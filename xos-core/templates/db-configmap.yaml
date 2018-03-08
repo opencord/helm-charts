@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xos-db
+  labels:
+    {{- include "xos-core.release_labels" . | indent 4 }}
+data:
+  service_5432_name: 'xos-db'

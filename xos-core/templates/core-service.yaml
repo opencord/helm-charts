@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "xos-core"
+  labels:
+    {{- include "xos-core.release_labels" . | indent 4 }}
+spec:
+  type: NodePort
+  ports:
+  - port: 50051
+    name: secure 
+    targetPort: 50051 
+    protocol: TCP
+  - port: 50055
+    name: insecure 
+    targetPort: 50055 
+    protocol: TCP
+  selector:
+    app: "xos-core"

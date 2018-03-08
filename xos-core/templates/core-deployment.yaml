@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: xos-core
+  labels:
+    app: xos-core    
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: xos-core    
+    spec:
+      containers:
+        - name: xos-core 
+          image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_core.repository }}:{{ .Values.images.xos_core.tag }}
+          command: ["/bin/bash", "-c", "cd coreapi; ./start_coreapi.sh"]
+          ports:
+            - containerPort: 50051
+              port: 50051
+              protocol: TCP
+            - containerPort: 50055
+              port: 50055
+              protocol: TCP
+          volumeMounts:
+            - name: certchain-volume
+              mountPath: /usr/local/share/ca-certificates
+            - name: coreapi-volume
+              mountPath: /opt/cord_profile
+              readOnly: true
+            - name: xos-core-config
+              mountPath: /opt/xos/xos_config.yaml
+              subPath: config/xos_config.yaml
+            - name: initial-data-config
+              mountPath: /opt/xos/core/migrations/initial_data.yaml
+              subPath: migrations/initial_data.yaml
+      volumes:
+        - name: certchain-volume
+          secret:
+            secretName: cert-chain-secret
+        - name: coreapi-volume
+          secret:
+            secretName: coreapi-cert-secret
+            items:
+            - key: core_api_cert.pem
+              path: coreapisecret/core_api_cert.pem
+            - key: core_api_key.pem
+              path: coreapisecret/core_api_key.pem
+        - name: xos-core-config
+          configMap:
+            name: xos-core 
+            items: 
+             - key: config
+               path: config/xos_config.yaml
+        - name: initial-data-config
+          configMap:
+            name: xos-initial-data 
+            items: 
+             - key: config
+               path: migrations/initial_data.yaml

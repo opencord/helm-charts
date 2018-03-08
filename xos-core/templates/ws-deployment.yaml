@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: xos-ws
+  labels:
+    app: xos-ws    
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: xos-ws
+    spec:
+      containers:
+        - name: xos-ws
+          image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_ws.repository }}:{{ .Values.images.xos_ws.tag }}
+          command: ["npm start -- --config gateway-config.yml"]
+          ports:
+            - containerPort: 3000
+              port: 3000
+              protocol: TCP
+          volumeMounts:
+            - name: gateway-config
+              mountPath: /var/www/src/config/gateway-config.yml
+              subPath: config/gateway-config.yml
+      volumes:
+        - name: gateway-config
+          configMap:
+            name: xos-gateway 
+            items: 
+             - key: config
+               path: config/gateway-config.yml

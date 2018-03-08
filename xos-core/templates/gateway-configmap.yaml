@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: xos-gateway
+data:
+  config: {{ .Values.configs.gateway_config }}

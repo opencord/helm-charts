@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: xos-gui
+  labels:
+    app: xos-gui    
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: xos-gui    
+    spec:
+      containers:
+        - name: xos-gui 
+          image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_gui.repository }}:{{ .Values.images.xos_gui.tag }}
+          ports:
+            - containerPort: 4000
+              port: 4000
+              protocol: TCP
+          volumeMounts:
+            - name: style-config
+              mountPath: /var/www/dist/style.config.js
+              subPath: style/style.config.js
+            - name: app-config
+              mountPath: /var/www/dist/app.config.js
+              subPath: app/app.config.js
+            - name: extensions-volume
+              mountPath: /var/www/dist/extensions
+      volumes:
+        - name: style-config
+          configMap:
+            name: xos-style-config 
+            items: 
+             - key: config
+               path: style/style.config.js
+        - name: app-config
+          configMap:
+            name: xos-app-config 
+            items: 
+             - key: config
+               path: app/app.config.js
+        - name: extensions-volume
+            emptyDir: {}

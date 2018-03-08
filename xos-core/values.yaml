@@ -1,0 +1,69 @@
+pull_docker_registry: docker-registry:5000/
+
+images:
+  xos_core:
+    repository: xosproject/xos-ui
+    tag: 'latest'
+  xos_gui:
+    repository: xosproject/xos-gui
+    tag: 'latest'
+  xos_db:
+    repository: xosproject/xos-postgres
+    tag: 'latest'
+  xos_tosca:
+    repository: xosproject/xos-tosca
+    tag: 'latest'
+  xos_chameleon:
+    repository: xosproject/chameleon
+    tag: 'latest'
+  node:
+    repository: node
+    tag: 'latest'
+  redis:
+    repository: redis
+    tag: 'latest'
+  xos_ws:
+    repository: xosproject/xos-ws
+    tag: 'latest'
+
+# synchronizers:
+#   - name: vsg
+#     repository: xosprogect/vsg-synchronizer
+#     tag: 'latest'
+
+secrets:
+  im_cert_chain: <BASE64_ENCODED_PEM_DATA>
+  core_api_cert: <BASE64_ENCODED_PEM_DATA>
+  core_api_key: <BASE64_ENCODED_PEM_DATA>
+
+configs:
+  initial_data_config: <INITIAL_DATA>
+  core_config: <CORE_CONFIG_DATA>
+  gui_style_config: <STYLE_CONFIG_DATA>
+  gui_app_config: <APP_CONFIG_DATA>
+  gateway_config: <GATEWAY_CONFIG_DATA>
+  tosca_config: <TOSCA_CONFIG_DATA>
+  # |-
+  #   ---
+  #   name: xos-core
+  #   database:
+  #     name: xos
+  #     username: postgres
+  #     password: password
+  #   logging:
+  #     version: 1
+  #     handlers:
+  #       console:
+  #         class: logging.StreamHandler
+  #       file:
+  #         class: logging.handlers.RotatingFileHandler
+  #         filename: /var/log/xos.log
+  #         maxBytes: 10485760
+  #         backupCount: 5
+  #     loggers:
+  #       '':
+  #         handlers:
+  #             - console
+  #             - file
+  #         level: DEBUG
+  #   xos_dir: /opt/xos
