@@ -2,5 +2,12 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: xos-app-config
+  labels:
+    {{- include "xos-core.release_labels" . | indent 4 }}
 data:
-  config: {{ .Values.configs.gui_app_config }}
+  config: |
+    angular.module('app')
+    .constant('AppConfig', {
+      apiEndpoint: '/xosapi/v1',
+      websocketClient: '/'
+    });

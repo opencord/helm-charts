@@ -42,10 +42,10 @@ spec:
           secret:
             secretName: coreapi-cert-secret
             items:
-            - key: core_api_cert.pem
-              path: coreapisecret/core_api_cert.pem
-            - key: core_api_key.pem
-              path: coreapisecret/core_api_key.pem
+            - key: tls.crt
+              path: core_api_cert.pem
+            - key: tls.key
+              path: core_api_key.pem
         - name: xos-core-config
           configMap:
             name: xos-core 

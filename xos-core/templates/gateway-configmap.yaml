@@ -2,5 +2,17 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: xos-gateway
+  labels:
+    {{- include "xos-core.release_labels" . | indent 4 }}
 data:
-  config: {{ .Values.configs.gateway_config }}
+  config: |
+    default:
+    xos:
+      host: xost
+      port: 9000
+    redis:
+      host: redis
+      port: 6379
+    gateway:
+      port: 3000
+

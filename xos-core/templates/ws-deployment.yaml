@@ -14,7 +14,7 @@ spec:
       containers:
         - name: xos-ws
           image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_ws.repository }}:{{ .Values.images.xos_ws.tag }}
-          command: ["npm start -- --config gateway-config.yml"]
+          command: ["npm", "start", "--",  "--config", "gateway-config.yml"]
           ports:
             - containerPort: 3000
               port: 3000

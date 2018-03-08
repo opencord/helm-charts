@@ -14,7 +14,7 @@ spec:
       containers:
         - name: xos-chameleon
           image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_chameleon.repository }}:{{ .Values.images.xos_chameleon.tag }}
-          command: ["python chameleon/chameleon/main.py -R 9101 -G xos-core:50055 --swagger-url /apidocs -r"]
+          command: [ "python", "chameleon/chameleon/main.py", "-R", "9101", "-G", "xos-core:50055", "--swagger-url", "/apidocs", "-r" ]
           ports:
             - containerPort: 9101
               port: 9101

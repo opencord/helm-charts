@@ -2,5 +2,29 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: xos-style-config
+  labels:
+    {{- include "xos-core.release_labels" . | indent 4 }}
 data:
-  config: {{ .Values.configs.gui_style_config }}
+  config: |
+    angular.module('app')
+    .constant('StyleConfig', {
+      projectName: 'R-CORD',
+      favicon: 'cord-favicon.png',
+      background: 'cord-bg.jpg',
+      payoff: 'Your VNF orchestrator',
+      logo: 'cord-logo.png',
+      routes: [
+          {
+              label: 'Slices',
+              state: 'xos.core.slice',
+          },
+          {
+              label: 'Nodes',
+              state: 'xos.core.node',
+          },
+          {
+              label: 'Instances',
+              state: 'xos.core.instance',
+          },
+      ]
+    });
