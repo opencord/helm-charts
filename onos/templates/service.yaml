@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "onos.fullname" . }}
+  labels:
+    app: {{ template "onos.name" . }}
+    chart: {{ template "onos.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  clusterIP: None
+  ports:
+    - port: {{ .Values.services.ovsdb.port }}
+      targetPort: ovsdb
+      name: ovsdb
+    - port: {{ .Values.services.openflow.port }}
+      targetPort: openflow
+      name: openflow
+    - port: {{ .Values.services.ssh.port }}
+      targetPort: ssh
+      name: ssh
+    - port: {{ .Values.services.ui.port }}
+      targetPort: ui
+      name: ui
+  selector:
+    app: {{ template "onos.name" . }}
+    release: {{ .Release.Name }}
