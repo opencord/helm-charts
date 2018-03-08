@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4e228634_ecee9b6b",
+        "filename": "xos-core/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-03-08T21:04:13Z",
+      "side": 1,
+      "message": "Empty string by default, to pull from Docker Hub",
+      "range": {
+        "startLine": 1,
+        "startChar": 22,
+        "endLine": 1,
+        "endChar": 43
+      },
+      "revId": "7ce7bbc7608fecd6fed3379b55b5154a387aef82",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4166a1c9_df404de3",
+        "filename": "xos-core/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-03-08T21:04:13Z",
+      "side": 1,
+      "message": "I was not able to get \"helm install\" to work until I moved these config files to the individual ConfigMap templates.",
+      "range": {
+        "startLine": 40,
+        "startChar": 2,
+        "endLine": 40,
+        "endChar": 21
+      },
+      "revId": "7ce7bbc7608fecd6fed3379b55b5154a387aef82",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
