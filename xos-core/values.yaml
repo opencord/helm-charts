@@ -2,29 +2,29 @@ pull_docker_registry: docker-registry:5000/
 
 images:
   xos_core:
-    repository: xosproject/xos-ui
-    tag: 'latest'
+    repository: xosproject/xos
+    tag: 'a12cfe6417ed48edf01bc5ad16f029e974325f39'
   xos_gui:
     repository: xosproject/xos-gui
-    tag: 'latest'
+    tag: '865b11c6804a8ede882fa87d506a4c18d58e6e0c'
   xos_db:
     repository: xosproject/xos-postgres
-    tag: 'latest'
+    tag: 'a12cfe6417ed48edf01bc5ad16f029e974325f39'
   xos_tosca:
     repository: xosproject/xos-tosca
-    tag: 'latest'
+    tag: 'b2eff2c795d9058a76c2fdb804c340200840cb13'
   xos_chameleon:
     repository: xosproject/chameleon
-    tag: 'latest'
+    tag: 'a12cfe6417ed48edf01bc5ad16f029e974325f39'
   node:
     repository: node
-    tag: 'latest'
+    tag: '7.9.0'
   redis:
     repository: redis
-    tag: 'latest'
+    tag: '3.2'
   xos_ws:
     repository: xosproject/xos-ws
-    tag: 'latest'
+    tag: 'a263b67c0448ab9fd450424327cf70dadb4574d3'
 
 # synchronizers:
 #   - name: vsg
