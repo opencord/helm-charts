@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: xos-redis
+  labels:
+    app: xos-redis    
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: xos-redis
+    spec:
+      containers:
+        - name: xos-redis
+          image: {{ .Values.pull_docker_registry }}{{ .Values.images.redis.repository }}:{{ .Values.images.redis.tag }}
+          ports:
+            - containerPort: 6379
+              port: 6379 
+              protocol: TCP
