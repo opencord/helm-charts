@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: xos-tosca
+  labels:
+    app: xos-tosca    
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: xos-tosca    
+    spec:
+      containers:
+        - name: xos-tosca 
+          image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_tosca.repository }}:{{ .Values.images.xos_tosca.tag }}
+          ports:
+            - containerPort: 9102
+              port: 9102 
+              protocol: TCP
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /usr/local/share/ca-certificates
+            - name: xos-core-config
+              mountPath: /opt/xos-tosca/src/xos-tosca.config.yaml
+              subPath: config/xos-tosca.config.yaml
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: cert-chain-secret
+        - name: xos-core-config
+          configMap:
+            name: xos-tosca 
+            items: 
+             - key: config
+               path: config/xos-tosca.config.yaml
