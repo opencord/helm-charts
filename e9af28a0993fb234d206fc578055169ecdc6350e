@@ -46,6 +46,30 @@
       "revId": "e9af28a0993fb234d206fc578055169ecdc6350e",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6351e904_2c2107c0",
+        "filename": "onos/templates/service.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-03-08T18:30:40Z",
+      "side": 1,
+      "message": "That\u0027s my understanding too:\n\nhttps://wiki.onosproject.org/display/ONOS/Requirements",
+      "parentUuid": "9b07b546_83d143bb",
+      "range": {
+        "startLine": 13,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 17
+      },
+      "revId": "e9af28a0993fb234d206fc578055169ecdc6350e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
