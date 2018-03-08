@@ -22,6 +22,30 @@
       "revId": "e9af28a0993fb234d206fc578055169ecdc6350e",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9b07b546_83d143bb",
+        "filename": "onos/templates/service.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-03-08T17:27:19Z",
+      "side": 1,
+      "message": "I think this is just the port where ONOS is listening for OVSDB connections. It\u0027s purely an ONOS configuration, same as the OpenFlow port.",
+      "parentUuid": "283890cb_de0228f8",
+      "range": {
+        "startLine": 13,
+        "startChar": 6,
+        "endLine": 15,
+        "endChar": 17
+      },
+      "revId": "e9af28a0993fb234d206fc578055169ecdc6350e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
