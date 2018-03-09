@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49d4bb98_7ee851f1",
+        "filename": "xos-services/exampleservice/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000297
+      },
+      "writtenOn": "2018-03-09T23:41:40Z",
+      "side": 1,
+      "message": "We should probably start giving better descriptions",
+      "range": {
+        "startLine": 19,
+        "startChar": 13,
+        "endLine": 19,
+        "endChar": 40
+      },
+      "revId": "5875895cd1d2ff90b403edc762db8905210abbe6",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
