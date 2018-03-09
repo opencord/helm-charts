@@ -9,11 +9,13 @@ spec:
   ports:
   - port: 50051
     name: secure 
-    targetPort: 50051 
+    targetPort: 50051
+    nodePort: 30003
     protocol: TCP
   - port: 50055
     name: insecure 
-    targetPort: 50055 
+    targetPort: 50055
+    nodePort: 30004
     protocol: TCP
   selector:
     app: "xos-core"

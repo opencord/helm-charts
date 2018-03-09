@@ -6,7 +6,8 @@ spec:
   type: NodePort
   ports:
   - port: 3000
-    targetPort: 3000 
+    targetPort: 3000
+    nodePort: 30000
     protocol: TCP
   selector:
     app: "xos-ws"

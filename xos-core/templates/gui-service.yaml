@@ -6,7 +6,8 @@ spec:
   type: NodePort
   ports:
   - port: 4000
-    targetPort: 4000 
+    targetPort: 4000
+    nodePort: 30001
     protocol: TCP
   selector:
     app: "xos-gui"
