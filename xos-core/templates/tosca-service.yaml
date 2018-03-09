@@ -6,7 +6,8 @@ spec:
   type: NodePort
   ports:
   - port: 9102
-    targetPort: 9102 
+    targetPort: 9102
+    nodePort: {{ .Values.node_ports.tosca_service_port }}
     protocol: TCP
   selector:
     app: "xos-tosca"
