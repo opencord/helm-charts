@@ -6,7 +6,8 @@ spec:
   type: NodePort
   ports:
   - port: 9101
-    targetPort: 9101 
+    targetPort: 9101
+    nodePort: {{ .Values.node_ports.chameleon_service_port }}
     protocol: TCP
   selector:
     app: "xos-chameleon"

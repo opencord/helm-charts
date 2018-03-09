@@ -6,7 +6,8 @@ spec:
   type: NodePort
   ports:
   - port: 4000
-    targetPort: 4000 
+    targetPort: 4000
+    nodePort: {{ .Values.node_ports.gui_service_port }}
     protocol: TCP
   selector:
     app: "xos-gui"

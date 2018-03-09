@@ -6,7 +6,8 @@ spec:
   type: NodePort
   ports:
   - port: 6379
-    targetPort: 6379 
+    targetPort: 6379
+    nodePort: {{ .Values.node_ports.redis_service_port }}
     protocol: TCP
   selector:
     app: "xos-redis"
