@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0b9454f6_224e58f8",
+        "filename": "xos-core/templates/db-configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-03-10T04:47:15Z",
+      "side": 1,
+      "message": "Is this a leftover variable from consul/registrator?",
+      "range": {
+        "startLine": 22,
+        "startChar": 2,
+        "endLine": 22,
+        "endChar": 19
+      },
+      "revId": "f2770deeaba2a040fcbd633ba94e3fd9599fc917",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdbf0acb_fdbc4537",
+        "filename": "xos-core/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-03-10T04:47:15Z",
+      "side": 1,
+      "message": "If this is a password, should it be distributed as a secret?",
+      "range": {
+        "startLine": 65,
+        "startChar": 6,
+        "endLine": 65,
+        "endChar": 24
+      },
+      "revId": "f2770deeaba2a040fcbd633ba94e3fd9599fc917",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
