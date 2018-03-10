@@ -20,23 +20,4 @@ metadata:
     {{- include "xos-core.release_labels" . | indent 4 }}
 data:
   config: |
-    - model: core.Site
-      fields:
-        name: "my_site"
-        abbreviated_name: "my_site"
-        login_base: "my_site"
-        site_url: "http://opencord.org/"
-        hosts_nodes: true
-
-    - model: core.User
-      fields:
-        email: "admin@opencord.org"
-        password: "letmein"
-        firstname: "XOS"
-        lastname: "User"
-        is_admin: True
-      relations:
-        site:
-          fields:
-            name: "my_site"
-          model: core.Site
+{{ toYaml .Values.configs.initial_data_config | indent 4 }}
