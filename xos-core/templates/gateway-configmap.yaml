@@ -20,13 +20,5 @@ metadata:
     {{- include "xos-core.release_labels" . | indent 4 }}
 data:
   config: |
-    default:
-    xos:
-      host: xost
-      port: 9000
-    redis:
-      host: redis
-      port: 6379
-    gateway:
-      port: 3000
+{{ toYaml .Values.configs.gateway_config | indent 4 }} 
 

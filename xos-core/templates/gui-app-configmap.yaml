@@ -19,9 +19,4 @@ metadata:
   labels:
     {{- include "xos-core.release_labels" . | indent 4 }}
 data:
-  config: |
-    angular.module('app')
-    .constant('AppConfig', {
-      apiEndpoint: '/xosapi/v1',
-      websocketClient: '/'
-    });
+  config: | {{ .Values.configs.gui_app | indent 4 }}
