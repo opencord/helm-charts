@@ -22,6 +22,30 @@
       "revId": "a2bb4b19ed8d45521119e08653f61d9a80c89fa8",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ceb272ab_84f7facd",
+        "filename": "xos-services/onos-service/templates/configmap.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-03-14T15:18:41Z",
+      "side": 1,
+      "message": "I laid out my reasons for organizing the chart this way in this Google Doc: https://docs.google.com/document/d/1zqxVa3TTdIadDc5VvZ9e94NsCDPTgHFFTnKc-U4GslM/edit?usp\u003dsharing\n\nCan we resolve?",
+      "parentUuid": "6f54f705_fdc974d0",
+      "range": {
+        "startLine": 23,
+        "startChar": 4,
+        "endLine": 31,
+        "endChar": 52
+      },
+      "revId": "a2bb4b19ed8d45521119e08653f61d9a80c89fa8",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
