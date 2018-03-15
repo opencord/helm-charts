@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb64a010_48fea282",
+        "filename": "xos-services/volt/templates/deployment.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000297
+      },
+      "writtenOn": "2018-03-15T22:26:04Z",
+      "side": 1,
+      "message": "Since this comes from XOS Core, we should probably specify dependency to it: https://github.com/kubernetes/helm/blob/master/docs/helm/helm_dependency.md",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 41
+      },
+      "revId": "d9aca33adf478ac5d27dbc6ab41133fb13810be0",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
