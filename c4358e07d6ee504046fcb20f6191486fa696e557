@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "79cb8941_3e6a7568",
+        "filename": "xos-services/addressmanager/templates/deployment.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000297
+      },
+      "writtenOn": "2018-03-15T22:33:41Z",
+      "side": 1,
+      "message": "Since this is coming from XOS Core service, we should specify dependency on it: https://github.com/kubernetes/helm/blob/master/docs/helm/helm_dependency.md",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 41
+      },
+      "revId": "c4358e07d6ee504046fcb20f6191486fa696e557",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "47d502b2_14678613",
+        "filename": "xos-services/fabric/templates/deployment.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000297
+      },
+      "writtenOn": "2018-03-15T22:33:41Z",
+      "side": 1,
+      "message": "Since this is coming from the XOS Core chart, we should specify dependency on it: https://github.com/kubernetes/helm/blob/master/docs/helm/helm_dependency.md",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 41
+      },
+      "revId": "c4358e07d6ee504046fcb20f6191486fa696e557",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
