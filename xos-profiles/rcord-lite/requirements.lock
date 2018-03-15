@@ -1,0 +1,15 @@
+dependencies:
+- name: onos-service
+  repository: file://../../xos-services/onos-service
+  version: 0.1.0
+- name: addressmanager
+  repository: file://../../xos-services/addressmanager
+  version: 0.1.0
+- name: fabric
+  repository: file://../../xos-services/fabric
+  version: 0.1.0
+- name: volt
+  repository: file://../../xos-services/volt
+  version: 0.1.0
+digest: sha256:bf3290920d0b352dce1be60bcd93efa90d31cd3aa903db9ea31c009ec64356fa
+generated: 2018-03-14T09:34:39.56819-07:00
