@@ -22,6 +22,30 @@
       "revId": "d9aca33adf478ac5d27dbc6ab41133fb13810be0",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b4f43e1e_6f8ac829",
+        "filename": "xos-services/volt/templates/deployment.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-03-16T00:29:19Z",
+      "side": 1,
+      "message": "I would prefer to merge the initial chart now and investigate this issue separately.",
+      "parentUuid": "eb64a010_48fea282",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 41
+      },
+      "revId": "d9aca33adf478ac5d27dbc6ab41133fb13810be0",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
