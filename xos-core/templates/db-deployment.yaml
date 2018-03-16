@@ -25,7 +25,7 @@ spec:
       labels:
         app: xos-db    
       annotations:
-        checksum/config-map: {{ include (print $.Chart.Name "/templates/db-configmap.yaml") . | sha256sum }}
+        checksum/config-map: {{ include (print $.Template.BasePath "/db-configmap.yaml") . | sha256sum }}
     spec:
       containers:
         - name: xos-db 
