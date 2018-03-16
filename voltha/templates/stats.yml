@@ -1,0 +1,53 @@
+#
+# The dashd deployment
+#
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: dashd
+  namespace: {{ .Values.global.namespace }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dashd
+    spec:
+      containers:
+      - name: dashd
+        image: voltha-dashd
+        imagePullPolicy: Never
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        args:
+{{ toYaml .Values.stats.dashd_args | indent 8 }} 
+---
+#
+# The shovel deployment
+#
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: shovel
+  namespace: voltha
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shovel
+    spec:
+      containers:
+      - name: shovel
+        image: voltha-shovel
+        imagePullPolicy: Never
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        args:
+{{ toYaml .Values.stats.shovel_args | indent 8 }} 
