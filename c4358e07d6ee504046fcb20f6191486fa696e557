@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "fb1de900_85698b10",
+        "filename": "xos-services/addressmanager/templates/deployment.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-03-16T00:20:06Z",
+      "side": 1,
+      "message": "I experimented with adding xos-core as a dependent chart of a service chart, and I think this may not work as expected.  I would prefer to check in the service charts now (since they are working) and investigate handling dependencies separately.",
+      "parentUuid": "79cb8941_3e6a7568",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 41
+      },
+      "revId": "c4358e07d6ee504046fcb20f6191486fa696e557",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "47d502b2_14678613",
         "filename": "xos-services/fabric/templates/deployment.yaml",
         "patchSetId": 5
