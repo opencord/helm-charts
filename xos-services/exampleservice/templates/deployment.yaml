@@ -52,7 +52,7 @@ spec:
           configMap:
             name: exampleservice
             items:
-              - key: service-config
+              - key: serviceConfig
                 path: exampleservice_config.yaml
         - name: cert-chain-secret
           secret:
