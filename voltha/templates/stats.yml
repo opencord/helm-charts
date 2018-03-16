@@ -1,0 +1,79 @@
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+#
+# The dashd deployment
+#
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: dashd
+  namespace: {{ .Values.global.namespace }}
+  serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dashd
+    spec:
+      serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
+      containers:
+      - name: dashd
+        image: {{ .Values.pull_docker_registry }}{{ .Values.images.dashd.repository }}:{{ .Values.images.dashd.tag }}
+        imagePullPolicy: {{ .Values.image_pull_policy }}
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        args:
+        - "/dashd/dashd/main.py"
+        - "--kafka={{ .Release.Name }}-kafka.default.svc.cluster.local"
+        - "--grafana_url=http://admin:admin@grafana.$(NAMESPACE).svc.cluster.local:80/api"
+        - "--topic=voltha.kpis"
+        #- "--consul=consul:8500"
+---
+#
+# The shovel deployment
+#
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: shovel
+  namespace: {{ .Values.global.namespace }}
+  serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shovel
+    spec:
+      serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
+      containers:
+      - name: shovel
+        image: {{ .Values.pull_docker_registry }}{{ .Values.images.shovel.repository }}:{{ .Values.images.shovel.tag }}
+        imagePullPolicy: {{ .Values.image_pull_policy }}
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        args:
+        - "/shovel/shovel/main.py"
+        - "--kafka={{ .Release.Name }}-kafka.default.svc.cluster.local"
+        - "--host=grafana.voltha.svc.cluster.local"
+        - "--topic=voltha.kpis"
+        #- "--consul=consul:8500"
