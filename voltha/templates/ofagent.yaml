@@ -1,0 +1,52 @@
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ofagent
+  namespace: {{ .Values.global.namespace }}
+  serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ofagent
+      annotations:
+        cni: "weave"
+    spec:
+      serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
+      terminationGracePeriodSeconds: 10
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - ofagent
+            topologyKey: kubernetes.io/hostname
+      containers:
+      - name: ofagent
+        image: {{ .Values.pull_docker_registry }}{{ .Values.images.ofagent.repository }}:{{ .Values.images.ofagent.tag }}
+        imagePullPolicy: {{ .Values.image_pull_policy }}
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        args:
+{{ toYaml .Values.ofagent_args | indent 8 }} 
