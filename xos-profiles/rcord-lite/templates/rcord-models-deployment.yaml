@@ -17,7 +17,7 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "rcord-lite.fullname" . }}
+  name: {{ template "rcord-lite.fullname" . }}-rcord-models
   labels:
     app: {{ template "rcord-lite.name" . }}
     chart: {{ template "rcord-lite.chart" . }}
@@ -35,32 +35,25 @@ spec:
         app: {{ template "rcord-lite.name" . }}
         release: {{ .Release.Name }}
       annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/config: {{ include (print $.Template.BasePath "/rcord-models-configmap.yaml") . | sha256sum }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
-          image: "{{ .Values.pull_docker_registry }}{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/bin/sh"]
-          args: ["-c", "for recipe in /opt/tosca/*; do echo $recipe; http --ignore-stdin POST http://xos-tosca:$XOS_TOSCA_SERVICE_PORT/run xos-username:{{ .Values.xosAdminUser }} xos-password:{{ .Values.xosAdminPassword }} @$recipe || exit 1; echo ''; done; sleep 3600"]
-          resources:
-{{ toYaml .Values.resources | indent 12 }}
+        - name: {{ .Chart.Name }}-rcord
+          image: "{{ .Values.pull_docker_registry }}{{ .Values.image.rcordSynchronizer.repository }}:{{ .Values.image.rcordSynchronizer.tag }}"
+          imagePullPolicy: {{ .Values.image.rcordSynchronizer.pullPolicy }}
           volumeMounts:
-            - name: rcord-lite-tosca
-              mountPath: /opt/tosca
+            - name: rcord-lite-config
+              mountPath: /opt/xos/synchronizers/rcord/rcord_config.yaml
+              subPath: rcord_config.yaml
+            - name: cert-chain-secret
+              mountPath: /usr/local/share/ca-certificates
       volumes:
-        - name: rcord-lite-tosca
+        - name: rcord-lite-config
           configMap:
-            name: rcord-lite-tosca
-    {{- with .Values.nodeSelector }}
-      nodeSelector:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-    {{- with .Values.affinity }}
-      affinity:
-{{ toYaml . | indent 8 }}
-    {{- end }}
-    {{- with .Values.tolerations }}
-      tolerations:
-{{ toYaml . | indent 8 }}
-    {{- end }}
+            name: rcord-lite-config
+            items:
+              - key: serviceConfig
+                path: rcord_config.yaml
+        - name: cert-chain-secret
+          secret:
+            secretName: cert-chain-secret

@@ -23,17 +23,14 @@ replicaCount: 1
 pull_docker_registry:
 
 image:
-  repository: clue/httpie
-  tag: latest
-  pullPolicy: IfNotPresent
-
-resources: {}
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+  toscaLoader:
+    repository: clue/httpie
+    tag: latest
+    pullPolicy: IfNotPresent
+  rcordSynchronizer:
+    repository: xosproject/rcord-synchronizer
+    tag: fc9d64d591236ec5d428045c67748e67a58b3fe3
+    pullPolicy: IfNotPresent
 
 xosAdminUser: admin@opencord.org
 xosAdminPassword: letmein
@@ -60,6 +57,19 @@ volt:
       username: admin@opencord.org
       password: letmein
 
+# The R-CORD synchronizer loads R-CORD-specific models into the core
+serviceConfig:
+  name: rcord
+  accessor:
+    username: admin@opencord.org
+    password: letmein
+    endpoint: xos-core:50051
+  dependency_graph: "/opt/xos/synchronizers/rcord/model-deps"
+  sys_dir: "/opt/xos/synchronizers/rcord/sys"
+  models_dir: "/opt/xos/synchronizers/rcord/models"
+  model_policies_dir: "/opt/xos/synchronizers/rcord/model_policies"
+
+# TOSCA recipes for the tosca-loader
 toscaRecipes:
   fixtures:
     tosca_definitions_version: tosca_simple_yaml_1_0
@@ -254,3 +264,15 @@ toscaRecipes:
           type: tosca.nodes.AddressManagerService
           properties:
             name: addressmanager
+
+  serviceGraphConstraints:
+    tosca_definitions_version: tosca_simple_yaml_1_0
+    imports:
+       - custom_types/servicegraphconstraint.yaml
+    description: Constraints on the Services position in the graph
+    topology_template:
+      node_templates:
+        constraints:
+          type: tosca.nodes.ServiceGraphConstraint
+          properties:
+            constraints: '[[null, "rcord"], [null, "volt"]]'
