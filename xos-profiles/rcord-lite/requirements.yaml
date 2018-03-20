@@ -27,3 +27,6 @@ dependencies:
 - name: volt
   version: 0.1.0
   repository: file://../../xos-services/volt
+- name: vsg-hw
+  version: 0.1.0
+  repository: file://../../xos-services/vsg-hw
