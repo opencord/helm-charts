@@ -1,0 +1,51 @@
+---
+
+# Copyright 2018-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Default values for exampleservice.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+pull_docker_registry:
+
+image:
+  repository: xosproject/vsg-hw-synchronizer
+  tag: db7508ea9d99f5f13f988856407b488900e2406d
+  pullPolicy: IfNotPresent
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+serviceConfig:
+  name: vsg-hw
+  accessor:
+    username: admin@opencord.org
+    password: letmein
+    endpoint: xos-core:50051
+  required_models:
+    - VSGHWService
+    - VSGHWServiceInstance
+    - ServiceInstanceLink
+  dependency_graph: "/opt/xos/synchronizers/vsg-hw/model-deps"
+  steps_dir: "/opt/xos/synchronizers/vsg-hw/steps"
+  sys_dir: "/opt/xos/synchronizers/vsg-hw/sys"
+  models_dir: "/opt/xos/synchronizers/vsg-hw/models"
