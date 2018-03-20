@@ -238,6 +238,7 @@ toscaRecipes:
       - custom_types/serviceinstancelink.yaml
       - custom_types/slice.yaml
       - custom_types/voltservice.yaml
+      - custom_types/vsghwservice.yaml
     topology_template:
       node_templates:
         service#rcord:
@@ -260,10 +261,36 @@ toscaRecipes:
           properties:
             name: volt
             kind: rcord
+        service#vsg-hw:
+          type: tosca.nodes.VSGHWService
+          properties:
+            name: vsg-hw
         service#addressmanager:
           type: tosca.nodes.AddressManagerService
           properties:
             name: addressmanager
+        volt_vsg-hw:
+          type: tosca.nodes.ServiceDependency
+          properties:
+            connect_method: None
+          requirements:
+            - subscriber_service:
+                node: service#volt
+                relationship: tosca.relationships.BelongsToOne
+            - provider_service:
+                node: service#vsg-hw
+                relationship: tosca.relationships.BelongsToOne
+        vsg-hw_addressmanager:
+          type: tosca.nodes.ServiceDependency
+          properties:
+            connect_method: None
+          requirements:
+            - subscriber_service:
+                node: service#vsg-hw
+                relationship: tosca.relationships.BelongsToOne
+            - provider_service:
+                node: service#addressmanager
+                relationship: tosca.relationships.BelongsToOne
 
   serviceGraphConstraints:
     tosca_definitions_version: tosca_simple_yaml_1_0
@@ -275,4 +302,4 @@ toscaRecipes:
         constraints:
           type: tosca.nodes.ServiceGraphConstraint
           properties:
-            constraints: '[[null, "rcord"], [null, "volt"]]'
+            constraints: '[[null, "rcord"], [null, "volt"], ["addressmanager", "vsg-hw"]]'
