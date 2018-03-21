@@ -42,7 +42,16 @@ spec:
           image: "{{ .Values.pull_docker_registry }}{{ .Values.image.toscaLoader.repository }}:{{ .Values.image.toscaLoader.tag }}"
           imagePullPolicy: {{ .Values.image.toscaLoader.pullPolicy }}
           command: ["/bin/sh"]
-          args: ["-c", "for recipe in /opt/tosca/*; do echo $recipe; http --ignore-stdin POST http://xos-tosca:$XOS_TOSCA_SERVICE_PORT/run xos-username:{{ .Values.xosAdminUser }} xos-password:{{ .Values.xosAdminPassword }} @$recipe || exit 1; echo ''; done; sleep 3600"]
+          args:
+            - "-c"
+            - |
+              for recipe in /opt/tosca/*
+              do
+                echo $recipe
+                http --check-status --ignore-stdin POST http://xos-tosca:$XOS_TOSCA_SERVICE_PORT/run xos-username:{{ .Values.xosAdminUser }} xos-password:{{ .Values.xosAdminPassword }} @$recipe || exit 1
+                echo ''
+              done
+              sleep 3600
           volumeMounts:
             - name: rcord-lite-tosca
               mountPath: /opt/tosca
