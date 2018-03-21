@@ -1,0 +1,33 @@
+images:
+  xos_core:
+    tag: 'candidate'
+  xos_gui:
+    tag: 'candidate'
+  xos_db:
+    tag: 'candidate'
+  xos_tosca:
+    tag: 'candidate'
+  xos_chameleon:
+    tag: 'candidate'
+  xos_ws:
+    tag: 'candidate'
+
+image:
+  rcordSynchronizer:
+    tag: 'candidate'
+
+addressmanager:
+  image:
+    tag: 'candidate'
+fabric:
+  image:
+    tag: 'candidate'
+onos-service:
+  image:
+    tag: 'candidate'
+volt:
+  image:
+    tag: 'candidate'
+vsg-hw:
+  image:
+    tag: 'candidate'
