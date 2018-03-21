@@ -29,7 +29,7 @@ image:
     pullPolicy: IfNotPresent
   rcordSynchronizer:
     repository: xosproject/rcord-synchronizer
-    tag: fc9d64d591236ec5d428045c67748e67a58b3fe3
+    tag: 9d9ddf643f04475d35538ae2c4bd9ab7f95c63dc
     pullPolicy: IfNotPresent
 
 xosAdminUser: admin@opencord.org
