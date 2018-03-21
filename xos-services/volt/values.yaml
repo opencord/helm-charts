@@ -24,7 +24,7 @@ pull_docker_registry:
 
 image:
   repository: xosproject/volt-synchronizer
-  tag: ca52aeace0ef451c22b6c1ef8f55159f4e16db16
+  tag: 187ba8b89734ade92cb8ecac054fce986bc4d962
   pullPolicy: IfNotPresent
 
 resources: {}
