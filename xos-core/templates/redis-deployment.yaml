@@ -17,7 +17,7 @@ kind: Deployment
 metadata:
   name: xos-redis
   labels:
-    app: xos-redis    
+    app: xos-redis
 spec:
   replicas: 1
   template:
@@ -28,7 +28,8 @@ spec:
       containers:
         - name: xos-redis
           image: {{ .Values.pull_docker_registry }}{{ .Values.images.redis.repository }}:{{ .Values.images.redis.tag }}
+          imagePullPolicy: {{ .Values.images.redis.pullPolicy }}
           ports:
             - containerPort: 6379
-              port: 6379 
+              port: 6379
               protocol: TCP

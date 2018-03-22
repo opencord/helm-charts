@@ -24,7 +24,7 @@ pull_docker_registry:
 
 image:
   repository: xosproject/fabric-synchronizer
-  tag: 750355c47ec8728b50177e9609434d5a56571dcf
+  tag: master
   pullPolicy: IfNotPresent
 
 resources: {}

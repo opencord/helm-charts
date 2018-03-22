@@ -17,7 +17,7 @@ kind: Deployment
 metadata:
   name: xos-ws
   labels:
-    app: xos-ws    
+    app: xos-ws
 spec:
   replicas: 1
   template:
@@ -28,6 +28,7 @@ spec:
       containers:
         - name: xos-ws
           image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_ws.repository }}:{{ .Values.images.xos_ws.tag }}
+          imagePullPolicy: {{ .Values.images.xos_ws.pullPolicy }}
           command: ["npm", "start", "--",  "--config", "gateway-config.yml"]
           ports:
             - containerPort: 3000
@@ -40,7 +41,7 @@ spec:
       volumes:
         - name: gateway-config
           configMap:
-            name: xos-gateway 
-            items: 
+            name: xos-gateway
+            items:
              - key: config
                path: config/gateway-config.yml

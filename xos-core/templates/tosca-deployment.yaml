@@ -17,20 +17,21 @@ kind: Deployment
 metadata:
   name: xos-tosca
   labels:
-    app: xos-tosca    
+    app: xos-tosca
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: xos-tosca    
+        app: xos-tosca
     spec:
       containers:
-        - name: xos-tosca 
+        - name: xos-tosca
           image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_tosca.repository }}:{{ .Values.images.xos_tosca.tag }}
+          imagePullPolicy: {{ .Values.images.xos_tosca.pullPolicy }}
           ports:
             - containerPort: 9102
-              port: 9102 
+              port: 9102
               protocol: TCP
           volumeMounts:
             - name: secret-volume
@@ -44,7 +45,7 @@ spec:
             secretName: cert-chain-secret
         - name: xos-core-config
           configMap:
-            name: xos-tosca 
-            items: 
+            name: xos-tosca
+            items:
              - key: config
                path: config/xos-tosca.config.yaml

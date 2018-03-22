@@ -24,7 +24,7 @@ pull_docker_registry:
 
 image:
   repository: xosproject/vsg-hw-synchronizer
-  tag: db7508ea9d99f5f13f988856407b488900e2406d
+  tag: master
   pullPolicy: IfNotPresent
 
 resources: {}

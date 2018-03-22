@@ -24,7 +24,7 @@ pull_docker_registry:
 
 image:
   repository: xosproject/addressmanager-synchronizer
-  tag: 328f513ef565e65103fff041745bbf18e44dc78d
+  tag: master
   pullPolicy: IfNotPresent
 
 resources: {}

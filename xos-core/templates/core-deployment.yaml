@@ -17,17 +17,18 @@ kind: Deployment
 metadata:
   name: xos-core
   labels:
-    app: xos-core    
+    app: xos-core
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: xos-core    
+        app: xos-core
     spec:
       containers:
-        - name: xos-core 
+        - name: xos-core
           image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_core.repository }}:{{ .Values.images.xos_core.tag }}
+          imagePullPolicy: {{ .Values.images.xos_core.pullPolicy }}
           command: ["/bin/bash", "-c", "cd coreapi; ./start_coreapi.sh"]
           ports:
             - containerPort: 50051
@@ -62,13 +63,13 @@ spec:
               path: core_api_key.pem
         - name: xos-core-config
           configMap:
-            name: xos-core 
-            items: 
+            name: xos-core
+            items:
              - key: config
                path: config/xos_config.yaml
         - name: initial-data-config
           configMap:
-            name: xos-initial-data 
-            items: 
+            name: xos-initial-data
+            items:
              - key: config
                path: migrations/initial_data.yaml

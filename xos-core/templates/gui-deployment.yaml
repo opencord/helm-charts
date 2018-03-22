@@ -17,17 +17,18 @@ kind: Deployment
 metadata:
   name: xos-gui
   labels:
-    app: xos-gui    
+    app: xos-gui
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: xos-gui    
+        app: xos-gui
     spec:
       containers:
-        - name: xos-gui 
+        - name: xos-gui
           image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_gui.repository }}:{{ .Values.images.xos_gui.tag }}
+          imagePullPolicy: {{ .Values.images.xos_gui.pullPolicy }}
           ports:
             - containerPort: 4000
               port: 4000
@@ -44,14 +45,14 @@ spec:
       volumes:
         - name: style-config
           configMap:
-            name: xos-style-config 
-            items: 
+            name: xos-style-config
+            items:
              - key: config
                path: style/style.config.js
         - name: app-config
           configMap:
-            name: xos-app-config 
-            items: 
+            name: xos-app-config
+            items:
              - key: config
                path: app/app.config.js
         - name: extensions-volume

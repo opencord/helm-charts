@@ -17,21 +17,22 @@ kind: Deployment
 metadata:
   name: xos-db
   labels:
-    app: xos-db    
+    app: xos-db
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: xos-db    
+        app: xos-db
       annotations:
         checksum/config-map: {{ include (print $.Template.BasePath "/db-configmap.yaml") . | sha256sum }}
     spec:
       containers:
-        - name: xos-db 
+        - name: xos-db
           image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_db.repository }}:{{ .Values.images.xos_db.tag }}
+          imagePullPolicy: {{ .Values.images.xos_db.pullPolicy }}
           ports:
-            - containerPort: 5432 
+            - containerPort: 5432
               protocol: TCP
           env:
             - name: SERVICE_5432_NAME

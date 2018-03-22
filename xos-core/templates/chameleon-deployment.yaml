@@ -17,7 +17,7 @@ kind: Deployment
 metadata:
   name: xos-chameleon
   labels:
-    app: xos-chameleon    
+    app: xos-chameleon
 spec:
   replicas: 1
   template:
@@ -28,6 +28,7 @@ spec:
       containers:
         - name: xos-chameleon
           image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_chameleon.repository }}:{{ .Values.images.xos_chameleon.tag }}
+          imagePullPolicy: {{ .Values.images.xos_chameleon.pullPolicy }}
           command: [ "python", "chameleon/chameleon/main.py", "-R", "9101", "-G", "xos-core:50055", "--swagger-url", "/apidocs", "-r" ]
           ports:
             - containerPort: 9101

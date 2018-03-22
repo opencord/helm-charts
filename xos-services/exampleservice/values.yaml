@@ -24,7 +24,7 @@ pull_docker_registry:
 
 image:
   repository: xosproject/exampleservice-synchronizer
-  tag: ef32e0abc7ef91ae04006ecb4583abf986c06dd9
+  tag: master
   pullPolicy: IfNotPresent
 
 resources: {}

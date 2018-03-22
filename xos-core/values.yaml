@@ -17,33 +17,36 @@ pull_docker_registry:
 images:
   xos_core:
     repository: xosproject/xos
-    tag: 'a12cfe6417ed48edf01bc5ad16f029e974325f39'
+    tag: 'master'
+    pullPolicy: 'IfNotPresent'
   xos_gui:
     repository: xosproject/xos-gui
-    tag: '865b11c6804a8ede882fa87d506a4c18d58e6e0c'
+    tag: 'master'
+    pullPolicy: 'IfNotPresent'
   xos_db:
     repository: xosproject/xos-postgres
-    tag: 'a12cfe6417ed48edf01bc5ad16f029e974325f39'
+    tag: 'master'
+    pullPolicy: 'IfNotPresent'
   xos_tosca:
     repository: xosproject/xos-tosca
-    tag: 'b2eff2c795d9058a76c2fdb804c340200840cb13'
+    tag: 'master'
+    pullPolicy: 'IfNotPresent'
   xos_chameleon:
     repository: xosproject/chameleon
-    tag: 'a12cfe6417ed48edf01bc5ad16f029e974325f39'
+    tag: 'master'
+    pullPolicy: 'IfNotPresent'
   node:
     repository: node
     tag: '7.9.0'
+    pullPolicy: 'IfNotPresent'
   redis:
     repository: redis
     tag: '3.2'
+    pullPolicy: 'IfNotPresent'
   xos_ws:
     repository: xosproject/xos-ws
-    tag: 'a263b67c0448ab9fd450424327cf70dadb4574d3'
-
-# synchronizers:
-#   - name: vsg
-#     repository: xosprogect/vsg-synchronizer
-#     tag: 'latest'
+    tag: 'master'
+    pullPolicy: 'IfNotPresent'
 
 node_ports:
   ws_service_port: 30008
@@ -79,7 +82,7 @@ configs:
               - file
           level: DEBUG
     xos_dir: /opt/xos
-  
+
   db_config: 'xos-db'
 
   gateway_config:
@@ -92,7 +95,7 @@ configs:
       port: 6379
     gateway:
       port: 3000
-  
+
   gui_app: |
 
     angular.module('app')
@@ -125,7 +128,7 @@ configs:
           },
       ]
     });
-  
+
   initial_data_config:
     - model: core.Site
       fields:
@@ -147,7 +150,7 @@ configs:
           fields:
             name: "my_site"
           model: core.Site
-  
+
   tosca_config:
     name: xos-tosca
     gprc_endpoint: "xos-core"

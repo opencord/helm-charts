@@ -29,7 +29,7 @@ image:
     pullPolicy: IfNotPresent
   rcordSynchronizer:
     repository: xosproject/rcord-synchronizer
-    tag: 9d9ddf643f04475d35538ae2c4bd9ab7f95c63dc
+    tag: master
     pullPolicy: IfNotPresent
 
 xosAdminUser: admin@opencord.org
@@ -43,15 +43,20 @@ addressmanager:
       password: letmein
 fabric:
   serviceConfig:
-  accessor:
-    username: admin@opencord.org
-    password: letmein
+    accessor:
+      username: admin@opencord.org
+      password: letmein
 onos-service:
   serviceConfig:
     accessor:
       username: admin@opencord.org
       password: letmein
 volt:
+  serviceConfig:
+    accessor:
+      username: admin@opencord.org
+      password: letmein
+vsg-hw:
   serviceConfig:
     accessor:
       username: admin@opencord.org
