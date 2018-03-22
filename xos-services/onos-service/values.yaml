@@ -24,7 +24,7 @@ pull_docker_registry:
 
 image:
   repository: xosproject/onos-synchronizer
-  tag: a2db56dd4760a3774b159105722afb6974cbe13f
+  tag: master
   pullPolicy: IfNotPresent
 
 resources: {}
