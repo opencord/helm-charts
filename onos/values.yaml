@@ -28,12 +28,16 @@ image:
 services:
   ovsdb:
     port: 6640
+    nodePort: 31640
   openflow:
     port: 6653
+    nodePort: 31653
   ssh:
     port: 8101
+    nodePort: 31101
   ui:
     port: 8181
+    nodePort: 31181
   cluster:
     port: 9876
 
