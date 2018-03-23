@@ -1,6 +1,4 @@
----
-
-# Copyright 2018-present Open Networking Foundation
+# Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,34 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Default values for onos.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-replicaCount: 1
-
-image:
-  repository: onosproject/onos
-  tag: 1.12.0
-  pullPolicy: IfNotPresent
-
-services:
-  serviceType: ClusterIP
-  ovsdb:
-    port: 6640
-  openflow:
-    port: 6653
-  ssh:
-    port: 8101
-  ui:
-    port: 8181
-  cluster:
-    port: 9876
-
-resources: {}
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "onos.fullname" . }}-ovsdb
+  labels:
+    app: {{ template "onos.name" . }}
+    chart: {{ template "onos.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.services.serviceType }}
+  ports:
+  - name: ovsdb
+{{ toYaml .Values.services.ovsdb | indent 4 }}
+  selector:
+    app: {{ template "onos.name" . }}
+    release: {{ .Release.Name }}
