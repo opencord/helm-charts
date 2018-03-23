@@ -198,7 +198,7 @@ toscaRecipes:
                   relationship: tosca.relationships.BelongsToOne
           properties:
               name: rest_onos/v1/network/configuration/
-              value: ''
+              value: '{}'
         service#fabric:
           type: tosca.nodes.FabricService
           properties:
