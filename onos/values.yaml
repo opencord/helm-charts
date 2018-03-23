@@ -26,6 +26,7 @@ image:
   pullPolicy: IfNotPresent
 
 services:
+  serviceType: ClusterIP
   ovsdb:
     port: 6640
   openflow:
