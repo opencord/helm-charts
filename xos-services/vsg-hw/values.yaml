@@ -47,5 +47,6 @@ serviceConfig:
     - ServiceInstanceLink
   dependency_graph: "/opt/xos/synchronizers/vsg-hw/model-deps"
   steps_dir: "/opt/xos/synchronizers/vsg-hw/steps"
+  model_policies_dir: "/opt/xos/synchronizers/vsg-hw/model_policies"
   sys_dir: "/opt/xos/synchronizers/vsg-hw/sys"
   models_dir: "/opt/xos/synchronizers/vsg-hw/models"
