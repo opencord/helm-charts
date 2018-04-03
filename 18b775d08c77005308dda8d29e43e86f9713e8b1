@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "56035536_8868d46c",
+        "filename": "voltha/templates/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-04-03T15:36:40Z",
+      "side": 1,
+      "message": "Do we need this in the Helm chart?  Maybe we can just link to the document in the VOLTHA source tree.\n\nAlso I think the README.md needs to be up a level (not in templates dir).",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 26
+      },
+      "revId": "18b775d08c77005308dda8d29e43e86f9713e8b1",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d226b13b_efb90f71",
+        "filename": "voltha/templates/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-04-03T15:36:40Z",
+      "side": 1,
+      "message": "It looks to me like the Helm charts are not currently performing these steps.  When I try to install I see:\n\nError: release voltha failed: clusterroles.rbac.authorization.k8s.io \"voltha-etcd-operator-etcd-operator\" is forbidden: attempt to grant extra privileges: [PolicyRule{Resources:[\"etcdclusters\"], APIGroups:[\"etcd.database.coreos.com\"], Verbs:[\"*\"]} PolicyRule{Resources:[\"etcdbackups\"], APIGroups:[\"etcd.database.coreos.com\"], Verbs:[\"*\"]} PolicyRule{Resources:[\"etcdrestores\"], APIGroups:[\"etcd.database.coreos.com\"], Verbs:[\"*\"]} PolicyRule{Resources:[\"customresourcedefinitions\"], APIGroups:[\"apiextensions.k8s.io\"], Verbs:[\"*\"]} PolicyRule{Resources:[\"pods\"], APIGroups:[\"\"], Verbs:[\"*\"]} PolicyRule{Resources:[\"services\"], APIGroups:[\"\"], Verbs:[\"*\"]} PolicyRule{Resources:[\"endpoints\"], APIGroups:[\"\"], Verbs:[\"*\"]} PolicyRule{Resources:[\"persistentvolumeclaims\"], APIGroups:[\"\"], Verbs:[\"*\"]} PolicyRule{Resources:[\"events\"], APIGroups:[\"\"], Verbs:[\"*\"]} PolicyRule{Resources:[\"deployments\"], APIGroups:[\"apps\"], Verbs:[\"*\"]} PolicyRule{Resources:[\"secrets\"], APIGroups:[\"\"], Verbs:[\"get\"]}] user\u003d\u0026{system:serviceaccount:kube-system:default 26c06469-36a3-11e8-999a-beb947fdf3b1 [system:serviceaccounts system:serviceaccounts:kube-system system:authenticated] map[]} ownerrules\u003d[] ruleResolutionErrors\u003d[]",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 46
+      },
+      "revId": "18b775d08c77005308dda8d29e43e86f9713e8b1",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "daa92db3_18c30599",
         "filename": "voltha/templates/envoy_for_etcd.yml",
         "patchSetId": 2
@@ -41,6 +87,29 @@
         "startChar": 27,
         "endLine": 66,
         "endChar": 32
+      },
+      "revId": "18b775d08c77005308dda8d29e43e86f9713e8b1",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "356c2a63_a3e4ce13",
+        "filename": "voltha/templates/fluentd-config.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-04-03T15:36:40Z",
+      "side": 1,
+      "message": "I think this needs to be indented to be considered valid YAML (even though it\u0027s a comment).",
+      "range": {
+        "startLine": 5,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 14
       },
       "revId": "18b775d08c77005308dda8d29e43e86f9713e8b1",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
