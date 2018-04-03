@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "daa92db3_18c30599",
+        "filename": "voltha/templates/envoy_for_etcd.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-04-03T00:26:01Z",
+      "side": 1,
+      "message": "I think we want to make this configurable in values.yaml for all VOLTHA images.  The images are available on Docker Hub.  I think we should use those images by default.\n\nFor now let\u0027s use voltha/voltha-envoy:latest.  Once 1.3 is available we\u0027ll switch to that.",
+      "range": {
+        "startLine": 40,
+        "startChar": 10,
+        "endLine": 40,
+        "endChar": 29
+      },
+      "revId": "18b775d08c77005308dda8d29e43e86f9713e8b1",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "885bfd33_0b843884",
+        "filename": "voltha/templates/envoy_for_etcd.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-04-03T00:26:01Z",
+      "side": 1,
+      "message": "Suggest we make this also configurable in values.yaml.  Suggest default IfNotPresent, to pull from Docker Hub.",
+      "range": {
+        "startLine": 66,
+        "startChar": 27,
+        "endLine": 66,
+        "endChar": 32
+      },
+      "revId": "18b775d08c77005308dda8d29e43e86f9713e8b1",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
