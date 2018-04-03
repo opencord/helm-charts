@@ -40,3 +40,12 @@ spec:
                 configMapKeyRef:
                   name: xos-db
                   key: service_5432_name
+            - name: POSTGRES_DB
+              value: {{ .Values.configs.core_config.database.name | quote }}
+            - name: POSTGRES_USER
+              value: {{ .Values.configs.core_config.database.username | quote }}
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: xos-db-secret
+                  key: postgres-password
