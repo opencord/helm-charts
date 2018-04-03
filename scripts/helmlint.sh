@@ -1,4 +1,4 @@
----
+#/usr/bin/env bash
 
 # Copyright 2018-present Open Networking Foundation
 #
@@ -14,37 +14,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Default values for onos.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# helmlint.sh
+# run `helm lint` on all helm charts that are found
 
-replicaCount: 1
+set +e
+echo "helmlint.sh, using helm version: $(helm version -c --short)"
 
-image:
-  repository: onosproject/onos
-  tag: 1.12.0
-  pullPolicy: IfNotPresent
+fail_lint=0
 
-nameOverride: ""
-fullnameOverride: ""
+for chart in $(find . -name Chart.yaml -print) ; do
 
-services:
-  serviceType: ClusterIP
-  ovsdb:
-    port: 6640
-  openflow:
-    port: 6653
-  ssh:
-    port: 8101
-  ui:
-    port: 8181
-  cluster:
-    port: 9876
+  chartdir=$(dirname "${chart}")
 
-resources: {}
+  # lint with values.yaml if it exists
+  if [ -f "${chartdir}/values.yaml" ]; then
+    helm lint --strict --values "${chartdir}/values.yaml" "${chartdir}"
+  else
+    helm lint --strict "${chartdir}"
+  fi
 
-nodeSelector: {}
+  rc=$?
+  if [[ $rc != 0 ]]; then
+    fail_lint=1
+  fi
+done
 
-tolerations: []
+if [[ $fail_lint != 0 ]]; then
+  exit 1
+fi
 
-affinity: {}
+exit 0
