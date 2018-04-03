@@ -132,9 +132,9 @@ configs:
   initial_data_config:
     - model: core.Site
       fields:
-        name: "my_site"
-        abbreviated_name: "my_site"
-        login_base: "my_site"
+        name: "mysite"
+        abbreviated_name: "mysite"
+        login_base: "mysite"
         site_url: "http://opencord.org/"
         hosts_nodes: true
 
@@ -148,7 +148,7 @@ configs:
       relations:
         site:
           fields:
-            name: "my_site"
+            name: "mysite"
           model: core.Site
 
   tosca_config:
