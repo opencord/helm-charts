@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,20 +16,16 @@
 # Whitelist for use with imagebuilder
 
 docker_image_whitelist:
+- xosproject/chameleon
 - xosproject/xos-base
-- xosproject/xos-core
 - xosproject/xos-client
+- xosproject/xos-core
 - xosproject/xos-gui
 - xosproject/xos-gui-builder
 - xosproject/xos-libraries
-- xosproject/xos-postgres
 - xosproject/xos-tosca
 - xosproject/xos-ws
-- xosproject/chameleon
 - xosproject/xos-synchronizer-base
-- redis
-- nginx
-- node
 - xosproject/rcord-synchronizer
 - xosproject/volt-synchronizer
 - xosproject/vtn-synchronizer
@@ -38,3 +33,7 @@ docker_image_whitelist:
 - xosproject/addressmanager-synchronizer
 - xosproject/vsg-hw-synchronizer
 - xosproject/fabric-synchronizer
+- nginx
+- node
+- postgres
+- redis

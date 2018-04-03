@@ -21,7 +21,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 5432 
+  - port: 5432
     targetPort: 5432
     nodePort: {{ .Values.node_ports.db_service_port }}
     protocol: TCP
