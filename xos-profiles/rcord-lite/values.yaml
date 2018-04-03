@@ -20,6 +20,9 @@
 
 replicaCount: 1
 
+nameOverride: ""
+fullnameOverride: ""
+
 pull_docker_registry:
 
 image:

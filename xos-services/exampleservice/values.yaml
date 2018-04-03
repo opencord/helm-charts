@@ -22,6 +22,9 @@ replicaCount: 1
 
 pull_docker_registry:
 
+nameOverride: ""
+fullnameOverride: ""
+
 image:
   repository: xosproject/exampleservice-synchronizer
   tag: master
