@@ -1,0 +1,47 @@
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dhcp-server
+  labels:
+    app: dhcp-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dhcp-server
+    spec:
+      containers:
+        - name: dhcp-server
+          image: {{ .Values.pull_docker_registry }}{{ .Values.images.dhcp_server.repository }}:{{ .Values.images.dhcp_server.tag }}
+          imagePullPolicy: {{ .Values.images.dhcp_server.pullPolicy }}
+          #command: ["/bin/bash", "-", "sleep 86400"]
+          ports:
+            - containerPort: 67
+              port: 67
+              protocol: UDP
+          volumeMounts:
+            - name: dhcp-server
+              mountPath: /data/dhcpd.conf
+              subPath: mymounts/dhcpd.conf
+      volumes:
+        - name: dhcp-server
+          configMap:
+            name: dhcp-server
+            items:
+             - key: config
+               path: mymounts/dhcpd.conf
