@@ -31,6 +31,7 @@ docker_image_whitelist:
 - redis
 - nginx
 - node
+- postgres
 - xosproject/rcord-synchronizer
 - xosproject/volt-synchronizer
 - xosproject/vtn-synchronizer

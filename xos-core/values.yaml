@@ -24,8 +24,8 @@ images:
     tag: 'master'
     pullPolicy: 'IfNotPresent'
   xos_db:
-    repository: xosproject/xos-postgres
-    tag: 'master'
+    repository: postgres
+    tag: '10.3-alpine'
     pullPolicy: 'IfNotPresent'
   xos_tosca:
     repository: xosproject/xos-tosca
