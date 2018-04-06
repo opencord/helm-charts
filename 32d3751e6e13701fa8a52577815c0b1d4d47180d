@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6ccaf931_6b2cfd24",
+        "filename": "xos-tools/xossh/templates/deployment.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000297
+      },
+      "writtenOn": "2018-04-06T16:37:01Z",
+      "side": 1,
+      "message": "It looks like you are not using the configmap Scott. You are using the variables directly from values.yaml. A configmap can be mounted into a file as shown in some of XOSCore helm resources or made available as env variables in containers. \n\nIn this case however, I believe you should not use a config map. You should use a secret. Are the -u, -p and -S parameters the only way to pass these values to the container application? if they can be read in from ENV for instance, we can specify them in a secret and populate an ENV in the container.",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 64
+      },
+      "revId": "32d3751e6e13701fa8a52577815c0b1d4d47180d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
