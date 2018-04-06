@@ -22,6 +22,30 @@
       "revId": "32d3751e6e13701fa8a52577815c0b1d4d47180d",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "74e4ae49_56ab58a0",
+        "filename": "xos-tools/xossh/templates/deployment.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-04-06T17:37:58Z",
+      "side": 1,
+      "message": "I\u0027ve removed the configmap in the next patchset. Let\u0027s look into transitioning both synchronizers and xossh to secrets as a separate evolution of the helm charts.",
+      "parentUuid": "6ccaf931_6b2cfd24",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 64
+      },
+      "revId": "32d3751e6e13701fa8a52577815c0b1d4d47180d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
