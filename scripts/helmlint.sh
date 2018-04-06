@@ -17,7 +17,7 @@
 # helmlint.sh
 # run `helm lint` on all helm charts that are found
 
-set +e
+set +e -u -o pipefail
 echo "helmlint.sh, using helm version: $(helm version -c --short)"
 
 fail_lint=0
