@@ -45,8 +45,6 @@ spec:
             - name: exampleservice-config
               mountPath: /opt/xos/synchronizers/exampleservice/exampleservice_config.yaml
               subPath: exampleservice_config.yaml
-            - name: cert-chain-secret
-              mountPath: /usr/local/share/ca-certificates
       volumes:
         - name: exampleservice-config
           configMap:
@@ -54,9 +52,6 @@ spec:
             items:
               - key: serviceConfig
                 path: exampleservice_config.yaml
-        - name: cert-chain-secret
-          secret:
-            secretName: cert-chain-secret
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
