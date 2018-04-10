@@ -49,3 +49,6 @@ volt:
 vsg-hw:
   image:
     pullPolicy: 'Always'
+kubernetes:
+  image:
+    pullPolicy: 'Always'
