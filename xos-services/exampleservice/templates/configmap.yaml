@@ -18,6 +18,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: exampleservice
+  namespace: untrusted-services
 data:
   serviceConfig: |
 {{ toYaml .Values.serviceConfig | indent 4 }}
