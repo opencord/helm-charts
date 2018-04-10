@@ -47,6 +47,10 @@ images:
     repository: xosproject/xos-ws
     tag: 'master'
     pullPolicy: 'IfNotPresent'
+  api_tester:
+    repository: xosproject/xos-api-tester
+    tag: 'master'
+    pullPolicy: 'IfNotPresent'
 
 node_ports:
   ws_service_port: 30008
@@ -57,6 +61,9 @@ node_ports:
   redis_service_port: 30005
   chameleon_service_port: 30006
   tosca_service_port: 30007
+
+xosAdminUser: &adminuser "admin@opencord.org"
+xosAdminPassword: &adminpass "letmein"
 
 configs:
   core_config:
@@ -140,8 +147,8 @@ configs:
 
     - model: core.User
       fields:
-        email: "admin@opencord.org"
-        password: "letmein"
+        email: *adminuser
+        password: *adminpass
         firstname: "XOS"
         lastname: "User"
         is_admin: True

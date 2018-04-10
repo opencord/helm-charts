@@ -29,6 +29,8 @@ images:
     pullPolicy: 'Always'
   xos_ws:
     pullPolicy: 'Always'
+  api_tester:
+    pullPolicy: 'Always'
 
 image:
   rcordSynchronizer:

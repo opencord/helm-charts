@@ -29,6 +29,8 @@ images:
     tag: 'candidate'
   xos_ws:
     tag: 'candidate'
+  api_tester:
+    tag: 'candidate'
 
 image:
   rcordSynchronizer:
