@@ -47,6 +47,10 @@ images:
     repository: xosproject/xos-ws
     tag: 'master'
     pullPolicy: 'IfNotPresent'
+  api_tester:
+    repository: xos-api-tester
+    tag: 'master'
+    pullPolicy: 'IfNotPresent'
 
 node_ports:
   ws_service_port: 30008
