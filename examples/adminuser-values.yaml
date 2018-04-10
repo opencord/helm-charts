@@ -38,3 +38,6 @@ volt:
 vsg-hw:
   xosAdminUser: *adminuser
   xosAdminPassword: *adminpass
+kubernetes:
+  xosAdminUser: *adminuser
+  xosAdminPassword: *adminpass

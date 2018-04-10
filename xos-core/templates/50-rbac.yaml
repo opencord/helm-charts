@@ -1,6 +1,5 @@
 ---
-
-# Copyright 2018-present Open Networking Foundation
+# Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,21 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Set all image tags to "candidate" to use imagebuilder's local images
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kubernetes-synchronizer
 
-# in xos-core and rcord-lite charts
-imagePullPolicy: 'Always'
+...
+---
 
-# in service charts
-addressmanager:
-  imagePullPolicy: 'Always'
-fabric:
-  imagePullPolicy: 'Always'
-onos-service:
-  imagePullPolicy: 'Always'
-volt:
-  imagePullPolicy: 'Always'
-vsg-hw:
-  imagePullPolicy: 'Always'
-kubernetes:
-  imagePullPolicy: 'Always'
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: kubernetes-synchronizer-cluster-admin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+  - kind: ServiceAccount
+    name: kubernetes-synchronizer
+    namespace: default

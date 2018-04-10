@@ -14,22 +14,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-dependencies:
-- name: onos-service
-  version: 0.1.0
-  repository: file://../../xos-services/onos-service
-- name: fabric
-  version: 0.1.0
-  repository: file://../../xos-services/fabric
-- name: volt
-  version: 0.1.0
-  repository: file://../../xos-services/volt
-- name: vsg-hw
-  version: 0.1.0
-  repository: file://../../xos-services/vsg-hw
-- name: vrouter
-  version: 0.1.0
-  repository: file://../../xos-services/vrouter
-- name: kubernetes
-  version: 0.1.0
-  repository: file://../../xos-services/kubernetes
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kubernetes
+data:
+  serviceConfig: |
+{{ include "kubernetes.serviceConfig" . | indent 4 }}

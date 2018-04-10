@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-dependencies:
-- name: onos-service
-  version: 0.1.0
-  repository: file://../../xos-services/onos-service
-- name: fabric
-  version: 0.1.0
-  repository: file://../../xos-services/fabric
-- name: volt
-  version: 0.1.0
-  repository: file://../../xos-services/volt
-- name: vsg-hw
-  version: 0.1.0
-  repository: file://../../xos-services/vsg-hw
-- name: vrouter
-  version: 0.1.0
-  repository: file://../../xos-services/vrouter
-- name: kubernetes
-  version: 0.1.0
-  repository: file://../../xos-services/kubernetes
+# Default values for kubernetes synchronizer.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+imagePullPolicy: 'IfNotPresent'
+
+kubernetes_synchronizerImage: "xosproject/kubernetes-synchronizer:master"
+
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
