@@ -49,3 +49,6 @@ volt:
 vsg-hw:
   image:
     tag: 'candidate'
+kubernetes:
+  image:
+    tag: 'candidate'
