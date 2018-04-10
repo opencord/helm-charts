@@ -64,6 +64,12 @@ vsg-hw:
     accessor:
       username: admin@opencord.org
       password: letmein
+kubernetes:
+  serviceConfig:
+    accessor:
+      username: admin@opencord.org
+      password: letmein
+
 
 # The R-CORD synchronizer loads R-CORD-specific models into the core
 serviceConfig:
@@ -233,6 +239,7 @@ toscaRecipes:
       - custom_types/addressmanagerservice.yaml
       - custom_types/addresspool.yaml
       - custom_types/image.yaml
+      - custom_types/kubernetesservice.yaml
       - custom_types/network.yaml
       - custom_types/networkslice.yaml
       - custom_types/networktemplate.yaml
@@ -264,6 +271,10 @@ toscaRecipes:
             - provider_service:
                 node: service#volt
                 relationship: tosca.relationships.BelongsToOne
+        service#kubernetes:
+          type: tosca.nodes.KubernetesService
+          properties:
+            name: kubernetes
         service#volt:
           type: tosca.nodes.VOLTService
           properties:
