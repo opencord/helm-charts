@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: xos-core
+  namespace: untrusted-services
+spec:
+  type: ExternalName
+  externalName: xos-core.{{ .Values.coreNamespace }}.svc.cluster.{{ .Values.clusterName }}
+ports:
+  - port: 50051

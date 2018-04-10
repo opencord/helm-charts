@@ -30,3 +30,9 @@ dependencies:
 - name: vsg-hw
   version: 0.1.0
   repository: file://../../xos-services/vsg-hw
+- name: kubernetes
+  version: 0.1.0
+  repository: file://../../xos-services/kubernetes
+- name: exampleservice
+  version: 0.1.0
+  repository: file://../../xos-services/exampleservice
