@@ -32,6 +32,7 @@ docker_image_whitelist:
 - xosproject/onos-synchronizer
 - xosproject/addressmanager-synchronizer
 - xosproject/vsg-hw-synchronizer
+- xosproject/kubernetes-synchronizer
 - xosproject/fabric-synchronizer
 - xosproject/xos-api-tester
 - nginx
