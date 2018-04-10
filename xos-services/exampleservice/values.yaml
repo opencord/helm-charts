@@ -43,7 +43,7 @@ serviceConfig:
   accessor:
     username: admin@opencord.org
     password: letmein
-    endpoint: xos-core:50051
+    endpoint: xos-core.default.svc.cluster.local:50051
   required_models:
     - ExampleService
     - ExampleServiceInstance
