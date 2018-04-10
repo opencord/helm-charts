@@ -59,3 +59,4 @@ fabric:         *serviceOverride
 onos-service:   *serviceOverride
 volt:           *serviceOverride
 vsg-hw:         *serviceOverride
+kubernetes:     *serviceOverride
