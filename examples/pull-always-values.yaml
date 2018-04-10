@@ -30,3 +30,5 @@ volt:
   imagePullPolicy: 'Always'
 vsg-hw:
   imagePullPolicy: 'Always'
+kubernetes:
+  imagePullPolicy: 'Always'

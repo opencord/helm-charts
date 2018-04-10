@@ -38,3 +38,5 @@ volt:
   volt_synchronizerImage: "xosproject/volt-synchronizer:candidate"
 vsg-hw:
   vsg_hw_synchronizerImage: "xosproject/vsg-hw-synchronizer:candidate"
+kubernetes:
+  kubernetes_synchronizerImage: "xosproject/kubernetes-synchronizer:candidate"
