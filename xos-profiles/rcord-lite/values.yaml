@@ -185,6 +185,7 @@ toscaRecipes:
     description: Set up VOLT, AddressManager, and RCORD services
     imports:
       - custom_types/image.yaml
+      - custom_types/kubernetesservice.yaml
       - custom_types/network.yaml
       - custom_types/networkslice.yaml
       - custom_types/networktemplate.yaml
@@ -222,6 +223,10 @@ toscaRecipes:
             - provider_service:
                 node: service#volt
                 relationship: tosca.relationships.BelongsToOne
+        service#kubernetes:
+          type: tosca.nodes.KubernetesService
+          properties:
+            name: kubernetes
         service#volt:
           type: tosca.nodes.VOLTService
           properties:
