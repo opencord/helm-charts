@@ -33,6 +33,7 @@ docker_image_whitelist:
 - xosproject/addressmanager-synchronizer
 - xosproject/vsg-hw-synchronizer
 - xosproject/fabric-synchronizer
+- xosproject/xos-api-tester
 - nginx
 - node
 - postgres
