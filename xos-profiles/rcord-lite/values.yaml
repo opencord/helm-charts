@@ -240,6 +240,7 @@ toscaRecipes:
       - custom_types/serviceinstancelink.yaml
       - custom_types/slice.yaml
       - custom_types/voltservice.yaml
+      - custom_types/vrouterservice.yaml
       - custom_types/vsghwservice.yaml
     topology_template:
       node_templates:
@@ -272,6 +273,15 @@ toscaRecipes:
           type: tosca.nodes.VSGHWService
           properties:
             name: vsg-hw
+        service#vrouter:
+          type: tosca.nodes.VRouterService
+          properties:
+            name: vrouter
+            kind: rcord
+            rest_hostname: onos-fabric-ui
+            rest_port: 8181
+            rest_user: karaf
+            rest_pass: karaf
         volt_vsg-hw:
           type: tosca.nodes.ServiceDependency
           properties:
@@ -294,6 +304,17 @@ toscaRecipes:
             - provider_service:
                 node: service#ONOS_Fabric
                 relationship: tosca.relationships.BelongsToOne
+        vsg-hw_vrouter:
+          type: tosca.nodes.ServiceDependency
+          properties:
+            connect_method: None
+          requirements:
+            - subscriber_service:
+                node: service#vsg-hw
+                relationship: tosca.relationships.BelongsToOne
+            - provider_service:
+                node: service#vrouter
+                relationship: tosca.relationships.BelongsToOne
 
   serviceGraphConstraints:
     tosca_definitions_version: tosca_simple_yaml_1_0
@@ -305,4 +326,4 @@ toscaRecipes:
         constraints:
           type: tosca.nodes.ServiceGraphConstraint
           properties:
-            constraints: '[[null, "rcord"], [null, "volt"], ["ONOS_Fabric", "vsg-hw"]]'
+            constraints: '[[null, "rcord"], [null, "volt"], ["ONOS_Fabric", "vsg-hw"], [null, "vrouter"]]'
