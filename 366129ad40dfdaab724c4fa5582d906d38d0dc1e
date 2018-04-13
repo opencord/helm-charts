@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "49b34b46_6588defd",
+        "filename": "xos-services/openstack/templates/deployment.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2018-04-13T04:35:48Z",
+      "side": 1,
+      "message": "i thinks we should add mountpath /opt/xos/images,\nif not , we can\u0027t use xos pull openstack images.",
+      "range": {
+        "startLine": 46,
+        "startChar": 10,
+        "endLine": 46,
+        "endChar": 22
+      },
+      "revId": "366129ad40dfdaab724c4fa5582d906d38d0dc1e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
