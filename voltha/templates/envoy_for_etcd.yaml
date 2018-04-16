@@ -44,7 +44,7 @@ metadata:
   name: voltha
   namespace: {{ .Values.global.namespace }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicas.envoy_for_etcd }}
   template:
     metadata:
       labels:

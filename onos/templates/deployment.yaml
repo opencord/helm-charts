@@ -18,6 +18,7 @@ apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: {{ template "onos.fullname" . }}
+  namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "onos.name" . }}
     chart: {{ template "onos.chart" . }}
@@ -35,10 +36,14 @@ spec:
         app: {{ template "onos.name" . }}
         release: {{ .Release.Name }}
     spec:
+      serviceAccount: {{ .Values.serviceAccountName }}
+      serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+{{ toYaml .Values.onos_env | indent 12 }}
           ports:
             - name: ovsdb
               containerPort: {{ .Values.services.ovsdb.port }}
