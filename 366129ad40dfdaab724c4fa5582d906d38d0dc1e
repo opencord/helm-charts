@@ -22,6 +22,30 @@
       "revId": "366129ad40dfdaab724c4fa5582d906d38d0dc1e",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0ca58bc_678d5ed8",
+        "filename": "xos-services/openstack/templates/deployment.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-04-16T21:17:01Z",
+      "side": 1,
+      "message": "I agree that we\u0027ll need to add our images to a volume in order to get XOS to load them into Glance.  Do you have any ideas on what kind of volume we should use, and how the images should be populated?",
+      "parentUuid": "49b34b46_6588defd",
+      "range": {
+        "startLine": 46,
+        "startChar": 10,
+        "endLine": 46,
+        "endChar": 22
+      },
+      "revId": "366129ad40dfdaab724c4fa5582d906d38d0dc1e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
