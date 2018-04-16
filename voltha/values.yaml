@@ -17,6 +17,13 @@ k8s_docker_registry: 'k8s.gcr.io/'
 
 image_pull_policy: IfNotPresent
 
+replicas:
+  vcore: 1
+  vcli: 1
+  ofagent: 1
+  netconf: 1
+  envoy_for_etcd: 1
+
 
 node_ports:
   vcli_port: 30110

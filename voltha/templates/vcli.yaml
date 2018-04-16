@@ -37,7 +37,7 @@ metadata:
   namespace: {{ .Values.global.namespace }}
   serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
 spec:
-  replicas: 2
+  replicas: {{ .Values.replicas.vcli }}
   template:
     metadata:
       labels:
