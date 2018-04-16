@@ -42,7 +42,7 @@ metadata:
   namespace: {{ .Values.global.namespace }}
   serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
 spec:
-  replicas: 3
+  replicas: {{ .Values.replicas.vcore }}
   template:
     metadata:
       labels:

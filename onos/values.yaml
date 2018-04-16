@@ -28,6 +28,9 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+namespace: default
+serviceAccountName: default
+
 services:
   serviceType: ClusterIP
   ovsdb:
@@ -40,6 +43,8 @@ services:
     port: 8181
   cluster:
     port: 9876
+
+onos_env: []
 
 resources: {}
 
