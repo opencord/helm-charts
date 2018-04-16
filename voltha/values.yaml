@@ -17,6 +17,13 @@ k8s_docker_registry: 'k8s.gcr.io/'
 
 image_pull_policy: IfNotPresent
 
+replicas:
+  vcore: 1
+  vcli: 1
+  ofagent: 1
+  netconf: 1
+  envoy_for_etcd: 1
+
 
 node_ports:
   vcli_port: 30110
@@ -120,7 +127,7 @@ ofagent_args:
 - "/ofagent/ofagent/main.py"
 - "-v"
 - "--consul=consul.$(NAMESPACE).svc.cluster.local:8500"
-- "--controller=onos:6653"
+- "--controller=onos-voltha-openflow:6653"
 - "--grpc-endpoint=vcore.$(NAMESPACE).svc.cluster.local:50556"
 - "--enable-tls"
 - "--key-file=/ofagent/pki/voltha.key"

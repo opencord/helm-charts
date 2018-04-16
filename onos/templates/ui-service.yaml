@@ -16,13 +16,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "onos.fullname" . }}-ui
+  namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "onos.name" . }}
     chart: {{ template "onos.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  type: {{ .Values.services.serviceType }}
+  type: {{ .Values.services.uiServiceType }}
   ports:
   - name: ui
 {{ toYaml .Values.services.ui | indent 4 }}

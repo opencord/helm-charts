@@ -28,8 +28,14 @@ image:
 nameOverride: ""
 fullnameOverride: ""
 
+namespace: default
+serviceAccountName: default
+
 services:
-  serviceType: ClusterIP
+  openflowServiceType: ClusterIP
+  ovsdbServiceType: ClusterIP
+  sshServiceType: ClusterIP
+  uiServiceType: ClusterIP
   ovsdb:
     port: 6640
   openflow:
@@ -40,6 +46,8 @@ services:
     port: 8181
   cluster:
     port: 9876
+
+onos_env: []
 
 resources: {}
 

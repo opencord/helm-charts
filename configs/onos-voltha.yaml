@@ -14,20 +14,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Expose ONOS services using NodePorts, for onos-fabric configuration
+# Expose ONOS services using NodePorts, for onos-voltha configuration
 #
-# helm install -f configs/onos-fabric.yaml onos
+# helm install -f configs/onos-voltha.yaml onos
+nameOverride: "onosv"
+fullnameOverride: "onos-voltha"
+
+namespace: voltha
+serviceAccountName: voltha-serviceaccount
+
+image:
+  repository: voltha/voltha-onos
+  tag: 'latest'
+  pullPolicy: IfNotPresent
 
 services:
-  openflowServiceType: NodePort
-  ovsdbServiceType: NodePort
+  openflowServiceType: ClusterIP
+  ovsdbServiceType: ClusterIP
   sshServiceType: NodePort
   uiServiceType: NodePort
-  ovsdb:
-    nodePort: 31640
-  openflow:
-    nodePort: 31653
   ssh:
-    nodePort: 31101
+    nodePort: 30115
   ui:
-    nodePort: 31181
+    nodePort: 30120
+
+onos_env:
+- name: POD_IP
+  valueFrom:
+  fieldRef:
+    fieldPath: status.podIP
+- name: NAMESPACE
+  valueFrom:
+  fieldRef:
+    fieldPath: metadata.namespace
+- name: ONOS_APPS
+  value: "drivers,openflow-base"

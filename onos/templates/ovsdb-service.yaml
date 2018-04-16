@@ -16,13 +16,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ template "onos.fullname" . }}-ovsdb
+  namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "onos.name" . }}
     chart: {{ template "onos.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  type: {{ .Values.services.serviceType }}
+  type: {{ .Values.services.ovsdbServiceType }}
   ports:
   - name: ovsdb
 {{ toYaml .Values.services.ovsdb | indent 4 }}
