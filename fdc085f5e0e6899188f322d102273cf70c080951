@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "71883797_807826a9",
+        "filename": "xos-services/openstack/templates/deployment.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000346
+      },
+      "writtenOn": "2018-04-17T00:35:37Z",
+      "side": 1,
+      "message": "we can use mount Hostpath to load /opt/xos/images images\n\nvolumeMounts:\n- name: openstack-volumes\n              mountPath: /opt/xos/images\nvolumes:\n- name: openstack-volumes\n          hostPath:\n            path: /opt/cord_profile/images",
+      "range": {
+        "startLine": 46,
+        "startChar": 10,
+        "endLine": 51,
+        "endChar": 57
+      },
+      "revId": "fdc085f5e0e6899188f322d102273cf70c080951",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
