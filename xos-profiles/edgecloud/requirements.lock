@@ -1,0 +1,12 @@
+dependencies:
+- name: onos-service
+  repository: file://../../xos-services/onos-service
+  version: 0.1.0
+- name: openstack
+  repository: file://../../xos-services/openstack
+  version: 0.1.0
+- name: vtn-service
+  repository: file://../../xos-services/vtn-service
+  version: 0.1.0
+digest: sha256:5f7676fb172f769c7a7bd00a713ef989ea815dea8460bb6603f32c52a2c1f02f
+generated: 2018-05-03T17:21:34.729406-07:00
