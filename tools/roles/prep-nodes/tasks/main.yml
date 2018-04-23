@@ -1,0 +1,16 @@
+---
+
+- name: Point node DNS resolver to kube-dns
+  lineinfile:
+    path: /etc/resolvconf/resolv.conf.d/head
+    regexp: 'nameserver 10\.1\.'
+    line: 'nameserver 10.233.0.3'
+
+- name: Run resolvconf
+  command: resolvconf -u
+  tags:
+  - skip_ansible_lint
+
+- name: Install ceph-common
+  apt:
+    name: ceph-common
