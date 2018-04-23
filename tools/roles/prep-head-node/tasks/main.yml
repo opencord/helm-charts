@@ -1,0 +1,24 @@
+---
+- name: Copy helm binary
+  copy:
+    src: /usr/local/bin/helm
+    dest: /usr/local/bin/helm
+    owner: root
+    mode: 0755
+
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+  with_items:
+  - nmap
+  - jq
+
+- name: Stop Apache
+  service:
+    name: apache2
+    state: stopped
+
+- name: Add head node labels
+  command: kubectl label nodes head1 --overwrite openstack-helm-node-class=primary
+  tags:
+  - skip_ansible_lint
