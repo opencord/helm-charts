@@ -1,0 +1,6 @@
+---
+
+- name: Install openstack-helm
+  hosts: head
+  roles:
+  - install-openstack-helm
