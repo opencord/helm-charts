@@ -1,0 +1,2 @@
+nameserver 10.233.0.3
+search cluster.local
