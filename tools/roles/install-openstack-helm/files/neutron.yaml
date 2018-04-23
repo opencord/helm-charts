@@ -1,0 +1,45 @@
+---
+
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+images:
+  tags:
+    neutron_server: andybavier/test-image:latest
+manifests:
+  daemonset_dhcp_agent: false
+  daemonset_l3_agent: false
+  daemonset_lb_agent: false
+  daemonset_metadata_agent: false
+  daemonset_ovs_agent: false
+  daemonset_sriov_agent: false
+network:
+  interface:
+    tunnel: "eth0"
+pod:
+  replicas:
+    server: 2
+conf:
+  plugins:
+    ml2_conf:
+      ml2:
+        type_drivers: vxlan
+        tenant_network_types: vxlan
+        mechanism_drivers: onos_ml2
+      ml2_type_vxlan:
+        vni_ranges: 1001:2000
+      onos:
+        url_path: http://onos-cord-ui.default.svc.cluster.local:8181/
+        username: onos
+        password: rocks
