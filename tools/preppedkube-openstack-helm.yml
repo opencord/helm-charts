@@ -1,0 +1,23 @@
+---
+
+- name: Install the preppedkube scenario
+  hosts: localhost
+  roles:
+  - install-preppedkube
+
+- name: Prep all nodes
+  hosts: head compute
+  become: yes
+  roles:
+  - prep-nodes
+
+- name: Prep the head node
+  hosts: head
+  become: yes
+  roles:
+  - prep-head
+
+- name: Install openstack-helm
+  hosts: head
+  roles:
+  - install-openstack-helm
