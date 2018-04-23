@@ -1,0 +1,90 @@
+---
+
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- name: Install charts
+  command: helm upgrade --install {{ item.name }} {{ item.path }}
+  args:
+    chdir: "{{ ansible_env.HOME }}/cord/build/helm-charts"
+  with_items:
+  - { name: xos-core, path: ./xos-core }
+  - { name: xos-openstack, path: ./xos-services/openstack }
+  - { name: xos-onos, path: ./xos-services/onos-service }
+  - { name: xos-vtn, path: ./xos-services/vtn-service }
+  - { name: onos-cord, path: ./onos }
+  tags:
+  - skip_ansible_lint
+
+- name: Wait for ONOS to come up
+  shell: kubectl get pod | grep onos-cord | grep Running
+  register: result
+  until: result is success
+  retries: 30
+  delay: 10
+  tags:
+  - skip_ansible_lint
+
+- name: Add head node private key to ONOS (HACK - should be a secret or something)
+  shell: |
+    HEAD_PRIVKEY={{ ansible_env.HOME}}/cord/build/scenarios/preppedkube/.vagrant/machines/head1/libvirt/private_key
+    ONOS_CORD_POD=$( kubectl get pod | grep onos-cord | awk '{print $1}' )
+    kubectl cp $HEAD_PRIVKEY $ONOS_CORD_POD:/root/node_key
+  tags:
+  - skip_ansible_lint
+
+- name: Wait for OpenStack service pod to come up
+  shell: kubectl get pod | grep xos-openstack | grep Running
+  register: result
+  until: result is success
+  retries: 30
+  delay: 10
+  tags:
+  - skip_ansible_lint
+
+- name: Download trusty-server-multi-nic image into OpenStack service pod (HACK - should be a volume)
+  shell: |
+    XOS_OPENSTACK_POD=$( kubectl get pod | grep xos-openstack | awk '{print $1}' )
+    kubectl exec $XOS_OPENSTACK_POD -- curl -L --create-dirs -o /opt/xos/images/trusty-server-multi-nic.qcow2 https://github.com/opencord/platform-install/releases/download/vms/trusty-server-cloudimg-amd64-disk1.img.20170201
+  tags:
+  - skip_ansible_lint
+
+- name: Wait for XOS TOSCA engine to be ready after service onboarding
+  uri:
+    url: "{{ xos_tosca_url }}"
+    method: GET
+    status_code: 200
+    return_content: yes
+  register: xosready_tosca
+  until: xosready_tosca.status == 200
+  retries: 40
+  delay: 15
+
+- name: Run TOSCA recipes (specific to preppedkube scenario)
+  uri:
+    url: "{{ xos_tosca_url }}/run"
+    method: POST
+    headers:
+      xos-username: "{{ xos_admin_user }}"
+      xos-password: "{{ xos_admin_pass }}"
+    body: "{{ lookup('file',  ansible_env.HOME + '/cord/build/helm-charts/examples/' + item ) }}"
+    status_code: 200
+  with_items:
+    - openstack-tosca.yaml
+    - openstack-compute-tosca.yaml
+    - vtn-service-tosca.yaml
+  register: result
+  until: result is success
+  retries: 5
+  delay: 5
