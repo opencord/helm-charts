@@ -41,7 +41,7 @@ xosAdminFirstname: 'XOS'
 xosAdminLastname: 'Admin'
 
 # CORD site names
-cordSiteName: placeholder-sitename
+cordSiteName: mysite
 
 # Database name/username/password
 xosDBName: 'xos'
