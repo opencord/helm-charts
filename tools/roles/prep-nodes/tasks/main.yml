@@ -1,0 +1,21 @@
+---
+
+- name: Point node DNS resolver to kube-dns
+  lineinfile:
+    path: /etc/resolvconf/resolv.conf.d/head
+    regexp: 'nameserver 10\.1\.'
+    line: 'nameserver 10.233.0.3'
+
+- name: Run resolvconf
+  command: resolvconf -u
+  tags:
+  - skip_ansible_lint
+
+- name: Install ceph-common
+  apt:
+    name: ceph-common
+
+- name: Add node labels
+  command: kubectl label nodes --all --overwrite ceph-mds=enabled ceph-mgr=enabled ceph-mon=enabled ceph-osd=enabled ceph-rgw=enabled linuxbridge=enabled openstack-compute-node=enabled openstack-control-plane=enabled openvswitch=enabled openstack-helm-node-class=general
+  tags:
+  - skip_ansible_lint
