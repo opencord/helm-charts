@@ -41,12 +41,21 @@ topology_template:
   node_templates:
 
 # Images and flavors
+    # Loaded into Glance by default
     Cirros-0.3.5:
       type: tosca.nodes.Image
       properties:
         name: "Cirros 0.3.5 64-bit"
         disk_format: QCOW2
         container_format: BARE
+
+    Ubuntu-14.04:
+      type: tosca.nodes.Image
+      properties:
+        name: "Ubuntu 14.04 64-bit"
+        disk_format: QCOW2
+        container_format: BARE
+        path: https://github.com/opencord/platform-install/releases/download/vms/trusty-server-cloudimg-amd64-disk1.img.20170201
 
     m1.tiny:
       type: tosca.nodes.Flavor
@@ -153,3 +162,52 @@ topology_template:
         visibility: private
         translation: none
         vtn_kind: PRIVATE
+
+
+# management (vtn: MANAGEMENT_LOCAL) network
+    management_template:
+      type: tosca.nodes.NetworkTemplate
+      properties:
+        name: management_template
+        visibility: private
+        translation: none
+        vtn_kind: MANAGEMENT_LOCAL
+
+    management:
+      type: tosca.nodes.Network
+      properties:
+        name: management
+        # ip_version: 4
+        subnet: 172.27.0.0/24
+        permit_all_slices: true
+      requirements:
+        - template:
+            node: management_template
+            relationship: tosca.relationships.BelongsToOne
+        - owner:
+            node: slice#mysite_management
+            relationship: tosca.relationships.BelongsToOne
+
+
+# Slice to own management networks
+    slice#mysite_management:
+      description: This slice exists solely to own the management network(s)
+      type: tosca.nodes.Slice
+      properties:
+        network: noauto
+        name: mysite_management
+      requirements:
+        - site:
+            node: mysite
+            relationship: tosca.relationships.BelongsToOne
+
+# Connect mysite_test to management net
+    networkslice#management_to_mysite_test:
+        type: tosca.nodes.NetworkSlice
+        requirements:
+          - network:
+              node: management
+              relationship: tosca.relationships.BelongsToOne
+          - slice:
+              node: mysite_test
+              relationship: tosca.relationships.BelongsToOne
