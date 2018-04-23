@@ -1,0 +1,180 @@
+---
+
+- name: Checkout openstack-helm
+  git:
+    repo: https://git.openstack.org/openstack/openstack-helm.git
+    dest: /opt/openstack-helm
+  become: yes
+  tags:
+  - skip_ansible_lint
+
+- name: Initialize Helm
+  command: helm init --client-only
+  tags:
+  - skip_ansible_lint
+
+- name: Run 'helm serve' in background
+  shell: nohup helm serve </dev/null >/dev/null 2>&1 &
+  tags:
+  - skip_ansible_lint
+
+- pause:
+    seconds: 5
+
+- name: Add localhost repo to Helm
+  command: helm repo add localhost http://localhost:8879/charts
+  tags:
+  - skip_ansible_lint
+
+- name: Install OpenStack clients and build charts
+  command: tools/deployment/multinode/010-setup-client.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+- name: Install ingress
+  command: tools/deployment/multinode/020-ingress.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+- name: Install Ceph
+  command: tools/deployment/multinode/030-ceph.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+- name: Activate Ceph
+  command: tools/deployment/multinode/040-ceph-ns-activate.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+- name: Install single copy of mariadb, to avoid deadlock
+  command: tools/deployment/developer/common/050-mariadb.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+- name: Install RabbitMQ
+  command: tools/deployment/multinode/060-rabbitmq.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+- name: Install memcached
+  command: tools/deployment/multinode/070-memcached.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+- name: Install Keystone
+  command: tools/deployment/multinode/080-keystone.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+- name: Install Ceph radosgateway
+  command: tools/deployment/multinode/090-ceph-radosgateway.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+- name: Install Glance
+  command: tools/deployment/multinode/100-glance.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+- name: Install OvS
+  command: tools/deployment/multinode/120-openvswitch.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+- name: Install Libvirt
+  command: tools/deployment/multinode/130-libvirt.sh
+  args:
+    chdir: /opt/openstack
+  tags:
+  - skip_ansible_lint
+
+#
+# Need to customize Neutron install for CORD
+#
+- name: Install Nova
+  helm:
+    name: nova
+    chart:
+      name: nova
+      version: 0.1.0
+      source:
+        type: repo
+        repository: /opt/openstack-helm/nova
+    state: installed
+    values:
+      labels:
+        api_metadata:
+          node_selector_key: openstack-helm-node-class
+          node_selector_value: primary
+      pod:
+        replicas:
+          api_metadata: 1
+          placement: 2
+          osapi: 2
+          conductor: 2
+          consoleauth: 2
+          scheduler: 1
+          novncproxy: 1
+
+- name: Install Neutron
+  helm:
+    name: neutron
+    chart:
+      name: neutron
+      version: 0.1.0
+      source:
+        type: repo
+        repository: /opt/openstack-helm/neutron
+    state: installed
+    values:
+      images:
+        tags:
+          neutron_server: andybavier/test-image:latest
+      manifests:
+        daemonset_dhcp_agent: false
+        daemonset_l3_agent: false
+        daemonset_lb_agent: false
+        daemonset_metadata_agent: false
+        daemonset_ovs_agent: false
+        daemonset_sriov_agent: false
+      network:
+        interface:
+          tunnel: "eth0"
+      pod:
+        replicas:
+          server: 2
+      conf:
+        plugins:
+          ml2_conf:
+            ml2:
+              type_drivers: vxlan
+              tenant_network_types: vxlan
+              mechanism_drivers: onos_ml2
+            ml2_type_vxlan:
+              vni_ranges: 1001:2000
+            onos:
+              url_path: http://onos-cord-ui.default.svc.cluster.local:8181/
+              username: onos
+              password: rocks
