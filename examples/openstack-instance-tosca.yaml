@@ -36,16 +36,16 @@ topology_template:
   node_templates:
 
 # Images and flavors
-    Cirros-0.3.5:
+    Ubuntu-14.04:
       type: tosca.nodes.Image
       properties:
-        name: "Cirros 0.3.5 64-bit"
+        name: "Ubuntu 14.04 64-bit"
         must-exist: true
 
-    m1.tiny:
+    m1.small:
       type: tosca.nodes.Flavor
       properties:
-        name: m1.tiny
+        name: m1.small
         must-exist: true
 
     MyDeployment:
@@ -74,13 +74,13 @@ topology_template:
         name: test_instance
       requirements:
         - image:
-            node: Cirros-0.3.5
+            node: Ubuntu-14.04
             relationship: tosca.relationships.BelongsToOne
         - deployment:
             node: MyDeployment
             relationship: tosca.relationships.BelongsToOne
         - flavor:
-            node: m1.tiny
+            node: m1.small
             relationship: tosca.relationships.BelongsToOne
         - slice:
             node: mysite_test
