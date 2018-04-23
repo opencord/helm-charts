@@ -52,6 +52,9 @@ topology_template:
       type: tosca.nodes.Node
       properties:
         name: head1
+        bridgeId: of:00000000abcdef01
+        dataPlaneIntf: fabricbridge
+        dataPlaneIp: 10.6.1.1/24
       requirements:
         - site_deployment:
             node:  mysite_MyDeployment
@@ -60,6 +63,9 @@ topology_template:
       type: tosca.nodes.Node
       properties:
         name: compute1
+        bridgeId: of:00000000abcdef02
+        dataPlaneIntf: fabricbond
+        dataPlaneIp: 10.6.1.17/24
       requirements:
         - site_deployment:
             node:  mysite_MyDeployment
@@ -68,6 +74,9 @@ topology_template:
       type: tosca.nodes.Node
       properties:
         name: compute2
+        bridgeId: of:00000000abcdef03
+        dataPlaneIntf: fabricbond
+        dataPlaneIp: 10.6.1.18/24
       requirements:
         - site_deployment:
             node:  mysite_MyDeployment

@@ -1,0 +1,13 @@
+---
+
+- name: Prep all nodes
+  hosts: head compute
+  become: yes
+  roles:
+  - prep-nodes
+
+- name: Prep the head node
+  hosts: head
+  become: yes
+  roles:
+  - prep-head
