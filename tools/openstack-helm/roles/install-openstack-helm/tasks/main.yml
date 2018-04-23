@@ -1,0 +1,160 @@
+---
+
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- name: Checkout openstack-helm
+  git:
+    repo: https://git.openstack.org/openstack/openstack-helm.git
+    dest: "{{ ansible_env.HOME }}/openstack-helm"
+  tags:
+  - skip_ansible_lint
+
+- name: Initialize Helm
+  command: helm init --client-only
+  tags:
+  - skip_ansible_lint
+
+- name: Run 'helm serve' in background
+  shell: nohup helm serve </dev/null >/dev/null 2>&1 &
+  tags:
+  - skip_ansible_lint
+
+- name: Wait 5 seconds for helm chart server to initialize
+  pause:
+    seconds: 5
+
+- name: Add localhost repo to Helm
+  command: helm repo add localhost http://localhost:8879/charts
+  tags:
+  - skip_ansible_lint
+
+- name: Install OpenStack clients and build charts
+  command: tools/deployment/multinode/010-setup-client.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+    creates: "{{ ansible_env.HOME }}/openstack-helm/nova-0.1.0.tgz"
+  tags:
+  - skip_ansible_lint
+
+- name: Install ingress
+  command: tools/deployment/multinode/020-ingress.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+    creates: /tmp/ingress-openstack.yaml
+  tags:
+  - skip_ansible_lint
+
+- name: Install Ceph
+  command: tools/deployment/multinode/030-ceph.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+    creates: /tmp/ceph.yaml
+  tags:
+  - skip_ansible_lint
+
+- name: Activate Ceph
+  command: tools/deployment/multinode/040-ceph-ns-activate.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+    creates: /tmp/ceph-openstack-config.yaml
+  tags:
+  - skip_ansible_lint
+
+- name: Install single copy of mariadb, to avoid deadlock
+  command: tools/deployment/developer/common/050-mariadb.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+  tags:
+  - skip_ansible_lint
+
+- name: Install RabbitMQ
+  command: tools/deployment/multinode/060-rabbitmq.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+  tags:
+  - skip_ansible_lint
+
+- name: Install memcached
+  command: tools/deployment/multinode/070-memcached.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+  tags:
+  - skip_ansible_lint
+
+# Thus usually fails but things still look OK
+- name: Install Keystone
+  command: tools/deployment/multinode/080-keystone.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+  ignore_errors: yes
+  tags:
+  - skip_ansible_lint
+
+- name: Install Ceph radosgateway
+  command: tools/deployment/multinode/090-ceph-radosgateway.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+    creates: /tmp/radosgw-openstack.yaml
+  tags:
+  - skip_ansible_lint
+
+- name: Install Glance
+  command: tools/deployment/multinode/100-glance.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+    creates: /tmp/glance.yaml
+  tags:
+  - skip_ansible_lint
+
+- name: Install OvS
+  command: tools/deployment/multinode/120-openvswitch.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+  tags:
+  - skip_ansible_lint
+
+- name: Install Libvirt
+  command: tools/deployment/multinode/130-libvirt.sh
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+  tags:
+  - skip_ansible_lint
+
+#
+# Need to customize Neutron install for CORD
+#
+
+- name: Create values files for Nova and Neutron
+  copy:
+    src: files/{{ item }}
+    dest: /tmp/{{ item }}
+  with_items:
+    - nova.yaml
+    - neutron.yaml
+
+- name: Install Nova
+  command: helm upgrade --install nova ./nova --namespace=openstack --values=/tmp/nova.yaml
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+  tags:
+  - skip_ansible_lint
+
+- name: Install Neutron
+  command: helm upgrade --install neutron ./neutron --namespace=openstack --values=/tmp/neutron.yaml
+  args:
+    chdir: "{{ ansible_env.HOME }}/openstack-helm"
+  tags:
+  - skip_ansible_lint
+
