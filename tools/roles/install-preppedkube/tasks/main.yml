@@ -1,0 +1,19 @@
+---
+
+- name: Disable apt cache in preppedkube scenario
+  lineinfile:
+    path: "{{ ansible_env.HOME }}/cord/build/scenarios/preppedkube/config.yml"
+    regexp: "^use_apt_cache:"
+    line: "use_apt_cache: False"
+
+- name: Run config step
+  make:
+    chdir: "{{ ansible_env.HOME }}/cord/build"
+    target: config
+    params:
+      PODCONFIG=rcord-preppedkube.yml
+
+- name: Set up preppedkube
+  make:
+    chdir: "{{ ansible_env.HOME }}/cord/build"
+    target: milestones/install-kubernetes-tools

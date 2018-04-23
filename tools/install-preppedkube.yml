@@ -1,0 +1,6 @@
+---
+
+- name: Install the preppedkube scenario
+  hosts: localhost
+  roles:
+  - install-preppedkube
