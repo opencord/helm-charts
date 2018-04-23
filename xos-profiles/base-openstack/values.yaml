@@ -1,0 +1,360 @@
+---
+# Copyright 2018-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Default values for the base-openstack profile.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+imagePullPolicy: 'IfNotPresent'
+
+httpieImage: "clue/httpie:latest"
+
+xosAdminUser: &adminuser "admin@opencord.org"
+xosAdminPassword: &adminpass "letmein"
+
+# TOSCA recipes for the tosca-loader
+toscaRecipes:
+  openstack:
+    tosca_definitions_version: tosca_simple_yaml_1_0
+
+    imports:
+      - custom_types/controller.yaml
+      - custom_types/controllersite.yaml
+      - custom_types/deployment.yaml
+      - custom_types/flavor.yaml
+      - custom_types/image.yaml
+      - custom_types/site.yaml
+      - custom_types/networktemplate.yaml
+      - custom_types/network.yaml
+      - custom_types/networkslice.yaml
+      - custom_types/slice.yaml
+      - custom_types/sitedeployment.yaml
+
+    description: openstack extensions to deployment
+
+    topology_template:
+      node_templates:
+
+    # Images and flavors
+        Ubuntu-14.04:
+          type: tosca.nodes.Image
+          properties:
+            name: "Ubuntu 14.04 64-bit"
+            disk_format: QCOW2
+            container_format: BARE
+            path: https://github.com/opencord/platform-install/releases/download/vms/trusty-server-cloudimg-amd64-disk1.img.20170201
+
+        m1.tiny:
+          type: tosca.nodes.Flavor
+          properties:
+            name: m1.tiny
+
+        m1.small:
+          type: tosca.nodes.Flavor
+          properties:
+            name: m1.small
+
+        m1.medium:
+          type: tosca.nodes.Flavor
+          properties:
+            name: m1.medium
+
+        m1.large:
+          type: tosca.nodes.Flavor
+          properties:
+            name: m1.large
+
+        m1.xlarge:
+          type: tosca.nodes.Flavor
+          properties:
+            name: m1.xlarge
+
+        MyDeployment:
+          type: tosca.nodes.Deployment
+          properties:
+            name: MyDeployment
+
+    # OpenStack Controller
+        mysite_MyDeployment_openstack:
+          type: tosca.nodes.Controller
+          requirements:
+            - deployment:
+                node: MyDeployment
+                relationship: tosca.relationships.BelongsToOne
+          properties:
+              name: mysite_MyDeployment_openstack
+              backend_type: OpenStack
+              version: Newton
+              auth_url: http://keystone.openstack.svc.cluster.local/v3
+              admin_user: admin
+              admin_password: password
+              admin_tenant: admin
+              domain: Default
+
+    # Site - adds openstack controller to site defined in deployment.yaml
+        mysite:
+          type: tosca.nodes.Site
+          properties:
+              name: mysite
+              must-exist: true
+              site_url: http://mysite.opencloud.us/
+              hosts_nodes: true
+
+        mysite_deployment_MyDeployment:
+            type: tosca.nodes.SiteDeployment
+            requirements:
+                - site:
+                    node: mysite
+                    relationship: tosca.relationships.BelongsToOne
+                - deployment:
+                    node: MyDeployment
+                    relationship: tosca.relationships.BelongsToOne
+                - controller:
+                    node: mysite_MyDeployment_openstack
+                    relationship: tosca.relationships.BelongsToOne
+
+        mysite_openstack_controller:
+            type: tosca.nodes.ControllerSite
+            requirements:
+                - site:
+                    node: mysite
+                    relationship: tosca.relationships.BelongsToOne
+                - controller:
+                    node: mysite_MyDeployment_openstack
+                    relationship: tosca.relationships.BelongsToOne
+
+    # For creating a test VM
+        mysite_test:
+          description: Test Slice
+          type: tosca.nodes.Slice
+          properties:
+            # network: noauto
+            name: mysite_test
+          requirements:
+            - site:
+                node: mysite
+                relationship: tosca.relationships.BelongsToOne
+            - default_image:
+                node: Ubuntu-14.04
+                relationship: tosca.relationships.BelongsToOne
+
+    # For private networks (e.g., per-slice)
+        private_template:
+          type: tosca.nodes.NetworkTemplate
+          properties:
+            name: Private
+            visibility: private
+            translation: none
+            vtn_kind: PRIVATE
+
+    # management (vtn: MANAGEMENT_LOCAL) network
+        management_template:
+          type: tosca.nodes.NetworkTemplate
+          properties:
+            name: management_template
+            visibility: private
+            translation: none
+            vtn_kind: MANAGEMENT_LOCAL
+
+        management:
+          type: tosca.nodes.Network
+          properties:
+            name: management
+            # ip_version: 4
+            subnet: 172.27.0.0/24
+            permit_all_slices: true
+          requirements:
+            - template:
+                node: management_template
+                relationship: tosca.relationships.BelongsToOne
+            - owner:
+                node: slice#mysite_management
+                relationship: tosca.relationships.BelongsToOne
+
+    # Slice to own management networks
+        slice#mysite_management:
+          description: This slice exists solely to own the management network(s)
+          type: tosca.nodes.Slice
+          properties:
+            network: noauto
+            name: mysite_management
+          requirements:
+            - site:
+                node: mysite
+                relationship: tosca.relationships.BelongsToOne
+
+    # Connect mysite_test to management net
+        networkslice#management_to_mysite_test:
+            type: tosca.nodes.NetworkSlice
+            requirements:
+              - network:
+                  node: management
+                  relationship: tosca.relationships.BelongsToOne
+              - slice:
+                  node: mysite_test
+                  relationship: tosca.relationships.BelongsToOne
+  openstackCompute:
+    tosca_definitions_version: tosca_simple_yaml_1_0
+
+    imports:
+      - custom_types/deployment.yaml
+      - custom_types/node.yaml
+      - custom_types/site.yaml
+      - custom_types/sitedeployment.yaml
+
+    description: Adds OpenStack compute nodes
+
+    topology_template:
+      node_templates:
+
+    # Site/Deployment, fully defined in deployment.yaml
+        mysite:
+          type: tosca.nodes.Site
+          properties:
+            name: mysite
+            must-exist: true
+
+        MyDeployment:
+          type: tosca.nodes.Deployment
+          properties:
+            name: MyDeployment
+            must-exist: true
+
+        mysite_MyDeployment:
+          type: tosca.nodes.SiteDeployment
+          requirements:
+            - site:
+                node: mysite
+                relationship: tosca.relationships.BelongsToOne
+            - deployment:
+                node: MyDeployment
+                relationship: tosca.relationships.BelongsToOne
+
+    # OpenStack compute nodes
+
+        head1:
+          type: tosca.nodes.Node
+          properties:
+            name: head1
+            bridgeId: of:00000000abcdef01
+            dataPlaneIntf: fabricbridge
+            dataPlaneIp: 10.6.1.1/24
+          requirements:
+            - site_deployment:
+                node:  mysite_MyDeployment
+                relationship: tosca.relationships.BelongsToOne
+
+        compute1:
+          type: tosca.nodes.Node
+          properties:
+            name: compute1
+            bridgeId: of:00000000abcdef02
+            dataPlaneIntf: fabricbond
+            dataPlaneIp: 10.6.1.17/24
+          requirements:
+            - site_deployment:
+                node:  mysite_MyDeployment
+                relationship: tosca.relationships.BelongsToOne
+
+        compute2:
+          type: tosca.nodes.Node
+          properties:
+            name: compute2
+            bridgeId: of:00000000abcdef03
+            dataPlaneIntf: fabricbond
+            dataPlaneIp: 10.6.1.18/24
+          requirements:
+            - site_deployment:
+                node:  mysite_MyDeployment
+                relationship: tosca.relationships.BelongsToOne
+
+  vtnService:
+    tosca_definitions_version: tosca_simple_yaml_1_0
+
+    imports:
+       - custom_types/onosapp.yaml
+       - custom_types/onosservice.yaml
+       - custom_types/serviceinstanceattribute.yaml
+       - custom_types/serviceinstancelink.yaml
+       - custom_types/vtnservice.yaml
+
+    description: Configures the VTN ONOS service
+
+    topology_template:
+      node_templates:
+
+        service#ONOS_CORD:
+          type: tosca.nodes.ONOSService
+          properties:
+              name: ONOS_CORD
+              kind: platform
+              no_container: true
+              rest_hostname: onos-cord-ui
+              rest_port: 8181
+
+        service#vtn:
+          type: tosca.nodes.VTNService
+          properties:
+              name: vtn
+              kind: platform
+              view_url: /admin/vtn/vtnservice/$id$/
+              privateGatewayMac: 00:00:00:00:00:01
+              localManagementIp: 172.27.0.1/24
+              ovsdbPort: 6641
+              sshUser: vagrant
+              sshKeyFile: /root/node_key
+              sshPort: 22
+              xosEndpoint: xos-chameleon:9101
+              xosUser: *adminuser
+              xosPassword: *adminpass
+              vtnAPIVersion: 2
+              controllerPort: onos-cord-openflow:6653
+              resync: false
+
+        VTN_ONOS_app:
+          type: tosca.nodes.ONOSApp
+          requirements:
+              - owner:
+                  node: service#ONOS_CORD
+                  relationship: tosca.relationships.BelongsToOne
+          properties:
+              name: VTN_ONOS_app
+              install_dependencies: https://repo.maven.apache.org/maven2/org/opencord/cord-config/1.3.1/cord-config-1.3.1.oar, https://repo.maven.apache.org/maven2/org/opencord/vtn/1.5.0/vtn-1.5.0.oar
+              dependencies: org.onosproject.drivers, org.onosproject.drivers.ovsdb, org.onosproject.openflow-base, org.onosproject.ovsdb-base, org.onosproject.dhcp
+
+        VTN_ONOS_app_autogenerate:
+            type: tosca.nodes.ServiceInstanceAttribute
+            requirements:
+              - service_instance:
+                  node: VTN_ONOS_app
+                  relationship: tosca.relationships.BelongsToOne
+            properties:
+                name: autogenerate
+                value: vtn-network-cfg
+
+        VTN_ONOS_app_VTN_Service:
+            type: tosca.nodes.ServiceInstanceLink
+            requirements:
+              - provider_service_instance:
+                  node: VTN_ONOS_app
+                  relationship: tosca.relationships.BelongsToOne
+              - subscriber_service:
+                  node: service#vtn
+                  relationship: tosca.relationships.BelongsToOne
