@@ -1,0 +1,72 @@
+---
+
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- name: Prep all nodes
+  hosts: head compute
+  become: yes
+  roles:
+    - prep-nodes
+
+- name: Prep the head node
+  hosts: head
+  become: yes
+  roles:
+    - prep-head-node
+
+- name: Install openstack-helm
+  hosts: head
+  roles:
+    - install-openstack-helm
+
+- name: Get public key used on head node (VTN)
+  hosts: head
+  tasks:
+  - name: Read public key
+    slurp:
+      src: "{{ ansible_env.HOME }}/.ssh/authorized_keys"
+    register: public_key
+
+- name: Add public key to compute nodes (VTN)
+  hosts: compute
+  tasks:
+  - name: Add public key to compute nodes
+    authorized_key:
+      user: "{{ ansible_env.USER }}"
+      state: present
+      key: "{{ hostvars[groups['head'][0]].public_key['content'] | b64decode }}"
+
+- name: Run kubectl commands (FIX ME!!!)
+  hosts: localhost
+  connection: local
+  tasks:
+  - name: Prep openvswitch on the nodes for VTN
+    shell: |
+      OVSDB_PODS=$( kubectl get pod --namespace openstack|grep openvswitch-db|awk '{print $1}' )
+      for pod in $OVSDB_PODS
+      do
+          #kubectl --namespace openstack exec $pod ovs-vsctl del-br br-int
+          #kubectl --namespace openstack exec $pod ovs-vsctl del-br br-ex
+          #kubectl --namespace openstack exec $pod ovs-vsctl del-br br-tun
+          kubectl --namespace openstack exec $pod -- ovs-appctl -t ovsdb-server ovsdb-server/add-remote ptcp:6641
+      done
+    tags:
+    - skip_ansible_lint
+
+- name: Deploy XOS
+  hosts: localhost
+  connection: local
+  roles:
+    - deploy-xos
