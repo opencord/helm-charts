@@ -28,9 +28,9 @@ spec:
         value: 'xos-chameleon'
       - name: SERVER_PORT
         value: '9101'
-      - name: USER
+      - name: XOS_USER
         value: '{{ .Values.xosAdminUser }}'
-      - name: PASSWD
+      - name: XOS_PASSWD
         value: '{{ .Values.xosAdminPassword }}'
     command: [ "pybot", "-L", "TRACE", "-d", "Log", "-T", "Ch_DeploymentTest.txt", "Ch_SiteTest.txt", "Ch_UsersTest.txt", "Ch_SliceTest.txt", "Ch_ServiceTest.txt" ]
   restartPolicy: Never
