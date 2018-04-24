@@ -39,11 +39,11 @@ spec:
         - name: {{ .Chart.Name }}
           args:
                - "-u"
-               - "{{ .Values.serviceConfig.accessor.username }}"
+               - "{{ .Values.xosshConfig.accessor.username }}"
                - "-p"
-               - "{{ .Values.serviceConfig.accessor.password }}"
+               - "{{ .Values.xosshConfig.accessor.password }}"
                - "-S"
-               - "{{ .Values.serviceConfig.accessor.endpoint }}"
+               - "{{ .Values.xosshConfig.accessor.endpoint }}"
           stdin: true
           tty: true
           image: "{{ .Values.pull_docker_registry }}{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -51,9 +51,18 @@ spec:
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
+            - name: xossh-config
+              mountPath: /opt/xos/config.yml
+              subPath: config.yml
             - name: cert-chain-secret
               mountPath: /usr/local/share/ca-certificates
       volumes:
+        - name: xossh-config
+          configMap:
+            name: xossh
+            items:
+              - key: xosshConfig
+                path: config.yml
         - name: cert-chain-secret
           secret:
             secretName: cert-chain-secret
