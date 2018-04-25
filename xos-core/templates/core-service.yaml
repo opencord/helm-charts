@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,16 +21,14 @@ metadata:
     {{- include "xos-core.release_labels" . | indent 4 }}
 spec:
   type: NodePort
-  ports:
-  - port: 50051
-    name: secure 
-    targetPort: 50051
-    nodePort: {{ .Values.node_ports.core_secure_service_port }}
-    protocol: TCP
-  - port: 50055
-    name: insecure 
-    targetPort: 50055
-    nodePort: {{ .Values.node_ports.core_insecure_service_port }}
-    protocol: TCP
   selector:
     app: "xos-core"
+  ports:
+    - port: 50051
+      name: secure
+      targetPort: 50051
+      nodePort: {{ .Values.xos_coreSecureNodePort }}
+      protocol: TCP
+
+# NOTE: insecure grpc ClusterIP isn't listed, but should be able to be looked
+# up by DNS created by secure grpc NodePort
