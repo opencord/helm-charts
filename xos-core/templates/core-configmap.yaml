@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,4 +21,25 @@ metadata:
     {{- include "xos-core.release_labels" . | indent 4 }}
 data:
   config: |
-{{ toYaml .Values.configs.core_config | indent 4 }} 
+    name: xos-core
+    xos_dir: /opt/xos
+    database:
+      name: {{ .Values.xosDBName | quote }}
+      username: {{ .Values.xosDBUser | quote }}
+      password: {{ .Values.xosDBPassword | quote }}
+    logging:
+      version: 1
+      handlers:
+        console:
+          class: logging.StreamHandler
+        file:
+          class: logging.handlers.RotatingFileHandler
+          filename: /var/log/xos.log
+          maxBytes: 10485760
+          backupCount: 5
+      loggers:
+        'multistructlog':
+          handlers:
+            - console
+            - file
+          level: DEBUG

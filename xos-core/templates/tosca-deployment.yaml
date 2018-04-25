@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: extensions/v1beta1
+apiVersion: extensions/v1beta2
 kind: Deployment
 metadata:
   name: xos-tosca
   labels:
-    app: xos-tosca
+    {{- include "xos-core.release_labels" . | indent 4 }}
 spec:
   replicas: 1
   template:
@@ -27,8 +28,8 @@ spec:
     spec:
       containers:
         - name: xos-tosca
-          image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_tosca.repository }}:{{ .Values.images.xos_tosca.tag }}
-          imagePullPolicy: {{ .Values.images.xos_tosca.pullPolicy }}
+          image: {{ .Values.xos_toscaImage }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
             - containerPort: 9102
               port: 9102
@@ -47,5 +48,5 @@ spec:
           configMap:
             name: xos-tosca
             items:
-             - key: config
-               path: config/xos-tosca.config.yaml
+              - key: config
+                path: config/xos-tosca.config.yaml
