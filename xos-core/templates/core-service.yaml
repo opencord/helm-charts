@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,15 +22,15 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 50051
-    name: secure 
-    targetPort: 50051
-    nodePort: {{ .Values.node_ports.core_secure_service_port }}
-    protocol: TCP
-  - port: 50055
-    name: insecure 
-    targetPort: 50055
-    nodePort: {{ .Values.node_ports.core_insecure_service_port }}
-    protocol: TCP
+    - port: 50051
+      name: secure
+      targetPort: 50051
+      nodePort: {{ .Values.xos_coreSecureNodePort }}
+      protocol: TCP
+    - port: 50055
+      name: insecure
+      targetPort: 50055
+      nodePort: {{ .Values.xos_coreUnsecureNodePort }}
+      protocol: TCP
   selector:
     app: "xos-core"
