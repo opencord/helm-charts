@@ -25,6 +25,11 @@ pull_docker_registry:
 nameOverride: ""
 fullnameOverride: ""
 
+clusterName: "local"
+coreNamespace: "default"
+
+serviceNamespace: "untrusted-services"
+
 image:
   repository: xosproject/exampleservice-synchronizer
   tag: master
