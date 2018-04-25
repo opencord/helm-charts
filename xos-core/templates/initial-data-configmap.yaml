@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,4 +21,24 @@ metadata:
     {{- include "xos-core.release_labels" . | indent 4 }}
 data:
   config: |
-{{ toYaml .Values.configs.initial_data_config | indent 4 }}
+    - model: core.Site
+      fields:
+        name: {{ .Values.cordSiteHumanName | quote }}
+        abbreviated_name: {{ .Values.cordSiteName | quote }}
+        login_base: {{ .Values.cordSiteName | quote }}
+        site_url: "http://opencord.org/"
+        hosts_nodes: true
+
+    - model: core.User
+      fields:
+        email: {{ .Values.xosAdminUser | quote }}
+        password: {{ .Values.xosAdminPassword | quote }}
+        firstname: {{ .Values.xosAdminFirstname | quote }}
+        lastname:  {{ .Values.xosAdminLastname | quote }}
+        is_admin: true
+      relations:
+        site:
+          fields:
+            name: "mysite"
+          model: core.Site
+
