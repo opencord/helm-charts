@@ -45,3 +45,32 @@ Create chart name and version as used by the chart label.
 {{- define "onos-service.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+
+{{- define "onos-service.serviceConfig" -}}
+name: onos
+accessor:
+  username: {{ .Values.xosAdminUser | quote }}
+  password: {{ .Values.xosAdminPassword | quote }}
+  endpoint: xos-core:50051
+dependency_graph: "/opt/xos/synchronizers/onos/model-deps"
+steps_dir: "/opt/xos/synchronizers/onos/steps"
+sys_dir: "/opt/xos/synchronizers/onos/sys"
+models_dir: "/opt/xos/synchronizers/onos/models"
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+    file:
+      class: logging.handlers.RotatingFileHandler
+      filename: /var/log/xos.log
+      maxBytes: 10485760
+      backupCount: 5
+  loggers:
+    'multistructlog':
+      handlers:
+          - console
+          - file
+      level: DEBUG
+{{- end -}}

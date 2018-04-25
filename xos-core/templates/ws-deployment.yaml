@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +18,7 @@ kind: Deployment
 metadata:
   name: xos-ws
   labels:
-    app: xos-ws
+    {{- include "xos-core.release_labels" . | indent 4 }}
 spec:
   replicas: 1
   template:
@@ -27,9 +28,9 @@ spec:
     spec:
       containers:
         - name: xos-ws
-          image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_ws.repository }}:{{ .Values.images.xos_ws.tag }}
-          imagePullPolicy: {{ .Values.images.xos_ws.pullPolicy }}
-          command: ["npm", "start", "--",  "--config", "gateway-config.yml"]
+          image: {{ .Values.xos_wsImage | quote }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          command: ["npm", "start", "--", "--config", "gateway-config.yml"]
           ports:
             - containerPort: 3000
               port: 3000
@@ -41,7 +42,7 @@ spec:
       volumes:
         - name: gateway-config
           configMap:
-            name: xos-gateway
+            name: xos-ws
             items:
-             - key: config
-               path: config/gateway-config.yml
+              - key: config
+                path: config/gateway-config.yml

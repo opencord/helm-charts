@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -39,14 +38,15 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-rcord
-          image: "{{ .Values.pull_docker_registry }}{{ .Values.image.rcordSynchronizer.repository }}:{{ .Values.image.rcordSynchronizer.tag }}"
-          imagePullPolicy: {{ .Values.image.rcordSynchronizer.pullPolicy }}
+          image: {{ .Values.rcord_synchronizerImage | quote }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           volumeMounts:
             - name: rcord-lite-config
               mountPath: /opt/xos/synchronizers/rcord/rcord_config.yaml
               subPath: rcord_config.yaml
-            - name: cert-chain-secret
-              mountPath: /usr/local/share/ca-certificates
+            - name: certchain-volume
+              mountPath: /usr/local/share/ca-certificates/local_certs.crt
+              subPath: config/ca_cert_chain.pem
       volumes:
         - name: rcord-lite-config
           configMap:
@@ -54,6 +54,9 @@ spec:
             items:
               - key: serviceConfig
                 path: rcord_config.yaml
-        - name: cert-chain-secret
-          secret:
-            secretName: cert-chain-secret
+        - name: certchain-volume
+          configMap:
+            name: ca-certificates
+            items:
+              - key: chain
+                path: config/ca_cert_chain.pem

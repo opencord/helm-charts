@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,15 +19,15 @@
 
 replicaCount: 1
 
-pull_docker_registry:
-
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: xosproject/onos-synchronizer
-  tag: master
-  pullPolicy: IfNotPresent
+imagePullPolicy: 'IfNotPresent'
+
+onos_synchronizerImage: "xosproject/onos-synchronizer:master"
+
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"
 
 resources: {}
 
@@ -37,30 +36,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-serviceConfig:
-  name: onos
-  accessor:
-    username: admin@opencord.org
-    password: letmein
-    endpoint: xos-core:50051
-  dependency_graph: "/opt/xos/synchronizers/onos/model-deps"
-  steps_dir: "/opt/xos/synchronizers/onos/steps"
-  sys_dir: "/opt/xos/synchronizers/onos/sys"
-  models_dir: "/opt/xos/synchronizers/onos/models"
-  logging:
-    version: 1
-    handlers:
-      console:
-        class: logging.StreamHandler
-      file:
-        class: logging.handlers.RotatingFileHandler
-        filename: /var/log/xos.log
-        maxBytes: 10485760
-        backupCount: 5
-    loggers:
-      'multistructlog':
-        handlers:
-            - console
-            - file
-        level: DEBUG

@@ -14,11 +14,24 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */ -}}
 
-{{- define "xos-core.release_labels" }}
-app: {{ printf "%s-%s" .Release.Name .Chart.Name | trunc 63 }}
-chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-release: {{ .Release.Name }}
-heritage: {{ .Release.Service }}
-version: {{ .Chart.Version }}
+{{- define "xos-tosca.config" }}
+name: xos-tosca
+gprc_endpoint: "xos-core"
+local_cert: /usr/local/share/ca-certificates/local_certs.crt
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+    file:
+      class: logging.handlers.RotatingFileHandler
+      filename: /var/log/xos.log
+      maxBytes: 10485760
+      backupCount: 5
+  loggers:
+    'multistructlog':
+      handlers:
+        - console
+        - file
+      level: DEBUG
 {{- end }}
-

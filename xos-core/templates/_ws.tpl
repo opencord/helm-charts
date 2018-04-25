@@ -14,11 +14,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */ -}}
 
-{{- define "xos-core.release_labels" }}
-app: {{ printf "%s-%s" .Release.Name .Chart.Name | trunc 63 }}
-chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
-release: {{ .Release.Name }}
-heritage: {{ .Release.Service }}
-version: {{ .Chart.Version }}
+{{- define "xos-ws.gateway_config" }}
+gateway_config:
+  default:
+  xos:
+    host: xost
+    port: 9000
+  redis:
+    host: redis
+    port: 6379
+  gateway:
+    port: 3000
 {{- end }}
 

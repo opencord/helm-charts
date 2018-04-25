@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,15 +19,15 @@
 
 replicaCount: 1
 
-pull_docker_registry:
-
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: xosproject/openstack-synchronizer
-  tag: master
-  pullPolicy: IfNotPresent
+imagePullPolicy: 'IfNotPresent'
+
+openstack_synchronizerImage: "xosproject/openstack-synchronizer:master"
+
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"
 
 resources: {}
 
@@ -37,30 +36,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-serviceConfig:
-  name: openstack-synchronizer
-  accessor:
-    username: admin@opencord.org
-    password: letmein
-    endpoint: xos-core:50051
-  dependency_graph: "/opt/xos/synchronizers/openstack/model-deps"
-  steps_dir: "/opt/xos/synchronizers/openstack/steps"
-  sys_dir: "/opt/xos/synchronizers/openstack/sys"
-  model_policies_dir: "/opt/xos/synchronizers/openstack/model_policies"
-  images_directory: "/opt/xos/images"
-  required_models:
-    - ControllerImages
-    - ControllerNetwork
-    - ControllerSitePrivilege
-    - ControllerSite
-    - ControllerSlicePrivilege
-    - ControllerSlice
-    - ControllerUser
-    - Image
-    - Instance
-    - Port
-    - Role
-  nova:
-    ca_ssl_cert: "/etc/ssl/certs/ca-certificates.crt"
-    enabled: True

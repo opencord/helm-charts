@@ -45,3 +45,37 @@ Create chart name and version as used by the chart label.
 {{- define "volt.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{- define "volt.serviceConfig" -}}
+name: volt
+accessor:
+  username: {{ .Values.xosAdminUser | quote }}
+  password: {{ .Values.xosAdminPassword | quote }}
+  endpoint: xos-core:50051
+required_models:
+  - VOLTService
+  - VOLTServiceInstance
+  - ServiceInstanceLink
+  - OLTDevice
+dependency_graph: "/opt/xos/synchronizers/volt/model-deps"
+model_policies_dir: "/opt/xos/synchronizers/volt/model_policies"
+models_dir: "/opt/xos/synchronizers/volt/models"
+steps_dir: "/opt/xos/synchronizers/volt/steps"
+pull_steps_dir: "/opt/xos/synchronizers/volt/pull_steps"
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+    file:
+      class: logging.handlers.RotatingFileHandler
+      filename: /var/log/xos.log
+      maxBytes: 10485760
+      backupCount: 5
+  loggers:
+    'multistructlog':
+      handlers:
+          - console
+          - file
+      level: DEBUG
+{{- end -}}

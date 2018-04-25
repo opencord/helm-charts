@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,4 +21,4 @@ metadata:
     {{- include "xos-core.release_labels" . | indent 4 }}
 data:
   config: |
-{{ toYaml .Values.configs.tosca_config | indent 4 }}
+{{ include "xos-tosca.config" . | indent 4 }}

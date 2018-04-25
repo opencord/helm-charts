@@ -45,3 +45,37 @@ Create chart name and version as used by the chart label.
 {{- define "exampleservice.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{- define "exampleservice.serviceConfig" -}}
+name: exampleservice
+accessor:
+  username: {{ .Values.xosAdminUser | quote }}
+  password: {{ .Values.xosAdminPassword | quote }}
+  endpoint: xos-core:50051
+required_models:
+  - ExampleService
+  - ExampleServiceInstance
+  - ServiceDependency
+  - ServiceMonitoringAgentInfo
+dependency_graph: "/opt/xos/synchronizers/exampleservice/model-deps"
+steps_dir: "/opt/xos/synchronizers/exampleservice/steps"
+sys_dir: "/opt/xos/synchronizers/exampleservice/sys"
+model_policies_dir: "/opt/xos/synchronizers/exampleservice/model_policies"
+models_dir: "/opt/xos/synchronizers/exampleservice/models"
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+    file:
+      class: logging.handlers.RotatingFileHandler
+      filename: /var/log/xos.log
+      maxBytes: 10485760
+      backupCount: 5
+  loggers:
+    'multistructlog':
+      handlers:
+          - console
+          - file
+      level: DEBUG
+{{- end -}}

@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,15 +19,15 @@
 
 replicaCount: 1
 
-pull_docker_registry:
-
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: xosproject/exampleservice-synchronizer
-  tag: master
-  pullPolicy: IfNotPresent
+imagePullPolicy: 'IfNotPresent'
+
+exampleservice_synchronizerImage: "xosproject/exampleservice-synchronizer:master"
+
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"
 
 resources: {}
 
@@ -37,20 +36,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-serviceConfig:
-  name: exampleservice
-  accessor:
-    username: admin@opencord.org
-    password: letmein
-    endpoint: xos-core:50051
-  required_models:
-    - ExampleService
-    - ExampleServiceInstance
-    - ServiceDependency
-    - ServiceMonitoringAgentInfo
-  dependency_graph: "/opt/xos/synchronizers/exampleservice/model-deps"
-  steps_dir: "/opt/xos/synchronizers/exampleservice/steps"
-  sys_dir: "/opt/xos/synchronizers/exampleservice/sys"
-  model_policies_dir: "/opt/xos/synchronizers/exampleservice/model_policies"
-  models_dir: "/opt/xos/synchronizers/exampleservice/models"

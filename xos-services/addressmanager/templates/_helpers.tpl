@@ -45,3 +45,32 @@ Create chart name and version as used by the chart label.
 {{- define "addressmanager.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{- define "addressmanager.serviceConfig" -}}
+name: addressmanager
+accessor:
+  username: {{ .Values.xosAdminUser | quote }}
+  password: {{ .Values.xosAdminPassword | quote }}
+  endpoint: xos-core:50051
+required_models:
+  - AddressManagerServiceInstance
+dependency_graph: "/opt/xos/synchronizers/addressmanager/model-deps"
+model_policies_dir: "/opt/xos/synchronizers/addressmanager/model_policies"
+models_dir: "/opt/xos/synchronizers/addressmanager/models"
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+    file:
+      class: logging.handlers.RotatingFileHandler
+      filename: /var/log/xos.log
+      maxBytes: 10485760
+      backupCount: 5
+  loggers:
+    'multistructlog':
+      handlers:
+          - console
+          - file
+      level: DEBUG
+{{- end -}}

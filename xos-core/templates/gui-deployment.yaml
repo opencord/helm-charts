@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,7 +18,7 @@ kind: Deployment
 metadata:
   name: xos-gui
   labels:
-    app: xos-gui
+    {{- include "xos-core.release_labels" . | indent 4 }}
 spec:
   replicas: 1
   template:
@@ -27,8 +28,8 @@ spec:
     spec:
       containers:
         - name: xos-gui
-          image: {{ .Values.pull_docker_registry }}{{ .Values.images.xos_gui.repository }}:{{ .Values.images.xos_gui.tag }}
-          imagePullPolicy: {{ .Values.images.xos_gui.pullPolicy }}
+          image: {{ .Values.xos_guiImage | quote }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
             - containerPort: 4000
               port: 4000
@@ -45,15 +46,15 @@ spec:
       volumes:
         - name: style-config
           configMap:
-            name: xos-style-config
+            name: gui-style-config
             items:
-             - key: config
-               path: style/style.config.js
+              - key: config
+                path: style/style.config.js
         - name: app-config
           configMap:
-            name: xos-app-config
+            name: gui-app-config
             items:
-             - key: config
-               path: app/app.config.js
+              - key: config
+                path: app/app.config.js
         - name: extensions-volume
           emptyDir: {}

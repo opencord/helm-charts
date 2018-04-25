@@ -20,4 +20,4 @@ metadata:
   name: vtn
 data:
   serviceConfig: |
-{{ toYaml .Values.serviceConfig | indent 4 }}
+{{ include "vtn.serviceConfig" . | indent 4 }}

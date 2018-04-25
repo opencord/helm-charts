@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,54 +22,13 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-pull_docker_registry:
+imagePullPolicy: 'IfNotPresent'
 
-image:
-  toscaLoader:
-    repository: clue/httpie
-    tag: latest
-    pullPolicy: IfNotPresent
-  rcordSynchronizer:
-    repository: xosproject/rcord-synchronizer
-    tag: master
-    pullPolicy: IfNotPresent
+rcord_synchronizerImage: "xosproject/rcord-synchronizer:master"
+httpieImage: "clue/httpie:latest"
 
-xosAdminUser: admin@opencord.org
-xosAdminPassword: letmein
-
-# Service-specific configuration.
-fabric:
-  serviceConfig:
-    accessor:
-      username: admin@opencord.org
-      password: letmein
-onos-service:
-  serviceConfig:
-    accessor:
-      username: admin@opencord.org
-      password: letmein
-volt:
-  serviceConfig:
-    accessor:
-      username: admin@opencord.org
-      password: letmein
-vsg-hw:
-  serviceConfig:
-    accessor:
-      username: admin@opencord.org
-      password: letmein
-
-# The R-CORD synchronizer loads R-CORD-specific models into the core
-serviceConfig:
-  name: rcord
-  accessor:
-    username: admin@opencord.org
-    password: letmein
-    endpoint: xos-core:50051
-  dependency_graph: "/opt/xos/synchronizers/rcord/model-deps"
-  sys_dir: "/opt/xos/synchronizers/rcord/sys"
-  models_dir: "/opt/xos/synchronizers/rcord/models"
-  model_policies_dir: "/opt/xos/synchronizers/rcord/model_policies"
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"
 
 # TOSCA recipes for the tosca-loader
 toscaRecipes:

@@ -45,3 +45,36 @@ Create chart name and version as used by the chart label.
 {{- define "vrouter.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{- define "vrouter.serviceConfig" -}}
+name: vrouter
+accessor:
+  username: {{ .Values.xosAdminUser | quote }}
+  password: {{ .Values.xosAdminPassword | quote }}
+  endpoint: xos-core:50051
+required_models:
+  - VRouterService
+  - VRouterDevice
+  - VRouterApp
+  - VRouterPort
+dependency_graph: "/opt/xos/synchronizers/vrouter/model-deps"
+steps_dir: "/opt/xos/synchronizers/vrouter/steps"
+sys_dir: "/opt/xos/synchronizers/vrouter/sys"
+models_dir: "/opt/xos/synchronizers/vrouter/models"
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+    file:
+      class: logging.handlers.RotatingFileHandler
+      filename: /var/log/xos.log
+      maxBytes: 10485760
+      backupCount: 5
+  loggers:
+    'multistructlog':
+      handlers:
+          - console
+          - file
+      level: DEBUG
+{{- end -}}

@@ -39,8 +39,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}-tosca-loader
-          image: "{{ .Values.pull_docker_registry }}{{ .Values.image.toscaLoader.repository }}:{{ .Values.image.toscaLoader.tag }}"
-          imagePullPolicy: {{ .Values.image.toscaLoader.pullPolicy }}
+          image: {{ .Values.httpieImage | quote }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           command: ["/bin/sh"]
           args:
             - "-c"

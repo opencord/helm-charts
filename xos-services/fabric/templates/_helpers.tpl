@@ -45,3 +45,36 @@ Create chart name and version as used by the chart label.
 {{- define "fabric.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{- define "fabric.serviceConfig" -}}
+name: fabric
+accessor:
+  username: {{ .Values.xosAdminUser | quote }}
+  password: {{ .Values.xosAdminPassword | quote }}
+  endpoint: xos-core:50051
+required_models:
+  - Instance
+  - Tag
+  - FabricService
+  - AddressManagerServiceInstance
+dependency_graph: "/opt/xos/synchronizers/fabric/model-deps"
+steps_dir: "/opt/xos/synchronizers/fabric/steps"
+sys_dir: "/opt/xos/synchronizers/fabric/sys"
+models_dir: "/opt/xos/synchronizers/fabric/models"
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+    file:
+      class: logging.handlers.RotatingFileHandler
+      filename: /var/log/xos.log
+      maxBytes: 10485760
+      backupCount: 5
+  loggers:
+    'multistructlog':
+      handlers:
+          - console
+          - file
+      level: DEBUG
+{{- end -}}

@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,12 +17,14 @@ apiVersion: v1
 kind: Service
 metadata:
   name: "xos-gui"
+  labels:
+    {{- include "xos-core.release_labels" . | indent 4 }}
 spec:
   type: NodePort
   ports:
-  - port: 4000
-    targetPort: 4000
-    nodePort: {{ .Values.node_ports.gui_service_port }}
-    protocol: TCP
+    - port: 4000
+      targetPort: 4000
+      nodePort: {{ .Values.xos_guiNodePort }}
+      protocol: TCP
   selector:
     app: "xos-gui"

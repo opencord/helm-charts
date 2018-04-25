@@ -20,4 +20,4 @@ metadata:
   name: addressmanager
 data:
   serviceConfig: |
-{{ toYaml .Values.serviceConfig | indent 4 }}
+{{ include "addressmanager.serviceConfig" . | indent 4 }}

@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,21 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Default values for exampleservice.
+# Default values for vOLT
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
-pull_docker_registry:
-
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: xosproject/volt-synchronizer
-  tag: master
-  pullPolicy: IfNotPresent
+imagePullPolicy: 'IfNotPresent'
+
+volt_synchronizerImage: "xosproject/volt-synchronizer:master"
+
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"
 
 resources: {}
 
@@ -37,36 +36,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-serviceConfig:
-  name: volt
-  accessor:
-    username: admin@opencord.org
-    password: letmein
-    endpoint: xos-core:50051
-  required_models:
-    - VOLTService
-    - VOLTServiceInstance
-    - ServiceInstanceLink
-    - OLTDevice
-  dependency_graph: "/opt/xos/synchronizers/volt/model-deps"
-  model_policies_dir: "/opt/xos/synchronizers/volt/model_policies"
-  models_dir: "/opt/xos/synchronizers/volt/models"
-  steps_dir: "/opt/xos/synchronizers/volt/steps"
-  pull_steps_dir: "/opt/xos/synchronizers/volt/pull_steps"
-  logging:
-    version: 1
-    handlers:
-      console:
-        class: logging.StreamHandler
-      file:
-        class: logging.handlers.RotatingFileHandler
-        filename: /var/log/xos.log
-        maxBytes: 10485760
-        backupCount: 5
-    loggers:
-      'multistructlog':
-        handlers:
-            - console
-            - file
-        level: DEBUG

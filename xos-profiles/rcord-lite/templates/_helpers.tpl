@@ -45,3 +45,20 @@ Create chart name and version as used by the chart label.
 {{- define "rcord-lite.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+The R-CORD synchronizer loads R-CORD-specific models into the core
+*/}}
+
+{{- define "rcord.serviceConfig" -}}
+name: rcord
+accessor:
+  username: {{ .Values.xosAdminUser | quote }}
+  password: {{ .Values.xosAdminPassword | quote }}
+  endpoint: xos-core:50051
+dependency_graph: "/opt/xos/synchronizers/rcord/model-deps"
+sys_dir: "/opt/xos/synchronizers/rcord/sys"
+models_dir: "/opt/xos/synchronizers/rcord/models"
+model_policies_dir: "/opt/xos/synchronizers/rcord/model_policies"
+{{- end -}}
+
