@@ -65,30 +65,11 @@ node_ports:
 xosAdminUser: &adminuser "admin@opencord.org"
 xosAdminPassword: &adminpass "letmein"
 
+xosdb_name: xos
+xosdb_username: postgres
+xosdb_password: password
+
 configs:
-  core_config:
-    name: xos-core
-    database:
-      name: xos
-      username: postgres
-      password: password
-    logging:
-      version: 1
-      handlers:
-        console:
-          class: logging.StreamHandler
-        file:
-          class: logging.handlers.RotatingFileHandler
-          filename: /var/log/xos.log
-          maxBytes: 10485760
-          backupCount: 5
-      loggers:
-        'multistructlog':
-          handlers:
-              - console
-              - file
-          level: DEBUG
-    xos_dir: /opt/xos
 
   db_config: 'xos-db'
 

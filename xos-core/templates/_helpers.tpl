@@ -20,6 +20,32 @@ app: {{ printf "%s-%s" .Release.Name .Chart.Name | trunc 63 }}
 version: {{ .Chart.Version }}
 release: {{ .Release.Name }}
 {{- end }}
+
 {{- define "xos-core.full_name" -}}
 {{- printf "%s-%s" .Release.Name .Chart.Name | trunc 63 -}}
+{{- end -}}
+
+{{- define "core.config" -}}
+name: xos-core
+database:
+  name: {{ .Values.xosdb_name }}
+  username: {{ .Values.xosdb_username }}
+  password: {{ .Values.xosdb_password }}
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+    file:
+      class: logging.handlers.RotatingFileHandler
+      filename: /var/log/xos.log
+      maxBytes: 10485760
+      backupCount: 5
+  loggers:
+    'multistructlog':
+      handlers:
+          - console
+          - file
+      level: DEBUG
+xos_dir: /opt/xos
 {{- end -}}

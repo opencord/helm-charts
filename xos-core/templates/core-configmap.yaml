@@ -20,4 +20,4 @@ metadata:
     {{- include "xos-core.release_labels" . | indent 4 }}
 data:
   config: |
-{{ toYaml .Values.configs.core_config | indent 4 }} 
+{{ include "core.config" . | indent 4 }} 
