@@ -21,20 +21,8 @@ metadata:
   labels:
     name: voltha
 spec:
-  clusterIP: None
-  ports:
-    - name: rest
-      port: 8882
-      targetPort: 8882
-    - name: mystery
-      port: 8001
-      targetPort: 8001
-    - name: mystery2
-      port: 8443
-      targetPort: 8443
-    - name: grpc
-      port: 50555
-      targetPort: 50555
+  type: {{ .Values.services.envoy.serviceType }}
+{{ toYaml .Values.services.envoy.serviceInfo | indent 2 }}
   selector:
     app: voltha
 ---

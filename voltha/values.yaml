@@ -28,6 +28,25 @@ replicas:
 node_ports:
   vcli_port: 30110
 
+services:
+  envoy:
+    serviceType: NodePort
+    serviceInfo:
+      ports:
+        - name: rest
+          port: 8882
+          targetPort: 8882
+          nodePort: 30125
+        - name: mystery
+          port: 8001
+          targetPort: 8001
+        - name: mystery2
+          port: 8443
+          targetPort: 8443
+        - name: grpc
+          port: 50555
+          targetPort: 50555
+
 etcd-operator:
   customResources:
     createEtcdClusterCRD: true
