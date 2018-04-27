@@ -73,9 +73,6 @@ images:
   ofagent:
     repository: voltha/voltha-ofagent
     tag: 'latest'
-  onos:
-    repository: voltha/voltha-onos
-    tag: 'latest'
   dashd:
     repository: voltha/voltha-dashd
     tag: 'latest'
