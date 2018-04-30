@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: Service
+metadata:
+   name: olt
+   namespace: {{ .Values.global.namespace }}
+   labels:
+     name: olt
+spec:
+  ports:
+    - name: grpc
+      port: 50060
+      targetPort: 50060
+  selector:
+    app: olt
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: olt
+  namespace: {{ .Values.global.namespace }}
+spec:
+   replicas: 1
+   template:
+     metadata:
+       labels:
+         app: olt
+       annotations:
+         cni: "calico"
+     spec:
+       containers:
+         - name: olt
+           image: {{ .Values.pull_docker_registry }}{{ .Values.images.olt.repository }}:{{ .Values.images.olt.tag }}
+           env:
+             - name: POD_IP
+               valueFrom:
+                 fieldRef:
+                   fieldPath: status.podIP
+             - name: NAMESPACE
+               valueFrom:
+                 fieldRef:
+                   fieldPath: metadata.namespace
+
+           args:
+             - "/app/ponsim"
+             - "-device_type"
+             - "OLT"
+             - "-onus"
+             - "4"
+             - "-internal_if"
+             - "eth0"
+             - "-external_if"
+             - "eth0"
+             - "-vcore_endpoint"
+             - "vcore"
+             - "-promiscuous"
+
+           ports:
+            - containerPort: 50060
+              name: grpc-port
+
+           imagePullPolicy: Never
