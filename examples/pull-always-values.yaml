@@ -16,38 +16,17 @@
 
 # Set all image tags to "candidate" to use imagebuilder's local images
 
-images:
-  xos_core:
-    pullPolicy: 'Always'
-  xos_gui:
-    pullPolicy: 'Always'
-  xos_db:
-    pullPolicy: 'Always'
-  xos_tosca:
-    pullPolicy: 'Always'
-  xos_chameleon:
-    pullPolicy: 'Always'
-  xos_ws:
-    pullPolicy: 'Always'
-  api_tester:
-    pullPolicy: 'Always'
+# in xos-core and rcord-lite charts
+imagePullPolicy: 'Always'
 
-image:
-  rcordSynchronizer:
-    pullPolicy: 'Always'
-
+# in service charts
 addressmanager:
-  image:
-    pullPolicy: 'Always'
+  imagePullPolicy: 'Always'
 fabric:
-  image:
-    pullPolicy: 'Always'
+  imagePullPolicy: 'Always'
 onos-service:
-  image:
-    pullPolicy: 'Always'
+  imagePullPolicy: 'Always'
 volt:
-  image:
-    pullPolicy: 'Always'
+  imagePullPolicy: 'Always'
 vsg-hw:
-  image:
-    pullPolicy: 'Always'
+  imagePullPolicy: 'Always'
