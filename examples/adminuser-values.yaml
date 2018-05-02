@@ -22,40 +22,19 @@
 xosAdminUser: &adminuser "cordadmin@foobar.com"
 xosAdminPassword: &adminpass "AVerySecurePassword"
 
-# initial_data_config is a list.
-# I don’t know how to override individual list items...
-configs:
-  initial_data_config:
-    - model: core.Site
-      fields:
-        name: "mysite"
-        abbreviated_name: "mysite"
-        login_base: "mysite"
-        site_url: "http://opencord.org/"
-        hosts_nodes: true
-    - model: core.User
-      fields:
-        email: *adminuser
-        password: *adminpass
-        firstname: "XOS"
-        lastname: "User"
-        is_admin: True
-      relations:
-        site:
-          fields:
-            name: "mysite"
-          model: core.Site
-
-serviceOverride: &serviceOverride
-  serviceConfig:
-    accessor:
-      username: *adminuser
-      password: *adminpass
-
-
 # Update the username / password for all the services
-addressmanager: *serviceOverride
-fabric:         *serviceOverride
-onos-service:   *serviceOverride
-volt:           *serviceOverride
-vsg-hw:         *serviceOverride
+addressmanager:
+  xosAdminUser: *adminuser
+  xosAdminPassword: *adminpass
+fabric:
+  xosAdminUser: *adminuser
+  xosAdminPassword: *adminpass
+onos-service:
+  xosAdminUser: *adminuser
+  xosAdminPassword: *adminpass
+volt:
+  xosAdminUser: *adminuser
+  xosAdminPassword: *adminpass
+vsg-hw:
+  xosAdminUser: *adminuser
+  xosAdminPassword: *adminpass

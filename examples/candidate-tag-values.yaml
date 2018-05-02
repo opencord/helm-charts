@@ -16,38 +16,25 @@
 
 # Set all image tags to "candidate" to use imagebuilder's local images
 
-images:
-  xos_core:
-    tag: 'candidate'
-  xos_gui:
-    tag: 'candidate'
-  xos_db:
-    tag: 'candidate'
-  xos_tosca:
-    tag: 'candidate'
-  xos_chameleon:
-    tag: 'candidate'
-  xos_ws:
-    tag: 'candidate'
-  api_tester:
-    tag: 'candidate'
+# in xos-core chart
+xos_coreImage: 'xosproject/xos-core:candidate'
+xos_chameleonImage: 'xosproject/chameleon:candidate'
+xos_guiImage: 'xosproject/xos-gui:candidate'
+xos_toscaImage: 'xosproject/xos-tosca:candidate'
+xos_wsImage: 'xosproject/xos-ws:candidate'
+xos_api_testerImage: 'xosproject/xos-api-tester:candidate'
 
-image:
-  rcordSynchronizer:
-    tag: 'candidate'
+# in rcord-lite chart
+rcord_synchronizerImage: "xosproject/rcord-synchronizer:candidate"
 
+# in service charts
 addressmanager:
-  image:
-    tag: 'candidate'
+  addressmanager_synchronizerImage: "xosproject/addressmanager-synchronizer:candidate"
 fabric:
-  image:
-    tag: 'candidate'
+  fabric_synchronizerImage: "xosproject/fabric-synchronizer:candidate"
 onos-service:
-  image:
-    tag: 'candidate'
+  onos_synchronizerImage: "xosproject/onos-synchronizer:candidate"
 volt:
-  image:
-    tag: 'candidate'
+  volt_synchronizerImage: "xosproject/volt-synchronizer:candidate"
 vsg-hw:
-  image:
-    tag: 'candidate'
+  vsg_hw_synchronizerImage: "xosproject/vsg-hw-synchronizer:candidate"

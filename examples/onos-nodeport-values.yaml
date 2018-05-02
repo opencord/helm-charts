@@ -19,7 +19,10 @@
 # helm install -f examples/onos-nodeport-values.yaml onos
 
 services:
-  serviceType: NodePort
+  openflowServiceType: NodePort
+  ovsdbServiceType: NodePort
+  sshServiceType: NodePort
+  uiServiceType: NodePort
   ovsdb:
     nodePort: 31640
   openflow:
