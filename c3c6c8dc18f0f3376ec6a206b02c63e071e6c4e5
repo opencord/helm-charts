@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3eb7ab0c_b1351294",
+        "filename": "xos-core/templates/50-rbac.yaml",
+        "patchSetId": 33
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-05-03T17:38:23Z",
+      "side": 1,
+      "message": "YAML pedantry:  add `...` here to end the first YAML document before starting the next one with `---`",
+      "revId": "c3c6c8dc18f0f3376ec6a206b02c63e071e6c4e5",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
