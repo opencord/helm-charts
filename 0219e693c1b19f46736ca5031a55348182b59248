@@ -1,0 +1,22 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "07151f3e_e906bf2d",
+        "filename": "xos-core/templates/50-rbac.yaml",
+        "patchSetId": 34
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-05-03T17:41:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3eb7ab0c_b1351294",
+      "revId": "0219e693c1b19f46736ca5031a55348182b59248",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
