@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3d33aabf_71c6dc6d",
+        "filename": "xos-profiles/base-openstack/values.yaml",
+        "patchSetId": 43
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-05-04T23:32:42Z",
+      "side": 1,
+      "message": "Still needed?",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 0
+      },
+      "revId": "4386d7230ad2552c6c07a4b488b8fd1c50127a3d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "1357f4b2_dff09df0",
+        "filename": "xos-profiles/base-openstack/values.yaml",
+        "patchSetId": 43
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-05-04T23:32:42Z",
+      "side": 1,
+      "message": "should this be Ubuntu?",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 62
+      },
+      "revId": "4386d7230ad2552c6c07a4b488b8fd1c50127a3d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "629be7ca_b941220b",
+        "filename": "xos-profiles/base-openstack/values.yaml",
+        "patchSetId": 43
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-05-04T23:32:42Z",
+      "side": 1,
+      "message": "Does this need to be parameterized?",
+      "range": {
+        "startLine": 332,
+        "startChar": 0,
+        "endLine": 333,
+        "endChar": 34
+      },
+      "revId": "4386d7230ad2552c6c07a4b488b8fd1c50127a3d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
