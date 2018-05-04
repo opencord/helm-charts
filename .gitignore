@@ -1,2 +1,4 @@
 xos-profiles/rcord-lite/charts/*
 xos-profiles/rcord-lite/requirements.lock
+voltha/charts/*
+voltha/requirements.lock
