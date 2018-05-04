@@ -22,7 +22,7 @@ replicaCount: 1
 
 image:
   repository: onosproject/onos
-  tag: 1.13.0
+  tag: 1.13.1
   pullPolicy: IfNotPresent
 
 nameOverride: ""
