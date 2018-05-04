@@ -52,6 +52,9 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
+required_models:
+  - RCORDService
+  - RCORDSubscriber
 dependency_graph: "/opt/xos/synchronizers/rcord/model-deps"
 sys_dir: "/opt/xos/synchronizers/rcord/sys"
 models_dir: "/opt/xos/synchronizers/rcord/models"

@@ -49,5 +49,3 @@ Create chart name and version as used by the chart label.
 {{/*
 The R-CORD synchronizer loads R-CORD-specific models into the core
 */}}
-
-

@@ -187,6 +187,7 @@ toscaRecipes:
       - custom_types/nodelabel.yaml
       - custom_types/onosapp.yaml
       - custom_types/onosservice.yaml
+      - custom_types/rcordservice.yaml
       - custom_types/site.yaml
       - custom_types/service.yaml
       - custom_types/servicedependency.yaml
@@ -209,7 +210,7 @@ toscaRecipes:
               name: fabric
               must-exist: true
         service#rcord:
-          type: tosca.nodes.Service
+          type: tosca.nodes.RCORDService
           properties:
             name: rcord
         rcord_volt:
