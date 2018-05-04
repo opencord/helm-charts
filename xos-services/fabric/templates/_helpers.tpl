@@ -56,7 +56,6 @@ required_models:
   - Instance
   - Tag
   - FabricService
-  - AddressManagerServiceInstance
 dependency_graph: "/opt/xos/synchronizers/fabric/model-deps"
 steps_dir: "/opt/xos/synchronizers/fabric/steps"
 sys_dir: "/opt/xos/synchronizers/fabric/sys"

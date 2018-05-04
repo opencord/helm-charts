@@ -32,3 +32,5 @@ vsg-hw:
   imagePullPolicy: 'Always'
 kubernetes:
   imagePullPolicy: 'Always'
+vrouter:
+  imagePullPolicy: 'Always'

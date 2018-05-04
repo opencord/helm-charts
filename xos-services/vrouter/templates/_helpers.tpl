@@ -54,9 +54,8 @@ accessor:
   endpoint: xos-core:50051
 required_models:
   - VRouterService
-  - VRouterDevice
-  - VRouterApp
-  - VRouterPort
+  - VRouterServiceInstance
+  - VRouterStaticRoute
 dependency_graph: "/opt/xos/synchronizers/vrouter/model-deps"
 steps_dir: "/opt/xos/synchronizers/vrouter/steps"
 sys_dir: "/opt/xos/synchronizers/vrouter/sys"

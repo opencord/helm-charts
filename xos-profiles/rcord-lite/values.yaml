@@ -161,7 +161,7 @@ toscaRecipes:
                   relationship: tosca.relationships.BelongsToOne
           properties:
               name: Fabric_ONOS_app
-              dependencies: org.onosproject.drivers, org.onosproject.openflow, org.onosproject.netcfghostprovider, org.onosproject.segmentrouting
+              dependencies: org.onosproject.drivers, org.onosproject.openflow, org.onosproject.netcfghostprovider, org.onosproject.segmentrouting, org.onosproject.vrouter
         service_dependency#onos-fabric_fabric:
           type: tosca.nodes.ServiceDependency
           properties:
@@ -244,10 +244,6 @@ toscaRecipes:
           properties:
             name: vrouter
             kind: rcord
-            rest_hostname: onos-fabric-ui
-            rest_port: 8181
-            rest_user: karaf
-            rest_pass: karaf
         service_dependency#fabric_vrouter:
           type: tosca.nodes.ServiceDependency
           properties:
