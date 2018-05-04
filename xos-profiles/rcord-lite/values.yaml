@@ -231,10 +231,12 @@ toscaRecipes:
           type: tosca.nodes.VOLTService
           properties:
             name: volt
-            voltha_url: voltha.voltha.svc.cluster.local:8882
-            p_onos_url: onos-voltha-ui.voltha.svc.cluster.local:8181
-            p_onos_user: karaf
-            p_onos_pass: karaf
+            voltha_url: voltha.voltha.svc.cluster.local
+            voltha_port: 8882
+            onos_voltha_url: onos-voltha-ui.voltha.svc.cluster.local
+            onos_voltha_port: 8181
+            onos_voltha_user: karaf
+            onos_voltha_pass: karaf
         service#vsg-hw:
           type: tosca.nodes.VSGHWService
           properties:

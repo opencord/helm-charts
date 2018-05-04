@@ -7,4 +7,3 @@ requirements.lock
 # ignore dependent chart dirs
 voltha/charts
 xos-profiles/rcord-lite/charts
-
