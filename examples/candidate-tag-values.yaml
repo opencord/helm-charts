@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,10 +18,13 @@
 # in xos-core chart
 xos_coreImage: 'xosproject/xos-core:candidate'
 xos_chameleonImage: 'xosproject/chameleon:candidate'
-xos_guiImage: 'xosproject/xos-gui:candidate'
 xos_toscaImage: 'xosproject/xos-tosca:candidate'
-xos_wsImage: 'xosproject/xos-ws:candidate'
 xos_api_testerImage: 'xosproject/xos-api-tester:candidate'
+
+# in xos-gui sub-chart required by xos-core chart
+xos-gui:
+  xos_guiImage: 'xosproject/xos-gui:candidate'
+  xos_wsImage: 'xosproject/xos-ws:candidate'
 
 # in rcord-lite chart
 rcord_synchronizerImage: "xosproject/rcord-synchronizer:candidate"

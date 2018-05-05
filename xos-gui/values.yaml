@@ -13,13 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: xos-ws
-  labels:
-    {{- include "xos-core.release_labels" . | indent 4 }}
-data:
-  config: |
-{{ include "xos-ws.gateway_config" . | indent 4 }}
+imagePullPolicy: 'IfNotPresent'
+
+# Docker Images
+xos_guiImage: 'xosproject/xos-gui:master'
+xos_wsImage: 'xosproject/xos-ws:master'
+
+# NodePorts
+xos_guiNodePort: 30001
+xos_wsNodePort: 30008
 

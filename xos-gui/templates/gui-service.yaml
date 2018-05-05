@@ -18,7 +18,7 @@ kind: Service
 metadata:
   name: "xos-gui"
   labels:
-    {{- include "xos-core.release_labels" . | indent 4 }}
+    {{- include "xos-gui.release_labels" . | indent 4 }}
 spec:
   type: NodePort
   ports:

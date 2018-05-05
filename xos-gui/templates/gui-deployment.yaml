@@ -16,33 +16,45 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: xos-ws
+  name: xos-gui
   labels:
-    {{- include "xos-core.release_labels" . | indent 4 }}
+    {{- include "xos-gui.release_labels" . | indent 4 }}
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: xos-ws
+        app: xos-gui
     spec:
       containers:
-        - name: xos-ws
-          image: {{ .Values.xos_wsImage | quote }}
+        - name: xos-gui
+          image: {{ .Values.xos_guiImage | quote }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
-          command: ["npm", "start", "--", "--config", "gateway-config.yml"]
           ports:
-            - containerPort: 3000
-              port: 3000
+            - containerPort: 4000
+              port: 4000
               protocol: TCP
           volumeMounts:
-            - name: gateway-config
-              mountPath: /var/www/src/config/gateway-config.yml
-              subPath: config/gateway-config.yml
+            - name: style-config
+              mountPath: /var/www/dist/style.config.js
+              subPath: style/style.config.js
+            - name: app-config
+              mountPath: /var/www/dist/app.config.js
+              subPath: app/app.config.js
+            - name: extensions-volume
+              mountPath: /var/www/dist/extensions
       volumes:
-        - name: gateway-config
+        - name: style-config
           configMap:
-            name: xos-ws
+            name: gui-style-config
             items:
               - key: config
-                path: config/gateway-config.yml
+                path: style/style.config.js
+        - name: app-config
+          configMap:
+            name: gui-app-config
+            items:
+              - key: config
+                path: app/app.config.js
+        - name: extensions-volume
+          emptyDir: {}
