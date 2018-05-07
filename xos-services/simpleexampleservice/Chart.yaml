@@ -14,27 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Set all image tags to "candidate" to use imagebuilder's local images
-
-# in xos-core, rcord-lite, onos and voltha charts
-imagePullPolicy: 'Always'
-
-# in service charts
-addressmanager:
-  imagePullPolicy: 'Always'
-fabric:
-  imagePullPolicy: 'Always'
-onos-service:
-  imagePullPolicy: 'Always'
-volt:
-  imagePullPolicy: 'Always'
-vsg-hw:
-  imagePullPolicy: 'Always'
-kubernetes:
-  imagePullPolicy: 'Always'
-vrouter:
-  imagePullPolicy: 'Always'
-xos-gui:
-  imagePullPolicy: 'Always'
-simpleexampleservice:
-  imagePullPolicy: 'Always'
+apiVersion: v1
+appVersion: "1.0"
+description: A Helm chart for XOS's "simpleexampleservice" service
+name: simpleexampleservice
+version: 0.1.0

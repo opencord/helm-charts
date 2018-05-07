@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,27 +13,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Set all image tags to "candidate" to use imagebuilder's local images
+# Default values for rcord
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
 
-# in xos-core, rcord-lite, onos and voltha charts
-imagePullPolicy: 'Always'
+replicaCount: 1
 
-# in service charts
-addressmanager:
-  imagePullPolicy: 'Always'
-fabric:
-  imagePullPolicy: 'Always'
-onos-service:
-  imagePullPolicy: 'Always'
-volt:
-  imagePullPolicy: 'Always'
-vsg-hw:
-  imagePullPolicy: 'Always'
-kubernetes:
-  imagePullPolicy: 'Always'
-vrouter:
-  imagePullPolicy: 'Always'
-xos-gui:
-  imagePullPolicy: 'Always'
-simpleexampleservice:
-  imagePullPolicy: 'Always'
+nameOverride: ""
+fullnameOverride: ""
+
+imagePullPolicy: 'IfNotPresent'
+
+rcord_synchronizerImage: "xosproject/rcord-synchronizer:master"
+
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

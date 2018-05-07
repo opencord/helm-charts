@@ -14,27 +14,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Set all image tags to "candidate" to use imagebuilder's local images
-
-# in xos-core, rcord-lite, onos and voltha charts
-imagePullPolicy: 'Always'
-
-# in service charts
-addressmanager:
-  imagePullPolicy: 'Always'
-fabric:
-  imagePullPolicy: 'Always'
-onos-service:
-  imagePullPolicy: 'Always'
-volt:
-  imagePullPolicy: 'Always'
-vsg-hw:
-  imagePullPolicy: 'Always'
-kubernetes:
-  imagePullPolicy: 'Always'
-vrouter:
-  imagePullPolicy: 'Always'
-xos-gui:
-  imagePullPolicy: 'Always'
-simpleexampleservice:
-  imagePullPolicy: 'Always'
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: container-vnf-tosca
+data:
+  010-fixtures.yaml: |
+{{ toYaml .Values.toscaRecipes.fixtures | indent 4 }}
+  020-deployment.yaml: |
+{{ toYaml .Values.toscaRecipes.deployment | indent 4 }}
+  030-fabric-service.yaml: |
+{{ toYaml .Values.toscaRecipes.fabricService | indent 4 }}
+  040-cord-services.yaml: |
+{{ toYaml .Values.toscaRecipes.cordServices | indent 4 }}
+  050-service-graph-constraints.yaml: |
+{{ toYaml .Values.toscaRecipes.serviceGraphConstraints | indent 4 }}

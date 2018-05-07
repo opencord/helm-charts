@@ -16,47 +16,59 @@
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: {{ template "rcord-lite.fullname" . }}-rcord-models
+  name: {{ template "simpleexampleservice.fullname" . }}
   labels:
-    app: {{ template "rcord-lite.name" . }}
-    chart: {{ template "rcord-lite.chart" . }}
+    app: {{ template "simpleexampleservice.name" . }}
+    chart: {{ template "simpleexampleservice.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "rcord-lite.name" . }}
+      app: {{ template "simpleexampleservice.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "rcord-lite.name" . }}
+        app: {{ template "simpleexampleservice.name" . }}
         release: {{ .Release.Name }}
-      annotations:
-        checksum/config: {{ include (print $.Template.BasePath "/rcord-models-configmap.yaml") . | sha256sum }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}-rcord
-          image: {{ .Values.rcord_synchronizerImage | quote }}
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.simpleexampleservice_synchronizerImage | quote }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
+          resources:
+{{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
-            - name: rcord-lite-config
-              mountPath: /opt/xos/synchronizers/rcord/rcord_config.yaml
-              subPath: rcord_config.yaml
+            - name: simpleexampleservice-config
+              mountPath: /opt/xos/synchronizers/simpleexampleservice/simpleexampleservice_config.yaml
+              subPath: simpleexampleservice_config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
       volumes:
-        - name: rcord-lite-config
+        - name: simpleexampleservice-config
           configMap:
-            name: rcord-lite-config
+            name: simpleexampleservice
             items:
               - key: serviceConfig
-                path: rcord_config.yaml
+                path: simpleexampleservice_config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates
             items:
               - key: chain
                 path: config/ca_cert_chain.pem
+    {{- with .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+{{ toYaml . | indent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+{{ toYaml . | indent 8 }}
+    {{- end }}

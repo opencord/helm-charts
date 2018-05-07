@@ -17,7 +17,7 @@ limitations under the License.
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "rcord-lite.name" -}}
+{{- define "simpleexampleservice.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -26,7 +26,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "rcord-lite.fullname" -}}
+{{- define "simpleexampleservice.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -42,12 +42,45 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "rcord-lite.chart" -}}
+{{- define "simpleexampleservice.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{/*
-The R-CORD synchronizer loads R-CORD-specific models into the core
-*/}}
-
-
+{{- define "simpleexampleservice.serviceConfig" -}}
+name: simpleexampleservice
+accessor:
+  username: {{ .Values.xosAdminUser | quote }}
+  password: {{ .Values.xosAdminPassword | quote }}
+  endpoint: xos-core:50051
+required_models:
+  - SimpleExampleService
+  - SimpleExampleServiceInstance
+  - ServiceDependency
+  - KubernetesService
+  - KubernetesServiceInstance
+  - KubernetesConfigMap
+  - KubernetesSecret
+  - KubernetesConfigVolumeMount
+  - KubernetesSecretVolumeMount
+dependency_graph: "/opt/xos/synchronizers/simpleexampleservice/model-deps"
+steps_dir: "/opt/xos/synchronizers/simpleexampleservice/steps"
+sys_dir: "/opt/xos/synchronizers/simpleexampleservice/sys"
+model_policies_dir: "/opt/xos/synchronizers/simpleexampleservice/model_policies"
+models_dir: "/opt/xos/synchronizers/simpleexampleservice/models"
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+    file:
+      class: logging.handlers.RotatingFileHandler
+      filename: /var/log/xos.log
+      maxBytes: 10485760
+      backupCount: 5
+  loggers:
+    'multistructlog':
+      handlers:
+          - console
+          - file
+      level: DEBUG
+{{- end -}}

@@ -17,7 +17,7 @@ limitations under the License.
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "rcord-lite.name" -}}
+{{- define "rcord.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -26,7 +26,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "rcord-lite.fullname" -}}
+{{- define "rcord.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -42,12 +42,18 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "rcord-lite.chart" -}}
+{{- define "rcord.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
-{{/*
-The R-CORD synchronizer loads R-CORD-specific models into the core
-*/}}
-
-
+{{- define "rcord.serviceConfig" -}}
+name: rcord
+accessor:
+  username: {{ .Values.xosAdminUser | quote }}
+  password: {{ .Values.xosAdminPassword | quote }}
+  endpoint: xos-core:50051
+dependency_graph: "/opt/xos/synchronizers/rcord/model-deps"
+sys_dir: "/opt/xos/synchronizers/rcord/sys"
+models_dir: "/opt/xos/synchronizers/rcord/models"
+model_policies_dir: "/opt/xos/synchronizers/rcord/model_policies"
+{{- end -}}
