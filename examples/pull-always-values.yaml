@@ -36,3 +36,5 @@ vrouter:
   imagePullPolicy: 'Always'
 xos-gui:
   imagePullPolicy: 'Always'
+simpleexampleservice:
+  imagePullPolicy: 'Always'

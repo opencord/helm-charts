@@ -1,0 +1,61 @@
+---
+
+# Copyright 2018-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ template "container-vnf.fullname" . }}-tosca-loader
+  labels:
+    app: {{ template "container-vnf.name" . }}
+    chart: {{ template "container-vnf.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ template "container-vnf.name" . }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "container-vnf.name" . }}
+        release: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/tosca-configmap.yaml") . | sha256sum }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-tosca-loader
+          image: {{ .Values.httpieImage | quote }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          command: ["/bin/sh"]
+          args:
+            - "-c"
+            - |
+              for recipe in /opt/tosca/*
+              do
+                echo $recipe
+                http --check-status --ignore-stdin POST http://xos-tosca:$XOS_TOSCA_SERVICE_PORT/run xos-username:{{ .Values.xosAdminUser }} xos-password:{{ .Values.xosAdminPassword }} @$recipe || exit 1
+                echo ''
+              done
+              sleep 3600
+          volumeMounts:
+            - name: container-vnf-tosca
+              mountPath: /opt/tosca
+      volumes:
+        - name: container-vnf-tosca
+          configMap:
+            name: container-vnf-tosca
