@@ -40,3 +40,5 @@ vsg-hw:
   vsg_hw_synchronizerImage: "xosproject/vsg-hw-synchronizer:candidate"
 kubernetes:
   kubernetes_synchronizerImage: "xosproject/kubernetes-synchronizer:candidate"
+exampleservicenew:
+  exampleservicenew_synchronizerImage: "xosproject/exampleservicenew-synchronizer:candidate"
