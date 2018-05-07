@@ -33,3 +33,6 @@ dependencies:
 - name: kubernetes
   version: 0.1.0
   repository: file://../../xos-services/kubernetes
+- name: exampleservicenew
+  version: 0.1.0
+  repository: file://../../xos-services/exampleservicenew
