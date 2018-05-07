@@ -13,15 +13,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+xos_gui:
+  enabled: true
+
 imagePullPolicy: 'IfNotPresent'
 
 # Docker images
 # YAML variable names can't contain `-`, so substituted with `_`
 xos_coreImage: 'xosproject/xos-core:master'
 xos_chameleonImage: 'xosproject/chameleon:master'
-xos_guiImage: 'xosproject/xos-gui:master'
 xos_toscaImage: 'xosproject/xos-tosca:master'
-xos_wsImage: 'xosproject/xos-ws:master'
 xos_api_testerImage: 'xosproject/xos-api-tester:master'
 
 postgresImage: 'postgres:10.3-alpine'
@@ -29,10 +30,8 @@ nodeImage: 'node:7.9.0'
 redisImage: 'redis:3.2'
 
 # NodePorts
-xos_guiNodePort: 30001
 xos_chameleonNodePort: 30006
 xos_toscaNodePort: 30007
-xos_wsNodePort: 30008
 
 # XOS Admin username/password
 xosAdminUser: 'admin@opencord.org'

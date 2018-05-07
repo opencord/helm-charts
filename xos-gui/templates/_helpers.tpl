@@ -14,6 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */ -}}
 
+{{- define "xos-gui.release_labels" }}
+app: {{ printf "%s-%s" .Release.Name .Chart.Name | trunc 63 }}
+chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+release: {{ .Release.Name }}
+heritage: {{ .Release.Service }}
+version: {{ .Chart.Version }}
+{{- end }}
+
 {{- define "xos-gui.app_config" }}
 angular.module('app')
 .constant('AppConfig', {
