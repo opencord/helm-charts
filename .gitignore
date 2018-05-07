@@ -1,2 +1,10 @@
-xos-profiles/rcord-lite/charts/*
-xos-profiles/rcord-lite/requirements.lock
+# local chart repo
+chart_repo
+
+# lockfiles for requirements.yaml for dependent charts
+requirements.lock
+
+# ignore dependent chart dirs
+voltha/charts
+xos-profiles/rcord-lite/charts
+
