@@ -277,6 +277,11 @@ toscaRecipes:
             - provider_service:
                 node: service#ONOS_Fabric
                 relationship: tosca.relationships.BelongsToOne
+        httpd_image:
+          type: tosca.nodes.Image
+          properties:
+            name: "httpd"
+            tag: "2.4"
 
   serviceGraphConstraints:
     tosca_definitions_version: tosca_simple_yaml_1_0

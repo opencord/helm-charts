@@ -34,3 +34,5 @@ kubernetes:
   imagePullPolicy: 'Always'
 vrouter:
   imagePullPolicy: 'Always'
+simpleexampleservice:
+  imagePullPolicy: 'Always'
