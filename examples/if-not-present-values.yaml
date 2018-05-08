@@ -17,24 +17,24 @@
 # Set all image tags to "candidate" to use imagebuilder's local images
 
 # in xos-core, rcord-lite, onos and voltha charts
-imagePullPolicy: 'Always'
+imagePullPolicy: 'IfNotPresent'
 
 # in service charts
 addressmanager:
-  imagePullPolicy: 'Always'
+  imagePullPolicy: 'IfNotPresent'
 fabric:
-  imagePullPolicy: 'Always'
+  imagePullPolicy: 'IfNotPresent'
 onos-service:
-  imagePullPolicy: 'Always'
+  imagePullPolicy: 'IfNotPresent'
 volt:
-  imagePullPolicy: 'Always'
+  imagePullPolicy: 'IfNotPresent'
 vsg-hw:
-  imagePullPolicy: 'Always'
+  imagePullPolicy: 'IfNotPresent'
 kubernetes:
-  imagePullPolicy: 'Always'
+  imagePullPolicy: 'IfNotPresent'
 vrouter:
-  imagePullPolicy: 'Always'
+  imagePullPolicy: 'IfNotPresent'
 xos-gui:
-  imagePullPolicy: 'Always'
+  imagePullPolicy: 'IfNotPresent'
 simpleexampleservice:
-  imagePullPolicy: 'Always'
+  imagePullPolicy: 'IfNotPresent'

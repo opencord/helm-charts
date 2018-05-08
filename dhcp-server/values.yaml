@@ -15,7 +15,7 @@
 # helm install dhcp-server -n dhcp-server
 
 dhcpServerImage: 'networkboot/dhcpd:latest'
-imagePullPolicy: IfNotPresent
+imagePullPolicy: Always
 
 config: |
 

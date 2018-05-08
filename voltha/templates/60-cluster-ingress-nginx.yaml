@@ -37,7 +37,7 @@ spec:
         - -c
         - sysctl -w net.core.somaxconn=32768; sysctl -w net.ipv4.ip_local_port_range="1024 65535"
         image: alpine:3.6
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: sysctl
         securityContext:
           privileged: true

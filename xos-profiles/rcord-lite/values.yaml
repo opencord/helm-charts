@@ -22,7 +22,7 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'IfNotPresent'
+imagePullPolicy: 'Always'
 
 rcord_synchronizerImage: "xosproject/rcord-synchronizer:master"
 httpieImage: "clue/httpie:latest"

@@ -16,7 +16,7 @@
 xos_gui:
   enabled: true
 
-imagePullPolicy: 'IfNotPresent'
+imagePullPolicy: 'Always'
 
 # Docker images
 # YAML variable names can't contain `-`, so substituted with `_`
