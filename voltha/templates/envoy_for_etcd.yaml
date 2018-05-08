@@ -41,7 +41,8 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:
         - name: voltha
-          image: {{ .Values.pull_docker_registry }}{{ .Values.images.envoy_for_etcd.repository }}:{{ .Values.images.envoy_for_etcd.tag }}
+          image: {{ .Values.envoyForEtcdImage }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           env:
             - name: POD_IP
               valueFrom:
@@ -67,6 +68,5 @@ spec:
               name: mystery2-port
             - containerPort: 50555
               name: grpc-port
-          imagePullPolicy: {{ .Values.image_pull_policy }}
 
 

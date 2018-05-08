@@ -20,10 +20,8 @@
 
 replicaCount: 1
 
-image:
-  repository: onosproject/onos
-  tag: 1.13.1
-  pullPolicy: IfNotPresent
+imagePullPolicy: IfNotPresent
+onosImage: 'onosproject/onos:1.13.1'
 
 nameOverride: ""
 fullnameOverride: ""

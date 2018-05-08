@@ -41,8 +41,8 @@ spec:
             topologyKey: kubernetes.io/hostname
       containers:
       - name: ofagent
-        image: {{ .Values.pull_docker_registry }}{{ .Values.images.ofagent.repository }}:{{ .Values.images.ofagent.tag }}
-        imagePullPolicy: {{ .Values.image_pull_policy }}
+        image: {{ .Values.ofagentImage }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
         env:
         - name: NAMESPACE
           valueFrom:

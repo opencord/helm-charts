@@ -12,13 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-pull_docker_registry:
+# helm install dhcp-server -n dhcp-server
 
-images:
-  dhcp_server:
-    repository: networkboot/dhcpd
-    tag: 'latest'
-    pullPolicy: 'IfNotPresent'
+dhcpServerImage: 'networkboot/dhcpd:latest'
+imagePullPolicy: IfNotPresent
 
 config: |
 

@@ -31,8 +31,8 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:
       - name: dashd
-        image: {{ .Values.pull_docker_registry }}{{ .Values.images.dashd.repository }}:{{ .Values.images.dashd.tag }}
-        imagePullPolicy: {{ .Values.image_pull_policy }}
+        image: {{ .Values.dashdImage }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
         env:
         - name: NAMESPACE
           valueFrom:
@@ -64,8 +64,8 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:
       - name: shovel
-        image: {{ .Values.pull_docker_registry }}{{ .Values.images.shovel.repository }}:{{ .Values.images.shovel.tag }}
-        imagePullPolicy: {{ .Values.image_pull_policy }}
+        image: {{ .Values.shovelImage }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
         env:
         - name: NAMESPACE
           valueFrom:

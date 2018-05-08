@@ -53,7 +53,8 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:
         - name: voltha
-          image: {{ .Values.pull_docker_registry }}{{ .Values.images.vcore.repository }}:{{ .Values.images.vcore.tag }}
+          image: {{ .Values.vcoreImage }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           env:
             - name: NAMESPACE
               valueFrom:
@@ -77,6 +78,5 @@ spec:
               name: mystery-port
             - containerPort: 50556
               name: grpc-port
-          imagePullPolicy: {{ .Values.image_pull_policy }}
 
 

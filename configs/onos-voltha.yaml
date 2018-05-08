@@ -16,17 +16,15 @@
 
 # Expose ONOS services using NodePorts, for onos-voltha configuration
 #
-# helm install -f configs/onos-voltha.yaml onos
+# helm install onos -f configs/onos-voltha.yaml -n onos-voltha
+
 nameOverride: "onosv"
 fullnameOverride: "onos-voltha"
 
 namespace: voltha
 serviceAccountName: voltha-serviceaccount
 
-image:
-  repository: voltha/voltha-onos
-  tag: 'latest'
-  pullPolicy: IfNotPresent
+onosImage: 'voltha/voltha-onos:latest'
 
 services:
   openflowServiceType: ClusterIP

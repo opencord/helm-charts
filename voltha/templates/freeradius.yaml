@@ -55,7 +55,8 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:
         - name: freeradius
-          image: {{ .Values.pull_docker_registry }}{{ .Values.images.freeradius.repository }}:{{ .Values.images.freeradius.tag }}
+          image: {{ .Values.freeradiusImage }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           env:
             - name: POD_IP
               valueFrom:

@@ -16,8 +16,7 @@
 
 # Parameters for running ONOS with VTN
 #
-# helm install -f configs/onos-cord.yaml onos
+# helm install onos -f configs/onos-cord.yaml -n onos-cord
 
 # VTN is not working with 1.13 at present
-image:
-  tag: 1.12.0
+onosImage: 'onosproject/onos:1.12.0'

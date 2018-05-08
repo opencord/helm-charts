@@ -27,8 +27,8 @@ spec:
     spec:
       containers:
         - name: dhcp-server
-          image: {{ .Values.pull_docker_registry }}{{ .Values.images.dhcp_server.repository }}:{{ .Values.images.dhcp_server.tag }}
-          imagePullPolicy: {{ .Values.images.dhcp_server.pullPolicy }}
+          image: {{ .Values.dhcpServerImage }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           #command: ["/bin/bash", "-", "sleep 86400"]
           ports:
             - containerPort: 67

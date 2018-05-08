@@ -40,8 +40,8 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.onosImage }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           env:
 {{ toYaml .Values.onos_env | indent 12 }}
           ports:

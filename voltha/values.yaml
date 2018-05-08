@@ -15,7 +15,7 @@
 pull_docker_registry:
 k8s_docker_registry: 'k8s.gcr.io/'
 
-image_pull_policy: IfNotPresent
+imagePullPolicy: IfNotPresent
 
 replicas:
   vcore: 1
@@ -51,41 +51,15 @@ etcd-operator:
   customResources:
     createEtcdClusterCRD: true
 
-images:
-  consul:
-    repository: consul
-    tag: '0.9.2'
-  envoy_for_etcd:
-    repository: voltha/voltha-envoy
-    tag: 'latest'
-  fluentd:
-    repository: fluentd-gcp
-    tag: '1.30'
-  freeradius:
-    repository: marcelmaatkamp/freeradius
-    tag: 'latest'
-  grafana:
-    repository: kamon/grafana_graphite
-    tag: '3.0'
-  netconf:
-    repository: voltha/voltha-netconf
-    tag: 'latest'
-  ofagent:
-    repository: voltha/voltha-ofagent
-    tag: 'latest'
-  dashd:
-    repository: voltha/voltha-dashd
-    tag: 'latest'
-  shovel:
-    repository: voltha/voltha-shovel
-    tag: 'latest'
-  vcli:
-    repository: voltha/voltha-cli
-    tag: 'latest'
-  vcore:
-    repository: voltha/voltha-voltha
-    tag: 'latest'
-    
+envoyForEtcdImage: 'voltha/voltha-envoy:latest'
+freeradiusImage: 'marcelmaatkamp/freeradius:latest'
+grafanaImage: 'kamon/grafana_graphite:3.0'
+netconfImage: 'voltha/voltha-netconf:latest'
+ofagentImage: 'voltha/voltha-ofagent:latest'
+dashdImage: 'voltha/voltha-dashd:latest'
+shovelImage: 'voltha/voltha-shovel:latest'
+vcliImage: 'voltha/voltha-cli:latest'
+vcoreImage: 'voltha/voltha-voltha:latest'
   
 kafka:
   enabled: true
