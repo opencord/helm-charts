@@ -16,7 +16,7 @@
 
 # Expose ONOS services using NodePorts, for onos-fabric configuration
 #
-# helm install -f configs/onos-fabric.yaml onos
+# helm install onos -f configs/onos-fabric.yaml -n onos-fabric
 
 services:
   openflowServiceType: NodePort

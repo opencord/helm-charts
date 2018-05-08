@@ -63,7 +63,7 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:
       - name: grafana
-        image: {{ .Values.pull_docker_registry }}{{ .Values.images.grafana.repository }}:{{ .Values.images.grafana.tag }}
+        image: {{ .Values.grafanaImage }}
         ports:
         - containerPort: 80
         - containerPort: 2003
