@@ -22,10 +22,14 @@ metadata:
   annotations:
     "helm.sh/hook": test-success
 spec:
+  restartPolicy: Never
   containers:
     - name: {{ .Release.Name }}-api-test
       image: {{ .Values.xos_api_testerImage }}
       imagePullPolicy: {{ .Values.imagePullPolicy }}
+      volumeMounts:
+        - name: log-volume
+          mountPath: /src/cord-api/Tests/Log/
       env:
         - name: SERVER_IP
           value: 'xos-chameleon'
@@ -38,4 +42,8 @@ spec:
         - name: SITE_NAME
           value: {{ .Values.cordSiteName | quote }}
       command: ["pybot", "-L", "TRACE", "-d", "Log", "-T", "Ch_DeploymentTest.txt", "Ch_SiteTest.txt", "Ch_UsersTest.txt", "Ch_SliceTest.txt", "Ch_ServiceTest.txt"]
-  restartPolicy: Never
+  volumes:
+    - name: log-volume
+      hostPath:
+        path: /tmp/helm_test_xos_core_logs_{{ dateInZone "20060102T030405.00Z" (now) "UTC"  }}
+        type: DirectoryOrCreate
