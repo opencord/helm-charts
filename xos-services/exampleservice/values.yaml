@@ -22,7 +22,7 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'IfNotPresent'
+imagePullPolicy: 'Always'
 
 exampleservice_synchronizerImage: "xosproject/exampleservice-synchronizer:master"
 

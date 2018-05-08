@@ -20,7 +20,7 @@
 
 replicaCount: 1
 
-imagePullPolicy: IfNotPresent
+imagePullPolicy: Always
 onosImage: 'onosproject/onos:1.13.1'
 
 nameOverride: ""

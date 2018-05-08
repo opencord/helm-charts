@@ -22,7 +22,7 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'IfNotPresent'
+imagePullPolicy: 'Always'
 
 vtn_synchronizerImage: "xosproject/vtn-synchronizer:master"
 

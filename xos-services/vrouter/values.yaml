@@ -22,7 +22,7 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'IfNotPresent'
+imagePullPolicy: 'Always'
 
 vrouter_synchronizerImage: "xosproject/vrouter-synchronizer:master"
 
