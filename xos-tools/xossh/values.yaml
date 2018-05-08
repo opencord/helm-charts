@@ -25,10 +25,9 @@ pull_docker_registry:
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: xosproject/xos-client
-  tag: candidate
-  pullPolicy: IfNotPresent
+imagePullPolicy: IfNotPresent
+
+xosshImage: 'xosproject/xos-client:master'
 
 resources: {}
 
