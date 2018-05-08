@@ -28,6 +28,7 @@ docker_image_whitelist:
 - xosproject/xos-synchronizer-base
 - xosproject/rcord-synchronizer
 - xosproject/volt-synchronizer
+- xosproject/vrouter-synchronizer
 - xosproject/vtn-synchronizer
 - xosproject/onos-synchronizer
 - xosproject/addressmanager-synchronizer
