@@ -14,29 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: apps/v1beta2
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
-  name: {{ template "rcord-lite.fullname" . }}-tosca-loader
+  name: {{ template "base-openstack.fullname" . }}-tosca-loader
   labels:
-    app: {{ template "rcord-lite.name" . }}
-    chart: {{ template "rcord-lite.chart" . }}
+    app: {{ template "base-openstack.name" . }}
+    chart: {{ template "base-openstack.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  replicas: {{ .Values.replicaCount }}
-  selector:
-    matchLabels:
-      app: {{ template "rcord-lite.name" . }}
-      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "rcord-lite.name" . }}
+        app: {{ template "base-openstack.name" . }}
         release: {{ .Release.Name }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/tosca-configmap.yaml") . | sha256sum }}
     spec:
+      restartPolicy: Never
       containers:
         - name: {{ .Chart.Name }}-tosca-loader
           image: {{ .Values.httpieImage | quote }}
@@ -51,11 +47,10 @@ spec:
                 http --check-status --ignore-stdin POST http://xos-tosca:$XOS_TOSCA_SERVICE_PORT/run xos-username:{{ .Values.xosAdminUser }} xos-password:{{ .Values.xosAdminPassword }} @$recipe || exit 1
                 echo ''
               done
-              sleep 3600
           volumeMounts:
-            - name: rcord-lite-tosca
+            - name: base-openstack-tosca
               mountPath: /opt/tosca
       volumes:
-        - name: rcord-lite-tosca
+        - name: base-openstack-tosca
           configMap:
-            name: rcord-lite-tosca
+            name: base-openstack-tosca
