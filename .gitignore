@@ -7,4 +7,5 @@ requirements.lock
 # ignore dependent chart dirs
 xos-core/charts
 voltha/charts
+xos-core/charts
 xos-profiles/rcord-lite/charts
