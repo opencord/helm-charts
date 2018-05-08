@@ -48,7 +48,8 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:
         - name: vcli
-          image: {{ .Values.pull_docker_registry }}{{ .Values.images.vcli.repository }}:{{ .Values.images.vcli.tag }}
+          image: {{ .Values.vcliImage }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           env:
             - name: POD_IP
               valueFrom:
@@ -63,6 +64,5 @@ spec:
           ports:
             - containerPort: 22
               name: ssh-port
-          imagePullPolicy: {{ .Values.image_pull_policy }}
 
 

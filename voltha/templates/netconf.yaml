@@ -53,8 +53,8 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: netconf
-        image: {{ .Values.pull_docker_registry }}{{ .Values.images.netconf.repository }}:{{ .Values.images.netconf.tag }}
-        imagePullPolicy: {{ .Values.image_pull_policy }}
+        image: {{ .Values.netconfImage }}
+        imagePullPolicy: {{ .Values.imagePullPolicy }}
         ports:
         - containerPort: 830
         env:
