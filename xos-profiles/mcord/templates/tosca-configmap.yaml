@@ -1,0 +1,49 @@
+---
+
+# Copyright 2018-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mcord-tosca
+data:
+  010-fixtures.yaml: |
+{{ include "mcord.fixtureTosca" . | indent 4 }}
+  020-vspgwu-service.yaml: |
+{{ include "vspgwu.serviceTosca" .Values.vspgwu | indent 4 }}
+  030-vspgwc-service.yaml: |
+{{ include "vspgwc.serviceTosca" .Values.vspgwc | indent 4 }}
+  040-vmme-service.yaml: |
+{{ include "vmme.serviceTosca" .Values.vmme | indent 4 }}
+  050-vhss-service.yaml: |
+{{ include "vhss.serviceTosca" .Values.vhss | indent 4 }}
+  060-hssdb-service.yaml: |
+{{ include "hssdb.serviceTosca" .Values.hssdb | indent 4 }}
+  070-internetemulator-service.yaml: |
+{{ include "internetemulator.serviceTosca" .Values.internetemulator | indent 4 }}
+  080-progran-service.yaml: |
+{{ include "progran.serviceTosca" .Values.progran | indent 4 }}
+  090-sdncontroller-service.yaml: |
+{{ include "sdncontroller.serviceTosca" .Values.sdncontroller | indent 4 }}
+  100-mcord-subscriber-service.yaml: |
+{{ include "mcord-subscriber.serviceTosca" (index .Values "mcord-subscriber") | indent 4 }}
+  110-epc-service.yaml: |
+{{ include "epc-service.serviceTosca" (index .Values "epc-service") | indent 4 }}
+  120-fabric-service.yaml: |
+{{ include "mcord.serviceGraphTosca" . | indent 4 }}
+  310-mcord-slices.yaml: |
+{{ include "mcord.sliceTosca" . | indent 4 }}
+  320-mcord-networks.yaml: |
+{{ include "mcord.networkTosca" . | indent 4 }}
