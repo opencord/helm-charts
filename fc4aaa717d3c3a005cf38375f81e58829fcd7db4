@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bb065140_e43e5789",
+        "filename": "xos-profiles/container-vnf/templates/_helpers.tpl",
+        "patchSetId": 13
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-05-09T17:36:39Z",
+      "side": 1,
+      "message": "maybe put this in it\u0027s own file (\u0027_rcord.tpl\u0027) which could be reused?",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 11
+      },
+      "revId": "fc4aaa717d3c3a005cf38375f81e58829fcd7db4",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
