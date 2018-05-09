@@ -24,6 +24,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+  backoffLimit: 12
   template:
     metadata:
       labels:
