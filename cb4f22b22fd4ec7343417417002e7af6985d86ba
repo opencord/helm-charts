@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6e674f5c_d0e09b08",
+        "filename": "xos-profiles/container-vnf/requirements.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-05-09T17:25:12Z",
+      "side": 1,
+      "message": "Are these needed for the example?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 47
+      },
+      "revId": "cb4f22b22fd4ec7343417417002e7af6985d86ba",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "0a2e355d_69abb8bb",
+        "filename": "xos-profiles/container-vnf/templates/_helpers.tpl",
+        "patchSetId": 12
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-05-09T17:25:12Z",
+      "side": 1,
+      "message": "Is this needed for the example?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 36
+      },
+      "revId": "cb4f22b22fd4ec7343417417002e7af6985d86ba",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
