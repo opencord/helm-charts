@@ -22,6 +22,30 @@
       "revId": "e2965c9fa10aa347652af182bd11f0f49101949f",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e49da27e_94344449",
+        "filename": "examples/if-not-present-values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-05-14T17:54:19Z",
+      "side": 1,
+      "message": "I would leave it this way as a developer may want to change single values to support his use-case.",
+      "parentUuid": "8822a2c7_d806454b",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 31
+      },
+      "revId": "e2965c9fa10aa347652af182bd11f0f49101949f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
     }
   ]
 }
