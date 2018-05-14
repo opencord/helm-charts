@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 
 # Copyright 2018-present Open Networking Foundation
 #
@@ -25,6 +25,11 @@ fail_lint=0
 for chart in $(find . -name Chart.yaml -print) ; do
 
   chartdir=$(dirname "${chart}")
+
+  # update requirements if it exists. Skip voltha as it has non-clean reqirements
+  if [ "${chartdir}" != "./voltha" ] && [ -f "${chartdir}/requirements.yaml" ]; then
+    helm dependency update "${chartdir}"
+  fi
 
   # lint with values.yaml if it exists
   if [ -f "${chartdir}/values.yaml" ]; then
