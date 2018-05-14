@@ -52,6 +52,9 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
+event_bus:
+  endpoint: cord-kafka-kafka
+  kind: kafka
 required_models:
   - SimpleExampleService
   - SimpleExampleServiceInstance
@@ -64,6 +67,7 @@ required_models:
   - KubernetesSecretVolumeMount
 dependency_graph: "/opt/xos/synchronizers/simpleexampleservice/model-deps"
 steps_dir: "/opt/xos/synchronizers/simpleexampleservice/steps"
+event_steps_dir: "/opt/xos/synchronizers/simpleexampleservice/event_steps"
 sys_dir: "/opt/xos/synchronizers/simpleexampleservice/sys"
 model_policies_dir: "/opt/xos/synchronizers/simpleexampleservice/model_policies"
 models_dir: "/opt/xos/synchronizers/simpleexampleservice/models"
