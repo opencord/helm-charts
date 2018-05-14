@@ -1,0 +1,9 @@
+Code-Review+1: Matteo Scandolo <teo@opennetworking.org>
+Code-Review+1: Scott Baker <scottb@onlab.us>
+Code-Review+2: Andy Bavier <andy@opennetworking.org>
+Verified+1: Andy Bavier <andy@opennetworking.org>
+Submitted-by: Andy Bavier <andy@opennetworking.org>
+Submitted-at: Mon, 14 May 2018 21:31:23 +0000
+Reviewed-on: https://gerrit.opencord.org/9293
+Project: helm-charts
+Branch: refs/heads/master
