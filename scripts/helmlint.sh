@@ -26,6 +26,11 @@ for chart in $(find . -name Chart.yaml -print) ; do
 
   chartdir=$(dirname "${chart}")
 
+  # update requirements if it exists
+  if [ -f "${chartdir}/requirements.yaml" ]; then
+    helm dependency update "${chartdir}"
+  fi
+
   # lint with values.yaml if it exists
   if [ -f "${chartdir}/values.yaml" ]; then
     helm lint --strict --values "${chartdir}/values.yaml" "${chartdir}"
