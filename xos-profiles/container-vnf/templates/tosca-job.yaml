@@ -33,7 +33,7 @@ spec:
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/tosca-configmap.yaml") . | sha256sum }}
     spec:
-      restartPolicy: Never
+      restartPolicy: OnFailure
       containers:
         - name: {{ .Chart.Name }}-tosca-loader
           image: {{ .Values.httpieImage | quote }}
