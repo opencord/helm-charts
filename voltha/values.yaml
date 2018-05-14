@@ -52,7 +52,7 @@ etcd-operator:
     createEtcdClusterCRD: true
 
 envoyForEtcdImage: 'voltha/voltha-envoy:latest'
-freeradiusImage: 'marcelmaatkamp/freeradius:latest'
+freeradiusImage: 'tpdock/freeradius:latest'
 grafanaImage: 'kamon/grafana_graphite:3.0'
 netconfImage: 'voltha/voltha-netconf:latest'
 ofagentImage: 'voltha/voltha-ofagent:latest'
@@ -60,7 +60,7 @@ dashdImage: 'voltha/voltha-dashd:latest'
 shovelImage: 'voltha/voltha-shovel:latest'
 vcliImage: 'voltha/voltha-cli:latest'
 vcoreImage: 'voltha/voltha-voltha:latest'
-  
+
 kafka:
   enabled: true
   persistence:
@@ -86,7 +86,7 @@ stats:
   #- "--grafana_url=http://admin:admin@grafana.$(NAMESPACE).svc.cluster.local:80/api"
   #- "--topic=voltha.kpis"
   #- "--consul=consul:8500"
-  
+
   #shovel_args:
   #- "/shovel/shovel/main.py"
   #- "--kafka={{ .Release.Name }}-kafka.default.svc.cluster.local"
