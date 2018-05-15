@@ -14,6 +14,10 @@
 # limitations under the License.
 
 # Set all image tags to "candidate" to use imagebuilder's local images
+# Also set imagePullPolicy to IfNotPresent, so these images will be used.
+
+# in xos-core, rcord-lite, onos and voltha charts
+imagePullPolicy: 'IfNotPresent'
 
 # in xos-core chart
 xos_coreImage: 'xosproject/xos-core:candidate'
@@ -25,6 +29,7 @@ xos_api_testerImage: 'xosproject/xos-api-tester:candidate'
 xos-gui:
   xos_guiImage: 'xosproject/xos-gui:candidate'
   xos_wsImage: 'xosproject/xos-ws:candidate'
+  imagePullPolicy: 'IfNotPresent'
 
 # in rcord-lite chart
 rcord_synchronizerImage: "xosproject/rcord-synchronizer:candidate"
@@ -32,17 +37,26 @@ rcord_synchronizerImage: "xosproject/rcord-synchronizer:candidate"
 # in service charts
 addressmanager:
   addressmanager_synchronizerImage: "xosproject/addressmanager-synchronizer:candidate"
+  imagePullPolicy: 'IfNotPresent'
 fabric:
   fabric_synchronizerImage: "xosproject/fabric-synchronizer:candidate"
+  imagePullPolicy: 'IfNotPresent'
 onos-service:
   onos_synchronizerImage: "xosproject/onos-synchronizer:candidate"
+  imagePullPolicy: 'IfNotPresent'
 volt:
   volt_synchronizerImage: "xosproject/volt-synchronizer:candidate"
+  imagePullPolicy: 'IfNotPresent'
 vsg-hw:
   vsg_hw_synchronizerImage: "xosproject/vsg-hw-synchronizer:candidate"
+  imagePullPolicy: 'IfNotPresent'
 vrouter:
   vrouter_synchronizerImage: "xosproject/vrouter-synchronizer:candidate"
+  imagePullPolicy: 'IfNotPresent'
 kubernetes:
   kubernetes_synchronizerImage: "xosproject/kubernetes-synchronizer:candidate"
+  imagePullPolicy: 'IfNotPresent'
 simpleexampleservice:
   simpleexampleservice_synchronizerImage: "xosproject/simpleexampleservice-synchronizer:candidate"
+  imagePullPolicy: 'IfNotPresent'
+
