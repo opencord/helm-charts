@@ -32,6 +32,8 @@ vsg-hw:
   imagePullPolicy: 'IfNotPresent'
 kubernetes:
   imagePullPolicy: 'IfNotPresent'
+rcord:
+  imagePullPolicy: 'IfNotPresent'
 vrouter:
   imagePullPolicy: 'IfNotPresent'
 xos-gui:
