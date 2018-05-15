@@ -17,12 +17,19 @@
 # helmlint.sh
 # run `helm lint` on all helm charts that are found
 
-set +e
+set +e -u -o pipefail
+
+# verify that we have helm installed
+command -v helm >/dev/null 2>&1 || { echo "helm not found, please install it" >&2; exit 1; }
+
 echo "helmlint.sh, using helm version: $(helm version -c --short)"
 
 fail_lint=0
 
-for chart in $(find . -name Chart.yaml -print) ; do
+# when not running under Jenkins, use current dir as workspace
+WORKSPACE=${WORKSPACE:-.}
+
+for chart in $(find "${WORKSPACE}" -name Chart.yaml -print) ; do
 
   chartdir=$(dirname "${chart}")
 
