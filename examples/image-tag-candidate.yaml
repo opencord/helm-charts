@@ -26,24 +26,22 @@ xos-gui:
   xos_guiImage: 'xosproject/xos-gui:candidate'
   xos_wsImage: 'xosproject/xos-ws:candidate'
 
-# in rcord-lite chart
-rcord_synchronizerImage: "xosproject/rcord-synchronizer:candidate"
-
 # in service charts
 addressmanager:
-  addressmanager_synchronizerImage: "xosproject/addressmanager-synchronizer:candidate"
+  addressmanager_synchronizerImage: 'xosproject/addressmanager-synchronizer:candidate'
 fabric:
-  fabric_synchronizerImage: "xosproject/fabric-synchronizer:candidate"
+  fabric_synchronizerImage: 'xosproject/fabric-synchronizer:candidate'
 onos-service:
-  onos_synchronizerImage: "xosproject/onos-synchronizer:candidate"
+  onos_synchronizerImage: 'xosproject/onos-synchronizer:candidate'
 volt:
-  volt_synchronizerImage: "xosproject/volt-synchronizer:candidate"
+  volt_synchronizerImage: 'xosproject/volt-synchronizer:candidate'
 vsg-hw:
-  vsg_hw_synchronizerImage: "xosproject/vsg-hw-synchronizer:candidate"
+  vsg_hw_synchronizerImage: 'xosproject/vsg-hw-synchronizer:candidate'
 vrouter:
-  vrouter_synchronizerImage: "xosproject/vrouter-synchronizer:candidate"
+  vrouter_synchronizerImage: 'xosproject/vrouter-synchronizer:candidate'
 kubernetes:
-  kubernetes_synchronizerImage: "xosproject/kubernetes-synchronizer:candidate"
+  kubernetes_synchronizerImage: 'xosproject/kubernetes-synchronizer:candidate'
+rcord:
+  rcord_synchronizerImage: 'xosproject/rcord-synchronizer:candidate'
 simpleexampleservice:
-  simpleexampleservice_synchronizerImage: "xosproject/simpleexampleservice-synchronizer:candidate"
-
+  simpleexampleservice_synchronizerImage: 'xosproject/simpleexampleservice-synchronizer:candidate'
