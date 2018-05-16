@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c83413e_c6951872",
+        "filename": "examples/api-test-values.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-05-16T20:35:06Z",
+      "side": 1,
+      "message": "This is not mandatory, the same workflow applies to any minikube installation. The only important thing is that the images are build on the minikube docker",
+      "range": {
+        "startLine": 19,
+        "startChar": 14,
+        "endLine": 19,
+        "endChar": 30
+      },
+      "revId": "ff683a2a1bb7b2c231f5f5db879ef637a5037bc9",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
