@@ -22,6 +22,30 @@
       "revId": "fcb6b424a9d11d0237ee72ce81bebe1d637a758c",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e983725e_f1ec59f7",
+        "filename": "examples/api-test-values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-05-16T19:03:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad6d6aa0_34a43786",
+      "range": {
+        "startLine": 17,
+        "startChar": 2,
+        "endLine": 17,
+        "endChar": 73
+      },
+      "revId": "fcb6b424a9d11d0237ee72ce81bebe1d637a758c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
