@@ -13,28 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Set all image tags to "candidate" to use imagebuilder's local images
-# Also set imagePullPolicy to IfNotPresent, so these images will be used.
+# Values file for API tests
+# Uses locally built 'candidate' images built by imagebuilder in minikube
 
-# in xos-core, rcord-lite, onos and voltha charts
+# shared by xos-core, rcord-lite, etc.
 imagePullPolicy: 'IfNotPresent'
 
-# in xos-core chart
+# xos core
+xos-gui:
+  enabled: false
+
 xos_coreImage: 'xosproject/xos-core:candidate'
 xos_chameleonImage: 'xosproject/chameleon:candidate'
 xos_toscaImage: 'xosproject/xos-tosca:candidate'
 xos_api_testerImage: 'xosproject/xos-api-tester:candidate'
 
-# in xos-gui sub-chart required by xos-core chart
-xos-gui:
-  xos_guiImage: 'xosproject/xos-gui:candidate'
-  xos_wsImage: 'xosproject/xos-ws:candidate'
-  imagePullPolicy: 'IfNotPresent'
-
-# in rcord-lite chart
+# rcord-lite
 rcord_synchronizerImage: "xosproject/rcord-synchronizer:candidate"
 
-# in service charts
+# xossh
+xosshImage: 'xosproject/xos-client:candidate'
+
+# XOS service charts
 addressmanager:
   addressmanager_synchronizerImage: "xosproject/addressmanager-synchronizer:candidate"
   imagePullPolicy: 'IfNotPresent'
