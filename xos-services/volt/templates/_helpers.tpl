@@ -52,6 +52,9 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
+event_bus:
+  endpoint: cord-kafka-kafka
+  kind: kafka
 required_models:
   - VOLTService
   - VOLTServiceInstance
@@ -62,6 +65,7 @@ model_policies_dir: "/opt/xos/synchronizers/volt/model_policies"
 models_dir: "/opt/xos/synchronizers/volt/models"
 steps_dir: "/opt/xos/synchronizers/volt/steps"
 pull_steps_dir: "/opt/xos/synchronizers/volt/pull_steps"
+event_steps_dir: "/opt/xos/synchronizers/volt/event_steps"
 logging:
   version: 1
   handlers:
