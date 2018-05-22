@@ -52,9 +52,10 @@ accessor:
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
 dependency_graph: "/opt/xos/synchronizers/openstack/model-deps"
-steps_dir: "/opt/xos/synchronizers/openstack/steps"
+steps_dir: "/opt/xos/synchronizers/openstack/new_steps"
 sys_dir: "/opt/xos/synchronizers/openstack/sys"
-model_policies_dir: "/opt/xos/synchronizers/openstack/model_policies"
+model_policies_dir: "/opt/xos/synchronizers/openstack/new_model_policies"
+models_dir: "/opt/xos/synchronizers/openstack/models"
 logging:
   version: 1
   handlers:
@@ -84,6 +85,7 @@ required_models:
   - Instance
   - Port
   - Role
+  - OpenStackService
 nova:
   ca_ssl_cert: "/etc/ssl/certs/ca-certificates.crt"
   enabled: True
