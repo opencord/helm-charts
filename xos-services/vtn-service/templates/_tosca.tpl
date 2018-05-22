@@ -34,9 +34,9 @@ topology_template:
           privateGatewayMac: 00:00:00:00:00:01
           localManagementIp: 172.27.0.1/24
           ovsdbPort: 6641
-          sshUser: vagrant
+          sshUser: {{ .sshUser }}
           sshKeyFile: /root/node_key
-          sshPort: 22
+          sshPort: {{ .sshPort }}
           xosEndpoint: xos-chameleon:9101
           xosUser: {{ .xosAdminUser }}
           xosPassword: {{ .xosAdminPassword }}

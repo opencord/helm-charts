@@ -37,79 +37,10 @@ keystoneAdminPassword: "password"
 keystoneAdminTenant: "admin"
 keystoneDomain: "Default"
 
-# TOSCA recipes for the tosca-loader
-toscaRecipes:
-  openstackCompute:
-    tosca_definitions_version: tosca_simple_yaml_1_0
-
-    imports:
-      - custom_types/deployment.yaml
-      - custom_types/node.yaml
-      - custom_types/site.yaml
-      - custom_types/sitedeployment.yaml
-
-    description: Adds OpenStack compute nodes
-
-    topology_template:
-      node_templates:
-
-    # Site/Deployment, fully defined in deployment.yaml
-        site:
-          type: tosca.nodes.Site
-          properties:
-            name: *site
-            must-exist: true
-
-        deployment:
-          type: tosca.nodes.Deployment
-          properties:
-            name: *deployment
-            must-exist: true
-
-        site_deployment:
-          type: tosca.nodes.SiteDeployment
-          requirements:
-            - site:
-                node: site
-                relationship: tosca.relationships.BelongsToOne
-            - deployment:
-                node: deployment
-                relationship: tosca.relationships.BelongsToOne
-
-    # OpenStack compute nodes
-
-        head1:
-          type: tosca.nodes.Node
-          properties:
-            name: head1
-            bridgeId: of:00000000abcdef01
-            dataPlaneIntf: fabricbridge
-            dataPlaneIp: 10.6.1.1/24
-          requirements:
-            - site_deployment:
-                node:  site_deployment
-                relationship: tosca.relationships.BelongsToOne
-
-        compute1:
-          type: tosca.nodes.Node
-          properties:
-            name: compute1
-            bridgeId: of:00000000abcdef02
-            dataPlaneIntf: fabricbond
-            dataPlaneIp: 10.6.1.17/24
-          requirements:
-            - site_deployment:
-                node:  site_deployment
-                relationship: tosca.relationships.BelongsToOne
-
-        compute2:
-          type: tosca.nodes.Node
-          properties:
-            name: compute2
-            bridgeId: of:00000000abcdef03
-            dataPlaneIntf: fabricbond
-            dataPlaneIp: 10.6.1.18/24
-          requirements:
-            - site_deployment:
-                node:  site_deployment
-                relationship: tosca.relationships.BelongsToOne
+# List of compute nodes to add to XOS
+computeNodes:
+  head:
+    name: headnode.mysite.org
+    bridgeId: of:00000000abcdef01
+    dataPlaneIntf: fabric
+    dataPlaneIp: 10.6.1.1/24
