@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ca5ceb6f_4b6ba10e",
+        "filename": "examples/compute-nodes.yaml",
+        "patchSetId": 20
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-05-22T18:49:55Z",
+      "side": 1,
+      "message": "Probably should be made generic",
+      "range": {
+        "startLine": 20,
+        "startChar": 10,
+        "endLine": 20,
+        "endChar": 48
+      },
+      "revId": "e3a1f5c866b58d5f4a93c14ec176595ad5a7244f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
