@@ -29,6 +29,9 @@ vtn_synchronizerImage: "xosproject/vtn-synchronizer:master"
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
+sshUser: "root"
+sshPort: 22
+
 resources: {}
 
 nodeSelector: {}
