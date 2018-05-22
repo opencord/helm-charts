@@ -28,13 +28,11 @@ data:
   040-vtn-service.yaml: |
 {{ include "vtn-service.serviceTosca" (index .Values "vtn-service") | indent 4 }}
   050-openstack-compute.yaml: |
-{{ toYaml .Values.toscaRecipes.openstackCompute | indent 4 }}
+{{ include "base-openstack.computeNodeTosca" . | indent 4 }}
   060-openstack-networks.yaml: |
 {{ include "openstack.networkTosca" .Values | indent 4 }}
   070-onos-service-vtn-app.yaml: |
 {{ include "onos-service.vtnAppTosca" (index .Values "onos-service") | indent 4 }}
   300-service-graph.yaml: |
 {{ include "base-openstack.serviceGraphTosca" . | indent 4 }}
-  400-openstack-test.yaml: |
-{{ include "base-openstack.testTosca" . | indent 4 }}
 
