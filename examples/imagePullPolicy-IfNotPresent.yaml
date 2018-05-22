@@ -39,3 +39,5 @@ xos-gui:
   imagePullPolicy: 'IfNotPresent'
 simpleexampleservice:
   imagePullPolicy: 'IfNotPresent'
+openstack:
+  imagePullPolicy: 'IfNotPresent'

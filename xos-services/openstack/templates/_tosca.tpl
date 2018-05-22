@@ -126,6 +126,7 @@ imports:
   - custom_types/deployment.yaml
   - custom_types/site.yaml
   - custom_types/sitedeployment.yaml
+  - custom_types/openstackservice.yaml
 
 description: openstack controller models
 
@@ -143,6 +144,15 @@ topology_template:
       properties:
         name: {{ .cordDeploymentName }}
         must-exist: true
+
+    service#openstack:
+      type: tosca.nodes.OpenStackService
+      properties:
+          name: "OpenStack"
+          auth_url: http://keystone.openstack.svc.cluster.local/v3
+          admin_user: {{ .keystoneAdminUser }}
+          admin_password: {{ .keystoneAdminPassword }}
+          admin_tenant: {{ .keystoneAdminTenant }}
 
     {{ .cordSiteName }}_{{ .cordDeploymentName }}_openstack:
       type: tosca.nodes.Controller
