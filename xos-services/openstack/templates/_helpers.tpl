@@ -42,15 +42,17 @@ Create chart name and version as used by the chart label.
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 {{- define "openstack.serviceConfig" -}}
-name: openstack-synchronizer
+name: openstack
 accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
 dependency_graph: "/opt/xos/synchronizers/openstack/model-deps"
 steps_dir: "/opt/xos/synchronizers/openstack/steps"
+pull_steps_dir: "/opt/xos/synchronizers/openstack/pull_steps"
 sys_dir: "/opt/xos/synchronizers/openstack/sys"
 model_policies_dir: "/opt/xos/synchronizers/openstack/model_policies"
+models_dir: "/opt/xos/synchronizers/openstack/models"
 logging:
   version: 1
   handlers:
@@ -80,6 +82,7 @@ required_models:
   - Instance
   - Port
   - Role
+  - OpenStackService
 nova:
   ca_ssl_cert: "/etc/ssl/certs/ca-certificates.crt"
   enabled: True

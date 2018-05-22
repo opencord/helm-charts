@@ -26,6 +26,7 @@ docker_image_whitelist:
 - xosproject/xos-tosca
 - xosproject/xos-ws
 - xosproject/xos-synchronizer-base
+- xosproject/openstack-synchronizer
 - xosproject/rcord-synchronizer
 - xosproject/volt-synchronizer
 - xosproject/vrouter-synchronizer
