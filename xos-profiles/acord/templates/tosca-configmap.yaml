@@ -1,0 +1,26 @@
+---
+# Copyright 2018-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: acord-tosca
+data:
+  010-fixtures.yaml: |
+{{ include "acord.basicFixturesTosca" . | indent 4 }}
+  020-acordion-service.yaml: |
+{{ include "acordion.serviceTosca" .Values.acordion | indent 4 }}
+  030-kafka-service.yaml: |
+{{ include "acord.kafkaTosca" .Values.acordion | indent 4 }}
