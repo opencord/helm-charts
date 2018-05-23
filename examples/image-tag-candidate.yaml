@@ -19,6 +19,8 @@
 xos_coreImage: 'xosproject/xos-core:candidate'
 xos_chameleonImage: 'xosproject/chameleon:candidate'
 xos_toscaImage: 'xosproject/xos-tosca:candidate'
+
+# for XOS API tests
 xos_api_testerImage: 'xosproject/xos-api-tester:candidate'
 
 # in xos-gui sub-chart required by xos-core chart
@@ -27,28 +29,30 @@ xos-gui:
   xos_wsImage: 'xosproject/xos-ws:candidate'
 
 # in service charts
+acordion:
+  acordion_synchronizerImage: 'xosproject/acordion-synchronizer:candidate'
 addressmanager:
   addressmanager_synchronizerImage: 'xosproject/addressmanager-synchronizer:candidate'
 fabric:
   fabric_synchronizerImage: 'xosproject/fabric-synchronizer:candidate'
-onos-service:
-  onos_synchronizerImage: 'xosproject/onos-synchronizer:candidate'
-volt:
-  volt_synchronizerImage: 'xosproject/volt-synchronizer:candidate'
-vsg-hw:
-  vsg_hw_synchronizerImage: 'xosproject/vsg-hw-synchronizer:candidate'
-vrouter:
-  vrouter_synchronizerImage: 'xosproject/vrouter-synchronizer:candidate'
+hippieOSS:
+  hippieOSS_synchronizerImage: 'xosproject/hippie-oss-synchronizer:candidate'
 kubernetes:
   kubernetes_synchronizerImage: 'xosproject/kubernetes-synchronizer:candidate'
+onos-service:
+  onos_synchronizerImage: 'xosproject/onos-synchronizer:candidate'
+openstack:
+  openstack_synchronizerImage: 'xosproject/openstack-synchronizer:candidate'
 rcord:
   rcord_synchronizerImage: 'xosproject/rcord-synchronizer:candidate'
 simpleexampleservice:
   simpleexampleservice_synchronizerImage: 'xosproject/simpleexampleservice-synchronizer:candidate'
-hippieOSS:
-  hippieOSS_synchronizerImage: 'xosproject/hippie-oss-synchronizer:candidate'
-openstack:
-  openstack_synchronizerImage: 'xosproject/openstack-synchronizer:candidate'
+volt:
+  volt_synchronizerImage: 'xosproject/volt-synchronizer:candidate'
+vrouter:
+  vrouter_synchronizerImage: 'xosproject/vrouter-synchronizer:candidate'
+vsg-hw:
+  vsg_hw_synchronizerImage: 'xosproject/vsg-hw-synchronizer:candidate'
 vtn-service:
   vtn_synchronizerImage: 'xosproject/vtn-synchronizer:candidate'
 

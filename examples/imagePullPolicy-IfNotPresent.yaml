@@ -19,27 +19,30 @@
 imagePullPolicy: 'IfNotPresent'
 
 # in service charts
+acordion:
+  imagePullPolicy: 'IfNotPresent'
 addressmanager:
   imagePullPolicy: 'IfNotPresent'
 fabric:
   imagePullPolicy: 'IfNotPresent'
-onos-service:
-  imagePullPolicy: 'IfNotPresent'
-volt:
-  imagePullPolicy: 'IfNotPresent'
-vsg-hw:
-  imagePullPolicy: 'IfNotPresent'
 kubernetes:
   imagePullPolicy: 'IfNotPresent'
-rcord:
-  imagePullPolicy: 'IfNotPresent'
-vrouter:
-  imagePullPolicy: 'IfNotPresent'
-xos-gui:
-  imagePullPolicy: 'IfNotPresent'
-simpleexampleservice:
+onos-service:
   imagePullPolicy: 'IfNotPresent'
 openstack:
   imagePullPolicy: 'IfNotPresent'
+rcord:
+  imagePullPolicy: 'IfNotPresent'
+simpleexampleservice:
+  imagePullPolicy: 'IfNotPresent'
+volt:
+  imagePullPolicy: 'IfNotPresent'
+vrouter:
+  imagePullPolicy: 'IfNotPresent'
+vsg-hw:
+  imagePullPolicy: 'IfNotPresent'
 vtn-service:
   imagePullPolicy: 'IfNotPresent'
+xos-gui:
+  imagePullPolicy: 'IfNotPresent'
+
