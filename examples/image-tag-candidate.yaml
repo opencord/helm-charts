@@ -19,6 +19,8 @@
 xos_coreImage: 'xosproject/xos-core:candidate'
 xos_chameleonImage: 'xosproject/chameleon:candidate'
 xos_toscaImage: 'xosproject/xos-tosca:candidate'
+
+# for XOS API tests
 xos_api_testerImage: 'xosproject/xos-api-tester:candidate'
 
 # in xos-gui sub-chart required by xos-core chart
@@ -70,11 +72,13 @@ mcord-subscriber:
 progran:
   synchronizerImage: "xosproject/progran-synchronizer:candidate"
 
-# others  
+# others
+acordion:
+  acordion_synchronizerImage: 'xosproject/acordion-synchronizer:candidate'
+hippieOSS:
+  hippieOSS_synchronizerImage: 'xosproject/hippie-oss-synchronizer:candidate'
 kubernetes:
   kubernetes_synchronizerImage: 'xosproject/kubernetes-synchronizer:candidate'
 simpleexampleservice:
   simpleexampleservice_synchronizerImage: 'xosproject/simpleexampleservice-synchronizer:candidate'
-hippieOSS:
-  hippieOSS_synchronizerImage: 'xosproject/hippie-oss-synchronizer:candidate'
 

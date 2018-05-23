@@ -17,6 +17,7 @@
 
 # in xos-core, rcord-lite, onos and voltha charts
 imagePullPolicy: 'IfNotPresent'
+
 xos-gui:
   imagePullPolicy: 'IfNotPresent'
 
@@ -25,15 +26,23 @@ addressmanager:
   imagePullPolicy: 'IfNotPresent'
 fabric:
   imagePullPolicy: 'IfNotPresent'
+kubernetes:
+  imagePullPolicy: 'IfNotPresent'
 onos-service:
   imagePullPolicy: 'IfNotPresent'
-volt:
-  imagePullPolicy: 'IfNotPresent'
-vsg-hw:
+openstack:
   imagePullPolicy: 'IfNotPresent'
 rcord:
   imagePullPolicy: 'IfNotPresent'
 vrouter:
+  imagePullPolicy: 'IfNotPresent'
+volt:
+  imagePullPolicy: 'IfNotPresent'
+vrouter:
+  imagePullPolicy: 'IfNotPresent'
+vsg-hw:
+  imagePullPolicy: 'IfNotPresent'
+vtn-service:
   imagePullPolicy: 'IfNotPresent'
 
 # in BASE-OPENSTACK chart
@@ -65,9 +74,12 @@ progran:
   imagePullPolicy: 'IfNotPresent'
 
 # others
+acordion:
+  imagePullPolicy: 'IfNotPresent'
+hippieOSS:
+  imagePullPolicy: 'IfNotPresent'
 kubernetes:
   imagePullPolicy: 'IfNotPresent'
 simpleexampleservice:
   imagePullPolicy: 'IfNotPresent'
-hippieOSS:
-  imagePullPolicy: 'IfNotPresent'
+
