@@ -16,5 +16,10 @@
 # for development purposes deploy a single instance of kafka
 
 replicas: 1
+enabled: true
+persistence:
+  enabled: false
 zookeeper:
+  persistence:
+    enabled: false
   servers: 1 # NOTE this differs from the zookeper documentation as the kafka chart is still referencing zookeper 0.5.0
