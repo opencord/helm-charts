@@ -20,6 +20,7 @@ docker_image_whitelist:
 - node
 - postgres
 - redis
+
 # xos-core images
 - xosproject/chameleon
 - xosproject/xos-base
@@ -28,37 +29,40 @@ docker_image_whitelist:
 - xosproject/xos-gui
 - xosproject/xos-gui-builder
 - xosproject/xos-libraries
+- xosproject/xos-synchronizer-base
 - xosproject/xos-tosca
 - xosproject/xos-ws
-- xosproject/xos-synchronizer-base
 
 # rcord images
+- xosproject/addressmanager-synchronizer
+- xosproject/fabric-synchronizer
+- xosproject/fabric-synchronizer
+- xosproject/onos-synchronizer
 - xosproject/rcord-synchronizer
 - xosproject/volt-synchronizer
 - xosproject/vrouter-synchronizer
-- xosproject/onos-synchronizer
-- xosproject/addressmanager-synchronizer
 - xosproject/vsg-hw-synchronizer
-- xosproject/fabric-synchronizer
 
 # base-openstack images
 - xosproject/openstack-synchronizer
 - xosproject/vtn-synchronizer
 
 # mcord images
-- "xosproject/vmme-synchronizer"
-- "xosproject/vspgwc-synchronizer"
-- "xosproject/vspgwu-synchronizer"
-- "xosproject/vhss-synchronizer"
-- "xosproject/hssdb-synchronizer"
-- "xosproject/internetemulator-synchronizer"
-- "xosproject/sdncontroller-synchronizer"
-- "xosproject/vepc-synchronizer"
-- "xosproject/mcord-synchronizer"
-- "xosproject/progran-synchronizer"
+- xosproject/hssdb-synchronizer
+- xosproject/internetemulator-synchronizer
+- xosproject/mcord-synchronizer
+- xosproject/progran-synchronizer
+- xosproject/sdncontroller-synchronizer
+- xosproject/vepc-synchronizer
+- xosproject/vhss-synchronizer
+- xosproject/vmme-synchronizer
+- xosproject/vspgwc-synchronizer
+- xosproject/vspgwu-synchronizer
 
 # others
 - xosproject/kubernetes-synchronizer
 - xosproject/exampleservice-synchronizer
 - xosproject/simpleexampleservice-synchronizer
 - xosproject/xos-api-tester
+- xosproject/acordion-synchronizer
+
