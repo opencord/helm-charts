@@ -5,10 +5,14 @@ chart_repo
 requirements.lock
 
 # ignore dependent chart dirs
-xos-core/charts
+seba/charts
 voltha/charts
 xos-core/charts
-xos-profiles/rcord-lite/charts
-xos-profiles/mcord/charts
+xos-profiles/acord/charts
+xos-profiles/base-kubernetes/charts/
 xos-profiles/base-openstack/charts
 xos-profiles/container-vnf/charts
+xos-profiles/demo-exampleservice/charts/
+xos-profiles/demo-simpleexampleservice/charts/
+xos-profiles/mcord/charts
+xos-profiles/rcord-lite/charts
