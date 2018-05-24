@@ -13,34 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Default values for the base-openstack profile.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# Information for the cluster's OpenStack compute nodes
 
-replicaCount: 1
-
-nameOverride: ""
-fullnameOverride: ""
-
-imagePullPolicy: 'Always'
-
-httpieImage: "clue/httpie:latest"
-
-xosAdminUser: "admin@opencord.org"
-xosAdminPassword: "letmein"
-
-cordSiteName:  &site "mysite"
-cordDeploymentName: &deployment "mydeployment"
-
-keystoneAdminUser: "admin"
-keystoneAdminPassword: "password"
-keystoneAdminTenant: "admin"
-keystoneDomain: "Default"
-
-# List of compute nodes to add to XOS
 computeNodes:
   master:
     name: node0.opencord.org
     bridgeId: of:00000000abcdef01
     dataPlaneIntf: fabric
     dataPlaneIp: 10.6.1.1/24
+  node1:
+    name: node1.opencord.org
+    bridgeId: of:00000000abcdef02
+    dataPlaneIntf: fabric
+    dataPlaneIp: 10.6.1.2/24
+  node2:
+    name: node2.opencord.org
+    bridgeId: of:00000000abcdef03
+    dataPlaneIntf: fabric
+    dataPlaneIp: 10.6.1.3/24

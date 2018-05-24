@@ -148,3 +148,57 @@ topology_template:
               node: {{ .Values.cordSiteName }}_test
               relationship: tosca.relationships.BelongsToOne
 {{- end -}}
+
+{{- define "base-openstack.computeNodeTosca" -}}
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+imports:
+  - custom_types/deployment.yaml
+  - custom_types/node.yaml
+  - custom_types/site.yaml
+  - custom_types/sitedeployment.yaml
+
+description: Adds OpenStack compute nodes
+
+topology_template:
+  node_templates:
+
+# Site/Deployment, fully defined in deployment.yaml
+    site:
+      type: tosca.nodes.Site
+      properties:
+        name: {{ .Values.cordSiteName }}
+        must-exist: true
+
+    deployment:
+      type: tosca.nodes.Deployment
+      properties:
+        name: {{ .Values.cordDeploymentName }}
+        must-exist: true
+
+    site_deployment:
+      type: tosca.nodes.SiteDeployment
+      requirements:
+        - site:
+            node: site
+            relationship: tosca.relationships.BelongsToOne
+        - deployment:
+            node: deployment
+            relationship: tosca.relationships.BelongsToOne
+
+# OpenStack compute nodes
+
+    {{- range .Values.computeNodes }}
+    {{ .name }}:
+      type: tosca.nodes.Node
+      properties:
+        name: {{ .name }}
+        bridgeId: {{ .bridgeId }}
+        dataPlaneIntf: {{ .dataPlaneIntf }}
+        dataPlaneIp: {{ .dataPlaneIp }}
+      requirements:
+        - site_deployment:
+            node:  site_deployment
+            relationship: tosca.relationships.BelongsToOne
+    {{- end }}
+{{- end -}}
