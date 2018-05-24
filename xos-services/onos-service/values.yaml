@@ -29,6 +29,9 @@ onos_synchronizerImage: "xosproject/onos-synchronizer:master"
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
+cordConfigAppURL: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/cord-config/1.4.0-SNAPSHOT/cord-config-1.4.0-20180524.071425-262.oar"
+vtnAppURL: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/vtn/1.6.0-SNAPSHOT/vtn-1.6.0-20180524.071556-118.oar"
+
 resources: {}
 
 nodeSelector: {}

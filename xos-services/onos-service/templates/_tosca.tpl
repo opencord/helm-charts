@@ -72,7 +72,7 @@ topology_template:
               relationship: tosca.relationships.BelongsToOne
       properties:
           name: VTN_ONOS_app
-          install_dependencies: https://repo.maven.apache.org/maven2/org/opencord/cord-config/1.3.1/cord-config-1.3.1.oar, https://repo.maven.apache.org/maven2/org/opencord/vtn/1.5.0/vtn-1.5.0.oar
+          install_dependencies: {{ .cordConfigAppURL }}, {{ .vtnAppURL }}
           dependencies: org.onosproject.drivers, org.onosproject.drivers.ovsdb, org.onosproject.openflow-base, org.onosproject.ovsdb-base, org.onosproject.dhcp
 
     VTN_ONOS_app_autogenerate:
