@@ -45,3 +45,5 @@ rcord:
   rcord_synchronizerImage: 'xosproject/rcord-synchronizer:candidate'
 simpleexampleservice:
   simpleexampleservice_synchronizerImage: 'xosproject/simpleexampleservice-synchronizer:candidate'
+
+hippieOSS_synchronizerImage: 'xosproject/hippie-oss-synchronizer:candidate'
