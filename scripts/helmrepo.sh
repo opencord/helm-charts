@@ -22,7 +22,7 @@ set -e -u -o pipefail
 REPO_DIR="${REPO_DIR:-chart_repo}"
 
 GERRIT_BRANCH="${GERRIT_BRANCH:-$(git symbolic-ref --short HEAD)}"
-PUBLISH_URL="${PUBLISH_URL:-https://guide.opencord.org/charts/${GERRIT_BRANCH}}"
+PUBLISH_URL="${PUBLISH_URL:-https://charts.opencord.org/${GERRIT_BRANCH}}"
 
 mkdir -p "${REPO_DIR}"
 
