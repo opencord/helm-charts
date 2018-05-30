@@ -1,0 +1,9 @@
+Now, You have created the CRD(CustomResourceDefinition) into your kubernetes cluster
+Running the following command to check/describe the crd
+
+$ kubectl get crd
+$ kubectl describe crd {{ .Values.customResourceDefinition.plural}}
+
+We have installed the CNI config and you can find it in {{ .Values.daemonSet.cniConfPath}}/{{ .Values.daemonSet.targetCNIFile}} into each kubernetes nodes.
+
+For more usage about the multus, you can go to https://github.com/intel/multus-cni to learn how to use the CRD {{ .Values.customResourceDefinition.plural}} to support multiple network for your kubernetes pods.
