@@ -63,6 +63,7 @@ topology_template:
           no_container: true
           rest_hostname: onos-cord-ui
           rest_port: 8181
+          node_key: /root/vtn/node_key
 
     VTN_ONOS_app:
       type: tosca.nodes.ONOSApp

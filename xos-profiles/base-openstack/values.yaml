@@ -37,6 +37,8 @@ keystoneAdminPassword: "password"
 keystoneAdminTenant: "admin"
 keystoneDomain: "Default"
 
+nodeKeyFile: "~/.ssh/id_rsa"
+
 # List of compute nodes to add to XOS
 computeNodes:
   master:
