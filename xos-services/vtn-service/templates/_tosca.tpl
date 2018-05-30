@@ -35,7 +35,7 @@ topology_template:
           localManagementIp: 172.27.0.1/24
           ovsdbPort: 6641
           sshUser: {{ .sshUser }}
-          sshKeyFile: /root/node_key
+          sshKeyFile: /root/vtn/node_key
           sshPort: {{ .sshPort }}
           xosEndpoint: xos-chameleon:9101
           xosUser: {{ .xosAdminUser }}

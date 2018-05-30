@@ -37,6 +37,8 @@ keystoneAdminPassword: "password"
 keystoneAdminTenant: "admin"
 keystoneDomain: "Default"
 
+nodeKeyFile: "files/node_key"
+
 # List of compute nodes to add to XOS
 computeNodes:
   master:

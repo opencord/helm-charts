@@ -57,6 +57,16 @@ spec:
               containerPort: {{ .Values.services.cluster.port }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+          volumeMounts:
+            - name: node-key
+              mountPath: /root/vtn
+              readOnly: true
+      volumes:
+        - name: node-key
+          secret:
+            secretName: node-key
+            defaultMode: 256
+            optional: true
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
