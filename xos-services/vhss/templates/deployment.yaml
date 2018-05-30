@@ -52,6 +52,9 @@ spec:
             - name: vhss-keys
               mountPath: /opt/xos/services/vhss/keys
               readOnly: true
+            - name: node-key
+              mountPath: /opt/cord_profile
+              readOnly: true
       volumes:
         - name: vhss-config
           configMap:
@@ -68,6 +71,11 @@ spec:
         - name: vhss-keys
           secret:
             secretName: vhss-keys
+        - name: node-key
+          secret:
+            secretName: node-key
+            defaultMode: 256
+            optional: true
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

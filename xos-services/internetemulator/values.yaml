@@ -35,6 +35,11 @@ vnfImageVersion: "v0.1"
 publicKey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDL5L5vDsQ1bmSeisxMf/GZEqv85oHHu6RFE17VYoTAuBBsHQnETOccbQT85qSBy5NAMAICtOd15iXYfmul0eFeSHoQr1H3IAXT0if6ANxXOm8/Z2rlRNthOEgsjDQU9foNxQ4wksygy5epKmbEhMqbFZjuj4zYfStPzE/gkFSE9QjhKMWaJmyLFfq9f8DnC+TTE41K5iGbtramr7qHSWsKKy75XV6MZZLLFExrQqlYDlLA2V0aYezCql3fB96KJmf6GJRT3j3Y7oWaj7gEzMCycA2QgP8ZNFL/2Q1qgvQRc6I46/HUiOh3IT8LVDdo2ZUn9qrNameQ1zR7a+wBvYIV Insecure M-CORD keypair"
 privateKeyFile: "files/id_rsa"
 
+# These variables can be overridden by the profile chart
+global:
+  proxySshEnabled: true
+  proxySshUser: "root"
+
 resources: {}
 
 nodeSelector: {}

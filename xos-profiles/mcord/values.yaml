@@ -36,3 +36,7 @@ keystoneAdminUser: "admin"
 keystoneAdminPassword: "password"
 keystoneAdminTenant: "admin"
 keystoneDomain: "Default"
+
+global:
+  proxySshEnabled: true
+  proxySshUser: root
