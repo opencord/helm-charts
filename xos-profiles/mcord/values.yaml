@@ -36,3 +36,28 @@ keystoneAdminUser: "admin"
 keystoneAdminPassword: "password"
 keystoneAdminTenant: "admin"
 keystoneDomain: "Default"
+
+proxySshEnabled: &proxySshEnabled true
+proxySshUser: &proxySshUser root
+
+hssdb:
+  proxySshEnabled: *proxySshEnabled
+  proxySshUser: *proxySshUser
+internetemulator:
+  proxySshEnabled: *proxySshEnabled
+  proxySshUser: *proxySshUser
+sdncontroller:
+  proxySshEnabled: *proxySshEnabled
+  proxySshUser: *proxySshUser
+vhss:
+  proxySshEnabled: *proxySshEnabled
+  proxySshUser: *proxySshUser
+vmme:
+  proxySshEnabled: *proxySshEnabled
+  proxySshUser: *proxySshUser
+vspgwc:
+  proxySshEnabled: *proxySshEnabled
+  proxySshUser: *proxySshUser
+vspgwu:
+  proxySshEnabled: *proxySshEnabled
+  proxySshUser: *proxySshUser
