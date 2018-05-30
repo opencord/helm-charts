@@ -52,6 +52,9 @@ spec:
             - name: hssdb-keys
               mountPath: /opt/xos/services/hssdb/keys
               readOnly: true
+            - name: node-key
+              mountPath: /opt/cord_profile
+              readOnly: true
       volumes:
         - name: hssdb-config
           configMap:
@@ -68,6 +71,12 @@ spec:
         - name: hssdb-keys
           secret:
             secretName: hssdb-keys
+            defaultMode: 256
+        - name: node-key
+          secret:
+            secretName: node-key
+            defaultMode: 256
+            optional: true
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
