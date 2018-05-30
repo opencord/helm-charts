@@ -100,4 +100,7 @@ blueprints:
         links:
           - name: VENBServiceInstance
           - name: VSPGWUTenant
+proxy_ssh:
+  enabled: {{ .Values.proxySshEnabled }}
+  user: {{ .Values.proxySshUser }}
 {{- end -}}
