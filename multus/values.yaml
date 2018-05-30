@@ -1,0 +1,36 @@
+# Default values for multus.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+
+namespace: kube-system
+
+customResourceDefinition:
+  shortName: net
+  plural: networks
+  singular: network
+  kind: Network
+
+daemonSet:
+  tempCNIDir: /cni/conf
+  targetCNIFile: 00-multus.conf
+  cniBinaryPath: /opt/cni/bin
+  cniConfPath: /etc/cni/net.d
+
+resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+   cpu: 10m
+   memory: 10Mi
+  requests:
+   cpu: 10m
+   memory: 10Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

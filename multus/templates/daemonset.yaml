@@ -1,0 +1,42 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: {{ template "multus.fullname" . }}
+  namespace: {{ .Values.namespace}}
+spec:
+  template:
+    metadata:
+      labels:
+       name: {{ template "multus.fullname" . }}
+    spec:
+      hostNetwork: true
+      nodeSelector:
+        beta.kubernetes.io/arch: amd64
+      containers:
+      - name: {{ template "multus.fullname" .}}
+        image: hwchiu/docker-multus-cni:latest
+        args: ["-b", "/cni/bin","-g", "/cni/conf", "-d"]
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu}}
+            memory: {{ .Values.resources.requests.memory}}
+          limits:
+            cpu: {{ .Values.resources.limits.cpu}}
+            memory: {{ .Values.resources.limits.memory}}
+        securityContext:
+          privileged: true
+        env:
+        - name: DEST_CNI
+          value: {{ .Values.daemonSet.tempCNIDir}}/{{ .Values.daemonSet.targetCNIFile}}
+        volumeMounts:
+        - name: cni-binary
+          mountPath: /cni/bin
+        - name: cni-conf
+          mountPath: {{ .Values.daemonSet.tempCNIDir}}
+      volumes:
+        - name: cni-binary
+          hostPath:
+            path: {{ .Values.daemonSet.cniBinaryPath}}
+        - name: cni-conf
+          hostPath:
+            path: {{ .Values.daemonSet.cniConfPath}}
