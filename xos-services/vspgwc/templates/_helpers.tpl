@@ -114,5 +114,8 @@ blueprints:
         links:
           - name: HSSDBServiceInstance
       - name: HSSDBServiceInstance
+proxy_ssh:
+  enabled: {{ .Values.proxySshEnabled }}
+  user: {{ .Values.proxySshUser }}
 {{- end -}}
 

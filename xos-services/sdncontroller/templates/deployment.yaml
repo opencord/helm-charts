@@ -52,6 +52,9 @@ spec:
             - name: sdncontroller-keys
               mountPath: /opt/xos/services/sdncontroller/keys
               readOnly: true
+            - name: node-key
+              mountPath: /opt/cord_profile
+              readOnly: true
       volumes:
         - name: sdncontroller-config
           configMap:
@@ -68,6 +71,11 @@ spec:
         - name: sdncontroller-keys
           secret:
             secretName: sdncontroller-keys
+        - name: node-key
+          secret:
+            secretName: node-key
+            defaultMode: 256
+            optional: true
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

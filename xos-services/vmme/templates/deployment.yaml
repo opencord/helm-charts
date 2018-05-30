@@ -52,6 +52,9 @@ spec:
             - name: vmme-keys
               mountPath: /opt/xos/services/vmme/keys
               readOnly: true
+            - name: node-key
+              mountPath: /opt/cord_profile
+              readOnly: true
       volumes:
         - name: vmme-config
           configMap:
@@ -68,6 +71,11 @@ spec:
         - name: vmme-keys
           secret:
             secretName: vmme-keys
+        - name: node-key
+          secret:
+            secretName: node-key
+            defaultMode: 256
+            optional: true
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
