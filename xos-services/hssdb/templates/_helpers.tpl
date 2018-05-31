@@ -77,4 +77,7 @@ logging:
           - console
           - file
       level: DEBUG
+proxy_ssh:
+  enabled: {{ .Values.global.proxySshEnabled }}
+  user: {{ .Values.global.proxySshUser }}
 {{- end -}}
