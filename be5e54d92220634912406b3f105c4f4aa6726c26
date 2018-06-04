@@ -1,0 +1,8 @@
+Verified+1: Jenkins Jenkins <do-not-reply@opencord.org>
+Code-Review+1: Zack Williams <zdw@opennetworking.org>
+Code-Review+2: Scott Baker <scottb@onlab.us>
+Submitted-by: Scott Baker <scottb@onlab.us>
+Submitted-at: Mon, 04 Jun 2018 16:33:29 +0000
+Reviewed-on: https://gerrit.opencord.org/9631
+Project: helm-charts
+Branch: refs/heads/master
