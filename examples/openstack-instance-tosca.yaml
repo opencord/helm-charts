@@ -29,6 +29,7 @@ imports:
   - custom_types/node.yaml
   - custom_types/instance.yaml
   - custom_types/slice.yaml
+  - custom_types/site.yaml
 
 description: openstack extensions to deployment
 
@@ -40,7 +41,9 @@ topology_template:
       type: tosca.nodes.Image
       properties:
         name: "Ubuntu 14.04 64-bit"
-        must-exist: true
+        disk_format: QCOW2
+        container_format: BARE
+        path: https://github.com/opencord/platform-install/releases/download/vms/trusty-server-cloudimg-amd64-disk1.img.20170201
 
     m1.small:
       type: tosca.nodes.Flavor
@@ -51,7 +54,13 @@ topology_template:
     MyDeployment:
       type: tosca.nodes.Deployment
       properties:
-        name: MyDeployment
+        name: mydeployment
+        must-exist: true
+
+    mysite:
+      type: tosca.nodes.Site
+      properties:
+        name: mysite
         must-exist: true
 
     mysite_test:
@@ -59,12 +68,15 @@ topology_template:
       type: tosca.nodes.Slice
       properties:
         name: mysite_test
-        must-exist: true
+      requirements:
+        - site:
+            node: mysite
+            relationship: tosca.relationships.BelongsToOne
 
     compute1:
       type: tosca.nodes.Node
       properties:
-        name: compute1
+        name: insert-node-hostname-here
         must-exist: true
 
     test_instance:
@@ -88,4 +100,3 @@ topology_template:
         - node:
             node: compute1
             relationship: tosca.relationships.BelongsToOne
-
