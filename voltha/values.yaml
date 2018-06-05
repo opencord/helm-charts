@@ -47,9 +47,27 @@ services:
           port: 50555
           targetPort: 50555
 
+kafka:
+  enabled: false
+  persistence:
+    enabled: false
+  zookeeper:
+    persistence:
+      enabled: false
+
+etcd:
+  operator:
+    enabled: true
 etcd-operator:
   customResources:
+    size: 1
     createEtcdClusterCRD: true
+
+kafkaReleaseName: voltha-kafka
+etcdReleaseName: voltha-etcd
+
+consul:
+  enabled: false
 
 envoyForEtcdImage: 'voltha/voltha-envoy:latest'
 freeradiusImage: 'tpdock/freeradius:latest'
@@ -61,38 +79,9 @@ shovelImage: 'voltha/voltha-shovel:latest'
 vcliImage: 'voltha/voltha-cli:latest'
 vcoreImage: 'voltha/voltha-voltha:latest'
 
-kafka:
-  enabled: true
-  persistence:
-    enabled: false
-  zookeeper:
-    persistence:
-      enabled: false
-etcd:
-  operator:
-    enabled: true
-consul:
-  enabled: false
-
-
 # Need the namespace global for kafka
 global:
   namespace: voltha
-
-stats:
-  #dashd_args:
-  #- "/dashd/dashd/main.py"
-  #- "--kafka={{ .Release.Name }}-kafka.default.svc.cluster.local"
-  #- "--grafana_url=http://admin:admin@grafana.$(NAMESPACE).svc.cluster.local:80/api"
-  #- "--topic=voltha.kpis"
-  #- "--consul=consul:8500"
-
-  #shovel_args:
-  #- "/shovel/shovel/main.py"
-  #- "--kafka={{ .Release.Name }}-kafka.default.svc.cluster.local"
-  #- "--host=grafana.voltha.svc.cluster.local"
-  #- "--topic=voltha.kpis"
-  #- "--consul=consul:8500"
 
 vcli_args:
 - "/cli/cli/setup.sh"
@@ -100,18 +89,6 @@ vcli_args:
 - "-g voltha:50555"
 - "-s voltha:18880"
 - "-G"
-
-#vcore_etcd_args:
-#- "voltha/voltha/main.py"
-#- "-v"
-#- "--etcd=etcd-restore-operator.default.svc.cluster.local:2379"
-#- "--kafka={{ .Release.Name }}-kafka.default.svc.cluster.local"
-#- "--rest-port=8880"
-#- "--grpc-port=50556"
-#- "--interface=eth1"
-#- "--backend=etcd"
-#- "--pon-subnet=10.38.0.0/12"
-#- "--ponsim-comm=grpc"
 
 ofagent_args:
 - "/ofagent/ofagent/main.py"
