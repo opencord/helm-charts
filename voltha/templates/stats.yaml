@@ -39,11 +39,8 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         args:
-        - "/dashd/dashd/main.py"
-        - "--kafka={{ .Release.Name }}-kafka.default.svc.cluster.local"
-        - "--grafana_url=http://admin:admin@grafana.$(NAMESPACE).svc.cluster.local:80/api"
-        - "--topic=voltha.kpis"
-        #- "--consul=consul:8500"
+{{ include "voltha-dashd.cmd" . | indent 8 }}
+
 ---
 #
 # The shovel deployment
@@ -72,8 +69,4 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         args:
-        - "/shovel/shovel/main.py"
-        - "--kafka={{ .Release.Name }}-kafka.default.svc.cluster.local"
-        - "--host=grafana.voltha.svc.cluster.local"
-        - "--topic=voltha.kpis"
-        #- "--consul=consul:8500"
+{{ include "voltha-shovel.cmd" . | indent 8 }}
