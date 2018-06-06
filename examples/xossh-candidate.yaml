@@ -15,4 +15,4 @@
 
 # tools
 xosshImage: 'xosproject/xos-client:candidate'
-imagePullPolicy: 'Always'
+imagePullPolicy: 'IfNotPresent'
