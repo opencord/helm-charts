@@ -17,18 +17,17 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "container-vnf.fullname" . }}-tosca-loader
+  name: {{ template "demo-simpleexampleservice.fullname" . }}-tosca-loader
   labels:
-    app: {{ template "container-vnf.name" . }}
-    chart: {{ template "container-vnf.chart" . }}
+    app: {{ template "demo-simpleexampleservice.name" . }}
+    chart: {{ template "demo-simpleexampleservice.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  backoffLimit: 12
   template:
     metadata:
       labels:
-        app: {{ template "container-vnf.name" . }}
+        app: {{ template "demo-simpleexampleservice.name" . }}
         release: {{ .Release.Name }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/tosca-configmap.yaml") . | sha256sum }}
@@ -49,9 +48,9 @@ spec:
                 echo ''
               done
           volumeMounts:
-            - name: container-vnf-tosca
+            - name: demo-simpleexampleservice-tosca
               mountPath: /opt/tosca
       volumes:
-        - name: container-vnf-tosca
+        - name: demo-simpleexampleservice-tosca
           configMap:
-            name: container-vnf-tosca
+            name: demo-simpleexampleservice-tosca

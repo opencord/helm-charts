@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Default values for the container-vnf profile.
+# Default values for the base-kubernetes profile.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -178,7 +178,6 @@ toscaRecipes:
     tosca_definitions_version: tosca_simple_yaml_1_0
     description: Set up VOLT, AddressManager, and RCORD services
     imports:
-      - custom_types/simpleexampleservice.yaml
       - custom_types/fabricservice.yaml
       - custom_types/image.yaml
       - custom_types/kubernetesservice.yaml
@@ -288,38 +287,6 @@ toscaRecipes:
                 relationship: tosca.relationships.BelongsToOne
             - provider_service:
                 node: service#ONOS_Fabric
-                relationship: tosca.relationships.BelongsToOne
-        httpd_image:
-          type: tosca.nodes.Image
-          properties:
-            name: "httpd"
-            tag: "2.4"
-        service#simpleexampleservice:
-          type: tosca.nodes.SimpleExampleService
-          properties:
-            name: simpleexampleservice
-            service_message: hello
-        mysite:
-          type: tosca.nodes.Site
-          properties:
-            name: "mysite"
-            must-exist: true
-        simpleexampleservice_slice:
-          type: tosca.nodes.Slice
-          properties:
-            name: "mysite_simpleexampleservice"
-          requirements:
-            - site:
-                node: mysite
-                relationship: tosca.relationships.BelongsToOne
-            - trust_domain:
-                node: default_trustdomain
-                relationship: tosca.relationships.BelongsToOne
-            - default_image:
-                node: httpd_image
-                relationship: tosca.relationships.BelongsToOne
-            - service:
-                node: service#simpleexampleservice
                 relationship: tosca.relationships.BelongsToOne
 
   serviceGraphConstraints:
