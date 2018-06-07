@@ -27,6 +27,8 @@ imagePullPolicy: 'Always'
 rcord_synchronizerImage: "xosproject/rcord-synchronizer:master"
 httpieImage: "clue/httpie:latest"
 
+xos_api_testerImage: 'xosproject/xos-api-tester:master'
+
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
