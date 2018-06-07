@@ -17,7 +17,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: container-vnf-tosca
+  name: base-kubernetes-tosca
 data:
   010-fixtures.yaml: |
 {{ toYaml .Values.toscaRecipes.fixtures | indent 4 }}

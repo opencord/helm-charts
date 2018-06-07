@@ -17,10 +17,10 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "container-vnf.fullname" . }}-tosca-loader
+  name: {{ template "base-kubernetes.fullname" . }}-tosca-loader
   labels:
-    app: {{ template "container-vnf.name" . }}
-    chart: {{ template "container-vnf.chart" . }}
+    app: {{ template "base-kubernetes.name" . }}
+    chart: {{ template "base-kubernetes.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -28,7 +28,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "container-vnf.name" . }}
+        app: {{ template "base-kubernetes.name" . }}
         release: {{ .Release.Name }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/tosca-configmap.yaml") . | sha256sum }}
@@ -49,9 +49,9 @@ spec:
                 echo ''
               done
           volumeMounts:
-            - name: container-vnf-tosca
+            - name: base-kubernetes-tosca
               mountPath: /opt/tosca
       volumes:
-        - name: container-vnf-tosca
+        - name: base-kubernetes-tosca
           configMap:
-            name: container-vnf-tosca
+            name: base-kubernetes-tosca
