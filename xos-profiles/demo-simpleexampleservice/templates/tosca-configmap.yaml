@@ -15,7 +15,9 @@
 # limitations under the License.
 
 apiVersion: v1
-appVersion: "1.0"
-description: A Helm chart for XOS's "container-vnf" profile
-name: container-vnf
-version: 0.1.0
+kind: ConfigMap
+metadata:
+  name: demo-simpleexampleservice-tosca
+data:
+  010-simpleexampleservice-service.yaml: |
+{{ include "simpleexampleservice.serviceTosca" .Values.vspgwu | indent 4 }}
