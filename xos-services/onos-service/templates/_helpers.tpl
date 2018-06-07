@@ -53,6 +53,9 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
+required_models:
+  - ONOSService
+  - ONOSApp
 dependency_graph: "/opt/xos/synchronizers/onos/model-deps"
 steps_dir: "/opt/xos/synchronizers/onos/steps"
 sys_dir: "/opt/xos/synchronizers/onos/sys"
