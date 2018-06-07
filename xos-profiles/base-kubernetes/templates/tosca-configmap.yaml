@@ -15,7 +15,17 @@
 # limitations under the License.
 
 apiVersion: v1
-appVersion: "1.0"
-description: A Helm chart for XOS's "container-vnf" profile
-name: container-vnf
-version: 0.1.0
+kind: ConfigMap
+metadata:
+  name: base-kubernetes-tosca
+data:
+  010-fixtures.yaml: |
+{{ toYaml .Values.toscaRecipes.fixtures | indent 4 }}
+  020-deployment.yaml: |
+{{ toYaml .Values.toscaRecipes.deployment | indent 4 }}
+  030-fabric-service.yaml: |
+{{ toYaml .Values.toscaRecipes.fabricService | indent 4 }}
+  040-cord-services.yaml: |
+{{ toYaml .Values.toscaRecipes.cordServices | indent 4 }}
+  050-service-graph-constraints.yaml: |
+{{ toYaml .Values.toscaRecipes.serviceGraphConstraints | indent 4 }}
