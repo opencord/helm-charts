@@ -33,7 +33,7 @@ angular.module('app')
 {{- define "xos-gui.style_config" }}
 angular.module('app')
 .constant('StyleConfig', {
-  projectName: 'R-CORD',
+  projectName: {{ .Values.xos_projectName | quote }},
   favicon: 'cord-favicon.png',
   background: 'cord-bg.jpg',
   payoff: 'Your VNF orchestrator',

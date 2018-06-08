@@ -23,3 +23,4 @@ xos_wsImage: 'xosproject/xos-ws:master'
 xos_guiNodePort: 30001
 xos_wsNodePort: 30008
 
+xos_projectName: "R-CORD"
