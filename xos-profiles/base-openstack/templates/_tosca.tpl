@@ -48,7 +48,9 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 
 imports:
    - custom_types/onosapp.yaml
+   - custom_types/onosservice.yaml
    - custom_types/servicegraphconstraint.yaml
+   - custom_types/serviceinstance.yaml
    - custom_types/serviceinstancelink.yaml
    - custom_types/vtnservice.yaml
 
@@ -64,21 +66,57 @@ topology_template:
         must-exist: true
         resync: false
 
-    VTN_ONOS_app:
+    service#ONOS_CORD:
+      type: tosca.nodes.ONOSService
+      properties:
+        name: ONOS_CORD
+        must-exist: true
+
+    # NOTE this is defined in the onos-service TOSCA
+    onos_app#vtn:
       type: tosca.nodes.ONOSApp
       properties:
-          name: VTN_ONOS_app
+          name: vtn
           must-exist: true
 
-    VTN_ONOS_app_VTN_Service:
+    # NOTE this is defined in the vtn-service TOSCA
+    vtn_service_instance:
+      type: tosca.nodes.ServiceInstance
+      properties:
+          name: VTN config
+          must-exist: true
+
+    onos_app#vtn_VTN_Service:
         type: tosca.nodes.ServiceInstanceLink
         requirements:
           - provider_service_instance:
-              node: VTN_ONOS_app
+              node: onos_app#vtn
               relationship: tosca.relationships.BelongsToOne
           - subscriber_service:
               node: service#vtn
               relationship: tosca.relationships.BelongsToOne
+
+    link#vtn_to_vtn-config:
+      type: tosca.nodes.ServiceInstanceLink
+      requirements:
+        - subscriber_service_instance:
+            node: vtn_service_instance
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service_instance:
+            node: onos_app#vtn
+            relationship: tosca.relationships.BelongsToOne
+
+    service_dependency#onos-cord_vtn:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: None
+      requirements:
+        - subscriber_service:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#vtn
+            relationship: tosca.relationships.BelongsToOne
 {{- end -}}
 
 {{- define "base-openstack.testTosca" -}}
