@@ -67,7 +67,7 @@ topology_template:
     VTN_ONOS_app:
       type: tosca.nodes.ONOSApp
       properties:
-          name: VTN_ONOS_app
+          name: vtn
           must-exist: true
 
     VTN_ONOS_app_VTN_Service:
