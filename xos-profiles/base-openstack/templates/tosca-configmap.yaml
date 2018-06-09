@@ -25,14 +25,14 @@ data:
 {{ include "openstack.controllerTosca" .Values | indent 4 }}
   030-openstack-flavors.yaml: |
 {{ include "openstack.flavorTosca" .Values.openstack | indent 4 }}
-  040-vtn-service.yaml: |
+  040-onos-service-vtn-app.yaml: |
+{{ include "onos-service.vtnAppTosca" (index .Values "onos-service") | indent 4 }}
+  041-vtn-service.yaml: |
 {{ include "vtn-service.serviceTosca" (index .Values "vtn-service") | indent 4 }}
   050-openstack-compute.yaml: |
 {{ include "base-openstack.computeNodeTosca" . | indent 4 }}
   060-openstack-networks.yaml: |
 {{ include "openstack.networkTosca" .Values | indent 4 }}
-  070-onos-service-vtn-app.yaml: |
-{{ include "onos-service.vtnAppTosca" (index .Values "onos-service") | indent 4 }}
   300-service-graph.yaml: |
 {{ include "base-openstack.serviceGraphTosca" . | indent 4 }}
 

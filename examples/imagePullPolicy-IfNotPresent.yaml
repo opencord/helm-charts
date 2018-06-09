@@ -41,3 +41,5 @@ simpleexampleservice:
   imagePullPolicy: 'IfNotPresent'
 openstack:
   imagePullPolicy: 'IfNotPresent'
+vtn-service:
+  imagePullPolicy: 'IfNotPresent'
