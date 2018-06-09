@@ -27,19 +27,28 @@ topology_template:
       properties:
           name: ONOS_Fabric
           kind: platform
-          no_container: true
           rest_hostname: onos-fabric-ui
           rest_port: 8181
 
-    Fabric_ONOS_app:
+    onos_app#segmentrouting:
       type: tosca.nodes.ONOSApp
-      requirements:
-          - owner:
-              node: service#ONOS_Fabric
-              relationship: tosca.relationships.BelongsToOne
       properties:
-          name: Fabric_ONOS_app
-          dependencies: org.onosproject.drivers, org.onosproject.openflow, org.onosproject.netcfghostprovider, org.onosproject.segmentrouting, org.onosproject.vrouter
+        name: segmentrouting
+        app_id: org.onosproject.segmentrouting
+      requirements:
+        - owner:
+            node: service#ONOS_Fabric
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#vrouter:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: vrouter
+        app_id: org.onosproject.vrouter
+      requirements:
+        - owner:
+            node: service#ONOS_Fabric
+            relationship: tosca.relationships.BelongsToOne
 {{- end -}}
 
 {{- define "onos-service.vtnAppTosca" -}}
@@ -60,28 +69,28 @@ topology_template:
       properties:
           name: ONOS_CORD
           kind: platform
-          no_container: true
           rest_hostname: onos-cord-ui
           rest_port: 8181
 
-    VTN_ONOS_app:
+    onos_app#cord-config:
       type: tosca.nodes.ONOSApp
-      requirements:
-          - owner:
-              node: service#ONOS_CORD
-              relationship: tosca.relationships.BelongsToOne
       properties:
-          name: VTN_ONOS_app
-          install_dependencies: {{ .cordConfigAppURL }}, {{ .vtnAppURL }}
-          dependencies: org.onosproject.drivers, org.onosproject.drivers.ovsdb, org.onosproject.openflow-base, org.onosproject.ovsdb-base, org.onosproject.dhcp
+        name: cord-config
+        url: {{ .cordConfigAppURL }}
+        version: 1.4.0
+      requirements:
+        - owner:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.BelongsToOne
 
-    VTN_ONOS_app_autogenerate:
-        type: tosca.nodes.ServiceInstanceAttribute
-        requirements:
-          - service_instance:
-              node: VTN_ONOS_app
-              relationship: tosca.relationships.BelongsToOne
-        properties:
-            name: autogenerate
-            value: vtn-network-cfg
+    onos_app#vtn:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: vtn
+        url: {{ .vtnAppURL }}
+        version: 1.6.0
+      requirements:
+        - owner:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.BelongsToOne
 {{- end -}}

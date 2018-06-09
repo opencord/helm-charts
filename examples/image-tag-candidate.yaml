@@ -49,4 +49,6 @@ hippieOSS:
   hippieOSS_synchronizerImage: 'xosproject/hippie-oss-synchronizer:candidate'
 openstack:
   openstack_synchronizerImage: 'xosproject/openstack-synchronizer:candidate'
+vtn-service:
+  vtn_synchronizerImage: 'xosproject/vtn-synchronizer:candidate'
 
