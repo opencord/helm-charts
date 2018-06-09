@@ -18,12 +18,22 @@ limitations under the License.
 tosca_definitions_version: tosca_simple_yaml_1_0
 
 imports:
-   - custom_types/vtnservice.yaml
+  - custom_types/onosservice.yaml
+  - custom_types/servicedependency.yaml
+  - custom_types/serviceinstance.yaml
+  - custom_types/serviceinstanceattribute.yaml
+  - custom_types/vtnservice.yaml
 
 description: Configures the VTN ONOS service
 
 topology_template:
   node_templates:
+
+    service#ONOS_CORD:
+      type: tosca.nodes.ONOSService
+      properties:
+        name: ONOS_CORD
+        must-exist: true
 
     service#vtn:
       type: tosca.nodes.VTNService
@@ -43,4 +53,35 @@ topology_template:
           vtnAPIVersion: 2
           controllerPort: onos-cord-openflow:6653
           resync: false
+
+    service_dependency#onos-cord_vtn:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: None
+      requirements:
+        - subscriber_service:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#vtn
+            relationship: tosca.relationships.BelongsToOne
+
+    vtn_service_instance:
+      type: tosca.nodes.ServiceInstance
+      properties:
+          name: VTN config
+      requirements:
+        - owner:
+            node: service#vtn
+            relationship: tosca.relationships.BelongsToOne
+
+    vtn_config:
+        type: tosca.nodes.ServiceInstanceAttribute
+        properties:
+            name: autogenerate
+            value: vtn-network-cfg
+        requirements:
+          - service_instance:
+              node: vtn_service_instance
+              relationship: tosca.relationships.BelongsToOne
 {{- end -}}
