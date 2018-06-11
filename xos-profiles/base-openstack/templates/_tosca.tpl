@@ -79,11 +79,6 @@ topology_template:
           - subscriber_service:
               node: service#vtn
               relationship: tosca.relationships.BelongsToOne
-
-    constraints:
-      type: tosca.nodes.ServiceGraphConstraint
-      properties:
-        constraints: '[]'
 {{- end -}}
 
 {{- define "base-openstack.testTosca" -}}
