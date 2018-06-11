@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "86f33d2d_cb6031dd",
+        "filename": "xos-profiles/base-openstack/templates/tosca-configmap.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-06-11T23:30:03Z",
+      "side": 1,
+      "message": "I left that in the VTNService since it expect to depend on ONOSCord, do we expect that someone can use a different name for it?",
+      "parentUuid": "6d6a3c07_0bfad518",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 23
+      },
+      "revId": "607b73655427b2d953374105954f1ff73abb054c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "f75ac731_e8a4d045",
         "filename": "xos-services/vtn-service/templates/_tosca.tpl",
         "patchSetId": 4
