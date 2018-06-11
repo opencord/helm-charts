@@ -22,6 +22,30 @@
       "revId": "963ad82c37d86b00a272942c06805d91e30fb65f",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e5a4599_10a81267",
+        "filename": "xos-services/onos-service/templates/_tosca.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-06-11T16:45:42Z",
+      "side": 0,
+      "message": "Those are applications bundled within ONOS, so they\u0027ll get activated when segmentrouting is activated. It\u0027s useful to track dependencies at the xos level only if we need to install them from an URL (the new models have support for that)",
+      "parentUuid": "d139a81d_4b3642bb",
+      "range": {
+        "startLine": 42,
+        "startChar": 24,
+        "endLine": 42,
+        "endChar": 73
+      },
+      "revId": "963ad82c37d86b00a272942c06805d91e30fb65f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
