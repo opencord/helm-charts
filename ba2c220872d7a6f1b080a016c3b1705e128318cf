@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4f29e0dc_f72c8a77",
+        "filename": "xos-profiles/base-kubernetes/templates/tosca-configmap.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-06-11T18:57:25Z",
+      "side": 1,
+      "message": "do we want to decrease this number?",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 29,
+        "endChar": 68
+      },
+      "revId": "ba2c220872d7a6f1b080a016c3b1705e128318cf",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
