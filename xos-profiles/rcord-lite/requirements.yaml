@@ -33,6 +33,3 @@ dependencies:
 - name: vrouter
   version: 0.1.0
   repository: file://../../xos-services/vrouter
-- name: kubernetes
-  version: 0.1.0
-  repository: file://../../xos-services/kubernetes
