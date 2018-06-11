@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6d6a3c07_0bfad518",
+        "filename": "xos-profiles/base-openstack/templates/tosca-configmap.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-06-11T22:46:55Z",
+      "side": 1,
+      "message": "If we include all ServiceDependencies in the service graph, then ordering of these per-service bits shouldn\u0027t matter.",
+      "range": {
+        "startLine": 28,
+        "startChar": 2,
+        "endLine": 30,
+        "endChar": 23
+      },
+      "revId": "607b73655427b2d953374105954f1ff73abb054c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f75ac731_e8a4d045",
+        "filename": "xos-services/vtn-service/templates/_tosca.tpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-06-11T22:46:55Z",
+      "side": 1,
+      "message": "The pattern we\u0027ve been using is to specify ServiceDependencies as part of the service graph defined in the profile (in this case, base-openstack): \n\nhttps://github.com/opencord/helm-charts/blob/master/xos-profiles/base-openstack/templates/_tosca.tpl#L46\n\nI\u0027d be in favor of moving all of the new TOSCA in this file to that location.",
+      "range": {
+        "startLine": 57,
+        "startChar": 4,
+        "endLine": 58,
+        "endChar": 41
+      },
+      "revId": "607b73655427b2d953374105954f1ff73abb054c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
