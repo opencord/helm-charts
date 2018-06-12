@@ -137,6 +137,12 @@ topology_template:
         name: ONOS_Fabric
         must-exist: true
 
+    service#ONOS_VOLTHA:
+      type: tosca.nodes.ONOSService
+      properties:
+        name: ONOS_VOLTHA
+        must-exist: true
+
     service#fabric:
       type: tosca.nodes.FabricService
       properties:
@@ -193,6 +199,18 @@ topology_template:
             node: service#volt
             relationship: tosca.relationships.BelongsToOne
 
+    service_dependency#onos_voltha_volt:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: None
+      requirements:
+        - subscriber_service:
+            node: service#volt
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#ONOS_VOLTHA
+            relationship: tosca.relationships.BelongsToOne
+
     service_dependency#fabric_vrouter:
       type: tosca.nodes.ServiceDependency
       properties:
@@ -232,6 +250,6 @@ topology_template:
     constraints:
       type: tosca.nodes.ServiceGraphConstraint
       properties:
-        constraints: '[[null, "rcord"], [null, "volt"], ["ONOS_Fabric", "vsg-hw"], ["fabric", null], ["vrouter", null]]'
+        constraints: '[[null, "rcord"], ["ONOS_VOLTHA", "volt"], ["ONOS_Fabric", "vsg-hw"], ["fabric", null], ["vrouter", null]]'
 {{- end -}}
 
