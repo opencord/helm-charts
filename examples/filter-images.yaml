@@ -16,6 +16,11 @@
 # Whitelist for use with imagebuilder
 
 docker_image_whitelist:
+- nginx
+- node
+- postgres
+- redis
+# xos-core images
 - xosproject/chameleon
 - xosproject/xos-base
 - xosproject/xos-client
@@ -26,19 +31,33 @@ docker_image_whitelist:
 - xosproject/xos-tosca
 - xosproject/xos-ws
 - xosproject/xos-synchronizer-base
-- xosproject/openstack-synchronizer
+
+# rcord images
 - xosproject/rcord-synchronizer
 - xosproject/volt-synchronizer
 - xosproject/vrouter-synchronizer
-- xosproject/vtn-synchronizer
 - xosproject/onos-synchronizer
 - xosproject/addressmanager-synchronizer
 - xosproject/vsg-hw-synchronizer
+- xosproject/fabric-synchronizer
+
+# base-openstack images
+- xosproject/openstack-synchronizer
+- xosproject/vtn-synchronizer
+
+# mcord images
+- "xosproject/vmme-synchronizer"
+- "xosproject/vspgwc-synchronizer"
+- "xosproject/vspgwu-synchronizer"
+- "xosproject/vhss-synchronizer"
+- "xosproject/hssdb-synchronizer"
+- "xosproject/internetemulator-synchronizer"
+- "xosproject/sdncontroller-synchronizer"
+- "xosproject/vepc-synchronizer"
+- "xosproject/mcord-synchronizer"
+- "xosproject/progran-synchronizer"
+
+# others
 - xosproject/kubernetes-synchronizer
 - xosproject/simpleexampleservice-synchronizer
-- xosproject/fabric-synchronizer
 - xosproject/xos-api-tester
-- nginx
-- node
-- postgres
-- redis
