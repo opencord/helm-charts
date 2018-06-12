@@ -49,6 +49,7 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 imports:
    - custom_types/onosapp.yaml
    - custom_types/onosservice.yaml
+   - custom_types/servicedependency.yaml
    - custom_types/servicegraphconstraint.yaml
    - custom_types/serviceinstance.yaml
    - custom_types/serviceinstancelink.yaml
