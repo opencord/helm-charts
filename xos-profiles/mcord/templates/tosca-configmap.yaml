@@ -41,7 +41,7 @@ data:
 {{ include "mcord-subscriber.serviceTosca" (index .Values "mcord-subscriber") | indent 4 }}
   110-epc-service.yaml: |
 {{ include "epc-service.serviceTosca" (index .Values "epc-service") | indent 4 }}
-  120-fabric-service.yaml: |
+  300-service-graph.yaml: |
 {{ include "mcord.serviceGraphTosca" . | indent 4 }}
   310-mcord-slices.yaml: |
 {{ include "mcord.sliceTosca" . | indent 4 }}
