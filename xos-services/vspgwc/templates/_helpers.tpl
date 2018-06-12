@@ -52,15 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - VSPGWCService
-  - VSPGWCVendor
-  - VSPGWCTenant
-dependency_graph: "/opt/xos/synchronizers/vspgwc/model-deps"
-steps_dir: "/opt/xos/synchronizers/vspgwc/steps"
-sys_dir: "/opt/xos/synchronizers/vspgwc/sys"
-model_policies_dir: "/opt/xos/synchronizers/vspgwc/model_policies"
-models_dir: "/opt/xos/synchronizers/vspgwc/models"
 logging:
   version: 1
   handlers:
@@ -77,43 +68,6 @@ logging:
           - console
           - file
       level: DEBUG
-blueprints:
-  - name: cord_5_0_blueprint
-    graph:
-      - name: VMMETenant
-        links:
-          - name: VHSSTenant
-      - name: VSPGWCTenant
-        links:
-          - name: VMMETenant
-          - name: VSPGWUTenant
-      - name: VSPGWUTenant
-      - name: VHSSTenant
-        links:
-          - name: HSSDBServiceInstance
-      - name: HSSDBServiceInstance
-  - name: cord_4_1_blueprint
-    graph:
-      - name: VSPGWUTenant
-        links:
-          - name: VENBServiceInstance
-      - name: VENBServiceInstance
-      - name: VSPGWCTenant
-        links:
-          - name: VENBServiceInstance
-          - name: VSPGWUTenant
-  - name: cord_5_p4_blueprint
-    graph:
-      - name: VMMETenant
-        links:
-          - name: VHSSTenant
-      - name: VSPGWCTenant
-        links:
-          - name: VMMETenant
-      - name: HSSTenant
-        links:
-          - name: HSSDBServiceInstance
-      - name: HSSDBServiceInstance
 proxy_ssh:
   enabled: {{ .Values.global.proxySshEnabled }}
   user: {{ .Values.global.proxySshUser }}

@@ -52,9 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-dependency_graph: "/opt/xos/synchronizers/mcord/model-deps"
-sys_dir: "/opt/xos/synchronizers/mcord/sys"
-models_dir: "/opt/xos/synchronizers/mcord/models"
 logging:
   version: 1
   handlers:

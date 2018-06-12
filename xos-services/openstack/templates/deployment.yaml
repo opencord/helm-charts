@@ -45,8 +45,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: openstack-config
-              mountPath: /opt/xos/synchronizers/openstack/openstack_config.yaml
-              subPath: openstack_config.yaml
+              mountPath: /opt/xos/synchronizers/openstack/mounted_config.yaml
+              subPath: mounted_config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
@@ -56,7 +56,7 @@ spec:
             name: openstack
             items:
               - key: serviceConfig
-                path: openstack_config.yaml
+                path: mounted_config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates

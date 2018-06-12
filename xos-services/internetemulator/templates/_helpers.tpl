@@ -52,15 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - InternetEmulatorService
-  - InternetEmulatorServiceInstance
-  - ServiceDependency
-dependency_graph: "/opt/xos/synchronizers/internetemulator/model-deps"
-steps_dir: "/opt/xos/synchronizers/internetemulator/steps"
-sys_dir: "/opt/xos/synchronizers/internetemulator/sys"
-model_policies_dir: "/opt/xos/synchronizers/internetemulator/model_policies"
-models_dir: "/opt/xos/synchronizers/internetemulator/models"
 logging:
   version: 1
   handlers:

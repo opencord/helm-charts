@@ -44,8 +44,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: vhss-config
-              mountPath: /opt/xos/synchronizers/vhss/vhss_config.yaml
-              subPath: vhss_config.yaml
+              mountPath: /opt/xos/synchronizers/vhss/mounted_config.yaml
+              subPath: mounted_config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
@@ -61,7 +61,7 @@ spec:
             name: vhss
             items:
               - key: serviceConfig
-                path: vhss_config.yaml
+                path: mounted_config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates

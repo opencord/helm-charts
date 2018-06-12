@@ -47,12 +47,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-dependency_graph: "/opt/xos/synchronizers/openstack/model-deps"
-steps_dir: "/opt/xos/synchronizers/openstack/steps"
-pull_steps_dir: "/opt/xos/synchronizers/openstack/pull_steps"
-sys_dir: "/opt/xos/synchronizers/openstack/sys"
-model_policies_dir: "/opt/xos/synchronizers/openstack/model_policies"
-models_dir: "/opt/xos/synchronizers/openstack/models"
 logging:
   version: 1
   handlers:
@@ -69,20 +63,6 @@ logging:
           - console
           - file
       level: DEBUG
-images_directory: "/opt/xos/images"
-required_models:
-  - ControllerImages
-  - ControllerNetwork
-  - ControllerSitePrivilege
-  - ControllerSite
-  - ControllerSlicePrivilege
-  - ControllerSlice
-  - ControllerUser
-  - Image
-  - Instance
-  - Port
-  - Role
-  - OpenStackService
 nova:
   ca_ssl_cert: "/etc/ssl/certs/ca-certificates.crt"
   enabled: True
