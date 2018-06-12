@@ -26,7 +26,7 @@ xos-gui:
   xos_guiImage: 'xosproject/xos-gui:candidate'
   xos_wsImage: 'xosproject/xos-ws:candidate'
 
-# in service charts
+# in RCORD service chart
 addressmanager:
   addressmanager_synchronizerImage: 'xosproject/addressmanager-synchronizer:candidate'
 fabric:
@@ -39,16 +39,42 @@ vsg-hw:
   vsg_hw_synchronizerImage: 'xosproject/vsg-hw-synchronizer:candidate'
 vrouter:
   vrouter_synchronizerImage: 'xosproject/vrouter-synchronizer:candidate'
-kubernetes:
-  kubernetes_synchronizerImage: 'xosproject/kubernetes-synchronizer:candidate'
 rcord:
   rcord_synchronizerImage: 'xosproject/rcord-synchronizer:candidate'
-simpleexampleservice:
-  simpleexampleservice_synchronizerImage: 'xosproject/simpleexampleservice-synchronizer:candidate'
-hippieOSS:
-  hippieOSS_synchronizerImage: 'xosproject/hippie-oss-synchronizer:candidate'
+
+# in BASE-OPENSTACK chart
 openstack:
   openstack_synchronizerImage: 'xosproject/openstack-synchronizer:candidate'
 vtn-service:
   vtn_synchronizerImage: 'xosproject/vtn-synchronizer:candidate'
+
+# in MCORD
+vmme:
+  synchronizerImage: "xosproject/vmme-synchronizer:candidate"
+vspgwc:
+  synchronizerImage: "xosproject/vspgwc-synchronizer:candidate"
+vspgwu:
+  synchronizerImage: "xosproject/vspgwu-synchronizer:candidate"
+vhss:
+  synchronizerImage: "xosproject/vhss-synchronizer:candidate"
+hssdb:
+  synchronizerImage: "xosproject/hssdb-synchronizer:candidate"
+internetemulator:
+  synchronizerImage: "xosproject/internetemulator-synchronizer:candidate"
+sdncontroller:
+  synchronizerImage: "xosproject/sdncontroller-synchronizer:candidate"
+epc-service:
+  synchronizerImage: "xosproject/vepc-synchronizer:candidate"
+mcord-subscriber:
+  synchronizerImage: "xosproject/mcord-synchronizer:candidate"
+progran:
+  synchronizerImage: "xosproject/progran-synchronizer:candidate"
+
+# others  
+kubernetes:
+  kubernetes_synchronizerImage: 'xosproject/kubernetes-synchronizer:candidate'
+simpleexampleservice:
+  simpleexampleservice_synchronizerImage: 'xosproject/simpleexampleservice-synchronizer:candidate'
+hippieOSS:
+  hippieOSS_synchronizerImage: 'xosproject/hippie-oss-synchronizer:candidate'
 
