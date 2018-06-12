@@ -52,14 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - VRouterService
-  - VRouterServiceInstance
-  - VRouterStaticRoute
-dependency_graph: "/opt/xos/synchronizers/vrouter/model-deps"
-steps_dir: "/opt/xos/synchronizers/vrouter/steps"
-sys_dir: "/opt/xos/synchronizers/vrouter/sys"
-models_dir: "/opt/xos/synchronizers/vrouter/models"
 logging:
   version: 1
   handlers:

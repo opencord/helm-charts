@@ -48,11 +48,20 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - RCORDService
-  - RCORDSubscriber
-dependency_graph: "/opt/xos/synchronizers/rcord/model-deps"
-sys_dir: "/opt/xos/synchronizers/rcord/sys"
-models_dir: "/opt/xos/synchronizers/rcord/models"
-model_policies_dir: "/opt/xos/synchronizers/rcord/model_policies"
+logging:
+  version: 1
+  handlers:
+    console:
+      class: logging.StreamHandler
+    file:
+      class: logging.handlers.RotatingFileHandler
+      filename: /var/log/xos.log
+      maxBytes: 10485760
+      backupCount: 5
+  loggers:
+    'multistructlog':
+      handlers:
+          - console
+          - file
+      level: DEBUG
 {{- end -}}

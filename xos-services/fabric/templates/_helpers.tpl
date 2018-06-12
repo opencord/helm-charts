@@ -52,14 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - Instance
-  - Tag
-  - FabricService
-dependency_graph: "/opt/xos/synchronizers/fabric/model-deps"
-steps_dir: "/opt/xos/synchronizers/fabric/steps"
-sys_dir: "/opt/xos/synchronizers/fabric/sys"
-models_dir: "/opt/xos/synchronizers/fabric/models"
 logging:
   version: 1
   handlers:
