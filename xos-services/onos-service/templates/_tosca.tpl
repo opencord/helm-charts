@@ -72,12 +72,33 @@ topology_template:
           rest_hostname: onos-cord-ui
           rest_port: 8181
 
+    onos_app#openflow-base:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.onosproject.openflow-base
+        app_id: org.onosproject.openflow-base
+      requirements:
+        - owner:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#dhcp:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.onosproject.dhcp
+        app_id: org.onosproject.dhcp
+      requirements:
+        - owner:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.BelongsToOne
+
     onos_app#cord-config:
       type: tosca.nodes.ONOSApp
       properties:
         name: cord-config
         url: {{ .cordConfigAppURL }}
         version: 1.4.0
+        dependencies: org.onosproject.openflow-base, org.onosproject.dhcp
       requirements:
         - owner:
             node: service#ONOS_CORD
