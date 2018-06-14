@@ -52,20 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - AddressPool
-  - Controller
-  - Network
-  - Node
-  - Port
-  - Service
-  - ServiceInstance
-  - Tag
-  - VTNService
-dependency_graph: "/opt/xos/synchronizers/vtn/model-deps"
-models_dir: "/opt/xos/synchronizers/vtn/models"
-sys_dir: "/opt/xos/synchronizers/vtn/sys"
-steps_dir: "/opt/xos/synchronizers/vtn/steps"
 logging:
   version: 1
   handlers:

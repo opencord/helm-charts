@@ -40,8 +40,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: mcord-subscriber-config
-              mountPath: /opt/xos/synchronizers/mcord/mcord_config.yaml
-              subPath: mcord_config.yaml
+              mountPath: /opt/xos/synchronizers/mcord/mounted_config.yaml
+              subPath: mounted_config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
@@ -51,7 +51,7 @@ spec:
             name: mcord-subscriber
             items:
               - key: serviceConfig
-                path: mcord_config.yaml
+                path: mounted_config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates

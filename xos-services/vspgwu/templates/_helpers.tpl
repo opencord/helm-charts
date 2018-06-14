@@ -52,15 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - VSPGWUService
-  - VSPGWUVendor
-  - VSPGWUTenant
-dependency_graph: "/opt/xos/synchronizers/vspgwu/model-deps"
-steps_dir: "/opt/xos/synchronizers/vspgwu/steps"
-sys_dir: "/opt/xos/synchronizers/vspgwu/sys"
-model_policies_dir: "/opt/xos/synchronizers/vspgwu/model_policies"
-models_dir: "/opt/xos/synchronizers/vspgwu/models"
 logging:
   version: 1
   handlers:

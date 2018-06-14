@@ -44,8 +44,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: vspgwu-config
-              mountPath: /opt/xos/synchronizers/vspgwu/vspgwu_config.yaml
-              subPath: vspgwu_config.yaml
+              mountPath: /opt/xos/synchronizers/vspgwu/mounted_config.yaml
+              subPath: mounted_config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
@@ -61,7 +61,7 @@ spec:
             name: vspgwu
             items:
               - key: serviceConfig
-                path: vspgwu_config.yaml
+                path: mounted_config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates

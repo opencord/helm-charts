@@ -52,15 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - SDNControllerService
-  - SDNControllerVendor
-  - SDNControllerServiceInstance
-dependency_graph: "/opt/xos/synchronizers/sdncontroller/model-deps"
-steps_dir: "/opt/xos/synchronizers/sdncontroller/steps"
-sys_dir: "/opt/xos/synchronizers/sdncontroller/sys"
-model_policies_dir: "/opt/xos/synchronizers/sdncontroller/model_policies"
-models_dir: "/opt/xos/synchronizers/sdncontroller/models"
 logging:
   version: 1
   handlers:

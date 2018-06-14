@@ -52,15 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - HSSDBService
-  - HSSDBVendor
-  - HSSDBServiceInstance
-dependency_graph: "/opt/xos/synchronizers/hssdb/model-deps"
-steps_dir: "/opt/xos/synchronizers/hssdb/steps"
-sys_dir: "/opt/xos/synchronizers/hssdb/sys"
-model_policies_dir: "/opt/xos/synchronizers/hssdb/model_policies"
-models_dir: "/opt/xos/synchronizers/hssdb/models"
 logging:
   version: 1
   handlers:

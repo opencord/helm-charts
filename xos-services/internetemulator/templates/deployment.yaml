@@ -44,8 +44,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: internetemulator-config
-              mountPath: /opt/xos/synchronizers/internetemulator/internetemulator_config.yaml
-              subPath: internetemulator_config.yaml
+              mountPath: /opt/xos/synchronizers/internetemulator/mounted_config.yaml
+              subPath: mounted_config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
@@ -61,7 +61,7 @@ spec:
             name: internetemulator
             items:
               - key: serviceConfig
-                path: internetemulator_config.yaml
+                path: mounted_config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates

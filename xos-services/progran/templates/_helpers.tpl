@@ -52,17 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - ProgranService
-  - ProgranServiceInstance
-  - MCordSubscriberInstance
-  - ENodeB
-  - Handover
-dependency_graph: "/opt/xos/synchronizers/progran/model_deps"
-steps_dir: "/opt/xos/synchronizers/progran/steps"
-sys_dir: "/opt/xos/synchronizers/progran/sys"
-models_dir: "/opt/xos/synchronizers/progran/models"
-#model_policies_dir: "/opt/xos/synchronizers/progran/model_policies"
 logging:
   version: 1
   handlers:

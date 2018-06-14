@@ -44,8 +44,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: epc-service-config
-              mountPath: /opt/xos/synchronizers/epc-service/vepc_config.yaml
-              subPath: vepc_config.yaml
+              mountPath: /opt/xos/synchronizers/epc-service/mounted_config.yaml
+              subPath: mounted_config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
@@ -55,7 +55,7 @@ spec:
             name: epc-service
             items:
               - key: serviceConfig
-                path: vepc_config.yaml
+                path: mounted_config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates

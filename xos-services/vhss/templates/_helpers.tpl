@@ -52,15 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - VHSSService
-  - VHSSVendor
-  - VHSSTenant
-dependency_graph: "/opt/xos/synchronizers/vhss/model-deps"
-steps_dir: "/opt/xos/synchronizers/vhss/steps"
-sys_dir: "/opt/xos/synchronizers/vhss/sys"
-model_policies_dir: "/opt/xos/synchronizers/vhss/model_policies"
-models_dir: "/opt/xos/synchronizers/vhss/models"
 logging:
   version: 1
   handlers:

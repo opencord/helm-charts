@@ -44,8 +44,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: sdncontroller-config
-              mountPath: /opt/xos/synchronizers/sdncontroller/sdncontroller_config.yaml
-              subPath: sdncontroller_config.yaml
+              mountPath: /opt/xos/synchronizers/sdncontroller/mounted_config.yaml
+              subPath: mounted_config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
@@ -61,7 +61,7 @@ spec:
             name: sdncontroller
             items:
               - key: serviceConfig
-                path: sdncontroller_config.yaml
+                path: mounted_config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates

@@ -52,15 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - VMMEService
-  - VMMEVendor
-  - VMMETenant
-dependency_graph: "/opt/xos/synchronizers/vmme/model-deps"
-steps_dir: "/opt/xos/synchronizers/vmme/steps"
-sys_dir: "/opt/xos/synchronizers/vmme/sys"
-model_policies_dir: "/opt/xos/synchronizers/vmme/model_policies"
-models_dir: "/opt/xos/synchronizers/vmme/models"
 logging:
   version: 1
   handlers:

@@ -44,8 +44,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: progran-config
-              mountPath: /opt/xos/synchronizers/progran/progran_config.yml
-              subPath: progran_config.yml
+              mountPath: /opt/xos/synchronizers/progran/mounted_config.yml
+              subPath: mounted_config.yml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
@@ -55,7 +55,7 @@ spec:
             name: progran
             items:
               - key: serviceConfig
-                path: progran_config.yml
+                path: mounted_config.yml
         - name: certchain-volume
           configMap:
             name: ca-certificates
