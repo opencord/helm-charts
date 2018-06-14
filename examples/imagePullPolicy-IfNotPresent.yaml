@@ -17,8 +17,10 @@
 
 # in xos-core, rcord-lite, onos and voltha charts
 imagePullPolicy: 'IfNotPresent'
+xos-gui:
+  imagePullPolicy: 'IfNotPresent'
 
-# in service charts
+# in RCORD service chart
 addressmanager:
   imagePullPolicy: 'IfNotPresent'
 fabric:
@@ -29,17 +31,43 @@ volt:
   imagePullPolicy: 'IfNotPresent'
 vsg-hw:
   imagePullPolicy: 'IfNotPresent'
-kubernetes:
-  imagePullPolicy: 'IfNotPresent'
 rcord:
   imagePullPolicy: 'IfNotPresent'
 vrouter:
   imagePullPolicy: 'IfNotPresent'
-xos-gui:
-  imagePullPolicy: 'IfNotPresent'
-simpleexampleservice:
-  imagePullPolicy: 'IfNotPresent'
+
+# in BASE-OPENSTACK chart
 openstack:
   imagePullPolicy: 'IfNotPresent'
 vtn-service:
+  imagePullPolicy: 'IfNotPresent'
+
+# in MCORD
+vmme:
+  imagePullPolicy: 'IfNotPresent'
+vspgwc:
+  imagePullPolicy: 'IfNotPresent'
+vspgwu:
+  imagePullPolicy: 'IfNotPresent'
+vhss:
+  imagePullPolicy: 'IfNotPresent'
+hssdb:
+  imagePullPolicy: 'IfNotPresent'
+internetemulator:
+  imagePullPolicy: 'IfNotPresent'
+sdncontroller:
+  imagePullPolicy: 'IfNotPresent'
+epc-service:
+  imagePullPolicy: 'IfNotPresent'
+mcord-subscriber:
+  imagePullPolicy: 'IfNotPresent'
+progran:
+  imagePullPolicy: 'IfNotPresent'
+
+# others
+kubernetes:
+  imagePullPolicy: 'IfNotPresent'
+simpleexampleservice:
+  imagePullPolicy: 'IfNotPresent'
+hippieOSS:
   imagePullPolicy: 'IfNotPresent'

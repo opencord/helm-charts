@@ -51,6 +51,7 @@ imports:
    - custom_types/onosservice.yaml
    - custom_types/servicedependency.yaml
    - custom_types/servicegraphconstraint.yaml
+   - custom_types/servicedependency.yaml
    - custom_types/serviceinstance.yaml
    - custom_types/serviceinstancelink.yaml
    - custom_types/vtnservice.yaml
