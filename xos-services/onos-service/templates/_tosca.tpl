@@ -49,6 +49,36 @@ topology_template:
         - owner:
             node: service#ONOS_Fabric
             relationship: tosca.relationships.BelongsToOne
+
+    onos_app#hostprovider:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.onosproject.hostprovider
+        app_id: org.onosproject.hostprovider
+      requirements:
+        - owner:
+            node: service#ONOS_Fabric
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#netcfghostprovider:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.onosproject.netcfghostprovider
+        app_id: org.onosproject.netcfghostprovider
+      requirements:
+        - owner:
+            node: service#ONOS_Fabric
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#openflow-base:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.onosproject.openflow-base
+        app_id: org.onosproject.openflow-base
+      requirements:
+        - owner:
+            node: service#ONOS_Fabric
+            relationship: tosca.relationships.BelongsToOne
 {{- end -}}
 
 {{- define "onos-service.vtnAppTosca" -}}
