@@ -186,7 +186,7 @@ topology_template:
         value: >
           {
             "kafka" : {
-              "bootstrapServers" : "cord-kafka-kafka.default.svc.cluster.local:9092"
+              "bootstrapServers" : "cord-kafka.default.svc.cluster.local:9092"
             }
           }
       requirements:

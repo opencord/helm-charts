@@ -53,7 +53,7 @@ accessor:
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
 event_bus:
-  endpoint: cord-kafka-kafka
+  endpoint: cord-kafka
   kind: kafka
 logging:
   version: 1

@@ -52,9 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-event_bus:
-  endpoint: cord-kafka-kafka
-  kind: kafka
 required_models:
   - HippieOSSService
   - HippieOSSServiceInstance
