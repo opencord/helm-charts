@@ -59,6 +59,9 @@ vrouter:
 kubernetes:
   kubernetes_synchronizerImage: "xosproject/kubernetes-synchronizer:candidate"
   imagePullPolicy: 'IfNotPresent'
+exampleservice:
+  exampleservice_synchronizerImage: "xosproject/exampleservice-synchronizer:candidate"
+  imagePullPolicy: 'IfNotPresent'
 simpleexampleservice:
   simpleexampleservice_synchronizerImage: "xosproject/simpleexampleservice-synchronizer:candidate"
   imagePullPolicy: 'IfNotPresent'
