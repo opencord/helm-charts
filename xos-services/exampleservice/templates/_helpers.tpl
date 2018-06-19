@@ -52,16 +52,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - ExampleService
-  - ExampleServiceInstance
-  - ServiceDependency
-  - ServiceMonitoringAgentInfo
-dependency_graph: "/opt/xos/synchronizers/exampleservice/model-deps"
-steps_dir: "/opt/xos/synchronizers/exampleservice/steps"
-sys_dir: "/opt/xos/synchronizers/exampleservice/sys"
-model_policies_dir: "/opt/xos/synchronizers/exampleservice/model_policies"
-models_dir: "/opt/xos/synchronizers/exampleservice/models"
 logging:
   version: 1
   handlers:
