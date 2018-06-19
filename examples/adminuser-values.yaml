@@ -41,6 +41,9 @@ vsg-hw:
 kubernetes:
   xosAdminUser: *adminuser
   xosAdminPassword: *adminpass
+exampleservice:
+  xosAdminUser: *adminuser
+  xosAdminPassword: *adminpass
 simpleexampleservice:
   xosAdminUser: *adminuser
   xosAdminPassword: *adminpass
