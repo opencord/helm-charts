@@ -59,5 +59,6 @@ docker_image_whitelist:
 
 # others
 - xosproject/kubernetes-synchronizer
+- xosproject/exampleservice-synchronizer
 - xosproject/simpleexampleservice-synchronizer
 - xosproject/xos-api-tester
