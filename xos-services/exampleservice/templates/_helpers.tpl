@@ -31,11 +31,7 @@ If release name contains chart name it will be used as a full name.
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- if contains $name .Release.Name -}}
-{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
 {{- end -}}
 {{- end -}}
 
@@ -52,16 +48,6 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - ExampleService
-  - ExampleServiceInstance
-  - ServiceDependency
-  - ServiceMonitoringAgentInfo
-dependency_graph: "/opt/xos/synchronizers/exampleservice/model-deps"
-steps_dir: "/opt/xos/synchronizers/exampleservice/steps"
-sys_dir: "/opt/xos/synchronizers/exampleservice/sys"
-model_policies_dir: "/opt/xos/synchronizers/exampleservice/model_policies"
-models_dir: "/opt/xos/synchronizers/exampleservice/models"
 logging:
   version: 1
   handlers:
@@ -78,4 +64,7 @@ logging:
           - console
           - file
       level: DEBUG
+proxy_ssh:
+  enabled: {{ .Values.global.proxySshEnabled }}
+  user: {{ .Values.global.proxySshUser }}
 {{- end -}}

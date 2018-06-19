@@ -67,6 +67,8 @@ progran:
 # others
 kubernetes:
   imagePullPolicy: 'IfNotPresent'
+exampleservice:
+  imagePullPolicy: 'IfNotPresent'
 simpleexampleservice:
   imagePullPolicy: 'IfNotPresent'
 hippieOSS:
