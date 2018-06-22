@@ -50,16 +50,6 @@ topology_template:
             node: service#ONOS_Fabric
             relationship: tosca.relationships.BelongsToOne
 
-    onos_app#hostprovider:
-      type: tosca.nodes.ONOSApp
-      properties:
-        name: org.onosproject.hostprovider
-        app_id: org.onosproject.hostprovider
-      requirements:
-        - owner:
-            node: service#ONOS_Fabric
-            relationship: tosca.relationships.BelongsToOne
-
     onos_app#netcfghostprovider:
       type: tosca.nodes.ONOSApp
       properties:
@@ -70,11 +60,11 @@ topology_template:
             node: service#ONOS_Fabric
             relationship: tosca.relationships.BelongsToOne
 
-    onos_app#openflow-base:
+    onos_app#openflow:
       type: tosca.nodes.ONOSApp
       properties:
-        name: org.onosproject.openflow-base
-        app_id: org.onosproject.openflow-base
+        name: org.onosproject.openflow
+        app_id: org.onosproject.openflow
       requirements:
         - owner:
             node: service#ONOS_Fabric
@@ -102,11 +92,11 @@ topology_template:
           rest_hostname: onos-cord-ui
           rest_port: 8181
 
-    onos_app#openflow-base:
+    onos_app#openflow:
       type: tosca.nodes.ONOSApp
       properties:
-        name: org.onosproject.openflow-base
-        app_id: org.onosproject.openflow-base
+        name: org.onosproject.openflow
+        app_id: org.onosproject.openflow
       requirements:
         - owner:
             node: service#ONOS_CORD
@@ -128,7 +118,7 @@ topology_template:
         name: cord-config
         url: {{ .cordConfigAppURL }}
         version: 1.4.0
-        dependencies: org.onosproject.openflow-base, org.onosproject.dhcp
+        dependencies: org.onosproject.openflow, org.onosproject.dhcp
       requirements:
         - owner:
             node: service#ONOS_CORD
