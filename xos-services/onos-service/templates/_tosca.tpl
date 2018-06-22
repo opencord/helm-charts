@@ -70,11 +70,11 @@ topology_template:
             node: service#ONOS_Fabric
             relationship: tosca.relationships.BelongsToOne
 
-    onos_app#openflow-base:
+    onos_app#openflow:
       type: tosca.nodes.ONOSApp
       properties:
-        name: org.onosproject.openflow-base
-        app_id: org.onosproject.openflow-base
+        name: org.onosproject.openflow
+        app_id: org.onosproject.openflow
       requirements:
         - owner:
             node: service#ONOS_Fabric
