@@ -18,8 +18,12 @@ limitations under the License.
 tosca_definitions_version: tosca_simple_yaml_1_0
 description: Setup public network
 imports:
+  - custom_types/addressmanagerservice.yaml
+  - custom_types/addressmanagerserviceinstance.yaml
+  - custom_types/addresspool.yaml
   - custom_types/networktemplate.yaml
   - custom_types/network.yaml
+  - custom_types/serviceinstancelink.yaml
   - custom_types/site.yaml
   - custom_types/slice.yaml
 topology_template:
@@ -64,4 +68,44 @@ topology_template:
         - owner:
             node: public_networking_slice
             relationship: tosca.relationships.BelongsToOne
+
+    service#addressmanager:
+      type: tosca.nodes.AddressManagerService
+      properties:
+        name: addressmanager
+
+    addresses_public:
+      type: tosca.nodes.AddressPool
+      properties:
+        name: addresses_public
+        addresses: {{ .Values.addresspool_public_cidr }}
+        gateway_ip: {{ .Values.addresspool_public_gateway_ip }}
+        gateway_mac:  {{ .Values.addresspool_public_gateway_mac }}
+      requirements:
+        - service:
+            node: service#addressmanager
+            relationship: tosca.relationships.BelongsToOne
+
+    AddressManagerServiceInstancePublicNetwork:
+      type: tosca.nodes.AddressManagerServiceInstance
+      requirements:
+        - owner:
+            node: service#addressmanager
+            relationship: tosca.relationships.BelongsToOne
+        - address_pool:
+            node: addresses_public
+            relationship: tosca.relationships.BelongsToOne
+      properties:
+        name: AM_public_net
+
+    public_to_address_manager:
+      type: tosca.nodes.ServiceInstanceLink
+      requirements:
+        - provider_service_instance:
+            node: AddressManagerServiceInstancePublicNetwork
+            relationship: tosca.relationships.BelongsToOne
+        - subscriber_network:
+            node: public
+            relationship: tosca.relationships.BelongsToOne
+
 {{- end -}}
