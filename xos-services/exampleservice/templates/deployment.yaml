@@ -42,24 +42,38 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: exampleservice-config
-              mountPath: /opt/xos/synchronizers/exampleservice/exampleservice_config.yaml
-              subPath: exampleservice_config.yaml
+              mountPath: /opt/xos/synchronizers/exampleservice/mounted_config.yaml
+              subPath: mounted_config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
+            - name: exampleservice-keys
+              mountPath: /opt/xos/services/exampleservice/keys
+              readOnly: true
+            - name: node-key
+              mountPath: /opt/cord_profile
+              readOnly: true
       volumes:
         - name: exampleservice-config
           configMap:
             name: exampleservice
             items:
               - key: serviceConfig
-                path: exampleservice_config.yaml
+                path: mounted_config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates
             items:
               - key: chain
                 path: config/ca_cert_chain.pem
+        - name: exampleservice-keys
+          secret:
+            secretName: exampleservice-keys
+        - name: node-key
+          secret:
+            secretName: node-key
+            defaultMode: 256
+            optional: true
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

@@ -17,7 +17,7 @@ limitations under the License.
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "exampleservice.name" -}}
+{{- define "demo-exampleservice.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -26,45 +26,22 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "exampleservice.fullname" -}}
+{{- define "demo-exampleservice.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
 {{- end -}}
 {{- end -}}
 
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "exampleservice.chart" -}}
+{{- define "demo-exampleservice.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{- define "exampleservice.serviceConfig" -}}
-name: exampleservice
-accessor:
-  username: {{ .Values.xosAdminUser | quote }}
-  password: {{ .Values.xosAdminPassword | quote }}
-  endpoint: xos-core:50051
-logging:
-  version: 1
-  handlers:
-    console:
-      class: logging.StreamHandler
-    file:
-      class: logging.handlers.RotatingFileHandler
-      filename: /var/log/xos.log
-      maxBytes: 10485760
-      backupCount: 5
-  loggers:
-    'multistructlog':
-      handlers:
-          - console
-          - file
-      level: DEBUG
-proxy_ssh:
-  enabled: {{ .Values.global.proxySshEnabled }}
-  user: {{ .Values.global.proxySshUser }}
 {{- end -}}
