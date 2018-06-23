@@ -18,6 +18,10 @@ xos_gui:
 
 imagePullPolicy: 'Always'
 
+dbPvClaimName: db-pv-claim
+
+needDBPersistence: false
+
 # Docker images
 # YAML variable names can't contain `-`, so substituted with `_`
 xos_coreImage: 'xosproject/xos-core:master'
