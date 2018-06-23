@@ -43,3 +43,10 @@ spec:
                 secretKeyRef:
                   name: xos-db-secrets
                   key: password
+          volumeMounts:
+            - name: db-pv-storage
+              mountPath: "/var/lib/postgresql/data"
+      volumes:
+        - name: db-pv-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.dbPvClaimName }}
