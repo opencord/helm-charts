@@ -115,7 +115,8 @@ topology_template:
     onos_app#cord-config:
       type: tosca.nodes.ONOSApp
       properties:
-        name: cord-config
+        name: org.opencord.cord-config
+        app_id: org.opencord.cord-config
         url: {{ .cordConfigAppURL }}
         version: 1.4.0
         dependencies: org.onosproject.openflow, org.onosproject.dhcp
@@ -128,6 +129,7 @@ topology_template:
       type: tosca.nodes.ONOSApp
       properties:
         name: vtn
+        app_id: org.opencord.vtn
         url: {{ .vtnAppURL }}
         version: 1.6.0
       requirements:
