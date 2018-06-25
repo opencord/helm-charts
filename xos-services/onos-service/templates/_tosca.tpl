@@ -115,7 +115,8 @@ topology_template:
     onos_app#cord-config:
       type: tosca.nodes.ONOSApp
       properties:
-        name: cord-config
+        name: org.opencord.cord-config
+        app_id: org.opencord.cord-config
         url: {{ .cordConfigAppURL }}
         version: 1.4.0
         dependencies: org.onosproject.openflow, org.onosproject.dhcp
