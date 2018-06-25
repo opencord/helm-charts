@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "95b65b94_dd65b4db",
+        "filename": "configs/onos-fabric.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-06-25T16:43:28Z",
+      "side": 1,
+      "message": "What is this needed for?",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 37,
+        "endChar": 47
+      },
+      "revId": "162944c152422e3535fdd531aa6ae9074aaa0389",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
