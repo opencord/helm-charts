@@ -14,7 +14,7 @@
 
 dependencies:
 - name: etcd-operator
-  version: 0.8.0
+  version: 0.7.3
   repository: https://kubernetes-charts.storage.googleapis.com/
   condition: etcd.operator.enabled
 - name: consul
