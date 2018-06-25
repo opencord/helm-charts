@@ -61,7 +61,16 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
           args:
-{{ include "voltha-vcore.cmd" . | indent 12 }}
+            - "voltha/voltha/main.py"
+            - "-v"
+            - "--etcd=etcd-cluster.default.svc.cluster.local:2379"
+            - "--kafka={{ .Release.Name }}-kafka.default.svc.cluster.local"
+            - "--rest-port=8880"
+            - "--grpc-port=50556"
+            - "--interface=eth1"
+            - "--backend=etcd"
+            - "--pon-subnet=10.38.0.0/12"
+            - "--ponsim-comm=grpc"
           ports:
             - containerPort: 8880
               name: rest-port
