@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "56b9cda7_727bda0e",
+        "filename": "xos-services/onos-service/templates/_tosca.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-06-25T23:03:07Z",
+      "side": 1,
+      "message": "Should this be just \"cord-config\" to keep consistent with other examples?",
+      "range": {
+        "startLine": 118,
+        "startChar": 14,
+        "endLine": 118,
+        "endChar": 38
+      },
+      "revId": "79f92df7f4d3d7dba959e9360a519638f62a2f3b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
