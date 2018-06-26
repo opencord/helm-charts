@@ -58,6 +58,7 @@ docker_image_whitelist:
 - "xosproject/progran-synchronizer"
 
 # others
+- xosproject/hippie-oss-synchronizer
 - xosproject/kubernetes-synchronizer
 - xosproject/exampleservice-synchronizer
 - xosproject/simpleexampleservice-synchronizer
