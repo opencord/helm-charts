@@ -31,3 +31,7 @@ services:
     nodePort: 31101
   ui:
     nodePort: 31181
+
+onos_env:
+  - name: ONOS_APPS
+    value: "openflow"
