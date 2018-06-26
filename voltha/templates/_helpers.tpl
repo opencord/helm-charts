@@ -16,14 +16,14 @@ limitations under the License.
 
 {{- define "voltha-shovel.cmd" }}
 - "/shovel/shovel/main.py"
-- "--kafka={{ .Values.kafkaReleaseName }}-kafka.default.svc.cluster.local"
+- "--kafka={{ .Values.kafkaReleaseName }}.default.svc.cluster.local"
 - "--host=grafana.voltha.svc.cluster.local"
 - "--topic=voltha.kpis"
 {{- end }}
 
 {{- define "voltha-dashd.cmd" }}
 - "/dashd/dashd/main.py"
-- "--kafka={{ .Values.kafkaReleaseName }}-kafka.default.svc.cluster.local"
+- "--kafka={{ .Values.kafkaReleaseName }}.default.svc.cluster.local"
 - "--grafana_url=http://admin:admin@grafana.$(NAMESPACE).svc.cluster.local:80/api"
 - "--topic=voltha.kpis"
 {{- end }}
@@ -32,7 +32,7 @@ limitations under the License.
 - "voltha/voltha/main.py"
 - "-v"
 - "--etcd=etcd-cluster.default.svc.cluster.local:2379"
-- "--kafka={{ .Values.kafkaReleaseName }}-kafka.default.svc.cluster.local"
+- "--kafka={{ .Values.kafkaReleaseName }}.default.svc.cluster.local"
 - "--rest-port=8880"
 - "--grpc-port=50556"
 - "--interface=eth1"
