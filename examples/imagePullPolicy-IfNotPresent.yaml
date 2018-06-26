@@ -71,5 +71,3 @@ exampleservice:
   imagePullPolicy: 'IfNotPresent'
 simpleexampleservice:
   imagePullPolicy: 'IfNotPresent'
-hippieOSS:
-  imagePullPolicy: 'IfNotPresent'
