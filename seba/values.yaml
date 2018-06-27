@@ -1,0 +1,71 @@
+---
+# Aggregation chart of SEBA charts
+
+# configuration for kafka
+cord-kafka:
+  replicas: 1
+  persistence:
+    enabled: false
+  zookeeper:
+    servers: 1
+    persistence:
+      enabled: false
+
+voltha:
+  etc-operator:
+    customResources:
+      createEtcdClusterCRD: false
+
+# from configs/onos-voltha.yaml
+onos-voltha:
+  nameOverride: "onosv"
+  fullnameOverride: "onos-voltha"
+
+  namespace: voltha
+  serviceAccountName: voltha-serviceaccount
+
+  onosImage: 'voltha/voltha-onos:latest'
+
+  services:
+    openflowServiceType: ClusterIP
+    ovsdbServiceType: ClusterIP
+    sshServiceType: NodePort
+    uiServiceType: NodePort
+    ssh:
+      nodePort: 30115
+    ui:
+      nodePort: 30120
+
+  onos_env:
+  - name: POD_IP
+    valueFrom:
+    fieldRef:
+      fieldPath: status.podIP
+  - name: NAMESPACE
+    valueFrom:
+    fieldRef:
+      fieldPath: metadata.namespace
+  - name: ONOS_APPS
+    value: "drivers,openflow-base"
+
+
+# from configs/onos-fabric.yaml
+onos-fabric:
+  services:
+    openflowServiceType: NodePort
+    ovsdbServiceType: NodePort
+    sshServiceType: NodePort
+    uiServiceType: NodePort
+    ovsdb:
+      nodePort: 31640
+    openflow:
+      nodePort: 31653
+    ssh:
+      nodePort: 31101
+    ui:
+      nodePort: 31181
+
+  onos_env:
+    - name: ONOS_APPS
+      value: "openflow"
+
