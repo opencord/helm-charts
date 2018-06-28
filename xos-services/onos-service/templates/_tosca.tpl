@@ -132,6 +132,7 @@ topology_template:
         app_id: org.opencord.vtn
         url: {{ .vtnAppURL }}
         version: 1.6.0
+        dependencies: org.opencord.cord-config
       requirements:
         - owner:
             node: service#ONOS_CORD
