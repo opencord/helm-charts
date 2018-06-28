@@ -32,6 +32,20 @@ description: configure exampleservice
 
 topology_template:
   node_templates:
+    service#openstack:
+      type: tosca.nodes.OpenStackService
+      properties:
+          name: "OpenStack"
+          must-exist: true
+
+    untrusted_trustdomain:
+      type: tosca.nodes.TrustDomain
+      properties:
+        name: "untrusted-openstack"
+      requirements:
+        - owner:
+            node: service#openstack
+            relationship: tosca.relationships.BelongsToOne
 
 # site, image, fully created in deployment.yaml
     mysite:
@@ -108,6 +122,9 @@ topology_template:
               relationship: tosca.relationships.BelongsToOne
           - default_flavor:
               node: m1.small
+              relationship: tosca.relationships.BelongsToOne
+          - trust_domain:
+              node: untrusted_trustdomain
               relationship: tosca.relationships.BelongsToOne
 
 # ExampleService NetworkSlices
