@@ -60,7 +60,7 @@ etcd:
     enabled: true
 etcd-operator:
   customResources:
-    size: 1
+    size: 3
     createEtcdClusterCRD: true
 
 kafkaReleaseName: voltha-kafka
