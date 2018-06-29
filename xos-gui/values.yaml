@@ -24,3 +24,5 @@ xos_guiNodePort: 30001
 xos_wsNodePort: 30008
 
 xos_projectName: "R-CORD"
+
+cord_version: 6.0.0-devel

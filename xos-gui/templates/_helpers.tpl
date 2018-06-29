@@ -55,3 +55,8 @@ angular.module('app')
 });
 {{- end }}
 
+{{- define "xos-gui.cord_version" }}
+{
+    "version": {{ .Values.cord_version | quote }}
+}
+{{- end }}
