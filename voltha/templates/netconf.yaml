@@ -38,19 +38,11 @@ spec:
     metadata:
       labels:
         app: netconf
+      annotations:
+        cni: "calico"
     spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       terminationGracePeriodSeconds: 10
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            - labelSelector:
-                matchExpressions:
-                  - key: app
-                    operator: In
-                    values:
-                      - netconf
-              topologyKey: kubernetes.io/hostname
       containers:
       - name: netconf
         image: {{ .Values.netconfImage }}
