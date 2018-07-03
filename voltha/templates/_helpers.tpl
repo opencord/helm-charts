@@ -39,6 +39,7 @@ limitations under the License.
 - "--backend=etcd"
 - "--pon-subnet=10.38.0.0/12"
 - "--ponsim-comm=grpc"
+- "--core-number-extractor=^.*-([0-9]+)_.*$"
 {{- end }}
 
 
