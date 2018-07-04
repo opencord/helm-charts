@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-synchronizerImage: "xosproject/vepc-synchronizer:master"
+synchronizerImage: "xosproject/vepc-synchronizer:1.0.0"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
