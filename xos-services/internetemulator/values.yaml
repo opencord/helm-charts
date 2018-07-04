@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-synchronizerImage: "xosproject/internetemulator-synchronizer:master"
+synchronizerImage: "xosproject/internetemulator-synchronizer:1.0.0"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

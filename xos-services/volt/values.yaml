@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-volt_synchronizerImage: "xosproject/volt-synchronizer:master"
+volt_synchronizerImage: "xosproject/volt-synchronizer:2.0.0"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

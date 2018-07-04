@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-synchronizerImage: "xosproject/mcord-synchronizer:master"
+synchronizerImage: "xosproject/mcord-synchronizer:2.0.0"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

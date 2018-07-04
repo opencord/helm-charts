@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-addressmanager_synchronizerImage: "xosproject/addressmanager-synchronizer:master"
+addressmanager_synchronizerImage: "xosproject/addressmanager-synchronizer:2.0.0"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

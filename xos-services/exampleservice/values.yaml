@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-exampleservice_synchronizerImage: "xosproject/exampleservice-synchronizer:master"
+exampleservice_synchronizerImage: "xosproject/exampleservice-synchronizer:2.0.0"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

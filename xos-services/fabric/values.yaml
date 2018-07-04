@@ -25,7 +25,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-fabric_synchronizerImage: "xosproject/fabric-synchronizer:master"
+fabric_synchronizerImage: "xosproject/fabric-synchronizer:2.0.0"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
@@ -37,4 +37,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
