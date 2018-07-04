@@ -27,7 +27,7 @@ fullnameOverride: ""
 
 imagePullPolicy: Always
 
-xosshImage: 'xosproject/xos-client:master'
+xosshImage: 'xosproject/xos-client:2.0.0'
 
 resources: {}
 
