@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,20 +15,20 @@
 
 dependencies:
 - name: rcord
-  version: 0.1.0
+  version: 1.0.0
   repository: file://../../xos-services/rcord
 - name: onos-service
-  version: 0.1.0
+  version: 2.0.0
   repository: file://../../xos-services/onos-service
 - name: fabric
-  version: 0.1.0
+  version: 2.0.0
   repository: file://../../xos-services/fabric
 - name: volt
-  version: 0.1.0
+  version: 2.0.0
   repository: file://../../xos-services/volt
 - name: vsg-hw
-  version: 0.1.0
+  version: 1.0.0
   repository: file://../../xos-services/vsg-hw
 - name: vrouter
-  version: 0.1.0
+  version: 2.0.0
   repository: file://../../xos-services/vrouter

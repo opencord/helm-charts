@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'IfNotPresent'
 
-tosca_loaderImage: "xosproject/tosca-loader:master"
+tosca_loaderImage: "xosproject/tosca-loader:1.0.1"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

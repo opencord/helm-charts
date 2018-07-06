@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,32 +15,32 @@
 
 dependencies:
 - name: vmme
-  version: 0.1.0
+  version: 1.0.1
   repository: file://../../xos-services/vmme
 - name: vspgwc
-  version: 0.1.0
+  version: 1.0.0
   repository: file://../../xos-services/vspgwc
 - name: vspgwu
-  version: 0.1.0
+  version: 1.0.0
   repository: file://../../xos-services/vspgwu
 - name: vhss
-  version: 0.1.0
+  version: 1.0.1
   repository: file://../../xos-services/vhss
 - name: hssdb
-  version: 0.1.0
+  version: 1.0.0
   repository: file://../../xos-services/hssdb
 - name: internetemulator
-  version: 0.1.0
+  version: 1.0.0
   repository: file://../../xos-services/internetemulator
 - name: sdncontroller
-  version: 0.1.0
+  version: 1.0.0
   repository: file://../../xos-services/sdncontroller
 - name: epc-service
-  version: 0.1.0
+  version: 1.0.0
   repository: file://../../xos-services/epc-service
 - name: mcord-subscriber
-  version: 0.1.0
+  version: 2.0.0
   repository: file://../../xos-services/mcord-subscriber
 - name: progran
-  version: 0.1.0
+  version: 2.0.0
   repository: file://../../xos-services/progran

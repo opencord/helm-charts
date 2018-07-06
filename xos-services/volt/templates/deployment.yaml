@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ .Values.volt_synchronizerImage | quote }}
+          image: {{ tpl .Values.volt_synchronizerImage . | quote }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}

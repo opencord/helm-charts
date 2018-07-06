@@ -47,7 +47,7 @@ spec:
                - "{{ .Values.xosshConfig.accessor.endpoint }}"
           stdin: true
           tty: true
-          image: "{{ .Values.xosshImage }}"
+          image: {{ tpl .Values.xosshImage . | quote }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}

@@ -40,7 +40,7 @@ spec:
       serviceAccountName: kubernetes-synchronizer
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ .Values.kubernetes_synchronizerImage | quote }}
+          image: {{ tpl .Values.kubernetes_synchronizerImage . | quote }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}

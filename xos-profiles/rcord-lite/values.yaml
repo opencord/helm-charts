@@ -24,10 +24,9 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-rcord_synchronizerImage: "xosproject/rcord-synchronizer:master"
-tosca_loaderImage: "xosproject/tosca-loader:master"
+tosca_loaderImage: "xosproject/tosca-loader:1.0.1"
 
-xos_api_testerImage: 'xosproject/xos-api-tester:master'
+xos_api_testerImage: 'xosproject/xos-api-tester:2.0.1'
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

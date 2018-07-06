@@ -36,7 +36,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ .Values.exampleservice_synchronizerImage | quote }}
+          image: {{ tpl .Values.exampleservice_synchronizerImage . | quote }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}

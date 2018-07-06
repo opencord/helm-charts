@@ -14,8 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-appVersion: "1.0"
-description: A Helm chart for XOS's "hippie-oss" service
 name: hippie-oss
-version: 0.1.0
+description: A Helm chart for XOS's "hippie-oss" service
+version: 1.0.0
