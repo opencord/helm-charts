@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-rcord_synchronizerImage: "xosproject/rcord-synchronizer:master"
+rcord_synchronizerImage: "xosproject/rcord-synchronizer:{{ .Chart.Version }}"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

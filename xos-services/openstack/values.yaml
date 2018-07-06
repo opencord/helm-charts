@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-openstack_synchronizerImage: "xosproject/openstack-synchronizer:master"
+openstack_synchronizerImage: "xosproject/openstack-synchronizer:{{ .Chart.Version }}"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

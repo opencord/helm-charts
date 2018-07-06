@@ -24,7 +24,6 @@ fullnameOverride: ""
 
 imagePullPolicy: 'IfNotPresent'
 
-rcord_synchronizerImage: "xosproject/rcord-synchronizer:master"
 tosca_loaderImage: "xosproject/tosca-loader:master"
 
 xosAdminUser: "admin@opencord.org"

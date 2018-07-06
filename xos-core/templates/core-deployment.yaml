@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: xos-core
-          image: {{ .Values.xos_coreImage | quote }}
+          image: {{ tpl .Values.xos_coreImage . | quote }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           command: ["/bin/bash", "-c", "cd coreapi; ./start_coreapi.sh"]
           ports:
