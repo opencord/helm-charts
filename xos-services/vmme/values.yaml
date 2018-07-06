@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-synchronizerImage: "xosproject/vmme-synchronizer:master"
+synchronizerImage: "xosproject/vmme-synchronizer:{{ .Chart.Version }}"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

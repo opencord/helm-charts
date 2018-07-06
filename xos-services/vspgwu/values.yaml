@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-synchronizerImage: "xosproject/vspgwu-synchronizer:master"
+synchronizerImage: "xosproject/vspgwu-synchronizer:{{ .Chart.Version }}"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
