@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: xos-gui
-          image: {{ .Values.xos_guiImage | quote }}
+          image: {{ tpl .Values.xos_guiImage . | quote }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
             - containerPort: 4000

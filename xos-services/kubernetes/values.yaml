@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-kubernetes_synchronizerImage: "xosproject/kubernetes-synchronizer:master"
+kubernetes_synchronizerImage: "xosproject/kubernetes-synchronizer:{{ .Chart.Version }}"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
