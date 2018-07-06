@@ -35,12 +35,15 @@ spec:
           value: 'xos-chameleon'
         - name: SERVER_PORT
           value: '9101'
+        - name: SITE_NAME
+          value: {{ .Values.cordSiteName | quote }}
         - name: XOS_USER
           value: {{ .Values.xosAdminUser | quote }}
         - name: XOS_PASSWD
-          value: {{ .Values.xosAdminPassword | quote}}
-        - name: SITE_NAME
-          value: {{ .Values.cordSiteName | quote }}
+          valueFrom:
+            secretKeyRef:
+              name: xos-admin-passwd-secret
+              key: password
       command: ["pybot", "-L", "TRACE", "-d", "Log", "-T", "Ch_DeploymentTest.txt", "Ch_SiteTest.txt", "Ch_UsersTest.txt", "Ch_SliceTest.txt", "Ch_ServiceTest.txt"]
   volumes:
     - name: log-volume
