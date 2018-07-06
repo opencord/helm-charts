@@ -25,7 +25,7 @@ fullnameOverride: ""
 imagePullPolicy: 'Always'
 
 rcord_synchronizerImage: "xosproject/rcord-synchronizer:master"
-httpieImage: "clue/httpie:latest"
+tosca_loaderImage: "xosproject/tosca-loader:master"
 
 xos_api_testerImage: 'xosproject/xos-api-tester:master'
 
