@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,8 +15,8 @@
 
 dependencies:
 - name: exampleservice
-  version: 0.1.0
+  version: 2.1.0
   repository: file://../../xos-services/exampleservice
 - name: addressmanager
-  version: 0.1.0
+  version: 2.0.0
   repository: file://../../xos-services/addressmanager
