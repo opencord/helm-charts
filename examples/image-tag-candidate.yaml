@@ -20,6 +20,7 @@ xos_coreImage: 'xosproject/xos-core:candidate'
 xos_chameleonImage: 'xosproject/chameleon:candidate'
 xos_toscaImage: 'xosproject/xos-tosca:candidate'
 xos_api_testerImage: 'xosproject/xos-api-tester:candidate'
+tosca_loaderImage: 'xosproject/tosca-loader:candidate'
 
 # in xos-gui sub-chart required by xos-core chart
 xos-gui:

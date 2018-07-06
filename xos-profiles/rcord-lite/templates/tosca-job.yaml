@@ -36,18 +36,16 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: {{ .Chart.Name }}-tosca-loader
-          image: {{ .Values.httpieImage | quote }}
+          image: {{ .Values.tosca_loaderImage | quote }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
-          command: ["/bin/sh"]
-          args:
-            - "-c"
-            - |
-              for recipe in /opt/tosca/*
-              do
-                echo $recipe
-                http --check-status --ignore-stdin POST http://xos-tosca:$XOS_TOSCA_SERVICE_PORT/run xos-username:{{ .Values.xosAdminUser }} xos-password:{{ .Values.xosAdminPassword }} @$recipe || exit 1
-                echo ''
-              done
+          env:
+            - name: XOS_USER
+              value: {{ .Values.xosAdminUser }}
+            - name: XOS_PASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: xos-admin-passwd-secret
+                  key: password
           volumeMounts:
             - name: rcord-lite-tosca
               mountPath: /opt/tosca

@@ -20,6 +20,7 @@ docker_image_whitelist:
 - node
 - postgres
 - redis
+
 # xos-core images
 - xosproject/chameleon
 - xosproject/xos-base
@@ -63,3 +64,4 @@ docker_image_whitelist:
 - xosproject/exampleservice-synchronizer
 - xosproject/simpleexampleservice-synchronizer
 - xosproject/xos-api-tester
+- xosproject/tosca-loader
