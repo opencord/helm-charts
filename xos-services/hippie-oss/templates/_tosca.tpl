@@ -14,9 +14,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */}}
-{{- define "volt.serviceTosca" -}}
+{{- define "hippie-oss.serviceTosca" -}}
 tosca_definitions_version: tosca_simple_yaml_1_0
-description: Set up VOLT service
+description: Set up hippie-oss service
 imports:
   - custom_types/hippieossservice.yaml
 
