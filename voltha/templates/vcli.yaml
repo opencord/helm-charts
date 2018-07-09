@@ -43,7 +43,7 @@ spec:
       labels:
         app: vcli
       annotations:
-        cni: "weave"
+        cni: "calico"
     spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:
