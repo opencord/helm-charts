@@ -45,6 +45,54 @@
       "revId": "0e094e86dce2642d3af21387e7307461e21009a8",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3725afcf_e53b048b",
+        "filename": "xos-core/Chart.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-07-09T19:10:48Z",
+      "side": 1,
+      "message": "Maybe we put this in the docs?",
+      "parentUuid": "cc039579_0b66548a",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "0e094e86dce2642d3af21387e7307461e21009a8",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "051df6f2_dca267e0",
+        "filename": "xos-core/Chart.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-07-09T19:10:48Z",
+      "side": 1,
+      "message": "I think all of these would be good to add.  I\u0027ll make another patchset after this with that information.",
+      "parentUuid": "6b44f754_422b27ff",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "0e094e86dce2642d3af21387e7307461e21009a8",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
