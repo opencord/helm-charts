@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b44f754_422b27ff",
+        "filename": "xos-core/Chart.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-07-09T16:08:59Z",
+      "side": 1,
+      "message": "Should we be leveraging some of the other values too?\nhttps://github.com/kubernetes/helm/blob/master/docs/charts.md#the-chartyaml-file\nPossibly:\n- kubeVersion (for charts requiring 1.10)\n- home\n- sources\n- maintainers?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "0e094e86dce2642d3af21387e7307461e21009a8",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc039579_0b66548a",
+        "filename": "xos-core/Chart.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-07-09T16:08:59Z",
+      "side": 1,
+      "message": "Do we want to add a comment saying that, by convention, the chart version is the same as the component version?  (I.e., we are not using appVersion)",
+      "range": {
+        "startLine": 17,
+        "startChar": 9,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "0e094e86dce2642d3af21387e7307461e21009a8",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
