@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d09d5562_ff6d3252",
+        "filename": "ponsimv2/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-07-11T23:16:05Z",
+      "side": 1,
+      "message": "Put this in a `voltha` repository?",
+      "range": {
+        "startLine": 32,
+        "startChar": 16,
+        "endLine": 32,
+        "endChar": 38
+      },
+      "revId": "be3435f4c18906dfe4f18aebff608c2fe3b7453f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
