@@ -21,7 +21,7 @@
 replicaCount: 1
 
 imagePullPolicy: Always
-onosImage: 'onosproject/onos:1.13.1'
+onosImage: 'onosproject/onos:1.13.2'
 
 nameOverride: ""
 fullnameOverride: ""
