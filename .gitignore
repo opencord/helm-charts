@@ -12,3 +12,4 @@ xos-profiles/rcord-lite/charts
 xos-profiles/mcord/charts
 xos-profiles/base-openstack/charts
 xos-profiles/container-vnf/charts
+nem-monitoring/charts
