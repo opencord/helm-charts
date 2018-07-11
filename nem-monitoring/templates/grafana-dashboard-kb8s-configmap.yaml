@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-kb8s
+  labels:
+     grafana_dashboard: "1"
+data:
+  kb8s.json: |
+{{ .Files.Get "grafana-dashboards/kb8s-app-metrics.json" | indent 4 }}

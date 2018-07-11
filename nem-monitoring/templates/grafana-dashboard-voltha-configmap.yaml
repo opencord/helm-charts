@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-voltha
+  labels:
+     grafana_dashboard: "1"
+data:
+  voltha.json: |
+{{ .Files.Get "grafana-dashboards/voltha-kpi.json" | indent 4 }}
