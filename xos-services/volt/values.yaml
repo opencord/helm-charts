@@ -29,6 +29,8 @@ volt_synchronizerImage: "xosproject/volt-synchronizer:{{ .Chart.Version }}"
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
+kafkaService: "cord-kafka"
+
 resources: {}
 
 nodeSelector: {}

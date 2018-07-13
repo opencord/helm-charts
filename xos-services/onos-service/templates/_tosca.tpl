@@ -27,7 +27,7 @@ topology_template:
       properties:
           name: ONOS_Fabric
           kind: platform
-          rest_hostname: onos-fabric-ui
+          rest_hostname: {{ .onosFabricRestService | quote }}
           rest_port: 8181
 
     onos_app#segmentrouting:
@@ -89,7 +89,7 @@ topology_template:
       properties:
           name: ONOS_CORD
           kind: platform
-          rest_hostname: onos-cord-ui
+          rest_hostname: {{ .onosCordRestService | quote }}
           rest_port: 8181
 
     onos_app#openflow:
@@ -147,17 +147,17 @@ imports:
    - custom_types/onosservice.yaml
    - custom_types/serviceinstanceattribute.yaml
 
-description: Configures the VTN ONOS service
+description: Configures the VOLTHA ONOS service
 
 topology_template:
   node_templates:
 
-    service#ONOS_CORD:
+    service#ONOS_VOLTHA:
       type: tosca.nodes.ONOSService
       properties:
           name: ONOS_VOLTHA
           kind: platform
-          rest_hostname: onos-voltha-ui.voltha.svc.cluster.local
+          rest_hostname: {{ .onosVolthaRestService | quote }}
           rest_port: 8181
 
     onos_app#olt:
@@ -168,7 +168,7 @@ topology_template:
         version: 1.4.0
       requirements:
         - owner:
-            node: service#ONOS_CORD
+            node: service#ONOS_VOLTHA
             relationship: tosca.relationships.BelongsToOne
 
     # CORD-Configuration
@@ -179,7 +179,7 @@ topology_template:
         value: >
           {
             "kafka" : {
-              "bootstrapServers" : "cord-kafka.default.svc.cluster.local:9092"
+              "bootstrapServers" : {{ .kafkaService | quote }}
             }
           }
       requirements:
