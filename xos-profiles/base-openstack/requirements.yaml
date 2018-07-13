@@ -16,7 +16,7 @@
 
 dependencies:
 - name: onos-service
-  version: 2.0.0
+  version: 2.0.1
   repository: file://../../xos-services/onos-service
 - name: openstack
   version: 1.0.0

@@ -32,6 +32,11 @@ xosAdminPassword: "letmein"
 cordConfigAppURL: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/cord-config/1.4.0/cord-config-1.4.0.oar"
 vtnAppURL: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/vtn/1.6.0/vtn-1.6.0.oar"
 
+onosCordRestService: "onos-cord-ui.default.svc.cluster.local"
+onosVolthaRestService: "onos-voltha-ui.voltha.svc.cluster.local"
+onosFabricRestService: "onos-fabric-ui.default.svc.cluster.local"
+kafkaService: "cord-kafka.default.svc.cluster.local"
+
 resources: {}
 
 nodeSelector: {}

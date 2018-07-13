@@ -29,6 +29,8 @@ simpleexampleservice_synchronizerImage: "xosproject/simpleexampleservice-synchro
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
+kafkaService: "cord-kafka"
+
 resources: {}
 
 nodeSelector: {}
