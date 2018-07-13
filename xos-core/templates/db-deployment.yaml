@@ -43,6 +43,8 @@ spec:
                 secretKeyRef:
                   name: xos-db-secrets
                   key: password
+            - name: PGDATA
+              value: "/var/lib/postgresql/data/pgdata"
       {{- if .Values.needDBPersistence }}
           volumeMounts:
             - name: db-pv-storage
