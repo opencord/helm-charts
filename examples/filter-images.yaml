@@ -26,8 +26,8 @@ docker_image_whitelist:
 - xosproject/xos-base
 - xosproject/xos-client
 - xosproject/xos-core
-- xosproject/xos-gui
-- xosproject/xos-gui-builder
+# - xosproject/xos-gui
+# - xosproject/xos-gui-builder
 - xosproject/xos-libraries
 - xosproject/xos-tosca
 - xosproject/xos-ws
@@ -47,16 +47,16 @@ docker_image_whitelist:
 - xosproject/vtn-synchronizer
 
 # mcord images
-- "xosproject/vmme-synchronizer"
-- "xosproject/vspgwc-synchronizer"
-- "xosproject/vspgwu-synchronizer"
-- "xosproject/vhss-synchronizer"
-- "xosproject/hssdb-synchronizer"
-- "xosproject/internetemulator-synchronizer"
-- "xosproject/sdncontroller-synchronizer"
-- "xosproject/vepc-synchronizer"
-- "xosproject/mcord-synchronizer"
-- "xosproject/progran-synchronizer"
+# - "xosproject/vmme-synchronizer"
+# - "xosproject/vspgwc-synchronizer"
+# - "xosproject/vspgwu-synchronizer"
+# - "xosproject/vhss-synchronizer"
+# - "xosproject/hssdb-synchronizer"
+# - "xosproject/internetemulator-synchronizer"
+# - "xosproject/sdncontroller-synchronizer"
+# - "xosproject/vepc-synchronizer"
+# - "xosproject/mcord-synchronizer"
+# - "xosproject/progran-synchronizer"
 
 # others
 - xosproject/hippie-oss-synchronizer
