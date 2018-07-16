@@ -1,0 +1,2 @@
+imagePullPolicy: 'IfNotPresent'
+onos_synchronizerImage: 'xosproject/onos-synchronizer:candidate'
