@@ -1,0 +1,3 @@
+xos-gui:
+  xos_guiImage: 'xosproject/xos-gui:candidate'
+  imagePullPolicy: 'IfNotPresent'
