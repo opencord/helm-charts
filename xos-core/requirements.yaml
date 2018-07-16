@@ -15,7 +15,7 @@
 
 dependencies:
 - name: xos-gui
-  version: 1.0.0
+  version: 1.0.1
   repository: file://../xos-gui
   condition: xos-gui.enabled
 
