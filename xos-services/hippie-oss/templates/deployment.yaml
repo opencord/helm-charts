@@ -45,8 +45,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: hippie-oss-config
-              mountPath: /opt/xos/synchronizers/hippie-oss/config.yaml
-              subPath: config.yaml
+              mountPath: /opt/xos/synchronizers/hippie-oss/mounted_config.yaml
+              subPath: mounted_config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
@@ -56,7 +56,7 @@ spec:
             name: hippie-oss
             items:
               - key: serviceConfig
-                path: config.yaml
+                path: mounted_config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates
