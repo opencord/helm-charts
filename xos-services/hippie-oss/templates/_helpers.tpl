@@ -52,14 +52,9 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-  - HippieOSSService
-  - HippieOSSServiceInstance
-  - RCORDSubscriber
-dependency_graph: "/opt/xos/synchronizers/hippie-oss/model-deps"
-model_policies_dir: "/opt/xos/synchronizers/hippie-oss/model_policies"
-models_dir: "/opt/xos/synchronizers/hippie-oss/models"
-steps_dir: "/opt/xos/synchronizers/hippie-oss/steps"
+event_bus:
+  endpoint: {{ .Values.kafkaService | quote }}
+  kind: kafka
 logging:
   version: 1
   handlers:
