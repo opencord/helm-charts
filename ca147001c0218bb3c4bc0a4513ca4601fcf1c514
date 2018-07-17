@@ -22,6 +22,29 @@
       "revId": "ca147001c0218bb3c4bc0a4513ca4601fcf1c514",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42a88f03_9b4bfe1c",
+        "filename": "xos-profiles/rcord-fc/templates/tests/test-rcord-lite-api.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-07-17T19:14:05Z",
+      "side": 1,
+      "message": "Should this file and the test change names?  Or is the test redundant?",
+      "range": {
+        "startLine": 44,
+        "startChar": 29,
+        "endLine": 44,
+        "endChar": 39
+      },
+      "revId": "ca147001c0218bb3c4bc0a4513ca4601fcf1c514",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
     }
   ]
 }
