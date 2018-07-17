@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "57873cb7_437171b0",
+        "filename": "xos-profiles/rcord-fc/templates/_tosca.tpl",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-07-17T18:40:13Z",
+      "side": 1,
+      "message": "Do we still need vRouter if we use BNG?",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 224,
+        "endChar": 58
+      },
+      "revId": "ca147001c0218bb3c4bc0a4513ca4601fcf1c514",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
