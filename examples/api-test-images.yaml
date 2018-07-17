@@ -31,6 +31,7 @@ docker_image_whitelist:
 - xosproject/vsg-hw-synchronizer
 - xosproject/kubernetes-synchronizer
 - xosproject/fabric-synchronizer
+- xosproject/fabric-crossconnect-synchronizer
 - xosproject/xos-api-tester
 - node
 - postgres

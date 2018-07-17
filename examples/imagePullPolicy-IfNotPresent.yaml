@@ -25,6 +25,8 @@ addressmanager:
   imagePullPolicy: 'IfNotPresent'
 fabric:
   imagePullPolicy: 'IfNotPresent'
+fabric-crossconnect:
+  imagePullPolicy: 'IfNotPresent'
 onos-service:
   imagePullPolicy: 'IfNotPresent'
 volt:
