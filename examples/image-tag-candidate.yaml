@@ -32,6 +32,8 @@ addressmanager:
   addressmanager_synchronizerImage: 'xosproject/addressmanager-synchronizer:candidate'
 fabric:
   fabric_synchronizerImage: 'xosproject/fabric-synchronizer:candidate'
+fabric-crossconnect:
+  fabric_crossconnect_synchronizerImage: 'xosproject/fabric-crossconnect-synchronizer:candidate'
 onos-service:
   onos_synchronizerImage: 'xosproject/onos-synchronizer:candidate'
 volt:
