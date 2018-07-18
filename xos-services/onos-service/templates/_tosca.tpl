@@ -165,7 +165,29 @@ topology_template:
       properties:
         name: org.opencord.olt
         app_id: org.opencord.olt
+        version: 1.4.1
+      requirements:
+        - owner:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#dhcpl2relay:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.opencord.dhcpl2relay
+        app_id: org.opencord.dhcpl2relay
         version: 1.4.0
+      requirements:
+        - owner:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#aaa:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.opencord.aaa
+        app_id: org.opencord.aaa
+        version: 1.6.0
       requirements:
         - owner:
             node: service#ONOS_VOLTHA
@@ -175,7 +197,7 @@ topology_template:
     cord-config-attr:
       type: tosca.nodes.ServiceInstanceAttribute
       properties:
-        name: /onos/v1/network/configuration/apps/org.opencord.olt
+        name: /onos/v1/network/configuration/apps/org.opencord.kafka
         value: >
           {
             "kafka" : {
@@ -198,5 +220,38 @@ topology_template:
       requirements:
         - service_instance:
             node: onos_app#olt
+            relationship: tosca.relationships.BelongsToOne
+
+    dhcpl2relay-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration/apps/org.opencord.dhcpl2relay
+        value: >
+          {
+            "dhcpl2relay" : {
+              "useOltUplinkForServerPktInOut" : true
+            }
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#dhcpl2relay
+            relationship: tosca.relationships.BelongsToOne
+
+    aaa-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration/apps/org.opencord.aaa
+        value: >
+          {
+            "AAA" : {
+              "radiusConnectionType" : "socket",
+              "radiusHost" : "freeradius",
+              "radiusServerPort" : "1812",
+              "radiusSecret" : "SECRET"
+            }
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#aaa
             relationship: tosca.relationships.BelongsToOne
 {{- end -}}
