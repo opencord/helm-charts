@@ -22,6 +22,30 @@
       "revId": "546b80820417a3ed9babdcfcdc3a5a8b53b6ae7a",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cc345995_fb7a3f4e",
+        "filename": "xos-services/onos-service/templates/_tosca.tpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-07-18T16:33:03Z",
+      "side": 1,
+      "message": "yes - but i wasn\u0027t really sure why there was no app for it, or what making and app for it would do.",
+      "parentUuid": "9570cf4a_31a13e60",
+      "range": {
+        "startLine": 203,
+        "startChar": 4,
+        "endLine": 216,
+        "endChar": 58
+      },
+      "revId": "546b80820417a3ed9babdcfcdc3a5a8b53b6ae7a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
