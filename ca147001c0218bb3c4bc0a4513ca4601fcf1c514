@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "67f3c1d6_fc50453b",
+        "filename": "xos-profiles/rcord-fc/templates/_tosca.tpl",
+        "patchSetId": 5
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-07-18T15:44:32Z",
+      "side": 1,
+      "message": "I will remove it. We can always bring it back later if needed.",
+      "parentUuid": "57873cb7_437171b0",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 224,
+        "endChar": 58
+      },
+      "revId": "ca147001c0218bb3c4bc0a4513ca4601fcf1c514",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "42a88f03_9b4bfe1c",
         "filename": "xos-profiles/rcord-fc/templates/tests/test-rcord-lite-api.yaml",
         "patchSetId": 5
@@ -36,6 +60,30 @@
       "writtenOn": "2018-07-17T19:14:05Z",
       "side": 1,
       "message": "Should this file and the test change names?  Or is the test redundant?",
+      "range": {
+        "startLine": 44,
+        "startChar": 29,
+        "endLine": 44,
+        "endChar": 39
+      },
+      "revId": "ca147001c0218bb3c4bc0a4513ca4601fcf1c514",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d9efedfc_619d67f8",
+        "filename": "xos-profiles/rcord-fc/templates/tests/test-rcord-lite-api.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-07-18T15:44:32Z",
+      "side": 1,
+      "message": "I think we probably need an entirely new test, I was leaving this in here until we came up with something.",
+      "parentUuid": "42a88f03_9b4bfe1c",
       "range": {
         "startLine": 44,
         "startChar": 29,
