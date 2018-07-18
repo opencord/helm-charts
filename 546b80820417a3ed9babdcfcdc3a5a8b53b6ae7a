@@ -46,6 +46,30 @@
       "revId": "546b80820417a3ed9babdcfcdc3a5a8b53b6ae7a",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0c0b4489_b118058f",
+        "filename": "xos-services/onos-service/templates/_tosca.tpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-07-18T18:02:22Z",
+      "side": 1,
+      "message": "The app it\u0027s not listed as it\u0027s activated by default in onos-voltha, so it\u0027s not strictly necessary, but if you add it with \"app_id\" nothing will break:\nhttps://guide.opencord.org/onos-service/#onosserviceinstance",
+      "parentUuid": "cc345995_fb7a3f4e",
+      "range": {
+        "startLine": 203,
+        "startChar": 4,
+        "endLine": 216,
+        "endChar": 58
+      },
+      "revId": "546b80820417a3ed9babdcfcdc3a5a8b53b6ae7a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
