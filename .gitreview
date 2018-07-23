@@ -3,3 +3,4 @@ host=gerrit.opencord.org
 port=29418
 project=helm-charts.git
 defaultremote=origin
+defaultbranch=cord-6.0
