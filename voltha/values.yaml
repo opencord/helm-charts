@@ -15,7 +15,7 @@
 pull_docker_registry:
 k8s_docker_registry: 'k8s.gcr.io/'
 
-imagePullPolicy: Always
+imagePullPolicy: IfNotPresent
 
 replicas:
   vcore: 1
@@ -78,7 +78,7 @@ ofagentImage: 'voltha/voltha-ofagent:1.4.0'
 dashdImage: 'voltha/voltha-dashd:1.4.0'
 shovelImage: 'voltha/voltha-shovel:1.4.0'
 vcliImage: 'voltha/voltha-cli:1.4.0'
-vcoreImage: 'voltha/voltha-voltha:1.4.0'
+vcoreImage: 'voltha-voltha:latest'
 
 # Need the namespace global for kafka
 global:

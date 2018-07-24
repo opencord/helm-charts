@@ -17,13 +17,13 @@ pull_docker_registry:
 
 images:
   olt:
-    repository: voltha/voltha-ponsim
+    repository: voltha-ponsim
     tag: 'latest'
-    pullPolicy: 'Always'
+    pullPolicy: 'IfNotPresent'
   onu:
-    repository: voltha/voltha-ponsim
+    repository: voltha-ponsim
     tag: 'latest'
-    pullPolicy: 'Always'
+    pullPolicy: 'IfNotPresent'
   rg:
     repository: voltha/voltha-tester
     tag: 'latest'
