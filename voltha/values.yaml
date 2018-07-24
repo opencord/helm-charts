@@ -78,7 +78,7 @@ ofagentImage: 'voltha/voltha-ofagent:1.4.0'
 dashdImage: 'voltha/voltha-dashd:1.4.0'
 shovelImage: 'voltha/voltha-shovel:1.4.0'
 vcliImage: 'voltha/voltha-cli:1.4.0'
-vcoreImage: 'voltha/voltha-voltha:1.4.0'
+vcoreImage: 'andybavier/test-image:voltha-voltha'
 
 # Need the namespace global for kafka
 global:
