@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-hippieOSS_synchronizerImage: "xosproject/hippie-oss-synchronizer:{{ .Chart.Version }}"
+hippieOSS_synchronizerImage: "xosproject/hippie-oss-synchronizer:master"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
