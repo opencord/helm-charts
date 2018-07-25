@@ -168,7 +168,7 @@ topology_template:
         version: 1.4.1
       requirements:
         - owner:
-            node: service#ONOS_CORD
+            node: service#ONOS_VOLTHA
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#dhcpl2relay:
@@ -179,7 +179,7 @@ topology_template:
         version: 1.4.0
       requirements:
         - owner:
-            node: service#ONOS_CORD
+            node: service#ONOS_VOLTHA
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#aaa:
