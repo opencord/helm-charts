@@ -16,4 +16,4 @@
 
 name: hippie-oss
 description: A Helm chart for XOS's "hippie-oss" service
-version: 1.0.0
+version: 1.1.0-dev
