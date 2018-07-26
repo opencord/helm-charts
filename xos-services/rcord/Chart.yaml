@@ -15,4 +15,4 @@
 
 name: rcord
 description: A Helm chart for XOS's "rcord" service
-version: 1.0.0
+version: 1.1.0-dev
