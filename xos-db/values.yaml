@@ -13,17 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: "xos-db"
-  labels:
-    {{- include "xos-core.release_labels" . | indent 4 }}
-spec:
-  type: ClusterIP
-  selector:
-    app: "xos-db"
-  ports:
-    - port: 5432
-      targetPort: 5432
-      protocol: TCP
+# XOS Postgres database related values
+
+imagePullPolicy: 'Always'
+postgresImage: 'postgres:10.3-alpine'
+
+# Database name/username/password
+xosDBName: 'xos'
+xosDBUser: 'postgres'
+xosDBPassword: 'password'
+
+# DB persistence related vars
+needDBPersistence: false
+storageClassName: seba-block
+pvClaimName: xosdb-pv-claim
+

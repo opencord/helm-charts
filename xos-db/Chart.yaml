@@ -13,15 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: {{ .Values.pvClaimName }}
-spec:
-  accessModes:
-  - ReadWriteOnce
-  storageClassName: {{ .Values.storageClassName }}
-  resources:
-    requests:
-      storage: 1Gi
-
+name: xos-db
+version: 2.0.0
