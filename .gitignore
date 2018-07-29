@@ -8,7 +8,4 @@ requirements.lock
 xos-core/charts
 voltha/charts
 xos-core/charts
-xos-profiles/rcord-lite/charts
-xos-profiles/mcord/charts
-xos-profiles/base-openstack/charts
-xos-profiles/container-vnf/charts
+xos-profiles/*/charts

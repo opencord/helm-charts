@@ -13,12 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-dependencies:
-- name: xos-db
-  version: 0.1.0-dev0
-  repository: file://../xos-db
-- name: xos-gui
-  version: 1.0.1
-  repository: file://../xos-gui
-  condition: xos-gui.enabled
-
+apiVersion: v1
+kind: Service
+metadata:
+  name: "xos-db"
+  labels:
+    {{- include "xos-db.release_labels" . | indent 4 }}
+spec:
+  type: ClusterIP
+  selector:
+    app: "xos-db"
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP

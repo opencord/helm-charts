@@ -13,15 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: {{ .Values.pvClaimName }}
-spec:
-  accessModes:
-  - ReadWriteOnce
-  storageClassName: {{ .Values.storageClassName }}
-  resources:
-    requests:
-      storage: 1Gi
+# XOS Postgres database related values
+
+imagePullPolicy: 'Always'
+postgresImage: 'postgres:10.3-alpine'
+
+# Database name/username/password
+xosDBName: 'xos'
+xosDBUser: 'postgres'
+xosDBPassword: 'password'
+
+# DB persistence related vars
+needDBPersistence: false
+storageClassName: cord-block
+pvClaimName: xosdb-pv-claim
 
