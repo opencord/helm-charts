@@ -33,7 +33,6 @@ topology_template:
       properties:
           name: vtn
           kind: platform
-          view_url: /admin/vtn/vtnservice/$id$/
           privateGatewayMac: 00:00:00:00:00:01
           localManagementIp: 172.27.0.1/24
           ovsdbPort: 6641
