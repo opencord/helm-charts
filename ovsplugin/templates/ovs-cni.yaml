@@ -1,0 +1,206 @@
+---
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: ovs-plugin
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - pods
+    verbs:
+      - get
+      - update
+      - patch
+  - apiGroups:
+      - "alpha.network.k8s.io"
+    resources:
+      - logicalnetworks
+    verbs:
+      - get
+      - update
+      - patch
+  - apiGroups:
+      - "alpha.network.k8s.io"
+    resources:
+      - physicalnetworks
+    verbs:
+      - get
+      - update
+      - patch
+  - apiGroups:
+      - ""
+    resources:
+      - configmaps
+    verbs:
+      - get
+  - apiGroups:
+      - "admissionregistration.k8s.io"
+    resources:
+      - validatingwebhookconfigurations
+    verbs:
+      - get
+      - update
+      - create
+      - delete
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: ovs-plugin
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ovs-plugin
+subjects:
+- kind: ServiceAccount
+  name: ovs-plugin
+  namespace: kube-system
+- kind: Group
+  name: system:authenticated
+  apiGroup: rbac.authorization.k8s.io
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ovs-plugin
+  namespace: kube-system
+
+---
+# This ConfigMap can be used to configure a self-hosted OVS installation.
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: ovs-config
+  namespace: kube-system
+data:
+  # The CNI network configuration to install on each node.
+  cni_ovs_network_config: |-
+    {
+      "name":"ovs",
+      "cniVersion":"0.3.1",
+      "type":"ovs",
+      "ovsBridge":"br0",
+      "vtepIPs":[
+          "10.245.2.2",
+          "10.245.2.3"
+      ],
+      "isDefaultGateway": true,
+      "ipMasq": true,
+      "ipam":{
+          "type":"host-local",
+          "subnet":"10.244.0.0/16",
+          "rangeStart":"10.244.1.10",
+          "rangeEnd":"10.244.1.150",
+          "routes":[
+            {
+                "dst":"0.0.0.0/0"
+            }
+          ],
+          "gateway":"10.244.1.1"
+      }
+    }
+  
+  cni_ovsctlip_network_config: |-
+    {
+      "name":"ovs-ctl",
+      "cniVersion":"0.3.1",
+      "type":"ovs",
+      "ovsBridge":"br0",
+        "ipam":{
+          "type":"centralip",
+          "ipType": "cluster",
+          "network":"10.245.0.0/16",
+          "etcdURL": "https://127.0.0.1:2379",
+          "etcdCertFile": "/etc/ovs/certs/cert.crt",
+          "etcdKeyFile": "/etc/ovs/certs/key.pem",
+          "etcdTrustedCAFileFile": "/etc/ovs/certs/ca_cert.crt"
+      }
+    }
+
+
+---
+# Install OVS CNI plugin and conf on each slave node.
+kind: DaemonSet
+apiVersion: extensions/v1beta1
+metadata:
+  name: ovs-plugin
+  namespace: kube-system
+  labels:
+    k8s-app: ovs
+spec:
+  selector:
+    matchLabels:
+      k8s-app: ovs
+  template:
+    metadata:
+      labels:
+        k8s-app: ovs
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ''
+        scheduler.alpha.kubernetes.io/tolerations: |
+          [
+            {
+              "key": "dedicated",
+              "value": "master",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "CriticalAddonsOnly",
+              "operator": "Exists"
+            }
+          ]
+    spec:
+      hostNetwork: true
+      hostPID: true
+      serviceAccountName: ovs-plugin
+      containers:
+        # Create a container with place_conf.sh that
+        # Installs required 30-ovs.conf and 35-ovsctlip.conf on slave node.
+        - name: install-cni
+          image: {{ .Values.pull_docker_registry }}{{ .Values.images.ovs_plugin.repository }}:{{ .Values.images.ovs_plugin.tag }} 
+          imagePullPolicy: {{ .Values.images.ovs_plugin.pullPolicy }} 
+          command: ["/place_conf.sh"]
+          env:
+            - name: CNI_OVS_NETWORK_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  name: ovs-config
+                  key: cni_ovs_network_config
+            - name: CNI_OVSCTLIP_NETWORK_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  name: ovs-config
+                  key: cni_ovsctlip_network_config
+            - name: KUBERNETES_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+          volumeMounts:
+            - mountPath: /host/opt/cni/bin
+              name: cni-bin-dir
+            - mountPath: /host/etc/cni/net.d
+              name: cni-net-dir
+      volumes:
+        - name: cni-bin-dir
+          hostPath:
+            path: /opt/cni/bin
+        - name: cni-net-dir
+          hostPath:
+            path: /etc/cni/net.d
