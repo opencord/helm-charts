@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "950fad13_98c4f64b",
+        "filename": "ovsplugin/templates/_helpers.tpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-08-02T16:46:40Z",
+      "side": 1,
+      "message": "ovsplugin",
+      "range": {
+        "startLine": 18,
+        "startChar": 12,
+        "endLine": 18,
+        "endChar": 20
+      },
+      "revId": "966879298e6a764f9ef8a104f646e6190878e21c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "144fc955_6f88d4fb",
+        "filename": "ovsplugin/templates/_helpers.tpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-08-02T16:46:40Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 23,
+        "startChar": 12,
+        "endLine": 23,
+        "endChar": 20
+      },
+      "revId": "966879298e6a764f9ef8a104f646e6190878e21c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
