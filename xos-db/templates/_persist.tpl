@@ -26,5 +26,10 @@ spec:
   resources:
     requests:
       storage: 1Gi
+{{- if .Values.pvName }}
+  selector:
+    matchLabels:
+      name: {{ .Values.pvName }}
+{{- end }}
 {{- end }}
 
