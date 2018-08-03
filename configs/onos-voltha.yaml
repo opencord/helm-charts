@@ -21,9 +21,6 @@
 nameOverride: "onosv"
 fullnameOverride: "onos-voltha"
 
-namespace: voltha
-serviceAccountName: voltha-serviceaccount
-
 onosImage: 'voltha/voltha-onos:latest'
 
 services:
