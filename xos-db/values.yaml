@@ -25,6 +25,6 @@ xosDBPassword: 'password'
 
 # DB persistence related vars
 needDBPersistence: false
-storageClassName: cord-block
+storageClassName: cord-ceph-rbd
 pvClaimName: xosdb-pv-claim
 
