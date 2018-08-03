@@ -71,7 +71,7 @@ spec:
             - name: USERS_FILE
               value: "/etc/raddb/users"
             - name: RADIUS_CLIENTS
-              value: "SECRET@10.233.0.0/16"
+              value: "SECRET@0.0.0.0/0"
           ports:
             - containerPort: 1812
               name: radauth-port
