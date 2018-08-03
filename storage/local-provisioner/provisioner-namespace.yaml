@@ -1,5 +1,5 @@
 ---
-# Copyright 2017-present Open Networking Foundation
+# Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,25 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- if .Values.common.rbac }}
 apiVersion: v1
-kind: PersistentVolume
+kind: Namespace
 metadata:
-  name: {{ .Values.persistentVolumeName }}
-spec:
-  capacity:
-    storage: {{ .Values.pvStorageCapacity }}
-  accessModes:
-  - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: {{ .Values.storageClassName }}
-  local:
-    path: {{ .Values.hostLocalPath }}
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - {{ .Values.volumeHostName }}
-
+  name: {{ .Values.common.namespace }}
+{{- end }}
