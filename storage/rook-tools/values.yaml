@@ -1,5 +1,5 @@
 ---
-# Copyright 2017-present Open Networking Foundation
+# Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,17 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# XOS Postgres database related values
+# values file for rook-tools
 
-imagePullPolicy: 'Always'
-postgresImage: 'postgres:10.3-alpine'
+rookClusterNamespace: 'rook-ceph'
 
-# Database name/username/password
-xosDBName: 'xos'
-xosDBUser: 'postgres'
-xosDBPassword: 'password'
+rookCephToolsImage: 'rook/ceph-toolbox:v0.8.1'
 
-# DB persistence related vars
-needDBPersistence: false
-pvClaimName: xosdb-pv-claim
-storageClassName: ""
+imagePullPolicy: 'IfNotPresent'
+

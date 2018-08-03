@@ -13,25 +13,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: {{ .Values.storageClassName }}
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+
+{{- range $volume := .Values.volumes }}
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: {{ .Values.persistentVolumeName }}
+  name: {{ $volume.name }}
 spec:
   capacity:
-    storage: {{ .Values.pvStorageCapacity }}
+    storage: {{ $volume.size }}
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: {{ .Values.storageClassName }}
+  storageClassName: {{ $.Values.storageClassName }}
   local:
-    path: {{ .Values.hostLocalPath }}
+    path: {{ $volume.directory }}
   nodeAffinity:
     required:
       nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - {{ .Values.volumeHostName }}
-
+        - matchExpressions:
+          - key: kubernetes.io/hostname
+            operator: In
+            values:
+            - {{ $volume.host }}
+{{- end }}

@@ -1,5 +1,5 @@
 ---
-# Copyright 2017-present Open Networking Foundation
+# Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,10 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-kind: StorageClass
-apiVersion: storage.k8s.io/v1
-metadata:
-  name: {{ .Values.storageClassName }}
-provisioner: kubernetes.io/no-provisioner
-volumeBindingMode: WaitForFirstConsumer
+# values file for rook-cluster
+
+# directory on k8s nodes that holds ceph data
+cephDataDir: "/mnt/ceph"
+
+rookSystemNamespace: "rook-ceph-system"
+rookClusterNamespace: "rook-ceph"
+
+rookPoolName: "cord-ceph-pool"
+rookCephfsName: "cord-ceph-filesystem"
+
+rookCephfsPersistentVolumeName: "cord-cephfs-pv"
+rookCephfsPersistentVolumeSize: 20Gi
+
+# StorageClass used by other charts to create PersistentVolumeClaims
+rbdStorageClassName: "cord-ceph-rbd"
+fsStorageClassName: "cord-cephfs"
 
