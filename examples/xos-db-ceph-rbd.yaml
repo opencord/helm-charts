@@ -13,9 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-storageClassName: db-local-storage
-persistentVolumeName: db-pv
-pvClaimName: db-pv-claim
-volumeHostName: k8s-01
-hostLocalPath: /var/local/vol1
-pvStorageCapacity: 10Gi
+# Use a Ceph RBD volume to store the XOS database
+
+xos-db:
+  needDBPersistence: true
+  storageClassName: cord-ceph-rbd
