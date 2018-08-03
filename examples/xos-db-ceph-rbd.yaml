@@ -13,25 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: {{ .Values.persistentVolumeName }}
-spec:
-  capacity:
-    storage: {{ .Values.pvStorageCapacity }}
-  accessModes:
-  - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
-  storageClassName: {{ .Values.storageClassName }}
-  local:
-    path: {{ .Values.hostLocalPath }}
-  nodeAffinity:
-    required:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: kubernetes.io/hostname
-          operator: In
-          values:
-          - {{ .Values.volumeHostName }}
+# Use a Ceph RBD volume for XOS database
 
+xos-db:
+  needDBPersistence: true
+  storageClassName: cord-ceph-rbd
