@@ -72,11 +72,8 @@ consul:
 
 envoyForEtcdImage: 'voltha/voltha-envoy:1.4.0'
 freeradiusImage: 'tpdock/freeradius:latest'
-grafanaImage: 'kamon/grafana_graphite:3.0'
 netconfImage: 'voltha/voltha-netconf:1.4.0'
 ofagentImage: 'voltha/voltha-ofagent:1.4.0'
-dashdImage: 'voltha/voltha-dashd:1.4.0'
-shovelImage: 'voltha/voltha-shovel:1.4.0'
 vcliImage: 'voltha/voltha-cli:1.4.0'
 vcoreImage: 'voltha/voltha-voltha:1.4.0'
 
