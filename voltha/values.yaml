@@ -97,9 +97,6 @@ ofagent_args:
 - "--consul=consul.$(NAMESPACE).svc.cluster.local:8500"
 - "--controller=onos-voltha-openflow.default.svc.cluster.local:6653"
 - "--grpc-endpoint=vcore.$(NAMESPACE).svc.cluster.local:50556"
-- "--enable-tls"
-- "--key-file=/ofagent/pki/voltha.key"
-- "--cert-file=/ofagent/pki/voltha.crt"
 
 netconf_args:
 - "/netconf/netconf/main.py"
