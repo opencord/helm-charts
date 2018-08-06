@@ -1,0 +1,8 @@
+Code-Review+1: Gopinath Taget <gopinath@opennetworking.org>
+Code-Review+2: Jonathan Hart <jono@opennetworking.org>
+Verified+1: Jenkins Jenkins <do-not-reply@opencord.org>
+Submitted-by: Jonathan Hart <jono@opennetworking.org>
+Submitted-at: Mon, 06 Aug 2018 22:14:40 +0000
+Reviewed-on: https://gerrit.opencord.org/10466
+Project: helm-charts
+Branch: refs/heads/master
