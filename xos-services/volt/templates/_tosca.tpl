@@ -28,7 +28,7 @@ topology_template:
         name: volt
         voltha_url: voltha.voltha.svc.cluster.local
         voltha_port: 8882
-        onos_voltha_url: onos-voltha-ui.voltha.svc.cluster.local
+        onos_voltha_url: onos-voltha-ui.default.svc.cluster.local
         onos_voltha_port: 8181
         onos_voltha_user: karaf
         onos_voltha_pass: karaf
