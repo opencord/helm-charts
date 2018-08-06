@@ -32,6 +32,13 @@ xosAdminPassword: "letmein"
 cordConfigAppURL: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/cord-config/1.4.0/cord-config-1.4.0.oar"
 vtnAppURL: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/vtn/1.6.0/vtn-1.6.0.oar"
 
+# onos-voltha applications
+oltAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=olt-app&v=2.0.0-SNAPSHOT&e=oar"
+sadisAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/sadis-app/2.1.0/sadis-app-2.1.0.oar"
+dhcpl2relayAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=dhcpl2relay&v=1.5.0-SNAPSHOT&e=oar"
+aaaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=aaa&v=1.8.0-SNAPSHOT&e=oar"
+kafkaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=kafka&v=1.0.0-SNAPSHOT&e=oar"
+
 onosCordRestService: "onos-cord-ui.default.svc.cluster.local"
 onosVolthaRestService: "onos-voltha-ui.default.svc.cluster.local"
 onosFabricRestService: "onos-fabric-ui.default.svc.cluster.local"

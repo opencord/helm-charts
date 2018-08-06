@@ -21,7 +21,7 @@
 nameOverride: "onosv"
 fullnameOverride: "onos-voltha"
 
-onosImage: 'voltha/voltha-onos:latest'
+onosImage: 'onosproject/onos:1.13.2'
 
 services:
   openflowServiceType: ClusterIP

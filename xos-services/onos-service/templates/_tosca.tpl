@@ -160,12 +160,37 @@ topology_template:
           rest_hostname: {{ .onosVolthaRestService | quote }}
           rest_port: 8181
 
+    onos_app#cord-config:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: cord-config
+        app_id: org.opencord.config
+        url: {{ .cordConfigAppURL }}
+        version: 1.4.0
+      requirements:
+        - owner:
+            node: service#ONOS_VOLTHA
+            relationship: tosca.relationships.BelongsToOne
+
     onos_app#olt:
       type: tosca.nodes.ONOSApp
       properties:
-        name: org.opencord.olt
+        name: olt
         app_id: org.opencord.olt
-        version: 1.4.1
+        url: {{ .oltAppUrl }}
+        version: 2.0.0.SNAPSHOT
+      requirements:
+        - owner:
+            node: service#ONOS_VOLTHA
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#sadis:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: sadis
+        app_id: org.opencord.sadis
+        url: {{ .sadisAppUrl }}
+        version: 2.1.0
       requirements:
         - owner:
             node: service#ONOS_VOLTHA
@@ -174,9 +199,10 @@ topology_template:
     onos_app#dhcpl2relay:
       type: tosca.nodes.ONOSApp
       properties:
-        name: org.opencord.dhcpl2relay
+        name: dhcpl2relay
         app_id: org.opencord.dhcpl2relay
-        version: 1.4.0
+        url: {{ .dhcpl2relayAppUrl }}
+        version: 1.5.0.SNAPSHOT
       requirements:
         - owner:
             node: service#ONOS_VOLTHA
@@ -185,9 +211,22 @@ topology_template:
     onos_app#aaa:
       type: tosca.nodes.ONOSApp
       properties:
-        name: org.opencord.aaa
+        name: aaa
         app_id: org.opencord.aaa
-        version: 1.6.0
+        url: {{ .aaaAppUrl }}
+        version: 1.8.0.SNAPSHOT
+      requirements:
+        - owner:
+            node: service#ONOS_VOLTHA
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#kafka:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: kafka
+        app_id: org.opencord.kafka
+        url: {{ .kafkaAppUrl }}
+        version: 1.0.0.SNAPSHOT
       requirements:
         - owner:
             node: service#ONOS_VOLTHA
