@@ -254,7 +254,7 @@ topology_template:
         name: /onos/v1/configuration/org.opencord.olt.impl.Olt?preset=true
         value: >
           {
-            "enableDhcpIgmpOnProvisioning" : true
+            "enableDhcpOnProvisioning" : true
           }
       requirements:
         - service_instance:
