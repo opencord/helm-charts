@@ -14,20 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */ -}}
 
-{{- define "voltha-shovel.cmd" }}
-- "/shovel/shovel/main.py"
-- "--kafka={{ .Values.kafkaReleaseName }}.default.svc.cluster.local"
-- "--host=grafana.voltha.svc.cluster.local"
-- "--topic=voltha.kpis"
-{{- end }}
-
-{{- define "voltha-dashd.cmd" }}
-- "/dashd/dashd/main.py"
-- "--kafka={{ .Values.kafkaReleaseName }}.default.svc.cluster.local"
-- "--grafana_url=http://admin:admin@grafana.$(NAMESPACE).svc.cluster.local:80/api"
-- "--topic=voltha.kpis"
-{{- end }}
-
 {{- define "voltha-vcore.cmd" }}
 - "voltha/voltha/main.py"
 - "-v"
@@ -41,5 +27,3 @@ limitations under the License.
 - "--ponsim-comm=grpc"
 - "--core-number-extractor=^.*-([0-9]+)_.*$"
 {{- end }}
-
-
