@@ -25,4 +25,5 @@ topology_template:
       type: tosca.nodes.RCORDService
       properties:
         name: rcord
+        kind: data
 {{- end -}}
