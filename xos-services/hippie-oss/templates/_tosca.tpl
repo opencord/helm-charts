@@ -26,5 +26,5 @@ topology_template:
       type: tosca.nodes.HippieOSSService
       properties:
         name: hippie-oss
-        kind: OSS
+        kind: oss
 {{- end -}}

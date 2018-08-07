@@ -26,5 +26,5 @@ topology_template:
       type: tosca.nodes.VRouterService
       properties:
         name: vrouter
-        kind: rcord
+        kind: data
 {{- end -}}

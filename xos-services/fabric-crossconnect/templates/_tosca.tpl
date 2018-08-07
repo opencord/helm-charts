@@ -26,4 +26,5 @@ topology_template:
       type: tosca.nodes.FabricCrossconnectService
       properties:
         name: fabric-crossconnect
+        kind: data
 {{- end -}}

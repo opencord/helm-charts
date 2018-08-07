@@ -19,40 +19,9 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 description: Some basic fixtures
 imports:
   - custom_types/siterole.yaml
-  - custom_types/slicerole.yaml
-  - custom_types/networkparametertype.yaml
-  - custom_types/networktemplate.yaml
   - custom_types/deployment.yaml
 topology_template:
   node_templates:
-
-# -----------------------------------------------------------------------------
-# Network Parameter Types
-# -----------------------------------------------------------------------------
-    s_tag:
-      type: tosca.nodes.NetworkParameterType
-      properties:
-        name: s_tag
-    c_tag:
-      type: tosca.nodes.NetworkParameterType
-      properties:
-        name: c_tag
-    next_hop:
-      type: tosca.nodes.NetworkParameterType
-      properties:
-        name: next_hop
-    device:
-      type: tosca.nodes.NetworkParameterType
-      properties:
-        name: device
-    bridge:
-      type: tosca.nodes.NetworkParameterType
-      properties:
-        name: bridge
-    neutron_port_name:
-      type: tosca.nodes.NetworkParameterType
-      properties:
-        name: neutron_port_name
 
 # ----------------------------------------------------------------------------
 # Roles
@@ -69,40 +38,6 @@ topology_template:
       type: tosca.nodes.SiteRole
       properties:
         role: tech
-    slicerole#admin:
-      type: tosca.nodes.SliceRole
-      properties:
-        role: admin
-    slicerole#access:
-      type: tosca.nodes.SliceRole
-      properties:
-        role: access
-
-# -----------------------------------------------------------------------------
-# Network Templates
-# -----------------------------------------------------------------------------
-    Private:
-      type: tosca.nodes.NetworkTemplate
-      properties:
-        name: Private
-        visibility: private
-        translation: none
-
-    Public shared IPv4:
-      type: tosca.nodes.NetworkTemplate
-      properties:
-        name: Public shared IPv4
-        visibility: private
-        translation: NAT
-        shared_network_name: nat-net
-
-    Public dedicated IPv4:
-      type: tosca.nodes.NetworkTemplate
-      properties:
-        name: Public dedicated IPv4
-        visibility: public
-        translation: none
-        shared_network_name: ext-net
 
 # -----------------------------------------------------------------------------
 # Deployment
@@ -178,7 +113,7 @@ topology_template:
     service_dependency#onos-fabric_fabric:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#ONOS_Fabric
@@ -190,7 +125,7 @@ topology_template:
     service_dependency#rcord_volt:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#rcord
@@ -202,7 +137,7 @@ topology_template:
     service_dependency#onos_voltha_volt:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#volt
@@ -214,7 +149,7 @@ topology_template:
     service_dependency#fabric_vrouter:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#fabric
@@ -226,7 +161,7 @@ topology_template:
     service_dependency#volt_vsg-hw:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#volt
@@ -238,7 +173,7 @@ topology_template:
     service_dependency#onos_fabric_vsg-hw:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#vsg-hw
