@@ -22,6 +22,30 @@
       "revId": "f1d215d80fa9f552165942bdffe20c72d10cc41a",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f6854b54_5a5be1f8",
+        "filename": "xos-services/onos-service/templates/_tosca.tpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2018-08-07T22:33:45Z",
+      "side": 1,
+      "message": "kafka depends on these apps, so kafka needs to come after these apps are installed.",
+      "parentUuid": "b40aee2e_ff56c78e",
+      "range": {
+        "startLine": 253,
+        "startChar": 8,
+        "endLine": 253,
+        "endChar": 80
+      },
+      "revId": "f1d215d80fa9f552165942bdffe20c72d10cc41a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
