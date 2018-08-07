@@ -26,5 +26,5 @@ topology_template:
       type: tosca.nodes.FabricService
       properties:
         name: fabric
-        kind: platform
+        kind: data
 {{- end -}}

@@ -19,7 +19,6 @@ tosca_definitions_version: tosca_simple_yaml_1_0
 description: Some basic fixtures
 imports:
   - custom_types/siterole.yaml
-  - custom_types/slicerole.yaml
   - custom_types/networkparametertype.yaml
   - custom_types/networktemplate.yaml
   - custom_types/deployment.yaml
@@ -69,14 +68,6 @@ topology_template:
       type: tosca.nodes.SiteRole
       properties:
         role: tech
-    slicerole#admin:
-      type: tosca.nodes.SliceRole
-      properties:
-        role: admin
-    slicerole#access:
-      type: tosca.nodes.SliceRole
-      properties:
-        role: access
 
 # -----------------------------------------------------------------------------
 # Network Templates
