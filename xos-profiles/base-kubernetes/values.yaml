@@ -83,14 +83,6 @@ toscaRecipes:
           type: tosca.nodes.SiteRole
           properties:
             role: tech
-        slicerole#admin:
-          type: tosca.nodes.SliceRole
-          properties:
-            role: admin
-        slicerole#access:
-          type: tosca.nodes.SliceRole
-          properties:
-            role: access
     # -----------------------------------------------------------------------------
     # Network Templates
     # -----------------------------------------------------------------------------
