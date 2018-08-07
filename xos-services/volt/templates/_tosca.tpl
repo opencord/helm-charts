@@ -26,6 +26,7 @@ topology_template:
       type: tosca.nodes.VOLTService
       properties:
         name: volt
+        kind: data
         voltha_url: voltha.voltha.svc.cluster.local
         voltha_port: 8882
         onos_voltha_url: onos-voltha-ui.default.svc.cluster.local
