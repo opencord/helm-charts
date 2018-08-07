@@ -26,4 +26,5 @@ topology_template:
       type: tosca.nodes.VSGHWService
       properties:
         name: vsg-hw
+        kind: data
 {{- end -}}
