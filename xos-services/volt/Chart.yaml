@@ -15,4 +15,4 @@
 
 name: volt
 description: A Helm chart for XOS's "olt-service" service
-version: 2.0.1
+version: 2.0.2-dev
