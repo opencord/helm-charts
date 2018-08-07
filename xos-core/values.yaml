@@ -20,7 +20,7 @@ imagePullPolicy: 'Always'
 
 # Docker images
 # YAML variable names can't contain `-`, so substituted with `_`
-xos_coreImage: 'xosproject/xos-core:{{ .Chart.Version }}'
+xos_coreImage: 'xosproject/xos-core:master'
 xos_chameleonImage: 'xosproject/chameleon:{{ .Chart.Version }}'
 xos_toscaImage: 'xosproject/xos-tosca:1.0.1'
 xos_api_testerImage: 'xosproject/xos-api-tester:2.0.1'
