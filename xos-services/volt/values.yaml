@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-volt_synchronizerImage: "xosproject/volt-synchronizer:{{ .Chart.Version }}"
+volt_synchronizerImage: "xosproject/volt-synchronizer:master"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
