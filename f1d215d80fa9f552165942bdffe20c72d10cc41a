@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b40aee2e_ff56c78e",
+        "filename": "xos-services/onos-service/templates/_tosca.tpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-08-07T22:29:48Z",
+      "side": 1,
+      "message": "do we need to install kafka after these applications? or are the these apps that depend on kafka?",
+      "range": {
+        "startLine": 253,
+        "startChar": 8,
+        "endLine": 253,
+        "endChar": 80
+      },
+      "revId": "f1d215d80fa9f552165942bdffe20c72d10cc41a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
