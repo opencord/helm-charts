@@ -26,7 +26,7 @@ topology_template:
       type: tosca.nodes.ONOSService
       properties:
           name: ONOS_Fabric
-          kind: platform
+          kind: data
           rest_hostname: {{ .onosFabricRestService | quote }}
           rest_port: 8181
 
@@ -88,7 +88,7 @@ topology_template:
       type: tosca.nodes.ONOSService
       properties:
           name: ONOS_CORD
-          kind: platform
+          kind: data
           rest_hostname: {{ .onosCordRestService | quote }}
           rest_port: 8181
 
@@ -156,7 +156,7 @@ topology_template:
       type: tosca.nodes.ONOSService
       properties:
           name: ONOS_VOLTHA
-          kind: platform
+          kind: data
           rest_hostname: {{ .onosVolthaRestService | quote }}
           rest_port: 8181
 
