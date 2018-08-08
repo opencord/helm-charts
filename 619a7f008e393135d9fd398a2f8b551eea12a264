@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0df556f5_074d7830",
+        "filename": "xos-profiles/base-kubernetes/values.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-08-08T18:09:36Z",
+      "side": 0,
+      "message": "remove?",
+      "range": {
+        "startLine": 39,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 35
+      },
+      "revId": "619a7f008e393135d9fd398a2f8b551eea12a264",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
