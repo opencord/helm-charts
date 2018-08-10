@@ -13,6 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: fabric-crossconnect
-description: A Helm chart for XOS's "fabric-crossconnect" service
-version: 1.0.0-dev
+# Default values for vOLT
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+imagePullPolicy: 'Always'
+
+attWorkflowDriver_synchronizerImage: "xosproject/att-workflow-driver-synchronizer:master"
+
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"
+
+kafkaService: "cord-kafka"
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

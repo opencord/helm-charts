@@ -13,6 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: fabric-crossconnect
-description: A Helm chart for XOS's "fabric-crossconnect" service
-version: 1.0.0-dev
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: att-workflow-driver
+data:
+  serviceConfig: |
+{{ include "att-workflow-driver.serviceConfig" . | indent 4 }}

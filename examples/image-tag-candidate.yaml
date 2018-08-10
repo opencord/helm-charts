@@ -30,6 +30,8 @@ xos-gui:
 # in RCORD service chart
 addressmanager:
   addressmanager_synchronizerImage: 'xosproject/addressmanager-synchronizer:candidate'
+att-workflow-driver:
+  attWorkflowDriver_synchronizerImage: 'xosproject/att-workflow-driver-synchronizer:candidate'
 fabric:
   fabric_synchronizerImage: 'xosproject/fabric-synchronizer:candidate'
 fabric-crossconnect:

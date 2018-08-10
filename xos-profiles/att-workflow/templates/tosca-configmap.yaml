@@ -17,10 +17,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: rcord-fc-tosca
+  name: att-workflow-tosca
 data:
   010-fixtures.yaml: |
-{{ include "rcord-fc.basicFixturesTosca" . | indent 4 }}
+{{ include "att-workflow.basicFixturesTosca" . | indent 4 }}
   020-rcord-subscriber-service.yaml: |
 {{ include "rcord.serviceTosca" .Values.rcord | indent 4 }}
   030-volt-service.yaml: |
@@ -33,5 +33,7 @@ data:
 {{ include "onos-service.volthaOnosTosca" (index .Values "onos-service") | indent 4 }}
   070-fabric-service.yaml: |
 {{ include "fabric.serviceTosca" .Values.fabric | indent 4 }}
+  080-workflow-service.yaml: |
+{{ include "att-workflow-driver.serviceTosca"  (index .Values "att-workflow-driver") | indent 4 }}
   300-service-graph.yaml: |
-{{ include "rcord-fc.serviceGraphTosca" . | indent 4 }}
+{{ include "att-workflow.serviceGraphTosca" . | indent 4 }}

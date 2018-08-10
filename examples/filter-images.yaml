@@ -42,6 +42,7 @@ docker_image_whitelist:
 - xosproject/vsg-hw-synchronizer
 - xosproject/fabric-synchronizer
 - xosproject/fabric-crossconnect-synchronizer
+- xosproject/att-workflow-driver-synchronizer
 
 # base-openstack images
 - xosproject/openstack-synchronizer

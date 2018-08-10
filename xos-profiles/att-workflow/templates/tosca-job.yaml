@@ -17,10 +17,10 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "rcord-fc.fullname" . }}-tosca-loader
+  name: {{ template "att-workflow.fullname" . }}-tosca-loader
   labels:
-    app: {{ template "rcord-fc.name" . }}
-    chart: {{ template "rcord-fc.chart" . }}
+    app: {{ template "att-workflow.name" . }}
+    chart: {{ template "att-workflow.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -28,7 +28,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "rcord-fc.name" . }}
+        app: {{ template "att-workflow.name" . }}
         release: {{ .Release.Name }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/tosca-configmap.yaml") . | sha256sum }}
@@ -47,9 +47,9 @@ spec:
                   name: xos-admin-passwd-secret
                   key: password
           volumeMounts:
-            - name: rcord-fc-tosca
+            - name: att-workflow-tosca
               mountPath: /opt/tosca
       volumes:
-        - name: rcord-fc-tosca
+        - name: att-workflow-tosca
           configMap:
-            name: rcord-fc-tosca
+            name: att-workflow-tosca

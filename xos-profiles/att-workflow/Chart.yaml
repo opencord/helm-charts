@@ -1,4 +1,5 @@
 ---
+
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,19 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-dependencies:
-- name: rcord
-  version: 1.1.0-dev
-  repository: file://../../xos-services/rcord
-- name: onos-service
-  version: 2.0.2-dev
-  repository: file://../../xos-services/onos-service
-- name: fabric
-  version: 2.0.0
-  repository: file://../../xos-services/fabric
-- name: volt
-  version: 2.0.1
-  repository: file://../../xos-services/volt
-- name: fabric-crossconnect
-  version: 1.0.0
-  repository: file://../../xos-services/fabric-crossconnect
+apiVersion: v1
+appVersion: "1.0"
+description: A Helm chart for XOS's "att-workflow" profile
+name: att-workflow
+version: 0.1.0
