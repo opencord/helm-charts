@@ -23,6 +23,8 @@ xos-gui:
 # in RCORD service chart
 addressmanager:
   imagePullPolicy: 'IfNotPresent'
+att-workflow-driver:
+  imagePullPolicy: 'IfNotPresent'
 fabric:
   imagePullPolicy: 'IfNotPresent'
 fabric-crossconnect:
