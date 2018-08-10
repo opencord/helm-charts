@@ -15,4 +15,4 @@
 
 name: kubernetes
 description: A Helm chart for XOS's "kubernetes" service
-version: 1.0.0
+version: 1.0.1-dev

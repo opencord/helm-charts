@@ -35,3 +35,5 @@ services:
 onos_env:
   - name: ONOS_APPS
     value: "openflow"
+
+xos_service_label: ONOS_Fabric

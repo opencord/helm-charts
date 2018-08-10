@@ -24,6 +24,9 @@ metadata:
     chart: {{ template "onos.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+{{- if .Values.xos_service_label }}
+    xos_service: {{ .Values.xos_service_label }}
+{{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -35,6 +38,9 @@ spec:
       labels:
         app: {{ template "onos.name" . }}
         release: {{ .Release.Name }}
+{{- if .Values.xos_service_label }}
+        xos_service: {{ .Values.xos_service_label }}
+{{- end }}
     spec:
       serviceAccount: {{ .Values.serviceAccountName }}
       serviceAccountName: {{ .Values.serviceAccountName }}
