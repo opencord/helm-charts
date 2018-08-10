@@ -16,7 +16,7 @@
 imagePullPolicy: 'Always'
 
 # Docker Images
-xos_guiImage: 'xosproject/xos-gui:{{ .Chart.Version }}'
+xos_guiImage: 'xosproject/xos-gui:master'
 xos_wsImage: 'xosproject/xos-ws:1.0.0'
 
 # NodePorts
