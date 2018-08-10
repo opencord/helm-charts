@@ -46,8 +46,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: kubernetes-config
-              mountPath: /opt/xos/synchronizers/kubernetes/kubernetes_config.yaml
-              subPath: kubernetes_config.yaml
+              mountPath: /opt/xos/synchronizers/kubernetes/mounted_config.yaml
+              subPath: mounted_config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
@@ -57,7 +57,7 @@ spec:
             name: kubernetes
             items:
               - key: serviceConfig
-                path: kubernetes_config.yaml
+                path: mounted_config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates

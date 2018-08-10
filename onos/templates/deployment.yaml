@@ -24,6 +24,7 @@ metadata:
     chart: {{ template "onos.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    xos_service: {{ .Values.xos_service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
