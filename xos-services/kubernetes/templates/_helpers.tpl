@@ -48,15 +48,9 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
-required_models:
-    - KubernetesService
-    - KubernetesServiceInstance
-dependency_graph: "/opt/xos/synchronizers/kubernetes/model-deps"
-steps_dir: "/opt/xos/synchronizers/kubernetes/steps"
-#  model_policies_dir: "/opt/xos/synchronizers/kubernetes/model_policies"
-sys_dir: "/opt/xos/synchronizers/kubernetes/sys"
-models_dir: "/opt/xos/synchronizers/kubernetes/models"
-pull_steps_dir: "/opt/xos/synchronizers/kubernetes/pull_steps"
+event_bus:
+  endpoint: {{ .Values.kafkaService | quote }}
+  kind: kafka
 logging:
   version: 1
   handlers:
