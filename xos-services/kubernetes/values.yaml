@@ -24,10 +24,12 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-kubernetes_synchronizerImage: "xosproject/kubernetes-synchronizer:{{ .Chart.Version }}"
+kubernetes_synchronizerImage: "xosproject/kubernetes-synchronizer:master"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
+
+kafkaService: "cord-kafka"
 
 resources: {}
 
