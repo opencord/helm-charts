@@ -22,6 +22,30 @@
       "revId": "2cc3d81a719429cf531e23e4a17c1c97bf42a616",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "70d41512_29a9c425",
+        "filename": "xos-tools/kafkacat/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-08-13T17:40:58Z",
+      "side": 1,
+      "message": "I don\u0027t think there is a direct connection between this container version and the kafka version. This one works with the kafka version we are deploying.\n\nThis tool is needed for development/debug only so it should not be deployed as part of a profile",
+      "parentUuid": "4a181c76_567b6b02",
+      "range": {
+        "startLine": 29,
+        "startChar": 29,
+        "endLine": 29,
+        "endChar": 46
+      },
+      "revId": "2cc3d81a719429cf531e23e4a17c1c97bf42a616",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
     }
   ]
 }
