@@ -13,6 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: xossh
-description: A Helm chart for xossh, the XOS command line shell
-version: 2.1.0-dev
+# Default values for xossh
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+pull_docker_registry:
+
+nameOverride: ""
+fullnameOverride: ""
+
+imagePullPolicy: Always
+
+kafkacatImage: "confluentinc/cp-kafkacat:4.0.2"

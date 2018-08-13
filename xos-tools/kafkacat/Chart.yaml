@@ -13,6 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: xossh
-description: A Helm chart for xossh, the XOS command line shell
-version: 2.1.0-dev
+name: kafkacat
+description: A Helm chart for kafkacat
+version: 1.0.0-dev
