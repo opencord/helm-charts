@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1b05857c_c41a64f3",
+        "filename": "configs/onos-fabric.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-08-14T19:40:16Z",
+      "side": 1,
+      "message": "should we stick to lower case?",
+      "range": {
+        "startLine": 39,
+        "startChar": 13,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "b440ad76bef612ba17fad97c26a6288fc337544a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "808e383e_62d3d45f",
+        "filename": "onos/templates/deployment.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-08-14T19:40:16Z",
+      "side": 1,
+      "message": "Why not set the label only if this value is provided?",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 42
+      },
+      "revId": "b440ad76bef612ba17fad97c26a6288fc337544a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7b2d1bde_004d50ef",
+        "filename": "onos/values.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-08-14T19:40:16Z",
+      "side": 1,
+      "message": "Why not set the label only if this value is provided?",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 26
+      },
+      "revId": "b440ad76bef612ba17fad97c26a6288fc337544a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
