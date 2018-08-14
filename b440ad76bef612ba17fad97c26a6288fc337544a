@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "02d040bd_66a7a3a7",
+        "filename": "configs/onos-fabric.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-08-14T20:07:05Z",
+      "side": 1,
+      "message": "The service name created by the TOSCA recipe has mixed case. My intent is that this label match the service name. Changing the case of the service in the TOSCA recipes is something we can consider separately (I have no opposition to doing so, other than what it may look like in the GUI).",
+      "parentUuid": "1b05857c_c41a64f3",
+      "range": {
+        "startLine": 39,
+        "startChar": 13,
+        "endLine": 39,
+        "endChar": 24
+      },
+      "revId": "b440ad76bef612ba17fad97c26a6288fc337544a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "808e383e_62d3d45f",
         "filename": "onos/templates/deployment.yaml",
         "patchSetId": 9
