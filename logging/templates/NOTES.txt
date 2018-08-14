@@ -1,0 +1,16 @@
+** Log aggregation for CORD **
+
+This chart runs the following services:
+
+- Elasticsearch
+
+and optionally:
+
+- Kibana
+- Logstash
+- fluentd-elasticsearch (container logs from k8s)
+
+To access Kibana, go to:
+
+ http://<any_k8s_node>:{{ .Values.kibana.service.nodePort }}
+

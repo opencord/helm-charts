@@ -1,0 +1,130 @@
+---
+# Copyright 2018--present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Values file for SEBA log aggregation infra
+# NOTE: must start this chart with the name "logging":
+#   helm install -n logging logging
+# ortherwise the elasticsearch hostname won't work properly in the other containers
+
+# elasticstack config
+# ref: https://github.com/helm/charts/tree/master/incubator/elasticsearch
+elasticsearch:
+  client:
+    serviceType: "NodePort"
+  master:
+    persistence:
+      storageClass: "local-ssd"
+      size: "5Gi"
+  data:
+    persistence:
+      storageClass: "local-hdd"
+      size: "10Gi"
+
+# kibana config
+# ref: https://github.com/helm/charts/tree/master/stable/kibana
+kibana:
+  enabled: true
+#  dashboardImport:
+#    dashboards: |-
+#
+  service:
+    type: "NodePort"
+    nodePort: 30601
+  env:
+    ELASTICSEARCH_URL: "http://logging-elasticsearch-client:9200"
+
+# logstash config
+# ref: https://github.com/helm/charts/tree/master/incubator/logstash
+logstash:
+  enabled: true
+  elasticsearch:
+    host: "logging-elasticsearch-client"
+
+  # we have kafka, so persistence isn't needed
+  # ref: https://www.elastic.co/guide/en/logstash/current/persistent-queues.html
+  persistence:
+    enabled: false
+
+  # 'config' k/v are turned into env vars for logstash container
+  # ref: https://www.elastic.co/guide/en/logstash/current/docker-config.html#docker-env-config
+  # config:
+  #   LOG_LEVEL: trace
+
+  # Kafka input plugin
+  # ref: https://www.elastic.co/guide/en/logstash/current/plugins-inputs-kafka.html
+  inputs:
+    main: |-
+      input {
+        kafka {
+          bootstrap_servers => "cord-kafka:9092"
+          client_id => "logstash_ck"
+          codec => json { charset => "UTF-8" }
+          consumer_threads => 1
+          decorate_events => true
+          metadata_max_age_ms => 60000 # recheck for new topics every minute
+          topics_pattern => 'authentication.*|dhcp.*|onos.*|onu.*|xos.*'
+          type => "cord-kafka"
+        }
+        kafka {
+          bootstrap_servers => "voltha-kafka:9092"
+          client_id => "logstash_vk"
+          codec => json { charset => "UTF-8" }
+          consumer_threads => 1
+          decorate_events => true
+          metadata_max_age_ms => 60000 # recheck for new topics every minute
+          topics_pattern => 'voltha.*'
+          type => "voltha-kafka"
+        }
+      }
+
+  filters:
+    main: |-
+      filter {
+        mutate {
+          add_field => {
+            "kafka_topic" => "%{[@metadata][kafka][topic]}"
+            "kafka_timestamp" => "%{[@metadata][kafka][timestamp]}"
+          }
+        }
+
+        date {
+          match => [ "ts", "UNIX" ]
+          target => "voltha_ts"
+          tag_on_failure => []
+        }
+
+        json {
+          source => "data"
+          target => "data"
+          skip_on_invalid_json => true
+        }
+      }
+
+  outputs:
+    main: |-
+      output {
+        elasticsearch {
+          hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
+        }
+      }
+
+# fluentd-elasticsearch config
+# ref: https://github.com/helm/charts/tree/master/stable/fluentd-elasticsearch
+# forwards k8s logs from nodes to elasticsearch
+fluentd-elasticsearch:
+  enabled: false
+  elasticsearch:
+    host: "logging-elasticsearch-client"
+
