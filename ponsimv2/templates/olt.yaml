@@ -40,7 +40,7 @@ spec:
        labels:
          app: olt
        annotations:
-         cni: "calico"
+         cni: "calico,pon1"
      spec:
        containers:
          - name: olt
@@ -62,9 +62,9 @@ spec:
              - "-onus"
              - "4"
              - "-internal_if"
-             - "eth0"
+             - "eth1"
              - "-external_if"
-             - "eth0"
+             - "eth1"
              - "-vcore_endpoint"
              - "vcore"
              - "-promiscuous"
