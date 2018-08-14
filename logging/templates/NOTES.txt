@@ -1,0 +1,5 @@
+Log aggregation for SEBA
+
+This chart runs elasticsearch and kibana
+
+
