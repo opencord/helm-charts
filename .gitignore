@@ -11,3 +11,4 @@ xos-core/charts
 nem-monitoring/charts/
 xos-profiles/*/charts
 storage/*/charts
+logging/charts
