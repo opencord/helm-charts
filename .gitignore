@@ -10,3 +10,4 @@ voltha/charts
 xos-core/charts
 xos-profiles/*/charts
 storage/*/charts
+logging/*/charts
