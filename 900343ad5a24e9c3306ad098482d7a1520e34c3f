@@ -1,0 +1,7 @@
+Code-Review+2: Matteo Scandolo <teo@opennetworking.org>
+Verified+1: Jenkins Jenkins <do-not-reply@opencord.org>
+Submitted-by: Scott Baker <scottb@onlab.us>
+Submitted-at: Tue, 14 Aug 2018 21:35:01 +0000
+Reviewed-on: https://gerrit.opencord.org/10517
+Project: helm-charts
+Branch: refs/heads/master
