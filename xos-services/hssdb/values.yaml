@@ -22,9 +22,8 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'Always'
-
-synchronizerImage: "xosproject/hssdb-synchronizer:{{ .Chart.Version }}"
+image:
+  repository: xosproject/hssdb-synchronizer
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
@@ -40,6 +39,9 @@ privateKeyFile: "files/id_rsa"
 global:
   proxySshEnabled: true
   proxySshUser: "root"
+  registry: ""
+  tag: "{{ .Chart.Version }}"
+  pullPolicy: Always
 
 resources: {}
 
