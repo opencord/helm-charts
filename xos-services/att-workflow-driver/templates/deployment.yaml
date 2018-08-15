@@ -39,8 +39,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ tpl .Values.attWorkflowDriver_synchronizerImage . | quote }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image: {{ if .Values.image.registry }}{{ .Values.image.registry }}{{ else }}{{ .Values.global.registry }}{{ end }}{{ .Values.image.repository }}:{{ if .Values.image.tag }}{{ .Values.image.tag }}{{ else }}{{ .Values.global.tag }}{{ end }}
+          imagePullPolicy: {{ if .Values.image.pullPolicy }}{{ .Values.image.pullPolicy }}{{ else }}{{ .Values.global.pullPolicy }}{{ end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
