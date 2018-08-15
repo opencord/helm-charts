@@ -22,9 +22,13 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'Always'
+image:
+  repository: xosproject/vtn-synchronizer
 
-vtn_synchronizerImage: "xosproject/vtn-synchronizer:{{ .Chart.Version }}"
+global:
+  registry: ""
+  tag: "{{ .Chart.Version }}"
+  pullPolicy: Always
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
