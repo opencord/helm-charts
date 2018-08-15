@@ -22,9 +22,13 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'Always'
+image:
+  repository: xosproject/progran-synchronizer
 
-synchronizerImage: "xosproject/progran-synchronizer:{{ .Chart.Version }}"
+global:
+  registry: ""
+  tag: "{{ .Chart.Version }}"
+  pullPolicy: Always
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

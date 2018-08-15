@@ -22,9 +22,13 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'Always'
+image:
+  repository: xosproject/vepc-synchronizer
 
-synchronizerImage: "xosproject/vepc-synchronizer:{{ .Chart.Version }}"
+global:
+  registry: ""
+  tag: "master"
+  pullPolicy: Always
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
