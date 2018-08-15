@@ -24,7 +24,9 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-attWorkflowDriver_synchronizerImage: "xosproject/att-workflow-driver-synchronizer:master"
+dockerRegistry: ""
+synchronizerImage: "xosproject/att-workflow-driver-synchronizer"
+dockerTag: "master"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

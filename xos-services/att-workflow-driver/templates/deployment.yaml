@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ tpl .Values.attWorkflowDriver_synchronizerImage . | quote }}
+          image: {{ .Values.dockerRegistry }}{{ .Values.attWorkflowDriver_synchronizerImage }}:{{ .Values.dockerTag }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
