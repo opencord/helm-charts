@@ -22,9 +22,12 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'Always'
 
-fabric_crossconnect_synchronizerImage: "xosproject/fabric-crossconnect-synchronizer:master"
+
+ global:
+  registry: ""
+  tag: "master"
+  pullPolicy: Always
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

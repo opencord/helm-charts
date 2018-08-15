@@ -22,9 +22,12 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'Always'
 
-vsg_hw_synchronizerImage: "xosproject/vsg-hw-synchronizer:{{ .Chart.Version }}"
+
+ global:
+  registry: ""
+  tag: "{{ .Chart.Version }}"
+  pullPolicy: Always
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

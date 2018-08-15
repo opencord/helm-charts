@@ -1,0 +1,10 @@
+global:
+  registry: "global-registry/"
+  tag: "global-tag"
+  pullPolicy: "global-pull"
+
+att-workflow-driver:
+  image:
+    registry: "local-registry/"
+    tag: "local-tag"
+    pullPolicy: "local-pull"
