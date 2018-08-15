@@ -53,6 +53,9 @@ accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
   endpoint: xos-core:50051
+event_bus:
+  endpoint: {{ .Values.kafkaService | quote }}
+  kind: kafka
 logging:
   version: 1
   handlers:

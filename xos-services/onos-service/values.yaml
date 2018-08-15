@@ -29,6 +29,8 @@ onos_synchronizerImage: "xosproject/onos-synchronizer:master"
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
+kafkaService: "cord-kafka"
+
 cordConfigAppURL: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/cord-config/1.4.0/cord-config-1.4.0.oar"
 vtnAppURL: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/vtn/1.6.0/vtn-1.6.0.oar"
 
