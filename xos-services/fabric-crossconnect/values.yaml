@@ -29,6 +29,8 @@ fabric_crossconnect_synchronizerImage: "xosproject/fabric-crossconnect-synchroni
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
+kafkaService: "cord-kafka"
+
 resources: {}
 
 nodeSelector: {}
