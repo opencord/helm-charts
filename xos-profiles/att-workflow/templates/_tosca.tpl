@@ -172,10 +172,10 @@ topology_template:
         connect_method: none
       requirements:
         - subscriber_service:
-            node: service#ONOS_Fabric
+            node: service#fabric
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
-            node: service#fabric
+            node: service#ONOS_Fabric
             relationship: tosca.relationships.BelongsToOne
 
     service_dependency#rcord_volt:
