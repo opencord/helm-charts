@@ -16,3 +16,6 @@
 
 mavenRepoImage: 'opencord/mavenrepo:latest'
 imagePullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
