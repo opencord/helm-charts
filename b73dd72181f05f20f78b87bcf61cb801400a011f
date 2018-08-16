@@ -1,0 +1,7 @@
+Code-Review+2: Matteo Scandolo <teo@opennetworking.org>
+Verified+1: Matteo Scandolo <teo@opennetworking.org>
+Submitted-by: Matteo Scandolo <teo@opennetworking.org>
+Submitted-at: Thu, 16 Aug 2018 20:30:20 +0000
+Reviewed-on: https://gerrit.opencord.org/10627
+Project: helm-charts
+Branch: refs/heads/master
