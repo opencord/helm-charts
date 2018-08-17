@@ -22,11 +22,11 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'Always'
+imagePullPolicy: 'IfNotPresent'
 
 tosca_loaderImage: "xosproject/tosca-loader:1.0.1"
 
-xos_api_testerImage: 'xosproject/xos-api-tester:2.0.1'
+xos_api_testerImage: 'xosproject/xos-api-tester:master'
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
