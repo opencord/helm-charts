@@ -317,4 +317,24 @@ topology_template:
         - service_instance:
             node: onos_app#aaa
             relationship: tosca.relationships.BelongsToOne
+
+    sadis-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration/apps/org.opencord.sadis
+        value: >
+          {
+            "sadis" : {
+              "integration" : {
+                "cache" : {
+                  "maxsize" : 1000
+                },
+                "url" : "http://sadis-service:8000/subscriber/%s"
+              }
+            }
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#sadis
+            relationship: tosca.relationships.BelongsToOne
 {{- end -}}

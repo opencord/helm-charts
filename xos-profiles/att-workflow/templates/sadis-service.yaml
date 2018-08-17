@@ -1,5 +1,4 @@
----
-# Copyright 2018-present Open Networking Foundation
+# Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,23 +11,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+apiVersion: v1
 
-# Default values for the rcord-fc profile.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-replicaCount: 1
-
-nameOverride: ""
-fullnameOverride: ""
-
-imagePullPolicy: 'IfNotPresent'
-
-tosca_loaderImage: "xosproject/tosca-loader:1.0.1"
-
-xos_api_testerImage: 'xosproject/xos-api-tester:master'
-
-xosAdminUser: "admin@opencord.org"
-xosAdminPassword: "letmein"
-
-sadisServerImage: "opencord/sadis-server:latest"
+kind: Service
+metadata:
+  name: "sadis-service"
+  labels:
+    app: "sadis-server"
+spec:
+  type: ClusterIP
+  ports:
+    - name: sadis-service
+      port: 8000
+      targetPort: 8000
+      protocol: TCP
+  selector:
+    app: sadis-server
+    release: {{ .Release.Name }}
