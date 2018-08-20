@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-fabric_synchronizerImage: "xosproject/fabric-synchronizer:{{ .Chart.Version }}"
+fabric_synchronizerImage: "xosproject/fabric-synchronizer:master"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
