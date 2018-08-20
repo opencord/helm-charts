@@ -17,7 +17,7 @@
 # helmlint.sh
 # run `helm lint` on all helm charts that are found
 
-set +e -u -o pipefail
+set +e -o pipefail
 
 # verify that we have helm installed
 command -v helm >/dev/null 2>&1 || { echo "helm not found, please install it" >&2; exit 1; }
@@ -29,12 +29,20 @@ fail_lint=0
 # when not running under Jenkins, use current dir as workspace
 WORKSPACE=${WORKSPACE:-.}
 
-for chart in $(find "${WORKSPACE}" -name Chart.yaml -print) ; do
+# cleanup repos if `clean` option passed as parameter
+if [ "$1" = "clean" ]
+then
+  echo "Removing dependent charts"
+  find "${WORKSPACE}" -name 'charts' -exec rm -rf {} \;
+fi
 
+while IFS= read -r -d '' chart
+do
   chartdir=$(dirname "${chart}")
 
-  # update requirements if it exists. Skip voltha as it has non-clean reqirements
-  if [[ ! $chartdir =~ voltha$ ]] && [ -f "${chartdir}/requirements.yaml" ]; then
+  # only update dependencies for profiles
+  if [[ $chartdir =~ xos-profiles ]] && [ -f "${chartdir}/requirements.yaml" ]
+  then
     helm dependency update "${chartdir}"
   fi
 
@@ -49,7 +57,7 @@ for chart in $(find "${WORKSPACE}" -name Chart.yaml -print) ; do
   if [[ $rc != 0 ]]; then
     fail_lint=1
   fi
-done
+done < <(find "${WORKSPACE}" -name Chart.yaml -print0)
 
 if [[ $fail_lint != 0 ]]; then
   exit 1
