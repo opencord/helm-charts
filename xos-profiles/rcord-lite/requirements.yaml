@@ -21,7 +21,7 @@ dependencies:
   version: 2.0.2-dev
   repository: file://../../xos-services/onos-service
 - name: fabric
-  version: 2.0.0
+  version: 2.0.1-dev
   repository: file://../../xos-services/fabric
 - name: volt
   version: 2.0.2-dev

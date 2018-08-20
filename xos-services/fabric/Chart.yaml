@@ -16,4 +16,4 @@
 
 name: fabric
 description: A Helm chart for XOS's "fabric" service
-version: 2.0.0
+version: 2.0.1-dev
