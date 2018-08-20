@@ -37,7 +37,7 @@ spec:
           value: {{ .Values.xosAdminUser | quote }}
         - name: XOS_PASSWD
           value: {{ .Values.xosAdminPassword | quote}}
-      command: ["pybot", "-L", "TRACE", "-d", "Log", "-T", "ATT_Workflow.robot"]
+      command: ["pybot", "-L", "TRACE", "-d", "Log", "-T", "WorkflowValidations/ATT_Workflow.robot"]
   volumes:
     - name: log-volume
       hostPath:
