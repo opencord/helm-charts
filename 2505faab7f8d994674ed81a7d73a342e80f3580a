@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1af6a1d9_abd740f4",
+        "filename": "nem-monitoring/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-08-21T20:28:12Z",
+      "side": 1,
+      "message": "31300 ?",
+      "range": {
+        "startLine": 11,
+        "startChar": 19,
+        "endLine": 11,
+        "endChar": 24
+      },
+      "revId": "2505faab7f8d994674ed81a7d73a342e80f3580a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "38dd58c6_62c5c32c",
+        "filename": "nem-monitoring/templates/NOTES.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-08-21T20:28:12Z",
+      "side": 1,
+      "message": "{{ .Values.grafana.service.nodePort }} \n?",
+      "range": {
+        "startLine": 5,
+        "startChar": 44,
+        "endLine": 5,
+        "endChar": 49
+      },
+      "revId": "2505faab7f8d994674ed81a7d73a342e80f3580a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "077715d8_d98f8e69",
+        "filename": "nem-monitoring/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-08-21T20:28:12Z",
+      "side": 1,
+      "message": "Host this on gerrit?  I\u0027m trying to get golang toolchain/testing supported in Jenkins and could use an example project.",
+      "range": {
+        "startLine": 16,
+        "startChar": 32,
+        "endLine": 16,
+        "endChar": 69
+      },
+      "revId": "2505faab7f8d994674ed81a7d73a342e80f3580a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "cae37708_50cd9586",
+        "filename": "nem-monitoring/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-08-21T20:28:12Z",
+      "side": 1,
+      "message": "Does this require that you name the release `nem-monitoring` with helm for it to function properly?",
+      "range": {
+        "startLine": 203,
+        "startChar": 22,
+        "endLine": 203,
+        "endChar": 54
+      },
+      "revId": "2505faab7f8d994674ed81a7d73a342e80f3580a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
