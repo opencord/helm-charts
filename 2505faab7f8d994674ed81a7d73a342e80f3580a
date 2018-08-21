@@ -71,6 +71,30 @@
     },
     {
       "key": {
+        "uuid": "8185785a_987ad975",
+        "filename": "nem-monitoring/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-08-21T23:34:20Z",
+      "side": 1,
+      "message": "it\u0027s already hosted in gerrit, it does not have unit tests yet so I\u0027m not golang support is urgent",
+      "parentUuid": "077715d8_d98f8e69",
+      "range": {
+        "startLine": 16,
+        "startChar": 32,
+        "endLine": 16,
+        "endChar": 69
+      },
+      "revId": "2505faab7f8d994674ed81a7d73a342e80f3580a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "cae37708_50cd9586",
         "filename": "nem-monitoring/values.yaml",
         "patchSetId": 1
