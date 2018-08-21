@@ -1,0 +1,12 @@
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }}.
+
+You can now access Grafana at: <cluster-ip>:{{ .Values.grafana.service.nodePort }}
+using:
+
+username: {{ .Values.grafana.adminUser}}
+password: {{ .Values.grafana.adminPassword}}
+
+and Prometheus at: <cluster-ip>:{{ .Values.prometheus.server.service.nodePort }}
+
