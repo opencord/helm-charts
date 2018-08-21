@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bcf90340_a6180b86",
+        "filename": ".gitignore",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-08-21T20:10:54Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be \"logging/charts\"?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 16
+      },
+      "revId": "993a1f3915d4f8f13c7fec7da0c9b5382d951e59",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
