@@ -8,5 +8,6 @@ requirements.lock
 xos-core/charts
 voltha/charts
 xos-core/charts
+nem-monitoring/charts/
 xos-profiles/*/charts
 storage/*/charts
