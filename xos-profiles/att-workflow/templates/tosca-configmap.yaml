@@ -27,10 +27,8 @@ data:
 {{ include "volt.serviceTosca" .Values.volt | indent 4 }}
   040-fabric-crossconnect-service.yaml: |
 {{ include "fabric-crossconnect.serviceTosca" (index .Values "fabric-crossconnect") | indent 4 }}
-  060-onos-service-fabric.yaml: |
-{{ include "onos-service.fabricAppTosca" (index .Values "onos-service") | indent 4 }}
-  061-onos-voltha-service-fabric.yaml: |
-{{ include "onos-service.volthaOnosTosca" (index .Values "onos-service") | indent 4 }}
+  061-onos-service.yaml: |
+{{ include "att-workflow.onosTosca" .Values | indent 4 }}
   070-fabric-service.yaml: |
 {{ include "fabric.serviceTosca" .Values.fabric | indent 4 }}
   080-workflow-service.yaml: |

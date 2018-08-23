@@ -30,9 +30,9 @@ data:
   050-vrouter-service.yaml: |
 {{ include "vrouter.serviceTosca" .Values.vrouter | indent 4 }}
   060-onos-service-fabric.yaml: |
-{{ include "onos-service.fabricAppTosca" (index .Values "onos-service") | indent 4 }}
+{{ include "rcord-lite.fabricAppTosca" .Values | indent 4 }}
   061-onos-voltha-service-fabric.yaml: |
-{{ include "onos-service.volthaOnosTosca" (index .Values "onos-service") | indent 4 }}
+{{ include "rcord-lite.volthaOnosTosca" .Values | indent 4 }}
   070-fabric-service.yaml: |
 {{ include "fabric.serviceTosca" .Values.fabric | indent 4 }}
   300-service-graph.yaml: |

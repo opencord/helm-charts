@@ -14,6 +14,224 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */}}
+{{- define "att-workflow.onosTosca" -}}
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+imports:
+   - custom_types/onosapp.yaml
+   - custom_types/onosservice.yaml
+   - custom_types/serviceinstanceattribute.yaml
+
+description: Configures the VOLTHA ONOS service
+
+topology_template:
+  node_templates:
+
+    service#onos:
+      type: tosca.nodes.ONOSService
+      properties:
+          name: onos
+          kind: data
+          rest_hostname: {{ .onosRestService | quote }}
+          rest_port: 8181
+
+    onos_app#openflow-base:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: openflow-base
+        app_id: org.onosproject.openflow-base
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#hostprovider:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: hostprovider
+        app_id: org.onosproject.hostprovider
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#olt:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: olt
+        app_id: org.opencord.olt
+        url: {{ .oltAppUrl }}
+        version: 2.0.0.SNAPSHOT
+        dependencies: org.opencord.sadis
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#sadis:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: sadis
+        app_id: org.opencord.sadis
+        url: {{ .sadisAppUrl }}
+        version: 2.2.0.SNAPSHOT
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#dhcpl2relay:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: dhcpl2relay
+        app_id: org.opencord.dhcpl2relay
+        url: {{ .dhcpl2relayAppUrl }}
+        version: 1.5.0.SNAPSHOT
+        dependencies: org.opencord.sadis
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#aaa:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: aaa
+        app_id: org.opencord.aaa
+        url: {{ .aaaAppUrl }}
+        version: 1.8.0.SNAPSHOT
+        dependencies: org.opencord.sadis
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#kafka:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: kafka
+        app_id: org.opencord.kafka
+        url: {{ .kafkaAppUrl }}
+        version: 1.0.0.SNAPSHOT
+        dependencies: org.opencord.olt,org.opencord.aaa,org.opencord.dhcpl2relay
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
+    # CORD-Configuration
+    kafka-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration/apps/org.opencord.kafka
+        value: >
+          {
+            "kafka" : {
+              "bootstrapServers" : {{ .kafkaService | quote }}
+            }
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#olt
+            relationship: tosca.relationships.BelongsToOne
+
+    olt-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/configuration/org.opencord.olt.impl.Olt?preset=true
+        value: >
+          {
+            "enableDhcpOnProvisioning" : true
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#olt
+            relationship: tosca.relationships.BelongsToOne
+
+    dhcpl2relay-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration/apps/org.opencord.dhcpl2relay
+        value: >
+          {
+            "dhcpl2relay" : {
+              "useOltUplinkForServerPktInOut" : true
+            }
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#dhcpl2relay
+            relationship: tosca.relationships.BelongsToOne
+
+    aaa-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration/apps/org.opencord.aaa
+        value: >
+          {
+            "AAA" : {
+              "radiusConnectionType" : "socket",
+              "radiusHost" : "freeradius.voltha.svc.cluster.local",
+              "radiusServerPort" : "1812",
+              "radiusSecret" : "SECRET"
+            }
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#aaa
+            relationship: tosca.relationships.BelongsToOne
+
+    sadis-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration/apps/org.opencord.sadis
+        value: >
+          {
+            "sadis" : {
+              "integration" : {
+                "cache" : {
+                  "maxsize" : 1000
+                },
+                "url" : "http://sadis-service:8000/subscriber/%s"
+              }
+            }
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#sadis
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#segmentrouting:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.onosproject.segmentrouting
+        app_id: org.onosproject.segmentrouting
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#netcfghostprovider:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.onosproject.netcfghostprovider
+        app_id: org.onosproject.netcfghostprovider
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#openflow:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.onosproject.openflow
+        app_id: org.onosproject.openflow
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+{{- end -}}
+
 {{- define "att-workflow.basicFixturesTosca" -}}
 tosca_definitions_version: tosca_simple_yaml_1_0
 description: Some basic fixtures
@@ -122,16 +340,10 @@ topology_template:
 
 # These services must be defined before loading the graph
 
-    service#ONOS_Fabric:
+    service#onos:
       type: tosca.nodes.ONOSService
       properties:
-        name: ONOS_Fabric
-        must-exist: true
-
-    service#ONOS_VOLTHA:
-      type: tosca.nodes.ONOSService
-      properties:
-        name: ONOS_VOLTHA
+        name: onos
         must-exist: true
 
     service#fabric:
@@ -175,7 +387,7 @@ topology_template:
             node: service#fabric
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
-            node: service#ONOS_Fabric
+            node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
     service_dependency#rcord_volt:
@@ -190,7 +402,7 @@ topology_template:
             node: service#volt
             relationship: tosca.relationships.BelongsToOne
 
-    service_dependency#onos_voltha_volt:
+    service_dependency#onos_volt:
       type: tosca.nodes.ServiceDependency
       properties:
         connect_method: none
@@ -199,7 +411,7 @@ topology_template:
             node: service#volt
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
-            node: service#ONOS_VOLTHA
+            node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
     service_dependency#volt_fabric-crossconnect:
@@ -214,7 +426,7 @@ topology_template:
             node: service#fabric-crossconnect
             relationship: tosca.relationships.BelongsToOne
 
-    service_dependency#onos_fabric_fabric-crossconnect:
+    service_dependency#onos_fabric-crossconnect:
       type: tosca.nodes.ServiceDependency
       properties:
         connect_method: none
@@ -223,7 +435,7 @@ topology_template:
             node: service#fabric-crossconnect
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
-            node: service#ONOS_Fabric
+            node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
     service_dependency#workflow_volt:
@@ -241,6 +453,5 @@ topology_template:
     constraints:
       type: tosca.nodes.ServiceGraphConstraint
       properties:
-        constraints: '[[null, "rcord", null], ["ONOS_VOLTHA", "volt", null], ["ONOS_Fabric", "fabric-crossconnect", "att-workflow-driver"], ["fabric", null, null]]'
+        constraints: '[[null, "rcord", null], ["onos", "volt", null], [null, "fabric-crossconnect", "att-workflow-driver"], ["fabric", null, null]]'
 {{- end -}}
-
