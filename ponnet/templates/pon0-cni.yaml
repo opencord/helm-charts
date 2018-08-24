@@ -96,14 +96,11 @@ data:
         "name": "pon0",
         "type": "bridge",
         "bridge": "pon0",
-        "isGateway": true,
-        "ipMask": true,
+        "isGateway": false,
+        "ipMask": false,
         "ipam": {
         "type": "host-local",
-        "subnet": "10.22.0.0/16",
-        "routes": [
-            { "dst": "0.0.0.0/0" }
-        ]
+        "subnet": "10.22.0.0/16"
       }
     }
 
