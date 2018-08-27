@@ -57,11 +57,17 @@ logging:
       filename: /var/log/xos.log
       maxBytes: 10485760
       backupCount: 5
+    kafka:
+      class: kafkaloghandler.kafkaloghandler.KafkaLogHandler
+      bootstrap_servers:
+        - "cord-kafka:9092"
+      topic: xos.log.openstack
   loggers:
     'multistructlog':
       handlers:
-          - console
-          - file
+        - console
+        - file
+        - kafka
       level: DEBUG
 nova:
   ca_ssl_cert: "/etc/ssl/certs/ca-certificates.crt"
