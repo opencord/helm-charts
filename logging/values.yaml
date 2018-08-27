@@ -81,18 +81,8 @@ logstash:
           consumer_threads => 1
           decorate_events => true
           metadata_max_age_ms => 60000 # recheck for new topics every minute
-          topics_pattern => 'authentication.*|dhcp.*|onos.*|onu.*|xos.*'
+          topics_pattern => 'authentication.*|dhcp.*|onos.*|onu.*|voltha.*|xos.*'
           type => "cord-kafka"
-        }
-        kafka {
-          bootstrap_servers => "voltha-kafka:9092"
-          client_id => "logstash_vk"
-          codec => json { charset => "UTF-8" }
-          consumer_threads => 1
-          decorate_events => true
-          metadata_max_age_ms => 60000 # recheck for new topics every minute
-          topics_pattern => 'voltha.*'
-          type => "voltha-kafka"
         }
       }
 
@@ -102,6 +92,7 @@ logstash:
         mutate {
           add_field => {
             "kafka_topic" => "%{[@metadata][kafka][topic]}"
+            "kafka_key" => "%{[@metadata][kafka][key]}"
             "kafka_timestamp" => "%{[@metadata][kafka][timestamp]}"
           }
         }

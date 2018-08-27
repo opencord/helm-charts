@@ -48,14 +48,6 @@ services:
           port: 50555
           targetPort: 50555
 
-kafka:
-  enabled: false
-  persistence:
-    enabled: false
-  zookeeper:
-    persistence:
-      enabled: false
-
 etcd:
   operator:
     enabled: true
@@ -64,7 +56,7 @@ etcd-operator:
     size: 1
     createEtcdClusterCRD: true
 
-kafkaReleaseName: voltha-kafka
+kafkaReleaseName: cord-kafka
 etcdReleaseName: voltha-etcd
 
 consul:
