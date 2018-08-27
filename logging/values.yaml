@@ -57,6 +57,13 @@ logstash:
   persistence:
     enabled: false
 
+  # Probe default delays are too short, which puts logstash into a reboot loop
+  livenessProbe:
+    initialDelaySeconds: 120
+
+  readinessProbe:
+    initialDelaySeconds: 120
+
   # 'config' k/v are turned into env vars for logstash container
   # ref: https://www.elastic.co/guide/en/logstash/current/docker-config.html#docker-env-config
   # config:
