@@ -408,10 +408,10 @@ topology_template:
         connect_method: none
       requirements:
         - subscriber_service:
-            node: service#volt
+            node: service#onos
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
-            node: service#onos
+            node: service#volt
             relationship: tosca.relationships.BelongsToOne
 
     service_dependency#volt_fabric-crossconnect:
@@ -453,5 +453,5 @@ topology_template:
     constraints:
       type: tosca.nodes.ServiceGraphConstraint
       properties:
-        constraints: '[[null, "rcord", null], ["onos", "volt", null], [null, "fabric-crossconnect", "att-workflow-driver"], ["fabric", null, null]]'
+        constraints: '[[null, "rcord", null], [null, "volt", null], ["onos", "fabric-crossconnect", "att-workflow-driver"], ["fabric", null, null]]'
 {{- end -}}
