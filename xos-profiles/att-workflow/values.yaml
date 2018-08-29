@@ -31,8 +31,6 @@ xos_api_testerImage: 'xosproject/xos-api-tester:master'
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
-sadisServerImage: "opencord/sadis-server:latest"
-
 # ONOS applications
 oltAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=olt-app&v=2.0.0-SNAPSHOT&e=oar"
 sadisAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=sadis-app&v=2.2.0-SNAPSHOT&e=oar"

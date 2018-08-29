@@ -32,3 +32,6 @@ dependencies:
 - name: att-workflow-driver
   version: 1.0.0-dev
   repository: file://../../xos-services/att-workflow-driver
+- name: sadis-server
+  version: 1.0.0-dev
+  repository: file://../../sadis-server
