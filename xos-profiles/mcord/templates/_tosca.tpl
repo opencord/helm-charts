@@ -128,7 +128,7 @@ topology_template:
     vmme_vspgwc:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#vmme
@@ -140,7 +140,7 @@ topology_template:
     vmme_vspgwu:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#vmme
@@ -152,7 +152,7 @@ topology_template:
     vspgwc_vspgwu:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#vspgwc
@@ -164,7 +164,7 @@ topology_template:
     vmme_vhss:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#vmme
@@ -176,7 +176,7 @@ topology_template:
     vhss_hssdb:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#vhss
@@ -188,7 +188,7 @@ topology_template:
     mcord_vmme:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#vmme
