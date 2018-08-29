@@ -15,20 +15,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-{{- define "rcord-lite.fabricAppTosca" -}}
+{{- define "rcord-lite.onosTosca" -}}
 tosca_definitions_version: tosca_simple_yaml_1_0
 imports:
   - custom_types/onosapp.yaml
   - custom_types/onosservice.yaml
+  - custom_types/serviceinstanceattribute.yaml
 description: ONOS service and app for fabric
 topology_template:
   node_templates:
-    service#ONOS_Fabric:
+    service#ONOS:
       type: tosca.nodes.ONOSService
       properties:
-          name: ONOS_Fabric
+          name: ONOS
           kind: data
-          rest_hostname: {{ .onosFabricRestService | quote }}
+          rest_hostname: {{ .onosRestService | quote }}
           rest_port: 8181
 
     onos_app#segmentrouting:
@@ -38,7 +39,7 @@ topology_template:
         app_id: org.onosproject.segmentrouting
       requirements:
         - owner:
-            node: service#ONOS_Fabric
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#vrouter:
@@ -48,7 +49,7 @@ topology_template:
         app_id: org.onosproject.vrouter
       requirements:
         - owner:
-            node: service#ONOS_Fabric
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#netcfghostprovider:
@@ -58,7 +59,7 @@ topology_template:
         app_id: org.onosproject.netcfghostprovider
       requirements:
         - owner:
-            node: service#ONOS_Fabric
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#openflow:
@@ -68,30 +69,8 @@ topology_template:
         app_id: org.onosproject.openflow
       requirements:
         - owner:
-            node: service#ONOS_Fabric
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
-{{- end -}}
-
-{{- define "rcord-lite.volthaOnosTosca" -}}
-tosca_definitions_version: tosca_simple_yaml_1_0
-
-imports:
-   - custom_types/onosapp.yaml
-   - custom_types/onosservice.yaml
-   - custom_types/serviceinstanceattribute.yaml
-
-description: Configures the VOLTHA ONOS service
-
-topology_template:
-  node_templates:
-
-    service#ONOS_VOLTHA:
-      type: tosca.nodes.ONOSService
-      properties:
-          name: ONOS_VOLTHA
-          kind: data
-          rest_hostname: {{ .onosVolthaRestService | quote }}
-          rest_port: 8181
 
     onos_app#openflow-base:
       type: tosca.nodes.ONOSApp
@@ -100,7 +79,7 @@ topology_template:
         app_id: org.onosproject.openflow-base
       requirements:
         - owner:
-            node: service#ONOS_VOLTHA
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#hostprovider:
@@ -110,7 +89,7 @@ topology_template:
         app_id: org.onosproject.hostprovider
       requirements:
         - owner:
-            node: service#ONOS_VOLTHA
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#cord-config:
@@ -122,7 +101,7 @@ topology_template:
         version: 1.4.0
       requirements:
         - owner:
-            node: service#ONOS_VOLTHA
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#olt:
@@ -135,7 +114,7 @@ topology_template:
         dependencies: org.opencord.config
       requirements:
         - owner:
-            node: service#ONOS_VOLTHA
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#sadis:
@@ -147,7 +126,7 @@ topology_template:
         version: 2.1.0
       requirements:
         - owner:
-            node: service#ONOS_VOLTHA
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#dhcpl2relay:
@@ -160,7 +139,7 @@ topology_template:
         dependencies: org.opencord.sadis
       requirements:
         - owner:
-            node: service#ONOS_VOLTHA
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#aaa:
@@ -173,7 +152,7 @@ topology_template:
         dependencies: org.opencord.sadis
       requirements:
         - owner:
-            node: service#ONOS_VOLTHA
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     onos_app#kafka:
@@ -186,7 +165,7 @@ topology_template:
         dependencies: org.opencord.olt,org.opencord.aaa,org.opencord.dhcpl2relay
       requirements:
         - owner:
-            node: service#ONOS_VOLTHA
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     # CORD-Configuration
@@ -324,16 +303,10 @@ topology_template:
 
 # These services must be defined before loading the graph
 
-    service#ONOS_Fabric:
+    service#ONOS:
       type: tosca.nodes.ONOSService
       properties:
-        name: ONOS_Fabric
-        must-exist: true
-
-    service#ONOS_VOLTHA:
-      type: tosca.nodes.ONOSService
-      properties:
-        name: ONOS_VOLTHA
+        name: ONOS
         must-exist: true
 
     service#fabric:
@@ -377,7 +350,7 @@ topology_template:
             node: service#fabric
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
-            node: service#ONOS_Fabric
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     service_dependency#rcord_volt:
@@ -401,7 +374,7 @@ topology_template:
             node: service#volt
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
-            node: service#ONOS_VOLTHA
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     service_dependency#fabric_vrouter:
@@ -410,10 +383,10 @@ topology_template:
         connect_method: none
       requirements:
         - subscriber_service:
-            node: service#fabric
+            node: service#vrouter
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
-            node: service#vrouter
+            node: service#fabric
             relationship: tosca.relationships.BelongsToOne
 
     service_dependency#volt_vsg-hw:
@@ -437,11 +410,11 @@ topology_template:
             node: service#vsg-hw
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
-            node: service#ONOS_Fabric
+            node: service#ONOS
             relationship: tosca.relationships.BelongsToOne
 
     constraints:
       type: tosca.nodes.ServiceGraphConstraint
       properties:
-        constraints: '[[null, "rcord"], ["ONOS_VOLTHA", "volt"], ["ONOS_Fabric", "vsg-hw"], ["fabric", null], ["vrouter", null]]'
+        constraints: '[[null, "rcord"], [null, "volt"], ["ONOS", "vsg-hw"], ["fabric", null], ["vrouter", null]]'
 {{- end -}}

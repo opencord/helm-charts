@@ -24,7 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-vrouter_synchronizerImage: "xosproject/vrouter-synchronizer:{{ .Chart.Version }}"
+vrouter_synchronizerImage: "xosproject/vrouter-synchronizer:master"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
