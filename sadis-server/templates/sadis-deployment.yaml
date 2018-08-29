@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: sadis-server
-          image: {{ .Values.sadisServerImage }}
+          image: {{ .Values.image }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
             - containerPort: 8000
