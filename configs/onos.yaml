@@ -35,6 +35,8 @@ services:
   ui:
     nodePort: 30120
 
+xos_service_label: ONOS
+
 onos_env:
 - name: POD_IP
   valueFrom:
