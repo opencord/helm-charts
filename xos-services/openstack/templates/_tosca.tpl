@@ -29,26 +29,31 @@ topology_template:
       type: tosca.nodes.Flavor
       properties:
         name: m1.tiny
+        flavor: m1.tiny
 
     m1.small:
       type: tosca.nodes.Flavor
       properties:
         name: m1.small
+        flavor: m1.small
 
     m1.medium:
       type: tosca.nodes.Flavor
       properties:
         name: m1.medium
+        flavor: m1.medium
 
     m1.large:
       type: tosca.nodes.Flavor
       properties:
         name: m1.large
+        flavor: m1.large
 
     m1.xlarge:
       type: tosca.nodes.Flavor
       properties:
         name: m1.xlarge
+        flavor: m1.xlarge
 {{- end -}}
 
 {{- define "openstack.networkTosca" -}}
