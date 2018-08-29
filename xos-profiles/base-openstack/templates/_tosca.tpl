@@ -111,7 +111,7 @@ topology_template:
     service_dependency#onos-cord_vtn:
       type: tosca.nodes.ServiceDependency
       properties:
-        connect_method: None
+        connect_method: none
       requirements:
         - subscriber_service:
             node: service#ONOS_CORD

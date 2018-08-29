@@ -32,7 +32,7 @@ topology_template:
       type: tosca.nodes.VTNService
       properties:
           name: vtn
-          kind: platform
+          kind: control
           privateGatewayMac: 00:00:00:00:00:01
           localManagementIp: 172.27.0.1/24
           ovsdbPort: 6641
