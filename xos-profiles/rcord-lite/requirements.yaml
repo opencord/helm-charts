@@ -30,5 +30,8 @@ dependencies:
   version: 1.0.0
   repository: file://../../xos-services/vsg-hw
 - name: vrouter
-  version: 2.0.0
+  version: 2.0.1-dev
   repository: file://../../xos-services/vrouter
+- name: sadis-server
+  version: 1.0.0-dev
+  repository: file://../../sadis-server

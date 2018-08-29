@@ -70,5 +70,5 @@ logging:
       handlers:
           - console
           - file
-      level: DEBUG
+      level: INFO
 {{- end -}}
