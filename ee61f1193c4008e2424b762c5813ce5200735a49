@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ec03c9c_5310ab41",
+        "filename": "resources/mininet/mininet.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2018-08-30T22:28:01Z",
+      "side": 1,
+      "message": "why don\u0027t we create an helm-chart for this?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 30
+      },
+      "revId": "ee61f1193c4008e2424b762c5813ce5200735a49",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
