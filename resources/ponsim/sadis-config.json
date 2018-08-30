@@ -1,0 +1,24 @@
+{
+    "sadis": {
+	"integration": {
+	    "cache": {
+		"maxsize": 1000
+	    }
+	},
+        "entries" : [
+	    {
+		"id" : "olt:50060",
+		"hardwareIdentifier" : "aa:bb:cc:dd:ee:ff",
+		"uplinkPort" : 2
+	    },
+	    {
+		"id": "PSMO12345678",
+		"cTag": 111,
+		"sTag": 222,
+		"nasPortId": "PON 1/1/03/1:1.1.1",
+		"circuitId": "foo",
+		"remoteId": "bar"
+	    }
+	]
+    }
+}
