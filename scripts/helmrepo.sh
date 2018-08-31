@@ -17,7 +17,7 @@
 # helmrepo.sh
 # creates a helm repo for publishing on guide website
 
-set -e -u -o pipefail
+set -eu -o pipefail
 
 REPO_DIR="${REPO_DIR:-chart_repo}"
 
@@ -26,15 +26,15 @@ PUBLISH_URL="${PUBLISH_URL:-https://charts.opencord.org/${GERRIT_BRANCH}}"
 
 mkdir -p "${REPO_DIR}"
 
-for chart in $(find . -name Chart.yaml -print) ; do
-
+while IFS= read -r -d '' chart
+do
   chartdir=$(dirname "${chart}")
 
   echo "Adding ${chartdir}"
 
   helm package --dependency-update --destination "${REPO_DIR}" "${chartdir}"
 
-done
+done < <(find "${WORKSPACE}" -name Chart.yaml -print0)
 
 echo "Generating repo index"
 
