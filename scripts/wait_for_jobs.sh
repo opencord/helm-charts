@@ -14,11 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# wait-for-jobs.sh
+# wait_for_jobs.sh
 # waits for all kubernetes jobs to complete before exiting
 # inspired by similar scripts in Kolla-Kubernetes and Openstack Helm
 
-set -e -u -o pipefail
+set -eu -o pipefail
 fail_wfj=0
 
 # Set these to configure maximum timeout, and interval for checks
@@ -41,16 +41,19 @@ while true; do
   # handle timeout without completion
   if [ "$NOW" -gt "$END_TIME" ]
   then
-    echo "Jobs didn't complete before timout of ${JOBS_TIMEOUT} seconds"
+    echo "Jobs didn't complete before timeout of ${JOBS_TIMEOUT} seconds"
     fail_wfj=1
     break
   fi
 
   # get list of active jobs, and count of them
   # jsonpath is picky about string vs comparison quoting, so have to have:
-  # shellcheck disable=SC2026
+  # shellcheck disable=SC2026,SC2086
   active_jobs=$(kubectl get jobs $KUBECTL_ARGS -o=jsonpath='{range .items[?(@.status.active=='1')]}{.metadata.name}{"\n"}{end}')
-  active_job_count=$(echo "${active_jobs}" | wc -l)
+
+  # this always is 1 or more, as echo leaves a newline in the output which wc
+  # counts as a line
+  active_job_count=$(echo -n "${active_jobs}" | wc -l)
 
   # if no jobs active, print runtime and break
   if [ -z "$active_jobs" ]
@@ -71,12 +74,13 @@ while true; do
   prev_job_count=$active_job_count
 
   # print number of remaining jobs every $CHECK_INTERVAL
-  echo -n "$active_job_count"
+  echo -n "$active_job_count "
   sleep "$CHECK_INTERVAL"
 done
 
 echo ""
 echo "Job Status - Name | Start Time | Completion Time"
+# shellcheck disable=SC2086
 kubectl get jobs $KUBECTL_ARGS -o=jsonpath='{range .items[*]}{.metadata.name}{"\t| "}{.status.startTime}{" | "}{.status.completionTime}{"\n"}{end}'
 
 exit ${fail_wfj}
