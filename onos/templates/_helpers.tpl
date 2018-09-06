@@ -97,4 +97,5 @@ log4j.appender.sift.appender.append=true
 # Application logs
 log4j.logger.org.opencord.olt = DEBUG
 log4j.logger.org.opencord.kafka = DEBUG
+log4j.logger.org.opencord.sadis = DEBUG
 {{- end -}}
