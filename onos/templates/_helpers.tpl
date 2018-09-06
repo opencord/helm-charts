@@ -95,6 +95,6 @@ log4j.appender.sift.appender.file=${karaf.data}/log/$\\{bundle.name\\}.log
 log4j.appender.sift.appender.append=true
 
 # Application logs
-log4j.logger.org.opencord.olt = DEBUG
-log4j.logger.org.opencord.kafka = DEBUG
+{{ .Values.application_logs }}
+
 {{- end -}}

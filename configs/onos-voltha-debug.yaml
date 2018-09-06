@@ -14,47 +14,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Default values for onos.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# Expose ONOS services using NodePorts, for onos-voltha configuration
+#
+# helm install onos -f configs/onos-voltha.yaml -n onos-voltha
 
-replicaCount: 1
+nameOverride: "onosv"
+fullnameOverride: "onos-voltha"
 
-imagePullPolicy: Always
 onosImage: 'onosproject/onos:1.13.2'
-
-nameOverride: ""
-fullnameOverride: ""
-
-namespace: default
-serviceAccountName: default
 
 services:
   openflowServiceType: ClusterIP
   ovsdbServiceType: ClusterIP
-  sshServiceType: ClusterIP
-  uiServiceType: ClusterIP
-  ovsdb:
-    port: 6640
-  openflow:
-    port: 6653
+  sshServiceType: NodePort
+  uiServiceType: NodePort
   ssh:
-    port: 8101
+    nodePort: 30115
   ui:
-    port: 8181
-  cluster:
-    port: 9876
+    nodePort: 30120
 
-onos_env: []
+onos_env:
+- name: POD_IP
+  valueFrom:
+  fieldRef:
+    fieldPath: status.podIP
+- name: NAMESPACE
+  valueFrom:
+  fieldRef:
+    fieldPath: metadata.namespace
+- name: ONOS_APPS
+  value: "drivers,openflow-base"
 
-resources: {}
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
-
-xos_service_label: ""
-
-application_logs: ""
+application_logs: |
+  log4j.logger.org.opencord.olt = DEBUG
+  log4j.logger.org.opencord.kafka = DEBUG
+  log4j.logger.org.opencord.sadis = DEBUG
