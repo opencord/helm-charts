@@ -64,6 +64,9 @@ spec:
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
+            - name: onos-logs-cfg
+              mountPath: /root/onos/apache-karaf-3.0.8/etc/org.ops4j.pax.logging.cfg
+              subPath: org.ops4j.pax.logging.cfg
             - name: node-key
               mountPath: /root/vtn
               readOnly: true
@@ -73,6 +76,12 @@ spec:
             secretName: node-key
             defaultMode: 256
             optional: true
+        - name: onos-logs-cfg
+          configMap:
+            name: onos
+            items:
+              - key: logCfg
+                path: org.ops4j.pax.logging.cfg
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
