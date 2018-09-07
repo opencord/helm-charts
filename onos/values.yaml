@@ -34,6 +34,7 @@ services:
   ovsdbServiceType: ClusterIP
   sshServiceType: ClusterIP
   uiServiceType: ClusterIP
+  debuggerServiceType: NodePort
   ovsdb:
     port: 6640
   openflow:
@@ -42,6 +43,8 @@ services:
     port: 8101
   ui:
     port: 8181
+  debugger:
+    port: 5005
   cluster:
     port: 9876
 

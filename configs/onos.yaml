@@ -34,6 +34,9 @@ services:
     nodePort: 30115
   ui:
     nodePort: 30120
+  intellij_debugger:
+    nodePort: 30555
+
 
 xos_service_label: ONOS
 
