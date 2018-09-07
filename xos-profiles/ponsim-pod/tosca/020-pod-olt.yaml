@@ -34,7 +34,7 @@ topology_template:
       properties:
         name: PONSIM OLT
         device_type: ponsim_olt
-        host: olt
+        host: olt.voltha.svc
         port: 50060
         switch_datapath_id: of:0000000000000001
         switch_port: "2"
