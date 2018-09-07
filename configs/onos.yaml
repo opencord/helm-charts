@@ -21,7 +21,7 @@
 nameOverride: "onos"
 fullnameOverride: "onos"
 
-onosImage: 'onosproject/onos:1.13.2'
+onosImage: 'onosproject/onos:1.13.3'
 
 services:
   openflowServiceType: NodePort
@@ -34,6 +34,9 @@ services:
     nodePort: 30115
   ui:
     nodePort: 30120
+  debugger:
+    nodePort: 30555
+
 
 xos_service_label: ONOS
 
