@@ -63,15 +63,15 @@ etcdReleaseName: voltha-etcd
 consul:
   enabled: false
 
-envoyForEtcdImage: 'voltha/voltha-envoy:1.4.0'
+envoyForEtcdImage: 'voltha/voltha-envoy:latest'
 freeradiusImage: 'tpdock/freeradius:latest'
-netconfImage: 'voltha/voltha-netconf:1.4.0'
-ofagentImage: 'voltha/voltha-ofagent:1.4.0'
-vcliImage: 'voltha/voltha-cli:1.4.0'
-vcoreImage: 'voltha/voltha-voltha:1.4.0'
+netconfImage: 'voltha/voltha-netconf:latest'
+ofagentImage: 'voltha/voltha-ofagent:latest'
+vcliImage: 'voltha/voltha-cli:latest'
+vcoreImage: 'voltha/voltha-voltha:latest'
 httpBackendImage: 'gcr.io/google_containers/defaultbackend:1.4'
 ingressControllerImage: 'quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.10.2'
-alarmGeneratorImage: "voltha/voltha-alarm-generator:1.4.0"
+alarmGeneratorImage: "voltha/voltha-alarm-generator:latest"
 
 # Need the namespace global for kafka
 global:
