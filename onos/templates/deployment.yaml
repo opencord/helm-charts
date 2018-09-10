@@ -48,6 +48,7 @@ spec:
         - name: {{ .Chart.Name }}
           image: {{ .Values.onosImage }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
+          command: ["./bin/onos-service", "server", "debug"]
           env:
 {{ toYaml .Values.onos_env | indent 12 }}
           ports:
@@ -61,6 +62,8 @@ spec:
               containerPort: {{ .Values.services.ui.port }}
             - name: cluster
               containerPort: {{ .Values.services.cluster.port }}
+            - name: debugger
+              containerPort: {{ .Values.services.debugger.port }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
