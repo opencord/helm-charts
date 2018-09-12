@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3e634417_4637eb0e",
+        "filename": "ves-agent/values.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-09-12T18:10:51Z",
+      "side": 1,
+      "message": "Do you need the `voltha-ves-agent` to be built and pushed to Dockerhub or some other public location?",
+      "range": {
+        "startLine": 19,
+        "startChar": 13,
+        "endLine": 19,
+        "endChar": 71
+      },
+      "revId": "d3556980e5b3adb7357b28b7640d6a2cd4040c2b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
