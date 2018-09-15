@@ -132,7 +132,7 @@ topology_template:
           }
       requirements:
         - service_instance:
-            node: onos_app#olt
+            node: onos_app#kafka
             relationship: tosca.relationships.BelongsToOne
 
     olt-config-attr:
