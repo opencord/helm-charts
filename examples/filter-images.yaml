@@ -17,9 +17,7 @@
 
 docker_image_whitelist:
 - nginx
-- node
 - postgres
-- redis
 
 # xos-core images
 - xosproject/chameleon

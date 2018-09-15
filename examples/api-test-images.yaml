@@ -33,7 +33,5 @@ docker_image_whitelist:
 - xosproject/fabric-synchronizer
 - xosproject/fabric-crossconnect-synchronizer
 - xosproject/xos-api-tester
-- node
 - postgres
-- redis
 

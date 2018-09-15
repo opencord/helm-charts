@@ -20,9 +20,6 @@ gateway_config:
   xos:
     host: xost
     port: 9000
-  redis:
-    host: redis
-    port: 6379
   gateway:
     port: 3000
 {{- end }}

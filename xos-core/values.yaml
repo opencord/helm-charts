@@ -25,9 +25,6 @@ xos_chameleonImage: 'xosproject/chameleon:master'
 xos_toscaImage: 'xosproject/xos-tosca:master'
 xos_api_testerImage: 'xosproject/xos-api-tester:master'
 
-nodeImage: 'node:7.9.0'
-redisImage: 'redis:3.2'
-
 # NodePorts
 xos_chameleonNodePort: 30006
 xos_toscaNodePort: 30007
