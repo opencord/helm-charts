@@ -32,3 +32,6 @@ freeradiusImage: 'tpdock/freeradius:latest'
 netconfImage: 'voltha/voltha-netconf:latest'
 ofagentImage: 'voltha/voltha-ofagent:latest'
 vcliImage: 'voltha/voltha-cli:latest'
+etcd-operator:
+  etcdCluster:
+    size: 1
