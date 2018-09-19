@@ -23,6 +23,7 @@ replicas:
   ofagent: 1
   netconf: 1
   envoy_for_etcd: 1
+  alarm_generator: 1
 
 
 node_ports:
@@ -76,6 +77,7 @@ netconfImage: 'voltha/voltha-netconf:1.4.0'
 ofagentImage: 'voltha/voltha-ofagent:1.4.0'
 vcliImage: 'voltha/voltha-cli:1.4.0'
 vcoreImage: 'voltha/voltha-voltha:1.4.0'
+alarmGeneratorImage: "voltha/voltha-alarm-generator:1.4.0"
 
 # Need the namespace global for kafka
 global:
@@ -100,3 +102,12 @@ netconf_args:
 - "-v"
 - "--consul=consul:8500"
 - "--grpc-endpoint=voltha:50555"
+
+alarm_generator_args:
+- "-C=consul:8500"
+- "-g=voltha:50555"
+- "-G"
+- "-r=1"
+- "-u=2"
+- "-i=0"
+- "-o=00012bc90d6552dd"
