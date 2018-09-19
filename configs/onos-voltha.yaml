@@ -24,7 +24,7 @@ fullnameOverride: "onos-voltha"
 namespace: voltha
 serviceAccountName: voltha-serviceaccount
 
-onosImage: 'voltha/voltha-onos:latest'
+onosImage: 'voltha/voltha-onos:1.4.0'
 
 services:
   openflowServiceType: ClusterIP
