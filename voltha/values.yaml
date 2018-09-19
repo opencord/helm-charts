@@ -23,6 +23,7 @@ replicas:
   ofagent: 1
   netconf: 1
   envoy_for_etcd: 1
+  alarm_generator: 1
 
 
 node_ports:
@@ -70,6 +71,7 @@ vcliImage: 'voltha/voltha-cli:1.4.0'
 vcoreImage: 'voltha/voltha-voltha:1.4.0'
 httpBackendImage: 'gcr.io/google_containers/defaultbackend:1.4'
 ingressControllerImage: 'quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.10.2'
+alarmGeneratorImage: "voltha/voltha-alarm-generator:1.4.0"
 
 # Need the namespace global for kafka
 global:
@@ -94,3 +96,16 @@ netconf_args:
 - "-v"
 - "--consul=consul:8500"
 - "--grpc-endpoint=voltha:50555"
+
+# set alarm_generator_enable to true to enable alarm generator container.
+# uncomment the intf_id and onu_id arguments if no olt is physically present, and a fake onu_id should be used.
+
+alarm_generator_enable: false
+alarm_generator_args:
+- "--consul=consul:8500"
+- "--grpc-endpoint=voltha:50555"
+- "--global_request"
+- "--rate=1"
+- "--duration=2"
+#- "--intf_id=0"
+#- "--onu_id=00012bc90d6552dd"
