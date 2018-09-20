@@ -14,33 +14,9 @@
 # limitations under the License.
 
 dependencies:
-- name: vmme
-  version: 1.0.1
-  repository: file://../../xos-services/vmme
-- name: vspgwc
+- name: vepcservice
   version: 1.0.0
-  repository: file://../../xos-services/vspgwc
-- name: vspgwu
-  version: 1.0.0
-  repository: file://../../xos-services/vspgwu
-- name: vhss
-  version: 1.0.1
-  repository: file://../../xos-services/vhss
-- name: hssdb
-  version: 1.0.0
-  repository: file://../../xos-services/hssdb
-- name: internetemulator
-  version: 1.0.0
-  repository: file://../../xos-services/internetemulator
-- name: sdncontroller
-  version: 1.0.0
-  repository: file://../../xos-services/sdncontroller
-- name: epc-service
-  version: 1.0.0
-  repository: file://../../xos-services/epc-service
-- name: mcord-subscriber
-  version: 2.0.0
-  repository: file://../../xos-services/mcord-subscriber
+  repository: file://../../xos-services/vepcservice
 - name: progran
   version: 2.0.0
   repository: file://../../xos-services/progran
