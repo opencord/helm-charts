@@ -1,0 +1,109 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ngic
+  namespace: {{ .Release.Name }}
+spec:
+  selector:
+    app: ngic
+  clusterIP: None
+  ports:
+  - name: s11
+    port: {{ .Values.ngic.ports.s11 }}
+    protocol: UDP
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ngic
+  namespace: {{ .Release.Name }}
+  labels:
+    app: ngic
+spec:
+  replicas: {{ .Values.ngic.replicas }}
+  selector:
+    matchLabels:
+      app: ngic
+  serviceName: "ngic"
+  template:
+    metadata:
+      namespace: {{ .Release.Name }}
+      labels:
+        app: ngic
+      annotations:
+        kubernetes.v1.cni.cncf.io/networks: '[
+                { "name": "s1u-net", "interfaceRequest": "s1u-net" },
+                { "name": "sgi-net", "interfaceRequest": "sgi-net" }
+        ]'
+    spec:
+      initContainers:
+      - name: init-iptables
+        image: {{ .Values.ngic.images.init }}
+        command: [ "sh", "-c"]
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+        args:
+        - iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP;
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: ngic-cp
+        image: {{ .Values.ngic.images.cp }}
+        stdin: true
+        command: [ "bash",  "-cx", ". /opt/ngic/config/cp_config.cfg; ./ngic_controlplane  $EAL_ARGS -- $APP_ARGS"]
+        #command: ["sleep", "3600"]
+        tty: true
+        env:
+          - name: MME_S11_IP
+            value: mme-0.mme.{{ .Release.Name }}.svc.cluster.local
+          - name: APN
+            value: {{ .Values.ngic.apn }}
+          - name: IP_POOL_IP
+            value: {{ .Values.ngic.cp.ue_ip_pool }}
+          - name: IP_POOL_MASK
+            value: {{ .Values.ngic.cp.ue_ip_pool_mask }}
+          - name: S11_TEID_POOL_START
+            value: "00100000"
+          - name: S11_TEID_POOL_STOP
+            value: "001fffff"
+          - name: S1U_TEID_POOL_START
+            value: "00100000"
+          - name: S1U_TEID_POOL_STOP
+            value: "001fffff"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/ngic/config
+        resources:
+          limits:
+            cpu: {{ .Values.ngic.cp.resources.cpu }}
+            memory: {{ .Values.ngic.cp.resources.mem }}
+      - name: ngic-dp
+        image: {{ .Values.ngic.images.dp }}
+        stdin: true
+        tty: true
+        env:
+        - name: RTR_SGI_IP
+          value: {{ .Values.ngic.dp.rtr_sgi_ip }}
+        - name: SGI_MASK
+          value: {{ .Values.ngic.dp.sgi_mask }}
+        command: [ "bash",  "-cx", ". /opt/ngic/config/dp_config.cfg ; ./ngic_dataplane $EAL_ARGS -- $APP_ARGS"]
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/ngic/config
+        resources:
+          limits:
+            cpu: {{ .Values.ngic.dp.resources.cpu }}
+            memory: {{ .Values.ngic.dp.resources.mem }}
+            intel.com/sriov: '2'
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+              - NET_ADMIN
+              - IPC_LOCK
+      volumes:
+        - name: config-volume
+          configMap:
+            name: ngic-config
