@@ -1,0 +1,153 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Name }}
+  name: ngic
+spec:
+  selector:
+    app: ngic
+  clusterIP: None
+  ports:
+  - name: s11
+    port: {{ .Values.ngic.ports.s11 }}
+    protocol: UDP
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: {{ .Release.Name }}
+  name: ngic
+  labels:
+    app: ngic
+spec:
+  replicas: {{ .Values.ngic.replicas }}
+  selector:
+    matchLabels:
+      app: ngic
+  serviceName: "ngic"
+  template:
+    metadata:
+      namespace: {{ .Release.Name }}
+      labels:
+        app: ngic
+      annotations:
+        kubernetes.v1.cni.cncf.io/networks: '[
+                { "name": "s1u-net-dpdk", "interfaceRequest": "s1u-net" },
+                { "name": "sgi-net-dpdk", "interfaceRequest": "sgi-net" }
+        ]'
+    spec:
+      initContainers:
+      - name: init-iptables
+        image: {{ .Values.ngic.images.init }}
+        command: [ "sh", "-c"]
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+        args:
+        - iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP;
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: ngic-cp
+        image: {{ .Values.ngic.images.cp }}
+        imagePullPolicy: Always
+        stdin: true
+        command: [ "bash",  "-cx", ". /opt/ngic/config/cp_config.cfg; sleep 20; ./ngic_controlplane  $EAL_ARGS -- $APP_ARGS"]
+        #command: ["sleep", "3600"]
+        tty: true
+        env:
+        - name: MME_S11_IP
+          value: mme-0.mme.{{ .Release.Name }}.svc.cluster.local
+        #- name: SGW_S1U_IP  # for now,this will be in our own pod
+        #  value: "5.5.5.5"
+        - name: APN
+          value: {{ .Values.ngic.apn }}
+        - name: IP_POOL_IP
+          value: "{{ .Values.ngic.cp.ue_ip_pool }}"
+        - name: IP_POOL_MASK
+          value: "{{ .Values.ngic.cp.ue_ip_pool_mask }}"
+        - name: S11_TEID_POOL_START
+          value: "00100000"
+        - name: S11_TEID_POOL_STOP
+          value: "001fffff"
+        - name: S1U_TEID_POOL_START
+          value: "00100000"
+        - name: S1U_TEID_POOL_STOP
+          value: "001fffff"
+        - name: MEM_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              containerName: ngic-cp
+              resource: limits.memory
+              divisor: 1Mi
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/ngic/config
+        #- name: hugepage
+        #  mountPath: /dev/hugepages
+        - name: shared-data
+          mountPath: /opt/ngic/config/shared
+        resources:
+          limits:
+            #hugepages-1Gi: 4Gi
+            cpu: {{ .Values.ngic.cp.resources.cpu }}
+            memory: {{ .Values.ngic.cp.resources.mem }}
+      - name: ngic-dp
+        image: {{ .Values.ngic.images.dp }}
+        imagePullPolicy: Always
+        stdin: true
+        tty: true
+        env:
+        - name: RTR_SGI_IP
+          value: {{ .Values.ngic.dp.rtr_sgi_ip }}
+        - name: SGI_MASK
+          value: {{ .Values.ngic.dp.sgi_mask }}
+        - name: MEM_LIMIT
+          valueFrom:
+            resourceFieldRef:
+              containerName: ngic-dp
+              resource: limits.memory
+              divisor: 1Mi
+        command: [ "bash",  "-cx", ". /opt/ngic/config/dp_config.cfg ; ./ngic_dataplane  $EAL_ARGS -- $APP_ARGS"]
+        #command: ["sleep", "3600"]
+        volumeMounts:
+        - name: config-volume
+          mountPath: /opt/ngic/config
+        - name: hugepage
+          mountPath: /dev/hugepages
+        - name: shared-data
+          mountPath: /opt/ngic/config/shared
+        - name: sriov-volume
+          mountPath: /sriov-cni
+        - name: vfio-volume
+          mountPath: /dev/vfio
+        resources:
+          limits:
+            hugepages-1Gi: {{ .Values.ngic.dp.resources.hugepage }}
+            cpu: {{ .Values.ngic.dp.resources.cpu }}
+            memory: {{ .Values.ngic.dp.resources.mem }}
+            intel.com/sriov: '2'
+        securityContext:
+          privileged: true
+          #capabilities:
+          #  add:
+          #    - NET_ADMIN
+          #    - IPC_LOCK
+      volumes:
+        - name: config-volume
+          configMap:
+            name: ngic-config
+        - name: hugepage
+          emptyDir:
+            medium: HugePages
+        - name: shared-data
+          emptyDir: {}
+        - name: sriov-volume
+          hostPath:
+            path: /var/lib/cni/sriov
+            type: Directory
+        - name: vfio-volume
+          hostPath:
+            path: /dev/vfio
+            type: Directory

@@ -1,0 +1,53 @@
+# Default values for mcord-vepc-helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+hss:
+  # TODO: init UE's IMEI to DB?
+  images:
+    init: "ngick8stesting/c3po-cassandra:5e2eaf6"
+    hss: "ngick8stesting/c3po-hss:5e2eaf6"
+  ports:
+    s6a: 3868
+    secs6a: 5868
+  replicas: 1
+  resources:
+    cpu: 3
+    mem: "1Gi"
+
+mme:
+  images:
+    init: "ngick8stesting/c3po-mmeinit"
+    mme: "ngick8stesting/c3po-mme:5e2eaf6"
+  ports:
+    s11: 2123
+    s1ap: 36412
+    s6a: 3868
+  replicas: 1
+  enb_s1ap_ip: "119.0.0.10"
+  resources:
+    cpu: 3
+    mem: "1Gi"
+
+ngic:
+  images:
+    init: "ngick8stesting/c3po-mmeinit"
+    cp: "ngick8stesting/ngic-cp:690f418"
+    dp: "ngiccorddemo/ngic-dp:690f418"
+  replicas: 1
+  ports:
+    s11: 2123
+  apn: "apn1"
+  cp:
+    ue_ip_pool: "16.0.0.0"
+    ue_ip_pool_mask: "255.240.0.0"
+    resources:
+      cpu: 3
+      mem: "5Gi"
+  dp:
+    rtr_sgi_ip: "13.1.1.254"
+    sgi_mask: "255.255.255.0"
+    resources:
+      cpu: 8
+      mem: "1Gi"
+      hugepage: "8Gi"

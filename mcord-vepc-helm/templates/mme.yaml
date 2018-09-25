@@ -1,0 +1,98 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Release.Name }}
+  name: mme
+spec:
+  selector:
+    app: mme
+  clusterIP: None
+  ports:
+  - name: s11
+    port: {{ .Values.mme.ports.s11 }}
+    protocol: UDP
+  - name: s1ap
+    port: {{ .Values.mme.ports.s1ap }}
+    protocol: TCP
+  - name: s6a
+    port: {{ .Values.mme.ports.s6a }}
+    protocol: TCP
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: {{ .Release.Name }}
+  name: mme
+  labels:
+    app: mme
+spec:
+  replicas: {{ .Values.mme.replicas }}
+  selector:
+    matchLabels:
+      app: mme
+  serviceName: "mme"
+  template:
+    metadata:
+      namespace: {{ .Release.Name }}
+      labels:
+        app: mme
+    spec:
+      terminationGracePeriodSeconds: 1
+      initContainers:
+      - name: init-mme
+        image: {{ .Values.mme.images.init }}
+        command: [ "sh", "-c"]
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+        args:
+        - iptables -A OUTPUT -p sctp --sport {{ .Values.mme.ports.s1ap }} --chunk-types any ABORT -j DROP;
+          until nslookup hss-0.hss.{{ .Release.Name }}.svc.cluster.local;
+          do echo waiting for hss; sleep 2; done;
+      containers:
+      - name: mme
+        image: {{ .Values.mme.images.mme }}
+        imagePullPolicy: Always
+        env:
+          - name: SGW_S11_IP
+            value: ngic-0.ngic.{{ .Release.Name }}.svc.cluster.local
+          - name: MME_ETH0_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          - name: ENB_S1AP_IP
+            value: {{ .Values.mme.enb_s1ap_ip }}
+          - name: ENB_S1AP_PORT
+            value: "{{ .Values.mme.ports.s1ap }}"   #ng4t uses 32767
+          - name: CONNECT_PEER
+            value: hss-0.hss.{{ .Release.Name }}.svc.cluster.local
+          - name: VAR_HSS_REALM
+            value: hss.{{ .Release.Name }}.svc.cluster.local
+          - name: HSS_S6A_IP
+            value: hss-0.hss.{{ .Release.Name }}.svc.cluster.local
+          - name: HSS_PORT
+            value: "{{ .Values.mme.ports.s6a }}"
+        stdin: true
+        tty: true
+        #command: [ "sleep", "3600"]
+        resources:
+          limits:
+            cpu: {{ .Values.mme.resources.cpu }}
+            memory: {{ .Values.mme.resources.mem }}
+        volumeMounts:
+        - name: mme-script
+          mountPath: /opt/c3po/mme/bin/launch.sh
+          subPath: launch.sh
+        - name: mme-config
+          mountPath: /etc/mme/conf
+      volumes:
+      - name: mme-script
+        configMap:
+          name: mme
+          defaultMode: 493
+      - name: mme-config
+        configMap:
+          name: mme
+          defaultMode: 420
