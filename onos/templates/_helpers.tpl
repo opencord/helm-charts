@@ -67,7 +67,7 @@ Create chart name and version as used by the chart label.
 ################################################################################
 
 # Root logger
-log4j.rootLogger=INFO, out, osgi:*, stdout
+log4j.rootLogger=INFO, out, json, osgi:*, stdout
 log4j.throwableRenderer=org.apache.log4j.OsgiThrowableRenderer
 
 # CONSOLE appender not used by default
@@ -84,7 +84,17 @@ log4j.appender.out.append=true
 log4j.appender.out.maxFileSize=10MB
 log4j.appender.out.maxBackupIndex=10
 
-# Sift appender
+# JSON-ish appender (doesn't handle quotes in fields correctly)
+# docs: https://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html
+log4j.appender.json=org.apache.log4j.RollingFileAppender
+log4j.appender.json.layout=org.apache.log4j.PatternLayout
+log4j.appender.json.layout.ConversionPattern={"@timestamp":"%d{yyyy-MM-dd'T'HH:mm:ss.SSS'Z'}","levelname":"%p","threadName":"%t","category":"%c{1}","bundle.id":"%X{bundle.id}","bundle.name":"%X{bundle.name}","bundle.version":"%X{bundle.version}","message":"%m"}%n
+log4j.appender.json.file=${karaf.data}/log/karaf_json.log
+log4j.appender.json.append=true
+log4j.appender.json.maxFileSize=10MB
+log4j.appender.json.maxBackupIndex=10
+
+# Sift appender - one logfile per bundle ID
 log4j.appender.sift=org.apache.log4j.sift.MDCSiftingAppender
 log4j.appender.sift.key=bundle.name
 log4j.appender.sift.default=karaf
