@@ -21,7 +21,22 @@
 replicaCount: 1
 
 imagePullPolicy: Always
-onosImage: 'onosproject/onos:1.13.4'
+onosImage: 'onosproject/onos:1.13.5'
+
+images:
+
+  # keep in sync with: https://github.com/helm/charts/blob/master/stable/filebeat/values.yaml
+  log_agent:
+    repository: docker.elastic.co/beats/filebeat-oss
+    tag: 6.4.2
+    pullPolicy: IfNotPresent
+
+global:
+  registry: ''
+
+log_agent:
+  enabled: True
+  kafka_brokers: ['cord-kafka:9092']
 
 nameOverride: ""
 fullnameOverride: ""
