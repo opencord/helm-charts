@@ -45,6 +45,19 @@ kibana:
   env:
     ELASTICSEARCH_URL: "http://logging-elasticsearch-client:9200"
 
+  dashboardImport:
+    dashboards:
+      1_create_index: |-
+        {
+          "_id": "00000000-0000-0000-0000-000000005eba",
+          "_type": "index-pattern",
+          "_source": {
+            "title": "logstash-*",
+            "timeFieldName": "@timestamp",
+            "fields": "[{\"name\":\"@timestamp\",\"type\":\"date\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+            }
+        }
+
 # logstash config
 # ref: https://github.com/helm/charts/tree/master/incubator/logstash
 logstash:
@@ -75,13 +88,16 @@ logstash:
     main: |-
       input {
         kafka {
+          auto_offset_reset => "earliest" # get all previous items from new topics
           bootstrap_servers => "cord-kafka:9092"
           client_id => "logstash_ck"
           codec => json { charset => "UTF-8" }
           consumer_threads => 1
           decorate_events => true
+          group_id => "logstash_ck"
           metadata_max_age_ms => 60000 # recheck for new topics every minute
-          topics_pattern => 'authentication.*|dhcp.*|onos.*|onu.*|voltha.*|xos.*'
+          # other topics that are not indexed: xos.gui_events, voltha.kpis, voltha.heartbeat
+          topics_pattern => '*.events|dhcp.*|onos.*|voltha.log*|xos.log*'
           type => "cord-kafka"
         }
       }
@@ -95,12 +111,6 @@ logstash:
             "kafka_key" => "%{[@metadata][kafka][key]}"
             "kafka_timestamp" => "%{[@metadata][kafka][timestamp]}"
           }
-        }
-
-        date {
-          match => [ "ts", "UNIX" ]
-          target => "voltha_ts"
-          tag_on_failure => []
         }
 
         json {
