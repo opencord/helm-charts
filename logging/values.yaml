@@ -45,6 +45,19 @@ kibana:
   env:
     ELASTICSEARCH_URL: "http://logging-elasticsearch-client:9200"
 
+  dashboardImport:
+    dashboards:
+      1_create_index: |-
+        {
+            "type": "index-pattern",
+            "version": 2,
+            "attributes": {
+                "title": "logstash-*",
+                "timeFieldName": "@timestamp",
+                "fields": "[{\"name\":\"@timestamp\",\"type\":\"date\",\"count\":0,\"scripted\":false,\"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+            }
+        }
+
 # logstash config
 # ref: https://github.com/helm/charts/tree/master/incubator/logstash
 logstash:
