@@ -67,7 +67,7 @@
       "targets": [
         {
           "$$hashKey": "object:187",
-          "expr": "sum(tx_bytes_total{title=\"Ethernet\"})by(device_id)  / 1024 / 1024",
+          "expr": "sum(tx_bytes_total{title=\"Ethernet\"})by(logical_device_id)  / 1024 / 1024",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -152,7 +152,7 @@
       "targets": [
         {
           "$$hashKey": "object:241",
-          "expr": "sum(rx_bytes_total{title=\"Ethernet\"})by(device_id) / 1024 / 1024",
+          "expr": "sum(rx_bytes_total{title=\"Ethernet\"})by(logical_device_id) / 1024 / 1024",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -250,7 +250,7 @@
       "targets": [
         {
           "$$hashKey": "object:295",
-          "expr": "sum(tx_packets_total{title=\"Ethernet\"})by(device_id)",
+          "expr": "sum(tx_packets_total{title=\"Ethernet\"})by(logical_device_id)",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -335,7 +335,7 @@
       "targets": [
         {
           "$$hashKey": "object:349",
-          "expr": "sum(rx_packets_total{title=\"Ethernet\"})by(device_id)",
+          "expr": "sum(rx_packets_total{title=\"Ethernet\"})by(logical_device_id)",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -510,6 +510,174 @@
         },
         {
           "$$hashKey": "object:422",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 0,
+        "y": 31
+      },
+      "id": 16,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "$$hashKey": "object:162",
+          "expr": "sum(rx_bytes_total{}) by (title, pon_id) / 1024 / 1024",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Rx bytes total by PON ID",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 10,
+        "w": 12,
+        "x": 12,
+        "y": 31
+      },
+      "id": 17,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "$$hashKey": "object:162",
+          "expr": "sum(tx_bytes_total{}) by (title, pon_id) / 1024 / 1024",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Tx bytes total by PON ID",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
           "format": "short",
           "label": null,
           "logBase": 1,
