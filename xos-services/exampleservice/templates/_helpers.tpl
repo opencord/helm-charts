@@ -58,17 +58,11 @@ logging:
       filename: /var/log/xos.log
       maxBytes: 10485760
       backupCount: 5
-    kafka:
-      class: kafkaloghandler.kafkaloghandler.KafkaLogHandler
-      bootstrap_servers:
-        - "cord-kafka:9092"
-      topic: xos.log.exampleservice
   loggers:
     'multistructlog':
       handlers:
         - console
         - file
-        - kafka
       level: DEBUG
 proxy_ssh:
   enabled: {{ .Values.global.proxySshEnabled }}
