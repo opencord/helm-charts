@@ -36,8 +36,5 @@ etcd-operator:
   etcdCluster:
     size: 1
 
-# ONOS
-onosImage: 'andybavier/test-image:onos-1.13-jono'
-
 # att-workflow
 kafkaAppUrl: 'http://www.vicci.org/cord/kafka-1.0.0-SNAPSHOT.oar'
