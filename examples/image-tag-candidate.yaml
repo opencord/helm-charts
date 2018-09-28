@@ -49,7 +49,9 @@ rcord:
 
 # in BASE-OPENSTACK chart
 openstack:
-  openstack_synchronizerImage: 'xosproject/openstack-synchronizer:candidate'
+  image:
+    tag: 'candidate'
+
 vtn-service:
   vtn_synchronizerImage: 'xosproject/vtn-synchronizer:candidate'
 
