@@ -28,8 +28,8 @@ spec:
     spec:
       containers:
         - name: xos-db
-          image: {{ .Values.postgresImage | quote }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image:  {{ .Values.global.registry }}{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 5432
               protocol: TCP

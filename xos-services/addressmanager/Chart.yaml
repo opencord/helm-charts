@@ -15,4 +15,8 @@
 
 name: addressmanager
 description: A Helm chart for XOS's "addressmanager" service
-version: 2.0.0
+icon: https://guide.opencord.org/logos/cord.svg
+
+version: 2.0.1
+appVersion: 2.0.1
+
