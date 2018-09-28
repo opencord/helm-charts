@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}"
+          image: "{{ .Values.global.registry }}{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command: ["/app/AbstractOLT", "-log_file", "/dev/stdout"]
           resources:
