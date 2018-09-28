@@ -61,8 +61,8 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:
         - name: voltha
-          image: {{ .Values.vcoreImage }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image: {{ .Values.global.registry }}{{ .Values.images.vcore.repository }}:{{ tpl .Values.images.vcore.tag . }}
+          imagePullPolicy: {{ .Values.images.vcore.pullPolicy }}
           env:
             - name: NAMESPACE
               valueFrom:

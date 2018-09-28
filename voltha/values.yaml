@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-pull_docker_registry:
-k8s_docker_registry: 'k8s.gcr.io/'
-
-imagePullPolicy: Always
-
 replicas:
   vcore: 1
   vcli: 1
@@ -24,7 +20,6 @@ replicas:
   netconf: 1
   envoy_for_etcd: 1
   alarm_generator: 1
-
 
 node_ports:
   vcli_port: 30110
@@ -52,9 +47,9 @@ services:
 etcd:
   operator:
     enabled: true
+
 etcd-operator:
   customResources:
-    size: 1
     createEtcdClusterCRD: true
 
 kafkaReleaseName: cord-kafka
@@ -63,19 +58,57 @@ etcdReleaseName: voltha-etcd
 consul:
   enabled: false
 
-envoyForEtcdImage: 'voltha/voltha-envoy:latest'
-freeradiusImage: 'tpdock/freeradius:latest'
-netconfImage: 'voltha/voltha-netconf:latest'
-ofagentImage: 'voltha/voltha-ofagent:latest'
-vcliImage: 'voltha/voltha-cli:latest'
-vcoreImage: 'voltha/voltha-voltha:latest'
-httpBackendImage: 'gcr.io/google_containers/defaultbackend:1.4'
-ingressControllerImage: 'quay.io/kubernetes-ingress-controller/nginx-ingress-controller:0.10.2'
-alarmGeneratorImage: "voltha/voltha-alarm-generator:latest"
+images:
+  vcore:
+    repository: 'voltha/voltha-voltha'
+    tag: '{{ .Chart.AppVersion }}'
+    pullPolicy: 'Always'
+
+  vcli:
+    repository: 'voltha/voltha-cli'
+    tag: '{{ .Chart.AppVersion }}'
+    pullPolicy: 'Always'
+
+  ofagent:
+    repository: 'voltha/voltha-ofagent'
+    tag: '{{ .Chart.AppVersion }}'
+    pullPolicy: 'Always'
+
+  netconf:
+    repository: 'voltha/voltha-netconf'
+    tag: '{{ .Chart.AppVersion }}'
+    pullPolicy: 'Always'
+
+  envoy_for_etcd:
+    repository: 'voltha/voltha-envoy'
+    tag: '{{ .Chart.AppVersion }}'
+    pullPolicy: 'Always'
+
+  alarm_generator:
+    repository: 'voltha/voltha-alarm-generator'
+    tag: '{{ .Chart.AppVersion }}'
+    pullPolicy: 'Always'
+
+  freeradius:
+    repository: 'tpdock/freeradius'
+    tag: '2.2.9'
+    pullPolicy: 'Always'
+
+  http_backend:
+    repository: 'gcr.io/google_containers/defaultbackend'
+    tag: '1.4'
+    pullPolicy: 'Always'
+
+  ingress_controller:
+    repository: 'quay.io/kubernetes-ingress-controller/nginx-ingress-controller'
+    tag: '0.10.2'
+    pullPolicy: 'Always'
+
 
 # Need the namespace global for kafka
 global:
   namespace: voltha
+  registry: ''
 
 vcli_args:
 - "/cli/cli/setup.sh"

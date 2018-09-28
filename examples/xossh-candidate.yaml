@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# tools
-xosshImage: 'xosproject/xos-client:candidate'
-imagePullPolicy: 'IfNotPresent'
+# Use locally created xos-client container with xos-tools/xossh chart
+image:
+  tag: 'candidate'
+  pullPolicy: 'IfNotPresent'

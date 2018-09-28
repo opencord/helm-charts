@@ -16,9 +16,12 @@ replicaCount: 1
 nameOverride: ""
 
 image:
-  repository: registry.hub.docker.com/opencord/ves-agent
-  tag: 1.0.0
-  pullPolicy: Always
+  repository: 'opencord/ves-agent'
+  tag: '{{ .Chart.AppVersion }}'
+  pullPolicy: 'Always'
+
+global:
+  registry: ''
 
 co_id: test_co
 pod_id: test_pod

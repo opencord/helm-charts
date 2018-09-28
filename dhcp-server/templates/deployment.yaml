@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,8 +28,8 @@ spec:
     spec:
       containers:
         - name: dhcp-server
-          image: {{ .Values.dhcpServerImage }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image: {{ .Values.global.registry }}{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           #command: ["/bin/bash", "-", "sleep 86400"]
           ports:
             - containerPort: 67

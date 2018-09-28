@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -41,8 +42,8 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:
         - name: voltha
-          image: {{ .Values.envoyForEtcdImage }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image: {{ .Values.global.registry }}{{ .Values.images.envoy_for_etcd.repository }}:{{ tpl .Values.images.envoy_for_etcd.tag . }}
+          imagePullPolicy: {{ .Values.images.envoy_for_etcd.pullPolicy }}
           env:
             - name: POD_IP
               valueFrom:

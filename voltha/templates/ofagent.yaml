@@ -32,8 +32,8 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: ofagent
-          image: {{ .Values.ofagentImage }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image: {{ .Values.global.registry }}{{ .Values.images.ofagent.repository }}:{{ tpl .Values.images.ofagent.tag . }}
+          imagePullPolicy: {{ .Values.images.ofagent.pullPolicy }}
           env:
             - name: NAMESPACE
               valueFrom:

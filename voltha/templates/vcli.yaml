@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,8 +49,8 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:
         - name: vcli
-          image: {{ .Values.vcliImage }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image: {{ .Values.global.registry }}{{ .Values.images.vcli.repository }}:{{ tpl .Values.images.vcli.tag . }}
+          imagePullPolicy: {{ .Values.images.vcli.pullPolicy }}
           env:
             - name: POD_IP
               valueFrom:
@@ -60,7 +61,7 @@ spec:
                 fieldRef:
                   fieldPath: metadata.namespace
           args:
-{{ toYaml .Values.vcli_args |  indent 12 }} 
+{{ toYaml .Values.vcli_args |  indent 12 }}
           ports:
             - containerPort: 22
               name: ssh-port

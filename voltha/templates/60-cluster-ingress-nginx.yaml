@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -43,7 +44,8 @@ spec:
           privileged: true
       containers:
         - name: nginx-ingress-controller
-          image: {{ .Values.ingressControllerImage }}
+          image: {{ .Values.global.registry }}{{ .Values.images.ingress_controller.repository }}:{{ tpl .Values.images.ingress_controller.tag . }}
+          imagePullPolicy: {{ .Values.images.ingress_controller.pullPolicy }}
           args:
             - /nginx-ingress-controller
             - --default-backend-service=$(POD_NAMESPACE)/default-http-backend

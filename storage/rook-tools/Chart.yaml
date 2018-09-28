@@ -13,7 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-description: Toolbox for debuging Rook's Ceph storage
 name: rook-tools
+description: Toolbox for debuging Rook's Ceph storage
 version: 0.1.0-dev0
 
+appVersion: 'v0.8.1'

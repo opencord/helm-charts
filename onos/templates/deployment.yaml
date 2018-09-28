@@ -45,8 +45,8 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ .Values.onosImage }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image:  "{{ .Values.global.registry }}{{ .Values.images.onos.repository }}:{{ tpl .Values.images.onos.tag . }}"
+          imagePullPolicy: {{ .Values.images.onos.pullPolicy }}
           command: ["./bin/onos-service", "server", "debug"]
           env:
 {{ toYaml .Values.onos_env | indent 12 }}

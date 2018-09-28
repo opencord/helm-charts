@@ -46,8 +46,8 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
         - name: netconf
-          image: {{ .Values.netconfImage }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image: {{ .Values.global.registry }}{{ .Values.images.netconf.repository }}:{{ tpl .Values.images.netconf.tag . }}
+          imagePullPolicy: {{ .Values.images.netconf.pullPolicy }}
           ports:
             - containerPort: 830
           env:

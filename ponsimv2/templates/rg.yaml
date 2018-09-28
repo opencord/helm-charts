@@ -41,7 +41,8 @@ spec:
               topologyKey: kubernetes.io/hostname
        containers:
          - name: rg
-           image: {{ .Values.pull_docker_registry }}{{ .Values.images.rg.repository }}:{{ .Values.images.rg.tag }}
+           image: {{ .Values.global.registry }}{{ .Values.images.rg.repository }}:{{ tpl .Values.images.rg.tag . }}
+           imagePullPolicy: {{ .Values.images.rg.pullPolicy }}
            env:
              - name: POD_IP
                valueFrom:
