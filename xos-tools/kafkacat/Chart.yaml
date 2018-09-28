@@ -15,4 +15,9 @@
 
 name: kafkacat
 description: A Helm chart for kafkacat
-version: 1.0.0-dev
+icon: https://kafka.apache.org/images/logo.png
+
+version: 1.0.0
+
+# version of confluentinc/cp-kafkacat container
+appVersion: 4.1.2
