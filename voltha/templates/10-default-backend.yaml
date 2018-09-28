@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +33,8 @@ spec:
         # Any image is permissable as long as:
         # 1. It serves a 404 page at /
         # 2. It serves 200 on a /healthz endpoint
-        image: {{ .Values.httpBackendImage }}
+        image: {{ .Values.global.registry }}{{ .Values.images.http_backend.repository }}:{{ tpl .Values.images.http_backend.tag . }}
+        imagePullPolicy: {{ .Values.images.http_backend.pullPolicy }}
         livenessProbe:
           httpGet:
             path: /healthz
