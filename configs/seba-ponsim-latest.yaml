@@ -34,6 +34,22 @@ images:
   tosca_loader:
     tag: 'master'
 
+# VOLTHA
+  vcore:
+    tag: 'latest'
+  vcli:
+    tag: 'latest'
+  ofagent:
+    tag: 'latest'
+  netconf:
+    tag: 'latest'
+  envoy_for_etcd:
+    tag: 'latest'
+  alarm_generator:
+    tag: 'latest'
+  freeradius:
+    tag: 'latest'
+
 # Ponsimv2
   olt:
     repository: "voltha/voltha-ponsim"
@@ -72,13 +88,4 @@ volt:
 rcord:
   image:
     tag: 'master'
-
-
-# VOLTHA
-vcoreImage: "voltha/voltha-voltha:latest"
-envoyForEtcdImage: 'voltha/voltha-envoy:latest'
-freeradiusImage: 'tpdock/freeradius:latest'
-netconfImage: 'voltha/voltha-netconf:latest'
-ofagentImage: 'voltha/voltha-ofagent:latest'
-vcliImage: 'voltha/voltha-cli:latest'
 
