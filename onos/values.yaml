@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Default values for onos.
+# Default values for ONOS
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
-imagePullPolicy: Always
-onosImage: 'onosproject/onos:1.13.5'
-
 images:
+  onos:
+    repository: 'onosproject/onos'
+    tag: '{{ .Chart.AppVersion }}'
+    pullPolicy: 'Always'
 
   # keep in sync with: https://github.com/helm/charts/blob/master/stable/filebeat/values.yaml
   log_agent:
@@ -38,32 +38,55 @@ log_agent:
   enabled: True
   kafka_brokers: ['cord-kafka:9092']
 
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: ''
+fullnameOverride: ''
+
+xos_service_label: ONOS
 
 namespace: default
 serviceAccountName: default
 
 services:
-  openflowServiceType: ClusterIP
-  ovsdbServiceType: ClusterIP
-  sshServiceType: ClusterIP
-  uiServiceType: ClusterIP
-  debuggerServiceType: NodePort
-  ovsdb:
-    port: 6640
+  openflowServiceType: NodePort
   openflow:
     port: 6653
+    nodePort: 31653
+
+  sshServiceType: NodePort
   ssh:
     port: 8101
+    nodePort: 30115
+
+  uiServiceType: NodePort
   ui:
     port: 8181
+    nodePort: 30120
+
+  debuggerServiceType: NodePort
   debugger:
     port: 5005
+    nodePort: 30555
+
+  ovsdbServiceType: ClusterIP
+  ovsdb:
+    port: 6640
+
   cluster:
     port: 9876
 
 onos_env: []
+
+# onos_env:
+#   - name: POD_IP
+#     valueFrom:
+#     fieldRef:
+#       fieldPath: status.podIP
+#   - name: NAMESPACE
+#     valueFrom:
+#     fieldRef:
+#       fieldPath: metadata.namespace
+#   - name: ONOS_APPS
+#     value: "drivers,openflow-base"
 
 resources: {}
 
@@ -73,6 +96,4 @@ tolerations: []
 
 affinity: {}
 
-xos_service_label: ""
-
-application_logs: ""
+application_logs: ''
