@@ -54,10 +54,11 @@ spec:
                   values:
                   - rg
               topologyKey: kubernetes.io/hostname
-            
+
        containers:
          - name: onu
-           image: {{ .Values.pull_docker_registry }}{{ .Values.images.onu.repository }}:{{ .Values.images.onu.tag }}
+           image: {{ .Values.global.registry }}{{ .Values.images.onu.repository }}:{{ tpl .Values.images.onu.tag . }}
+           imagePullPolicy: {{ .Values.images.onu.pullPolicy }}
            env:
              - name: POD_IP
                valueFrom:
