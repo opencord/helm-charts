@@ -19,11 +19,16 @@
 
 replicaCount: 1
 
-pull_docker_registry:
-
 nameOverride: ""
 fullnameOverride: ""
 
 imagePullPolicy: Always
 
-kafkacatImage: "confluentinc/cp-kafkacat:4.0.2"
+image:
+  repository: 'confluentinc/cp-kafkacat'
+  tag: '{{ .Chart.AppVersion }}'
+  pullPolicy: 'Always'
+
+global:
+  registry: ''
+
