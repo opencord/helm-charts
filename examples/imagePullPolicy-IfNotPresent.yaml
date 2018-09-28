@@ -42,7 +42,9 @@ vrouter:
 
 # in BASE-OPENSTACK chart
 openstack:
-  imagePullPolicy: 'IfNotPresent'
+  image:
+    pullPolicy: 'IfNotPresent'
+
 vtn-service:
   imagePullPolicy: 'IfNotPresent'
 
