@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,14 +13,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Expose ONOS services using NodePorts, for onos-cord configuration
-#
-# helm install onos -f configs/onos-cord.yaml -n onos-cord
+# Default values for vepcservice.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
 
-services:
-  sshServiceType: NodePort
-  uiServiceType: NodePort
-  ssh:
-    nodePort: 32101
-  ui:
-    nodePort: 32181
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: 'xosproject/k8sepcservice-synchronizer'
+  tag: '{{ .Chart.AppVersion }}'
+  pullPolicy: 'Always'
+
+global:
+  registry: ''
+
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"
+
+kafkaService: "cord-kafka"
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,24 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Expose ONOS services using NodePorts, for onos-voltha configuration
+# Enabled debugging for ONOS services
 #
-# helm install onos -f configs/onos-voltha.yaml -n onos-voltha
-
-nameOverride: "onosv"
-fullnameOverride: "onos-voltha"
-
-onosImage: 'onosproject/onos:1.13.2'
-
-services:
-  openflowServiceType: ClusterIP
-  ovsdbServiceType: ClusterIP
-  sshServiceType: NodePort
-  uiServiceType: NodePort
-  ssh:
-    nodePort: 30115
-  ui:
-    nodePort: 30120
+# helm install onos -f configs/onos-debug.yaml -n onos
 
 onos_env:
 - name: POD_IP
@@ -44,3 +28,8 @@ onos_env:
     fieldPath: metadata.namespace
 - name: ONOS_APPS
   value: "drivers,openflow-base"
+
+application_logs: |
+  log4j.logger.org.opencord.olt = DEBUG
+  log4j.logger.org.opencord.kafka = DEBUG
+  log4j.logger.org.opencord.sadis = DEBUG
