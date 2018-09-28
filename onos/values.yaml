@@ -20,8 +20,13 @@
 
 replicaCount: 1
 
-imagePullPolicy: Always
-onosImage: 'onosproject/onos:1.13.4'
+image:
+  repository: 'onosproject/onos'
+  tag: '{{ .Chart.AppVersion }}'
+  pullPolicy: 'Always'
+
+global:
+  registry: ''
 
 nameOverride: ""
 fullnameOverride: ""
@@ -35,10 +40,10 @@ services:
   sshServiceType: ClusterIP
   uiServiceType: ClusterIP
   debuggerServiceType: NodePort
-  ovsdb:
-    port: 6640
   openflow:
     port: 6653
+  ovsdb:
+    port: 6640
   ssh:
     port: 8101
   ui:
