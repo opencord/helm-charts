@@ -13,25 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-pull_docker_registry:
-
 images:
   olt:
-    repository: voltha/voltha-ponsim
-    tag: 'latest'
+    repository: 'voltha/voltha-ponsim'
+    tag: '{{ .Chart.AppVersion }}'
     pullPolicy: 'Always'
   onu:
-    repository: voltha/voltha-ponsim
-    tag: 'latest'
+    repository: 'voltha/voltha-ponsim'
+    tag: '{{ .Chart.AppVersion }}'
     pullPolicy: 'Always'
   rg:
-    repository: voltha/voltha-tester
-    tag: 'latest'
+    repository: 'voltha/voltha-tester'
+    tag: '{{ .Chart.AppVersion }}'
     pullPolicy: 'Always'
   pon0:
-    repository: gopinatht/pon0-network
+    repository: 'gopinatht/pon0-network'
     tag: 'latest'
     pullPolicy: 'Always'
-  
+
 global:
   namespace: voltha
+  registry: ''

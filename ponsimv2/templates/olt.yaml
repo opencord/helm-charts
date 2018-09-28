@@ -44,7 +44,8 @@ spec:
      spec:
        containers:
          - name: olt
-           image: {{ .Values.pull_docker_registry }}{{ .Values.images.olt.repository }}:{{ .Values.images.olt.tag }}
+           image: {{ .Values.global.registry }}{{ .Values.images.olt.repository }}:{{ tpl .Values.images.olt.tag . }}
+           imagePullPolicy: {{ .Values.images.olt.pullPolicy }}
            env:
              - name: POD_IP
                valueFrom:
