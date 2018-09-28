@@ -13,7 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-appVersion: latest
-description: A Helm chart for SEBA's Abstract OLT layer
 name: abstract-olt
+description: A Helm chart for SEBA's Abstract OLT layer
+icon: https://guide.opencord.org/logos/cord.svg
+
 version: 0.1.0
+appVersion: latest

@@ -28,8 +28,8 @@ spec:
     spec:
       containers:
         - name: mavenrepo
-          image: {{ .Values.mavenRepoImage }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image: {{ .Values.global.registry }}{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: 80
               port: 80
