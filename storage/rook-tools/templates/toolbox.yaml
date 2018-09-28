@@ -22,8 +22,8 @@ spec:
   dnsPolicy: ClusterFirstWithHostNet
   containers:
   - name: rook-ceph-tools
-    image: {{ .Values.rookCephToolsImage | quote }}
-    imagePullPolicy: {{ .Values.imagePullPolicy }}
+    image: {{ .Values.global.registry }}{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}
+    imagePullPolicy: {{ .Values.image.pullPolicy }}
     env:
       - name: ROOK_ADMIN_SECRET
         valueFrom:

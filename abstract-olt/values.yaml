@@ -23,6 +23,9 @@ image:
   tag: '{{ .Chart.AppVersion }}'
   pullPolicy: Always
 
+global:
+  registry: ''
+
 service:
   type: NodePort
   grpcPort: 31777
