@@ -28,6 +28,7 @@ xos_api_testerImage: 'xosproject/xos-api-tester:master'
 # NodePorts
 xos_chameleonNodePort: 30006
 xos_toscaNodePort: 30007
+xos_prometheusNodePort: 30009
 
 # XOS Admin username/password
 xosAdminUser: 'admin@opencord.org'

@@ -16,7 +16,7 @@
 # Set all image tags to "candidate" to use locally built images
 
 # in xos-core chart
-xos_coreImage: 'xosproject/xos-core:candidate'
+xos_coreImage: 'xosproject/xos-core:2.1.17'
 xos_chameleonImage: 'xosproject/chameleon:candidate'
 xos_toscaImage: 'xosproject/xos-tosca:candidate'
 xos_api_testerImage: 'xosproject/xos-api-tester:candidate'

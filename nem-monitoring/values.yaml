@@ -48,6 +48,14 @@ prometheus:
             - targets:
               - voltha-kpi-exporter:8080
 
+        # XOS-Core
+        - job_name: 'xos-core'
+          metrics_path: /metrics
+          scrape_interval: 15s
+          static_configs:
+            - targets:
+              - xos-core-prometheus:8000
+
         # KB8s monitoring jobs
         - job_name: prometheus
           static_configs:
