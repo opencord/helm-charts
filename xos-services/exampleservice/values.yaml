@@ -22,10 +22,9 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: "xosproject/exampleservice-synchronizer"
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'Always'
+imagePullPolicy: 'Always'
+
+exampleservice_synchronizerImage: "xosproject/exampleservice-synchronizer:{{ .Chart.Version }}"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
@@ -47,4 +46,3 @@ privateKeyFile: "files/id_rsa"
 global:
   proxySshEnabled: true
   proxySshUser: "root"
-  registry: ''

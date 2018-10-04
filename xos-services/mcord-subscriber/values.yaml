@@ -22,13 +22,9 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: 'xosproject/mcord-synchronizer'
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'Always'
+imagePullPolicy: 'Always'
 
-global:
-  registry: ''
+synchronizerImage: "xosproject/mcord-synchronizer:{{ .Chart.Version }}"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

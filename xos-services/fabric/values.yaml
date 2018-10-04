@@ -22,13 +22,9 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: xosproject/fabric-synchronizer
-  tag: "{{ .Chart.AppVersion }}"
-  pullPolicy: Always
+imagePullPolicy: 'Always'
 
-global:
-  registry: ""
+fabric_synchronizerImage: "xosproject/fabric-synchronizer:master"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

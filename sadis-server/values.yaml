@@ -12,14 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-image:
-  repository: 'opencord/sadis-server'
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'Always'
-
-global:
-  registry: ''
+image: "opencord/sadis-server:latest"
+imagePullPolicy: Always
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

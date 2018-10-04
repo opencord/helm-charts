@@ -28,8 +28,8 @@ spec:
     spec:
       containers:
         - name: xos-chameleon
-          image:  {{ .Values.global.registry }}{{ .Values.images.xos_chameleon.repository }}:{{ tpl .Values.images.xos_chameleon.tag . }}
-          imagePullPolicy: {{ .Values.images.xos_chameleon.pullPolicy }}
+          image: {{ tpl .Values.xos_chameleonImage . | quote }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           command: ["python", "chameleon/chameleon/main.py", "-R", "9101", "-G", "xos-core:50055", "--swagger-url", "/apidocs", "-r"]
           ports:
             - containerPort: 9101

@@ -16,31 +16,14 @@
 xos_gui:
   enabled: true
 
+imagePullPolicy: 'Always'
+
 # Docker images
 # YAML variable names can't contain `-`, so substituted with `_`
-images:
-  xos_core:
-    repository: 'xosproject/xos-core'
-    tag: '{{ .Chart.AppVersion }}'
-    pullPolicy: 'Always'
-
-  xos_chameleon:
-    repository: 'xosproject/chameleon'
-    tag: '{{ .Chart.AppVersion }}'
-    pullPolicy: 'Always'
-
-  xos_tosca:
-    repository: 'xosproject/xos-tosca'
-    tag: '1.1.1'
-    pullPolicy: 'Always'
-
-  xos_api_tester:
-    repository: 'xosproject/xos-api-tester'
-    tag: '2.0.3'
-    pullPolicy: 'Always'
-
-global:
-  registry: ""
+xos_coreImage: 'xosproject/xos-core:master'
+xos_chameleonImage: 'xosproject/chameleon:master'
+xos_toscaImage: 'xosproject/xos-tosca:master'
+xos_api_testerImage: 'xosproject/xos-api-tester:master'
 
 # NodePorts
 xos_chameleonNodePort: 30006

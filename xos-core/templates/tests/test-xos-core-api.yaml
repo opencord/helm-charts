@@ -25,8 +25,8 @@ spec:
   restartPolicy: Never
   containers:
     - name: {{ .Release.Name }}-api-test
-      image: {{ .Values.global.registry }}{{ .Values.images.xos_api_tester.repository }}:{{ tpl .Values.images.xos_api_tester.tag . }}
-      imagePullPolicy: {{ .Values.images.xos_api_tester.pullPolicy }}
+      image: {{ .Values.xos_api_testerImage }}
+      imagePullPolicy: {{ .Values.imagePullPolicy }}
       volumeMounts:
         - name: log-volume
           mountPath: /src/cord-api/Tests/Log/

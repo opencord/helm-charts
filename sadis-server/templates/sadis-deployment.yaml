@@ -29,8 +29,8 @@ spec:
     spec:
       containers:
         - name: sadis-server
-          image: {{ .Values.global.registry }}{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.image }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
             - containerPort: 8000
               port: 8000

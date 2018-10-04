@@ -22,10 +22,9 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: 'xosproject/internetemulator-synchronizer'
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'Always'
+imagePullPolicy: 'Always'
+
+synchronizerImage: "xosproject/internetemulator-synchronizer:{{ .Chart.Version }}"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
@@ -40,7 +39,6 @@ privateKeyFile: "files/id_rsa"
 global:
   proxySshEnabled: true
   proxySshUser: "root"
-  registry: ''
 
 resources: {}
 

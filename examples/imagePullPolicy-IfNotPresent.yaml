@@ -16,94 +16,62 @@
 # Only pull docker images if not already present
 
 # in xos-core, rcord-lite, onos and voltha charts
-image:
-  pullPolicy: 'IfNotPresent'
-
+imagePullPolicy: 'IfNotPresent'
 xos-gui:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 
 # in RCORD service chart
 addressmanager:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 att-workflow-driver:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 fabric:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 fabric-crossconnect:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 onos-service:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 volt:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 vsg-hw:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 rcord:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 vrouter:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 
 # in BASE-OPENSTACK chart
 openstack:
-  image:
-    pullPolicy: 'IfNotPresent'
-
+  imagePullPolicy: 'IfNotPresent'
 vtn-service:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 
 # in MCORD
 vmme:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 vspgwc:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 vspgwu:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 vhss:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 hssdb:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 internetemulator:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 sdncontroller:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 epc-service:
-  image:
-    pullPolicy: 'IfNotPresent'
-k8sepcservice:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 mcord-subscriber:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 progran:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 
 # others
 kubernetes:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 exampleservice:
-  image:
-    pullPolicy: 'IfNotPresent'
+  imagePullPolicy: 'IfNotPresent'
 simpleexampleservice:
-  image:
-    pullPolicy: 'IfNotPresent'
-
+  imagePullPolicy: 'IfNotPresent'

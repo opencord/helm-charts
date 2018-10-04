@@ -15,32 +15,32 @@
 
 dependencies:
 - name: vmme
-  version: 1.0.2
+  version: 1.0.1
   repository: file://../../xos-services/vmme
 - name: vspgwc
-  version: 1.0.1
+  version: 1.0.0
   repository: file://../../xos-services/vspgwc
 - name: vspgwu
-  version: 1.0.1
+  version: 1.0.0
   repository: file://../../xos-services/vspgwu
 - name: vhss
-  version: 1.0.2
+  version: 1.0.1
   repository: file://../../xos-services/vhss
 - name: hssdb
-  version: 1.0.1
+  version: 1.0.0
   repository: file://../../xos-services/hssdb
 - name: internetemulator
-  version: 1.0.1
+  version: 1.0.0
   repository: file://../../xos-services/internetemulator
 - name: sdncontroller
-  version: 1.0.1
+  version: 1.0.0
   repository: file://../../xos-services/sdncontroller
 - name: epc-service
-  version: 1.1.1
+  version: 1.0.0
   repository: file://../../xos-services/epc-service
 - name: mcord-subscriber
-  version: 2.0.1
+  version: 2.0.0
   repository: file://../../xos-services/mcord-subscriber
 - name: progran
-  version: 2.0.2
+  version: 2.0.0
   repository: file://../../xos-services/progran

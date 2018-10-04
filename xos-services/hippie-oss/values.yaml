@@ -22,13 +22,9 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: 'xosproject/hippie-oss-synchronizer'
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'Always'
+imagePullPolicy: 'Always'
 
-global:
-  registry: ''
+hippieOSS_synchronizerImage: "xosproject/hippie-oss-synchronizer:master"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

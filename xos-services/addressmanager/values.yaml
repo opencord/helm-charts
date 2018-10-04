@@ -22,13 +22,9 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: 'xosproject/addressmanager-synchronizer'
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'Always'
+imagePullPolicy: 'Always'
 
-global:
-  registry: ''
+addressmanager_synchronizerImage: "xosproject/addressmanager-synchronizer:{{ .Chart.Version }}"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

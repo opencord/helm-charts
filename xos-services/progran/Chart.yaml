@@ -15,7 +15,4 @@
 
 name: progran
 description: A Helm chart for XOS's "progran" service
-icon: https://guide.opencord.org/logos/cord.svg
-
-version: 2.0.2
-appVersion: 2.0.2
+version: 2.0.0

@@ -22,14 +22,9 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
+imagePullPolicy: 'Always'
 
-image:
-  repository: 'xosproject/vrouter-synchronizer'
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'Always'
-
-global:
-  registry: ''
+vrouter_synchronizerImage: "xosproject/vrouter-synchronizer:master"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

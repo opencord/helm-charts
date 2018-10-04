@@ -22,10 +22,9 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: 'xosproject/sdncontroller-synchronizer'
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'Always'
+imagePullPolicy: 'Always'
+
+synchronizerImage: "xosproject/sdncontroller-synchronizer:{{ .Chart.Version }}"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
@@ -41,7 +40,6 @@ privateKeyFile: "files/id_rsa"
 global:
   proxySshEnabled: true
   proxySshUser: "root"
-  registry: ''
 
 resources: {}
 

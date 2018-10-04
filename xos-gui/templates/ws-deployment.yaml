@@ -28,8 +28,8 @@ spec:
     spec:
       containers:
         - name: xos-ws
-          image: {{ .Values.global.registry }}{{ .Values.images.xos_ws.repository }}:{{ tpl .Values.images.xos_ws.tag . }}
-          imagePullPolicy: {{ .Values.images.xos_ws.pullPolicy }}
+          image: {{ .Values.xos_wsImage | quote }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           command: ["npm", "start", "--", "--config", "gateway-config.yml"]
           ports:
             - containerPort: 3000

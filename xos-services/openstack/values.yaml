@@ -24,13 +24,7 @@ fullnameOverride: ""
 
 imagePullPolicy: 'Always'
 
-image:
-  repository: xosproject/openstack-synchronizer
-  tag: "{{ .Chart.AppVersion }}"
-  pullPolicy: Always
-
-global:
-  registry: ""
+openstack_synchronizerImage: "xosproject/openstack-synchronizer:{{ .Chart.Version }}"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

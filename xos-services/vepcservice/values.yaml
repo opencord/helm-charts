@@ -13,9 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: k8sepcservice
-description: A Helm chart for XOS's "k8sepcservice" service
-icon: https://guide.opencord.org/logos/cord.svg
+# Default values for vepcservice.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
 
-version: 1.0.2
-appVersion: 1.0.2
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+imagePullPolicy: 'Always'
+
+vepcservice_synchronizerImage: "xosproject/k8sepcservice-synchronizer:{{ .Chart.Version }}"
+#vepcservice_synchronizerImage: "gopinatht/k8sepcservice-synchronizer:candidate"
+
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"
+
+kafkaService: "cord-kafka"
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

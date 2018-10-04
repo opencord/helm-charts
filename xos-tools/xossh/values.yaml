@@ -19,16 +19,14 @@
 
 replicaCount: 1
 
+pull_docker_registry:
+
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: 'xosproject/xos-client'
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'Always'
+imagePullPolicy: Always
 
-global:
-  registry: ''
+xosshImage: "xosproject/xos-client:master"
 
 resources: {}
 

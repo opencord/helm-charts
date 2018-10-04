@@ -22,13 +22,9 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: 'xosproject/volt-synchronizer'
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'Always'
+imagePullPolicy: 'Always'
 
-global:
-  registry: ''
+volt_synchronizerImage: "xosproject/volt-synchronizer:master"
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

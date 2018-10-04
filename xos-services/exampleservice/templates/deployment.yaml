@@ -36,8 +36,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ .Values.global.registry }}{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ tpl .Values.exampleservice_synchronizerImage . | quote }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:

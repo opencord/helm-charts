@@ -14,9 +14,4 @@
 # limitations under the License.
 
 name: xos-db
-version: 1.0.0
-
-icon: https://www.postgresql.org/media/img/about/press/elephant.png
-
-# Postgres container from: https://hub.docker.com/_/postgres/
-appVersion: '10.3-alpine'
+version: 0.1.0-dev0

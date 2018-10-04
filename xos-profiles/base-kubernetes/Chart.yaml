@@ -14,11 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: base-kubernetes
+apiVersion: v1
+appVersion: "1.0"
 description: A Helm chart for XOS's "base-kubernetes" profile
-icon: https://guide.opencord.org/logos/cord.svg
-version: 1.0.0
-
-# xosproject/tosca-loader version
-appVersion: 1.1.0
-
+name: base-kubernetes
+version: 0.1.0

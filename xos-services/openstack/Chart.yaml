@@ -15,5 +15,4 @@
 
 name: openstack
 description: A Helm chart for XOS's "openstack" service
-version: 1.0.1
-appVersion: 1.0.1
+version: 1.0.0

@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Default values for the att-workflow profile.
+# Default values for the rcord-fc profile.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -22,19 +22,11 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-images:
-  tosca_loader:
-    repository: 'xosproject/tosca-loader'
-    tag: '{{ .Chart.AppVersion }}'
-    pullPolicy: 'Always'
+imagePullPolicy: 'IfNotPresent'
 
-  xos_api_tester:
-    repository: 'xosproject/xos-api-tester'
-    tag: '2.0.3'
-    pullPolicy: 'Always'
+tosca_loaderImage: "xosproject/tosca-loader:1.0.1"
 
-global:
-  registry: ""
+xos_api_testerImage: 'xosproject/xos-api-tester:master'
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
