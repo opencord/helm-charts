@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c709a869_9b01e7f3",
+        "filename": "xos-core/templates/core-service-nodeport.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-10-04T01:22:52Z",
+      "side": 1,
+      "message": "Does this need to be a NodePort (reachable outside the pod), as opposed to a ClusterIP (only reachable within the pod)?",
+      "range": {
+        "startLine": 23,
+        "startChar": 8,
+        "endLine": 23,
+        "endChar": 16
+      },
+      "revId": "bd1899039ce74652bf767c63f28c47d1f0dc679e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
