@@ -1,0 +1,56 @@
+# Copyright 2018-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# bbsim values
+
+# CLI switches passed to bbsim
+
+# -id option
+olt_id: 0
+
+# -H option, port number portion
+olt_tcp_port: 50060
+
+# -i option
+pon_ports: 1
+
+# -n option
+onus_per_pon_port: 1
+
+# -m option
+emulation_mode: 'both'
+
+image:
+  repository: 'voltha/voltha-bbsim'
+  tag: '{{ .Chart.AppVersion }}'
+  pullPolicy: 'IfNotPresent'
+
+global:
+  registry: ''
+
+namespace: voltha
+serviceAccountName: default
+
+nameOverride: ""
+fullnameOverride: ""
+
+replicaCount: 1
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
