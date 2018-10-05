@@ -1,0 +1,6 @@
+BBSim deployed with release name: {{ .Release.Name }}
+
+{{- $startport := int .Values.start_tcp_port }}
+OLTs: {{ .Values.olts }}, on TCP ports: {{ range $i, $t := until (int .Values.olts) }}{{ add $i $startport }},{{ end }}
+PON Ports per OLT: {{ .Values.pon_ports }} (total: {{ mul .Values.olts .Values.pon_ports }})
+ONUs per PON Port: {{ .Values.onus_per_pon_port }} (total: {{ mul .Values.olts .Values.pon_ports .Values.onus_per_pon_port}})
