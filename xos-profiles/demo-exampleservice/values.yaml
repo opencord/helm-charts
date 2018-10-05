@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Default values for the base-openstack profile.
+# Default values for the demo-exampleservice profile.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -22,9 +22,10 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'IfNotPresent'
-
-tosca_loaderImage: "xosproject/tosca-loader:1.0.1"
+image:
+  repository: 'xosproject/tosca-loader'
+  tag: '{{ .Chart.AppVersion }}'
+  pullPolicy: 'Always'
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
@@ -39,3 +40,4 @@ addresspool_public_gateway_mac: "a4:23:05:06:01:01"
 global:
   proxySshEnabled: true
   proxySshUser: root
+  registry: ''
