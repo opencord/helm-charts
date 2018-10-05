@@ -15,8 +15,13 @@
 
 # XOS Postgres database related values
 
-imagePullPolicy: 'Always'
-postgresImage: 'postgres:10.3-alpine'
+image:
+  repository: 'postgres'
+  tag: '{{ .Chart.AppVersion }}'
+  pullPolicy: 'Always'
+
+global:
+  registry: ""
 
 # Database name/username/password
 xosDBName: 'xos'

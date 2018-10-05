@@ -22,9 +22,10 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'IfNotPresent'
-
-tosca_loaderImage: "xosproject/tosca-loader:1.0.1"
+image:
+  repository: 'xosproject/tosca-loader'
+  tag: '{{ .Chart.AppVersion }}'
+  pullPolicy: 'Always'
 
 xosAdminUser: &adminuser "admin@opencord.org"
 xosAdminPassword: &adminpass "letmein"
@@ -40,3 +41,4 @@ keystoneDomain: "Default"
 global:
   proxySshEnabled: true
   proxySshUser: root
+  registry: ''

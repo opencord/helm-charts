@@ -22,9 +22,13 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'Always'
+image:
+  repository: 'xosproject/att-workflow-driver-synchronizer'
+  tag: '{{ .Chart.AppVersion }}'
+  pullPolicy: 'Always'
 
-attWorkflowDriver_synchronizerImage: "xosproject/att-workflow-driver-synchronizer:master"
+global:
+  registry: ''
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"

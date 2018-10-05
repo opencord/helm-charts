@@ -15,4 +15,8 @@
 
 name: exampleservice
 description: A Helm chart for XOS's "exampleservice" service
-version: 2.1.0
+icon: https://guide.opencord.org/logos/cord.svg
+
+version: 2.1.1
+appVersion: 2.1.1
+
