@@ -1,0 +1,5 @@
+BBSim deployed with release name: {{ .Release.Name }}
+
+OLT ID: {{ .Values.olt_id }}, on TCP port: {{ .Values.olt_tcp_port }}
+# of PON Ports: {{ .Values.pon_ports }}
+ONUs per PON Port: {{ .Values.onus_per_pon_port }} (total: {{ mul .Values.pon_ports .Values.onus_per_pon_port}})
