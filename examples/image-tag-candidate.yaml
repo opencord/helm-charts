@@ -14,74 +14,111 @@
 # limitations under the License.
 
 # Set all image tags to "candidate" to use locally built images
+image:
+  tag: 'candidate'
 
-# in xos-core chart
-xos_coreImage: 'xosproject/xos-core:2.1.17'
-xos_chameleonImage: 'xosproject/chameleon:candidate'
-xos_toscaImage: 'xosproject/xos-tosca:candidate'
-xos_api_testerImage: 'xosproject/xos-api-tester:candidate'
-tosca_loaderImage: 'xosproject/tosca-loader:candidate'
+# in xos-core chart and other charts with multiple images
+images:
+  xos_core:
+    tag: 'candidate'
+  xos_chameleon:
+    tag: 'candidate'
+  xos_tosca:
+    tag: 'candidate'
+  xos_api_tester:
+    tag: 'candidate'
+  tosca_loader:
+    tag: 'candidate'
 
 # in xos-gui sub-chart required by xos-core chart
 xos-gui:
-  xos_guiImage: 'xosproject/xos-gui:candidate'
-  xos_wsImage: 'xosproject/xos-ws:candidate'
+  images:
+    xos_gui:
+      tag: 'candidate'
+    xos_ws:
+      tag: 'candidate'
 
 # in RCORD service chart
 addressmanager:
-  addressmanager_synchronizerImage: 'xosproject/addressmanager-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 att-workflow-driver:
-  attWorkflowDriver_synchronizerImage: 'xosproject/att-workflow-driver-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 fabric:
-  fabric_synchronizerImage: 'xosproject/fabric-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 fabric-crossconnect:
-  fabric_crossconnect_synchronizerImage: 'xosproject/fabric-crossconnect-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 onos-service:
-  onos_synchronizerImage: 'xosproject/onos-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 volt:
-  volt_synchronizerImage: 'xosproject/volt-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 vsg-hw:
-  vsg_hw_synchronizerImage: 'xosproject/vsg-hw-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 vrouter:
-  vrouter_synchronizerImage: 'xosproject/vrouter-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 rcord:
-  rcord_synchronizerImage: 'xosproject/rcord-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 
 # in BASE-OPENSTACK chart
 openstack:
-  openstack_synchronizerImage: 'xosproject/openstack-synchronizer:candidate'
+  image:
+    tag: 'candidate'
+
 vtn-service:
-  vtn_synchronizerImage: 'xosproject/vtn-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 
 # in MCORD
 vmme:
-  synchronizerImage: "xosproject/vmme-synchronizer:candidate"
+  image:
+    tag: 'candidate'
 vspgwc:
-  synchronizerImage: "xosproject/vspgwc-synchronizer:candidate"
+  image:
+    tag: 'candidate'
 vspgwu:
-  synchronizerImage: "xosproject/vspgwu-synchronizer:candidate"
+  image:
+    tag: 'candidate'
 vhss:
-  synchronizerImage: "xosproject/vhss-synchronizer:candidate"
+  image:
+    tag: 'candidate'
 hssdb:
-  synchronizerImage: "xosproject/hssdb-synchronizer:candidate"
+  image:
+    tag: 'candidate'
 internetemulator:
-  synchronizerImage: "xosproject/internetemulator-synchronizer:candidate"
+  image:
+    tag: 'candidate'
 sdncontroller:
-  synchronizerImage: "xosproject/sdncontroller-synchronizer:candidate"
+  image:
+    tag: 'candidate'
 epc-service:
-  synchronizerImage: "xosproject/vepc-synchronizer:candidate"
+  image:
+    tag: 'candidate'
+k8spcservice:
+  image:
+    tag: 'candidate'
 mcord-subscriber:
-  synchronizerImage: "xosproject/mcord-synchronizer:candidate"
+  image:
+    tag: 'candidate'
 progran:
-  synchronizerImage: "xosproject/progran-synchronizer:candidate"
+  image:
+    tag: 'candidate'
 
-# others  
+# others
 kubernetes:
-  kubernetes_synchronizerImage: 'xosproject/kubernetes-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 exampleservice:
-  exampleservice_synchronizerImage: 'xosproject/exampleservice-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 simpleexampleservice:
-  simpleexampleservice_synchronizerImage: 'xosproject/simpleexampleservice-synchronizer:candidate'
-
-hippieOSS_synchronizerImage: 'xosproject/hippie-oss-synchronizer:candidate'
+  image:
+    tag: 'candidate'
 

@@ -15,4 +15,9 @@
 
 name: fabric-crossconnect
 description: A Helm chart for XOS's "fabric-crossconnect" service
-version: 1.0.0-dev
+icon: https://guide.opencord.org/logos/cord.svg
+
+version: 1.1.1
+appVersion: 1.1.1
+
+

@@ -16,4 +16,8 @@
 
 name: fabric
 description: A Helm chart for XOS's "fabric" service
-version: 2.0.1-dev
+icon: https://guide.opencord.org/logos/cord.svg
+
+version: 2.1.3
+appVersion: 2.1.3
+
