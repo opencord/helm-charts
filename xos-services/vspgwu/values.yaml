@@ -22,9 +22,10 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-imagePullPolicy: 'Always'
-
-synchronizerImage: "xosproject/vspgwu-synchronizer:{{ .Chart.Version }}"
+image:
+  repository: 'xosproject/vspgwu-synchronizer'
+  tag: '{{ .Chart.AppVersion }}'
+  pullPolicy: 'Always'
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
@@ -40,6 +41,7 @@ privateKeyFile: "files/id_rsa"
 global:
   proxySshEnabled: true
   proxySshUser: "root"
+  registry: ''
 
 resources: {}
 

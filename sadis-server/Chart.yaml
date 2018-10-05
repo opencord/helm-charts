@@ -13,4 +13,5 @@
 # limitations under the License.
 
 name: sadis-server
-version: 1.0.0-dev
+version: 1.0.1
+appVersion: latest

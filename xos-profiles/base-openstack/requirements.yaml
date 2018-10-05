@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +15,11 @@
 
 dependencies:
 - name: onos-service
-  version: 2.0.2-dev
+  version: 2.0.5
   repository: file://../../xos-services/onos-service
 - name: openstack
-  version: 1.0.0
+  version: 1.0.2
   repository: file://../../xos-services/openstack
 - name: vtn-service
-  version: 1.0.0
+  version: 1.0.1
   repository: file://../../xos-services/vtn-service

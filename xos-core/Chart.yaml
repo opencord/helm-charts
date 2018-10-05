@@ -14,4 +14,12 @@
 # limitations under the License.
 
 name: xos-core
-version: 2.1.0-dev
+description: XOS - An Extensible Cloud Operating System
+icon: https://guide.opencord.org/logos/xos.svg
+
+version: 2.1.19
+
+# appVersion is of the xos-core and xos-chameleon containers.
+# xos-tosca and xos-api-tester are versioned in values.yaml
+appVersion: 2.1.19
+
