@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0ba55b1a_54e16a9c",
+        "filename": "examples/image-tag-candidate.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2018-10-08T21:23:53Z",
+      "side": 1,
+      "message": "Is this intended to go into the patch?",
+      "range": {
+        "startLine": 19,
+        "startChar": 16,
+        "endLine": 19,
+        "endChar": 42
+      },
+      "revId": "e761009d3229b31f74a98d66c7e584ab271936f5",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
