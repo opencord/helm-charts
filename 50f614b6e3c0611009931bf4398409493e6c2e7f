@@ -16,6 +16,24 @@
       "revId": "50f614b6e3c0611009931bf4398409493e6c2e7f",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1dec8918_7fd3dae5",
+        "filename": "xos-profiles/att-workflow/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-10-10T18:55:28Z",
+      "side": 1,
+      "message": "Sure, that makes sense.  Will revise",
+      "parentUuid": "c4754f1c_29a98e48",
+      "revId": "50f614b6e3c0611009931bf4398409493e6c2e7f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
