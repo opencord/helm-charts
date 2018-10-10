@@ -17,7 +17,7 @@ nameOverride: ""
 
 image:
   repository: registry.hub.docker.com/opencord/ves-agent
-  tag: latest
+  tag: 1.0.0
   pullPolicy: Always
 
 co_id: test_co
@@ -30,8 +30,8 @@ onap:
 kafka:
   address: "cord-kafka"
   port: "9092"
-  alarms_topic: "kafka.alarms"
-  kpis_topic: "kafka.kpis"
+  alarms_topic: "voltha.alarms"
+  kpis_topic: "voltha.kpis"
 
 service:
   type: ClusterIP
