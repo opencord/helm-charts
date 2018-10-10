@@ -31,7 +31,7 @@ spec:
         - name: voltha-kpi-exporter
           image: {{ tpl .Values.nem_voltha_kpi_exporter_image . | quote }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
-          args: ["-broker={{ .Values.args.voltha_kpi_broker }}", "-topic={{ .Values.args.voltha_kpi_topic }}"]
+          args: ["-broker={{ .Values.args.voltha_kpi_broker }}"]
           ports:
             - containerPort: 8080
               port: 8080
