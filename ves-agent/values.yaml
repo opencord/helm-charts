@@ -30,8 +30,8 @@ onap:
 kafka:
   address: "cord-kafka"
   port: "9092"
-  alarms_topic: "kafka.alarms"
-  kpis_topic: "kafka.kpis"
+  alarms_topic: "voltha.alarms"
+  kpis_topic: "voltha.kpis"
 
 service:
   type: ClusterIP
