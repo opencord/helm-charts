@@ -15,10 +15,10 @@
 
 nem_voltha_kpi_exporter_image: "opencord/kafka-topic-exporter:latest"
 nem_voltha_kpi_exporter_nodePort: 31080
+nem_voltha_kpi_exporter_replicas: 2
 imagePullPolicy: "Always"
 args:
   voltha_kpi_broker: cord-kafka:9092
-  voltha_kpi_topic: voltha.kpis
 
 prometheus:
   alertmanager:
@@ -46,7 +46,7 @@ prometheus:
           scrape_interval: 15s
           static_configs:
             - targets:
-              - voltha-kpi-exporter:8080
+              - kpi-exporter:8080
 
         # XOS-Core
         - job_name: 'xos-core'

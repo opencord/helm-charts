@@ -17,8 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
-  "iteration": 1540483073721,
+  "iteration": 1541029831924,
   "links": [],
   "panels": [
     {
@@ -1095,10 +1094,8 @@
       {
         "allValue": null,
         "current": {
-          "$$hashKey": "object:1294",
-          "selected": false,
-          "text": "000000000a5a0072",
-          "value": "000000000a5a0072"
+          "text": "All",
+          "value": "$__all"
         },
         "datasource": "Prometheus",
         "hide": 0,
@@ -1106,28 +1103,9 @@
         "label": "OLT Device",
         "multi": false,
         "name": "olt",
-        "options": [
-          {
-            "$$hashKey": "object:1292",
-            "selected": false,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "$$hashKey": "object:1293",
-            "selected": false,
-            "text": "000000000a5a0073",
-            "value": "000000000a5a0073"
-          },
-          {
-            "$$hashKey": "object:1294",
-            "selected": true,
-            "text": "000000000a5a0072",
-            "value": "000000000a5a0072"
-          }
-        ],
-        "query": "label_values(tx_bytes_total, logical_device_id)",
-        "refresh": 0,
+        "options": [],
+        "query": "label_values(voltha_tx_bytes_total, logical_device_id)",
+        "refresh": 1,
         "regex": "",
         "sort": 0,
         "tagValuesQuery": "",
@@ -1139,7 +1117,6 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
           "text": "All",
           "value": "$__all"
         },
@@ -1151,19 +1128,17 @@
         "name": "onu",
         "options": [
           {
-            "$$hashKey": "object:389",
             "selected": true,
             "text": "All",
             "value": "$__all"
           },
           {
-            "$$hashKey": "object:390",
             "selected": false,
             "text": "ISKT71e801a0",
             "value": "ISKT71e801a0"
           }
         ],
-        "query": "label_values(tx_packets_total{title=\"Ethernet_Bridge_Port_History\"}, serial_number)",
+        "query": "label_values(voltha_tx_packets_total{title=\"Ethernet_Bridge_Port_History\"}, serial_number)",
         "refresh": 0,
         "regex": "",
         "sort": 0,
