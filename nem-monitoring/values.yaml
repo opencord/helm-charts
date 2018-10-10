@@ -18,7 +18,6 @@ nem_voltha_kpi_exporter_nodePort: 31080
 imagePullPolicy: "Always"
 args:
   voltha_kpi_broker: cord-kafka:9092
-  voltha_kpi_topic: voltha.kpis
 
 prometheus:
   alertmanager:
