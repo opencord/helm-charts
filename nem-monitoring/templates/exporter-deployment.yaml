@@ -16,22 +16,22 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: voltha-kpi-exporter
+  name: kpi-exporter
   labels:
     release: {{ .Release.Name }}
 spec:
-  replicas: 2
+  replicas: {{ .Values.nem_voltha_kpi_exporter_replicas }}
   template:
     metadata:
       labels:
-        app: voltha-kpi-exporter
+        app: kpi-exporter
         release: {{ .Release.Name }}
     spec:
       containers:
-        - name: voltha-kpi-exporter
+        - name: kpi-exporter
           image: {{ tpl .Values.nem_voltha_kpi_exporter_image . | quote }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
-          args: ["-broker={{ .Values.args.voltha_kpi_broker }}", "-topic={{ .Values.args.voltha_kpi_topic }}"]
+          args: ["-broker={{ .Values.args.voltha_kpi_broker }}"]
           ports:
             - containerPort: 8080
               port: 8080
