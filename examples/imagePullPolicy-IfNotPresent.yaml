@@ -19,9 +19,30 @@
 image:
   pullPolicy: 'IfNotPresent'
 
-xos-gui:
+# in xos-core chart and other charts with multiple images
+images:
+  xos_core:
+    pullPolicy: 'IfNotPresent'
+  xos_chameleon:
+    pullPolicy: 'IfNotPresent'
+  xos_tosca:
+    pullPolicy: 'IfNotPresent'
+  xos_api_tester:
+    pullPolicy: 'IfNotPresent'
+  tosca_loader:
+    pullPolicy: 'IfNotPresent'
+
+xos-db:
   image:
     pullPolicy: 'IfNotPresent'
+
+# in xos-gui sub-chart required by xos-core chart
+xos-gui:
+  images:
+    xos_gui:
+      pullPolicy: 'IfNotPresent'
+    xos_ws:
+      pullPolicy: 'IfNotPresent'
 
 # in RCORD service chart
 addressmanager:
