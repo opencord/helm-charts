@@ -148,21 +148,6 @@ topology_template:
             node: onos_app#olt
             relationship: tosca.relationships.BelongsToOne
 
-    dhcpl2relay-config-attr:
-      type: tosca.nodes.ServiceInstanceAttribute
-      properties:
-        name: /onos/v1/network/configuration/apps/org.opencord.dhcpl2relay
-        value: >
-          {
-            "dhcpl2relay" : {
-              "useOltUplinkForServerPktInOut" : true
-            }
-          }
-      requirements:
-        - service_instance:
-            node: onos_app#dhcpl2relay
-            relationship: tosca.relationships.BelongsToOne
-
     aaa-config-attr:
       type: tosca.nodes.ServiceInstanceAttribute
       properties:
