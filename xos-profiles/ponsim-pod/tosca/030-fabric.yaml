@@ -16,6 +16,7 @@
 tosca_definitions_version: tosca_simple_yaml_1_0
 imports:
   - custom_types/switch.yaml
+  - custom_types/onosapp.yaml
   - custom_types/switchport.yaml
   - custom_types/portinterface.yaml
   - custom_types/bngportmapping.yaml
@@ -65,6 +66,12 @@ topology_template:
       properties:
         s_tag: "any"
         switch_port: 1
+
+    onos_app#dhcpl2relay:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: dhcpl2relay
+        must-exist: true
 
     # DHCP L2 Relay config
     dhcpl2relay-config-attr:
