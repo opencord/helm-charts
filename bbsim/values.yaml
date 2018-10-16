@@ -26,10 +26,16 @@ olt_tcp_port: 50060
 pon_ports: 1
 
 # -n option
-onus_per_pon_port: 1
+onus_per_pon_port: 16
 
 # -m option
 emulation_mode: 'both'
+
+# -a option
+wpa_wait: 60
+
+# -d option
+dhcp_wait: 120
 
 image:
   repository: 'voltha/voltha-bbsim'
