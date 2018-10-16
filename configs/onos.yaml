@@ -21,7 +21,7 @@
 nameOverride: "onos"
 fullnameOverride: "onos"
 
-onosImage: 'onosproject/onos:1.13.4'
+onosImage: 'onosproject/onos:1.13.5'
 
 services:
   openflowServiceType: NodePort
