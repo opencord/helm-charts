@@ -21,9 +21,6 @@ etcd-operator:
   etcdCluster:
     size: 1
 
-# att-workflow
-kafkaAppUrl: 'http://www.vicci.org/cord/kafka-1.0.0-SNAPSHOT.oar'
-
 # in xos-core chart and other charts with multiple images
 images:
   xos_core:
