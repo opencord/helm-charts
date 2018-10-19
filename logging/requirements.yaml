@@ -21,7 +21,7 @@ dependencies:
 
 - name: kibana
   condition: kibana.enabled
-  version: 0.16.1
+  version: 0.16.4
   repository: https://kubernetes-charts.storage.googleapis.com/
 
 - name: fluentd-elasticsearch
