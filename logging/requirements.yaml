@@ -16,20 +16,20 @@
 dependencies:
 
 - name: elasticsearch
-  version: 1.11.0
+  version: 1.15.3
   repository: https://kubernetes-charts.storage.googleapis.com/
 
 - name: kibana
   condition: kibana.enabled
-  version: 0.16.1
+  version: 1.1.2
   repository: https://kubernetes-charts.storage.googleapis.com/
 
 - name: fluentd-elasticsearch
   condition: fluentd-elasticsearch.enabled
-  version: 1.0.3
+  version: 1.4.1
   repository: https://kubernetes-charts.storage.googleapis.com/
 
 - name: logstash
   condition: logstash.enabled
-  version: 1.0.0
+  version: 1.4.2
   repository: https://kubernetes-charts.storage.googleapis.com/
