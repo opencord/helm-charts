@@ -1,0 +1,16 @@
+apiVersion: "etcd.database.coreos.com/v1beta2"
+kind: "EtcdCluster"
+metadata:
+  name: {{ quote .Values.clusterName }}
+spec:
+  size: {{ .Values.clusterSize }}
+  pod:
+    resources:
+      limits:
+        memory: {{ .Values.memoryLimit }}
+    etcdEnv:
+    - name: ETCD_AUTO_COMPACTION_RETENTION
+      value: {{ quote .Values.autoCompactionRetention }}
+    busyboxImage: {{ quote .Values.etcdCluster.image.busyboxImage }}
+  version: {{ quote .Values.etcdCluster.image.tag }}
+  repository: {{ quote .Values.etcdCluster.image.repository }}
