@@ -17,23 +17,90 @@ replicaCount: 1
 
 nameOverride: ""
 fullnameOverride: ""
+abstractOlt:
+   image:
+      repository: 'docker-repo.dev.atl.foundry.att.com:5000'
+      image: "abstract-olt"
+      tag: '{{ .Chart.AppVersion }}'
+      pullPolicy: Always
+   service:
+     type: NodePort
+     grpcPort: 31777
+     restApiPort: 31778
+     type: NodePort
+     grpcPort: 31777
+     restApiPort: 31778
+     listenAddress: 0.0.0.0
+     debug: true
+     useMongo: true
+     mongodb: "mongodb://foundry:foundry123@abstract-olt-mongodb:27017/AbstractOLT"
+     dummy: true
+   replicaCount: 1
 
-image:
-  repository: 'opencord/abstract-olt'
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: Always
+   resources: {}
 
-service:
-  type: NodePort
-  grpcPort: 31777
-  restApiPort: 31778
+   nodeSelector: {}
 
-resources: {}
+   tolerations: []
 
-nodeSelector: {}
+   affinity: {}
 
-tolerations: []
+   annotations: {}
+mongodb:
+   usePassword: true
+   mongodbUsername: foundry
+   mongodbPassword: foundry123
+   mongodbDatabase: AbstractOLT
+   mongodbEnableIPv6: true
+   mongodbExtraFlags: []
+   securityContext:
+     enabled: true
+     fsGroup: 1001
+     runAsUser: 1001
+   clusterDomain: cluster.local
+   service:
+     annotations: {}
+     #override to ClusterIP for HA
+     type: NodePort
+     port: 27017
+   replicaSet:
+      #override to true for HA
+     enabled: false
+     useHostnames: true
+     name: rs0
+     replicas:
+       secondary: 1
+       arbiter: 1
+     pdb:
+       minAvailable:
+         primary: 1
+         secondary: 1
+         arbiter: 1
+   podAnnotations: {}
+   resources: {}
+   nodeSelector: {}
+   affinity: {}
+   tolerations: []
+   persistence:
+      #override to true for persistence
+     enabled: false
+     accessModes:
+       - ReadWriteOnce
+     size: 8Gi
+     annotations: {}
+   livenessProbe:
+     enabled: true
+     initialDelaySeconds: 30
+     periodSeconds: 10
+     timeoutSeconds: 5
+     failureThreshold: 6
+     successThreshold: 1
+   readinessProbe:
+     enabled: true
+     initialDelaySeconds: 5
+     periodSeconds: 10
+     timeoutSeconds: 5
+     failureThreshold: 6
+     successThreshold: 1
+   configmap:
 
-affinity: {}
-
-annotations: {}

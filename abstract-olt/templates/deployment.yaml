@@ -23,7 +23,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.abstractOlt.replicaCount }}
   selector:
     matchLabels:
       app: {{ template "abstract-olt.name" . }}
@@ -33,27 +33,41 @@ spec:
       labels:
         app: {{ template "abstract-olt.name" . }}
         release: {{ .Release.Name }}
-    {{- with .Values.annotations }}
+    {{- with .Values.abstractOlt.annotations }}
       annotations:
 {{ toYaml . | indent 8 }}
     {{- end }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
-          command: ["/app/AbstractOLT", "-log_file", "/dev/stdout"]
+          image: "{{ .Values.abstractOlt.image.repository }}/{{ .Values.abstractOlt.image.image}}:{{ tpl .Values.abstractOlt.image.tag . }}"
+          imagePullPolicy: {{ .Values.abstractOlt.image.pullPolicy }}
+          ports:
+             - name: grpc
+               containerPort: 7777
+               protocol: TCP
+             - name: rest
+               containerPort: 7778
+               protocol: TCP
+          command: ["/app/AbstractOLT"]
+          args: [ "-d={{ .Values.abstractOlt.service.debug }}",
+                  "-log_file=/dev/stdout",
+                  "-listenAddress={{ .Values.abstractOlt.service.listenAddress }}",
+                  "-dummy={{ .Values.abstractOlt.service.dummy }}",
+                  "-useMongo={{ .Values.abstractOlt.service.useMongo }}",
+                  "-mongodb={{ .Values.abstractOlt.service.mongodb }}"]
+
           resources:
 {{ toYaml .Values.resources | indent 12 }}
-    {{- with .Values.nodeSelector }}
+    {{- with .Values.abstractOlt.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}
     {{- end }}
-    {{- with .Values.affinity }}
+    {{- with .Values.abstractOlt.affinity }}
       affinity:
 {{ toYaml . | indent 8 }}
     {{- end }}
-    {{- with .Values.tolerations }}
+    {{- with .Values.abstractOlt.tolerations }}
       tolerations:
 {{ toYaml . | indent 8 }}
     {{- end }}
