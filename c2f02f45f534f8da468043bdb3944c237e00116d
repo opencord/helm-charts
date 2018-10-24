@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f86072c8_2d2c837d",
+        "filename": "abstract-olt/Chart.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-10-24T21:12:45Z",
+      "side": 1,
+      "message": "On Docker Hub we only have :latest.  Can we release :1.1 and push to Docker Hub?",
+      "range": {
+        "startLine": 16,
+        "startChar": 12,
+        "endLine": 16,
+        "endChar": 15
+      },
+      "revId": "c2f02f45f534f8da468043bdb3944c237e00116d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "307f6ad0_f5bff835",
+        "filename": "abstract-olt/requirements.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-10-24T21:12:45Z",
+      "side": 1,
+      "message": "Should be 4.6.2?  Using 3.6.2 gives me an error: \n\nError: Can\u0027t get a valid version for repositories mongodb. Try changing the version constraint in requirements.yaml",
+      "range": {
+        "startLine": 17,
+        "startChar": 11,
+        "endLine": 17,
+        "endChar": 16
+      },
+      "revId": "c2f02f45f534f8da468043bdb3944c237e00116d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba3f3b74_ed238b36",
+        "filename": "abstract-olt/values.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-10-24T21:12:45Z",
+      "side": 1,
+      "message": "I think best practice is to only include the names of dependent charts at the top level.  For example, if we were to include this chart as a dependency and we wanted to change its values, we\u0027d need to for ex. abstract-olt.abstractOlt.service.useMongo...",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 11
+      },
+      "revId": "c2f02f45f534f8da468043bdb3944c237e00116d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0caaa565_468bf41f",
+        "filename": "abstract-olt/values.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-10-24T21:12:45Z",
+      "side": 1,
+      "message": "Can we use a public repository for the default case?",
+      "range": {
+        "startLine": 22,
+        "startChar": 19,
+        "endLine": 22,
+        "endChar": 59
+      },
+      "revId": "c2f02f45f534f8da468043bdb3944c237e00116d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fdbb3e43_fa757837",
+        "filename": "abstract-olt/values.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-10-24T21:12:45Z",
+      "side": 1,
+      "message": "These lines appear twice",
+      "range": {
+        "startLine": 30,
+        "startChar": 5,
+        "endLine": 32,
+        "endChar": 23
+      },
+      "revId": "c2f02f45f534f8da468043bdb3944c237e00116d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "582ae392_444c0be8",
+        "filename": "abstract-olt/values.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2018-10-24T21:12:45Z",
+      "side": 1,
+      "message": "Most of these options seem to not be changed from the mongodb chart\u0027s default values.yaml.  Maybe only include the ones that are different?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "c2f02f45f534f8da468043bdb3944c237e00116d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
