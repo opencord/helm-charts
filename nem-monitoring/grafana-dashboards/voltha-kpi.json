@@ -17,7 +17,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1538522071785,
+  "id": 1,
+  "iteration": 1540483073721,
   "links": [],
   "panels": [
     {
@@ -583,10 +584,10 @@
       "repeatDirection": "v",
       "scopedVars": {
         "olt": {
-          "$$hashKey": "object:1293",
-          "selected": false,
-          "text": "000000000a5a0073",
-          "value": "000000000a5a0073"
+          "$$hashKey": "object:1294",
+          "selected": true,
+          "text": "000000000a5a0072",
+          "value": "000000000a5a0072"
         }
       },
       "seriesOverrides": [],
@@ -682,10 +683,10 @@
       "repeatDirection": "v",
       "scopedVars": {
         "olt": {
-          "$$hashKey": "object:1293",
-          "selected": false,
-          "text": "000000000a5a0073",
-          "value": "000000000a5a0073"
+          "$$hashKey": "object:1294",
+          "selected": true,
+          "text": "000000000a5a0072",
+          "value": "000000000a5a0072"
         }
       },
       "seriesOverrides": [],
@@ -749,7 +750,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "Prometheus",
       "fill": 1,
       "gridPos": {
         "h": 9,
@@ -757,9 +758,8 @@
         "x": 0,
         "y": 41
       },
-      "id": 27,
+      "id": 32,
       "legend": {
-        "alignAsTable": false,
         "avg": false,
         "current": false,
         "max": false,
@@ -771,42 +771,29 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "minSpan": 12,
       "nullPointMode": "null",
       "percentage": false,
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "repeat": null,
-      "repeatDirection": "v",
-      "repeatIteration": 1538522071785,
-      "repeatPanelId": 21,
-      "scopedVars": {
-        "olt": {
-          "$$hashKey": "object:1294",
-          "selected": false,
-          "text": "000000000a5a0072",
-          "value": "000000000a5a0072"
-        }
-      },
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:987",
-          "expr": "rx_bytes_total{title=\"PON\", logical_device_id=\"$olt\"} / 1024 / 1024",
+          "$$hashKey": "object:637",
+          "expr": "tx_bytes_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{pon_id}}",
+          "legendFormat": "{{serial_number}}",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Received MB per PON on device $olt",
+      "title": "ONU Transmitted Bytes on $onu",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -822,7 +809,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:1472",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -831,7 +817,6 @@
           "show": true
         },
         {
-          "$$hashKey": "object:1473",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -860,7 +845,6 @@
       },
       "id": 28,
       "legend": {
-        "alignAsTable": false,
         "avg": false,
         "current": false,
         "max": false,
@@ -872,42 +856,29 @@
       "lines": true,
       "linewidth": 1,
       "links": [],
-      "minSpan": 12,
       "nullPointMode": "null",
       "percentage": false,
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
-      "repeat": null,
-      "repeatDirection": "v",
-      "repeatIteration": 1538522071785,
-      "repeatPanelId": 26,
-      "scopedVars": {
-        "olt": {
-          "$$hashKey": "object:1294",
-          "selected": false,
-          "text": "000000000a5a0072",
-          "value": "000000000a5a0072"
-        }
-      },
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
       "targets": [
         {
-          "$$hashKey": "object:987",
-          "expr": "tx_bytes_total{title=\"PON\", logical_device_id=\"$olt\"} / 1024 / 1024",
+          "$$hashKey": "object:432",
+          "expr": "tx_packets_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{pon_id}}",
+          "legendFormat": "{{serial_number}}",
           "refId": "A"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Transmitted MB per PON on device $olt",
+      "title": "ONU Transmitted Packets on $onu",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -923,7 +894,6 @@
       },
       "yaxes": [
         {
-          "$$hashKey": "object:1472",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -932,7 +902,176 @@
           "show": true
         },
         {
-          "$$hashKey": "object:1473",
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 50
+      },
+      "id": 34,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "$$hashKey": "object:836",
+          "expr": "rx_bytes_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{serial_number}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ONU Received Bytes on $onu",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 50
+      },
+      "id": 30,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "$$hashKey": "object:537",
+          "expr": "rx_packets_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{serial_number}}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "ONU Received Packets on $onu",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -956,9 +1095,10 @@
       {
         "allValue": null,
         "current": {
-          "tags": [],
-          "text": "All",
-          "value": "$__all"
+          "$$hashKey": "object:1294",
+          "selected": false,
+          "text": "000000000a5a0072",
+          "value": "000000000a5a0072"
         },
         "datasource": "Prometheus",
         "hide": 0,
@@ -969,7 +1109,7 @@
         "options": [
           {
             "$$hashKey": "object:1292",
-            "selected": true,
+            "selected": false,
             "text": "All",
             "value": "$__all"
           },
@@ -981,7 +1121,7 @@
           },
           {
             "$$hashKey": "object:1294",
-            "selected": false,
+            "selected": true,
             "text": "000000000a5a0072",
             "value": "000000000a5a0072"
           }
@@ -995,11 +1135,48 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "tags": [],
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": "Prometheus",
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": false,
+        "name": "onu",
+        "options": [
+          {
+            "$$hashKey": "object:389",
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "$$hashKey": "object:390",
+            "selected": false,
+            "text": "ISKT71e801a0",
+            "value": "ISKT71e801a0"
+          }
+        ],
+        "query": "label_values(tx_packets_total{title=\"Ethernet_Bridge_Port_History\"}, serial_number)",
+        "refresh": 0,
+        "regex": "",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-1h",
     "to": "now"
   },
   "timepicker": {
