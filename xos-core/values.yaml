@@ -46,6 +46,8 @@ global:
 xos_chameleonNodePort: 30006
 xos_toscaNodePort: 30007
 xos_prometheusNodePort: 30009
+xos_core_gRPCSecureNodePort: 30010
+xos_core_gRPCInsecureNodePort: 30011
 
 # XOS Admin username/password
 xosAdminUser: 'admin@opencord.org'

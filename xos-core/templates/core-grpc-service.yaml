@@ -20,15 +20,18 @@ metadata:
   labels:
     {{- include "xos-core.release_labels" . | indent 4 }}
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: "xos-core"
   ports:
     - port: 50051
-      name: secure
       targetPort: 50051
+      name: secure
+      nodePort: {{ .Values.xos_core_gRPCSecureNodePort }}
       protocol: TCP
     - port: 50055
-      name: insecure
       targetPort: 50055
+      name: insecure
+      nodePort: {{ .Values.xos_core_gRPCInsecureNodePort }}
       protocol: TCP
+
