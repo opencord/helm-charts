@@ -32,3 +32,20 @@ spec:
       name: insecure
       targetPort: 50055
       protocol: TCP
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: "xos-core-secure"
+  labels:
+    {{- include "xos-core.release_labels" . | indent 4 }}
+spec:
+  type: NodePort
+  selector:
+    app: "xos-core"
+  ports:
+    - port: 50051
+      targetPort: 50051
+      name: secure
+      nodePort: {{ .Values.xos_coreSecureNodePort }}
+      protocol: TCP
