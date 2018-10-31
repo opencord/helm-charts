@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f4e79d8b_635aef08",
+        "filename": "xos-core/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-10-31T19:51:20Z",
+      "side": 1,
+      "message": "The `appVersion` is where the container\u0027s tag is listed - see https://docs.helm.sh/developing_charts#the-appversion-field",
+      "range": {
+        "startLine": 24,
+        "startChar": 12,
+        "endLine": 24,
+        "endChar": 18
+      },
+      "revId": "ea5fe2c7163111395fd71662d91e9545773c8f69",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
