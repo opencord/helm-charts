@@ -17,5 +17,5 @@ name: hippie-oss
 description: A Helm chart for XOS's "hippie-oss" service
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 1.1.0
-appVersion: 1.1.0
+version: 1.1.1
+appVersion: 1.1.1
