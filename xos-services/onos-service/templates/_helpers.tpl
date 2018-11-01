@@ -67,12 +67,12 @@ logging:
       maxBytes: 10485760
       backupCount: 5
     kafka:
-      class: kafkaloghandler.kafkaloghandler.KafkaLogHandler
+      class: kafkaloghandler.KafkaLogHandler
       bootstrap_servers:
         - "cord-kafka:9092"
       topic: xos.log.onos-service
   loggers:
-    'multistructlog':
+    '':
       handlers:
         - console
         - file

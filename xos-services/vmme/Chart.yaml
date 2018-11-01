@@ -17,6 +17,6 @@ name: vmme
 description: A Helm chart for XOS's "vmme" service
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 1.0.2
-appVersion: 1.0.2
+version: 1.0.3
+appVersion: 1.0.3
 
