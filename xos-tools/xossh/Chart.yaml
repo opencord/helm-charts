@@ -16,7 +16,7 @@
 name: xossh
 description: A Helm chart for xossh, the XOS command line shell
 icon: https://guide.opencord.org/logos/xos.svg
-version: 2.1.15
+version: 2.1.23
 
 # Runs the xosproject/xos-client container
-appVersion: 2.1.15
+appVersion: 2.1.23
