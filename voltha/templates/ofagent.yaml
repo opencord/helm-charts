@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -30,13 +31,24 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       terminationGracePeriodSeconds: 10
       containers:
-      - name: ofagent
-        image: {{ .Values.ofagentImage }}
-        imagePullPolicy: {{ .Values.imagePullPolicy }}
-        env:
-        - name: NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        args:
-{{ toYaml .Values.ofagent_args | indent 8 }} 
+        - name: ofagent
+          image: {{ .Values.ofagentImage }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          args:
+{{ toYaml .Values.ofagent_args | indent 12 }}
+          volumeMounts:
+            - name: ofagent-logconfig-vol
+              mountPath: /ofagent/ofagent/logconfig.yml
+              subPath: logconfig.yml
+      volumes:
+        - name: ofagent-logconfig-vol
+          configMap:
+            name: ofagent-logconfig
+            items:
+              - key: logconfig
+                path: logconfig.yml

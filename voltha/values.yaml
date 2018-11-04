@@ -86,14 +86,12 @@ vcli_args:
 
 ofagent_args:
 - "/ofagent/ofagent/main.py"
-- "-v"
 - "--consul=consul.$(NAMESPACE).svc.cluster.local:8500"
 - "--controller=onos-openflow.default.svc.cluster.local:6653"
 - "--grpc-endpoint=vcore.$(NAMESPACE).svc.cluster.local:50556"
 
 netconf_args:
 - "/netconf/netconf/main.py"
-- "-v"
 - "--consul=consul:8500"
 - "--grpc-endpoint=voltha:50555"
 
