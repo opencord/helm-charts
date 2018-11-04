@@ -16,7 +16,6 @@ limitations under the License.
 
 {{- define "voltha-vcore.cmd" }}
 - "voltha/voltha/main.py"
-- "-v"
 - "--etcd=etcd-cluster.default.svc.cluster.local:2379"
 - "--kafka={{ .Values.kafkaReleaseName }}.default.svc.cluster.local"
 - "--rest-port=8880"
@@ -26,4 +25,36 @@ limitations under the License.
 - "--pon-subnet=10.38.0.0/12"
 - "--ponsim-comm=grpc"
 - "--core-number-extractor=^.*-([0-9]+)_.*$"
+{{- end }}
+
+{{- define "logconfig.yml" }}
+version: 1
+
+formatters:
+  default:
+    format: '%(asctime)s.%(msecs)03d %(levelname)-8s %(threadName)s %(module)s.%(funcName)s %(message)s'
+    datefmt: '%Y%m%dT%H%M%S'
+
+handlers:
+  console:
+    class : logging.StreamHandler
+    formatter: default
+    stream: ext://sys.stdout
+  localRotatingFile:
+    class: logging.handlers.RotatingFileHandler
+    filename: voltha.log
+    formatter: default
+    maxBytes: 2097152
+    backupCount: 10
+  kafka:
+    class: kafkaloghandler.KafkaLogHandler
+    bootstrap_servers:
+      - "cord-kafka.default:9092"
+    topic: "voltha.log.{{ .KafkaTopic }}"
+
+loggers:
+  '':
+    handlers: [console, localRotatingFile, kafka]
+    level: DEBUG
+    propagate: False
 {{- end }}

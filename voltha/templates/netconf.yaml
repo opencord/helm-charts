@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,8 +24,8 @@ spec:
     app: netconf
   clusterIP: None
   ports:
-  - port: 830
-    targetPort: 830
+    - port: 830
+      targetPort: 830
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -44,13 +45,24 @@ spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       terminationGracePeriodSeconds: 10
       containers:
-      - name: netconf
-        image: {{ .Values.netconfImage }}
-        imagePullPolicy: {{ .Values.imagePullPolicy }}
-        ports:
-        - containerPort: 830
-        env:
-        - name: NETCONF_PORT
-          value: "830"
-        args:
-{{ toYaml .Values.netconf_args | indent 8 }} 
+        - name: netconf
+          image: {{ .Values.netconfImage }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          ports:
+            - containerPort: 830
+          env:
+            - name: NETCONF_PORT
+              value: "830"
+          args:
+{{ toYaml .Values.netconf_args | indent 12}}
+          volumeMounts:
+            - name: netconf-logconfig-vol
+              mountPath: /netconf/netconf/logconfig.yml
+              subPath: logconfig.yml
+      volumes:
+        - name: netconf-logconfig-vol
+          configMap:
+            name: netconf-logconfig
+            items:
+              - key: logconfig
+                path: logconfig.yml

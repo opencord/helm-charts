@@ -39,6 +39,11 @@ data:
         multiline.negate: false
         multiline.match: after
 
+    # remove unneeded fields
+    processors:
+      - drop_fields:
+          fields: ["host", "prospector", "input"]
+
     output.kafka:
       hosts: {{ .Values.log_agent.kafka_brokers | toJson }}
       topic: 'onos.log'
