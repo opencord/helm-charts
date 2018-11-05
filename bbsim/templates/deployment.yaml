@@ -50,8 +50,8 @@ spec:
             "-H", ":{{ .Values.olt_tcp_port }}",
             "-id", "{{ .Values.olt_id }}",
             "-i", "{{ .Values.pon_ports }}",
-            "-a", "{{ .Values.wpa_wait }}",
-            "-d", "{{ .Values.dhcp_wait }}",
+            "-aw", "{{ .Values.wpa_wait }}",
+            "-dw", "{{ .Values.dhcp_wait }}",
           ]
           ports:
             - name: "bbsim-olt-id-{{ .Values.olt_id }}"
