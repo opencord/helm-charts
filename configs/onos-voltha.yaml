@@ -18,20 +18,27 @@
 #
 # helm install onos -f configs/onos-voltha.yaml -n onos-voltha
 
-nameOverride: "onosv"
-fullnameOverride: "onos-voltha"
+nameOverride: "onos"
+fullnameOverride: "onos"
 
-onosImage: 'onosproject/onos:1.13.2'
+onosImage: 'voltha/voltha-onos:latest'
 
 services:
-  openflowServiceType: ClusterIP
+  openflowServiceType: NodePort
   ovsdbServiceType: ClusterIP
   sshServiceType: NodePort
   uiServiceType: NodePort
+  openflow:
+    nodePort: 31653
   ssh:
     nodePort: 30115
   ui:
     nodePort: 30120
+  debugger:
+    nodePort: 30555
+
+
+xos_service_label: ONOS
 
 onos_env:
 - name: POD_IP
