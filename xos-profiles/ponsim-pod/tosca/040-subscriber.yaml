@@ -31,5 +31,3 @@ topology_template:
         c_tag: 111
         s_tag: 222
         onu_device: PSMO12345678
-        mac_address: 00:AA:00:00:00:01 # subscriber mac address
-        ip_address: 10.8.2.1 # subscriber IP
