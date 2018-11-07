@@ -52,6 +52,7 @@ spec:
             "-i", "{{ .Values.pon_ports }}",
             "-aw", "{{ .Values.wpa_wait }}",
             "-dw", "{{ .Values.dhcp_wait }}",
+            "-k", "{{ .Values.kafka_broker }}",
           ]
           ports:
             - name: "bbsim-olt-id-{{ .Values.olt_id }}"
