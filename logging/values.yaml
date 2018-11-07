@@ -103,7 +103,7 @@ logstash:
           group_id => "logstash_ck"
           metadata_max_age_ms => 60000 # recheck for new topics every minute
           # other topics that are not indexed: xos.gui_events, voltha.kpis, voltha.heartbeat
-          topics_pattern => '.*\.events|dhcp.*|onos.*|voltha.log.*|xos.log.*'
+          topics_pattern => '.*\.events|dhcp.*|onos.*|.*\.log.*'
           type => "cord-kafka"
         }
       }

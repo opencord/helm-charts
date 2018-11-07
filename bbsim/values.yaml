@@ -37,6 +37,9 @@ wpa_wait: 60
 # -d option
 dhcp_wait: 120
 
+# -k option
+kafka_broker: 'cord-kafka.default.svc.cluster.local:9092'
+
 image:
   repository: 'voltha/voltha-bbsim'
   tag: '{{ .Chart.AppVersion }}'
