@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "61b56db3_a9184a4c",
+        "filename": "bbsim/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-11-08T02:20:13Z",
+      "side": 1,
+      "message": "Usually this is specified as a list (either native or comma separated) - see onos/values.yaml",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 0
+      },
+      "revId": "7df3ee07dd85631d80eed1caf7c6be82b0ea35ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
