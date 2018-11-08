@@ -17,7 +17,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1541029831924,
+  "iteration": 1541700702670,
   "links": [],
   "panels": [
     {
@@ -72,7 +72,7 @@
       "targets": [
         {
           "$$hashKey": "object:187",
-          "expr": "sum(tx_bytes_total{title=\"Ethernet\"})by(logical_device_id)  / 1024 / 1024",
+          "expr": "sum(voltha_tx_bytes_total{title=\"Ethernet\"})by(logical_device_id)  / 1024 / 1024",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{logical_device_id}}",
@@ -158,7 +158,7 @@
       "targets": [
         {
           "$$hashKey": "object:241",
-          "expr": "sum(rx_bytes_total{title=\"Ethernet\"})by(logical_device_id) / 1024 / 1024",
+          "expr": "sum(voltha_rx_bytes_total{title=\"Ethernet\"})by(logical_device_id) / 1024 / 1024",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{logical_device_id}}",
@@ -257,7 +257,7 @@
       "targets": [
         {
           "$$hashKey": "object:295",
-          "expr": "sum(tx_packets_total{title=\"Ethernet\"})by(logical_device_id)",
+          "expr": "sum(voltha_tx_packets_total{title=\"Ethernet\"})by(logical_device_id)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{logical_device_id}}",
@@ -343,7 +343,7 @@
       "targets": [
         {
           "$$hashKey": "object:349",
-          "expr": "sum(rx_packets_total{title=\"Ethernet\"})by(logical_device_id)",
+          "expr": "sum(voltha_rx_packets_total{title=\"Ethernet\"})by(logical_device_id)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{logical_device_id}}",
@@ -476,7 +476,7 @@
       "targets": [
         {
           "$$hashKey": "object:362",
-          "expr": "delta(rx_bytes_total{title=\"Ethernet\"}[30s]) / 1024 / 1024",
+          "expr": "delta(voltha_rx_bytes_total{title=\"Ethernet\"}[30s]) / 1024 / 1024",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{logical_device_id}}",
@@ -581,14 +581,6 @@
       "renderer": "flot",
       "repeat": "olt",
       "repeatDirection": "v",
-      "scopedVars": {
-        "olt": {
-          "$$hashKey": "object:1294",
-          "selected": true,
-          "text": "000000000a5a0072",
-          "value": "000000000a5a0072"
-        }
-      },
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
@@ -596,7 +588,7 @@
       "targets": [
         {
           "$$hashKey": "object:987",
-          "expr": "rx_bytes_total{title=\"PON\", logical_device_id=\"$olt\"} / 1024 / 1024",
+          "expr": "voltha_rx_bytes_total{title=\"PON\", logical_device_id=\"$olt\"} / 1024 / 1024",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{pon_id}}",
@@ -680,14 +672,6 @@
       "renderer": "flot",
       "repeat": "olt",
       "repeatDirection": "v",
-      "scopedVars": {
-        "olt": {
-          "$$hashKey": "object:1294",
-          "selected": true,
-          "text": "000000000a5a0072",
-          "value": "000000000a5a0072"
-        }
-      },
       "seriesOverrides": [],
       "spaceLength": 10,
       "stack": false,
@@ -695,7 +679,7 @@
       "targets": [
         {
           "$$hashKey": "object:987",
-          "expr": "tx_bytes_total{title=\"PON\", logical_device_id=\"$olt\"} / 1024 / 1024",
+          "expr": "voltha_tx_bytes_total{title=\"PON\", logical_device_id=\"$olt\"} / 1024 / 1024",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{pon_id}}",
@@ -782,7 +766,7 @@
       "targets": [
         {
           "$$hashKey": "object:637",
-          "expr": "tx_bytes_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
+          "expr": "voltha_tx_bytes_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{serial_number}}",
@@ -867,7 +851,7 @@
       "targets": [
         {
           "$$hashKey": "object:432",
-          "expr": "tx_packets_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
+          "expr": "voltha_tx_packets_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{serial_number}}",
@@ -952,7 +936,7 @@
       "targets": [
         {
           "$$hashKey": "object:836",
-          "expr": "rx_bytes_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
+          "expr": "voltha_rx_bytes_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{serial_number}}",
@@ -1037,7 +1021,7 @@
       "targets": [
         {
           "$$hashKey": "object:537",
-          "expr": "rx_packets_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
+          "expr": "voltha_rx_packets_total{title=\"Ethernet_Bridge_Port_History\", serial_number=\"$onu\"}",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{serial_number}}",
@@ -1128,11 +1112,13 @@
         "name": "onu",
         "options": [
           {
+            "$$hashKey": "object:232",
             "selected": true,
             "text": "All",
             "value": "$__all"
           },
           {
+            "$$hashKey": "object:233",
             "selected": false,
             "text": "ISKT71e801a0",
             "value": "ISKT71e801a0"
