@@ -41,7 +41,7 @@ spec:
               topologyKey: kubernetes.io/hostname
        containers:
          - name: rg
-           image: {{ .Values.global.registry }}{{ .Values.images.rg.repository }}:{{ tpl .Values.images.rg.tag . }}
+           image: "{{ .Values.global.registry }}{{ .Values.images.rg.repository }}:{{ tpl .Values.images.rg.tag . }}"
            imagePullPolicy: {{ .Values.images.rg.pullPolicy }}
            env:
              - name: POD_IP
@@ -53,6 +53,5 @@ spec:
                  fieldRef:
                    fieldPath: metadata.namespace
            command: [ "/bin/bash", "-c", "trap : TERM INT; sleep infinity & wait" ]
-           imagePullPolicy: {{ .Values.images.olt.pullPolicy }}
            securityContext:
              privileged: true

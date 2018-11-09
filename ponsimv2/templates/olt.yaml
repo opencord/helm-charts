@@ -44,7 +44,7 @@ spec:
      spec:
        containers:
          - name: olt
-           image: {{ .Values.global.registry }}{{ .Values.images.olt.repository }}:{{ tpl .Values.images.olt.tag . }}
+           image: "{{ .Values.global.registry }}{{ .Values.images.olt.repository }}:{{ tpl .Values.images.olt.tag . }}"
            imagePullPolicy: {{ .Values.images.olt.pullPolicy }}
            env:
              - name: POD_IP
@@ -55,7 +55,6 @@ spec:
                valueFrom:
                  fieldRef:
                    fieldPath: metadata.namespace
-
            args:
              - "/app/ponsim"
              - "-device_type"
@@ -69,9 +68,6 @@ spec:
              - "-vcore_endpoint"
              - "vcore"
              - "-promiscuous"
-
            ports:
             - containerPort: 50060
               name: grpc-port
-
-           imagePullPolicy: {{ .Values.images.olt.pullPolicy }}
