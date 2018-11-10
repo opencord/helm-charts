@@ -45,18 +45,14 @@ services:
           targetPort: 50555
 
 etcd:
-  operator:
+  cluster:
     enabled: true
 
-etcd-operator:
-  customResources:
-    createEtcdClusterCRD: true
+freeradius:
+  enabled: true
 
 kafkaReleaseName: cord-kafka
-etcdReleaseName: voltha-etcd
-
-consul:
-  enabled: false
+etcdReleaseName: etcd-cluster
 
 images:
   vcore:

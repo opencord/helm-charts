@@ -58,7 +58,7 @@ spec:
             - "-envoy-cfg-template=/envoy/voltha-grpc-proxy.template.json"
             - "-envoy-config=/envoy/voltha-grpc-proxy.json"
             - "-kv=etcd"
-            - "-kv-svc-name=etcd-cluster.default.svc.cluster.local"
+            - "-kv-svc-name={{ .Values.etcdReleaseName }}.default.svc.cluster.local"
             - "-kv-port=2379"
           ports:
             - containerPort: 8882
