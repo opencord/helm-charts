@@ -12,19 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-{{- if .Values.freeradius.enabled }}
-apiVersion: v1
-data:
-  clients.conf: |
-    client 0.0.0.0/0 {
-      secret = SECRET
-    }
-  users: |
-    user Cleartext-Password := "password", MS-CHAP-Use-NTLM-Auth := 0
-
-kind: ConfigMap
+apiVersion: "etcd.database.coreos.com/v1beta2"
+kind: "EtcdCluster"
 metadata:
-  name: freeradius-config
-  namespace: {{ .Values.global.namespace }}
-  serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
-{{- end}}
+  name: {{ quote .Values.clusterName }}
+spec:
+  size: {{ .Values.clusterSize }}
+  pod:
+    resources:
+      limits:
+        memory: {{ .Values.memoryLimit }}
+    etcdEnv:
+    - name: ETCD_AUTO_COMPACTION_RETENTION
+      value: {{ quote .Values.autoCompactionRetention }}
+    busyboxImage: {{ .Values.global.registry }}{{ .Values.images.busybox.repository }}:{{ tpl .Values.images.busybox.tag . }}
+  version: {{ tpl .Values.images.etcd.tag . }}
+  repository: {{ .Values.global.registry }}{{ .Values.images.etcd.repository }}

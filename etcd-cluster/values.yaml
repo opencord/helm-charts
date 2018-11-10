@@ -1,4 +1,3 @@
----
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +12,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-dependencies:
-- name: etcd-cluster
-  version: 0.1.1
-  repository: file://../etcd-cluster
-  condition: etcd.cluster.enabled
+# Default values for etcd-cluster.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+clusterName: "etcd-cluster"
+clusterSize: 3
+memoryLimit: 1024Mi
+autoCompactionRetention: "12"
+
+images:
+  etcd:
+    repository: "quay.io/coreos/etcd"
+    tag: "3.2.18"
+  busybox:
+    repository: "busybox"
+    tag: "1.28.1-glibc"
+
+global:
+  registry: ""
