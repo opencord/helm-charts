@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- if .Values.freeradius.enable }}
 apiVersion: v1
 data:
   clients.conf: |
@@ -26,3 +27,4 @@ metadata:
   name: freeradius-config
   namespace: {{ .Values.global.namespace }}
   serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
+{{- end}}
