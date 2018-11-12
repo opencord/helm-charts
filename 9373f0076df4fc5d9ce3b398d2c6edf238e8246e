@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ddc27e05_9067a9c8",
+        "filename": "voltha/templates/_helpers.tpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-11-12T16:48:59Z",
+      "side": 1,
+      "message": "It would be nice to retain this configuration option, so this chart would be useful in the generic VOLTHA case. \n\nMost of these options can be set with environmental variables, which might be a more k8s friendly way of doing things.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 48
+      },
+      "revId": "9373f0076df4fc5d9ce3b398d2c6edf238e8246e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "53e8570d_d777f394",
+        "filename": "voltha/values.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-11-12T16:48:59Z",
+      "side": 1,
+      "message": "Maybe \u0027enabled\u0027, to match the other variables in the file?",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 8
+      },
+      "revId": "9373f0076df4fc5d9ce3b398d2c6edf238e8246e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
