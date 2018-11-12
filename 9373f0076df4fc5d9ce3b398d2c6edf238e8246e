@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "f89a346b_cc679044",
+        "filename": "voltha/templates/_helpers.tpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-11-12T20:26:43Z",
+      "side": 1,
+      "message": "Looks good",
+      "parentUuid": "63b61744_b0af6522",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 48
+      },
+      "revId": "9373f0076df4fc5d9ce3b398d2c6edf238e8246e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "53e8570d_d777f394",
         "filename": "voltha/values.yaml",
         "patchSetId": 3
@@ -93,6 +117,30 @@
       "revId": "9373f0076df4fc5d9ce3b398d2c6edf238e8246e",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7d9cf6e1_3296e020",
+        "filename": "voltha/values.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-11-12T20:26:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e1618eb_6de45a41",
+      "range": {
+        "startLine": 52,
+        "startChar": 2,
+        "endLine": 52,
+        "endChar": 8
+      },
+      "revId": "9373f0076df4fc5d9ce3b398d2c6edf238e8246e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
