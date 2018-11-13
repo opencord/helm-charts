@@ -43,7 +43,7 @@ kafka_broker: 'cord-kafka.default.svc.cluster.local:9092'
 image:
   repository: 'voltha/voltha-bbsim'
   tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'IfNotPresent'
+  pullPolicy: 'Always'
 
 global:
   registry: ''
