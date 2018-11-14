@@ -29,8 +29,8 @@ spec:
     spec:
       containers:
         - name: kpi-exporter
-          image: {{ tpl .Values.nem_voltha_kpi_exporter_image . | quote }}
-          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          image:  "{{ .Values.global.registry }}{{ .Values.images.voltha_kpi_exporter.repository }}:{{ tpl .Values.images.voltha_kpi_exporter.tag . }}"
+          imagePullPolicy: "{{ .Values.images.voltha_kpi_exporter.pullPolicy }}"
           args: ["-broker={{ .Values.args.voltha_kpi_broker }}"]
           ports:
             - containerPort: 8080

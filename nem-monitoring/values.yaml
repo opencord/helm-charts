@@ -13,10 +13,18 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-nem_voltha_kpi_exporter_image: "opencord/kafka-topic-exporter:latest"
+global:
+  registry: ''
+
+images:
+  voltha_kpi_exporter:
+    repository: 'opencord/kafka-topic-exporter'
+    tag: 'latest'
+    pullPolicy: 'Always'
+
 nem_voltha_kpi_exporter_nodePort: 31080
 nem_voltha_kpi_exporter_replicas: 2
-imagePullPolicy: "Always"
+
 args:
   voltha_kpi_broker: cord-kafka:9092
 
