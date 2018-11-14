@@ -1,0 +1,56 @@
+---
+
+# Copyright 2018-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "ponsim-pod.fullname" . }}-ponsim-pod
+  labels:
+    app: {{ template "ponsim-pod.name" . }}
+    chart: {{ template "ponsim-pod.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  backoffLimit: 12
+  template:
+    metadata:
+      labels:
+        app: {{ template "ponsim-pod.name" . }}
+        release: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/tosca-configmap.yaml") . | sha256sum }}
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: {{ .Chart.Name }}-ponsim-pod
+          image: {{ .Values.global.registry }}{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: XOS_USER
+              value: {{ .Values.xosAdminUser }}
+            - name: XOS_PASSWD
+              valueFrom:
+                secretKeyRef:
+                  name: xos-admin-passwd-secret
+                  key: password
+          volumeMounts:
+            - name: ponsim-pod-tosca
+              mountPath: /opt/tosca
+      volumes:
+        - name: ponsim-pod-tosca
+          configMap:
+            name: ponsim-pod-tosca
