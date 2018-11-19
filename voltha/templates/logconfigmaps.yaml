@@ -20,7 +20,7 @@ metadata:
   serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
 data:
   logconfig: |
-{{- $data := dict "KafkaTopic" "vcore" }}
+{{- $data := dict "KafkaTopic" "vcore" "loglevel" .Values.loglevel }}
 {{ include "logconfig.yml" $data | indent 4 }}
 
 ---
@@ -32,7 +32,7 @@ metadata:
   serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
 data:
   logconfig: |
-{{- $data := dict "KafkaTopic" "netconf" }}
+{{- $data := dict "KafkaTopic" "netconf" "loglevel" .Values.loglevel }}
 {{ include "logconfig.yml" $data | indent 4 }}
 
 ---
@@ -44,5 +44,5 @@ metadata:
   serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
 data:
   logconfig: |
-{{- $data := dict "KafkaTopic" "ofagent" }}
+{{- $data := dict "KafkaTopic" "ofagent" "loglevel" .Values.loglevel }}
 {{ include "logconfig.yml" $data | indent 4 }}

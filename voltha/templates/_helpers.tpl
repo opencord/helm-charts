@@ -55,6 +55,6 @@ handlers:
 loggers:
   '':
     handlers: [console, localRotatingFile, kafka]
-    level: DEBUG
+    level: {{ .loglevel }}
     propagate: False
 {{- end }}

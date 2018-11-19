@@ -42,7 +42,7 @@ logging:
         - console
         - file
         - kafka
-      level: DEBUG
+      level: {{ .Values.loglevel }}
 {{- end }}
 
 {{- define "xos-core.initial_data" }}
