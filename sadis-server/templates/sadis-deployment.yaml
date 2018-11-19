@@ -44,3 +44,5 @@ spec:
               value: "{{ .Values.xosAdminPassword }}"
             - name: SADISSERVER_XOS
               value: xos-chameleon:9101
+            - name: SADISSERVER_KAFKABROKER
+              value: "{{ .Values.kafkaBroker }}"
