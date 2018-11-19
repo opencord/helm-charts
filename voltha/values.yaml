@@ -54,6 +54,9 @@ freeradius:
 kafkaReleaseName: cord-kafka
 etcdReleaseName: etcd-cluster
 
+
+loglevel: "INFO"
+
 images:
   vcore:
     repository: 'voltha/voltha-voltha'

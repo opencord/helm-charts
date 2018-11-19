@@ -42,6 +42,8 @@ images:
 global:
   registry: ""
 
+loglevel: "DEBUG"
+
 # NodePorts
 xos_chameleonNodePort: 30006
 xos_toscaNodePort: 30007
