@@ -175,7 +175,8 @@ topology_template:
             "sadis" : {
               "integration" : {
                 "cache" : {
-                  "maxsize" : 1000
+                  "maxsize" : 1000,
+                  "ttl": "PT300S"
                 },
                 "url" : "http://sadis-service:8000/subscriber/%s"
               }
