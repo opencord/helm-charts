@@ -17,7 +17,6 @@
 # Use this file to deploy the service versions speecified in the Helm charts.
 
 # voltha
-etcd-operator:
-  etcdCluster:
-    size: 1
+etcd-cluster:
+  clusterSize: 1
 
