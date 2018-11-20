@@ -23,7 +23,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 # tosca loader container
-image:
+images:
   repository: 'xosproject/tosca-loader'
   tag: '{{ .Chart.AppVersion }}'
   pullPolicy: 'Always'
