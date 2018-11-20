@@ -103,6 +103,10 @@ images:
     tag: '0.10.2'
     pullPolicy: 'Always'
 
+  ingress_controller_base:
+    repository: 'alpine'
+    tag: '3.6'
+    pullPolicy: 'Always'
 
 # Need the namespace global for kafka
 global:

@@ -37,8 +37,8 @@ spec:
         - sh
         - -c
         - sysctl -w net.core.somaxconn=32768; sysctl -w net.ipv4.ip_local_port_range="1024 65535"
-        image: alpine:3.6
-        imagePullPolicy: Always
+        image: {{ .Values.global.registry }}{{ .Values.images.ingress_controller_base.repository }}:{{ tpl .Values.images.ingress_controller_base.tag . }}
+        imagePullPolicy: {{ .Values.images.ingress_controller_base.pullPolicy }}
         name: sysctl
         securityContext:
           privileged: true
