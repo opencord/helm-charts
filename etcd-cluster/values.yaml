@@ -24,7 +24,7 @@ autoCompactionRetention: "12"
 images:
   etcd:
     repository: "quay.io/coreos/etcd"
-    tag: "3.2.18"
+    tag: "v3.2.18"
   busybox:
     repository: "busybox"
     tag: "1.28.1-glibc"
