@@ -13,30 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: extensions/v1beta1
-kind: Deployment
+apiVersion: apps/v1
+kind: StatefulSet
 metadata:
-  name: {{ template "bbsim.fullname" . }}
+  name: bbsim
   namespace: {{ .Values.namespace }}
   labels:
-    app: {{ template "bbsim.name" . }}
+    app: bbsim
     chart: {{ template "bbsim.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "bbsim.name" . }}
+      app: bbsim
       release: {{ .Release.Name }}
+  serviceName: bbsim
+  replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        app: {{ template "bbsim.name" . }}
+        app: bbsim
         release: {{ .Release.Name }}
     spec:
-      serviceAccount: {{ .Values.serviceAccountName }}
-      serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.global.registry }}{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}
@@ -47,7 +46,7 @@ spec:
             "/app/bbsim",
             "-n", "{{ .Values.onus_per_pon_port }}",
             "-m", "{{ .Values.emulation_mode }}",
-            "-H", ":{{ .Values.olt_tcp_port }}",
+            "-H", ":50060",
             "-id", "{{ .Values.olt_id }}",
             "-i", "{{ .Values.pon_ports }}",
             "-aw", "{{ .Values.wpa_wait }}",
@@ -56,8 +55,8 @@ spec:
           ]
           ports:
             - name: "bbsim-olt-id-{{ .Values.olt_id }}"
-              containerPort: {{ .Values.olt_tcp_port }}
-              port: {{ .Values.olt_tcp_port }}
+              containerPort: 50060
+              port: 50060
               protocol: TCP
           env:
             - name: POD_IP

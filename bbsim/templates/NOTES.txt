@@ -1,5 +1,8 @@
-BBSim deployed with release name: {{ .Release.Name }}
+Created {{ .Values.replicaCount }} BBSIM OLTs.
 
-OLT ID: {{ .Values.olt_id }}, on TCP port: {{ .Values.olt_tcp_port }}
-# of PON Ports: {{ .Values.pon_ports }}
-ONUs per PON Port: {{ .Values.onus_per_pon_port }} (total: {{ mul .Values.pon_ports .Values.onus_per_pon_port}})
+Each one has {{ .Values.onus_per_pon_port }} ONUs per PON Port: {{ .Values.onus_per_pon_port }} (total: {{ mul .Values.pon_ports .Values.onus_per_pon_port}})
+
+They are available at the addresses:
+{{range $i, $e := until (atoi (printf "%v" .Values.replicaCount))}}
+- bbsim-{{ $i }}.voltha.svc:5006{{ $i }}
+{{ end -}}
