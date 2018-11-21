@@ -19,9 +19,6 @@
 # -id option
 olt_id: 0
 
-# -H option, port number portion
-olt_tcp_port: 50060
-
 # -i option
 pon_ports: 1
 
@@ -49,10 +46,6 @@ global:
   registry: ''
 
 namespace: voltha
-serviceAccountName: default
-
-nameOverride: ""
-fullnameOverride: ""
 
 replicaCount: 1
 

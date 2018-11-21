@@ -1,5 +1,4 @@
----
-# Copyright 2018-present Open Networking Foundation
+# Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,22 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- $values := .Values -}}
+{{range $i, $e := until (atoi (printf "%v" .Values.replicaCount))}}
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "bbsim.fullname" . }}
-  namespace: {{ .Values.namespace }}
-  labels:
-    app: {{ template "bbsim.name" . }}
-    chart: {{ template "bbsim.chart" . }}
-    release: {{ .Release.Name }}
-    heritage: {{ .Release.Service }}
+  name: bbsim-{{ $i }}
+  namespace: {{ $values.namespace }}
 spec:
   type: ClusterIP
-  ports:
-    - name: "bbsim-olt-id-{{ .Values.olt_id }}"
-      port: {{ .Values.olt_tcp_port }}
-      protocol: TCP
   selector:
-    app: {{ template "bbsim.name" . }}
-    release: {{ .Release.Name }}
+    statefulset.kubernetes.io/pod-name: bbsim-{{ $i }}
+  ports:
+  - protocol: TCP
+    targetPort: 50060
+    port: 5006{{ $i }}
+{{end}}
