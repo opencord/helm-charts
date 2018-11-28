@@ -44,6 +44,13 @@ metadata:
   serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
 spec:
   serviceName: vcore
+  resources:
+    limits:
+      #cpu: 10m
+      memory: 3Gi
+    requests:
+      #cpu: 10m
+      memory: 1Gi
   replicas: {{ .Values.replicas.vcore }}
   updateStrategy:
     type: RollingUpdate
