@@ -39,8 +39,8 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ .Values.global.registry }}{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.global.registry }}{{ .Values.images.bbsim.repository }}:{{ tpl .Values.images.bbsim.tag . }}
+          imagePullPolicy: {{ .Values.images.bbsim.pullPolicy }}
           securityContext:
             privileged: true
           command: [
