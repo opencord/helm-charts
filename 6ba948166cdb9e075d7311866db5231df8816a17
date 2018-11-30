@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a772069_9ff3ea8a",
+        "filename": "voltha/templates/vcore_for_etcd.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-11-30T22:48:28Z",
+      "side": 1,
+      "message": "Needs to be relocated, see below.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 12
+      },
+      "revId": "6ba948166cdb9e075d7311866db5231df8816a17",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "7e5af335_c8f6e1e0",
+        "filename": "voltha/templates/vcore_for_etcd.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-11-30T22:48:28Z",
+      "side": 1,
+      "message": "`resources` key needs to be under `containers` here for it to work.\n\nMoving that key to this location, then running `kubectl describe nodes` shows the limit in place on the pod.",
+      "range": {
+        "startLine": 69,
+        "startChar": 1,
+        "endLine": 69,
+        "endChar": 17
+      },
+      "revId": "6ba948166cdb9e075d7311866db5231df8816a17",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
