@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b3a32f93_8834d14a",
+        "filename": "voltha/Chart.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2018-11-30T20:30:05Z",
+      "side": 1,
+      "message": "should the version be bumped as well?",
+      "range": {
+        "startLine": 19,
+        "startChar": 9,
+        "endLine": 19,
+        "endChar": 14
+      },
+      "revId": "77e4830acbd4137f0128ed3418b24aa5ef22a39e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
