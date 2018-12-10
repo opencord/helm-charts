@@ -92,17 +92,22 @@ metadata:
 data:
   # The CNI network configuration to install on each node.
   cni_pon0_network_config: |-
+  {{- range $i, $junk := until (.Values.onuCount|int) }}
     {
-        "name": "pon0",
-        "type": "bridge",
-        "bridge": "pon0",
-        "isGateway": false,
-        "ipMask": false,
-        "ipam": {
+      "name": "ponuni{{ $i }}",
+      "type": "bridge",
+      "bridge": "ponuni{{ $i }}",
+      "isGateway": false,
+      "ipMask": false,
+      "ipam": {
         "type": "host-local",
-        "subnet": "10.22.0.0/16"
+        "subnet": "10.22.{{ $i }}.0/16"
       }
     }
+    {{- if lt $i ( sub ($.Values.onuCount|int) 1 ) -}}
+      {{- printf "," -}}
+    {{- end -}}
+  {{- end }}
 
 ---
 # This ConfigMap can be used to configure a self-hosted Pon0 installation.

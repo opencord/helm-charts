@@ -20,6 +20,8 @@ images:
     repository: gopinatht/pon0-network
     tag: 'latest'
     pullPolicy: 'Always'
-  
+
 global:
   namespace: voltha
+
+onuCount: 3
