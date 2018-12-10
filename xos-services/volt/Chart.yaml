@@ -17,5 +17,5 @@ name: volt
 description: A Helm chart for XOS's "olt-service" service
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 2.1.5
-appVersion: 2.1.10
+version: 2.1.6
+appVersion: 2.1.11
