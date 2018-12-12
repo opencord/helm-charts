@@ -66,10 +66,7 @@ xos-gui:
     xos_ws:
       tag: 'master'
 
-# in att-workflow service chart
-att-workflow-driver:
-  image:
-    tag: 'master'
+# in seba service chart
 fabric:
   image:
     tag: 'master'
@@ -89,3 +86,7 @@ rcord:
   image:
     tag: 'master'
 
+# in workflow/seba-att service chart
+att-workflow-driver:
+  image:
+    tag: 'master'
