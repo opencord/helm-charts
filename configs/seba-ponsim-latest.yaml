@@ -67,9 +67,6 @@ xos-gui:
       tag: 'master'
 
 # in att-workflow service chart
-att-workflow-driver:
-  image:
-    tag: 'master'
 fabric:
   image:
     tag: 'master'
