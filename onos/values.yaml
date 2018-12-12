@@ -74,19 +74,17 @@ services:
   cluster:
     port: 9876
 
-onos_env: []
-
-# onos_env:
-#   - name: POD_IP
-#     valueFrom:
-#     fieldRef:
-#       fieldPath: status.podIP
-#   - name: NAMESPACE
-#     valueFrom:
-#     fieldRef:
-#       fieldPath: metadata.namespace
-#   - name: ONOS_APPS
-#     value: "drivers,openflow-base"
+onos_env:
+- name: POD_IP
+  valueFrom:
+  fieldRef:
+    fieldPath: status.podIP
+- name: NAMESPACE
+  valueFrom:
+  fieldRef:
+    fieldPath: metadata.namespace
+- name: ONOS_APPS
+  value: "drivers,openflow-base"
 
 resources: {}
 
