@@ -17,10 +17,10 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: att-workflow-tosca
+  name: seba-services-tosca
 data:
   010-fixtures.yaml: |
-{{ include "att-workflow.basicFixturesTosca" . | indent 4 }}
+{{ include "seba-services.basicFixturesTosca" . | indent 4 }}
   020-rcord-subscriber-service.yaml: |
 {{ include "rcord.serviceTosca" .Values.rcord | indent 4 }}
   030-volt-service.yaml: |
@@ -28,10 +28,8 @@ data:
   040-fabric-crossconnect-service.yaml: |
 {{ include "fabric-crossconnect.serviceTosca" (index .Values "fabric-crossconnect") | indent 4 }}
   061-onos-service.yaml: |
-{{ include "att-workflow.onosTosca" .Values | indent 4 }}
+{{ include "seba-services.onosTosca" .Values | indent 4 }}
   070-fabric-service.yaml: |
 {{ include "fabric.serviceTosca" .Values.fabric | indent 4 }}
-  080-workflow-service.yaml: |
-{{ include "att-workflow-driver.serviceTosca"  (index .Values "att-workflow-driver") | indent 4 }}
   300-service-graph.yaml: |
-{{ include "att-workflow.serviceGraphTosca" . | indent 4 }}
+{{ include "seba-services.serviceGraphTosca" . | indent 4 }}

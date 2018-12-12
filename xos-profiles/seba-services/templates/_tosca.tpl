@@ -14,7 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */}}
-{{- define "att-workflow.onosTosca" -}}
+{{- define "seba-services.onosTosca" -}}
 tosca_definitions_version: tosca_simple_yaml_1_0
 
 imports:
@@ -218,7 +218,7 @@ topology_template:
             relationship: tosca.relationships.BelongsToOne
 {{- end -}}
 
-{{- define "att-workflow.basicFixturesTosca" -}}
+{{- define "seba-services.basicFixturesTosca" -}}
 tosca_definitions_version: tosca_simple_yaml_1_0
 description: Some basic fixtures
 imports:
@@ -309,10 +309,9 @@ topology_template:
 {{- end -}}
 
 
-{{- define "att-workflow.serviceGraphTosca" -}}
+{{- define "seba-services.serviceGraphTosca" -}}
 tosca_definitions_version: tosca_simple_yaml_1_0
 imports:
-  - custom_types/attworkflowdriverservice.yaml
   - custom_types/fabricservice.yaml
   - custom_types/onosservice.yaml
   - custom_types/rcordservice.yaml
@@ -320,7 +319,7 @@ imports:
   - custom_types/fabriccrossconnectservice.yaml
   - custom_types/servicedependency.yaml
   - custom_types/servicegraphconstraint.yaml
-description: att-workflow service graph
+description: seba service graph
 topology_template:
   node_templates:
 
@@ -355,14 +354,6 @@ topology_template:
       properties:
         name: fabric-crossconnect
         must-exist: true
-
-    service#att-workflow-driver:
-      type: tosca.nodes.AttWorkflowDriverService
-      properties:
-        name: att-workflow-driver
-        must-exist: true
-
-# The att-workflow service graph
 
     service_dependency#onos-fabric_fabric:
       type: tosca.nodes.ServiceDependency
@@ -422,18 +413,6 @@ topology_template:
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
             node: service#onos
-            relationship: tosca.relationships.BelongsToOne
-
-    service_dependency#workflow_volt:
-      type: tosca.nodes.ServiceDependency
-      properties:
-        connect_method: none
-      requirements:
-        - subscriber_service:
-            node: service#att-workflow-driver
-            relationship: tosca.relationships.BelongsToOne
-        - provider_service:
-            node: service#volt
             relationship: tosca.relationships.BelongsToOne
 
     constraints:

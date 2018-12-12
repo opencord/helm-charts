@@ -10,5 +10,6 @@ voltha/charts
 xos-core/charts
 nem-monitoring/charts/
 xos-profiles/*/charts
+workflows/*/charts
 storage/*/charts
 logging/charts

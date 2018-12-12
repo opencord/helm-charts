@@ -41,7 +41,7 @@ do
   chartdir=$(dirname "${chart}")
 
   # only update dependencies for profiles
-  if [[ $chartdir =~ xos-profiles ]] && [ -f "${chartdir}/requirements.yaml" ]
+  if [[ $chartdir =~ xos-profiles || $chartdir =~ workflows ]] && [ -f "${chartdir}/requirements.yaml" ]
   then
     helm dependency update "${chartdir}"
   fi
