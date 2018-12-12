@@ -17,10 +17,10 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "att-workflow.fullname" . }}-tosca-loader
+  name: {{ template "seba-att.fullname" . }}-tosca-loader
   labels:
-    app: {{ template "att-workflow.name" . }}
-    chart: {{ template "att-workflow.chart" . }}
+    app: {{ template "seba-att.name" . }}
+    chart: {{ template "seba-att.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -28,7 +28,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "att-workflow.name" . }}
+        app: {{ template "seba-att.name" . }}
         release: {{ .Release.Name }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/tosca-configmap.yaml") . | sha256sum }}
@@ -47,9 +47,9 @@ spec:
                   name: xos-admin-passwd-secret
                   key: password
           volumeMounts:
-            - name: att-workflow-tosca
+            - name: seba-att-tosca
               mountPath: /opt/tosca
       volumes:
-        - name: att-workflow-tosca
+        - name: seba-att-tosca
           configMap:
-            name: att-workflow-tosca
+            name: seba-att-tosca
