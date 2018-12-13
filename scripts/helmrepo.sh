@@ -25,7 +25,7 @@ WORKSPACE=${WORKSPACE:-.}
 REPO_DIR="${REPO_DIR:-chart_repo}"
 
 GERRIT_BRANCH="${GERRIT_BRANCH:-$(git symbolic-ref --short HEAD)}"
-PUBLISH_URL="${PUBLISH_URL:-https://charts.opencord.org/${GERRIT_BRANCH}}"
+PUBLISH_URL="${PUBLISH_URL:-https://charts.opencord.org}"
 
 mkdir -p "${REPO_DIR}"
 
@@ -41,7 +41,7 @@ done < <(find "${WORKSPACE}" -name Chart.yaml -print0)
 
 echo "Generating repo index"
 
-helm repo index "${REPO_DIR}" --url "${PUBLISH_URL}"
+helm repo index "${REPO_DIR}" --url "${PUBLISH_URL}" --merge
 
 echo "Finished, chart repo generated: ${REPO_DIR}"
 
