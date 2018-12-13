@@ -41,7 +41,7 @@ done < <(find "${WORKSPACE}" -name Chart.yaml -print0)
 
 echo "Generating repo index"
 
-helm repo index "${REPO_DIR}" --url "${PUBLISH_URL}" --merge
+helm repo index "${REPO_DIR}" --url "${PUBLISH_URL}" --merge index.yaml
 
 echo "Finished, chart repo generated: ${REPO_DIR}"
 
