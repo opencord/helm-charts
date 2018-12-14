@@ -39,7 +39,7 @@ topology_template:
       type: tosca.nodes.OLTDevice
       properties:
         name: BBSIM_OLT
-        device_type: bbsimolt
+        device_type: openolt
         host: bbsim.voltha.svc
         port: 50060
         switch_datapath_id: of:0000000000000002
