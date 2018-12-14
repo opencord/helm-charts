@@ -1,0 +1,7 @@
+Code-Review+2: Luca Prete <luca@opennetworking.org>
+Verified+1: Jenkins Jenkins <do-not-reply@opencord.org>
+Submitted-by: Luca Prete <luca@opennetworking.org>
+Submitted-at: Fri, 14 Dec 2018 23:04:33 +0000
+Reviewed-on: https://gerrit.opencord.org/12099
+Project: helm-charts
+Branch: refs/heads/master
