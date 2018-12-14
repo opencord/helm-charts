@@ -1,0 +1,5 @@
+*.pem
+*.key
+*.csr
+root_ca
+xos_helm_values.yaml
