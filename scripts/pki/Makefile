@@ -25,7 +25,7 @@ OPENSSL_CNF      ?= xos-pki.cnf
 # utility/validation targets
 
 help:
-	@echo "Usually you want to run 'make helm_xos_pki.yaml'"
+	@echo "Usually you want to run 'make all_certs'"
 
 validate:
 	 openssl verify -verbose -purpose sslserver -CAfile xos-CA.pem xos-core.crt
@@ -44,21 +44,8 @@ printpem: xos-core.pem
 
 all_certs: xos-core.pem
 
-helm_xos_pki.yaml: xos-CA.pem xos-core.pem xos-core.key
-	@echo "Creating helm compatible YAML file containing certs"
-	@echo "---" > $@
-	@echo "# Certificates can be regenerated with scripts/pki/Makefile" >> $@
-	@echo "# Created on: `date -u`, good for $(EXPIRATION_DAYS) days" >> $@
-	@echo "ca_cert_chain: |" >> $@
-	@cat xos-CA.pem | base64 | sed 's/^/  /' >> $@
-	@echo "secrets:" >> $@
-	@echo "  core_api_cert: |" >> $@
-	@cat xos-core.pem | base64 | sed 's/^/    /' >> $@
-	@echo "  core_api_key: |" >> $@
-	@cat xos-core.key | base64 | sed 's/^/    /' >> $@
-
 clean:
-	rm -rf root_ca *.pem *.key *.csr helm_xos_pki.yaml
+	rm -rf root_ca *.pem *.key *.csr
 
 # CA creation
 root_ca:

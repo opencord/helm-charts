@@ -2,4 +2,3 @@
 *.key
 *.csr
 root_ca
-helm_xos_pki.yaml
