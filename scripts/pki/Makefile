@@ -50,12 +50,12 @@ helm_xos_pki.yaml: xos-CA.pem xos-core.pem xos-core.key
 	@echo "# Certificates can be regenerated with scripts/pki/Makefile" >> $@
 	@echo "# Created on: `date -u`, good for $(EXPIRATION_DAYS) days" >> $@
 	@echo "ca_cert_chain: |" >> $@
-	@cat xos-CA.pem | base64 -b 72 | sed 's/^/  /' >> $@
+	@cat xos-CA.pem | base64 | sed 's/^/  /' >> $@
 	@echo "secrets:" >> $@
 	@echo "  core_api_cert: |" >> $@
-	@cat xos-core.pem | base64 -b 72 | sed 's/^/    /' >> $@
+	@cat xos-core.pem | base64 | sed 's/^/    /' >> $@
 	@echo "  core_api_key: |" >> $@
-	@cat xos-core.key | base64 -b 72 | sed 's/^/    /' >> $@
+	@cat xos-core.key | base64 | sed 's/^/    /' >> $@
 
 clean:
 	rm -rf root_ca *.pem *.key *.csr helm_xos_pki.yaml
