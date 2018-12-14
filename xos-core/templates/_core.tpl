@@ -69,6 +69,6 @@ logging:
 {{- end }}
 
 {{- define "xos-core.ca_cert_chain" }}
-{{ .Values.ca_cert_chain | b64dec }}
+{{ (.Files.Get "pki/xos-CA.pem")}}
 {{- end }}
 

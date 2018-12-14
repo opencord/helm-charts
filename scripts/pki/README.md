@@ -1,7 +1,12 @@
-# XOS certificate generation
+# XOS Certificate Generation
 
-Run `make` on a system with the `openssl` cli tool installed to see options.
+To create certificates for use with XOS, you'll need a system with `make` and
+the `openssl` cli tool.
 
-Most likely you'll want to run `make helm_xos_pki.yaml` to generate a helm
-values file with base64 encoded certificates in it.
+Most frequently you'll want to run `make all_certs`, then copy the files:
 
+- `xos-CA.pem`
+- `xos-core.pem`
+- `xos-core.key`
+
+into the `xos-core/pki` chart directory.
