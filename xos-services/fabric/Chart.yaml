@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,6 +17,5 @@ name: fabric
 description: A Helm chart for XOS's "fabric" service
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 2.1.5
-appVersion: 2.1.5
-
+version: 2.1.6
+appVersion: 2.1.6

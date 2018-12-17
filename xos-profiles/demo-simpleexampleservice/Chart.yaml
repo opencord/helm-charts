@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +17,7 @@ name: demo-simpleexampleservice
 description: A Helm chart that launches and configures SimpleExampleService. It's assumed that base-kubernetes profile is installed.
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 1.0.1
+version: 1.0.2
 
 # xosproject/tosca-loader version
 appVersion: 1.1.5
