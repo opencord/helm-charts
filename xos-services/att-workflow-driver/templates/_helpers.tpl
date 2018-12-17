@@ -51,7 +51,7 @@ name: att-workflow-driver
 accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
-  endpoint: xos-core:50051
+  endpoint: {{ .Values.xosCoreService | quote }}
 event_bus:
   endpoint: {{ .Values.kafkaService | quote }}
   kind: kafka
@@ -68,7 +68,7 @@ logging:
     kafka:
       class: kafkaloghandler.KafkaLogHandler
       bootstrap_servers:
-        - "cord-kafka:9092"
+        - "{{ .Values.kafkaService }}:9092"
       topic: xos.log.att-workflow-driver
   loggers:
     '':
