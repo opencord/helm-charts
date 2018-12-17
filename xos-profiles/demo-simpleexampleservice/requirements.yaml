@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,5 +15,5 @@
 
 dependencies:
 - name: simpleexampleservice
-  version: 1.1.1
+  version: 1.1.2
   repository: file://../../xos-services/simpleexampleservice
