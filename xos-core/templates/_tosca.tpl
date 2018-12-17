@@ -31,7 +31,7 @@ logging:
     kafka:
       class: kafkaloghandler.KafkaLogHandler
       bootstrap_servers:
-        - "cord-kafka:9092"
+        - {{ .Values.platformKafka }}
       topic: xos.log.tosca
   loggers:
     '':

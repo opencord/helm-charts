@@ -17,6 +17,8 @@ limitations under the License.
 {{- define "xos-core.config" }}
 name: xos-core
 xos_dir: /opt/xos
+kafka_bootstrap_servers:
+  - {{ .Values.platformKafka }}
 database:
   name: {{ .Values.xosDBName | quote }}
   username: {{ .Values.xosDBUser | quote }}
@@ -34,7 +36,7 @@ logging:
     kafka:
       class: kafkaloghandler.KafkaLogHandler
       bootstrap_servers:
-        - "cord-kafka:9092"
+        - {{ .Values.platformKafka }}
       topic: xos.log.core
   loggers:
     '':
