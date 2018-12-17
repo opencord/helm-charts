@@ -51,6 +51,9 @@ xos_prometheusNodePort: 30009
 xos_core_gRPCSecureNodePort: 30010
 xos_core_gRPCInsecureNodePort: 30011
 
+# kafka
+platformKafka: cord-kafka:9092
+
 # XOS Admin username/password
 xosAdminUser: 'admin@opencord.org'
 xosAdminPassword: 'letmein'

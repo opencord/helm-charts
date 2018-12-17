@@ -15,4 +15,4 @@
 
 description: Sets up log aggregation infrastructure in Kubernetes, with elasticstack and kibana
 name: logging
-version: 0.1.0-dev0
+version: 1.0.0
