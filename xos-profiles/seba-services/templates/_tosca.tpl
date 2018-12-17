@@ -74,7 +74,7 @@ topology_template:
         name: sadis
         app_id: org.opencord.sadis
         url: {{ .sadisAppUrl }}
-        version: 3.0.0
+        version: 2.2.0
       requirements:
         - owner:
             node: service#onos

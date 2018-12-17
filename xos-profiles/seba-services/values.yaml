@@ -41,7 +41,7 @@ xosAdminPassword: "letmein"
 
 # ONOS applications
 aaaAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/aaa/1.8.0/aaa-1.8.0.oar"
-sadisAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/sadis-app/3.0.0/sadis-app-3.0.0.oar"
+sadisAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/sadis-app/2.2.0/sadis-app-2.2.0.oar"
 dhcpl2relayAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/dhcpl2relay/1.5.0/dhcpl2relay-1.5.0.oar"
 oltAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/olt-app/2.1.0/olt-app-2.1.0.oar"
 kafkaAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/kafka/1.0.0/kafka-1.0.0.oar"
