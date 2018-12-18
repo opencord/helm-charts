@@ -15,5 +15,5 @@
 
 name: nem-monitoring
 description: Time Series Storage and Dashboard for SEBA
-version: 1.0.0-dev
+version: 1.0.0
 
