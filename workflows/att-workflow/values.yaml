@@ -30,5 +30,8 @@ images:
 global:
   registry: ""
 
+att-workflow-driver:
+  kafkaService: "cord-platform-kafka"
+
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
