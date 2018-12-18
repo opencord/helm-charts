@@ -17,7 +17,7 @@ name: xos-core
 description: XOS - An Extensible Cloud Operating System
 icon: https://guide.opencord.org/logos/xos.svg
 
-version: 2.3.1
+version: 2.3.2
 
 # appVersion is of the xos-core and xos-chameleon containers.
 # xos-tosca and xos-api-tester are versioned in values.yaml

@@ -22,7 +22,7 @@ images:
 
   xos_ws:
     repository: 'xosproject/xos-ws'
-    tag: '2.0.0'
+    tag: '2.0.1'
     pullPolicy: 'Always'
 
 global:
@@ -34,6 +34,6 @@ xos_wsNodePort: 30008
 
 platformKafka: cord-kafka:9092
 
-xos_projectName: "R-CORD"
+xos_projectName: "CORD"
 
-cord_version: 6.1.0-devel
+cord_version: 6.1.0
