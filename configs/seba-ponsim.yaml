@@ -20,3 +20,7 @@
 etcd-cluster:
   clusterSize: 1
 
+# in workflow/att-workflow service chart
+att-workflow-driver:
+  # this is mandatory, it's needed to correctly configure the kafka endpoint
+  kafkaService: cord-kafka

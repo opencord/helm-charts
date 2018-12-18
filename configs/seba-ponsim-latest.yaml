@@ -86,7 +86,10 @@ rcord:
   image:
     tag: 'master'
 
-# in workflow/seba-att service chart
+# in workflow/att-workflow service chart
 att-workflow-driver:
   image:
     tag: 'master'
+
+  # this is mandatory, it's needed to correctly configure the kafka endpoint
+  kafkaService: cord-kafka
