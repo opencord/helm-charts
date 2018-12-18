@@ -1,0 +1,7 @@
+Code-Review+2: Scott Baker <scottb@onlab.us>
+Verified+1: Luca Prete <luca@opennetworking.org>
+Submitted-by: Luca Prete <luca@opennetworking.org>
+Submitted-at: Tue, 18 Dec 2018 00:30:47 +0000
+Reviewed-on: https://gerrit.opencord.org/12158
+Project: helm-charts
+Branch: refs/heads/master
