@@ -15,8 +15,8 @@ limitations under the License.
 */ -}}
 
 {{- define "xos-ws.gateway_config" }}
-gateway_config:
-  default:
+default:
+  kafka_bootstrap_servers: {{ .Values.platformKafka | quote }}
   xos:
     host: xost
     port: 9000
