@@ -13,9 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-xos_gui:
-  enabled: true
-
 # Docker images
 # YAML variable names can't contain `-`, so substituted with `_`
 images:
