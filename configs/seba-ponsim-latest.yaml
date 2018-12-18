@@ -21,6 +21,10 @@ etcd-operator:
   etcdCluster:
     size: 1
 
+# Mandatory
+att-workflow-driver:
+  kafkaService: "cord-kafka"
+
 # in xos-core chart and other charts with multiple images
 images:
   xos_core:

@@ -20,3 +20,6 @@
 etcd-cluster:
   clusterSize: 1
 
+# Mandatory
+att-workflow-driver:
+  kafkaService: "cord-kafka"
