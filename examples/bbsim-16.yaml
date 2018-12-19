@@ -65,7 +65,7 @@ topology_template:
       properties:
         serial_number: BBSM00000100
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -76,7 +76,7 @@ topology_template:
       properties:
         serial_number: BBSM00000101
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -87,7 +87,7 @@ topology_template:
       properties:
         serial_number: BBSM00000102
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -98,7 +98,7 @@ topology_template:
       properties:
         serial_number: BBSM00000103
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -109,7 +109,7 @@ topology_template:
       properties:
         serial_number: BBSM00000104
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -120,7 +120,7 @@ topology_template:
       properties:
         serial_number: BBSM00000105
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -131,7 +131,7 @@ topology_template:
       properties:
         serial_number: BBSM00000106
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -142,7 +142,7 @@ topology_template:
       properties:
         serial_number: BBSM00000107
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -153,7 +153,7 @@ topology_template:
       properties:
         serial_number: BBSM00000108
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -164,7 +164,7 @@ topology_template:
       properties:
         serial_number: BBSM00000109
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -175,7 +175,7 @@ topology_template:
       properties:
         serial_number: BBSM0000010a
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -186,7 +186,7 @@ topology_template:
       properties:
         serial_number: BBSM0000010b
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -197,7 +197,7 @@ topology_template:
       properties:
         serial_number: BBSM0000010c
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -208,7 +208,7 @@ topology_template:
       properties:
         serial_number: BBSM0000010d
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -219,7 +219,7 @@ topology_template:
       properties:
         serial_number: BBSM0000010e
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
@@ -230,7 +230,7 @@ topology_template:
       properties:
         serial_number: BBSM0000010f
         pon_port_id: 536870913
-        device_id: of:0000000000000012
+        device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
