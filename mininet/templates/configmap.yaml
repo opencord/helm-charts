@@ -18,4 +18,4 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-configmap
 data:
-{{ (.Files.Glob "toposcripts/*").AsConfig | indent 2 }}
+{{ (tpl (.Files.Glob "toposcripts/*").AsConfig .) | indent 2 }}
