@@ -54,7 +54,6 @@ freeradius:
 kafkaReleaseName: cord-kafka
 etcdReleaseName: etcd-cluster
 
-
 loglevel: "DEBUG"
 
 images:
