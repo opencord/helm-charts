@@ -49,7 +49,7 @@ handlers:
   kafka:
     class: kafkaloghandler.KafkaLogHandler
     bootstrap_servers:
-      - "cord-kafka.default:9092"
+      - "{{ .KafkaServer }}"
     topic: "voltha.log.{{ .KafkaTopic }}"
 
 loggers:
