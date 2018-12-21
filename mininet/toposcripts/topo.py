@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
     info( '*** Creating network\n' )
     OVSSwitch13 = partial( OVSSwitch, protocols='OpenFlow13' )
-    controllerIp = socket.gethostbyname( 'onos-openflow.default.svc.cluster.local' )
+    controllerIp = socket.gethostbyname( '{{ .Values.onosOpenflowSvc }}' )
     net = Mininet( topo=SingleSwitchTopo(1),
                    controller=lambda name: RemoteController( name, ip=controllerIp, port=6653 ),
                    switch=OVSSwitch13
