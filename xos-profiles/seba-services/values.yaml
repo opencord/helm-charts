@@ -41,10 +41,19 @@ xosAdminPassword: "letmein"
 
 # ONOS applications
 aaaAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/aaa/1.8.0/aaa-1.8.0.oar"
+aaaAppVersion: "1.8.0"
+
 sadisAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/sadis-app/2.2.0/sadis-app-2.2.0.oar"
+sadisAppVersion: "2.2.0"
+
 dhcpl2relayAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/dhcpl2relay/1.5.0/dhcpl2relay-1.5.0.oar"
+dhcpl2relayAppVersion: "1.5.0"
+
 oltAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/olt-app/2.1.0/olt-app-2.1.0.oar"
+oltAppVersion: "2.1.0"
+
 kafkaAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/kafka/1.0.0/kafka-1.0.0.oar"
+kafkaAppVersion: "1.0.0"
 
 onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka.default.svc.cluster.local:9092"

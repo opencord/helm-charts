@@ -61,7 +61,7 @@ topology_template:
         name: olt
         app_id: org.opencord.olt
         url: {{ .oltAppUrl }}
-        version: 2.1.0
+        version: {{ .oltAppVersion }}
         dependencies: org.opencord.sadis
       requirements:
         - owner:
@@ -74,7 +74,7 @@ topology_template:
         name: sadis
         app_id: org.opencord.sadis
         url: {{ .sadisAppUrl }}
-        version: 2.2.0
+        version: {{ .sadisAppVersion }}
       requirements:
         - owner:
             node: service#onos
@@ -86,7 +86,7 @@ topology_template:
         name: dhcpl2relay
         app_id: org.opencord.dhcpl2relay
         url: {{ .dhcpl2relayAppUrl }}
-        version: 1.5.0
+        version: {{ .dhcpl2relayAppVersion }}
         dependencies: org.opencord.sadis
       requirements:
         - owner:
@@ -99,7 +99,7 @@ topology_template:
         name: aaa
         app_id: org.opencord.aaa
         url: {{ .aaaAppUrl }}
-        version: 1.8.0
+        version: {{ .aaaAppVersion }}
         dependencies: org.opencord.sadis
       requirements:
         - owner:
@@ -112,7 +112,7 @@ topology_template:
         name: kafka
         app_id: org.opencord.kafka
         url: {{ .kafkaAppUrl }}
-        version: 1.0.0
+        version: {{ .kafkaAppVersion }}
         dependencies: org.opencord.olt,org.opencord.aaa,org.opencord.dhcpl2relay
       requirements:
         - owner:
