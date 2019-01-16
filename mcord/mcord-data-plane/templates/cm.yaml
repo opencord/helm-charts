@@ -1,0 +1,439 @@
+---
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: ngicdp-config
+data:
+  adc_rules.cfg: |
+    [GLOBAL]
+    NUM_ADC_RULES = 5
+
+    ;FORMAT ::
+    ;ADC_TYPE : [ DOMAIN = 0 | IP = 1 | IP PREFIX =2 ]
+    ;
+    ;if ADC_TYPE = 0
+    ;   DOMAIN
+    ;elseif ADC_TYPE = 1
+    ;   IP
+    ;elseif ADC_TYPE = 2
+    ;   IP
+    ;   PREFIX
+    ;else
+    ;   NONE
+    ;
+    ;NOTE :
+    ;Rules defined first have a higher priority, unless DROP is specified
+    ;(i.e. multiple rules for the same IP).
+    ;When specifying DROP with an IP address, use a prefix of 32 to prevent DNS
+    ;results from overwriting rule.
+
+
+    [ADC_RULE_1]
+    ADC_TYPE = 2
+    IP = 0.0.0.0
+    PREFIX = 0
+
+    [ADC_RULE_2]
+    ADC_TYPE = 2
+    IP = 13.1.1.0
+    PREFIX = 24
+
+    [ADC_RULE_3]
+    ADC_TYPE = 1
+    IP = 13.1.1.254
+
+    [ADC_RULE_4]
+    ADC_TYPE = 0
+    DOMAIN = www.example.gov
+
+    [ADC_RULE_5]
+    ADC_TYPE = 0
+    DOMAIN = www.drop_example.com
+  cdr.cfg: |
+    CDR_PATH=./cdr
+    MASTER_CDR=./cdr/master.csv
+  cp_config.cfg: |
+    if [ ! -d "/dev/hugepages" ]; then
+        MEMORY="--no-huge -m $((MEM_LIMIT-1024))"
+    fi
+
+    SGW_S1U_IP=$(netstat -ie | grep -A1 s1u-net | tail -1 | awk '{print $2}' | tr -d addr:)
+    SHARED_DIR="/opt/ngic/config/shared"
+    if [ -d ${SHARED_DIR} ]; then
+        while [ ! -f ${SHARED_DIR}/SGW_S1U_IP ]; do echo "Waiting for SGW_S1U_IP"; sleep 2; done
+        SGW_S1U_IP=$(cat ${SHARED_DIR}/SGW_S1U_IP)
+    fi
+
+    SGW_S11_IP=$(hostname)
+    MGMT_INFO="-s ${SGW_S11_IP} -m ${MME_S11_IP} -w ${SGW_S1U_IP}"
+    APN_INFO="-i ${IP_POOL_IP} -p ${IP_POOL_MASK} -a ${APN}"
+    SPGW_CFG="-d 03 -l 2 -r 7.7.7.7 -g 6.6.6.6 -v 4.4.4.4  -u 5.5.5.5"
+
+    TEID_INFO="-t ${S11_TEID_POOL_START} -e ${S11_TEID_POOL_STOP} -q ${S1U_TEID_POOL_START} -o ${S1U_TEID_POOL_STOP}"
+    APP_ARGS="${MGMT_INFO} ${APN_INFO} ${SPGW_CFG} ${TEID_INFO}"
+
+    CORES="-c $(taskset -p $$ | awk '{print $NF}')"
+    DEVICES="--no-pci"
+    EAL_ARGS="${CORES} ${MEMORY} ${DEVICES}"
+  dp_config.cfg: |
+    get_pcimac_addr () {
+        ifname=$1
+        cid="$(sed -ne '/hostname/p' /proc/1/task/1/mountinfo | awk -F '/' '{print $6}' |tr -d " " )"
+        cid="$cid-$ifname"
+        eval "export $2=$(awk -F '"' '{print $4}' /sriov-cni/$cid)"
+        eval "export $3=$(awk -F '"' '{print $8}' /sriov-cni/$cid)"
+        eval "export $4=$(awk -F '"' '{print $12}' /sriov-cni/$cid)"
+    }
+
+    if [ -d "/sriov-cni" ]; then
+        echo "================== SR-IOV FOUND ============"
+        get_pcimac_addr s1u-net SGW_S1U_PCI S1U_MAC SGW_S1U_IP
+        get_pcimac_addr sgi-net SGW_SGI_PCI SGI_MAC SGW_SGI_IP
+        DEVICES="-w $SGW_S1U_PCI -w $SGW_SGI_PCI"
+        SHARED_DIR="/opt/ngic/config/shared"
+        echo $SGW_S1U_IP > ${SHARED_DIR}/SGW_S1U_IP
+    else #dev --vdev af_packt
+        echo "vdev (AF_PACKET)"
+        # set the variables we provide
+        SGW_S1U_IP=$(netstat -ie | grep -A1 s1u-net | tail -1 | awk '{print $2}' | tr -d addr:)
+        SGW_SGI_IP=$(netstat -ie | grep -A1 sgi-net | tail -1 | awk '{print $2}' | tr -d addr:)
+        S1U_MAC=$( netstat -ie | grep -B1 $SGW_S1U_IP | head -n1 | awk '{print $5}' )
+        SGI_MAC=$( netstat -ie | grep -B1 $SGW_SGI_IP | head -n1 | awk '{print $5}' )
+
+        DEVICES="--no-pci --vdev eth_af_packet0,iface=s1u-net --vdev eth_af_packet1,iface=sgi-net"
+    fi
+
+    if [ ! -d "/dev/hugepages" ]; then
+        MEMORY="--no-huge -m $((MEM_LIMIT-1024))"
+    fi
+
+    CORES="-c $(taskset -p $$ | awk '{print $NF}')"
+    SPGW_CFG="--spgw_cfg 03"
+    EAL_ARGS="${CORES} ${MEMORY} ${DEVICES}"
+
+    S1U="--s1u_ip ${SGW_S1U_IP} --s1u_mac ${S1U_MAC}"
+    SGI="--sgi_ip ${SGW_SGI_IP} --sgi_mac ${SGI_MAC} --sgi_gw_ip ${RTR_SGI_IP} --sgi_mask ${SGI_MASK}"
+    WORKERS="--num_workers 1"
+    MISC="--log 1"
+    APP_ARGS="${S1U} ${SGI} ${WORKERS} ${MISC} ${SPGW_CFG}"
+  interface.cfg: |
+    [0]
+    dp_comm_ip =  127.0.0.1
+    dp_comm_port = 20
+    cp_comm_ip = ngic-cp-0.ngic-cp.{{ .Values.namespace }}.cluster.global
+    cp_comm_port = 21
+  meter_profile.cfg: |
+    [GLOBAL]
+    NUM_OF_IDX = 7
+    
+    [ENTRY_1]
+    ;Committed Information Rate (CIR). Measured in bytes per second.
+    ;MBR is mapped into CIR, convert MBR from bits to Bytes and set CIR.
+    CIR = 2342400
+    ;Committed Burst Size unit = Bytes
+    CBS = 5856
+    ;Excess Burst Size unit = Bytes
+    EBS = 11712
+    ;Meter profile index. Refer this index in static_pcc.cfg to set AMBR/MBR
+    MTR_PROFILE_IDX = 3
+    
+    [ENTRY_2]
+    ;1200 = 1756800
+    ;1400 = 2049600
+    ;1600 = 2342400
+    CIR = 2342400
+    CBS = 5856
+    EBS = 11712
+    MTR_PROFILE_IDX = 4
+    
+    [ENTRY_3]
+    ; QCI5,QCI7 15.571kbps = 1947 B
+    CIR = 2342400
+    CBS = 5856
+    EBS = 11712
+    MTR_PROFILE_IDX = 5
+
+    [ENTRY_4]
+    ; QCI1, 44kbps = 5500 B
+    CIR = 2342400
+    CBS = 5856
+    EBS = 11712
+    MTR_PROFILE_IDX = 6
+
+    [ENTRY_5]
+    ; QCI9, 31.143kbps = 3893 B
+    CIR = 2342400
+    CBS = 5856
+    EBS = 11712
+    MTR_PROFILE_IDX = 7
+
+    [ENTRY_6]
+    ; 128B, 7pps
+    CIR = 2342400
+    CBS = 512
+    EBS = 1024
+    MTR_PROFILE_IDX = 8
+
+    [ENTRY_7]
+    ; 128B, 2pps
+    CIR = 2342400
+    CBS = 512
+    EBS = 1024
+    MTR_PROFILE_IDX = 9
+
+  pcc_rules.cfg: |
+    [GLOBAL]
+    NUM_PCC_FILTERS = 9
+    ;To config AMBR/MBR values refer meter_profile.cfg. specify only the
+    ;meter profile index to be set here.
+    UL_AMBR_MTR_PROFILE_IDX = 3
+    DL_AMBR_MTR_PROFILE_IDX = 4
+    
+    ;default filter - must be first for now (until DP doesn't install any filters)
+    ;associated with default adc rule
+    [PCC_FILTER_1]
+    RULE_NAME = DefaultRule
+    RATING_GROUP = 9
+    SERVICE_ID = 0
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 1
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = 0
+    REDIRECT_INFO = 0
+    PRECEDENCE = 254
+    DROP_PKT_COUNT = 0
+    ;Specify the meter profile index from meter_profile.cfg
+    UL_MBR_MTR_PROFILE_IDX = 7
+    DL_MBR_MTR_PROFILE_IDX = 7
+    ;List of ADC filter indices
+    SDF_FILTER_IDX = 99998
+    
+    [PCC_FILTER_2]
+    RULE_NAME = sdf_rule_1
+    RATING_GROUP = 5
+    SERVICE_ID = 0
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 2
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = 0
+    REDIRECT_INFO = 0
+    PRECEDENCE = 1
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 5
+    DL_MBR_MTR_PROFILE_IDX = 5
+    ;List of SDF filter indices
+    SDF_FILTER_IDX = 1
+    
+    [PCC_FILTER_3]
+    RULE_NAME = sdf_rule_2
+    RATING_GROUP = 1
+    SERVICE_ID = 0
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 3
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = 0
+    REDIRECT_INFO = 0
+    PRECEDENCE = 18
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 6
+    DL_MBR_MTR_PROFILE_IDX = 6
+    ;List of SDF filter indices
+    SDF_FILTER_IDX = 2
+    
+    [PCC_FILTER_4]
+    RULE_NAME = adc_rule_1
+    RATING_GROUP = Zero-Rate
+    SERVICE_ID = Internet
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 8
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    REDIRECT_INFO = 0
+    SPONSOR_ID = Example
+    PRECEDENCE = 15
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 7
+    DL_MBR_MTR_PROFILE_IDX = 7
+    ;List of SDF filter indices
+    ADC_FILTER_IDX = 1
+    
+    [PCC_FILTER_5]
+    RULE_NAME = adc_rule_2
+    RATING_GROUP = 0
+    SERVICE_ID = CIPA
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 9
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = Example
+    REDIRECT_INFO = 0
+    SPONSOR_ID = Example
+    REDIRECT_INFO = 0
+    PRECEDENCE = 4
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 0
+    DL_MBR_MTR_PROFILE_IDX = 0
+    ;List of SDF filter indices
+    ADC_FILTER_IDX = 2
+    
+    [PCC_FILTER_6]
+    RULE_NAME = sdf_rule_3
+    RATING_GROUP = 7
+    SERVICE_ID = 0
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 4
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = 0
+    REDIRECT_INFO = 0
+    PRECEDENCE = 17
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 5
+    DL_MBR_MTR_PROFILE_IDX = 5
+    ;List of SDF filter indices
+    SDF_FILTER_IDX = 3
+    
+    [PCC_FILTER_7]
+    RULE_NAME = adc_rule_3
+    RATING_GROUP = Zero-Rate
+    SERVICE_ID = Internet
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 5
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = Example
+    REDIRECT_INFO = 0
+    PRECEDENCE = 210
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 7
+    DL_MBR_MTR_PROFILE_IDX = 7
+    ;List of SDF filter indices
+    ADC_FILTER_IDX = 4
+    
+    [PCC_FILTER_8]
+    RULE_NAME = adc_rule_4
+    RATING_GROUP = Zero-Rate
+    SERVICE_ID = Management
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 6
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = Example
+    REDIRECT_INFO = 0
+    PRECEDENCE = 200
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 7
+    DL_MBR_MTR_PROFILE_IDX = 7
+    ;List of SDF filter indices
+    ADC_FILTER_IDX = 12
+    
+    [PCC_FILTER_9]
+    RULE_NAME = adc_rule_5
+    RATING_GROUP = Zero-Rate
+    SERVICE_ID = Provisioning
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 7
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = Example
+    REDIRECT_INFO = 0
+    PRECEDENCE = 220
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 7
+    DL_MBR_MTR_PROFILE_IDX = 7
+    ;List of SDF filter indices
+    ADC_FILTER_IDX = 3
+  sdf_rules.cfg: |
+    [GLOBAL]
+    NUM_SDF_FILTERS = 4
+    
+    [SDF_FILTER_1]
+    DIRECTION = downlink_only
+    IPV4_REMOTE = 13.2.1.113
+    IPV4_REMOTE_MASK = 255.255.255.0
+    PROTOCOL = 17
+    LOCAL_LOW_LIMIT_PORT = 0
+    LOCAL_HIGH_LIMIT_PORT = 65535
+    REMOTE_LOW_LIMIT_PORT = 0
+    REMOTE_HIGH_LIMIT_PORT = 65535
+    
+    [SDF_FILTER_2]
+    DIRECTION = uplink_only
+    IPV4_LOCAL = 16.255.255.0
+    IPV4_LOCAL_MASK = 255.255.255.0
+    PROTOCOL = 17
+    LOCAL_LOW_LIMIT_PORT = 0
+    LOCAL_HIGH_LIMIT_PORT = 65535
+    REMOTE_LOW_LIMIT_PORT = 0
+    REMOTE_HIGH_LIMIT_PORT = 65535
+    
+    [SDF_FILTER_3]
+    DIRECTION = downlink_only
+    IPV4_REMOTE = 130.10.0.0
+    IPV4_REMOTE_MASK = 255.255.0.0
+    PROTOCOL = 17
+    REMOTE_LOW_LIMIT_PORT = 5060
+    REMOTE_HIGH_LIMIT_PORT = 5060
+    
+    [SDF_FILTER_4]
+    DIRECTION = uplink_only
+    IPV4_REMOTE = 103.1.0.0
+    IPV4_REMOTE_MASK = 255.255.0.0
+    PROTOCOL = 17
+    LOCAL_LOW_LIMIT_PORT = 17000
+    LOCAL_HIGH_LIMIT_PORT = 17010
+
