@@ -1,0 +1,22 @@
+# Default values for mcord-vepc-helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+ngic_dp:
+  images:
+    init: "ngick8stesting/c3po-mmeinit"
+    dp: "ngick8stesting/ngic-dp:690f418"
+  ports:
+    sx: 20
+  replicas: 1
+  resources:
+    cpu: 8
+    mem: "1Gi"
+    hugepage: "8Gi"
+  config:
+    rtr_sgi_ip: "13.1.1.254"
+    sgi_mask: "255.255.255.0"
+    dpdk_enabled: false
+    hugepage_enabled: true
+
+namespace: epc
