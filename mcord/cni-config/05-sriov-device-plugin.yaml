@@ -1,0 +1,109 @@
+---
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+kind: DaemonSet
+apiVersion: apps/v1
+metadata:
+  name: sriov-device-plugin
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      name: sriov-device-plugin
+  template:
+    metadata:
+      labels:
+        name: sriov-device-plugin
+    spec:
+      serviceAccountName: sriov-dp
+      initContainers:
+      - name: init-sriov-dp
+        image: ngick8stesting/aio-cni:k8s-1.13
+        command: [ "bash", "-c" ]
+        args:
+        - cp /tmp/cni/bin/{multus,sriov,centralip} /host/opt/cni/bin/;
+          echo "Restarting crio/containerd, kubelet";
+          systemctl daemon-reload;
+          systemctl restart containerd;
+          systemctl restart crio;
+          systemctl restart kubelet;
+        volumeMounts:
+        - name: usr-bin
+          mountPath: /host/usr/bin
+        - name: cni-bin
+          mountPath: /host/opt/cni/bin
+        - name: multus-cm
+          mountPath: /tmp/etc/cni/net.d
+        - name: multus-certs
+          mountPath: /tmp/multus
+        - name: cni-conf
+          mountPath: /host/etc/cni/net.d
+        - name: dbus
+          mountPath: /var/run/dbus
+        - name: systemd
+          mountPath: /run/systemd
+      containers:
+      - name: sriov-device-plugin
+        image: ngick8stesting/aio-cni:k8s-1.13
+        imagePullPolicy: IfNotPresent
+        command: [ "/bin/sh", "-c" ]
+        args:
+        - /usr/bin/sriovdp --logtostderr -v 10;
+          echo "exit status $?";
+        volumeMounts:
+        - mountPath: /var/lib/kubelet/device-plugins/
+          name: devicesock
+          readOnly: false
+        - mountPath: /sys/class/net/
+          name: net
+          readOnly: true
+        - mountPath: /etc/pcidp/
+          name: sriov-config
+          readOnly: false
+      volumes:
+      - name: sriov-config
+        configMap:
+          name: sriov-config
+      - name: usr-bin
+        hostPath:
+          path: /usr/bin
+      - name: cni-bin
+        hostPath:
+          path: /opt/cni/bin
+      - name: multus-cm
+        configMap:
+          name: multus-conf
+      - name: multus-certs
+        configMap:
+          defaultMode: 511
+          name: multus-certs
+      - name: cni-conf
+        hostPath:
+          path: /etc/cni/net.d
+      - name: dbus
+        hostPath:
+          path: /var/run/dbus
+      - name: systemd
+        hostPath:
+          path: /run/systemd
+      - name: net
+        hostPath:
+          path: /sys/class/net
+      - name: devicesock
+        hostPath:
+          path: /var/lib/kubelet/device-plugins/
+      hostNetwork: true
+      hostPID: true

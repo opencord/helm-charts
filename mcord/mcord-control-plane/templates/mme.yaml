@@ -1,0 +1,114 @@
+---
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: mme
+spec:
+  selector:
+    app: mme
+  type: NodePort
+  ports:
+  - name: s11
+    port: {{ .Values.mme.ports.s11 }}
+    protocol: UDP
+  - name: s1ap
+    port: {{ .Values.mme.ports.s1ap }}
+    protocol: TCP
+  - name: s6a
+    port: {{ .Values.mme.ports.s6a }}
+    protocol: TCP
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: mme
+  labels:
+    app: mme
+spec:
+  replicas: {{ .Values.mme.replicas }}
+  selector:
+    matchLabels:
+      app: mme
+  serviceName: "mme"
+  template:
+    metadata:
+      namespace: {{ .Values.namespace }}
+      labels:
+        app: mme
+    spec:
+      terminationGracePeriodSeconds: 1
+      initContainers:
+      - name: init-mme
+        image: {{ .Values.mme.images.init }}
+        command: [ "sh", "-c"]
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+              - NET_ADMIN
+        args:
+        - iptables -A OUTPUT -p sctp --sport {{ .Values.mme.ports.s1ap }} --chunk-types any ABORT -j DROP;
+          until nslookup hss-0.hss.{{ .Values.namespace }}.svc.cluster.local;
+          do echo waiting for hss; sleep 2; done;
+      containers:
+      - name: mme
+        image: {{ .Values.mme.images.mme }}
+        imagePullPolicy: Always
+        env:
+          - name: SGW_S11_IP
+            value: ngic-0.ngic-cp.{{ .Values.namespace }}.svc.cluster.local
+          - name: MME_ETH0_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          - name: ENB_S1AP_IP
+            value: {{ .Values.mme.enb_s1ap_ip }}
+          - name: ENB_S1AP_PORT
+            value: "{{ .Values.mme.ports.s1ap }}"   #ng4t uses 32767
+          - name: CONNECT_PEER
+            value: hss-0.hss.{{ .Values.namespace }}.svc.cluster.local
+          - name: VAR_HSS_REALM
+            value: hss.{{ .Values.namespace }}.svc.cluster.local
+          - name: HSS_S6A_IP
+            value: hss-0.hss.{{ .Values.namespace }}.svc.cluster.local
+          - name: HSS_PORT
+            value: "{{ .Values.mme.ports.s6a }}"
+        stdin: true
+        tty: true
+        #command: [ "sleep", "3600"]
+        resources:
+          limits:
+            cpu: {{ .Values.mme.resources.cpu }}
+            memory: {{ .Values.mme.resources.mem }}
+        volumeMounts:
+        - name: mme-script
+          mountPath: /opt/c3po/mme/bin/launch.sh
+          subPath: launch.sh
+        - name: mme-config
+          mountPath: /etc/mme/conf
+      volumes:
+      - name: mme-script
+        configMap:
+          name: mme
+          defaultMode: 493
+      - name: mme-config
+        configMap:
+          name: mme
+          defaultMode: 420

@@ -1,0 +1,897 @@
+---
+# Copyright 2017-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: ngiccp-config
+data:
+  adc_rules.cfg: |
+    [GLOBAL]
+    NUM_ADC_RULES = 5
+
+    ;FORMAT ::
+    ;ADC_TYPE : [ DOMAIN = 0 | IP = 1 | IP PREFIX =2 ]
+    ;
+    ;if ADC_TYPE = 0
+    ;   DOMAIN
+    ;elseif ADC_TYPE = 1
+    ;   IP
+    ;elseif ADC_TYPE = 2
+    ;   IP
+    ;   PREFIX
+    ;else
+    ;   NONE
+    ;
+    ;NOTE :
+    ;Rules defined first have a higher priority, unless DROP is specified
+    ;(i.e. multiple rules for the same IP).
+    ;When specifying DROP with an IP address, use a prefix of 32 to prevent DNS
+    ;results from overwriting rule.
+
+
+    [ADC_RULE_1]
+    ADC_TYPE = 2
+    IP = 0.0.0.0
+    PREFIX = 0
+
+    [ADC_RULE_2]
+    ADC_TYPE = 2
+    IP = 13.1.1.0
+    PREFIX = 24
+
+    [ADC_RULE_3]
+    ADC_TYPE = 1
+    IP = 13.1.1.254
+
+    [ADC_RULE_4]
+    ADC_TYPE = 0
+    DOMAIN = www.example.gov
+
+    [ADC_RULE_5]
+    ADC_TYPE = 0
+    DOMAIN = www.drop_example.com
+  cdr.cfg: |
+    CDR_PATH=./cdr
+    MASTER_CDR=./cdr/master.csv
+  cp_config.cfg: |
+    if [ ! -d "/dev/hugepages" ]; then
+        MEMORY="--no-huge -m $((MEM_LIMIT-1024))"
+    fi
+
+    SGW_S1U_IP=$(netstat -ie | grep -A1 s1u-net | tail -1 | awk '{print $2}' | tr -d addr:)
+    SHARED_DIR="/opt/ngic/config/shared"
+    if [ -d ${SHARED_DIR} ]; then
+        while [ ! -f ${SHARED_DIR}/SGW_S1U_IP ]; do echo "Waiting for SGW_S1U_IP"; sleep 2; done
+        SGW_S1U_IP=$(cat ${SHARED_DIR}/SGW_S1U_IP)
+    fi
+
+    SGW_S11_IP=$(hostname)
+    MGMT_INFO="-s ${SGW_S11_IP} -m ${MME_S11_IP} -w ${SGW_S1U_IP}"
+    APN_INFO="-i ${IP_POOL_IP} -p ${IP_POOL_MASK} -a ${APN}"
+    SPGW_CFG="-d 03 -l 2 -r 7.7.7.7 -g 6.6.6.6 -v 4.4.4.4  -u 5.5.5.5"
+
+    TEID_INFO="-t ${S11_TEID_POOL_START} -e ${S11_TEID_POOL_STOP} -q ${S1U_TEID_POOL_START} -o ${S1U_TEID_POOL_STOP}"
+    APP_ARGS="${MGMT_INFO} ${APN_INFO} ${SPGW_CFG} ${TEID_INFO}"
+
+    CORES="-c $(taskset -p $$ | awk '{print $NF}')"
+    DEVICES="--no-pci"
+    EAL_ARGS="${CORES} ${MEMORY} ${DEVICES}"
+  dp_config.cfg: |
+    get_pcimac_addr () {
+        ifname=$1
+        cid="$(sed -ne '/hostname/p' /proc/1/task/1/mountinfo | awk -F '/' '{print $6}' |tr -d " " )"
+        cid="$cid-$ifname"
+        eval "export $2=$(awk -F '"' '{print $4}' /sriov-cni/$cid)"
+        eval "export $3=$(awk -F '"' '{print $8}' /sriov-cni/$cid)"
+        eval "export $4=$(awk -F '"' '{print $12}' /sriov-cni/$cid)"
+    }
+
+    if [ -d "/sriov-cni" ]; then
+        echo "================== SR-IOV FOUND ============"
+        get_pcimac_addr s1u-net SGW_S1U_PCI S1U_MAC SGW_S1U_IP
+        get_pcimac_addr sgi-net SGW_SGI_PCI SGI_MAC SGW_SGI_IP
+        DEVICES="-w $SGW_S1U_PCI -w $SGW_SGI_PCI"
+        SHARED_DIR="/opt/ngic/config/shared"
+        echo $SGW_S1U_IP > ${SHARED_DIR}/SGW_S1U_IP
+    else #dev --vdev af_packt
+        echo "vdev (AF_PACKET)"
+        # set the variables we provide
+        SGW_S1U_IP=$(netstat -ie | grep -A1 s1u-net | tail -1 | awk '{print $2}' | tr -d addr:)
+        SGW_SGI_IP=$(netstat -ie | grep -A1 sgi-net | tail -1 | awk '{print $2}' | tr -d addr:)
+        S1U_MAC=$( netstat -ie | grep -B1 $SGW_S1U_IP | head -n1 | awk '{print $5}' )
+        SGI_MAC=$( netstat -ie | grep -B1 $SGW_SGI_IP | head -n1 | awk '{print $5}' )
+
+        DEVICES="--no-pci --vdev eth_af_packet0,iface=s1u-net --vdev eth_af_packet1,iface=sgi-net"
+    fi
+
+    if [ ! -d "/dev/hugepages" ]; then
+        MEMORY="--no-huge -m $((MEM_LIMIT-1024))"
+    fi
+
+    CORES="-c $(taskset -p $$ | awk '{print $NF}')"
+    SPGW_CFG="--spgw_cfg 03"
+    EAL_ARGS="${CORES} ${MEMORY} ${DEVICES}"
+
+    S1U="--s1u_ip ${SGW_S1U_IP} --s1u_mac ${S1U_MAC}"
+    SGI="--sgi_ip ${SGW_SGI_IP} --sgi_mac ${SGI_MAC} --sgi_gw_ip ${RTR_SGI_IP} --sgi_mask ${SGI_MASK}"
+    WORKERS="--num_workers 1"
+    MISC="--log 1"
+    APP_ARGS="${S1U} ${SGI} ${WORKERS} ${MISC} ${SPGW_CFG}"
+  interface.cfg: |
+    [0]
+    dp_comm_ip = ngic-dp-0.ngic-dp.{{ .Values.namespace }}.cluster.global
+    dp_comm_port = 20
+    cp_comm_ip = 127.0.0.1
+    cp_comm_port = 21
+  meter_profile.cfg: |
+    [GLOBAL]
+    NUM_OF_IDX = 7
+    
+    [ENTRY_1]
+    ;Committed Information Rate (CIR). Measured in bytes per second.
+    ;MBR is mapped into CIR, convert MBR from bits to Bytes and set CIR.
+    CIR = 2342400
+    ;Committed Burst Size unit = Bytes
+    CBS = 5856
+    ;Excess Burst Size unit = Bytes
+    EBS = 11712
+    ;Meter profile index. Refer this index in static_pcc.cfg to set AMBR/MBR
+    MTR_PROFILE_IDX = 3
+    
+    [ENTRY_2]
+    ;1200 = 1756800
+    ;1400 = 2049600
+    ;1600 = 2342400
+    CIR = 2342400
+    CBS = 5856
+    EBS = 11712
+    MTR_PROFILE_IDX = 4
+    
+    [ENTRY_3]
+    ; QCI5,QCI7 15.571kbps = 1947 B
+    CIR = 2342400
+    CBS = 5856
+    EBS = 11712
+    MTR_PROFILE_IDX = 5
+
+    [ENTRY_4]
+    ; QCI1, 44kbps = 5500 B
+    CIR = 2342400
+    CBS = 5856
+    EBS = 11712
+    MTR_PROFILE_IDX = 6
+
+    [ENTRY_5]
+    ; QCI9, 31.143kbps = 3893 B
+    CIR = 2342400
+    CBS = 5856
+    EBS = 11712
+    MTR_PROFILE_IDX = 7
+
+    [ENTRY_6]
+    ; 128B, 7pps
+    CIR = 2342400
+    CBS = 512
+    EBS = 1024
+    MTR_PROFILE_IDX = 8
+
+    [ENTRY_7]
+    ; 128B, 2pps
+    CIR = 2342400
+    CBS = 512
+    EBS = 1024
+    MTR_PROFILE_IDX = 9
+
+  pcc_rules.cfg: |
+    [GLOBAL]
+    NUM_PCC_FILTERS = 9
+    ;To config AMBR/MBR values refer meter_profile.cfg. specify only the
+    ;meter profile index to be set here.
+    UL_AMBR_MTR_PROFILE_IDX = 3
+    DL_AMBR_MTR_PROFILE_IDX = 4
+    
+    ;default filter - must be first for now (until DP doesn't install any filters)
+    ;associated with default adc rule
+    [PCC_FILTER_1]
+    RULE_NAME = DefaultRule
+    RATING_GROUP = 9
+    SERVICE_ID = 0
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 1
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = 0
+    REDIRECT_INFO = 0
+    PRECEDENCE = 254
+    DROP_PKT_COUNT = 0
+    ;Specify the meter profile index from meter_profile.cfg
+    UL_MBR_MTR_PROFILE_IDX = 7
+    DL_MBR_MTR_PROFILE_IDX = 7
+    ;List of ADC filter indices
+    SDF_FILTER_IDX = 99998
+    
+    [PCC_FILTER_2]
+    RULE_NAME = sdf_rule_1
+    RATING_GROUP = 5
+    SERVICE_ID = 0
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 2
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = 0
+    REDIRECT_INFO = 0
+    PRECEDENCE = 1
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 5
+    DL_MBR_MTR_PROFILE_IDX = 5
+    ;List of SDF filter indices
+    SDF_FILTER_IDX = 1
+    
+    [PCC_FILTER_3]
+    RULE_NAME = sdf_rule_2
+    RATING_GROUP = 1
+    SERVICE_ID = 0
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 3
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = 0
+    REDIRECT_INFO = 0
+    PRECEDENCE = 18
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 6
+    DL_MBR_MTR_PROFILE_IDX = 6
+    ;List of SDF filter indices
+    SDF_FILTER_IDX = 2
+    
+    [PCC_FILTER_4]
+    RULE_NAME = adc_rule_1
+    RATING_GROUP = Zero-Rate
+    SERVICE_ID = Internet
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 8
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    REDIRECT_INFO = 0
+    SPONSOR_ID = Example
+    PRECEDENCE = 15
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 7
+    DL_MBR_MTR_PROFILE_IDX = 7
+    ;List of SDF filter indices
+    ADC_FILTER_IDX = 1
+    
+    [PCC_FILTER_5]
+    RULE_NAME = adc_rule_2
+    RATING_GROUP = 0
+    SERVICE_ID = CIPA
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 9
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = Example
+    REDIRECT_INFO = 0
+    SPONSOR_ID = Example
+    REDIRECT_INFO = 0
+    PRECEDENCE = 4
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 0
+    DL_MBR_MTR_PROFILE_IDX = 0
+    ;List of SDF filter indices
+    ADC_FILTER_IDX = 2
+    
+    [PCC_FILTER_6]
+    RULE_NAME = sdf_rule_3
+    RATING_GROUP = 7
+    SERVICE_ID = 0
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 4
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = 0
+    REDIRECT_INFO = 0
+    PRECEDENCE = 17
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 5
+    DL_MBR_MTR_PROFILE_IDX = 5
+    ;List of SDF filter indices
+    SDF_FILTER_IDX = 3
+    
+    [PCC_FILTER_7]
+    RULE_NAME = adc_rule_3
+    RATING_GROUP = Zero-Rate
+    SERVICE_ID = Internet
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 5
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = Example
+    REDIRECT_INFO = 0
+    PRECEDENCE = 210
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 7
+    DL_MBR_MTR_PROFILE_IDX = 7
+    ;List of SDF filter indices
+    ADC_FILTER_IDX = 4
+    
+    [PCC_FILTER_8]
+    RULE_NAME = adc_rule_4
+    RATING_GROUP = Zero-Rate
+    SERVICE_ID = Management
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 6
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = Example
+    REDIRECT_INFO = 0
+    PRECEDENCE = 200
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 7
+    DL_MBR_MTR_PROFILE_IDX = 7
+    ;List of SDF filter indices
+    ADC_FILTER_IDX = 12
+    
+    [PCC_FILTER_9]
+    RULE_NAME = adc_rule_5
+    RATING_GROUP = Zero-Rate
+    SERVICE_ID = Provisioning
+    RULE_STATUS = 0
+    GATE_STATUS = 1
+    SESSION_CONT = 0
+    REPORT_LEVEL = 7
+    CHARGING_MODE = 0
+    METERING_METHOD = 0
+    MUTE_NOTIFY = 0
+    MONITORING_KEY = 0
+    SPONSOR_ID = Example
+    REDIRECT_INFO = 0
+    PRECEDENCE = 220
+    DROP_PKT_COUNT = 0
+    UL_MBR_MTR_PROFILE_IDX = 7
+    DL_MBR_MTR_PROFILE_IDX = 7
+    ;List of SDF filter indices
+    ADC_FILTER_IDX = 3
+  sdf_rules.cfg: |
+    [GLOBAL]
+    NUM_SDF_FILTERS = 4
+    
+    [SDF_FILTER_1]
+    DIRECTION = downlink_only
+    IPV4_REMOTE = 13.2.1.113
+    IPV4_REMOTE_MASK = 255.255.255.0
+    PROTOCOL = 17
+    LOCAL_LOW_LIMIT_PORT = 0
+    LOCAL_HIGH_LIMIT_PORT = 65535
+    REMOTE_LOW_LIMIT_PORT = 0
+    REMOTE_HIGH_LIMIT_PORT = 65535
+    
+    [SDF_FILTER_2]
+    DIRECTION = uplink_only
+    IPV4_LOCAL = 16.255.255.0
+    IPV4_LOCAL_MASK = 255.255.255.0
+    PROTOCOL = 17
+    LOCAL_LOW_LIMIT_PORT = 0
+    LOCAL_HIGH_LIMIT_PORT = 65535
+    REMOTE_LOW_LIMIT_PORT = 0
+    REMOTE_HIGH_LIMIT_PORT = 65535
+    
+    [SDF_FILTER_3]
+    DIRECTION = downlink_only
+    IPV4_REMOTE = 130.10.0.0
+    IPV4_REMOTE_MASK = 255.255.0.0
+    PROTOCOL = 17
+    REMOTE_LOW_LIMIT_PORT = 5060
+    REMOTE_HIGH_LIMIT_PORT = 5060
+    
+    [SDF_FILTER_4]
+    DIRECTION = uplink_only
+    IPV4_REMOTE = 103.1.0.0
+    IPV4_REMOTE_MASK = 255.255.0.0
+    PROTOCOL = 17
+    LOCAL_LOW_LIMIT_PORT = 17000
+    LOCAL_HIGH_LIMIT_PORT = 17010
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: cassandra
+data:
+  cassandra-rackdc.properties: |
+    dc=DC1
+    rack=RAC1
+    prefer_local=true
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: hss
+data:
+  acl.conf: |
+    ALLOW_OLD_TLS   *.cluster.local
+  hss.conf: |
+    # -------- Local ---------
+    # The first parameter in this section is Identity, which will be used to
+    # identify this peer in the Diameter network. The Diameter protocol mandates
+    # that the Identity used is a valid FQDN for the peer. This parameter can be
+    # omitted, in that case the framework will attempt to use system default value
+    # (as returned by hostname --fqdn).
+    Identity = "HSS_IDENTITY";
+
+    # In Diameter, all peers also belong to a Realm. If the realm is not specified,
+    # the framework uses the part of the Identity after the first dot.
+    Realm = "HSS_REALM";
+
+
+    # This parameter is mandatory, even if it is possible to disable TLS for peers
+    # connections. A valid certificate for this Diameter Identity is expected.
+    TLS_Cred = "./conf/HSS_HOST.cert.pem", "./conf/HSS_HOST.key.pem";
+    TLS_CA = "./conf/cacert.pem";
+
+
+    # Disable use of TCP protocol (only listen and connect in SCTP)
+    # Default : TCP enabled
+    No_SCTP;
+
+
+    # This option is ignored if freeDiameter is compiled with DISABLE_SCTP option.
+    # Prefer TCP instead of SCTP for establishing new connections.
+    # This setting may be overwritten per peer in peer configuration blocs.
+    # Default : SCTP is attempted first.
+    Prefer_TCP;
+
+
+    # Disable use of IPv6 addresses (only IP)
+    # Default : IPv6 enabled
+    No_IPv6;
+
+
+    # Overwrite the number of SCTP streams. This value should be kept low,
+    # especially if you are using TLS over SCTP, because it consumes a lot of
+    # resources in that case. See tickets 19 and 27 for some additional details on
+    # this.
+    # Limit the number of SCTP streams
+    SCTP_streams = 3;
+
+
+    # By default, freeDiameter acts as a Diameter Relay Agent by forwarding all
+    # messages it cannot handle locally. This parameter disables this behavior.
+    NoRelay;
+
+
+    # Use RFC3588 method for TLS protection, where TLS is negociated after CER/CEA exchange is completed
+    # on the unsecure connection. The alternative is RFC6733 mechanism, where TLS protects also the
+    # CER/CEA exchange on a dedicated secure port.
+    # This parameter only affects outgoing connections.
+    # The setting can be also defined per-peer (see Peers configuration section).
+    # Default: use RFC6733 method with separate port for TLS.
+
+    #TLS_old_method;
+
+
+    # Number of parallel threads that will handle incoming application messages.
+    # This parameter may be deprecated later in favor of a dynamic number of threads
+    # depending on the load.
+    AppServThreads = 4;
+
+    # Specify the addresses on which to bind the listening server. This must be
+    # specified if the framework is unable to auto-detect these addresses, or if the
+    # auto-detected values are incorrect. Note that the list of addresses is sent
+    # in CER or CEA message, so one should pay attention to this parameter if some
+    # adresses should be kept hidden.
+    #ListenOn = "127.0.0.1";
+
+    Port = {{ .Values.hss.ports.s6a }};
+    SecPort = {{ .Values.hss.ports.secs6a }};
+
+    LoadExtension = "acl_wl.fdx" : "./conf/acl.conf";
+
+    # -------- Extensions ---------
+
+    #LoadExtension = "/usr/local/lib/freeDiameter/_sample.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/app_acct.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/app_diameap.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/app_radgw.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/app_redirect.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/app_sip.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dbg_interactive.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dbg_monitor.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dbg_msg_dumps.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dbg_msg_timings.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dbg_rt.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_3gpp2_avps.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_CreditControl.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_CxDx.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Gx.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_NAS.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Ro.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Rx.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_S6mS6n.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_SGd.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_SLh.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Sd.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Sh.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_T4.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_T6aT6bT7.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Tsp.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_dcca.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_dcca_3gpp.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_dcca_starent.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_draftload_avps.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_eap.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_etsi283034_avps.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_legacy_xml.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_mip6a.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_mip6i.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_nas_mipv6.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_nasreq.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4004_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4006bis_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4072_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4590_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5447_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5580_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5777_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5778_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc6734_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc6942_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7155_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7683_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7944_avps.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_sip.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29061_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29128_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29154_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29173_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29212_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29214_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29215_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29217_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29229_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29272_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29273_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29329_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29336_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29337_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29338_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29343_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29344_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29345_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29368_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29468_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts32299_avps.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/rt_busypeers.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/rt_default.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/rt_ereg.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/rt_ignore_dh.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/rt_load_balance.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/rt_randomize.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/rt_redirect.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/test_acct.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/test_app.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/test_hss.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/test_netemul.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/test_rt_any.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/test_sip.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Rf.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6as6d.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6t.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6c.fdx";
+
+
+    # Load RFC4072 dictionary objects
+    #LoadExtension = "dict_eap.fdx";
+
+    # Load the Diameter EAP server extension (requires diameap.conf)
+    #LoadExtension = "app_diameap.fdx" : "diameap.conf";
+
+    # Load the Accounting Server extension (requires app_acct.conf)
+    #LoadExtension = "app_acct.fdx" : "app_acct.conf";
+
+    # -------- Peers ---------
+
+    # The framework will actively attempt to establish and maintain a connection
+    # with the peers listed here.
+    # For only accepting incoming connections, see the acl_wl.fx extension.
+
+    #ConnectPeer = "peer1.localdomain" { ConnectTo = "127.0.0.1"; };
+  hss.json: |
+    {"common": {
+        "fdcfg": "conf/hss.conf",
+        "originhost": "HSS_IDENTITY",
+        "originrealm": "HSS_REALM"
+    },
+    "hss": {
+        "gtwhost": "*",
+        "gtwport" : 9080,
+        "restport" : 9081,
+        "casssrv": "CASSANDRA_ADDR",
+        "cassusr": "root",
+        "casspwd": "root",
+        "cassdb" : "vhss",
+        "randv"  : true,
+        "optkey" : "63bfa50ee6523365ff14c1f45f88737d",
+        "reloadkey"  : true
+    }
+    }
+  launch.sh: |
+    #!/bin/bash
+
+    cd /opt/c3po/hss
+    cp /etc/hss/conf/{acl.conf,hss.json,hss.conf} conf
+
+    HSS_HOST=$(hostname)
+    HSS_DOMAIN=$(dnsdomainname)
+    CASSANDRA_ADDR=${CASSANDRA_ADDR:-localhost}
+
+    # from hss.json
+    sed -i "s/HSS_IDENTITY/$HSS_HOST.$HSS_DOMAIN/g" conf/hss.json
+    sed -i "s/HSS_REALM/$HSS_DOMAIN/g" conf/hss.json
+    sed -i "s/CASSANDRA_ADDR/$CASSANDRA_ADDR/g" conf/hss.json
+
+    # from hss.conf
+    sed -i "s/HSS_IDENTITY/$HSS_HOST.$HSS_DOMAIN/g" conf/hss.conf
+    sed -i "s/HSS_REALM/$HSS_DOMAIN/g" conf/hss.conf
+    sed -i "s/HSS_HOST/$HSS_HOST/g" conf/hss.conf
+
+    # If necessary, calculate the OPc value for each UE (User Equipment).
+    #./bin/hss -j conf/hss.json --onlyloadkey
+
+    cd conf
+    make_certs.sh $(hostname) $(dnsdomainname)
+    cd ..
+
+    # finally, launch
+    hss -j conf/hss.json
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: mme
+data:
+  launch.sh: |
+    #!/bin/bash
+
+    cd /opt/c3po/mme/bin
+    cp /etc/mme/conf/{vbsm_cfg.txt,vbfd.conf} .
+
+    # from vbsm_cfg.txt
+    SGW_S11_IP=${SGW_S11_IP:-sgw.localdomain}
+    ENB_S1AP_IP=${ENB_S1AP_IP:-enb1.localdomain}
+    ENB_S1AP_PORT=${ENB_S1AP_PORT:-36412}
+    MME_ETH0_IP=${MME_ETH0_IP:-0.0.0.0}
+
+    # from vbfd.conf
+    CONNECT_PEER=${CONNECT_PEER:-hss.localdomain}
+    HSS_S6A_IP=${HSS_S6A_IP:-hss.localdomain}
+    HSS_PORT=${HSS_PORT:-3868}
+    VAR_HSS_REALM=${VAR_HSS_REALM:-openair4G.eur}
+
+
+    sed -i "s/SGW_S11_IP/$(dig $SGW_S11_IP +short)/g" vbsm_cfg.txt
+    sed -i "s/ENB_S1AP_IP/$ENB_S1AP_IP/g" vbsm_cfg.txt
+    sed -i "s/ENB_S1AP_PORT/$ENB_S1AP_PORT/g" vbsm_cfg.txt
+    sed -i "s/MME_ETH0_IP/$MME_ETH0_IP/g" vbsm_cfg.txt
+    sed -i "s/VAR_HSS_HOST/$CONNECT_PEER/g" vbsm_cfg.txt
+    sed -i "s/VAR_HSS_REALM/$VAR_HSS_REALM/g" vbsm_cfg.txt
+
+
+    MME_HOST=$(hostname)
+    MME_DOMAIN=$(dnsdomainname)
+    sed -i "s/CONNECT_PEER/$CONNECT_PEER/g" vbfd.conf
+    sed -i "s/HSS_S6A_IP/$HSS_S6A_IP/g" vbfd.conf
+    sed -i "s/HSS_PORT/$HSS_PORT/g" vbfd.conf
+    sed -i "s/MME_IDENTITY/$MME_HOST.$MME_DOMAIN/g" vbfd.conf
+    sed -i "s/MME_REALM/$MME_DOMAIN/g" vbfd.conf
+    sed -i "s/MME_HOST/$MME_HOST/g" vbfd.conf
+
+    # generate the certs
+    # ./make_certs.sh mme localdomain
+    ./make_certs.sh $MME_HOST $MME_DOMAIN
+
+
+    # finally, launch
+    ./vb_acc
+  vbfd.conf: |
+    # -------- Test configuration ---------
+
+    # Identity = "<diameter_host>.<diameter_realm>";
+    Identity = "MME_IDENTITY";
+    Realm = "MME_REALM";
+    # Port = 3868;
+    # SecPort = 3869;
+
+    ConnectPeer = "CONNECT_PEER" { ConnectTo = "HSS_S6A_IP"; No_TLS; port = HSS_PORT; };
+
+    # TLS_Cred = "<diameter_host>.cert.pem", "<diameter_host>.key.pem";
+    TLS_Cred = "MME_HOST.cert.pem",
+        "MME_HOST.key.pem";
+    TLS_CA = "cacert.pem";
+
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_3gpp2_avps.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_CreditControl.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_base_rfc6733.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_draftload_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_etsi283034_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4004_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4006bis_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4072_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4590_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5447_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5580_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5777_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5778_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc6734_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc6942_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7155_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7683_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7944_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29061_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29128_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29154_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29173_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29212_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29214_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29215_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29217_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29229_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29272_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29273_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29329_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29336_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29337_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29338_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29343_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29344_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29345_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29368_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29468_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts32299_avps.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_CxDx.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Gx.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_NAS.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Rf.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Ro.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Rx.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6as6d.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6c.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_S6mS6n.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6t.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_S9.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_SGd.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_SLh.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Sd.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Sh.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_T4.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_T6aT6bT7.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Tsp.fdx";
+  vbsm_cfg.txt: |
+    # Configuration file for MME
+
+    #####  NOTE: Please Do NOT change the order of the parameters #####
+
+    # EGTP related
+    VBSM_EG_DFLT_PORT                2123                     # EGTP Default port
+    VBSM_EG_NONDFLT_PORT             2124                     # EGTP Non Default port
+    VBSM_EG_S10_NONDFLT_PORT         2125                     # EGTP Non Default
+    VBSM_EG_S3_NONDFLT_PORT          2126                     # EGTP Non Default port for S3 interface towards SGSN
+                                                              # port for S10
+    VBSM_EG_DFLT_HOST_NAME           "sutlej.ccin.ccpu.com"   # EGTP host name
+
+
+    # E-NodeB related
+    VBSM_ENB_ADDR_1                  "ENB_S1AP_IP"      # IP address of eNodeB
+    VBSM_ENB_PORT_1                  "ENB_S1AP_PORT"    # eNodeB port
+    #VBSM_ENB_ADDR_2                  "172.26.20.180"    # IP address of eNodeB
+    #VBSM_ENB_PORT_2                  36422              # eNodeB port
+
+    # MME related
+    VBSM_MME_IPADDR                  "MME_ETH0_IP"    # MME IP address
+    VBSM_MME_S1AP_IPADDR             "MME_ETH0_IP"    # MME IP address associated with the S1AP interface
+    VBSM_MME_EGTP_IPADDR             "MME_ETH0_IP"    # MME IP address associated with the EGTP interface
+    VBSM_MME_SCTP_PORT               {{ .Values.mme.ports.s1ap }}              # MME SCTP port
+
+    VBSM_SGW_IPADDR                  "SGW_S11_IP"   # SGW IP address
+    VBSM_PGW_IPADDR                  "192.168.1.105"    # PDN-GW IP address
+
+    VBSM_UE_NUM                      1000             # Support 1000 UE's
+    VBSM_SCTP_UDP_SERV_TYPE          0              #service type,default 0 SCTP
+
+    # Debug mask to be set; each represent
+    #different debug masks to be set (1 and 0 to unset)
+    #in the form |LVB_DBGMASK_INFO|LVB_DBGMASK_ERROR|LVB_DBGMASK_TRC|LVB_DBGMASK_MEM
+
+    VBSM_MME_DBG_MASK                1111
+    VBSM_DBG_MASK                    1111
+    VBSM_NW_INIATED_DETACH_TIMER     1000
+
+    VBSM_MCC_DIG1         3
+    VBSM_MCC_DIG2         0
+    VBSM_MCC_DIG3         2
+
+    VBSM_MNC_DIG1         7
+    VBSM_MNC_DIG2         2
+    VBSM_MNC_DIG3         0
+
+    # Target PLMN ID format [ MCC + MNC], + is concatination operator
+    # If MNC has two digits, the last charater shall be 'f'
+    # Valid Configurations: 11223f, 112345.
+    VBSM_TARGET_MME_PLMN_ID          31310f
+    VBSM_TARGET_MME_IP_ADDR          "192.25.1.100"
+
+    VBSM_T3412                        32
+
+    VBSM_SGSN_IP_ADDR                "192.25.1.195"
+
+
+    VBSM_SGSN_PLMN_ID        31311f
+
+    VBSM_FD_CFG  "vbfd.conf"
+    VBSM_HSS_HOST "VAR_HSS_HOST"
+    VBSM_HSS_REALM "VAR_HSS_REALM"
+
+    # set VBSM_DISABLE_EPC_DNS 0 - enable DNS,  1 - disable DNS
+    VBSM_DISABLE_EPC_DNS 1
+    VBSM_DISABLE_EIA0 1
+    VBSM_REL_CAP 1
+    VBSM_MME_NAME "vmmestandalone"
+    VBSM_S1C_SCTP_INSTREAMS 10
+    VBSM_S1C_SCTP_OUTSTREAMS 10
+    VBSM_MAX_ENB  2
+    VBSM_NO_OFGUMMEIS 1
+    VBSM_MMECODE  1
+    VBSM_MMEGRPID 1
+    VBSM_NO_OF_TAI 1
+    VBSM_TAI_LIST    {{"{{ 1,2,0,8,0,1,1 }}"}}
+
+    VBSM_SMS_ROUTER_HOST "smsrouter.test3gpp.net"
+    VBSM_SMS_ROUTER_REALM "test3gpp.net"
