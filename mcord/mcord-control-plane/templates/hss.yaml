@@ -17,7 +17,6 @@
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: {{ .Values.namespace }}
   name: hss
 spec:
   selector:
@@ -31,7 +30,6 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  namespace: {{ .Values.namespace }}
   name: hss
   labels:
     app: hss
@@ -43,7 +41,6 @@ spec:
   serviceName: "hss"
   template:
     metadata:
-      namespace: {{ .Values.namespace }}
       labels:
         app: hss
     spec:
@@ -56,10 +53,10 @@ spec:
         - until nslookup cassandra; do echo waiting for cassandra; sleep 2; done;
           sleep 5;
           cqlsh --file /scripts/oai_db.cql cassandra;
-          /scripts/data_provisioning_users.sh 302720100000421 1122334456 apn1 6226194254742F2D67145153602F7C8D 1 cassandra mme-0.mme.{{ .Values.namespace }}.svc.cluster.local mme.{{ .Values.namespace }}.svc.cluster.local;
+          /scripts/data_provisioning_users.sh 302720100000421 1122334456 apn1 6226194254742F2D67145153602F7C8D 1 cassandra mme mme;
           cqlsh -e "use vhss; update users_imsi set opc='D6CAF10C337FD65AC31A18EBACBF5BF9' where imsi='302720100000421';" cassandra;
           cqlsh -e "select imsi,key,opc,sqn from vhss.users_imsi;" cassandra;
-          /scripts/data_provisioning_mme.sh 1 19136246000 mme-0.mme.{{ .Values.namespace }}.svc.cluster.local mme.{{ .Values.namespace }}.svc.cluster.local 1 cassandra;
+          /scripts/data_provisioning_mme.sh 1 19136246000 mme mme 1 cassandra;
           /scripts/data_provisioning_mme.sh 1 19136246000 smsrouter.test3gpp.net test3gpp.net 0  cassandra;
       containers:
       - name: hss
@@ -69,7 +66,7 @@ spec:
           - name: CASSANDRA_ADDR
             value: cassandra
           - name: MME_ADDR
-            value: mme-0.mme.{{ .Values.namespace }}.svc.cluster.local
+            value: mme
         #command: [ "sleep", "3600"]
         resources:
           limits:

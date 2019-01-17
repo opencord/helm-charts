@@ -17,6 +17,9 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+controlplane_hostname: "ngic-cp"
+controlplane_port: 21
+
 ngic_dp:
   images:
     init: "ngick8stesting/c3po-mmeinit"
