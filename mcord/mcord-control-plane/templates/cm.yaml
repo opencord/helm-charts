@@ -16,7 +16,6 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: {{ .Values.namespace }}
   name: ngiccp-config
 data:
   adc_rules.cfg: |
@@ -133,7 +132,11 @@ data:
     APP_ARGS="${S1U} ${SGI} ${WORKERS} ${MISC} ${SPGW_CFG}"
   interface.cfg: |
     [0]
-    dp_comm_ip = ngic-dp-0.ngic-dp.{{ .Values.namespace }}.cluster.global
+    {{ if .Values.multicluster }}
+    dp_comm_ip = ngic-dp-0.ngic-dp.{{ .Release.Name }}.cluster.global
+    {{ else }}
+    dp_comm_ip = ngic-dp-0.ngic-dp.{{ .Release.Name }}.cluster.local
+    {{ end }}
     dp_comm_port = 20
     cp_comm_ip = 127.0.0.1
     cp_comm_port = 21
@@ -441,7 +444,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: {{ .Values.namespace }}
   name: cassandra
 data:
   cassandra-rackdc.properties: |
@@ -452,7 +454,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: {{ .Values.namespace }}
   name: hss
 data:
   acl.conf: |
@@ -695,7 +696,6 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: {{ .Values.namespace }}
   name: mme
 data:
   launch.sh: |

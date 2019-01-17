@@ -35,3 +35,4 @@ ngic_dp:
     hugepage_enabled: true
 
 namespace: epc
+multicluster: false
