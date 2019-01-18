@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "fe461337_6f30f178",
+        "filename": "mcord/mcord-control-plane/templates/cassandra.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-01-18T22:41:51Z",
+      "side": 1,
+      "message": "Wouldn\u0027t be \"cassandra-0\" sufficient?",
+      "parentUuid": "bf1f0981_999dfc13",
+      "range": {
+        "startLine": 62,
+        "startChar": 42,
+        "endLine": 62,
+        "endChar": 65
+      },
+      "revId": "43da2090c0089626cb31becf0e4a4ce4e10dc865",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0b976e8_ed1c7f04",
         "filename": "mcord/mcord-control-plane/templates/cp.yaml",
         "patchSetId": 1
@@ -84,6 +108,30 @@
       "side": 1,
       "message": "I changed it to multiple lines for make it clear, I think it is easier to read.",
       "parentUuid": "c0b976e8_ed1c7f04",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 53
+      },
+      "revId": "43da2090c0089626cb31becf0e4a4ce4e10dc865",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ca615c7b_e89d44c9",
+        "filename": "mcord/mcord-control-plane/templates/cp.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-01-18T22:41:51Z",
+      "side": 1,
+      "message": "Agree on the multiple line, I was wondering if it works that way, or we need a \"-\" before each argument",
+      "parentUuid": "59cad36d_a47b6445",
       "range": {
         "startLine": 67,
         "startChar": 8,
