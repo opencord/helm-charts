@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8bfa897e_6e229738",
+        "filename": "mcord/mcord-control-plane/templates/cp.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-01-18T01:04:51Z",
+      "side": 1,
+      "message": "I would parametrize all of the DNS values",
+      "range": {
+        "startLine": 71,
+        "startChar": 10,
+        "endLine": 71,
+        "endChar": 20
+      },
+      "revId": "b3409b8d2a2946d937993f6eed83d2f0ad8b8bf3",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "85588913_c38fe5a0",
+        "filename": "mcord/mcord-control-plane/templates/hss.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-01-18T01:04:51Z",
+      "side": 1,
+      "message": "I would parametrize all of the DNS values",
+      "range": {
+        "startLine": 56,
+        "startChar": 127,
+        "endLine": 56,
+        "endChar": 130
+      },
+      "revId": "b3409b8d2a2946d937993f6eed83d2f0ad8b8bf3",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52319908_a584604d",
+        "filename": "mcord/mcord-control-plane/templates/mme.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-01-18T01:04:51Z",
+      "side": 1,
+      "message": "I would parametrize all of the DNS values",
+      "range": {
+        "startLine": 73,
+        "startChar": 19,
+        "endLine": 73,
+        "endChar": 26
+      },
+      "revId": "b3409b8d2a2946d937993f6eed83d2f0ad8b8bf3",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cbf7621f_1bdbf645",
+        "filename": "mcord/mcord-control-plane/templates/mme.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-01-18T01:04:51Z",
+      "side": 1,
+      "message": "I would parametrize all of the DNS values",
+      "range": {
+        "startLine": 83,
+        "startChar": 19,
+        "endLine": 83,
+        "endChar": 22
+      },
+      "revId": "b3409b8d2a2946d937993f6eed83d2f0ad8b8bf3",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
