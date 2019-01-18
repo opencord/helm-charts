@@ -59,7 +59,7 @@ spec:
           - name: HEAP_NEWSIZE
             value: 100M
           - name: CASSANDRA_SEEDS
-            value: "cassandra-0.cassandra.{{ .Release.Name }}.svc.cluster.local"
+            value: "{{ .Values.hssdb_hostname }}-0"
           - name: CASSANDRA_CLUSTER_NAME
             value: "HSS Cluster"
           - name: CASSANDRA_RPC_ADDRESS

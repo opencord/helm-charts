@@ -63,12 +63,15 @@ spec:
         image: {{ .Values.ngic_cp.images.cp }}
         imagePullPolicy: IfNotPresent
         stdin: true
-        command: [ "bash",  "-cx", ". /opt/ngic/config/cp_config.cfg; sleep 20; ./ngic_controlplane  $EAL_ARGS -- $APP_ARGS"]
-        #command: ["sleep", "3600"]
+        command: [ "bash",  "-xc"]
+        args:
+        - . /opt/ngic/config/cp_config.cfg;
+        - sleep 20;
+        - ./ngic_controlplane $EAL_ARGS -- $APP_ARGS;
         tty: true
         env:
         - name: MME_S11_IP
-          value: mme
+          value: {{ .Values.mme_hostname }}
         #- name: SGW_S1U_IP  # for now,this will be in our own pod
         #  value: "5.5.5.5"
         - name: APN

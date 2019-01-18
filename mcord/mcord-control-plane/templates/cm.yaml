@@ -132,8 +132,8 @@ data:
     APP_ARGS="${S1U} ${SGI} ${WORKERS} ${MISC} ${SPGW_CFG}"
   interface.cfg: |
     [0]
-    dp_comm_ip = {{ .Values.dataplane_hostname }}
-    dp_comm_port = {{ .Values.dataplane_port }}
+    dp_comm_ip = {{ .Values.spgwu_hostname }}
+    dp_comm_port = {{ .Values.spgwu_port }}
     cp_comm_ip = 127.0.0.1
     cp_comm_port = 21
   meter_profile.cfg: |
