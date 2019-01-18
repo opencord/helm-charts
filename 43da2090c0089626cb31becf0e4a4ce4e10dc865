@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "bf1f0981_999dfc13",
+        "filename": "mcord/mcord-control-plane/templates/cassandra.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-01-18T21:51:22Z",
+      "side": 1,
+      "message": "Because of this container\u0027s program needs. `CASSANDRA_SEEDS` variable needs able to be resolved by `nslookup`, so I put namespace at here.\n\nIf we put `.Release.Name` here, it raised following error message:\nSeed provider couldn\u0027t lookup host cassandra-0.cassandra.mcord-control-plane.svc.cluster.local",
+      "parentUuid": "2fe0b2db_a0fbf3f5",
+      "range": {
+        "startLine": 62,
+        "startChar": 42,
+        "endLine": 62,
+        "endChar": 65
+      },
+      "revId": "43da2090c0089626cb31becf0e4a4ce4e10dc865",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0b976e8_ed1c7f04",
         "filename": "mcord/mcord-control-plane/templates/cp.yaml",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-01-18T21:43:01Z",
       "side": 1,
       "message": "do we need this format?\n\n- . /opt/ngic/config/cp_config.cfg;\n- sleep 20;\n- ./ngic_controlplane $EAL_ARGS -- $APP_ARGS;",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 53
+      },
+      "revId": "43da2090c0089626cb31becf0e4a4ce4e10dc865",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "59cad36d_a47b6445",
+        "filename": "mcord/mcord-control-plane/templates/cp.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-01-18T21:51:22Z",
+      "side": 1,
+      "message": "I changed it to multiple lines for make it clear, I think it is easier to read.",
+      "parentUuid": "c0b976e8_ed1c7f04",
       "range": {
         "startLine": 67,
         "startChar": 8,
