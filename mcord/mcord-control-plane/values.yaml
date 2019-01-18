@@ -17,8 +17,12 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-dataplane_hostname: "ngic-dp"
-dataplane_port: 20
+hssdb_hostname: "cassandra"
+hss_hostname: "hss"
+mme_hostname: "mme"
+spgwc_hostname: "ngic-cp"
+spgwu_hostname: "ngic-dp"
+spgwu_port: 20
 
 hss:
   # TODO: init UE's IMEI to DB?
