@@ -22,23 +22,20 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: 'xosproject/tosca-loader'
-  tag: '{{ .Chart.AppVersion }}'
-  pullPolicy: 'Always'
-
-xosAdminUser: &adminuser "admin@opencord.org"
-xosAdminPassword: &adminpass "letmein"
-
-cordSiteName:  &site "mysite"
-cordDeploymentName: &deployment "mydeployment"
-
-keystoneAdminUser: "admin"
-keystoneAdminPassword: "password"
-keystoneAdminTenant: "admin"
-keystoneDomain: "Default"
+images:
+  tosca_loader:
+    repository: 'xosproject/tosca-loader'
+    tag: '{{ .Chart.AppVersion }}'
+    pullPolicy: 'Always'
 
 global:
-  proxySshEnabled: true
-  proxySshUser: root
-  registry: ''
+  registry: ""
+
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"
+
+cordSiteName: "mysite"
+cordDeploymentName: "mydeployment"
+
+onosRestService: "onos-ui.default.svc.cluster.local"
+kafkaService: "cord-kafka.default.svc.cluster.local:9092"

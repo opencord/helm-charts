@@ -35,8 +35,8 @@ spec:
       restartPolicy: OnFailure
       containers:
         - name: {{ .Chart.Name }}-tosca-loader
-          image: {{ .Values.global.registry }}{{ .Values.image.repository }}:{{ tpl .Values.image.tag . }}
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: {{ .Values.global.registry }}{{ .Values.images.tosca_loader.repository }}:{{ tpl .Values.images.tosca_loader.tag . }}
+          imagePullPolicy: {{ .Values.images.tosca_loader.pullPolicy }}
           env:
             - name: XOS_USER
               value: {{ .Values.xosAdminUser }}

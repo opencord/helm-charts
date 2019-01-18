@@ -31,6 +31,7 @@ spec:
           image: {{ .Values.global.registry }}{{ .Values.images.xos_core.repository }}:{{ tpl .Values.images.xos_core.tag . }}
           imagePullPolicy: {{ .Values.images.xos_core.pullPolicy }}
           command: ["/bin/bash", "-c", "cd coreapi; ./start_coreapi.sh"]
+          # command: ["/bin/bash", "-c", "sleep 86400"]
           ports:
             - containerPort: 50051
               port: 50051
