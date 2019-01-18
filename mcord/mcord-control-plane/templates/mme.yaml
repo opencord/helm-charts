@@ -61,16 +61,15 @@ spec:
             add:
               - NET_ADMIN
         args:
+        - until nslookup {{ .Values.hss_hostname }}; do echo waiting for hss; sleep 2; done;
         - iptables -A OUTPUT -p sctp --sport {{ .Values.mme.ports.s1ap }} --chunk-types any ABORT -j DROP;
-          until nslookup hss;
-          do echo waiting for hss; sleep 2; done;
       containers:
       - name: mme
         image: {{ .Values.mme.images.mme }}
         imagePullPolicy: Always
         env:
           - name: SGW_S11_IP
-            value: ngic-cp
+            value: {{ .Values.spgwc_hostname }}
           - name: MME_ETH0_IP
             valueFrom:
               fieldRef:
@@ -80,11 +79,11 @@ spec:
           - name: ENB_S1AP_PORT
             value: "{{ .Values.mme.ports.s1ap }}"   #ng4t uses 32767
           - name: CONNECT_PEER
-            value: hss
+            value: {{ .Values.hss_hostname }}
           - name: VAR_HSS_REALM
-            value: hss
+            value: {{ .Values.hss_hostname }}
           - name: HSS_S6A_IP
-            value: hss
+            value: {{ .Values.hss_hostname }}
           - name: HSS_PORT
             value: "{{ .Values.mme.ports.s6a }}"
         stdin: true

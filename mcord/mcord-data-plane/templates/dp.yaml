@@ -77,8 +77,11 @@ spec:
               containerName: ngic
               resource: limits.memory
               divisor: 1Mi
-        command: [ "bash",  "-cx", "ifconfig -a; . /opt/ngic/config/dp_config.cfg ; ./ngic_dataplane  $EAL_ARGS -- $APP_ARGS"]
-        #command: ["sleep", "3600"]
+        command: [ "bash",  "-xc"]
+        args:
+        - ifconfig -a; ifconfig lo down;
+        - . /opt/ngic/config/dp_config.cfg;
+        - ./ngic_dataplane $EAL_ARGS -- $APP_ARGS
         volumeMounts:
         - name: config-volume
           mountPath: /opt/ngic/config
