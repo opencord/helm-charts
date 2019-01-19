@@ -67,8 +67,8 @@ spec:
         command: [ "bash",  "-xc"]
         args:
         - . /opt/ngic/config/cp_config.cfg;
-        - sleep 20;
-        - ./ngic_controlplane $EAL_ARGS -- $APP_ARGS;
+          sleep 20;
+          ./ngic_controlplane $EAL_ARGS -- $APP_ARGS;
         tty: true
         env:
         - name: MME_S11_IP

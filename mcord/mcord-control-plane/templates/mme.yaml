@@ -63,7 +63,7 @@ spec:
               - NET_ADMIN
         args:
         - until nslookup {{ .Values.hss_hostname }}; do echo waiting for hss; sleep 2; done;
-        - iptables -A OUTPUT -p sctp --sport {{ .Values.mme.ports.s1ap }} --chunk-types any ABORT -j DROP;
+          iptables -A OUTPUT -p sctp --sport {{ .Values.mme.ports.s1ap }} --chunk-types any ABORT -j DROP;
       containers:
       - name: mme
         image: {{ .Values.mme.images.mme }}

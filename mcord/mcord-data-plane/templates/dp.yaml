@@ -80,9 +80,10 @@ spec:
               divisor: 1Mi
         command: [ "bash",  "-xc"]
         args:
-        - ifconfig -a; ifconfig lo down;
-        - . /opt/ngic/config/dp_config.cfg;
-        - ./ngic_dataplane $EAL_ARGS -- $APP_ARGS
+        - ifconfig -a;
+          ifconfig lo down;
+          . /opt/ngic/config/dp_config.cfg;
+          ./ngic_dataplane $EAL_ARGS -- $APP_ARGS
         volumeMounts:
         - name: config-volume
           mountPath: /opt/ngic/config
