@@ -45,6 +45,10 @@ images:
     repository: 'voltha/voltha-bbsim'
     tag: '{{ .Chart.AppVersion }}'
     pullPolicy: 'Always'
+  xos_api_tester:
+    repository: 'xosproject/xos-api-tester'
+    tag: 'master'
+    pullPolicy: 'Always'
 
 global:
   registry: ''
