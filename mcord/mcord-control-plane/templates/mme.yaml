@@ -22,7 +22,7 @@ metadata:
 spec:
   selector:
     app: mme
-  type: NodePort
+  clusterIP: None
   ports:
   - name: s11
     port: {{ .Values.mme.ports.s11 }}
