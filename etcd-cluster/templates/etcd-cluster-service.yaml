@@ -1,3 +1,4 @@
+{{- if .Values.etcdNodePort -}}
 ---
 # Copyright 2017-present Open Networking Foundation
 #
@@ -13,8 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-dependencies:
-- name: etcd-cluster
-  version: 0.1.2
-  repository: file://../etcd-cluster
-  condition: etcd.cluster.enabled
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.clusterName }}-external
+spec:
+  type: NodePort
+  ports:
+    - port: 2379
+      targetPort: 2379
+      nodePort: {{ .Values.etcdNodePort }}
+      protocol: TCP
+  selector:
+    app: "etcd"
+{{- end -}}

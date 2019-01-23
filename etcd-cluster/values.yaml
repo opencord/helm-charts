@@ -21,6 +21,10 @@ clusterSize: 3
 memoryLimit: 1024Mi
 autoCompactionRetention: "12"
 
+# expose the etcd-cluster as a nodePort
+# etcdNodePort: 32379
+etcdNodePort: ""
+
 images:
   etcd:
     repository: "quay.io/coreos/etcd"
