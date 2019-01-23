@@ -22,3 +22,10 @@ heritage: {{ .Release.Service }}
 version: {{ .Chart.Version }}
 {{- end }}
 
+{{- define "xos-db.postgresql-conf" }}
+
+huge_pages = off     # on, off, or try
+listen_addresses = '*'
+
+{{- end }}
+
