@@ -17,7 +17,7 @@ apiVersion: v1
 name: seba-services
 description: A Helm chart for XOS's "SEBA" profile
 icon: https://guide.opencord.org/logos/cord.svg
-version: 1.0.2
+version: 1.0.3
 
 # xosproject/tosca-loader version
 appVersion: 1.1.5
