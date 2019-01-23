@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4784a0f3_e8a59d3d",
+        "filename": "xos-db/templates/_helpers.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-01-23T23:32:49Z",
+      "side": 1,
+      "message": "Not sure what this is supposed to mean - maybe link to the issue?",
+      "range": {
+        "startLine": 27,
+        "startChar": 21,
+        "endLine": 27,
+        "endChar": 38
+      },
+      "revId": "05b77e2f78f806ba5b417b627e234f4e16aefa35",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ef6cf6d8_cc162fae",
+        "filename": "xos-db/templates/db-deployment.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-01-23T23:32:49Z",
+      "side": 1,
+      "message": "sample?",
+      "range": {
+        "startLine": 50,
+        "startChar": 68,
+        "endLine": 50,
+        "endChar": 75
+      },
+      "revId": "05b77e2f78f806ba5b417b627e234f4e16aefa35",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
