@@ -22,3 +22,12 @@ heritage: {{ .Release.Service }}
 version: {{ .Chart.Version }}
 {{- end }}
 
+{{- define "xos-db.postgresql-conf" }}
+
+listen_addresses = '*'
+
+# as per https://github.com/kubernetes/kubernetes/issues/71233
+huge_pages = off     # on, off, or try
+
+{{- end }}
+
