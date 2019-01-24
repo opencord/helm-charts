@@ -436,4 +436,13 @@ data:
     PROTOCOL = 17
     LOCAL_LOW_LIMIT_PORT = 17000
     LOCAL_HIGH_LIMIT_PORT = 17010
-
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: l3-config
+data:
+  bootstrap.txt: |
+    redis.hostname:{{ .Values.accelleran_hostname }}
+    redis.port:6379
+    instance.filter:{{ .Values.accelleran.inst_id }}
