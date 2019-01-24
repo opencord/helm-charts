@@ -35,17 +35,17 @@ spec:
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-  name: sgi-net
+  name: bbu-net
   annotations:
     k8s.v1.cni.cncf.io/resourceName: intel.com/sriov
 spec:
   config: '{
     "type": "sriov",
-    "name": "sgi-net",
+    "name": "bbu-net",
     "ipam": {
         "type": "centralip",
         "ipType": "cluster",
         "etcdURL": "http://node1:32379",
-        "network": "13.1.1.0/24"
+        "network": "116.0.0.0/24"
     }
 }'
