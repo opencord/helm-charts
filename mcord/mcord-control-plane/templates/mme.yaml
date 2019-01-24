@@ -80,11 +80,11 @@ spec:
           - name: ENB_S1AP_PORT
             value: "{{ .Values.mme.ports.s1ap }}"   #ng4t uses 32767
           - name: CONNECT_PEER
-            value: {{ .Values.hss_hostname }}
+            value: hss-0.{{ .Values.hss_hostname }}.{{ .Values.namespace }}.svc.cluster.local
           - name: VAR_HSS_REALM
-            value: {{ .Values.hss_hostname }}
+            value: {{ .Values.hss_hostname }}.{{ .Values.namespace }}.svc.cluster.local
           - name: HSS_S6A_IP
-            value: {{ .Values.hss_hostname }}
+            value: hss-0.{{ .Values.hss_hostname }}.{{ .Values.namespace }}.svc.cluster.local
           - name: HSS_PORT
             value: "{{ .Values.mme.ports.s6a }}"
         stdin: true
