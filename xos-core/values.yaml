@@ -27,8 +27,8 @@ images:
     pullPolicy: 'Always'
 
   xos_tosca:
-    repository: '10.90.0.101:30500/xosproject/xos-tosca'
-    tag: 'candidate'
+    repository: 'xosproject/xos-tosca'
+    tag: '1.1.6'
     pullPolicy: 'Always'
 
   xos_api_tester:
