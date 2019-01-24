@@ -80,8 +80,8 @@ spec:
               divisor: 1Mi
         command: [ "bash",  "-xc"]
         args:
-        - ifconfig -a;
-          ifconfig lo down;
+        - ifconfig lo down;
+          ifconfig -a;
           . /opt/ngic/config/dp_config.cfg;
           ./ngic_dataplane $EAL_ARGS -- $APP_ARGS
         volumeMounts:
@@ -101,7 +101,9 @@ spec:
         {{- end}}
         resources:
           limits:
+            {{- if .Values.ngic_dp.config.hugepage_enabled}}
             hugepages-1Gi: {{ .Values.ngic_dp.resources.hugepage }}
+            {{- end}}
             cpu: {{ .Values.ngic_dp.resources.cpu }}
             memory: {{ .Values.ngic_dp.resources.mem }}
             intel.com/sriov: '2'
@@ -118,7 +120,7 @@ spec:
         - name: config-volume
           configMap:
             name: ngicdp-config
-        {{- if .Values.ngic_dp.config.hugepage_enabled }}
+        {{- if .Values.ngic_dp.config.hugepage_enabled}}
         - name: hugepage
           emptyDir:
             medium: HugePages
