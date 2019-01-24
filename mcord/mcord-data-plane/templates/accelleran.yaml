@@ -1,0 +1,122 @@
+---
+# Copyright 2018-present Open Networking Foundation
+# Copyright 2018 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: accelleran
+spec:
+  selector:
+    app: accelleran
+  clusterIP: None
+  ports:
+    - name: s1ap
+      port: {{ .Values.accelleran.ports.s1ap }}
+      protocol: TCP
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: accelleran
+  labels:
+    app: accelleran
+spec:
+  replicas: {{ .Values.accelleran.replicas }}
+  selector:
+    matchLabels:
+      app: accelleran
+  serviceName: "accelleran"
+  template:
+    metadata:
+      labels:
+        app: accelleran
+    spec:
+      initContainers:
+      - name: init-iptables
+        image: {{ .Values.accelleran.images.init }}
+        command: [ "sh", "-c"]
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+        args:
+        - iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP;
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: nats
+        image: {{ .Values.accelleran.images.nats }}
+        imagePullPolicy: IfNotPresent
+        stdin: true
+        tty: true
+        env:
+        - name: NATS_SERVICE_NAME
+          value: {{ .Values.accelleran.nats_service_name }}
+        command: [ "sh", "-c"]
+        args:
+        - gnatsd -DV -c /etc/gnatsd.conf;
+        resources:
+          limits:
+            cpu: {{ .Values.accelleran.resources.cpu }}
+            memory: {{ .Values.accelleran.resources.mem }}
+            intel.com/sriov: '2'
+          capabilities:
+            add:
+            - NET_ADMIN
+            - IPC_LOCK
+      - name: redis
+        image: {{ .Values.accelleran.images.redis }}
+        imagePullPolicy: IfNotPresent
+        stdin: true
+        tty: true
+        command: [ "sh", "-c"]
+        args:
+        - /usr/local/bin/redis-server;
+          sleep 5;
+          redis-cli -h localhost -p 6379 set NATS_SERVICE_URL "nats://{{ .Values.accelleran_hostname }}:4222";
+        resources:
+          limits:
+            cpu: {{ .Values.accelleran.resources.cpu }}
+            memory: {{ .Values.accelleran.resources.mem }}
+            intel.com/sriov: '2'
+          capabilities:
+            add:
+            - NET_ADMIN
+            - IPC_LOCK
+      - name: bbu
+        image: {{ .Values.accelleran.images.bbu }}
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: HOST_IP
+            value: {{ .Values.accelleran_hostname }}
+        stdin: true
+        tty: true
+        commands: ["sh", "-c"]
+        args:
+        - sleep 3600;
+        - sed -i '/^redis.hostname/s/:.*/:{{ .Values.redis_hostname }}/' /mnt/app/bootstrap.txt;
+        - sed -i '^instance.filter/s/:.*/:{{ .Values.accelleran.inst_id }}' /mnt/app/bootstrap.txt;
+        - /l3/l3start;
+        resources:
+          limits:
+            cpu: {{ .Values.accelleran.resources.cpu }}
+            memory: {{ .Values.accelleran.resources.mem }}
+            intel.com/sriov: '2'
+          capabilities:
+            add:
+            - NET_ADMIN
+            - IPC_LOCK
