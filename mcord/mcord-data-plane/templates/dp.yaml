@@ -101,7 +101,9 @@ spec:
         {{- end}}
         resources:
           limits:
+            {{- if .Values.ngic_dp.config.dpdk_enabled}}
             hugepages-1Gi: {{ .Values.ngic_dp.resources.hugepage }}
+            {{- end}}
             cpu: {{ .Values.ngic_dp.resources.cpu }}
             memory: {{ .Values.ngic_dp.resources.mem }}
             intel.com/sriov: '2'
