@@ -46,6 +46,24 @@ spec:
         "type": "centralip",
         "ipType": "cluster",
         "etcdURL": "http://node1:32379",
-        "network": "13.1.1.0/24"
+        "network": "13.0.0.0/24"
+    }
+}'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: bbu-net
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov
+spec:
+  config: '{
+    "type": "sriov",
+    "name": "bbu-net",
+    "ipam": {
+        "type": "centralip",
+        "ipType": "cluster",
+        "etcdURL": "http://node1:32379",
+        "network": "116.0.0.0/24"
     }
 }'

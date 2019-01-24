@@ -1,0 +1,141 @@
+---
+# Copyright 2018-present Open Networking Foundation
+# Copyright 2018 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: accelleran
+spec:
+  selector:
+    app: accelleran
+  clusterIP: None
+  ports:
+    - name: s1ap
+      port: {{ .Values.accelleran.ports.s1ap }}
+      protocol: TCP
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: accelleran
+  labels:
+    app: accelleran
+spec:
+  replicas: {{ .Values.accelleran.replicas }}
+  selector:
+    matchLabels:
+      app: accelleran
+  serviceName: "accelleran"
+  template:
+    metadata:
+      labels:
+        app: accelleran
+      annotations:
+        k8s.v1.cni.cncf.io/networks: '[
+          { "name": "bbu-net", "interface": "vbbu-net", "namespace": "default" }
+        ]'
+    spec:
+      initContainers:
+      - name: init-iptables
+        image: {{ .Values.accelleran.images.init }}
+        command: [ "sh", "-c"]
+        args:
+        - iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP;
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: nats
+        image: {{ .Values.accelleran.images.nats }}
+        imagePullPolicy: IfNotPresent
+        stdin: true
+        tty: true
+        env:
+        - name: NATS_SERVICE_NAME
+          value: {{ .Values.accelleran.nats_service_name }}
+        command: [ "sh", "-c"]
+        args:
+        - gnatsd -DV -c /etc/gnatsd.conf;
+        resources:
+          limits:
+            cpu: {{ .Values.accelleran.resources.cpu }}
+            memory: {{ .Values.accelleran.resources.mem }}
+            intel.com/sriov: '2'
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - IPC_LOCK
+      - name: redis
+        image: {{ .Values.accelleran.images.redis }}
+        imagePullPolicy: IfNotPresent
+        stdin: true
+        tty: true
+        command: ["sh", "-c"]
+        args:
+        # FIXME: Redis can't support with dns resolution, can't set hostname at here.
+        - (sleep 5; redis-cli -h localhost -p 6379 set NATS_SERVICE_URL "nat://{{ .Values.accelleran_hostname }}:4222";) &
+          /usr/local/bin/redis-server
+        resources:
+          limits:
+            cpu: {{ .Values.accelleran.resources.cpu }}
+            memory: {{ .Values.accelleran.resources.mem }}
+            intel.com/sriov: '2'
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - IPC_LOCK
+      - name: bbu
+        image: {{ .Values.accelleran.images.bbu }}
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: HOST_IP
+            value: {{ .Values.accelleran_hostname }}
+        stdin: true
+        tty: true
+        command: ["sh", "-c"]
+        args:
+        - sqlite3 /mnt/app/datastoreRemRw.db "update FapServiceFapControlLteGateway_S1SigLinkServerListList set S1SigLinkServerList='{{ .Values.accelleran_hostname }}';";
+          sleep 10;
+          /l3/l3start;
+        volumeMounts:
+        - name: bbu-config
+          mountPath: /mnt/app/bootstrap.txt
+          subPath: bootstrap.txt
+        resources:
+          limits:
+            cpu: {{ .Values.accelleran.resources.cpu }}
+            memory: {{ .Values.accelleran.resources.mem }}
+            intel.com/sriov: '2'
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            - IPC_LOCK
+            - SYS_NICE
+      volumes:
+        - name: bbu-config
+          configMap:
+            name: l3-config
+            items:
+              - key: bootstrap.txt
+                path: bootstrap.txt
+

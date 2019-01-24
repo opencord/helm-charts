@@ -66,15 +66,15 @@ spec:
         stdin: true
         command: [ "bash",  "-xc"]
         args:
-        - . /opt/ngic/config/cp_config.cfg;
+        - export HOSTIP=$(ip route get 1 | awk '{print $NF;exit}');
+          echo "$HOSTIP" > /opt/ngic/config/shared/SGW_S1U_IP;
+          . /opt/ngic/config/cp_config.cfg;
           sleep 20;
           ./ngic_controlplane $EAL_ARGS -- $APP_ARGS;
         tty: true
         env:
         - name: MME_S11_IP
           value: {{ .Values.mme_hostname }}
-        #- name: SGW_S1U_IP  # for now,this will be in our own pod
-        #  value: "5.5.5.5"
         - name: APN
           value: {{ .Values.ngic_cp.config.apn }}
         - name: IP_POOL_IP
