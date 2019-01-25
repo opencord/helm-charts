@@ -4,6 +4,9 @@ chart_repo
 # lockfiles for requirements.yaml for dependent charts
 requirements.lock
 
+# child repos (defined in the repo manifest)
+macro/*
+
 # ignore dependent chart dirs
 xos-core/charts
 voltha/charts
