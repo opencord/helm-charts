@@ -21,8 +21,10 @@ metadata:
 data:
   010-onos-service.yaml: |
 {{ include "mcord.onosTosca" .Values | indent 4 }}
+{{- if .Values.fabric.enabled }}
   020-fabric-service.yaml: |
 {{ include "fabric.serviceTosca" .Values.fabric | indent 4 }}
+{{- end }}
   030-fixtures.yaml: |
 {{ include "mcord.fixtureTosca" . | indent 4 }}
   040-progran-service.yaml: |
