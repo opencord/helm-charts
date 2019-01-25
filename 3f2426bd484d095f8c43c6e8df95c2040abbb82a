@@ -70,6 +70,30 @@
       "revId": "3f2426bd484d095f8c43c6e8df95c2040abbb82a",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8fc48640_5ef322da",
+        "filename": "mcord/cni-config/03-network-definition.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-01-25T18:30:37Z",
+      "side": 0,
+      "message": "Since SPGW-U\u0027s SGI only needs to communicate with CDN-LOCAL in the same cluster,  I think SPGW-U sgi interface doesn\u0027t need to be SR-IOV interface.\nExcept for accelerated traffic, the only reason to use SR-IOV is retrieving traffic from fabric. And we don\u0027t need to accelerate traffic if they are in the same cluster.",
+      "parentUuid": "718cf592_077543ee",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 15
+      },
+      "revId": "3f2426bd484d095f8c43c6e8df95c2040abbb82a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
