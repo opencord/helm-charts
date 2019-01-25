@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b016e8a7_4512fd55",
+        "filename": "mcord/mcord-data-plane/templates/accelleran.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-01-25T18:30:37Z",
+      "side": 1,
+      "message": "TCP works here, but we can modify to SCTP (the extra work needs is rebuilding the cluster. Because we need to enable SCTP support before booting the cluster.",
+      "parentUuid": "647976e9_f8685d5d",
+      "range": {
+        "startLine": 29,
+        "startChar": 16,
+        "endLine": 29,
+        "endChar": 19
+      },
+      "revId": "c08ef31eeedc63cb6680950215cfb1783ea9cd7a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "992dd76b_212f4abb",
         "filename": "mcord/mcord-data-plane/templates/accelleran.yaml",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2019-01-25T03:33:30Z",
       "side": 1,
       "message": "Can this be mounted as a configmap?",
+      "range": {
+        "startLine": 111,
+        "startChar": 73,
+        "endLine": 111,
+        "endChar": 95
+      },
+      "revId": "c08ef31eeedc63cb6680950215cfb1783ea9cd7a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c62a97e9_ad80a2aa",
+        "filename": "mcord/mcord-data-plane/templates/accelleran.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-01-25T18:30:37Z",
+      "side": 1,
+      "message": "Yes, but we still have database files in the same directory, so that is the reason I decided to put them together in container image and use `sed` to modify it.",
+      "parentUuid": "992dd76b_212f4abb",
       "range": {
         "startLine": 111,
         "startChar": 73,
