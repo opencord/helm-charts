@@ -46,6 +46,30 @@
       "revId": "3f2426bd484d095f8c43c6e8df95c2040abbb82a",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "718cf592_077543ee",
+        "filename": "mcord/cni-config/03-network-definition.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-25T01:58:47Z",
+      "side": 0,
+      "message": "I thought is is( PGWU\u0027s sgi) [sr-iov]\u003c--\u003e [sr-iov] (cdn-local) [calico]\u003c--\u003e [calico] (cdn-remote)\nwe can discuss face to face tomorrow.",
+      "parentUuid": "72ad9bae_f40089c9",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 15
+      },
+      "revId": "3f2426bd484d095f8c43c6e8df95c2040abbb82a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
