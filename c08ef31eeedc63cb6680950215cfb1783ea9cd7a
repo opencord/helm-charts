@@ -22,6 +22,29 @@
       "revId": "c08ef31eeedc63cb6680950215cfb1783ea9cd7a",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "992dd76b_212f4abb",
+        "filename": "mcord/mcord-data-plane/templates/accelleran.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-01-25T03:33:30Z",
+      "side": 1,
+      "message": "Can this be mounted as a configmap?",
+      "range": {
+        "startLine": 111,
+        "startChar": 73,
+        "endLine": 111,
+        "endChar": 95
+      },
+      "revId": "c08ef31eeedc63cb6680950215cfb1783ea9cd7a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
