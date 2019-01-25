@@ -45,3 +45,7 @@ fabric:
   enabled: true
 onos-service:
   enabled: true
+
+# wheter SEBA will be installed on the side or not
+seba:
+  enabled: false
