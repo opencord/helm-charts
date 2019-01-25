@@ -93,6 +93,30 @@
       "revId": "c08ef31eeedc63cb6680950215cfb1783ea9cd7a",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4bb41137_475faeca",
+        "filename": "mcord/mcord-data-plane/templates/accelleran.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-01-25T18:41:48Z",
+      "side": 1,
+      "message": "We can always have the baked in database file and mount only the bootstrap.txt file, but I think this is good for now",
+      "parentUuid": "c62a97e9_ad80a2aa",
+      "range": {
+        "startLine": 111,
+        "startChar": 73,
+        "endLine": 111,
+        "endChar": 95
+      },
+      "revId": "c08ef31eeedc63cb6680950215cfb1783ea9cd7a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
