@@ -57,3 +57,9 @@ kafkaAppVersion: "1.0.0"
 
 onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka.default.svc.cluster.local:9092"
+
+# whether to install or not this shared services
+fabric:
+  enabled: true
+onos-service:
+  enabled: true
