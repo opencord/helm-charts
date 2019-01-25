@@ -29,7 +29,9 @@ data:
 {{ include "fabric-crossconnect.serviceTosca" (index .Values "fabric-crossconnect") | indent 4 }}
   061-onos-service.yaml: |
 {{ include "seba-services.onosTosca" .Values | indent 4 }}
+{{- if .Values.fabric.enabled }}
   070-fabric-service.yaml: |
 {{ include "fabric.serviceTosca" .Values.fabric | indent 4 }}
+{{- end }}
   300-service-graph.yaml: |
 {{ include "seba-services.serviceGraphTosca" . | indent 4 }}
