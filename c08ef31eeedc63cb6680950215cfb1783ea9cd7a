@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "647976e9_f8685d5d",
+        "filename": "mcord/mcord-data-plane/templates/accelleran.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-25T01:58:47Z",
+      "side": 1,
+      "message": "does TCP work here or  it should be SCTP?",
+      "range": {
+        "startLine": 29,
+        "startChar": 16,
+        "endLine": 29,
+        "endChar": 19
+      },
+      "revId": "c08ef31eeedc63cb6680950215cfb1783ea9cd7a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
