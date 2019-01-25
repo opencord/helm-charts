@@ -101,8 +101,9 @@ imports:
    - custom_types/progranservice.yaml
    - custom_types/servicegraphconstraint.yaml
    - custom_types/servicedependency.yaml
+   - custom_types/service.yaml
 
-description: Configures the base-openstack service graph
+description: Configures the M-CORD service graph
 
 topology_template:
   node_templates:
@@ -131,6 +132,16 @@ topology_template:
         name: fabric
         must-exist: true
 
+    service#epc-local:
+      type: tosca.nodes.Service
+      properties:
+        name: epc-local
+
+    service#epc-remote:
+      type: tosca.nodes.Service
+      properties:
+        name: epc-remote
+
     mcord_progran:
       type: tosca.nodes.ServiceDependency
       properties:
@@ -141,6 +152,30 @@ topology_template:
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
             node: service#mcord
+            relationship: tosca.relationships.BelongsToOne
+
+    progran_epc_local:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#epc-local
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#progran
+            relationship: tosca.relationships.BelongsToOne
+
+    epc_local_epc_remote:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#epc-remote
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#epc-local
             relationship: tosca.relationships.BelongsToOne
 
     service_dependency#onos-fabric_fabric:
@@ -158,6 +193,10 @@ topology_template:
     constraints:
       type: tosca.nodes.ServiceGraphConstraint
       properties:
-        constraints: '[ ["mcord", null, "onos"], ["progran", null, "fabric"] ]'
+{{- if .Values.seba.enabled }}
+        constraints: '[ ["mcord", null, "onos"], ["progran", null, "fabric"], ["epc-local", null, null] ["epc-remote", null, null] ]'
+{{ else }}
+        constraints: '[ ["mcord", "rcord", null], ["progran", "volt", "att-workflow-driver"], ["epc-local", "fabric-crossconnect", "onos"], ["epc-remote", null, "fabric"] ]'
+{{- end -}}
 {{- end -}}
 
