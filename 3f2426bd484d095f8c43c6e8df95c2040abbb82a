@@ -22,6 +22,30 @@
       "revId": "3f2426bd484d095f8c43c6e8df95c2040abbb82a",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72ad9bae_f40089c9",
+        "filename": "mcord/cni-config/03-network-definition.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-01-25T00:33:26Z",
+      "side": 0,
+      "message": "That is because we use kubernetes and calico, so each container has the connectivity to the internet via calico interface.\n\nAnd CDN doesn\u0027t have SR-IOV interface, SPGW-U uses calico interface to talk to CDN, so we don\u0027t need sgi-net anymore.",
+      "parentUuid": "a66a3511_a33915be",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 15
+      },
+      "revId": "3f2426bd484d095f8c43c6e8df95c2040abbb82a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
