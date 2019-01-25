@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a66a3511_a33915be",
+        "filename": "mcord/cni-config/03-network-definition.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-01-25T00:24:30Z",
+      "side": 0,
+      "message": "I think we still need the sgi-net, right? for the dp connect to CDN or internet?",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 38,
+        "endChar": 15
+      },
+      "revId": "3f2426bd484d095f8c43c6e8df95c2040abbb82a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
