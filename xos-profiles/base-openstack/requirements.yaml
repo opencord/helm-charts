@@ -15,11 +15,11 @@
 
 dependencies:
 - name: onos-service
-  version: 2.0.7
+  version: 2.0.12
   repository: file://../../xos-services/onos-service
 - name: openstack
-  version: 1.1.1
+  version: 1.1.5
   repository: file://../../xos-services/openstack
 - name: vtn-service
-  version: 1.0.2
+  version: 1.0.4
   repository: file://../../xos-services/vtn-service

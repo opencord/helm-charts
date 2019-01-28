@@ -17,5 +17,5 @@ description: A Helm chart for XOS's "onos-service" service, which configures ONO
 name: onos-service
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 2.0.7
-appVersion: 2.0.7
+version: 2.0.12
+appVersion: 2.0.12

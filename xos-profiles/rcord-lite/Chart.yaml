@@ -16,7 +16,7 @@
 name: rcord-lite
 description: A Helm chart for XOS's "rcord-lite" profile
 icon: https://guide.opencord.org/logos/cord.svg
-version: 1.0.3
+version: 1.0.4
 
 # xosproject/tosca-loader version
-appVersion: 1.1.5
+appVersion: 1.1.7
