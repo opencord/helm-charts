@@ -28,7 +28,7 @@ images:
 
   xos_tosca:
     repository: 'xosproject/xos-tosca'
-    tag: '1.1.6'
+    tag: '1.1.7'
     pullPolicy: 'Always'
 
   xos_api_tester:
