@@ -1,0 +1,7 @@
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }}.
+
+This helm chart will perform test against a running installation of XOS.
+
+To view the result of the tests check the logs of the container
