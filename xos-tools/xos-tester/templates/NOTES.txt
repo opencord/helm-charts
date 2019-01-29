@@ -1,0 +1,11 @@
+Thank you for installing {{ .Chart.Name }}.
+
+Your release is named {{ .Release.Name }}.
+
+You can use this container to listen to event on Kafka.
+To do that, exec in the pod and run:
+
+kafkacat -C -b <kafka-service> -t <kafka-topic>
+
+
+
