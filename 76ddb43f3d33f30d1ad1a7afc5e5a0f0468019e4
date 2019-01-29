@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6c413414_80bb78a0",
+        "filename": "workflows/att-workflow/templates/tests/test-attworkflow.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-01-29T15:22:23Z",
+      "side": 1,
+      "message": "Could/should these be parameterized in the values.yaml file?",
+      "range": {
+        "startLine": 36,
+        "startChar": 49,
+        "endLine": 36,
+        "endChar": 110
+      },
+      "revId": "76ddb43f3d33f30d1ad1a7afc5e5a0f0468019e4",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
