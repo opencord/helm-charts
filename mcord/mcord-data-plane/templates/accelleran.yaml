@@ -91,7 +91,7 @@ spec:
         command: ["sh", "-c"]
         args:
         # FIXME: Redis can't support with dns resolution, can't set hostname at here.
-        - (sleep 5; redis-cli -h localhost -p 6379 set NATS_SERVICE_URL "nat://{{ .Values.accelleran_hostname }}:4222";) &
+        - (sleep 5; redis-cli -h localhost -p 6379 set NATS_SERVICE_URL "nat://$(ip route get 116 | awk '{print $NF;exit}'):4222";) &
           /usr/local/bin/redis-server
         resources:
           limits:

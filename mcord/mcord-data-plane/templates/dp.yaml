@@ -81,7 +81,7 @@ spec:
         command: [ "bash",  "-xc"]
         args:
         - ifconfig lo down;
-          ifconfig -a;
+          ifconfig;
           . /opt/ngic/config/dp_config.cfg;
           ./ngic_dataplane $EAL_ARGS -- $APP_ARGS
         volumeMounts:

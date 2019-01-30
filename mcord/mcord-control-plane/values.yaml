@@ -23,6 +23,8 @@ hss_hostname: "hss"
 mme_hostname: "mme"
 spgwc_hostname: "ngic-cp"
 spgwu_hostname: "ngic-dp"
+# Need to get SPGW-U interface IP address to put at here
+spgwu_s1u_ip: "119.0.0.45"
 spgwu_port: 20
 
 hss:
