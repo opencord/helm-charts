@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "12b040e8_214ab68b",
+        "filename": "xos-tools/xos-tester/templates/job.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-01-30T22:37:09Z",
+      "side": 1,
+      "message": "I still need to figure out a way to set this command in the value file so that we can run any test",
+      "range": {
+        "startLine": 38,
+        "startChar": 12,
+        "endLine": 43,
+        "endChar": 62
+      },
+      "revId": "485213f08e5a47b29bbd17157a7dce8d1b114647",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
