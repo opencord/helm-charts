@@ -99,6 +99,7 @@ imports:
    - custom_types/mcordsubscriberservice.yaml
    - custom_types/onosservice.yaml
    - custom_types/progranservice.yaml
+   - custom_types/vrouterservice.yaml
    - custom_types/servicegraphconstraint.yaml
    - custom_types/servicedependency.yaml
    - custom_types/service.yaml
@@ -112,6 +113,12 @@ topology_template:
       type: tosca.nodes.ProgranService
       properties:
         name: progran
+        must-exist: true
+
+    service#vrouter:
+      type: tosca.nodes.VRouterService
+      properties:
+        name: vrouter
         must-exist: true
 
     service#mcord:
@@ -190,13 +197,25 @@ topology_template:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
+    service_dependency#vrouter_fabric:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#vrouter
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#fabric
+            relationship: tosca.relationships.BelongsToOne
+
     constraints:
       type: tosca.nodes.ServiceGraphConstraint
       properties:
 {{- if .Values.seba.enabled }}
         constraints: '[ ["mcord", null, "onos"], ["progran", null, "fabric"], ["epc-local", null, null] ["epc-remote", null, null] ]'
 {{ else }}
-        constraints: '[ ["mcord", "rcord", null], ["progran", "volt", "att-workflow-driver"], ["epc-local", "fabric-crossconnect", "onos"], ["epc-remote", null, "fabric"] ]'
+        constraints: '[ ["mcord", "rcord", null], ["progran", "volt", "att-workflow-driver"], ["epc-local", "fabric-crossconnect", "onos"], ["epc-remote", "vrouter", "fabric"] ]'
 {{- end -}}
 {{- end -}}
 

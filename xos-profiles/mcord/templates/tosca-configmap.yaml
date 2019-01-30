@@ -29,6 +29,8 @@ data:
 {{ include "mcord.fixtureTosca" . | indent 4 }}
   040-progran-service.yaml: |
 {{ include "progran.serviceTosca" .Values.progran | indent 4 }}
+  050-vrouter-service.yaml: |
+{{ include "vrouter.serviceTosca" .Values.vrouter | indent 4 }}
   100-mcord-subscriber-service.yaml: |
 {{ include "mcord-subscriber.serviceTosca" (index .Values "mcord-subscriber") | indent 4 }}
   300-service-graph.yaml: |
