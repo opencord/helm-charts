@@ -22,6 +22,7 @@ redis_hostname: "redis"
 controlplane_hostname: "ngic-cp"
 controlplane_port: 21
 accelleran_hostname: "accelleran"
+cdn_hostname: "cdn"
 
 ngic_dp:
   images:
@@ -53,6 +54,17 @@ accelleran:
   inst_id: "enb_key"
   resources:
     cpu: 3
+    mem: "1Gi"
+
+cdn:
+  images:
+    init: "ngick8stesting/c3po-mmeinit"
+    streaming: "woojoong/mwc-cdn:190128"
+  ports:
+    vlc: 9999
+  replicas: 1
+  resources:
+    cpu: 2
     mem: "1Gi"
 
 namespace: epc
