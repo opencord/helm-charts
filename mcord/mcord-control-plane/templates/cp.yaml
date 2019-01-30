@@ -64,9 +64,9 @@ spec:
         image: {{ .Values.ngic_cp.images.cp }}
         imagePullPolicy: IfNotPresent
         stdin: true
-        command: [ "bash",  "-xc"]
+        command: [ "bash",  "-xc" ]
         args:
-        - export HOSTIP=$(ip route get 1 | awk '{print $NF;exit}');
+        - export HOSTIP="{{ .Values.spgwu_hostname }}";
           echo "$HOSTIP" > /opt/ngic/config/shared/SGW_S1U_IP;
           . /opt/ngic/config/cp_config.cfg;
           sleep 20;
