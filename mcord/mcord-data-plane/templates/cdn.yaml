@@ -1,0 +1,89 @@
+---
+# Copyright 2018-present Open Networking Foundation
+# Copyright 2018 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cdn
+spec:
+  selector:
+    app: cdn
+  clusterIP: None
+  ports:
+    - name: vlc
+      port: {{ .Values.cdn.ports.vlc }}
+      protocol: TCP
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cdn
+  labels:
+    app: cdn
+spec:
+  replicas: {{ .Values.cdn.replicas }}
+  selector:
+    matchLabels:
+      app: cdn
+  serviceName: "cdn"
+  template:
+    metadata:
+      labels:
+        app: cdn
+      annotations:
+        k8s.v1.cni.cncf.io/networks: '[
+          { "name": "sgi-net", "interface": "sgi-net", "namespace": "default" }
+        ]'
+    spec:
+      initContainers:
+      - name: init-iptables
+        image: {{ .Values.cdn.images.init }}
+        command: [ "sh", "-c"]
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+        args:
+        - iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP;
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: streaming
+        image: {{ .Values.cdn.images.streaming }}
+        imagePullPolicy: IfNotPresent
+        stdin: true
+        tty: true
+        command: [ "bash",  "-xc"]
+        args:
+        - sed -i 's/geteuid/getppid/' /usr/bin/vlc;
+          {{- if .Values.cdn.cdn_update}}
+          route add -net 16.0.0.0/8 gw {{ .Values.cdn.spgw_sgi_ip }} dev sgi-net;
+          route add -net 17.0.0.0/8 gw {{ .Values.cdn.spgw_sgi_ip }} dev sgi-net;
+          {{- else}}
+          route add -net 16.0.0.0/8 dev sgi-net;
+          route add -net 17.0.0.0/8 dev sgi-net;
+          {{- end}}
+          cvlc -I dummy bigbuck480.mp4 --sout=#rtp{sdp=rtsp://$(ifconfig | grep -A 1 sgi-net | tail -1 | awk '{print $2}' | awk -F ":" '{print $2}'):9999/video} --sout-keep --loop --ttl 10 --mtu 1200;
+        resources:
+          limits:
+            cpu: {{ .Values.cdn.resources.cpu }}
+            memory: {{ .Values.cdn.resources.mem }}
+            intel.com/sriov: '1'
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
