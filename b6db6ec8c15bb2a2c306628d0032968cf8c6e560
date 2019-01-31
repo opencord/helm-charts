@@ -22,6 +22,30 @@
       "revId": "b6db6ec8c15bb2a2c306628d0032968cf8c6e560",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1b5fb62c_c994bf45",
+        "filename": "mcord/mcord-data-plane/templates/accelleran.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-01-31T21:28:51Z",
+      "side": 1,
+      "message": "for the first one, we can, but we better not to do this. because of this parameter is for vBBU to connect to vMME, we can change the interface to communicate to MME if we want.\nfor the second one, this is the debug parameter, make vBBU has the log for SCTP connection with vMME.",
+      "parentUuid": "a40ef565_e692ce01",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 117,
+        "endChar": 84
+      },
+      "revId": "b6db6ec8c15bb2a2c306628d0032968cf8c6e560",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
