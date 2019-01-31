@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "180e0073_f0c846f8",
+        "filename": "mcord/mcord-data-plane/templates/cdn.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-01-31T03:19:08Z",
+      "side": 1,
+      "message": "Oh, it is my mistake :( The new patch will not have this command.",
+      "parentUuid": "16aa9617_4f590808",
+      "range": {
+        "startLine": 85,
+        "startChar": 12,
+        "endLine": 85,
+        "endChar": 32
+      },
+      "revId": "9595e07dc1932c6a78e53f277b8cf3ab170707a1",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "aa5a6a64_0c997f01",
         "filename": "mcord/mcord-data-plane/values.yaml",
         "patchSetId": 8
@@ -36,6 +60,30 @@
       "writtenOn": "2019-01-31T00:22:39Z",
       "side": 1,
       "message": "We are not able to know SPGW\u0027s sgu-net IP address before we deploy the helm chart. This is not able to work.\n\n(And domain name doesn\u0027t work either, because domain name only can resolve to the major interface in POD, and the major interface is calico)",
+      "range": {
+        "startLine": 64,
+        "startChar": 2,
+        "endLine": 64,
+        "endChar": 27
+      },
+      "revId": "9595e07dc1932c6a78e53f277b8cf3ab170707a1",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e753c7ce_1d3b9dc4",
+        "filename": "mcord/mcord-data-plane/values.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-01-31T03:19:08Z",
+      "side": 1,
+      "message": "You are definitely right. The streaming container cannot grab sgi-net IP address of ngic-dp. This IP address is not used when cdn_update is false, which is default configuration. In cdn.yaml file, you can see that spgw_sgi_ip is not referred. This variable is only referred when cdn_update is true. The reason why I define this value is that we can dynamically set spgw_sgi_ip address when redeploying mcord-data-plane (e.g., helm upgrade --set cdn_update\u003dtrue --set spgw_sgi_ip\u003d13.1.1.84 ...). \n\nOnce we deploy ngic-dp container, the sgi-net IP address for ngic-dp is not changed for a while even after the redeployment. With this feature, we can explicitly assign sgi-net IP address of ngic-dp into spgw_sgi_ip. Then, streaming container has more detailed routing rule (e.g., the results of \"route -n\" command).\n\nIf default commands in cdn.yaml does not work (i.e., ping b/w UE and streaming server does not work due to the routing rule), we initially figure out the sgi-net ip address of ngic-dp. Then, we can redeploy mcord-data-plane with the command \"helm upgrade --set cdn_update\u003dtrue --set spgw_sgi_ip\u003d13.1.1.84 ...\". If the default command works, it would be better.\n\nIf it is still confusing, please text me through slack :).",
+      "parentUuid": "aa5a6a64_0c997f01",
       "range": {
         "startLine": 64,
         "startChar": 2,
