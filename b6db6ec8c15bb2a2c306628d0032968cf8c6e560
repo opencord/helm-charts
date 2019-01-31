@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a40ef565_e692ce01",
+        "filename": "mcord/mcord-data-plane/templates/accelleran.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-01-31T20:42:09Z",
+      "side": 1,
+      "message": "can we fix the \"datastore.db\" instead?",
+      "range": {
+        "startLine": 115,
+        "startChar": 8,
+        "endLine": 117,
+        "endChar": 84
+      },
+      "revId": "b6db6ec8c15bb2a2c306628d0032968cf8c6e560",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
