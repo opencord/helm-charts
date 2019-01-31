@@ -19,6 +19,7 @@
 # Declare variables to be passed into your templates.
 
 accelleran_hostname: "accelleran"
+mme_hostname: "mme"
 
 accelleran:
   images:

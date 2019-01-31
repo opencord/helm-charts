@@ -19,6 +19,8 @@
 # Declare variables to be passed into your templates.
 
 redis_hostname: "redis"
+accelleran_hostname: "accelleran"
+mme_hostname: "mme"
 controlplane_hostname: "ngic-cp"
 controlplane_port: 21
 
@@ -31,12 +33,12 @@ ngic_dp:
   replicas: 1
   resources:
     cpu: 8
-    mem: "1Gi"
+    mem: "8Gi"
     hugepage: "8Gi"
   config:
     rtr_sgi_ip: "13.1.1.254"
     sgi_mask: "255.255.255.0"
     dpdk_enabled: false
-    hugepage_enabled: true
+    hugepage_enabled: false
 
 namespace: epc

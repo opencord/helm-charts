@@ -28,13 +28,16 @@ spec:
       labels:
         name: sriov-device-plugin
     spec:
-      serviceAccountName: sriov-dp
+      serviceAccountName: multus-sa
       initContainers:
-      - name: init-sriov-dp
+      - name: multus
         image: ngick8stesting/aio-cni:k8s-1.13
         command: [ "bash", "-c" ]
         args:
         - cp /tmp/cni/bin/{multus,sriov,centralip} /host/opt/cni/bin/;
+          /tmp/multus/install-multus-conf.sh;
+          /tmp/multus/install-certs.sh;
+          systemctl stop kubelet;
           echo "Restarting crio/containerd, kubelet";
           systemctl daemon-reload;
           systemctl restart containerd;
@@ -45,9 +48,9 @@ spec:
           mountPath: /host/usr/bin
         - name: cni-bin
           mountPath: /host/opt/cni/bin
-        - name: multus-cm
-          mountPath: /tmp/etc/cni/net.d
-        - name: multus-certs
+        - name: multus-sa
+          mountPath: /var/run/secrets/multus/serviceaccount
+        - name: multus-scripts
           mountPath: /tmp/multus
         - name: cni-conf
           mountPath: /host/etc/cni/net.d
@@ -59,10 +62,10 @@ spec:
       - name: sriov-device-plugin
         image: ngick8stesting/aio-cni:k8s-1.13
         imagePullPolicy: IfNotPresent
-        command: [ "/bin/sh", "-c" ]
+        command: [ "sh", "-c" ]
         args:
         - /usr/bin/sriovdp --logtostderr -v 10;
-          echo "exit status $?";
+          sleep infinity;
         volumeMounts:
         - mountPath: /var/lib/kubelet/device-plugins/
           name: devicesock
@@ -83,13 +86,13 @@ spec:
       - name: cni-bin
         hostPath:
           path: /opt/cni/bin
-      - name: multus-cm
-        configMap:
-          name: multus-conf
-      - name: multus-certs
+      - name: multus-sa
+        secret:
+          secretName: multus-sa-secret
+      - name: multus-scripts
         configMap:
           defaultMode: 511
-          name: multus-certs
+          name: multus-scripts
       - name: cni-conf
         hostPath:
           path: /etc/cni/net.d

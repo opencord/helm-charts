@@ -26,6 +26,7 @@ spgwu_hostname: "ngic-dp"
 # Need to get SPGW-U interface IP address to put at here
 spgwu_s1u_ip: "119.0.0.45"
 spgwu_port: 20
+accelleran_hostname: "10.233.65.254"
 
 hss:
   # TODO: init UE's IMEI to DB?
