@@ -29,7 +29,7 @@ spec:
     protocol: UDP
   - name: s1ap
     port: {{ .Values.mme.ports.s1ap }}
-    protocol: TCP
+    protocol: SCTP
   - name: s6a
     port: {{ .Values.mme.ports.s6a }}
     protocol: TCP
@@ -76,7 +76,7 @@ spec:
               fieldRef:
                 fieldPath: status.podIP
           - name: ENB_S1AP_IP
-            value: {{ .Values.mme.enb_s1ap_ip }}
+            value: {{ .Values.accelleran_hostname }}
           - name: ENB_S1AP_PORT
             value: "{{ .Values.mme.ports.s1ap }}"   #ng4t uses 32767
           - name: CONNECT_PEER

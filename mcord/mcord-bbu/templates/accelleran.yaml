@@ -105,15 +105,16 @@ spec:
             - IPC_LOCK
       - name: bbu
         image: {{ .Values.accelleran.images.bbu }}
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
-          - name: HOST_IP
-            value: {{ .Values.accelleran_hostname }}
+          - name: MME_IP
+            value: {{ .Values.mme_hostname }}
         stdin: true
         tty: true
         command: ["sh", "-c"]
         args:
-        - sqlite3 /mnt/app/datastoreRemRw.db "update FapServiceFapControlLteGateway_S1SigLinkServerListList set S1SigLinkServerList='{{ .Values.accelleran_hostname }}';";
+        - sqlite3 /mnt/app/datastore.db "insert into enbSctpSocketInterface ('interfaceName') values ('eth0');";
+          sqlite3 /mnt/app/datastore.db "update logging set severity=7 where id=25;"
           sleep 10;
           /l3/l3start;
         volumeMounts:
