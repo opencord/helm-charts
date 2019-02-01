@@ -21,7 +21,6 @@
 redis_hostname: "redis"
 controlplane_hostname: "ngic-cp"
 controlplane_port: 21
-accelleran_hostname: "accelleran"
 
 ngic_dp:
   images:
@@ -39,20 +38,5 @@ ngic_dp:
     sgi_mask: "255.255.255.0"
     dpdk_enabled: false
     hugepage_enabled: true
-
-accelleran:
-  images:
-    init: "ngick8stesting/c3po-mmeinit"
-    nats: "10.90.0.131:30500/ngick8stesting/vbbu-nats:20190121"
-    redis: "10.90.0.131:30500/ngick8stesting/vbbu-redis:20190121"
-    bbu: "10.90.0.131:30500/accelleran/vran-l3-fdd:onf-dns"
-  ports:
-    s1ap: 36412
-  replicas: 1
-  nats_service_name: "nats-cluster"
-  inst_id: "enb_key"
-  resources:
-    cpu: 3
-    mem: "1Gi"
 
 namespace: epc

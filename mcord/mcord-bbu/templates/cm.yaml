@@ -15,7 +15,11 @@
 # limitations under the License.
 
 apiVersion: v1
-appVersion: "1.0"
-description: A Helm chart for MCORD Data Plane Services
-name: mcord-data-plane
-version: 0.2.0
+kind: ConfigMap
+metadata:
+  name: l3-config
+data:
+  bootstrap.txt: |
+    redis.hostname:{{ .Values.accelleran_hostname }}
+    redis.port:6379
+    instance.filter:{{ .Values.accelleran.inst_id }}

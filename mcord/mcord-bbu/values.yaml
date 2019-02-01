@@ -14,8 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-appVersion: "1.0"
-description: A Helm chart for MCORD Data Plane Services
-name: mcord-data-plane
-version: 0.2.0
+# Default values for mcord-vepc-helm.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+accelleran_hostname: "accelleran"
+
+accelleran:
+  images:
+    init: "ngick8stesting/c3po-mmeinit"
+    nats: "10.90.0.131:30500/ngick8stesting/vbbu-nats:20190121"
+    redis: "10.90.0.131:30500/ngick8stesting/vbbu-redis:20190121"
+    bbu: "10.90.0.131:30500/accelleran/vran-l3-fdd:onf-dns"
+  ports:
+    s1ap: 36412
+  replicas: 1
+  nats_service_name: "nats-cluster"
+  inst_id: "enb_key"
+  resources:
+    cpu: 3
+    mem: "1Gi"
+
+namespace: epc
