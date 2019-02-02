@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "746ab6f1_0d310f7e",
+        "filename": "mcord/mcord-bbu/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-02-02T02:50:11Z",
+      "side": 1,
+      "message": "I would remove the registry from here to use this value file \"https://github.com/opencord/pod-configs/blob/master/kubernetes-configs/onf-mcord-pod1.yml\" but we can do that in another patch",
+      "range": {
+        "startLine": 26,
+        "startChar": 11,
+        "endLine": 26,
+        "endChar": 29
+      },
+      "revId": "927115ce5fd621892fbbf55c6e6d47f6d7adc9c7",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
