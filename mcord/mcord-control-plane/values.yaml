@@ -23,7 +23,7 @@ hss_hostname: "hss"
 mme_hostname: "mme"
 spgwc_hostname: "ngic-cp"
 # If the control plane is installed in a separate cluster, this value needs to be overridden
-spgwu_hostname: "ngic-dp"
+spgwu_s11_ip: "ngic-dp"
 # The spgwu_s1u_ip changes everytime, you can get it with this command:
 # ngic_sriov=$(kubectl exec -n epc ngic-dp-0 ifconfig s1u-net | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
 # and use it in the chart with --set spgwu_s1u_ip=$ngic_sriov

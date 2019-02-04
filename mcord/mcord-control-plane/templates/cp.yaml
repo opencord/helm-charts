@@ -66,15 +66,17 @@ spec:
         stdin: true
         command: [ "bash",  "-xc" ]
         args:
-        - export DP_S1U_IP="{{ .Values.spgwu_s1u_ip }}";
-          echo "$DP_S1U_IP" > /opt/ngic/config/shared/SGW_S1U_IP;
-          . /opt/ngic/config/cp_config.cfg;
+        - . /opt/ngic/config/cp_config.cfg;
           sleep 20;
           ./ngic_controlplane $EAL_ARGS -- $APP_ARGS;
         tty: true
         env:
         - name: MME_S11_IP
           value: {{ .Values.mme_hostname }}
+        - name: SGW_S11_IP
+          values: {{ .Values.spgwu_s11_ip }}
+        - name: SGW_S1U_IP
+          value: {{ .Values.spgwu_s1u_ip }}
         - name: APN
           value: {{ .Values.ngic_cp.config.apn }}
         - name: IP_POOL_IP

@@ -72,14 +72,6 @@ data:
         MEMORY="--no-huge -m $((MEM_LIMIT-1024))"
     fi
 
-    SGW_S1U_IP=$(netstat -ie | grep -A1 s1u-net | tail -1 | awk '{print $2}' | tr -d addr:)
-    SHARED_DIR="/opt/ngic/config/shared"
-    if [ -d ${SHARED_DIR} ]; then
-        while [ ! -f ${SHARED_DIR}/SGW_S1U_IP ]; do echo "Waiting for SGW_S1U_IP"; sleep 2; done
-        SGW_S1U_IP=$(cat ${SHARED_DIR}/SGW_S1U_IP)
-    fi
-
-    SGW_S11_IP=$(hostname)
     MGMT_INFO="-s ${SGW_S11_IP} -m ${MME_S11_IP} -w ${SGW_S1U_IP}"
     APN_INFO="-i ${IP_POOL_IP} -p ${IP_POOL_MASK} -a ${APN}"
     SPGW_CFG="-d 03 -l 2 -r 7.7.7.7 -g 6.6.6.6 -v 4.4.4.4  -u 5.5.5.5"
@@ -133,7 +125,7 @@ data:
     APP_ARGS="${S1U} ${SGI} ${WORKERS} ${MISC} ${SPGW_CFG}"
   interface.cfg: |
     [0]
-    dp_comm_ip = {{ .Values.spgwu_hostname }}
+    dp_comm_ip = {{ .Values.spgwu_s11_ip }}
     dp_comm_port = {{ .Values.spgwu_port }}
     cp_comm_ip = 127.0.0.1
     cp_comm_port = 21
