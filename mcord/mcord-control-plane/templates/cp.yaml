@@ -75,6 +75,10 @@ spec:
         env:
         - name: MME_S11_IP
           value: {{ .Values.mme_hostname }}
+        - name: SGW_S11_IP
+          values: {{ .Values.spgwu_s11_ip }}
+        - name: SGW_S1U_IP
+          value: {{ .Values.spgwu_s1u_ip }}
         - name: APN
           value: {{ .Values.ngic_cp.config.apn }}
         - name: IP_POOL_IP
