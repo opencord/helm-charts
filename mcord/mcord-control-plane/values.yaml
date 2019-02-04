@@ -22,9 +22,12 @@ hssdb_hostname: "cassandra"
 hss_hostname: "hss"
 mme_hostname: "mme"
 spgwc_hostname: "ngic-cp"
+# If the control plane is installed in a separate cluster, this value needs to be overridden
 spgwu_hostname: "ngic-dp"
-# Need to get SPGW-U interface IP address to put at here
-spgwu_s1u_ip: "119.0.0.45"
+# The spgwu_s1u_ip changes everytime, you can get it with this command:
+# ngic_sriov=$(kubectl exec -n epc ngic-dp-0 ifconfig s1u-net | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
+# and use it in the chart with --set spgwu_s1u_ip=$ngic_sriov
+spgwu_s1u_ip: "119.0.0.83"
 spgwu_port: 20
 accelleran_hostname: "10.233.65.254"
 
@@ -49,6 +52,9 @@ mme:
     s11: 2123
     s1ap: 36412
     s6a: 3868
+    s11_external: 32123
+    s1ap_external: 36412
+    s6a_external: 33868
   replicas: 1
   enb_s1ap_ip: "119.0.0.10"
   resources:

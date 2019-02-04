@@ -30,6 +30,7 @@ ngic_dp:
     dp: "ngick8stesting/ngic-dp:690f418"
   ports:
     sx: 20
+    sx_external: 31310
   replicas: 1
   resources:
     cpu: 8
