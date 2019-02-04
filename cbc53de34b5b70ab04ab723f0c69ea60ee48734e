@@ -22,6 +22,30 @@
       "revId": "cbc53de34b5b70ab04ab723f0c69ea60ee48734e",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4237dc0d_adb35e95",
+        "filename": "mcord/mcord-control-plane/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-02-04T22:12:42Z",
+      "side": 1,
+      "message": "the BBU\u0027s IP address.",
+      "parentUuid": "19d805c1_7d5b66b2",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 36
+      },
+      "revId": "cbc53de34b5b70ab04ab723f0c69ea60ee48734e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
