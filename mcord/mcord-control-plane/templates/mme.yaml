@@ -34,6 +34,28 @@ spec:
     port: {{ .Values.mme.ports.s6a }}
     protocol: TCP
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mme
+spec:
+  selector:
+    app: mme
+  type: NodePort
+  ports:
+    - name: s11
+      port: {{ .Values.mme.ports.s11 }}
+      nodePort: {{ .Values.mme.ports.s11_external }}
+      protocol: TCP
+    - name: s1ap
+      port: {{ .Values.mme.ports.s1ap }}
+      nodePort: {{ .Values.mme.ports.s1ap_external }}
+      protocol: TCP
+    - name: s6a
+      port: {{ .Values.mme.ports.s6a }}
+      nodePort: {{ .Values.mme.ports.s6a_external }}
+      protocol: TCP
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:

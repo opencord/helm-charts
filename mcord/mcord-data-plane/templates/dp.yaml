@@ -28,6 +28,19 @@ spec:
     port: {{ .Values.ngic_dp.ports.sx }}
     protocol: UDP
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ngic-dp-external
+spec:
+  selector:
+    app: ngic-dp
+  type: NodePort
+  ports:
+    - port: {{ .Values.ngic_dp.ports.sx }}
+      nodePort: {{ .Values.ngic_dp.ports.sx_external }}
+      protocol: UDP
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
