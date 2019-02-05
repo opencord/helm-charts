@@ -17,6 +17,10 @@ kind: "EtcdCluster"
 metadata:
   name: {{ quote .Values.clusterName }}
 spec:
+{{- if .Values.nodename -}}
+  nodeSelector:
+    kubernetes.io/hostname: {{.Values.nodename }}
+{{- end -}}
   size: {{ .Values.clusterSize }}
   pod:
     resources:

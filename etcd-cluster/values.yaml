@@ -21,6 +21,9 @@ clusterSize: 3
 memoryLimit: 1024Mi
 autoCompactionRetention: "12"
 
+# force etcd to be installed on a particular node
+nodename: ""
+
 # expose the etcd-cluster as a nodePort
 # etcdNodePort: 32379
 etcdNodePort: ""
