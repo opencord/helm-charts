@@ -50,9 +50,13 @@ data:
     current-context: multus-context
     EOF
   install-multus-conf.sh: |
-    # copied from https://github.com/intel/multus-cni/blob/master/images/entrypoint.sh
-    rm -f /host/etc/cni/net.d/00-multus.conf
-    MASTER_PLUGIN="$(ls /host/etc/cni/net.d | grep -E '\.conf(list)?$' | head -1)"
+    # To keep the original config installed by default (e.g. multus-daemonset)
+    if [ ! -f /host/etc/cni/net.d/00-multus.conf.original ]; then
+      mv /host/etc/cni/net.d/00-multus.conf /host/etc/cni/net.d/00-multus.conf.original;
+    fi
+
+    # Select the mainly CNI plugin's configuration and insert into multus's config
+    MASTER_PLUGIN="$(ls /host/etc/cni/net.d | grep -E '\.conf(list)?$' | grep -v 'multus' | head -1)"
     MASTER_PLUGIN_JSON="$(cat /host/etc/cni/net.d/$MASTER_PLUGIN)"
     cat > /host/etc/cni/net.d/00-multus.conf <<EOF
     {
