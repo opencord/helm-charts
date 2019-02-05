@@ -51,7 +51,7 @@ data:
     EOF
   install-multus-conf.sh: |
     # copied from https://github.com/intel/multus-cni/blob/master/images/entrypoint.sh
-    rm -f /host/etc/cni/net.d/00-multus.conf
+    mv /host/etc/cni/net.d/00-multus.conf /host/etc/cni/net.d/00-multus.conf.old
     MASTER_PLUGIN="$(ls /host/etc/cni/net.d | grep -E '\.conf(list)?$' | head -1)"
     MASTER_PLUGIN_JSON="$(cat /host/etc/cni/net.d/$MASTER_PLUGIN)"
     cat > /host/etc/cni/net.d/00-multus.conf <<EOF
