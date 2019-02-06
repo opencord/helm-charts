@@ -37,10 +37,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mme
+  name: mme-external
 spec:
   selector:
-    app: mme
+    app: mme-external
   type: NodePort
   ports:
     - name: s11
@@ -92,7 +92,7 @@ spec:
         imagePullPolicy: Always
         env:
           - name: SGW_S11_IP
-            value: {{ .Values.spgwc_hostname }}
+            value: {{ .Values.spgwc_hostname }}.{{ .Values.namespace }}.svc.cluster.local
           - name: MME_ETH0_IP
             valueFrom:
               fieldRef:

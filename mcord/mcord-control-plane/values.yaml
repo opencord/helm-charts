@@ -27,9 +27,9 @@ spgwu_s11_ip: "ngic-dp"
 # The spgwu_s1u_ip changes everytime, you can get it with this command:
 # ngic_sriov=$(kubectl exec -n epc ngic-dp-0 ifconfig s1u-net | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
 # and use it in the chart with --set spgwu_s1u_ip=$ngic_sriov
-spgwu_s1u_ip: "119.0.0.83"
+spgwu_s1u_ip: "119.0.0.45"
 spgwu_port: 20
-accelleran_hostname: "10.233.65.254"
+accelleran_hostname: "10.233.65.88"
 
 hss:
   # TODO: init UE's IMEI to DB?
@@ -47,14 +47,15 @@ hss:
 mme:
   images:
     init: "ngick8stesting/c3po-mmeinit"
-    mme: "ngick8stesting/c3po-mme:5e2eaf6"
+    #mme: "ngick8stesting/c3po-mme:5e2eaf6"
+    mme: "ngick8stesting/c3po-mme:mwca-mme-debug"
   ports:
     s11: 2123
     s1ap: 36412
     s6a: 3868
     s11_external: 32123
-    s1ap_external: 36412
-    s6a_external: 33868
+    s1ap_external: 31412
+    s6a_external: 30868
   replicas: 1
   enb_s1ap_ip: "119.0.0.10"
   resources:

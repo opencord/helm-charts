@@ -22,7 +22,7 @@ metadata:
 spec:
   selector:
     app: accelleran
-  clusterIP: 10.116.0.1
+  clusterIP: None
   ports:
     - name: s1ap
       port: {{ .Values.accelleran.ports.s1ap }}
@@ -31,14 +31,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: accelleran
+  name: accelleran-external
 spec:
   selector:
-    app: accelleran
+    app: accelleran-external
   type: NodePort
   ports:
     - port: {{ .Values.accelleran.ports.s1ap }}
-      nodePort: {{ .Values.accelleran.ports.s1ap }}
+      nodePort: {{ .Values.accelleran.ports.s1ap_external }}
       protocol: TCP
 ---
 apiVersion: apps/v1

@@ -857,7 +857,7 @@ data:
     VBSM_TARGET_MME_PLMN_ID          31310f
     VBSM_TARGET_MME_IP_ADDR          "192.25.1.100"
 
-    VBSM_T3412                        32
+    VBSM_T3412                        0
 
     VBSM_SGSN_IP_ADDR                "192.25.1.195"
 
