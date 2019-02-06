@@ -28,13 +28,6 @@ images:
     tag: '{{ .Chart.AppVersion }}'
     pullPolicy: 'Always'
 
-# temporary hack
-vrouter:
-  image:
-    repository: 'matteoscandolo/vrouter-synchronizer'
-    tag: 'latest'
-# end of temporary hack
-
 global:
   registry: ""
 
