@@ -29,6 +29,7 @@ accelleran:
     bbu: "10.90.0.131:30500/accelleran/vran-l3-fdd:onf-dns"
   ports:
     s1ap: 36412
+    s1ap_external: 30412
   replicas: 1
   nats_service_name: "nats-cluster"
   inst_id: "enb_key"
