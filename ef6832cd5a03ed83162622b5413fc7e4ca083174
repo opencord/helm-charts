@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "457ea55c_5d74050c",
+        "filename": "mcord/mcord-control-plane/templates/cp.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-02-06T02:42:47Z",
+      "side": 1,
+      "message": "Is this correct? As my understanding, SGW_S11_IP should be the SPGW-U\u0027s S11 IP?",
+      "range": {
+        "startLine": 77,
+        "startChar": 17,
+        "endLine": 77,
+        "endChar": 45
+      },
+      "revId": "ef6832cd5a03ed83162622b5413fc7e4ca083174",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
