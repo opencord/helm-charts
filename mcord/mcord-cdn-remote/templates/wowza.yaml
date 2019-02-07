@@ -1,0 +1,167 @@
+---
+# Copyright 2018-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wowza
+spec:
+  selector:
+    app: wowza
+  clusterIP: None
+  ports:
+    - name: port1935
+      protocol: TCP
+      port: {{ .Values.wowza.ports.port1935 }}
+    - name: port8086
+      protocol: TCP
+      port: {{ .Values.wowza.ports.port8086 }}
+    - name: port8087
+      protocol: TCP
+      port: {{ .Values.wowza.ports.port8087 }}
+    - name: port8088
+      protocol: TCP
+      port: {{ .Values.wowza.ports.port8088 }}
+    - name: port4430
+      protocol: TCP
+      port: {{ .Values.wowza.ports.port4430 }}
+    - name: port6970
+      protocol: UDP
+      port: {{ .Values.wowza.ports.port6970 }}
+    - name: port6971
+      protocol: UDP
+      port: {{ .Values.wowza.ports.port6971 }}
+    - name: port6972
+      protocol: UDP
+      port: {{ .Values.wowza.ports.port6972 }}
+    - name: port6973
+      protocol: UDP
+      port: {{ .Values.wowza.ports.port6973 }}
+    - name: port6974
+      protocol: UDP
+      port: {{ .Values.wowza.ports.port6974 }}
+    - name: port6975
+      protocol: UDP
+      port: {{ .Values.wowza.ports.port6975 }}
+    - name: port6976
+      protocol: UDP
+      port: {{ .Values.wowza.ports.port6976 }}
+    - name: port6977
+      protocol: UDP
+      port: {{ .Values.wowza.ports.port6977 }}
+    - name: port6978
+      protocol: UDP
+      port: {{ .Values.wowza.ports.port6978 }}
+    - name: port6979
+      protocol: UDP
+      port: {{ .Values.wowza.ports.port6979 }}
+    - name: port6980
+      protocol: UDP
+      port: {{ .Values.wowza.ports.port6980 }}
+
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: wowza
+  namespace: wowz
+spec:
+  serviceName: wowza
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: wowza
+        app: wowza
+    spec:
+      hostNetwork: true
+      terminationGracePeriodSeconds: 0
+      imagePullSecrets:
+      - name: nexus-docker-secret
+      nodeSelector:
+        wowza: wowza
+      initContainers:
+      - name: "wowza-init"
+        image: "wowzamedia/wowza-streaming-engine-linux:4.7.7"
+        imagePullPolicy: "IfNotPresent"
+        args:
+        - cp /config/*.sh /shared-vol
+        command:
+        - "/bin/bash"
+        - "-c"
+        volumeMounts:
+        - name: "shared-volume"
+          mountPath: "/shared-vol"
+        - name: "wowza-conf"
+          mountPath: "/config"
+      containers:
+      - name: wowza
+        image: "wowzamedia/wowza-streaming-engine-linux:4.7.7"
+        imagePullPolicy: IfNotPresent
+        args:
+        - chmod a+x /config/*.sh;/config/wowza_config.sh;/sbin/entrypoint.sh
+        command:
+        - "/bin/bash"
+        - "-c"
+        tty: true
+        securityContext:
+          privileged: true
+        env:
+        - name: WSE_MGR_USER
+          value: wowza
+        - name: WSE_MGR_PASS
+          value: wowza
+        - name: WSE_LIC
+          value: ET1E4-bze6X-EpP8Z-EF3ZQ-ABhdM-hrJDZ-8bG9dcbA9Hkm
+        - name: WSE_IP_PARAM
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        ports:
+        - containerPort: 1935
+        - containerPort: 8086
+        - containerPort: 8087
+        - containerPort: 8088
+        - containerPort: 4430
+        - containerPort: 6970
+        - containerPort: 6971
+        - containerPort: 6972
+        - containerPort: 6973
+        - containerPort: 6974
+        - containerPort: 6975
+        - containerPort: 6976
+        - containerPort: 6977
+        - containerPort: 6978
+        - containerPort: 6979
+        - containerPort: 6980
+        volumeMounts:
+        - name: wowza-logs
+          mountPath: /usr/local/WowzaStreamingEngine/logs
+          readOnly: false
+        - name: shared-volume
+          mountPath: /config
+      volumes:
+      - name: wowza-logs
+        hostPath:
+          path: /var/log
+      - name: wowza-conf
+        configMap:
+          name: wowza-config
+          items:
+          - key: wowza_config.sh
+            path: wowza_config.sh
+      - name: shared-volume
+        emptyDir: {}
