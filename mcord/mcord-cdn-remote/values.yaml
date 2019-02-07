@@ -1,0 +1,40 @@
+---
+# Copyright 2018-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+namespace: wowz
+wowza_hostname: "wowza"
+remote_vlc_hostname: "remote-vlc"
+
+wowza:
+  images:
+    wowza_image: "10.90.0.131:30500/wowza:latest"
+  ports:
+    rtmp: 1935
+    streammanager: 8086
+    rest: 8087
+    webui: 8088
+  replicas: 1
+
+remote_vlc:
+  images:
+    init: "ngick8stesting/c3po-mmeinit"
+    remote_vlc_image: "woojoong/mwc-cdn:remote"
+  ports:
+    vlc: 8089
+    http: 50001
+  replicas: 1
+  resources:
+    cpu: 3
+    mem: "1Gi"

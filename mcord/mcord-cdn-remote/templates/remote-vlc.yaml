@@ -1,0 +1,74 @@
+---
+# Copyright 2018-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: remote-vlc
+spec:
+  selector:
+    app: remote-vlc
+  clusterIP: None
+  ports:
+  - name: vlc
+    port: {{ .Values.remote_vlc.ports.vlc }}
+    protocol: TCP
+  - name: http
+    port: {{ .Values.remote_vlc.ports.http }}
+    protocol: TCP
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: remote-vlc
+  namespace: {{ .Values.namespace }}
+  labels:
+    name: remote-vlc
+    app: remote-vlc
+spec:
+  replicas: {{ .Values.remote_vlc.replicas }}
+  selector:
+    matchLabels:
+      app: remote-vlc
+  serviceName: "remote-vlc"
+  template:
+    metadata:
+      labels:
+        app: remote-vlc
+        name: remote-vlc
+    spec:
+      hostNetwork: true
+      terminationGracePeriodSeconds: 1
+      nodeSelector:
+        remote-vlc: remote-vlc
+      containers:
+      - name: streaming
+        image: {{ .Values.remote_vlc.images.remote_vlc_image }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: {{ .Values.remote_vlc.ports.vlc }}
+        - containerPort: {{ .Values.remote_vlc.ports.http }}
+        stdin: true
+        tty: true
+        command: [ "bash",  "-xc"]
+        args:
+        - sed -i 's/geteuid/getppid/' /usr/bin/vlc;
+           cvlc larva_360p.mp4 --sout "#transcode{vcodec=h264,acodec=mpga,ab=128,channels=2,samplerate=44100}:rtp{dst=0.0.0.0,port={{ .Values.remote_vlc.ports.vlc }},mux=ts,sap,name=Test}" --sout-keep --loop --ttl 10 --mtu 1200;
+        resources:
+          limits:
+            cpu: {{ .Values.remote_vlc.resources.cpu }}
+            memory: {{ .Values.remote_vlc.resources.mem }}
