@@ -22,6 +22,30 @@
       "revId": "ef6832cd5a03ed83162622b5413fc7e4ca083174",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30b1eeb3_ce558939",
+        "filename": "mcord/mcord-control-plane/templates/cp.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-07T18:33:07Z",
+      "side": 1,
+      "message": "it is belongs to SPGWC, not SPGWU",
+      "parentUuid": "457ea55c_5d74050c",
+      "range": {
+        "startLine": 77,
+        "startChar": 17,
+        "endLine": 77,
+        "endChar": 45
+      },
+      "revId": "ef6832cd5a03ed83162622b5413fc7e4ca083174",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
