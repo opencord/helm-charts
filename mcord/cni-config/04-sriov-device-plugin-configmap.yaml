@@ -50,9 +50,10 @@ data:
     current-context: multus-context
     EOF
   install-multus-conf.sh: |
-    # To keep the original config installed by default (e.g. multus-daemonset)
-    if [ ! -f /host/etc/cni/net.d/00-multus.conf.original ]; then
-      mv /host/etc/cni/net.d/00-multus.conf /host/etc/cni/net.d/00-multus.conf.original;
+    # If multus config is already exist on nodes (e.g. from kubespray installation)
+    # Then we don't need to create one by the script.
+    if [ -f /host/etc/cni/net.d/00-multus.conf ]; then
+      exit 0;
     fi
 
     # Select the mainly CNI plugin's configuration and insert into multus's config
