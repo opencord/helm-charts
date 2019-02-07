@@ -46,6 +46,30 @@
       "revId": "ef6832cd5a03ed83162622b5413fc7e4ca083174",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "30327a38_03bad635",
+        "filename": "mcord/mcord-control-plane/templates/cp.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-02-07T19:45:23Z",
+      "side": 1,
+      "message": "checked with sai, you are correct.",
+      "parentUuid": "30b1eeb3_ce558939",
+      "range": {
+        "startLine": 77,
+        "startChar": 17,
+        "endLine": 77,
+        "endChar": 45
+      },
+      "revId": "ef6832cd5a03ed83162622b5413fc7e4ca083174",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
