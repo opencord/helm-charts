@@ -42,8 +42,8 @@ spec:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: simpleexampleservice-config
-              mountPath: /opt/xos/synchronizers/simpleexampleservice/simpleexampleservice_config.yaml
-              subPath: simpleexampleservice_config.yaml
+              mountPath: /opt/xos/synchronizers/simpleexampleservice/config.yaml
+              subPath: config.yaml
             - name: certchain-volume
               mountPath: /usr/local/share/ca-certificates/local_certs.crt
               subPath: config/ca_cert_chain.pem
@@ -53,7 +53,7 @@ spec:
             name: simpleexampleservice
             items:
               - key: serviceConfig
-                path: simpleexampleservice_config.yaml
+                path: config.yaml
         - name: certchain-volume
           configMap:
             name: ca-certificates
