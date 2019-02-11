@@ -26,8 +26,8 @@ controlplane_port: 21
 
 ngic_dp:
   images:
-    init: "ngick8stesting/c3po-mmeinit"
-    dp: "ngick8stesting/ngic-dp:690f418"
+    init: "node1:30500/ngick8stesting/c3po-mmeinit"
+    dp: "node1:30500/ngick8stesting/ngic-dp:690f418"
   ports:
     sx: 20
     sx_external: 31310
