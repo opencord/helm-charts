@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2b587074_e07dc567",
+        "filename": "mcord/mcord-control-plane/values.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2019-02-11T21:45:11Z",
+      "side": 0,
+      "message": "we need this one, this one had a bug fix than 5e2eaf6 during MWCA 2-18. I explained on slack before.",
+      "range": {
+        "startLine": 51,
+        "startChar": 30,
+        "endLine": 51,
+        "endChar": 49
+      },
+      "revId": "7102a8155b7704f6a20b59a4032732868bf292b2",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
