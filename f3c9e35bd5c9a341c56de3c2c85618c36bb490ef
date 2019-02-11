@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "9b009263_fccba609",
+        "filename": "mcord/mcord-cdn-local/templates/cm.yaml",
+        "patchSetId": 16
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-02-11T02:34:33Z",
+      "side": 1,
+      "message": "Your suggestion is even better :)\nLet me test with your suggestion",
+      "parentUuid": "eab6f45e_a7a006a9",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 32
+      },
+      "revId": "f3c9e35bd5c9a341c56de3c2c85618c36bb490ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "67c6b9e7_1962bc6c",
         "filename": "mcord/mcord-cdn-local/templates/local-vlc.yaml",
         "patchSetId": 16
@@ -36,6 +60,30 @@
       "writtenOn": "2019-02-07T19:40:05Z",
       "side": 1,
       "message": "We don\u0027t need this in CDN.",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 81
+      },
+      "revId": "f3c9e35bd5c9a341c56de3c2c85618c36bb490ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1152e733_834dbd81",
+        "filename": "mcord/mcord-cdn-local/templates/local-vlc.yaml",
+        "patchSetId": 16
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-02-11T02:34:33Z",
+      "side": 1,
+      "message": "Ok.\nWill remove it :)",
+      "parentUuid": "67c6b9e7_1962bc6c",
       "range": {
         "startLine": 52,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "9a07e05d_963040ef",
+        "filename": "mcord/mcord-cdn-local/templates/local-vlc.yaml",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-02-11T02:34:33Z",
+      "side": 1,
+      "message": "When I use vlc, sometimes there is an error: root cannot use vlc.\nIt is very weird situation but it happens.\nThis line resolves the above situation.\nPlease see this link :p https://unix.stackexchange.com/questions/125546/how-to-run-vlc-player-in-root",
+      "parentUuid": "56885625_5669cd9a",
+      "range": {
+        "startLine": 74,
+        "startChar": 10,
+        "endLine": 74,
+        "endChar": 51
+      },
+      "revId": "f3c9e35bd5c9a341c56de3c2c85618c36bb490ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "13d5dc10_8b3ee934",
         "filename": "mcord/mcord-cdn-local/values.yaml",
         "patchSetId": 16
@@ -82,6 +154,30 @@
       "writtenOn": "2019-02-07T19:40:05Z",
       "side": 1,
       "message": "Don\u0027t we need to assign port too?\nIf we use the NodePort to expose, we only have 30000~32767 as the acceptable range. the default port for CDN may not in this range.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 22
+      },
+      "revId": "f3c9e35bd5c9a341c56de3c2c85618c36bb490ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c3a05fe3_7da1d535",
+        "filename": "mcord/mcord-cdn-local/values.yaml",
+        "patchSetId": 16
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-02-11T02:34:33Z",
+      "side": 1,
+      "message": "First, Infosys used Hostnet, not nodePort.\nThus, port number is no need.\nHowever, I think it should be changed to nodePort right?\nLet met change something.",
+      "parentUuid": "13d5dc10_8b3ee934",
       "range": {
         "startLine": 20,
         "startChar": 0,
@@ -140,6 +236,30 @@
     },
     {
       "key": {
+        "uuid": "65350bc1_490e678a",
+        "filename": "mcord/mcord-cdn-remote/templates/cm.yaml",
+        "patchSetId": 16
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-02-11T02:34:33Z",
+      "side": 1,
+      "message": "I just copied and paste from Infosys\u0027 yaml files.\nNot sure what this code is working for..",
+      "parentUuid": "4d4156b6_aeeb5372",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 16
+      },
+      "revId": "f3c9e35bd5c9a341c56de3c2c85618c36bb490ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9d24655_05db2ab6",
         "filename": "mcord/mcord-cdn-remote/templates/remote-vlc.yaml",
         "patchSetId": 16
@@ -151,6 +271,30 @@
       "writtenOn": "2019-02-07T19:40:05Z",
       "side": 1,
       "message": "we should move namespace as a variable in values.yaml\n\nand should it be `wowz` or `wowza`?",
+      "range": {
+        "startLine": 38,
+        "startChar": 2,
+        "endLine": 38,
+        "endChar": 17
+      },
+      "revId": "f3c9e35bd5c9a341c56de3c2c85618c36bb490ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ae7a2f56_3994f0b0",
+        "filename": "mcord/mcord-cdn-remote/templates/remote-vlc.yaml",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-02-11T02:34:33Z",
+      "side": 1,
+      "message": "Will change it",
+      "parentUuid": "d9d24655_05db2ab6",
       "range": {
         "startLine": 38,
         "startChar": 2,
@@ -186,6 +330,30 @@
     },
     {
       "key": {
+        "uuid": "86496802_515f63d7",
+        "filename": "mcord/mcord-cdn-remote/templates/remote-vlc.yaml",
+        "patchSetId": 16
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-02-11T02:34:33Z",
+      "side": 1,
+      "message": "Will remove them",
+      "parentUuid": "bdf2c1e0_cc8f7160",
+      "range": {
+        "startLine": 53,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 81
+      },
+      "revId": "f3c9e35bd5c9a341c56de3c2c85618c36bb490ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "acd9da10_7fc736ea",
         "filename": "mcord/mcord-cdn-remote/templates/remote-vlc.yaml",
         "patchSetId": 16
@@ -209,6 +377,30 @@
     },
     {
       "key": {
+        "uuid": "3dac833f_91da9bac",
+        "filename": "mcord/mcord-cdn-remote/templates/remote-vlc.yaml",
+        "patchSetId": 16
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-02-11T02:34:33Z",
+      "side": 1,
+      "message": "Same comment in local-vlc.yaml :)",
+      "parentUuid": "acd9da10_7fc736ea",
+      "range": {
+        "startLine": 75,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 51
+      },
+      "revId": "f3c9e35bd5c9a341c56de3c2c85618c36bb490ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b239cd6b_bc800377",
         "filename": "mcord/mcord-cdn-remote/templates/wowza.yaml",
         "patchSetId": 16
@@ -220,6 +412,30 @@
       "writtenOn": "2019-02-07T19:40:05Z",
       "side": 1,
       "message": "We will need to expose port in the multi-cluster scenario, and the port opened here is not allowed.\n\nBTW, can we rename the variable name (port number) to more meaningful string?",
+      "range": {
+        "startLine": 25,
+        "startChar": 2,
+        "endLine": 25,
+        "endChar": 8
+      },
+      "revId": "f3c9e35bd5c9a341c56de3c2c85618c36bb490ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "962d5edc_87504bae",
+        "filename": "mcord/mcord-cdn-remote/templates/wowza.yaml",
+        "patchSetId": 16
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-02-11T02:34:33Z",
+      "side": 1,
+      "message": "Well, also I just copied and pasted Infosys\u0027 codes.\nI have no idea which port means exactly.",
+      "parentUuid": "b239cd6b_bc800377",
       "range": {
         "startLine": 25,
         "startChar": 2,
