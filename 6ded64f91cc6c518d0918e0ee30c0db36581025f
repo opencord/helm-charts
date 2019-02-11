@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "50959f31_525412d0",
+        "filename": "onos-progran/values.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000404
+      },
+      "writtenOn": "2019-02-11T18:39:32Z",
+      "side": 1,
+      "message": "The new one is muluder/prograncontrollermcord:0.1.8",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 49
+      },
+      "revId": "6ded64f91cc6c518d0918e0ee30c0db36581025f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
