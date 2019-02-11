@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9db315d2_9d160d91",
+        "filename": "mcord/mcord-bbu/values.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-02-11T21:59:45Z",
+      "side": 1,
+      "message": "we should not list private registries in the default values, we should override them in the pod-configs value file.",
+      "range": {
+        "startLine": 27,
+        "startChar": 11,
+        "endLine": 27,
+        "endChar": 52
+      },
+      "revId": "b4ae01e518d859fd21c1fa5d393c87fbe2d4aa5f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
