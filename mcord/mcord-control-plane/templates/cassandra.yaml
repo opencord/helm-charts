@@ -48,7 +48,7 @@ spec:
       terminationGracePeriodSeconds: 1
       containers:
       - name: cassandra
-        image: ngick8stesting/c3po-cassandra:5e2eaf6
+        image: {{ .Values.hss.images.init }}
         imagePullPolicy: Always
         resources:
           limits:
