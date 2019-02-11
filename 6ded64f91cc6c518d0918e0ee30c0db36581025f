@@ -22,6 +22,30 @@
       "revId": "6ded64f91cc6c518d0918e0ee30c0db36581025f",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "68f36a39_eedde732",
+        "filename": "onos-progran/values.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000000
+      },
+      "writtenOn": "2019-02-11T18:57:58Z",
+      "side": 1,
+      "message": "Cem, thanks! We\u0027re abandoning this and going to commit another patch. I\u0027ll update you and on the patch as soon as we\u0027re done ;)",
+      "parentUuid": "50959f31_525412d0",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 49
+      },
+      "revId": "6ded64f91cc6c518d0918e0ee30c0db36581025f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
