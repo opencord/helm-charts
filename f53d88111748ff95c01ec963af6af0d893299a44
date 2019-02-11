@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b69ee07_14c43730",
+        "filename": "mcord/mcord-cdn-remote/templates/wowza.yaml",
+        "patchSetId": 33
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-02-11T22:17:39Z",
+      "side": 1,
+      "message": "Infosys should consider about multi-cluster scenario, I can\u0027t understand how this code can work if we don\u0027t have loadbalancer or NodePort.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 46
+      },
+      "revId": "f53d88111748ff95c01ec963af6af0d893299a44",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
