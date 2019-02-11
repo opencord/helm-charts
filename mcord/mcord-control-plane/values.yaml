@@ -29,13 +29,13 @@ spgwu_s11_ip: "ngic-dp"
 # and use it in the chart with --set spgwu_s1u_ip=$ngic_sriov
 spgwu_s1u_ip: "119.0.0.45"
 spgwu_port: 20
-accelleran_hostname: "10.233.65.88"
+accelleran_hostname: "10.233.75.23"
 
 hss:
   # TODO: init UE's IMEI to DB?
   images:
-    init: "ngick8stesting/c3po-cassandra:5e2eaf6"
-    hss: "ngick8stesting/c3po-hss:5e2eaf6"
+    init: "node1:30500/ngick8stesting/c3po-cassandra:5e2eaf6"
+    hss: "node1:30500/ngick8stesting/c3po-hss:5e2eaf6"
   ports:
     s6a: 3868
     secs6a: 5868
@@ -46,8 +46,7 @@ hss:
 
 mme:
   images:
-    init: "ngick8stesting/c3po-mmeinit"
-    #mme: "ngick8stesting/c3po-mme:5e2eaf6"
+    init: "node1:30500/ngick8stesting/c3po-mmeinit"
     mme: "ngick8stesting/c3po-mme:mwca-mme-debug"
   ports:
     s11: 2123
@@ -65,7 +64,7 @@ mme:
 ngic_cp:
   images:
     init: "ngick8stesting/c3po-mmeinit"
-    cp: "ngick8stesting/ngic-cp:690f418"
+    cp: "node1:30500/ngick8stesting/ngic-cp:690f418"
   replicas: 1
   ports:
     s11: 2123
