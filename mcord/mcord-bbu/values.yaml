@@ -19,7 +19,10 @@
 # Declare variables to be passed into your templates.
 
 accelleran_hostname: "accelleran"
-mme_hostname: "mme"
+
+# MME is on REMOTE's node2
+mme_hostname: "10.90.0.152"
+mme_port: 31412
 
 accelleran:
   images:
@@ -29,7 +32,7 @@ accelleran:
     bbu: "node1:30500/accelleran/vran-l3-fdd:onf-dns"
   ports:
     s1ap: 36412
-    s1ap_external: 30412
+    s1ap_external: 31412
   replicas: 1
   nats_service_name: "nats-cluster"
   inst_id: "enb_key"
