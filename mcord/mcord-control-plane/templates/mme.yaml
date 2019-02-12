@@ -24,15 +24,9 @@ spec:
     app: mme
   clusterIP: None
   ports:
-  - name: s11
-    port: {{ .Values.mme.ports.s11 }}
-    protocol: UDP
   - name: s1ap
     port: {{ .Values.mme.ports.s1ap }}
     protocol: SCTP
-  - name: s6a
-    port: {{ .Values.mme.ports.s6a }}
-    protocol: TCP
 ---
 apiVersion: v1
 kind: Service
@@ -40,21 +34,13 @@ metadata:
   name: mme-external
 spec:
   selector:
-    app: mme-external
+    app: mme
   type: NodePort
   ports:
-    - name: s11
-      port: {{ .Values.mme.ports.s11 }}
-      nodePort: {{ .Values.mme.ports.s11_external }}
-      protocol: TCP
     - name: s1ap
       port: {{ .Values.mme.ports.s1ap }}
       nodePort: {{ .Values.mme.ports.s1ap_external }}
-      protocol: TCP
-    - name: s6a
-      port: {{ .Values.mme.ports.s6a }}
-      nodePort: {{ .Values.mme.ports.s6a_external }}
-      protocol: TCP
+      protocol: SCTP
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -73,6 +59,8 @@ spec:
       labels:
         app: mme
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: "node2"
       terminationGracePeriodSeconds: 1
       initContainers:
       - name: init-mme
@@ -100,7 +88,7 @@ spec:
           - name: ENB_S1AP_IP
             value: {{ .Values.accelleran_hostname }}
           - name: ENB_S1AP_PORT
-            value: "{{ .Values.mme.ports.s1ap }}"   #ng4t uses 32767
+            value: "{{ .Values.accelleran_port }}"   #ng4t uses 32767
           - name: CONNECT_PEER
             value: hss-0.{{ .Values.hss_hostname }}.{{ .Values.namespace }}.svc.cluster.local
           - name: VAR_HSS_REALM

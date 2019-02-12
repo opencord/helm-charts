@@ -31,6 +31,20 @@ spec:
     port: {{ .Values.ngic_cp.ports.sx }}
     protocol: UDP
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ngic-cp-external
+spec:
+  selector:
+    app: ngic-cp
+  type: NodePort
+  ports:
+    - name: sx
+      port: {{ .Values.ngic_cp.ports.sx }}
+      nodePort: {{ .Values.ngic_cp.ports.sx_external }}
+      protocol: UDP
+---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -48,6 +62,8 @@ spec:
       labels:
         app: ngic-cp
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: "node2"
       initContainers:
       - name: init-iptables
         image: {{ .Values.ngic_cp.images.init }}

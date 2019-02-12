@@ -21,8 +21,9 @@
 redis_hostname: "redis"
 accelleran_hostname: "accelleran"
 mme_hostname: "mme"
-controlplane_hostname: "ngic-cp"
-controlplane_port: 21
+# CP is on REMOTE node2
+controlplane_hostname: "10.90.0.132"
+controlplane_port: 31311
 
 ngic_dp:
   images:

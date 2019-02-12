@@ -23,13 +23,16 @@ hss_hostname: "hss"
 mme_hostname: "mme"
 spgwc_hostname: "ngic-cp"
 # If the control plane is installed in a separate cluster, this value needs to be overridden
-spgwu_s11_ip: "ngic-dp"
+# DP installed on LOCAL node3
+spgwu_s11_ip: "10.90.0.133"
 # The spgwu_s1u_ip changes everytime, you can get it with this command:
 # ngic_sriov=$(kubectl exec -n epc ngic-dp-0 ifconfig s1u-net | grep 'inet addr' | cut -d: -f2 | awk '{print $1}')
 # and use it in the chart with --set spgwu_s1u_ip=$ngic_sriov
 spgwu_s1u_ip: "119.0.0.45"
-spgwu_port: 20
-accelleran_hostname: "10.233.75.23"
+spgwu_port: 31310
+# BBU is allocated on LOCAL's node2, use node2's IP
+accelleran_hostname: "10.90.0.132"
+accelleran_port: 31412
 
 hss:
   # TODO: init UE's IMEI to DB?
@@ -46,15 +49,13 @@ hss:
 
 mme:
   images:
-    init: "node1:30500/ngick8stesting/c3po-mmeinit"
+    init: "ngick8stesting/c3po-mmeinit"
     mme: "ngick8stesting/c3po-mme:mwca-mme-debug"
   ports:
     s11: 2123
     s1ap: 36412
     s6a: 3868
-    s11_external: 32123
     s1ap_external: 31412
-    s6a_external: 30868
   replicas: 1
   enb_s1ap_ip: "119.0.0.10"
   resources:
@@ -69,6 +70,7 @@ ngic_cp:
   ports:
     s11: 2123
     sx: 21
+    sx_external: 31311
   config:
     apn: "apn1"
     ue_ip_pool: "16.0.0.0"

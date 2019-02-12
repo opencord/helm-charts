@@ -44,7 +44,9 @@ spec:
     metadata:
       labels:
         app: cassandra
-    spec:
+    spec:    
+      nodeSelector:
+       kubernetes.io/hostname: "node3"
       terminationGracePeriodSeconds: 1
       containers:
       - name: cassandra

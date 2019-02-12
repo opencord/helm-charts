@@ -45,6 +45,8 @@ spec:
       labels:
         app: hss
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: "node3"
       terminationGracePeriodSeconds: 1
       initContainers:
       - name: init-db

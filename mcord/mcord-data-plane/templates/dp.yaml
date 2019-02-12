@@ -49,6 +49,7 @@ metadata:
     app: ngic-dp
 spec:
   replicas: {{ .Values.ngic_dp.replicas }}
+
   selector:
     matchLabels:
       app: ngic-dp
@@ -63,6 +64,8 @@ spec:
             { "name": "sgi-net", "interface": "sgi-net", "namespace": "default" }
         ]'
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: "node3"
       initContainers:
       - name: init-iptables
         image: {{ .Values.ngic_dp.images.init }}
