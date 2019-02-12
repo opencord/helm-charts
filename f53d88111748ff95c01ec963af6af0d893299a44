@@ -22,6 +22,30 @@
       "revId": "f53d88111748ff95c01ec963af6af0d893299a44",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3c209d7e_3ca2b79b",
+        "filename": "mcord/mcord-cdn-remote/templates/wowza.yaml",
+        "patchSetId": 33
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-02-12T01:35:03Z",
+      "side": 1,
+      "message": "I will let you know with my document for CDN, but I will briefly describe here. Of course, this code consider the multi-cluster scenario, which is mandatory. As you can see below (line 90), it used hostNetwork. \n\nBefore we deploy the remote part of CDN, we decide which worker node will run the remote part by using k8s label and namespace. Since it use hostnetwork, we can directly access this server through these port.\n\nOne question here is that shouldn\u0027t we use hostnetwork?\n\n+ Note that I am testing without some ports above. Praveen just used through tutorial; there are so many unused port. Finishing test, I will remove unnecessary ports here.",
+      "parentUuid": "6b69ee07_14c43730",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 73,
+        "endChar": 46
+      },
+      "revId": "f53d88111748ff95c01ec963af6af0d893299a44",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
