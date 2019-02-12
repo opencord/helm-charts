@@ -102,7 +102,7 @@ spec:
             optional: true
         - name: onos-logs-cfg
           configMap:
-            name: onos
+            name: onos-progran
             items:
               - key: logCfg
                 path: org.ops4j.pax.logging.cfg

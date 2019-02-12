@@ -21,7 +21,7 @@ replicaCount: 1
 
 images:
   onos:
-    repository: 'muluder/prograncontrollermcord:0.1.8'
+    repository: 'muluder/prograncontrollermcord'
     tag: '{{ .Chart.AppVersion }}'
     pullPolicy: 'Always'
 
