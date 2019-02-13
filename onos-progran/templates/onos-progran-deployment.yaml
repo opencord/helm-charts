@@ -47,7 +47,7 @@ spec:
         - name: {{ .Chart.Name }}
           image:  "{{ .Values.global.registry }}{{ .Values.images.onos.repository }}:{{ tpl .Values.images.onos.tag . }}"
           imagePullPolicy: {{ .Values.images.onos.pullPolicy }}
-          command: ["./bin/onos-service", "server", "debug"]
+          command: ["./root/files/onos-1.7.0.cemturker/bin/onos-service", "server", "debug"]
           env:
 {{ toYaml .Values.onos_env | indent 12 }}
           ports:
