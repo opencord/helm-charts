@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "64e237cb_0272e761",
+        "filename": "mcord/mcord-cdn-remote/values.yaml",
+        "patchSetId": 42
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-02-13T19:43:04Z",
+      "side": 1,
+      "message": "If we deployed to other clusters, this won\u0027t work, I would prefer to write `node1` at here first. and we can modify to public docker hub repository when the image is released.",
+      "range": {
+        "startLine": 22,
+        "startChar": 18,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "9ea492dc0100ec7258f626c65ca4fab3956cb6f3",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
