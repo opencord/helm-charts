@@ -63,6 +63,12 @@ spec:
               containerPort: {{ .Values.services.cluster.port }}
             - name: debugger
               containerPort: {{ .Values.services.debugger.port }}
+            - name: port22
+              containerPort: {{ .Values.services.port22.port }}
+            - name: port9876
+              containerPort: {{ .Values.services.port9876.port }}
+            - name: port4010
+              containerPort: {{ .Values.services.port4010.port }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
