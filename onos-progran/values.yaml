@@ -67,18 +67,18 @@ services:
     port: 5005
     nodePort: 30556
 
-  progranPort1ServiceType: NodePort
-  port1:
+  progranPort22ServiceType: NodePort
+  port22:
     port: 22
     nodePort: 30022
 
-  progranPort2ServiceType: NodePort
-  port2:
+  progranPort9876ServiceType: NodePort
+  port9876:
     port: 9876
     nodePort: 30876
 
-  progranPort3ServiceType: NodePort
-  port3:
+  progranPort4010ServiceType: NodePort
+  port4010:
     port: 4010
     nodePort: 30010
 
