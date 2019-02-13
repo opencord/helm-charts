@@ -24,6 +24,11 @@ accelleran_hostname: "accelleran"
 mme_hostname: "10.90.0.152"
 mme_port: 31412
 
+# Progran IP and port
+progran_ip: "10.90.0.132"
+progran_port: 30010
+
+
 accelleran:
   images:
     init: "ngick8stesting/c3po-mmeinit"
