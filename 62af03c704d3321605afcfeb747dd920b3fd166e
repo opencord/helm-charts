@@ -22,6 +22,53 @@
       "revId": "62af03c704d3321605afcfeb747dd920b3fd166e",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cb0fd696_cb575d4c",
+        "filename": "mcord/mcord-cdn-remote/templates/remote-vlc.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2019-02-14T19:40:27Z",
+      "side": 1,
+      "message": "Can we make the node selector configurable in .Values?",
+      "parentUuid": "510ce488_e444d9ba",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 39
+      },
+      "revId": "62af03c704d3321605afcfeb747dd920b3fd166e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c12d7503_c34bfd90",
+        "filename": "mcord/mcord-cdn-remote/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2019-02-14T19:40:27Z",
+      "side": 1,
+      "message": "Can we create this namespace automatically when installing the chart?  Here\u0027s an example from the VOLTHA chart: https://github.com/opencord/helm-charts/blob/master/voltha/templates/54-namespace.yaml",
+      "range": {
+        "startLine": 16,
+        "startChar": 11,
+        "endLine": 16,
+        "endChar": 15
+      },
+      "revId": "62af03c704d3321605afcfeb747dd920b3fd166e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
