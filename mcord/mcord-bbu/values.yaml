@@ -26,7 +26,7 @@ mme_port: 31412
 
 # Progran IP and port
 progran_ip: "10.90.0.132"
-progran_port: 30010
+progran_port: 30410
 
 
 accelleran:
