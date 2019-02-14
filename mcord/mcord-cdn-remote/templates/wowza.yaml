@@ -23,18 +23,42 @@ spec:
     app: wowza
   clusterIP: None
   ports:
-    - name: rtmp-port
-      protocol: TCP
-      port: {{ .Values.wowza.ports.rtmp }}
     - name: streammanager-port
       protocol: TCP
       port: {{ .Values.wowza.ports.streammanager }}
     - name: rest-port
       protocol: TCP
       port: {{ .Values.wowza.ports.rest }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wowza-rtmp
+spec:
+  selector:
+    app: wowza
+  type: NodePort
+  ports:
+    - name: rtmp-port
+      protocol: TCP
+      port: {{ .Values.wowza.ports.rtmp }}
+      nodePort: {{ .Values.wowza.nodeports.rtmp }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wowza-webui
+spec:
+  selector:
+    app: wowza
+  type: NodePort
+  ports:
     - name: webui-port
       protocol: TCP
       port: {{ .Values.wowza.ports.webui }}
+      nodePort: {{ .Values.wowza.nodeports.webui }}
 
 ---
 apiVersion: apps/v1beta1
