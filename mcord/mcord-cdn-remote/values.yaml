@@ -26,6 +26,7 @@ wowza:
     streammanager: 8086
     rest: 8087
     webui: 8088
+    webuiExternal: 30088
   replicas: 1
 
 remote_vlc:

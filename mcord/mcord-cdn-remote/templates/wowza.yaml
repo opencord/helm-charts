@@ -32,9 +32,21 @@ spec:
     - name: rest-port
       protocol: TCP
       port: {{ .Values.wowza.ports.rest }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wowza-webui
+spec:
+  selector:
+    app: wowza
+  type: NodePort
+  ports:
     - name: webui-port
       protocol: TCP
       port: {{ .Values.wowza.ports.webui }}
+      nodePort: {{ .Values.wowza.ports.webuiExternal }}
 
 ---
 apiVersion: apps/v1beta1
