@@ -32,6 +32,9 @@ prometheus:
   alertmanager:
     persistentVolume:
       enabled: false
+  nodeExporter:
+    service:
+      clusterIP: ""
   server:
     persistentVolume:
       enabled: false
@@ -63,6 +66,14 @@ prometheus:
           static_configs:
             - targets:
               - xos-core-prometheus:8000
+
+        # NodeExporter
+        - job_name: 'node-exporter'
+          metrics_path: /metrics
+          scrape_interval: 15s
+          static_configs:
+            - targets:
+              - nem-monitoring-prometheus-node-exporter:9100
 
         # KB8s monitoring jobs
         - job_name: prometheus
