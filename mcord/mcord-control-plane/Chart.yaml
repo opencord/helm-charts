@@ -15,7 +15,7 @@
 # limitations under the License.
 
 apiVersion: v1
-appVersion: "1.0"
+appVersion: "1.1"
 description: A Helm chart for MCORD Control Plane Services
 name: mcord-control-plane
 version: 0.2.0

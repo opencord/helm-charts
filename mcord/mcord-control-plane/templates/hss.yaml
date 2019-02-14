@@ -56,7 +56,9 @@ spec:
         - until nslookup {{ .Values.hssdb_hostname }}; do echo "waiting for cassandra domain name resolve."; sleep 2; done;
           until cqlsh -e "show version" {{ .Values.hssdb_hostname }}; do echo "waiting for cassandra database ready."; sleep 2; done;
           until cqlsh --file /scripts/oai_db.cql {{ .Values.hssdb_hostname }}; do echo "Writing data into database failed. Retrying ..."; sleep 2; done;
+          /scripts/data_provisioning_users.sh 302720100000420 1122334456 apn1 6226194254742F2D67145153602F7C8D 1 {{ .Values.hssdb_hostname }} {{ .Values.mme_hostname }} {{ .Values.mme_hostname }};
           /scripts/data_provisioning_users.sh 302720100000421 1122334456 apn1 6226194254742F2D67145153602F7C8D 1 {{ .Values.hssdb_hostname }} {{ .Values.mme_hostname }} {{ .Values.mme_hostname }};
+          cqlsh -e "use vhss; update users_imsi set opc='D6CAF10C337FD65AC31A18EBACBF5BF9' where imsi='302720100000420';" {{ .Values.hssdb_hostname }};
           cqlsh -e "use vhss; update users_imsi set opc='D6CAF10C337FD65AC31A18EBACBF5BF9' where imsi='302720100000421';" {{ .Values.hssdb_hostname }};
           /scripts/data_provisioning_mme.sh 1 19136246000 mme-0.{{ .Values.mme_hostname }}.{{ .Values.namespace }}.svc.cluster.local {{ .Values.mme_hostname }}.{{ .Values.namespace }}.svc.cluster.local 1 {{ .Values.hssdb_hostname }};
           /scripts/data_provisioning_mme.sh 1 19136246000 smsrouter.test3gpp.net test3gpp.net 0 {{ .Values.hssdb_hostname }};
