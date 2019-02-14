@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "510ce488_e444d9ba",
+        "filename": "mcord/mcord-cdn-remote/templates/remote-vlc.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-02-14T18:37:49Z",
+      "side": 1,
+      "message": "Sorry I forgot to mention it. We only have one node on REMOTE side, please use `node1` instead.",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 39
+      },
+      "revId": "62af03c704d3321605afcfeb747dd920b3fd166e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
