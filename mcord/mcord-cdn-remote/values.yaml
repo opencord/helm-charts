@@ -14,12 +14,13 @@
 # limitations under the License.
 
 namespace: wowz
+node_selector: node1
 wowza_hostname: "wowza"
 remote_vlc_hostname: "remote-vlc"
 
 wowza:
   images:
-    wowza_image: "10.90.0.131:30500/wowza:latest"
+    wowza_image: "wowzamedia/wowza-streaming-engine-linux"
   ports:
     rtmp: 1935
     streammanager: 8086

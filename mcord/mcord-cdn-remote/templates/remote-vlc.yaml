@@ -54,7 +54,7 @@ spec:
       hostNetwork: true
       terminationGracePeriodSeconds: 1
       nodeSelector:
-        remote-vlc: remote-vlc
+        kubernetes.io/hostname: {{ .Values.node_selector }}
       containers:
       - name: streaming
         image: {{ .Values.remote_vlc.images.remote_vlc_image }}

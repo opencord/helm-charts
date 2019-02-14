@@ -1,6 +1,4 @@
----
-# Copyright 2018-present Open Networking Foundation
-# Copyright 2018 Intel Corporation
+# Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+#
+# Observation:
+#    It appears that when a namespace is created, Kubernetes creates
+#    a ServiceAccount called "default" for that new namespace.
+#
 apiVersion: v1
-appVersion: "1.0"
-description: A Helm chart for MCORD CDN Services in Remote cloud
-name: mcord-cdn-remote
-version: 0.1.2
+kind: Namespace
+metadata:
+  name: {{ .Values.namespace }}
