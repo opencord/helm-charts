@@ -19,7 +19,7 @@ remote_vlc_hostname: "remote-vlc"
 
 wowza:
   images:
-    wowza_image: "10.90.0.131:30500/wowza:latest"
+    wowza_image: "node1:30500/wowza:latest"
   ports:
     rtmp: 1935
     streammanager: 8086
