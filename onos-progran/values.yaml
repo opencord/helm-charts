@@ -80,7 +80,7 @@ services:
   progranPort4010ServiceType: NodePort
   port4010:
     port: 4010
-    nodePort: 30010
+    nodePort: 30410
 
   ovsdbServiceType: ClusterIP
   ovsdb:
