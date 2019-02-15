@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f9fb98f4_d6b475b4",
+        "filename": "mcord/mcord-control-plane/Chart.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-02-15T01:39:46Z",
+      "side": 1,
+      "message": "this is the version that we needed to update",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "67ea19e6138278c5cf9d6b32187e290ca6602e22",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
