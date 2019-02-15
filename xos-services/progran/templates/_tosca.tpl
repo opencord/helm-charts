@@ -30,5 +30,5 @@ topology_template:
       properties:
         name: progran
         onos_address: onos-progran-ui
-        onos_port: 8181  
+        onos_port: "8181"
 {{- end -}}

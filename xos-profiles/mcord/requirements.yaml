@@ -26,7 +26,7 @@ dependencies:
   version: 2.0.5
   repository: file://../../xos-services/mcord-subscriber
 - name: progran
-  version: 2.0.6
+  version: 2.0.7
   repository: file://../../xos-services/progran
 - name: vrouter
   version: 2.0.5

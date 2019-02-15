@@ -149,7 +149,41 @@ topology_template:
       properties:
         name: epc-remote
 
-    mcord_progran:
+    service#cdn-local:
+      type: tosca.nodes.Service
+      properties:
+        name: cdn-local
+
+    service#cdn-remote:
+      type: tosca.nodes.Service
+      properties:
+        name: cdn-remote
+
+    service_dependency#epc_local_cdn_local:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#epc-local
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#cdn-local
+            relationship: tosca.relationships.BelongsToOne
+
+    service_dependency#cdn_local_cdn_remote:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#cdn-local
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#cdn-remote
+            relationship: tosca.relationships.BelongsToOne
+
+    service_dependency#mcord_progran:
       type: tosca.nodes.ServiceDependency
       properties:
         connect_method: none
@@ -161,7 +195,7 @@ topology_template:
             node: service#mcord
             relationship: tosca.relationships.BelongsToOne
 
-    progran_epc_local:
+    service_dependency#progran_epc_local:
       type: tosca.nodes.ServiceDependency
       properties:
         connect_method: none
@@ -173,7 +207,7 @@ topology_template:
             node: service#progran
             relationship: tosca.relationships.BelongsToOne
 
-    epc_local_epc_remote:
+    service_dependency#epc_local_epc_remote:
       type: tosca.nodes.ServiceDependency
       properties:
         connect_method: none
@@ -215,7 +249,6 @@ topology_template:
 {{- if .Values.seba.enabled }}
         constraints: '[ ["mcord", null, "onos"], ["progran", null, "fabric"], ["epc-local", null, null] ["epc-remote", null, null] ]'
 {{ else }}
-        constraints: '[ ["mcord", "rcord", null], ["progran", "volt", "att-workflow-driver"], ["epc-local", "fabric-crossconnect", "onos"], ["epc-remote", "vrouter", "fabric"] ]'
+        constraints: '[ ["mcord", null, "rcord", null], ["progran", null, "volt", "att-workflow-driver"], ["epc-local", "cdn-local", "fabric-crossconnect", "onos"], ["epc-remote", "cdn-remote", "vrouter", "fabric"] ]'
 {{- end -}}
 {{- end -}}
-
