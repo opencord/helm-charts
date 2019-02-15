@@ -24,7 +24,7 @@ ue_ip_subnet2: 17.0.0.0/8
 
 nginx:
   images:
-    nginx_image: "woojoong/nginx:onf-video"
+    nginx_image: "woojoong/nginx:onf-video-v2"
   ports:
     rtmp_orig: 1935
     rtmp_np: 31935
