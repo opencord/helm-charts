@@ -158,11 +158,11 @@ data:
     rtmp {
         server {
             listen 1935;
-            application pullfromwowza {
+            application r {
                live on;
                pull rtmp://{{ .Values.remote_ip }}:1935/live;
             }
-            application pullfromlocal {
+            application l {
                live on;
                play /opt/cdn/movies;
             }

@@ -67,7 +67,7 @@ spec:
         command: [ "bash",  "-xc"]
         args:
         - sed -i 's/geteuid/getppid/' /usr/bin/vlc;
-           cvlc larva_360p.mp4 --sout "#transcode{vcodec=h264,acodec=mpga,ab=128,channels=2,samplerate=44100}:rtp{dst=0.0.0.0,port={{ .Values.remote_vlc.ports.vlc }},mux=ts,sap,name=Test}" --sout-keep --loop --ttl 10 --mtu 1200;
+          cvlc {{ .Values.remote_vlc.video_quality }}.mp4 --sout "#transcode{vcodec=h264,acodec=mpga,ab=128,channels=2,samplerate=44100}:rtp{dst=0.0.0.0,port={{ .Values.remote_vlc.ports.vlc }},mux=ts,sap,name=Test}" --sout-keep --loop --ttl 10 --mtu 1200;
         resources:
           limits:
             cpu: {{ .Values.remote_vlc.resources.cpu }}

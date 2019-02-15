@@ -29,9 +29,10 @@ wowza:
   replicas: 1
 
 remote_vlc:
+  video_quality: 360
   images:
     init: "ngick8stesting/c3po-mmeinit"
-    remote_vlc_image: "woojoong/mwc-cdn:remote"
+    remote_vlc_image: "woojoong/mwc-cdn:remote-v2"
   ports:
     vlc: 8089
     http: 50001
