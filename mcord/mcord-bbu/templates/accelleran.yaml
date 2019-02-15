@@ -25,7 +25,7 @@ spec:
   clusterIP: None
   ports:
     - name: s1ap
-      port: {{ .Values.accelleran.ports.s1ap }}
+      port: {{ .Values.accelleran.ports.s1ap_external }}
       protocol: SCTP
 ---
 apiVersion: v1
@@ -37,7 +37,7 @@ spec:
     app: accelleran
   type: NodePort
   ports:
-    - port: {{ .Values.accelleran.ports.s1ap }}
+    - port: {{ .Values.accelleran.ports.s1ap_external }}
       nodePort: {{ .Values.accelleran.ports.s1ap_external }}
       protocol: SCTP
 ---
