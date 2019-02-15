@@ -134,7 +134,7 @@ spec:
           sqlite3 /mnt/app/datastore.db "update logging set severity=7 where id=25;";
           sqlite3 /mnt/app/datastore.db "update featureActivation set mmeSlicingEnabled=1;";
           sqlite3 /mnt/app/datastore.db "update featureActivation set ranSlicingEnabled=1;";
-          sqlite3 /mnt/app/datastore.db "insert into pranServerAddress (pranServerIpAddress,pranServerPort) values ('{{ .Values.progran_ip }}', {{ .Values.progran_port }});"
+          sqlite3 /mnt/app/datastore.db "insert into pranServerAddress (pranServerIpAddress,pranServerPort) values ('{{ .Values.progran_ip }}', {{ .Values.progran_port }});";
 
           sleep 10;
           /l3/l3start;
