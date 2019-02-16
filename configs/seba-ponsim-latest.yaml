@@ -50,6 +50,10 @@ images:
   freeradius:
     tag: 'latest'
 
+# ONOS
+  onos:
+    tag: '1.13.8'
+
 # Ponsimv2
   olt:
     repository: "voltha/voltha-ponsim"
