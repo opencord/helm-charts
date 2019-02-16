@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "27b32716_fedeb269",
+        "filename": "configs/seba-ponsim-latest.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2019-02-16T01:15:13Z",
+      "side": 1,
+      "message": "I think it\u0027s a good idea to test latest ONOS, but I built a SiaB with this ONOS version and the tests didn\u0027t work.  Do we want to try to debug the issue before committing?  If we just go ahead and commit then I think the \"seba-in-a-box-build-test-latest\" may consistently fail.",
+      "range": {
+        "startLine": 55,
+        "startChar": 0,
+        "endLine": 55,
+        "endChar": 17
+      },
+      "revId": "3a4e13afcdcccc18cd16e5f654be51c6446c526b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
