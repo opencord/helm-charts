@@ -14,6 +14,7 @@
 # limitations under the License.
 
 namespace: epc
+cdn_node_selector: node3
 nginx_hostname: "nginx"
 local_vlc_hostname: "local_vlc"
 # need to be changed to appropriate wowza server outside edge -- we can use the option --set remote_ip when deploying
