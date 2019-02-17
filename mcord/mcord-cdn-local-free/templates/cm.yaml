@@ -1,0 +1,107 @@
+---
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-rtmp-config
+data:
+  nginx_rtmp_config.sh: |+
+    #!/bin/bash
+    #ip addr add 192.168.99.2 dev north0
+    #ip addr add 192.168.99.3 dev north0d1
+    #ip route del default dev eth0
+    #ip route add default gw 192.168.99.2 north0
+    mkdir -pZ /var/www/live
+    ip route add {{ .Values.ue_ip_subnet1 }} via {{ .Values.spgwu_sgiip }} dev sgi-net;
+    ip route add {{ .Values.ue_ip_subnet2 }} via {{ .Values.spgwu_sgiip }} dev sgi-net;
+    ip link set sgi-net mtu 1200;
+    cp /conf/nginx.conf  /etc/nginx/
+    #nginx -c /etc/nginx/nginx.conf
+    #while true; do sleep 1; done
+    nginx -g "daemon off;"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-rtmp-conf
+data:
+  nginx.conf: |+
+
+    # I'll explain why we only have 1 worker process later
+    worker_processes 1;
+    error_log /var/log/nginx/error.log;
+    pid /run/nginx.pid;
+
+    include /usr/share/nginx/modules/*.conf;
+
+    events {
+        use epoll;
+        worker_connections 1024;
+    }
+
+    http {
+        log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                        '$status $body_bytes_sent "$http_referer" '
+                        '"$http_user_agent" "$http_x_forwarded_for" $request_time';
+        access_log /var/log/nginx/access.log main;
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+        include /etc/nginx/mime.types;
+        default_type application/octet-stream;
+
+        server {
+            listen 1980 default_server;
+            server_name _;
+            root /var/www;
+            expires -1d;
+
+            location ~ ^/live/.+\.ts$ {
+                # MPEG-TS segments can be cached upstream indefinitely
+                expires max;
+            }
+        }
+    }
+
+    rtmp {
+        server {
+            listen 1935;
+
+            application app {
+                live on;
+
+                # Don't allow RTMP playback
+                deny play all;
+
+                # Package streams as HLS
+                hls on;
+                hls_path /var/www/live;
+                hls_nested on;
+                #hls_datetime system;
+                hls_fragment_naming system;
+            }
+            application vod2 {
+               play /var/www/live;
+            }
+            application l {
+               live on;
+               play /opt/cdn/movies;
+            }
+        }
+    }
