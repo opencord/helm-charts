@@ -56,7 +56,7 @@ spec:
       imagePullSecrets:
       - name: nexus-docker-secret
       nodeSelector:
-        kubernetes.io/hostname: {{ .Values.node_selector }}
+        kubernetes.io/hostname: {{ .Values.cdn_node_selector }}
       initContainers:
       - name: "wowza-init"
         image: {{ .Values.wowza.images.wowza_image }}
