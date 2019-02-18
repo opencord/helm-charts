@@ -14,7 +14,7 @@
 # limitations under the License.
 
 namespace: remotecdn
-node_selector: node1
+cdn_node_selector: node2
 remote_streaming_hostname: "remote-streaming"
 
 remote_streaming:

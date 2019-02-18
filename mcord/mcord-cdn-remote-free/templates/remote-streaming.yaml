@@ -55,7 +55,7 @@ spec:
       #hostNetwork: true
       terminationGracePeriodSeconds: 1
       nodeSelector:
-        kubernetes.io/hostname: {{ .Values.node_selector }}
+        kubernetes.io/hostname: {{ .Values.cdn_node_selector }}
       containers:
       - name: streaming
         image: {{ .Values.remote_streaming.images.remote_streaming_image }}
