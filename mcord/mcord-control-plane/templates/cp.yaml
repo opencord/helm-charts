@@ -63,7 +63,7 @@ spec:
         app: ngic-cp
     spec:
       nodeSelector:
-        kubernetes.io/hostname: "node2"
+        kubernetes.io/hostname: "{{ .Values.spgwc_node_selector }}"
       initContainers:
       - name: init-iptables
         image: {{ .Values.ngic_cp.images.init }}

@@ -34,6 +34,12 @@ spgwu_port: 31310
 accelleran_hostname: "10.90.0.132"
 accelleran_port: 31412
 
+hssdb_node_selector: node3
+hss_node_selector: node3
+mme_node_selector: node2
+spgwc_node_selector: node2
+
+
 hss:
   # TODO: init UE's IMEI to DB?
   images:

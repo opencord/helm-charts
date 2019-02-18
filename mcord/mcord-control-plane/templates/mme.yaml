@@ -60,7 +60,7 @@ spec:
         app: mme
     spec:
       nodeSelector:
-        kubernetes.io/hostname: "node2"
+        kubernetes.io/hostname: "{{ .Values.mme_node_selector }}"
       terminationGracePeriodSeconds: 1
       initContainers:
       - name: init-mme

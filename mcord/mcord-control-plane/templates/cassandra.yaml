@@ -46,7 +46,7 @@ spec:
         app: cassandra
     spec:    
       nodeSelector:
-       kubernetes.io/hostname: "node3"
+       kubernetes.io/hostname: "{{ .Values.hssdb_node_selector }}"
       terminationGracePeriodSeconds: 1
       containers:
       - name: cassandra

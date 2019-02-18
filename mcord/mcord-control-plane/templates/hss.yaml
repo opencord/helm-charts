@@ -46,7 +46,7 @@ spec:
         app: hss
     spec:
       nodeSelector:
-        kubernetes.io/hostname: "node3"
+        kubernetes.io/hostname: "{{ .Values.hss_node_selector }}"
       terminationGracePeriodSeconds: 1
       initContainers:
       - name: init-db
