@@ -15,7 +15,7 @@
 
 namespace: epc
 nginx_hostname: "nginx"
-node_selector: "node3"
+cdn_node_selector: "node3"
 spgwu_sgiip: 13.0.0.83
 ue_ip_subnet1: 16.0.0.0/8
 ue_ip_subnet2: 17.0.0.0/8
