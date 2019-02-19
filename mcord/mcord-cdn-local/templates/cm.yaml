@@ -158,12 +158,13 @@ data:
     rtmp {
         server {
             listen 1935;
+            chunk_size 4000;
             application r {
                live on;
                pull rtmp://{{ .Values.remote_ip }}:1935/live;
             }
             application l {
-               live on;
+               #live on;
                play /opt/cdn/movies;
             }
         }
