@@ -48,6 +48,7 @@ Create chart name and version as used by the chart label.
 
 {{- define "simpleexampleservice.serviceConfig" -}}
 name: simpleexampleservice
+desired_state: {{ .Values.desired_state | quote }}
 accessor:
   username: {{ .Values.xosAdminUser | quote }}
   password: {{ .Values.xosAdminPassword | quote }}
