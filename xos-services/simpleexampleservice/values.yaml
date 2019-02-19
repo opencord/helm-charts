@@ -30,6 +30,8 @@ image:
 global:
   registry: ''
 
+desired_state: load
+
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
