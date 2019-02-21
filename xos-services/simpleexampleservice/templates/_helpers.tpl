@@ -56,22 +56,6 @@ accessor:
 event_bus:
   endpoint: {{ .Values.kafkaService | quote }}
   kind: kafka
-required_models:
-  - SimpleExampleService
-  - SimpleExampleServiceInstance
-  - ServiceDependency
-  - KubernetesService
-  - KubernetesServiceInstance
-  - KubernetesConfigMap
-  - KubernetesSecret
-  - KubernetesConfigVolumeMount
-  - KubernetesSecretVolumeMount
-dependency_graph: "/opt/xos/synchronizers/simpleexampleservice/model-deps"
-steps_dir: "/opt/xos/synchronizers/simpleexampleservice/steps"
-event_steps_dir: "/opt/xos/synchronizers/simpleexampleservice/event_steps"
-sys_dir: "/opt/xos/synchronizers/simpleexampleservice/sys"
-model_policies_dir: "/opt/xos/synchronizers/simpleexampleservice/model_policies"
-models_dir: "/opt/xos/synchronizers/simpleexampleservice/models"
 logging:
   version: 1
   handlers:
