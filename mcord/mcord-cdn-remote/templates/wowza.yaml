@@ -21,6 +21,7 @@ metadata:
 spec:
   selector:
     app: wowza
+    visualize: "true"
   clusterIP: None
   ports:
     - name: rtmp-port
@@ -50,6 +51,8 @@ spec:
       labels:
         name: wowza
         app: wowza
+        visualize: "true"
+        uses: wowza
     spec:
       hostNetwork: true
       terminationGracePeriodSeconds: 0

@@ -19,6 +19,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ngic-cp
+  labels:
+    app: ngic-cp
+    visualize: "true"
 spec:
   selector:
     app: ngic-cp
@@ -35,6 +38,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ngic-cp-external
+  labels:
+    app: ngic-cp
+    visualize: "true"
 spec:
   selector:
     app: ngic-cp
@@ -51,6 +57,7 @@ metadata:
   name: ngic-cp
   labels:
     app: ngic-cp
+    visualize: "true"
 spec:
   replicas: {{ .Values.ngic_cp.replicas }}
   selector:
@@ -61,6 +68,8 @@ spec:
     metadata:
       labels:
         app: ngic-cp
+        visualize: "true"
+        uses: ngic-cp-external,ngic-cp
     spec:
       nodeSelector:
         kubernetes.io/hostname: "{{ .Values.spgwc_node_selector }}"

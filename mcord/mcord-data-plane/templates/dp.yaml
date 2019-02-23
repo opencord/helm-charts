@@ -19,6 +19,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ngic-dp
+  labels:
+    name: ngic-dp
+    visualize: "true"
 spec:
   selector:
     app: ngic-dp
@@ -32,6 +35,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: ngic-dp-external
+  labels:
+    name: "ngic-dp-external"
+    visualize: "true"
 spec:
   selector:
     app: ngic-dp
@@ -58,6 +64,8 @@ spec:
     metadata:
       labels:
         app: ngic-dp
+        visualize: "true"
+        uses: ngic-dp-external,ngic-dp
       annotations:
         k8s.v1.cni.cncf.io/networks: '[
             { "name": "s1u-net", "interface": "s1u-net", "namespace": "default" },
