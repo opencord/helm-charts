@@ -222,10 +222,8 @@ topology_template:
 tosca_definitions_version: tosca_simple_yaml_1_0
 description: Some basic fixtures
 imports:
-  - custom_types/deployment.yaml
   - custom_types/networkparametertype.yaml
   - custom_types/networktemplate.yaml
-  - custom_types/siterole.yaml
 topology_template:
   node_templates:
 
@@ -257,22 +255,6 @@ topology_template:
       properties:
         name: neutron_port_name
 
-# ----------------------------------------------------------------------------
-# Roles
-# ----------------------------------------------------------------------------
-    siterole#admin:
-      type: tosca.nodes.SiteRole
-      properties:
-        role: admin
-    siterole#pi:
-      type: tosca.nodes.SiteRole
-      properties:
-        role: pi
-    siterole#tech:
-      type: tosca.nodes.SiteRole
-      properties:
-        role: tech
-
 # -----------------------------------------------------------------------------
 # Network Templates
 # -----------------------------------------------------------------------------
@@ -299,13 +281,6 @@ topology_template:
         translation: none
         shared_network_name: ext-net
 
-# -----------------------------------------------------------------------------
-# Deployment
-# -----------------------------------------------------------------------------
-    MyDeployment:
-      type: tosca.nodes.Deployment
-      properties:
-        name: MyDeployment
 {{- end -}}
 
 

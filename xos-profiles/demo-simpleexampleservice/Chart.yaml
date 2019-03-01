@@ -17,7 +17,7 @@ name: demo-simpleexampleservice
 description: A Helm chart that launches and configures SimpleExampleService. It's assumed that base-kubernetes profile is installed.
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 1.0.6
+version: 1.0.7
 
 # xosproject/tosca-loader version
 appVersion: 1.1.7

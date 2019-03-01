@@ -33,10 +33,6 @@ topology_template:
           site_url: http://mysite.opencord.us/
           hosts_nodes: true
 
-    {{ .Values.cordDeploymentName }}:
-      type: tosca.nodes.Deployment
-      properties:
-        name: {{ .Values.cordDeploymentName }}
 {{- end -}}
 
 {{- define "mcord.onosTosca" -}}

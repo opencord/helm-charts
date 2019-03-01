@@ -40,4 +40,3 @@ xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
 cordSiteName: "mysite"
-cordDeploymentName: "mydeployment"

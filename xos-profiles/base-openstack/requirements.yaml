@@ -18,7 +18,7 @@ dependencies:
   version: 2.0.12
   repository: file://../../xos-services/onos-service
 - name: openstack
-  version: 1.1.5
+  version: 1.1.6
   repository: file://../../xos-services/openstack
 - name: vtn-service
   version: 1.0.4

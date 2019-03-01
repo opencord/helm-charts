@@ -35,7 +35,6 @@ xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
 cordSiteName:  &site "mysite"
-cordDeploymentName: &deployment "mydeployment"
 
 keystoneAdminUser: "admin"
 keystoneAdminPassword: "password"

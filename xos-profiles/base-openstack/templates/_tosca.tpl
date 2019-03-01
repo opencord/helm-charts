@@ -37,10 +37,6 @@ topology_template:
           site_url: http://mysite.opencord.us/
           hosts_nodes: true
 
-    {{ .Values.cordDeploymentName }}:
-      type: tosca.nodes.Deployment
-      properties:
-        name: {{ .Values.cordDeploymentName }}
 {{- end -}}
 
 {{- define "base-openstack.serviceGraphTosca" -}}
@@ -203,12 +199,6 @@ topology_template:
       type: tosca.nodes.Site
       properties:
         name: {{ .Values.cordSiteName }}
-        must-exist: true
-
-    deployment:
-      type: tosca.nodes.Deployment
-      properties:
-        name: {{ .Values.cordDeploymentName }}
         must-exist: true
 
     site_deployment:

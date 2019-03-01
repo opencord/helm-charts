@@ -21,8 +21,6 @@ metadata:
 data:
   010-fixtures.yaml: |
 {{ toYaml .Values.toscaRecipes.fixtures | indent 4 }}
-  020-deployment.yaml: |
-{{ toYaml .Values.toscaRecipes.deployment | indent 4 }}
   040-cord-services.yaml: |
 {{ toYaml .Values.toscaRecipes.cordServices | indent 4 }}
   050-service-graph-constraints.yaml: |
