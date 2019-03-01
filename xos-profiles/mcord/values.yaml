@@ -35,7 +35,6 @@ xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
 cordSiteName: "mysite"
-cordDeploymentName: "mydeployment"
 
 onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka.default.svc.cluster.local:9092"
