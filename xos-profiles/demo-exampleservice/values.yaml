@@ -31,7 +31,6 @@ xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
 cordSiteName: "mysite"
-cordDeploymentName: "mydeployment"
 
 addresspool_public_cidr: "10.8.1.0/24"
 addresspool_public_gateway_ip: "10.8.1.1"

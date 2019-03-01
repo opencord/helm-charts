@@ -251,41 +251,6 @@ topology_template:
             relationship: tosca.relationships.BelongsToOne
 {{- end -}}
 
-{{- define "rcord-lite.basicFixturesTosca" -}}
-tosca_definitions_version: tosca_simple_yaml_1_0
-description: Some basic fixtures
-imports:
-  - custom_types/siterole.yaml
-  - custom_types/deployment.yaml
-topology_template:
-  node_templates:
-
-# ----------------------------------------------------------------------------
-# Roles
-# ----------------------------------------------------------------------------
-    siterole#admin:
-      type: tosca.nodes.SiteRole
-      properties:
-        role: admin
-    siterole#pi:
-      type: tosca.nodes.SiteRole
-      properties:
-        role: pi
-    siterole#tech:
-      type: tosca.nodes.SiteRole
-      properties:
-        role: tech
-
-# -----------------------------------------------------------------------------
-# Deployment
-# -----------------------------------------------------------------------------
-    MyDeployment:
-      type: tosca.nodes.Deployment
-      properties:
-        name: MyDeployment
-{{- end -}}
-
-
 {{- define "rcord-lite.serviceGraphTosca" -}}
 tosca_definitions_version: tosca_simple_yaml_1_0
 imports:
