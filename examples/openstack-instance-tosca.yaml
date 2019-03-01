@@ -23,7 +23,6 @@
 tosca_definitions_version: tosca_simple_yaml_1_0
 
 imports:
-  - custom_types/deployment.yaml
   - custom_types/flavor.yaml
   - custom_types/image.yaml
   - custom_types/node.yaml
@@ -49,12 +48,6 @@ topology_template:
       type: tosca.nodes.Flavor
       properties:
         name: m1.small
-        must-exist: true
-
-    MyDeployment:
-      type: tosca.nodes.Deployment
-      properties:
-        name: mydeployment
         must-exist: true
 
     mysite:
@@ -87,9 +80,6 @@ topology_template:
       requirements:
         - image:
             node: Ubuntu-14.04
-            relationship: tosca.relationships.BelongsToOne
-        - deployment:
-            node: MyDeployment
             relationship: tosca.relationships.BelongsToOne
         - flavor:
             node: m1.small

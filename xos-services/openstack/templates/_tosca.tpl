@@ -144,12 +144,6 @@ topology_template:
           name: {{ .cordSiteName }}
           must-exist: true
 
-    {{ .cordDeploymentName }}:
-      type: tosca.nodes.Deployment
-      properties:
-        name: {{ .cordDeploymentName }}
-        must-exist: true
-
     service#openstack:
       type: tosca.nodes.OpenStackService
       properties:
@@ -159,6 +153,7 @@ topology_template:
           admin_password: {{ .keystoneAdminPassword }}
           admin_tenant: {{ .keystoneAdminTenant }}
 
+    # TODO: deal with the lack of controller objects
     {{ .cordSiteName }}_{{ .cordDeploymentName }}_openstack:
       type: tosca.nodes.Controller
       requirements:
@@ -175,26 +170,4 @@ topology_template:
           admin_tenant: {{ .keystoneAdminTenant }}
           domain: {{ .keystoneDomain }}
 
-    {{ .cordSiteName }}_deployment_{{ .cordDeploymentName }}:
-        type: tosca.nodes.SiteDeployment
-        requirements:
-            - site:
-                node: {{ .cordSiteName }}
-                relationship: tosca.relationships.BelongsToOne
-            - deployment:
-                node: {{ .cordDeploymentName }}
-                relationship: tosca.relationships.BelongsToOne
-            - controller:
-                node: {{ .cordSiteName }}_{{ .cordDeploymentName }}_openstack
-                relationship: tosca.relationships.BelongsToOne
-
-    {{ .cordSiteName }}_openstack_controller:
-        type: tosca.nodes.ControllerSite
-        requirements:
-            - site:
-                node: {{ .cordSiteName }}
-                relationship: tosca.relationships.BelongsToOne
-            - controller:
-                node: {{ .cordSiteName }}_{{ .cordDeploymentName }}_openstack
-                relationship: tosca.relationships.BelongsToOne
 {{- end -}}
