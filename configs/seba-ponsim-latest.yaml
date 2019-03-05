@@ -86,6 +86,11 @@ rcord:
   image:
     tag: 'master'
 
+# in base-kubernetes chart
+kubernetes:
+  image:
+    tag: 'master'
+
 # in workflow/att-workflow service chart
 att-workflow-driver:
   image:
