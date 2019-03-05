@@ -36,27 +36,27 @@ images:
 
 # VOLTHA
   vcore:
-    tag: 'latest'
+    tag: 'voltha-1.6'
   vcli:
-    tag: 'latest'
+    tag: 'voltha-1.6'
   ofagent:
-    tag: 'latest'
+    tag: 'voltha-1.6'
   netconf:
-    tag: 'latest'
+    tag: 'voltha-1.6'
   envoy_for_etcd:
-    tag: 'latest'
+    tag: 'voltha-1.6'
   alarm_generator:
-    tag: 'latest'
+    tag: 'voltha-1.6'
   freeradius:
     tag: 'latest'
 
 # Ponsimv2
   olt:
     repository: "voltha/voltha-ponsim"
-    tag: "latest"
+    tag: "voltha-1.6"
   onu:
    repository: "voltha/voltha-ponsim"
-   tag: "latest"
+   tag: "voltha-1.6"
 
 # in xos-gui sub-chart required by xos-core chart
 xos-gui:
