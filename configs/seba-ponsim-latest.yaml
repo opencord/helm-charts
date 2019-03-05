@@ -33,6 +33,8 @@ images:
     tag: 'master'
   tosca_loader:
     tag: 'master'
+  kubernetes:
+    tag: 'master'
 
 # VOLTHA
   vcore:
