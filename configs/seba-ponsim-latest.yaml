@@ -98,3 +98,16 @@ att-workflow-driver:
 
   # this is mandatory, it's needed to correctly configure the kafka endpoint
   kafkaService: cord-kafka
+
+# ONOS applications
+aaaAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/aaa/1.8.0-SNAPSHOT/aaa-1.8.0-20181129.184849-116.oar"
+aaaAppVersion: "1.8.0.SNAPSHOT"
+
+sadisAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/sadis-app/2.2.0-SNAPSHOT/sadis-app-2.2.0-20181127.081727-156.oar"
+sadisAppVersion: "2.2.0.SNAPSHOT"
+
+dhcpl2relayAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/dhcpl2relay/1.5.0-SNAPSHOT/dhcpl2relay-1.5.0-20181129.184928-160.oar"
+dhcpl2relayAppVersion: "1.5.0.SNAPSHOT"
+
+oltAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/olt-app/2.1.0-SNAPSHOT/olt-app-2.1.0-20181129.184957-41.oar"
+oltAppVersion: "2.1.0.SNAPSHOT"
