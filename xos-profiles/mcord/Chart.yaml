@@ -17,7 +17,7 @@ name: mcord
 description: A Helm chart for the "mcord" profile
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 1.0.11
+version: 1.0.12
 
 # xosproject/tosca-loader version
 appVersion: 1.1.7

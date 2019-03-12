@@ -17,7 +17,7 @@ apiVersion: v1
 name: att-workflow
 description: A Helm chart for XOS's "att-workflow"
 icon: https://guide.opencord.org/logos/cord.svg
-version: 1.0.5
+version: 1.0.6
 
 # xosproject/tosca-loader version
 appVersion: 1.1.7

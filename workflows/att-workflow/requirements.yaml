@@ -15,5 +15,5 @@
 
 dependencies:
 - name: att-workflow-driver
-  version: 1.0.19
+  version: 1.0.20
   repository: file://../../xos-services/att-workflow-driver
