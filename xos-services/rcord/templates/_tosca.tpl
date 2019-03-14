@@ -18,7 +18,10 @@ limitations under the License.
 tosca_definitions_version: tosca_simple_yaml_1_0
 imports:
   - custom_types/rcordservice.yaml
+  - custom_types/bandwidthprofile.yaml
+
 description: R-CORD service TOSCA
+
 topology_template:
   node_templates:
     service#rcord:
@@ -26,4 +29,14 @@ topology_template:
       properties:
         name: rcord
         kind: data
+
+    bandwidth_profile#default:
+      type: tosca.nodes.BandwidthProfile
+      properties:
+         air: {{ .bandwidthprofile.air }}
+         cbs: {{ .bandwidthprofile.cbs }}
+         cir: {{ .bandwidthprofile.cir }}
+         ebs: {{ .bandwidthprofile.ebs }}
+         eir: {{ .bandwidthprofile.eir }}
+         name: {{ .bandwidthprofile.name }}
 {{- end -}}
