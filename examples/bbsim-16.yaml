@@ -24,6 +24,7 @@ imports:
   - custom_types/attworkflowdriverservice.yaml
   - custom_types/attworkflowdriverwhitelistentry.yaml
   - custom_types/rcordsubscriber.yaml
+  - custom_types/bandwidthprofile.yaml
 
 description: Create a simulated OLT Device in VOLTHA
 topology_template:
@@ -236,6 +237,13 @@ topology_template:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
+    # Default bandwidthprofile, already present in the system
+    default_bp:
+      type: tosca.nodes.BandwidthProfile
+      properties:
+        name: Default
+        must-exist: true
+
     # Pre-provision the subscriber
     bbsim_subscriber_0:
       type: tosca.nodes.RCORDSubscriber
@@ -248,6 +256,13 @@ topology_template:
         circuit_id: circuit0
         remote_id: remote0
         nas_port_id: PON 2/1/01/1:1.1.0
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_1:
       type: tosca.nodes.RCORDSubscriber
@@ -260,6 +275,13 @@ topology_template:
         circuit_id: circuit1
         remote_id: remote1
         nas_port_id: PON 2/1/01/1:1.1.1
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_2:
       type: tosca.nodes.RCORDSubscriber
@@ -272,6 +294,13 @@ topology_template:
         circuit_id: circuit2
         remote_id: remote2
         nas_port_id: PON 2/1/01/1:1.1.2
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_3:
       type: tosca.nodes.RCORDSubscriber
@@ -284,6 +313,13 @@ topology_template:
         circuit_id: circuit3
         remote_id: remote3
         nas_port_id: PON 2/1/01/1:1.1.3
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_4:
       type: tosca.nodes.RCORDSubscriber
@@ -296,6 +332,13 @@ topology_template:
         circuit_id: circuit4
         remote_id: remote4
         nas_port_id: PON 2/1/01/1:1.1.4
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_5:
       type: tosca.nodes.RCORDSubscriber
@@ -308,6 +351,13 @@ topology_template:
         circuit_id: circuit5
         remote_id: remote5
         nas_port_id: PON 2/1/01/1:1.1.5
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_6:
       type: tosca.nodes.RCORDSubscriber
@@ -320,6 +370,13 @@ topology_template:
         circuit_id: circuit6
         remote_id: remote6
         nas_port_id: PON 2/1/01/1:1.1.6
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_7:
       type: tosca.nodes.RCORDSubscriber
@@ -332,6 +389,13 @@ topology_template:
         circuit_id: circuit7
         remote_id: remote7
         nas_port_id: PON 2/1/01/1:1.1.7
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_8:
       type: tosca.nodes.RCORDSubscriber
@@ -344,6 +408,13 @@ topology_template:
         circuit_id: circuit8
         remote_id: remote8
         nas_port_id: PON 2/1/01/1:1.1.8
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_9:
       type: tosca.nodes.RCORDSubscriber
@@ -356,6 +427,13 @@ topology_template:
         circuit_id: circuit9
         remote_id: remote9
         nas_port_id: PON 2/1/01/1:1.1.9
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_a:
       type: tosca.nodes.RCORDSubscriber
@@ -368,6 +446,13 @@ topology_template:
         circuit_id: circuit10a
         remote_id: remote10a
         nas_port_id: PON 2/1/01/1:1.1.10a
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_b:
       type: tosca.nodes.RCORDSubscriber
@@ -380,6 +465,13 @@ topology_template:
         circuit_id: circuit10b
         remote_id: remote10b
         nas_port_id: PON 2/1/01/1:1.1.10b
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_c:
       type: tosca.nodes.RCORDSubscriber
@@ -392,6 +484,13 @@ topology_template:
         circuit_id: circuit10c
         remote_id: remote10c
         nas_port_id: PON 2/1/01/1:1.1.10c
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_d:
       type: tosca.nodes.RCORDSubscriber
@@ -404,6 +503,13 @@ topology_template:
         circuit_id: circuit10d
         remote_id: remote10d
         nas_port_id: PON 2/1/01/1:1.1.10d
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_e:
       type: tosca.nodes.RCORDSubscriber
@@ -416,6 +522,13 @@ topology_template:
         circuit_id: circuit10e
         remote_id: remote10e
         nas_port_id: PON 2/1/01/1:1.1.10e
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_f:
       type: tosca.nodes.RCORDSubscriber
@@ -428,3 +541,11 @@ topology_template:
         circuit_id: circuit10f
         remote_id: remote10f
         nas_port_id: PON 2/1/01/1:1.1.10f
+      requirements:
+        - upstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: default_bp
+            relationship: tosca.relationships.BelongsToOne
+
