@@ -24,3 +24,12 @@ etcd-cluster:
 att-workflow-driver:
   # this is mandatory, it's needed to correctly configure the kafka endpoint
   kafkaService: cord-kafka
+
+# in workflow/tt-workflow service chart
+tt-workflow-driver:
+  image:
+    repository: andybavier/test-image-synchronizer
+    tag: tt-workflow-driver
+
+  # this is mandatory, it's needed to correctly configure the kafka endpoint
+  kafkaService: cord-kafka
