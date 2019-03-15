@@ -63,3 +63,5 @@ fabric:
   enabled: true
 onos-service:
   enabled: true
+
+workflow: att-workflow

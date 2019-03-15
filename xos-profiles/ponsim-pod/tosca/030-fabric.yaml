@@ -22,7 +22,7 @@ imports:
   - custom_types/bngportmapping.yaml
   - custom_types/serviceinstanceattribute.yaml
 
-description: Configures the Ponsim SEBA POD with AT&T workflow
+description: Configures the Ponsim SEBA POD fabric
 
 topology_template:
   node_templates:

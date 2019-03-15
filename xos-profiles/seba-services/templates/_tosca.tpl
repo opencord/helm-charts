@@ -93,6 +93,8 @@ topology_template:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
+{{- if ne .workflow "tt-workflow" }}
+
     onos_app#aaa:
       type: tosca.nodes.ONOSApp
       properties:
@@ -105,6 +107,7 @@ topology_template:
         - owner:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
+{{- end }}
 
     onos_app#kafka:
       type: tosca.nodes.ONOSApp
@@ -113,7 +116,11 @@ topology_template:
         app_id: org.opencord.kafka
         url: {{ .kafkaAppUrl }}
         version: {{ .kafkaAppVersion }}
+{{- if ne .workflow "tt-workflow" }}
         dependencies: org.opencord.olt,org.opencord.aaa,org.opencord.dhcpl2relay
+{{- else }}
+        dependencies: org.opencord.olt,org.opencord.dhcpl2relay
+{{- end }}
       requirements:
         - owner:
             node: service#onos
@@ -148,6 +155,8 @@ topology_template:
             node: onos_app#olt
             relationship: tosca.relationships.BelongsToOne
 
+{{- if ne .workflow "tt-workflow" }}
+
     aaa-config-attr:
       type: tosca.nodes.ServiceInstanceAttribute
       properties:
@@ -165,6 +174,7 @@ topology_template:
         - service_instance:
             node: onos_app#aaa
             relationship: tosca.relationships.BelongsToOne
+{{- end }}
 
     sadis-config-attr:
       type: tosca.nodes.ServiceInstanceAttribute
@@ -393,5 +403,5 @@ topology_template:
     constraints:
       type: tosca.nodes.ServiceGraphConstraint
       properties:
-        constraints: '[[null, "rcord", null], [null, "volt", null], ["onos", "fabric-crossconnect", "att-workflow-driver"], ["fabric", null, null]]'
+        constraints: '[[null, "rcord", null], [null, "volt", null], ["onos", "fabric-crossconnect", "{{ .Values.workflow }}-driver"], ["fabric", null, null]]'
 {{- end -}}
