@@ -40,9 +40,6 @@ xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
 # ONOS applications
-aaaAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/aaa/1.8.0/aaa-1.8.0.oar"
-aaaAppVersion: "1.8.0"
-
 sadisAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/sadis-app/2.2.0/sadis-app-2.2.0.oar"
 sadisAppVersion: "2.2.0"
 

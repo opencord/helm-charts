@@ -1,4 +1,5 @@
 ---
+
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +15,11 @@
 # limitations under the License.
 
 apiVersion: v1
-name: att-workflow
-description: A Helm chart for XOS's "att-workflow"
-icon: https://guide.opencord.org/logos/cord.svg
-version: 1.1.0
-
-# xosproject/tosca-loader version
-appVersion: 1.1.7
+kind: ConfigMap
+metadata:
+  name: tt-workflow-tosca
+data:
+  010-fixtures.yaml: |
+{{ include "tt-workflow-driver.serviceTosca"  (index .Values "tt-workflow-driver") | indent 4 }}
+  300-service-graph.yaml: |
+{{ include "tt-workflow.serviceGraphTosca" . | indent 4 }}

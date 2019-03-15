@@ -13,11 +13,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-name: att-workflow
-description: A Helm chart for XOS's "att-workflow"
-icon: https://guide.opencord.org/logos/cord.svg
-version: 1.1.0
+# Default values for the tt-workflow profile.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
 
-# xosproject/tosca-loader version
-appVersion: 1.1.7
+
+nameOverride: ""
+fullnameOverride: ""
+
+images:
+  tosca_loader:
+    repository: 'xosproject/tosca-loader'
+    tag: '{{ .Chart.AppVersion }}'
+    pullPolicy: 'Always'
+
+global:
+  registry: ""
+
+tt-workflow-driver:
+  kafkaService: "cord-platform-kafka"
+
+xosAdminUser: "admin@opencord.org"
+xosAdminPassword: "letmein"

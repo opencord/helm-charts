@@ -32,3 +32,6 @@ global:
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
+
+# Supported workflows: att-workflow (AT&T) or tt-workflow (Turk Telekom)
+workflow: att-workflow

@@ -1,0 +1,43 @@
+---
+# Copyright 2018-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# curl -H "xos-username: admin@opencord.org" -H "xos-password: letmein" -X POST --data-binary 010-tt-workflow.yaml http://10.90.0.101:30007/run
+
+tosca_definitions_version: tosca_simple_yaml_1_0
+imports:
+  - custom_types/servicedependency.yaml
+  - custom_types/voltservice.yaml
+  - custom_types/ttworkflowdriverwhitelistentry.yaml
+  - custom_types/ttworkflowdriverservice.yaml
+description: Create an instance of the OSS Service and connect it to the vOLT Service
+topology_template:
+  node_templates:
+
+    service#tt:
+      type: tosca.nodes.TtWorkflowDriverService
+      properties:
+        name: tt-workflow-driver
+        must-exist: true
+
+    whitelist:
+      type: tosca.nodes.TtWorkflowDriverWhiteListEntry
+      properties:
+        serial_number: PSMO12345678
+        device_id: of:0000aabbccddeeff
+        pon_port_id: 1
+      requirements:
+        - owner:
+            node: service#tt
+            relationship: tosca.relationships.BelongsToOne

@@ -13,11 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-name: att-workflow
-description: A Helm chart for XOS's "att-workflow"
-icon: https://guide.opencord.org/logos/cord.svg
-version: 1.1.0
-
-# xosproject/tosca-loader version
-appVersion: 1.1.7
+dependencies:
+- name: tt-workflow-driver
+  version: 0.1.0-dev
+  repository: file://../../xos-services/tt-workflow-driver

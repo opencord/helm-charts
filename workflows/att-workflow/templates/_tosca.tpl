@@ -21,6 +21,7 @@ imports:
   - custom_types/attworkflowdriverservice.yaml
   - custom_types/voltservice.yaml
   - custom_types/servicedependency.yaml
+  - custom_types/servicegraphconstraint.yaml
 description: att-workflow-driver service graph
 topology_template:
   node_templates:
@@ -49,5 +50,61 @@ topology_template:
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
             node: service#volt
+            relationship: tosca.relationships.BelongsToOne
+
+    constraints:
+      type: tosca.nodes.ServiceGraphConstraint
+      properties:
+        constraints: '[[null, "rcord", null], [null, "volt", null], ["onos", "fabric-crossconnect", "att-workflow-driver"], ["fabric", null, null]]'
+{{- end -}}
+
+{{- define "att-workflow.onosTosca" -}}
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+imports:
+   - custom_types/onosapp.yaml
+   - custom_types/onosservice.yaml
+   - custom_types/serviceinstanceattribute.yaml
+
+description: Configures workflow-specific ONOS apps
+
+topology_template:
+  node_templates:
+
+    service#onos:
+      type: tosca.nodes.ONOSService
+      properties:
+          name: onos
+          must-exist: true
+
+    onos_app#aaa:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: aaa
+        app_id: org.opencord.aaa
+        url: {{ .Values.aaaAppUrl }}
+        version: {{ .Values.aaaAppVersion }}
+        dependencies: org.opencord.sadis
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
+    aaa-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration/apps/org.opencord.aaa
+        value: >
+          {
+            "AAA" : {
+              "radiusConnectionType" : "socket",
+              "radiusHost" : "freeradius.voltha.svc.cluster.local",
+              "radiusServerPort" : "1812",
+              "radiusSecret" : "SECRET"
+            }
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#aaa
             relationship: tosca.relationships.BelongsToOne
 {{- end -}}

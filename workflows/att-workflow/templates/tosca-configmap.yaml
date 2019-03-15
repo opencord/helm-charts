@@ -21,5 +21,7 @@ metadata:
 data:
   010-fixtures.yaml: |
 {{ include "att-workflow-driver.serviceTosca"  (index .Values "att-workflow-driver") | indent 4 }}
+  100-onos-apps.yaml: |
+{{ include "att-workflow.onosTosca" . | indent 4 }}
   300-service-graph.yaml: |
 {{ include "att-workflow.serviceGraphTosca" . | indent 4 }}

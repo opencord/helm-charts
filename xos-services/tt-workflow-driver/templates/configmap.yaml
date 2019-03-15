@@ -14,10 +14,9 @@
 # limitations under the License.
 
 apiVersion: v1
-name: att-workflow
-description: A Helm chart for XOS's "att-workflow"
-icon: https://guide.opencord.org/logos/cord.svg
-version: 1.1.0
-
-# xosproject/tosca-loader version
-appVersion: 1.1.7
+kind: ConfigMap
+metadata:
+  name: tt-workflow-driver
+data:
+  serviceConfig: |
+{{ include "tt-workflow-driver.serviceConfig" . | indent 4 }}
