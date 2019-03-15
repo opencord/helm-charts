@@ -93,19 +93,6 @@ topology_template:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
-    onos_app#aaa:
-      type: tosca.nodes.ONOSApp
-      properties:
-        name: aaa
-        app_id: org.opencord.aaa
-        url: {{ .aaaAppUrl }}
-        version: {{ .aaaAppVersion }}
-        dependencies: org.opencord.sadis
-      requirements:
-        - owner:
-            node: service#onos
-            relationship: tosca.relationships.BelongsToOne
-
     onos_app#kafka:
       type: tosca.nodes.ONOSApp
       properties:
@@ -113,7 +100,6 @@ topology_template:
         app_id: org.opencord.kafka
         url: {{ .kafkaAppUrl }}
         version: {{ .kafkaAppVersion }}
-        dependencies: org.opencord.olt,org.opencord.aaa,org.opencord.dhcpl2relay
       requirements:
         - owner:
             node: service#onos
@@ -146,24 +132,6 @@ topology_template:
       requirements:
         - service_instance:
             node: onos_app#olt
-            relationship: tosca.relationships.BelongsToOne
-
-    aaa-config-attr:
-      type: tosca.nodes.ServiceInstanceAttribute
-      properties:
-        name: /onos/v1/network/configuration/apps/org.opencord.aaa
-        value: >
-          {
-            "AAA" : {
-              "radiusConnectionType" : "socket",
-              "radiusHost" : "freeradius.voltha.svc.cluster.local",
-              "radiusServerPort" : "1812",
-              "radiusSecret" : "SECRET"
-            }
-          }
-      requirements:
-        - service_instance:
-            node: onos_app#aaa
             relationship: tosca.relationships.BelongsToOne
 
     sadis-config-attr:
@@ -389,9 +357,4 @@ topology_template:
         - provider_service:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
-
-    constraints:
-      type: tosca.nodes.ServiceGraphConstraint
-      properties:
-        constraints: '[[null, "rcord", null], [null, "volt", null], ["onos", "fabric-crossconnect", "att-workflow-driver"], ["fabric", null, null]]'
 {{- end -}}
