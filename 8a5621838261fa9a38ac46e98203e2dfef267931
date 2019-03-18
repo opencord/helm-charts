@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "df879096_c881fdd8",
+        "filename": "xos-profiles/seba-services/templates/_tosca.tpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-03-18T23:35:43Z",
+      "side": 1,
+      "message": "Agreed with scott, would be better to add than subtract, as thing could get confusing very quickly if we add a 3rd workflow",
+      "range": {
+        "startLine": 96,
+        "startChar": 7,
+        "endLine": 96,
+        "endChar": 9
+      },
+      "revId": "8a5621838261fa9a38ac46e98203e2dfef267931",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
