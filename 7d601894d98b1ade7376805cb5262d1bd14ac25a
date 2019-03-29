@@ -22,6 +22,30 @@
       "revId": "7d601894d98b1ade7376805cb5262d1bd14ac25a",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "266794c9_a7e121c6",
+        "filename": "xos-services/rcord/templates/_tosca.tpl",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2019-03-29T19:55:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3f1e64c_fbd41069",
+      "range": {
+        "startLine": 33,
+        "startChar": 4,
+        "endLine": 33,
+        "endChar": 29
+      },
+      "revId": "7d601894d98b1ade7376805cb5262d1bd14ac25a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
