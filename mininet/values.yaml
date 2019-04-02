@@ -23,7 +23,7 @@ fullnameOverride: ""
 
 image:
   repository: ciena/mininet
-  tag: latest
+  tag: ubuntu-bionic
   pullPolicy: IfNotPresent
 
 resources: {}
@@ -49,3 +49,4 @@ annotations:
   cni: "calico,pon1"
 
 onosOpenflowSvc: "onos-openflow.default.svc.cluster.local"
+vlanMatchDepth: 2

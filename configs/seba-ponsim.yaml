@@ -33,3 +33,6 @@ tt-workflow-driver:
 
   # this is mandatory, it's needed to correctly configure the kafka endpoint
   kafkaService: cord-kafka
+
+# in mininet chart
+vlanMatchDepth: 1
