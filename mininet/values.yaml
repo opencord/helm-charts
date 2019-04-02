@@ -23,7 +23,7 @@ fullnameOverride: ""
 
 image:
   repository: ciena/mininet
-  tag: latest
+  tag: ubuntu-bionic
   pullPolicy: IfNotPresent
 
 resources: {}
