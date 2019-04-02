@@ -35,6 +35,7 @@ if __name__ == '__main__':
     print quietRun( 'apt-get -y install dnsmasq ethtool' )
 
     info( '*** Creating network\n' )
+    print quietRun( 'ovs-vsctl set Open_vSwitch . other_config:vlan-limit={{ .Values.vlanMatchDepth }}' )
     OVSSwitch13 = partial( OVSSwitch, protocols='OpenFlow13' )
     controllerIp = socket.gethostbyname( '{{ .Values.onosOpenflowSvc }}' )
     net = Mininet( topo=SingleSwitchTopo(1),
@@ -51,8 +52,8 @@ if __name__ == '__main__':
 
     bgphost = net.hosts [ 0 ]
     info( '*** Adding VLAN interface to host\n')
-    bgphost.cmd( 'ip link add link h1-eth0 name h1-eth0.222 type vlan id 222' )
-    bgphost.cmd( 'ip link add link h1-eth0.222 name h1-eth0.222.111 type vlan id 111' )
+    bgphost.cmd( 'ip link add link h1-eth0 name h1-eth0.222 type vlan proto 802.1Q id 222' )
+    bgphost.cmd( 'ip link add link h1-eth0.222 name h1-eth0.222.111 type vlan proto 802.1Q id 111' )
     bgphost.cmd( 'ifconfig h1-eth0.222 up' )
     bgphost.cmd( 'ifconfig h1-eth0.222.111 up' )
     bgphost.cmd( 'ifconfig h1-eth0.222.111 172.18.0.10/24' )
