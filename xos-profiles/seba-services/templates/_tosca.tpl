@@ -148,6 +148,16 @@ topology_template:
                 },
                 "url" : "http://sadis-service:8000/subscriber/%s"
               }
+            },
+            "bandwidthprofile":{
+               "integration":{
+                  "url": "http://sadis-service:8000/bandwidthprofiles/%s",
+                  "cache":{
+                     "enabled":true,
+                     "maxsize":40,
+                     "ttl":"PT1m"
+                  }
+               }
             }
           }
       requirements:

@@ -21,8 +21,8 @@ images:
     pullPolicy: 'Always'
 
   xos_ws:
-    repository: 'xosproject/xos-ws'
-    tag: '2.0.1'
+    repository: 'xosproject/xos-rest-gw'
+    tag: '2.0.2'
     pullPolicy: 'Always'
 
 global:

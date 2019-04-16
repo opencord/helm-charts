@@ -38,7 +38,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           args:
-               - "/usr/local/bin/xossh"
+               - "/usr/bin/xossh"
                - "-u"
                - "{{ .Values.xosshConfig.accessor.username }}"
                - "-p"
