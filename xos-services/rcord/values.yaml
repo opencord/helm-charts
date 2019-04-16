@@ -36,6 +36,15 @@ xosCoreService: "xos-core:50051"
 
 kafkaService: "cord-kafka"
 
+# Default bandwidthprofile, used for flows not associated with a subscriber (e.g., EAPOL)
+bandwidthprofile:
+  name: "Default"
+  air: 10000
+  cbs: 10000
+  cir: 10000
+  ebs: 10000
+  eir: 10000
+
 resources: {}
 
 nodeSelector: {}
