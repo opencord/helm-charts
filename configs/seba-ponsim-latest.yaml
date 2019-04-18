@@ -124,5 +124,5 @@ dhcpl2relayAppVersion: "1.6.0.SNAPSHOT"
 oltAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/olt-app/3.0.1-SNAPSHOT/olt-app-3.0.1-20190410.071612-30.oar"
 oltAppVersion: "3.0.1.SNAPSHOT"
 
-kafkaAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/kafka/1.1.0-SNAPSHOT/kafka-1.1.0-20190410.071556-30.oar"
+kafkaAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/kafka/1.1.0-SNAPSHOT/kafka-1.1.0-20190418.234953-39.oar"
 kafkaAppVersion: "1.1.0.SNAPSHOT"
