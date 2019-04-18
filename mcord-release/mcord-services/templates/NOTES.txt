@@ -1,0 +1,32 @@
+{{- /*
+# Copyright 2018-present Open Networking Foundation
+# Copyright 2018 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+*/ -}}
+
+This is the instruction to configure your eNodeB to work with ONF M-CORD. You can find architecture illustration in assets/mcord-architecture.png.
+
+1. Check the eNodeB is operating in following information:
+    eNodeB Address: {{ .Values.enb.host }}
+    eNodeB S1 port: {{ .Values.enb.port }}
+
+2. Configure eNodeB with the correct MME information, get MME IP by following commands:
+    export MMEIP=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.status.podIP}" pods mme-0
+    export MMEPORT="36412"
+
+    MMEPORT is fixed in templates/mme.yaml.
+
+3. Make sure UE's SIM card information is configured in hss.yaml.
+
+4. Attach UE to M-CORD.

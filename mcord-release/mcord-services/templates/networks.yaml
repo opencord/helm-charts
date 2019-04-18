@@ -1,0 +1,25 @@
+{{- range .Values.networks }}
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: {{ .name }}
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov
+spec:
+  config: '{
+    "type": {{ .sriovtype | quote }},
+    "name": {{ .name | quote }},
+    "ipam": {
+        "type": {{ .ipamtype | quote }},
+    {{- if eq .ipamtype "host-local" }}
+        "subnet": {{ .subnet | quote }},
+        "gateway": {{ .gateway | quote }}
+    {{- else if eq .ipamtype "centralip" }}
+        "ipType": "cluster",
+        "network": {{ .subnet | quote }},
+        "etcdURL": {{ $.Values.global.etcdurl | quote }}
+    {{- end }}
+    }
+}'
+{{- end }}
