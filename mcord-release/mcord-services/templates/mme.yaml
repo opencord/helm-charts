@@ -1,0 +1,293 @@
+---
+# Copyright 2018-present Open Networking Foundation
+# Copyright 2018 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.mme.name }}
+data:
+  launch.sh: |
+    #!/bin/bash
+
+    cd /opt/c3po/mme/bin
+    cp /etc/mme/conf/{vbsm_cfg.txt,vbfd.conf} .
+
+    # from vbsm_cfg.txt
+    SGW_S11_IP=${SGW_S11_IP:-sgw.localdomain}
+    ENB_S1AP_IP=${ENB_S1AP_IP:-enb1.localdomain}
+    ENB_S1AP_PORT=${ENB_S1AP_PORT:-36412}
+    MME_ETH0_IP=${MME_ETH0_IP:-0.0.0.0}
+
+    # from vbfd.conf
+    HSS_CONNECT_PEER=${HSS_CONNECT_PEER:-hss.localdomain}
+    HSS_S6A_IP=${HSS_S6A_IP:-hss.localdomain}
+    HSS_PORT=${HSS_PORT:-3868}
+    VAR_HSS_REALM=${VAR_HSS_REALM:-openair4G.eur}
+
+    sed -i "s/SGW_S11_IP/$(dig $SGW_S11_IP +short)/g" vbsm_cfg.txt
+    sed -i "s/ENB_S1AP_IP/$ENB_S1AP_IP/g" vbsm_cfg.txt
+    sed -i "s/ENB_S1AP_PORT/$ENB_S1AP_PORT/g" vbsm_cfg.txt
+    sed -i "s/MME_ETH0_IP/$MME_ETH0_IP/g" vbsm_cfg.txt
+    sed -i "s/VAR_HSS_HOST/$HSS_CONNECT_PEER/g" vbsm_cfg.txt
+    sed -i "s/VAR_HSS_REALM/$VAR_HSS_REALM/g" vbsm_cfg.txt
+
+    MME_HOST=$(hostname)
+    MME_DOMAIN=$(dnsdomainname)
+    sed -i "s/HSS_CONNECT_PEER/$HSS_CONNECT_PEER/g" vbfd.conf
+    sed -i "s/HSS_S6A_IP/$HSS_S6A_IP/g" vbfd.conf
+    sed -i "s/HSS_PORT/$HSS_PORT/g" vbfd.conf
+    sed -i "s/MME_IDENTITY/$MME_HOST.$MME_DOMAIN/g" vbfd.conf
+    sed -i "s/MME_REALM/$MME_DOMAIN/g" vbfd.conf
+    sed -i "s/MME_HOST/$MME_HOST/g" vbfd.conf
+
+    # generate the certs
+    ./make_certs.sh $MME_HOST $MME_DOMAIN
+
+    # finally, launch
+    ./vb_acc
+  vbfd.conf: |
+    # -------- Test configuration ---------
+
+    # Identity = "<diameter_host>.<diameter_realm>";
+    Identity = "MME_IDENTITY";
+    Realm = "MME_REALM";
+    # Port = 3868;
+    # SecPort = 3869;
+
+    ConnectPeer = "HSS_CONNECT_PEER" { ConnectTo = "HSS_S6A_IP"; No_TLS; port = HSS_PORT; };
+
+    # TLS_Cred = "<diameter_host>.cert.pem", "<diameter_host>.key.pem";
+    TLS_Cred = "MME_HOST.cert.pem",
+        "MME_HOST.key.pem";
+    TLS_CA = "cacert.pem";
+
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_3gpp2_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_draftload_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_etsi283034_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4004_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4006bis_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4072_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4590_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5447_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5580_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5777_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5778_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc6734_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc6942_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7155_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7683_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7944_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29061_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29128_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29154_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29173_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29212_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29214_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29215_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29217_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29229_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29272_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29273_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29329_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29336_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29337_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29338_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29343_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29344_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29345_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29368_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29468_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts32299_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6as6d.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6c.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6t.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_SGd.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_T6aT6bT7.fdx";
+  vbsm_cfg.txt: |
+    # Configuration file for MME
+
+    #####  NOTE: Please Do NOT change the order of the parameters #####
+
+    # EGTP related
+    VBSM_EG_DFLT_PORT                2123                     # EGTP Default port
+    VBSM_EG_NONDFLT_PORT             2124                     # EGTP Non Default port
+    VBSM_EG_S10_NONDFLT_PORT         2125                     # EGTP Non Default
+    VBSM_EG_S3_NONDFLT_PORT          2126                     # EGTP Non Default port for S3 interface towards SGSN
+                                                              # port for S10
+    VBSM_EG_DFLT_HOST_NAME           "sutlej.ccin.ccpu.com"   # EGTP host name
+
+    # E-NodeB related
+    VBSM_ENB_ADDR_1                  "ENB_S1AP_IP"      # IP address of eNodeB
+    VBSM_ENB_PORT_1                  "ENB_S1AP_PORT"    # eNodeB port
+    #VBSM_ENB_ADDR_2                  "172.26.20.180"    # IP address of eNodeB
+    #VBSM_ENB_PORT_2                  36422              # eNodeB port
+
+    # MME related
+    VBSM_MME_IPADDR                  "MME_ETH0_IP"    # MME IP address
+    VBSM_MME_S1AP_IPADDR             "MME_ETH0_IP"    # MME IP address associated with the S1AP interface
+    VBSM_MME_EGTP_IPADDR             "MME_ETH0_IP"    # MME IP address associated with the EGTP interface
+    VBSM_MME_SCTP_PORT               36412              # MME SCTP port
+
+    VBSM_SGW_IPADDR                  "SGW_S11_IP"   # SGW IP address
+    VBSM_PGW_IPADDR                  "192.168.1.105"    # PDN-GW IP address
+
+    VBSM_UE_NUM                      1000             # Support 1000 UE's
+    VBSM_SCTP_UDP_SERV_TYPE          0              #service type,default 0 SCTP
+
+    # Debug mask to be set; each represent
+    #different debug masks to be set (1 and 0 to unset)
+    #in the form |LVB_DBGMASK_INFO|LVB_DBGMASK_ERROR|LVB_DBGMASK_TRC|LVB_DBGMASK_MEM
+
+    VBSM_MME_DBG_MASK                1111
+    VBSM_DBG_MASK                    1111
+    VBSM_NW_INIATED_DETACH_TIMER     1000
+
+    VBSM_MCC_DIG1         2
+    VBSM_MCC_DIG2         0
+    VBSM_MCC_DIG3         8
+
+    VBSM_MNC_DIG1         0
+    VBSM_MNC_DIG2         1
+    VBSM_MNC_DIG3         -1
+
+    # Target PLMN ID format [ MCC + MNC], + is concatination operator
+    # If MNC has two digits, the last charater shall be 'f'
+    # Valid Configurations: 11223f, 112345.
+    VBSM_TARGET_MME_PLMN_ID          31310f
+    VBSM_TARGET_MME_IP_ADDR          "192.25.1.100"
+
+    VBSM_T3412                        32
+
+    VBSM_SGSN_IP_ADDR                "192.25.1.195"
+
+
+    VBSM_SGSN_PLMN_ID        31311f
+
+    VBSM_FD_CFG  "vbfd.conf"
+    VBSM_HSS_HOST "VAR_HSS_HOST"
+    VBSM_HSS_REALM "VAR_HSS_REALM"
+
+    # set VBSM_DISABLE_EPC_DNS 0 - enable DNS,  1 - disable DNS
+    VBSM_DISABLE_EPC_DNS 1
+    VBSM_DISABLE_EIA0 1
+    VBSM_REL_CAP 1
+    VBSM_MME_NAME "vmmestandalone"
+    VBSM_S1C_SCTP_INSTREAMS 10
+    VBSM_S1C_SCTP_OUTSTREAMS 10
+    VBSM_MAX_ENB  2
+    VBSM_NO_OFGUMMEIS 1
+    VBSM_MMECODE  1
+    VBSM_MMEGRPID 1
+    VBSM_NO_OF_TAI 1
+    VBSM_TAI_LIST    {{"{{1,2,0,8,0,1,1}}"}}
+
+    VBSM_SMS_ROUTER_HOST "smsrouter.test3gpp.net"
+    VBSM_SMS_ROUTER_REALM "test3gpp.net"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mme
+spec:
+  selector:
+    app: mme
+  clusterIP: None
+  ports:
+  - name: s11
+    port: 2123
+    protocol: UDP
+  - name: s1ap
+    port: 36412
+    protocol: TCP
+  - name: s6a
+    port: 3868
+    protocol: TCP
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.mme.name }}
+  labels:
+    app: {{ .Values.mme.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.mme.name }}
+  serviceName: {{ .Values.mme.name | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mme.name }}
+    spec:
+      # Insert iptable rules as MME implements a userspace SCTP stack
+      initContainers:
+      - name: init-mme
+        image: {{ .Values.mme.initimage }}
+        command: [ "sh", "-c"]
+        securityContext:
+          capabilities:
+            add:
+              - NET_ADMIN
+        args:
+        - iptables -A OUTPUT -p sctp --sport 36412 --chunk-types any ABORT -j DROP;
+          until nslookup hss-0.{{ .Values.hss.name }}.{{ .Values.global.namespace }}.{{ .Values.global.fqdn }};
+          do echo "waiting for hss"; sleep 2; done;
+      containers:
+      - name: mme
+        image: {{ .Values.mme.image | quote }}
+        imagePullPolicy: {{ .Values.global.imagepullpolicy }}
+        env:
+          - name: SGW_S11_IP
+            value: cp-0.cp
+          - name: MME_ETH0_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          - name: ENB_S1AP_IP
+            value: {{ .Values.enb.host | quote }}
+          - name: ENB_S1AP_PORT
+            value: {{ .Values.enb.port | quote }}
+          - name: HSS_CONNECT_PEER
+            value: hss-0.{{ .Values.hss.name }}.{{ .Values.global.namespace }}.{{ .Values.global.fqdn }}
+          - name: VAR_HSS_REALM
+            value: {{ .Values.hss.name }}.{{ .Values.global.namespace }}.{{ .Values.global.fqdn }}
+          - name: HSS_S6A_IP
+            value: hss-0.{{ .Values.hss.name }}.{{ .Values.global.namespace }}.{{ .Values.global.fqdn }}
+          - name: HSS_PORT
+            value: "3868"
+        stdin: true
+        tty: true
+        #command: [ "sleep", "3600"]
+        resources:
+          limits:
+            cpu: {{ .Values.mme.cpu | quote }}
+            memory: {{ .Values.mme.memory }}
+        volumeMounts:
+        - name: mme-script
+          mountPath: /opt/c3po/mme/bin/launch.sh
+          subPath: launch.sh
+        - name: mme-config
+          mountPath: /etc/mme/conf
+      volumes:
+      - name: mme-script
+        configMap:
+          name: {{ .Values.mme.name }}
+          defaultMode: 493
+      - name: mme-config
+        configMap:
+          name: {{ .Values.mme.name }}
+          defaultMode: 420
