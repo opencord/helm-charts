@@ -1,0 +1,109 @@
+---
+# Copyright 2018-present Open Networking Foundation
+# Copyright 2018 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.hssdb.name }}
+data:
+  cassandra-rackdc.properties: |
+    dc=DC1
+    rack=RAC1
+    prefer_local=true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.hssdb.name }}
+  name: {{ .Values.hssdb.name }}
+spec:
+  clusterIP: None
+  ports:
+  - name: cql
+    port: 9042
+  selector:
+    app: {{ .Values.hssdb.name }}
+---
+apiVersion: "apps/v1"
+kind: StatefulSet
+metadata:
+  name: {{ .Values.hssdb.name }}
+  labels:
+     app: {{ .Values.hssdb.name }}
+spec:
+  serviceName: {{ .Values.hssdb.name }}
+  replicas: 1 # 3
+  selector:
+    matchLabels:
+      app: {{ .Values.hssdb.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.hssdb.name }}
+    spec:
+      securityContext:
+        runAsUser: 999
+        fsGroup: 999
+      containers:
+      - name: cassandra
+        image: {{ .Values.hssdb.image }}
+        imagePullPolicy: {{ .Values.global.imagepullpolicy }}
+        ports:
+        - containerPort: 9042
+          name: cql
+        resources:
+          limits:
+            cpu: {{ .Values.hssdb.cpu | quote }}
+            memory: {{ .Values.hssdb.memory }}
+        env:
+        - name: MAX_HEAP_SIZE
+          value: 512M
+        - name: HEAP_NEWSIZE
+          value: 100M
+        - name: CASSANDRA_SEEDS
+          value: "hssdb-0.{{ .Values.hssdb.name }}.{{ .Values.global.namespace }}.{{ .Values.global.fqdn }}"
+        - name: CASSANDRA_CLUSTER_NAME
+          value: "HSS Cluster"
+        - name: CASSANDRA_RPC_ADDRESS
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: CASSANDRA_ENDPOINT_SNITCH
+          value: "GossipingPropertyFileSnitch"
+        readinessProbe:
+          exec:
+            command: ["/bin/bash", "-c", "nodetool status -r | awk -v h=$(hostname) '$2==h {exit ($1==\"UN\" ? 0 : -1)}'"]
+          initialDelaySeconds: 15
+          timeoutSeconds: 5
+        volumeMounts:
+        - name: hssdb-config
+          mountPath: /etc/cassandra/cassandra-rackdc.properties
+          subPath: cassandra-rackdc.properties
+        #- name: hssdb-data
+        #  mountPath: /var/lib/cassandra
+      volumes:
+      - name: hssdb-config
+        configMap:
+          name: {{ .Values.hssdb.name }}
+#  volumeClaimTemplates:
+#  - metadata:
+#      name: hssdb-data
+#    spec:
+#      accessModes: [ "ReadWriteOnce" ]
+#      resources:
+#        requests:
+#          storage: 1Gi
