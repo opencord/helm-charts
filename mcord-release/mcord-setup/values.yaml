@@ -1,0 +1,8 @@
+sriovds:
+  initimage: aweimeow/multus-sriov
+  image: aweimeow/multus-sriov
+
+sriov:
+  name: sriov
+  devicepci: 04:00.0
+  devicetype: vfio
