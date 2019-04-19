@@ -1,0 +1,30 @@
+ {
+   "flows": [
+     {
+       "priority": 40000,
+       "timeout": 0,
+       "isPermanent": true,
+       "deviceId": "of:0000aabbccddeeff",
+       "treatment": {
+         "instructions": [
+           {
+             "type": "OUTPUT",
+             "port": "CONTROLLER"
+           }
+         ]
+       },
+       "selector": {
+         "criteria": [
+           {
+             "type": "ETH_TYPE",
+             "ethType": "0x888e"
+           },
+           {
+             "type": "IN_PORT",
+             "port": "128"
+           }
+         ]
+       }
+     }
+   ]
+ }

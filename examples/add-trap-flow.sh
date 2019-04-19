@@ -1,4 +1,5 @@
----
+#!/usr/bin/env bash
+
 # Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,11 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: ponsim-pod
-description: A Helm chart for loading the Ponsim pod's TOSCA files into XOS
-icon: https://guide.opencord.org/logos/xos.svg
+# add-trap-flow.sh
+# Adds the EAPOL trap flow needed by Ponsim.  In VOLTHA master, Ponsim has the wrong EAPOL trap flow loaded by the adapter.
 
-version: 1.2.0
-
-# xosproject/tosca-loader version
-appVersion: 1.1.5
+http -a karaf:karaf POST http://127.0.0.1:30120/onos/v1/flows < $( dirname "$0" )/add-trap-flow.json

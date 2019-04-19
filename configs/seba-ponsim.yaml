@@ -36,3 +36,6 @@ tt-workflow-driver:
 
 # in mininet chart
 vlanMatchDepth: 1
+
+# in ponsim-pod chart
+bandwidthProfiles: False
