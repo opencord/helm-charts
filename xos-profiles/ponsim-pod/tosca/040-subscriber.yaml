@@ -16,11 +16,27 @@
 tosca_definitions_version: tosca_simple_yaml_1_0
 imports:
   - custom_types/rcordsubscriber.yaml
+{{- if .Values.bandwidthProfiles }}
+  - custom_types/bandwidthprofile.yaml
+{{- end }}
 
 description: Pre-provsion a subscriber
 
 topology_template:
   node_templates:
+
+{{- if .Values.bandwidthProfiles }}
+    # Bronze bandwidthprofile for subscriber
+    bronze_bp:
+      type: tosca.nodes.BandwidthProfile
+      properties:
+         air: 99999
+         cbs: 99999
+         cir: 99999
+         ebs: 99999
+         eir: 99999
+         name: Bronze
+{{- end }}
 
     # Pre-provision the subscriber the subscriber
     my_house:
@@ -31,3 +47,12 @@ topology_template:
         c_tag: 111
         s_tag: 222
         onu_device: PSMO12345678
+{{- if .Values.bandwidthProfiles }}
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+{{- end }}
