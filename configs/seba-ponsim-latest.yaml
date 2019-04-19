@@ -112,17 +112,17 @@ tt-workflow-driver:
   kafkaService: cord-kafka
 
 # ONOS applications
-aaaAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/aaa/1.9.0-SNAPSHOT/aaa-1.9.0-20190410.071508-31.oar"
+aaaAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/aaa/1.9.0-SNAPSHOT/aaa-1.9.0-20190419.071451-41.oar"
 aaaAppVersion: "1.9.0.SNAPSHOT"
 
-sadisAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/sadis-app/3.1.0-SNAPSHOT/sadis-app-3.1.0-20190410.071623-30.oar"
+sadisAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/sadis-app/3.1.0-SNAPSHOT/sadis-app-3.1.0-20190419.071625-40.oar"
 sadisAppVersion: "3.1.0.SNAPSHOT"
 
-dhcpl2relayAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/dhcpl2relay/1.6.0-SNAPSHOT/dhcpl2relay-1.6.0-20190410.071549-30.oar"
+dhcpl2relayAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/dhcpl2relay/1.6.0-SNAPSHOT/dhcpl2relay-1.6.0-20190419.071534-40.oar"
 dhcpl2relayAppVersion: "1.6.0.SNAPSHOT"
 
-oltAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/olt-app/3.0.1-SNAPSHOT/olt-app-3.0.1-20190410.071612-30.oar"
+oltAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/olt-app/3.0.1-SNAPSHOT/olt-app-3.0.1-20190419.071614-40.oar"
 oltAppVersion: "3.0.1.SNAPSHOT"
 
-kafkaAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/kafka/1.1.0-SNAPSHOT/kafka-1.1.0-20190418.234953-39.oar"
+kafkaAppUrl: "https://oss.sonatype.org/content/repositories/snapshots/org/opencord/kafka/1.1.0-SNAPSHOT/kafka-1.1.0-20190419.071542-40.oar"
 kafkaAppVersion: "1.1.0.SNAPSHOT"
