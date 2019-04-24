@@ -57,3 +57,43 @@ topology_template:
       properties:
         constraints: '[[null, "rcord", null], [null, "volt", null], ["onos", "fabric-crossconnect", "tt-workflow-driver"], ["fabric", null, null]]'
 {{- end -}}
+
+{{- define "tt-workflow.onosTosca" -}}
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+imports:
+   - custom_types/onosapp.yaml
+   - custom_types/onosservice.yaml
+   - custom_types/serviceinstanceattribute.yaml
+
+description: Configures workflow-specific ONOS apps
+
+topology_template:
+  node_templates:
+
+    service#onos:
+      type: tosca.nodes.ONOSService
+      properties:
+          name: onos
+          must-exist: true
+
+    onos_app#olt:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: olt
+        must-exist: true
+
+    olt-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/configuration/org.opencord.olt.impl.Olt?preset=true
+        value: >
+          {
+            "enableDhcpOnProvisioning" : true,
+            "enableEapol" : false
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#olt
+            relationship: tosca.relationships.BelongsToOne
+{{- end -}}
