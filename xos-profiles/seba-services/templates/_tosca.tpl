@@ -121,19 +121,6 @@ topology_template:
             node: onos_app#kafka
             relationship: tosca.relationships.BelongsToOne
 
-    olt-config-attr:
-      type: tosca.nodes.ServiceInstanceAttribute
-      properties:
-        name: /onos/v1/configuration/org.opencord.olt.impl.Olt?preset=true
-        value: >
-          {
-            "enableDhcpOnProvisioning" : true
-          }
-      requirements:
-        - service_instance:
-            node: onos_app#olt
-            relationship: tosca.relationships.BelongsToOne
-
     sadis-config-attr:
       type: tosca.nodes.ServiceInstanceAttribute
       properties:
