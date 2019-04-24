@@ -17,9 +17,9 @@
 # Use this file to deploy the 'master' (dev) versions of all services.
 # This is mainly useful for testing.
 
-etcd-operator:
-  etcdCluster:
-    size: 1
+# voltha
+etcd-cluster:
+  clusterSize: 1
 
 # in xos-core chart and other charts with multiple images
 images:
