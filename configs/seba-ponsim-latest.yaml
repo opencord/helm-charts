@@ -17,9 +17,9 @@
 # Use this file to deploy the 'master' (dev) versions of all services.
 # This is mainly useful for testing.
 
-etcd-operator:
-  etcdCluster:
-    size: 1
+# voltha
+etcd-cluster:
+  clusterSize: 1
 
 # in xos-core chart and other charts with multiple images
 images:
@@ -36,7 +36,7 @@ images:
 # ONOS
   onos:
     repository: 'matteoscandolo/onos'
-    tag: '1.13.9-rc3'
+    tag: '1.13.9-rc4'
 # VOLTHA
   vcore:
     tag: 'latest'
@@ -105,8 +105,7 @@ att-workflow-driver:
 # in workflow/tt-workflow service chart
 tt-workflow-driver:
   image:
-    repository: andybavier/test-image-synchronizer
-    tag: tt-workflow-driver
+    tag: 'master'
 
   # this is mandatory, it's needed to correctly configure the kafka endpoint
   kafkaService: cord-kafka

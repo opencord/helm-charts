@@ -107,4 +107,23 @@ topology_template:
         - service_instance:
             node: onos_app#aaa
             relationship: tosca.relationships.BelongsToOne
+
+    onos_app#olt:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: olt
+        must-exist: true
+
+    olt-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/configuration/org.opencord.olt.impl.Olt?preset=true
+        value: >
+          {
+            "enableDhcpOnProvisioning" : true
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#olt
+            relationship: tosca.relationships.BelongsToOne
 {{- end -}}
