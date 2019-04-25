@@ -49,9 +49,6 @@ dhcpl2relayAppVersion: "1.5.0"
 oltAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/olt-app/2.1.0/olt-app-2.1.0.oar"
 oltAppVersion: "2.1.0"
 
-kafkaAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/kafka/1.0.0/kafka-1.0.0.oar"
-kafkaAppVersion: "1.0.0"
-
 onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka.default.svc.cluster.local:9092"
 

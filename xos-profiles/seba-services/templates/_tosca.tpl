@@ -93,34 +93,6 @@ topology_template:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
-    onos_app#kafka:
-      type: tosca.nodes.ONOSApp
-      properties:
-        name: kafka
-        app_id: org.opencord.kafka
-        url: {{ .kafkaAppUrl }}
-        version: {{ .kafkaAppVersion }}
-      requirements:
-        - owner:
-            node: service#onos
-            relationship: tosca.relationships.BelongsToOne
-
-    # CORD-Configuration
-    kafka-config-attr:
-      type: tosca.nodes.ServiceInstanceAttribute
-      properties:
-        name: /onos/v1/network/configuration/apps/org.opencord.kafka
-        value: >
-          {
-            "kafka" : {
-              "bootstrapServers" : {{ .kafkaService | quote }}
-            }
-          }
-      requirements:
-        - service_instance:
-            node: onos_app#kafka
-            relationship: tosca.relationships.BelongsToOne
-
     olt-config-attr:
       type: tosca.nodes.ServiceInstanceAttribute
       properties:
