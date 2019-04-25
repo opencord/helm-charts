@@ -57,3 +57,46 @@ topology_template:
       properties:
         constraints: '[[null, "rcord", null], [null, "volt", null], ["onos", "fabric-crossconnect", "tt-workflow-driver"], ["fabric", null, null]]'
 {{- end -}}
+
+{{ - define "tt-workflow.onosTosca" - }}
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+imports:
+   - custom_types/onosapp.yaml
+   - custom_types/onosservice.yaml
+   - custom_types/serviceinstanceattribute.yaml
+
+description: Configures workflow-specific ONOS apps
+
+topology_template:
+  node_templates:
+    onos_app#kafka:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: kafka
+        app_id: org.opencord.kafka
+        url: {{ .kafkaAppUrl }}
+        version: {{ .kafkaAppVersion }}
+        dependencies: org.opencord.olt, org.opencord.dhcpl2relay
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
+    # CORD-Configuration
+    kafka-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration/apps/org.opencord.kafka
+        value: >
+          {
+            "kafka" : {
+              "bootstrapServers" : {{ .kafkaService | quote }}
+            }
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#kafka
+            relationship: tosca.relationships.BelongsToOne
+
+{{ - end -}}

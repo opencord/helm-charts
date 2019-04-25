@@ -35,3 +35,6 @@ tt-workflow-driver:
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
+
+kafkaAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/kafka/1.0.0/kafka-1.0.0.oar"
+kafkaAppVersion: "1.0.0"
