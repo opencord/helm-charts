@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e124f76d_f890a078",
+        "filename": "configs/seba-ponsim.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2019-04-25T22:31:01Z",
+      "side": 1,
+      "message": "Pretty sure you need to specify the port number :9092",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 24
+      },
+      "revId": "dc8b7cce0a5e58b0f2bf0cbc5d95f206e26dc703",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
