@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2704e15d_55ef29a8",
+        "filename": "workflows/att-workflow/values.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2019-04-25T22:11:10Z",
+      "side": 1,
+      "message": "You\u0027ll need to override this to `kafkaService: cord-kafka:9092` in seba-ponsim.yaml",
+      "range": {
+        "startLine": 35,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 12
+      },
+      "revId": "b4425dec30dd44852078f69cb5446b4663e95e62",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
