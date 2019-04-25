@@ -25,6 +25,9 @@ att-workflow-driver:
   # this is mandatory, it's needed to correctly configure the kafka endpoint
   kafkaService: cord-kafka
 
+# this is for the onos-kafka application config
+kafkaService: cord-kafka
+
 # in workflow/tt-workflow service chart
 tt-workflow-driver:
   image:
