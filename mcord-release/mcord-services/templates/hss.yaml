@@ -240,8 +240,10 @@ spec:
         args:
         - until nslookup $HSSDB_ADDR; do echo "waiting for hssdb"; sleep 2; done;
           until cqlsh --file /opt/c3po/hssdb/oai_db.cql $HSSDB_ADDR; do echo "provisioning hssdb"; sleep 2; done;
-          until data_provisioning_users.sh 208014567891200 1122334455 apn1 465B5CE8B199B49FAA5F0A2EE238A6BC 10 $HSSDB_ADDR $MME_HOST.$MME_REALM $MME_REALM;
-          do echo "setting up users"; sleep 2; done;
+          until data_provisioning_users.sh 302720100000420 1122334456 apn1 6226194254742F2D67145153602F7C8D 1 $HSSDB_ADDR $MME_HOST.$MME_REALM $MME_REALM;
+          do echo "setting up first user"; sleep 2; done;
+          until data_provisioning_users.sh 302720100000421 1122334457 apn1 6226194254742F2D67145153602F7C8D 1 $HSSDB_ADDR $MME_HOST.$MME_REALM $MME_REALM;
+          do echo "setting up second user"; sleep 2; done;
           until data_provisioning_mme.sh 1 19136246000 $MME_HOST.$MME_REALM $MME_REALM 1 $HSSDB_ADDR; do echo "setting up mme"; sleep 2; done;
           until data_provisioning_mme.sh 1 19136246000 smsrouter.test3gpp.net test3gpp.net 0 $HSSDB_ADDR; do echo "setting up smsrouter"; sleep 2; done;
         env:
