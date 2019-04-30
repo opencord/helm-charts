@@ -61,7 +61,7 @@ spgwu:
   memory: 8Gi
 
 enb:
-  host: 10.1.11.3
+  host: 119.0.0.10
   port: 36412
 
 # Network block defines the network used by SR-IOV pods
