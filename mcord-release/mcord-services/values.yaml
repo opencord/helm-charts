@@ -78,7 +78,7 @@ spgwu:
       sgi_mask: 255.255.255.0
 
 enb:
-  host: 10.1.11.3
+  host: 119.0.0.10
   port: 36412
 
 # Network block defines the networks
