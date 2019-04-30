@@ -155,13 +155,13 @@ data:
     VBSM_DBG_MASK                    1111
     VBSM_NW_INIATED_DETACH_TIMER     1000
 
-    VBSM_MCC_DIG1         2
+    VBSM_MCC_DIG1         3
     VBSM_MCC_DIG2         0
-    VBSM_MCC_DIG3         8
+    VBSM_MCC_DIG3         2
 
-    VBSM_MNC_DIG1         0
-    VBSM_MNC_DIG2         1
-    VBSM_MNC_DIG3         -1
+    VBSM_MNC_DIG1         7
+    VBSM_MNC_DIG2         2
+    VBSM_MNC_DIG3         0
 
     # Target PLMN ID format [ MCC + MNC], + is concatination operator
     # If MNC has two digits, the last charater shall be 'f'
