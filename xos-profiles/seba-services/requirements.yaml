@@ -25,9 +25,9 @@ dependencies:
   version: 2.2.0
   repository: file://../../xos-services/fabric
   condition: fabric.enabled
-- name: volt
+- name: olt-service
   version: 2.2.0
-  repository: file://../../xos-services/volt
+  repository: file://../../xos-services/olt-service
 - name: fabric-crossconnect
   version: 1.2.0
   repository: file://../../xos-services/fabric-crossconnect
