@@ -110,6 +110,12 @@ tt-workflow-driver:
   # this is mandatory, it's needed to correctly configure the kafka endpoint
   kafkaService: cord-kafka
 
+# in mininet chart
+vlanMatchDepth: 2
+
+# in ponsim-pod chart
+bandwidthProfiles: True
+
 # ONOS applications
 aaaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=aaa&v=1.9.0-SNAPSHOT&e=oar"
 aaaAppVersion: "1.9.0.SNAPSHOT"
