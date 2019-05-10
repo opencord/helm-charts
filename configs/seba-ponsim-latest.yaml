@@ -82,7 +82,7 @@ onos-service:
 sadis-server:
   image:
     tag: 'latest'
-volt:
+olt-service:
   image:
     tag: 'master'
 rcord:
