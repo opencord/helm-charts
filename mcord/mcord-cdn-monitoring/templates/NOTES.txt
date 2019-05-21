@@ -1,0 +1,47 @@
+Thank you for installing {{ .Chart.Name }}.
+
+This chart is for CDN monitoring in M-CORD demo scenarios.
+To show CDN traffic of CDN server, this chart deploys cAdvisor, Grafana, and Prometheus.
+
+You can determine which components will be installed by values.yaml.
+
+{{- if .Values.cadvisor.enabled }}
+
+
+- cAdvisor
+
+You can now access cAdvisor at: <node-ip>:{{ .Values.cadvisor.nodePort }}
+Prometheus will collect data through this cAdvisor at: <node-ip>:{{ .Values.cadvisor.nodePort }}/metrics
+
+
+{{- end }}
+
+
+{{- if .Values.grafana.enabled }}
+
+
+- Grafana
+
+You can now access Grafana at: <{{ .Values.grafana.node_selector }}-ip>:{{ .Values.grafana.nodePort }}
+using:
+
+username: {{ .Values.grafana.adminUser}}
+password: {{ .Values.grafana.adminPassword}}
+
+We use configs/cdn_metrics.json in default to create dashboards.
+If you want to monitor other CDN servers which have different container names, you should modify the json file or create your own json files.
+
+
+{{- end}}
+
+
+{{- if .Values.prometheus.enabled }}
+
+
+- Prometheus
+
+You can now access Prometheus at: <{{ .Values.prometheus.node_selector }}-ip>:{{ .Values.prometheus.nodePort }}
+If you want to show CDN traffics by Grafana, Grafana should select this Prometheus as data source.
+
+
+{{- end }}
