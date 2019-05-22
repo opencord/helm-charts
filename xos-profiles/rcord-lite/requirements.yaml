@@ -23,9 +23,9 @@ dependencies:
 - name: fabric
   version: 2.2.0
   repository: file://../../xos-services/fabric
-- name: olt-service
-  version: 2.2.1
-  repository: file://../../xos-services/olt-service
+- name: volt
+  version: 2.2.2
+  repository: file://../../xos-services/volt
 - name: vsg-hw
   version: 1.1.0
   repository: file://../../xos-services/vsg-hw
