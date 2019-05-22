@@ -75,6 +75,12 @@ if __name__ == '__main__':
     h1.cmd( 'ifconfig %s.222.111 172.18.0.10/24' % base)
     h1.cmd( 'dnsmasq --dhcp-range=172.18.0.50,172.18.0.150,12h' )
 
+{{- if .Values.enableMulticast }}
+    info( '*** Start multicast routing on %s and source on %s\n' % (h1.name, h2.name))
+    h1.cmd( 'service pimd start' )
+    h2.cmd( 'mcjoin -s -i h2-eth0 -t 2 >& /tmp/mcjoin.log &')
+{{- end }}
+
     onos.start()
     s1.start( [onos] )
 
