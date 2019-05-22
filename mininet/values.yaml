@@ -50,3 +50,4 @@ annotations:
 
 onosOpenflowSvc: "onos-openflow.default.svc.cluster.local"
 vlanMatchDepth: 1
+enableMulticast: false
