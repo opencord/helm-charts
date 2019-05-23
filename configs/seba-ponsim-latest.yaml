@@ -55,11 +55,11 @@ images:
 
 # Ponsimv2
   olt:
-    repository: "voltha/voltha-ponsim"
     tag: "latest"
   onu:
-   repository: "voltha/voltha-ponsim"
-   tag: "latest"
+    tag: "latest"
+  rg:
+    tag: "latest"
 
 # in xos-gui sub-chart required by xos-core chart
 xos-gui:
@@ -112,6 +112,7 @@ tt-workflow-driver:
 
 # in mininet chart
 vlanMatchDepth: 2
+enableMulticast: True
 
 # in ponsim-pod chart
 bandwidthProfiles: True

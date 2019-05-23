@@ -57,11 +57,11 @@ images:
 
 # Ponsimv2
   olt:
-    repository: "voltha/voltha-ponsim"
     tag: "voltha-1.7"
   onu:
-   repository: "voltha/voltha-ponsim"
-   tag: "voltha-1.7"
+    tag: "voltha-1.7"
+  rg:
+    tag: "voltha-1.7"
 
 # in xos-gui sub-chart required by xos-core chart
 xos-gui:
@@ -114,6 +114,7 @@ tt-workflow-driver:
 
 # in mininet chart
 vlanMatchDepth: 2
+enableMulticast: True
 
 # in ponsim-pod chart
 bandwidthProfiles: True
