@@ -22,6 +22,11 @@ images:
     tag: '1.1.2'
     pullPolicy: 'Always'
 
+  device_management:
+    repository: 'opencord/device-management'
+    tag: 'latest'
+    pullPolicy: 'IfNotPresent'
+
 nem_voltha_kpi_exporter_nodePort: 31080
 nem_voltha_kpi_exporter_replicas: 2
 
