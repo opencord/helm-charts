@@ -22,8 +22,14 @@ images:
     tag: '1.2.3'
     pullPolicy: 'Always'
 
+  device_management:
+    repository: 'opencord/device-management'
+    tag: 'master'
+    pullPolicy: 'Always'
+
 nem_voltha_kpi_exporter_nodePort: 31080
 nem_voltha_kpi_exporter_replicas: 2
+device_management_replicas: 1
 
 args:
   voltha_kpi_broker: cord-kafka:9092
