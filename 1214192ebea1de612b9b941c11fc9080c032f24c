@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7326eeed_a52cf249",
+        "filename": "xos-profiles/rcord-lite/requirements.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-05-23T17:18:05Z",
+      "side": 1,
+      "message": "2.2.2",
+      "range": {
+        "startLine": 27,
+        "startChar": 11,
+        "endLine": 27,
+        "endChar": 16
+      },
+      "revId": "1214192ebea1de612b9b941c11fc9080c032f24c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6041e1b0_6f9e1c27",
+        "filename": "xos-profiles/seba-services/requirements.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-05-23T17:18:05Z",
+      "side": 1,
+      "message": "2.2.2",
+      "range": {
+        "startLine": 29,
+        "startChar": 11,
+        "endLine": 29,
+        "endChar": 16
+      },
+      "revId": "1214192ebea1de612b9b941c11fc9080c032f24c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "6b8481e1_6af38f3a",
+        "filename": "xos-services/volt/Chart.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-05-23T17:18:05Z",
+      "side": 1,
+      "message": "bump up to 2.2.2",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 14
+      },
+      "revId": "1214192ebea1de612b9b941c11fc9080c032f24c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
