@@ -16,7 +16,7 @@
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: pon0-plugin
+  name: ponnet-plugin
 rules:
   - apiGroups:
       - ""
@@ -62,14 +62,14 @@ rules:
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1beta1
 metadata:
-  name: pon0-plugin
+  name: ponnet-plugin
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: pon0-plugin
+  name: ponnet-plugin
 subjects:
 - kind: ServiceAccount
-  name: pon0-plugin
+  name: ponnnet-plugin
   namespace: kube-system
 - kind: Group
   name: system:authenticated
@@ -79,73 +79,59 @@ subjects:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: pon0-plugin
+  name: ponnet-plugin
   namespace: kube-system
 
 ---
-# This ConfigMap can be used to configure a self-hosted Pon0 installation.
+# This ConfigMap can be used to configure a self-hosted Ponnet installation.
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: pon0-config
+  name: ponnet-config
   namespace: kube-system
 data:
-  # The CNI network configuration to install on each node.
-  cni_pon0_network_config: |-
+  pon0.conf: |
     {
-        "name": "pon0",
-        "type": "bridge",
-        "bridge": "pon0",
-        "isGateway": false,
-        "ipMask": false,
-        "ipam": {
+      "name": "pon0",
+      "type": "bridge",
+      "bridge": "pon0",
+      "isGateway": false,
+      "ipMask": false,
+      "ipam": {
         "type": "host-local",
         "subnet": "10.22.0.0/16"
       }
     }
-
----
-# This ConfigMap can be used to configure a self-hosted Pon0 installation.
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: pon1-config
-  namespace: kube-system
-data:
-  # The CNI network configuration to install on each node.
-  cni_pon1_network_config: |-
+  pon1.conf: |
     {
-        "name": "pon1",
-        "type": "bridge",
-        "bridge": "pon1",
-        "isGateway": true,
-        "ipMask": true,
-        "ipam": {
+      "name": "pon1",
+      "type": "bridge",
+      "bridge": "pon1",
+      "isGateway": false,
+      "ipMask": false,
+      "ipam": {
         "type": "host-local",
-        "subnet": "10.23.0.0/16",
-        "routes": [
-            { "dst": "0.0.0.0/0" }
-        ]
+        "subnet": "10.23.0.0/16"
       }
     }
 
 ---
-# Install Pon0 CNI conf on each slave node.
+# Install Ponnnet CNI conf on each slave node.
 kind: DaemonSet
 apiVersion: extensions/v1beta1
 metadata:
-  name: pon0-plugin
+  name: ponnet-plugin
   namespace: kube-system
   labels:
-    k8s-app: pon0
+    k8s-app: ponnet
 spec:
   selector:
     matchLabels:
-      k8s-app: pon0
+      k8s-app: ponnet
   template:
     metadata:
       labels:
-        k8s-app: pon0
+        k8s-app: ponnet
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ''
         scheduler.alpha.kubernetes.io/tolerations: |
@@ -163,25 +149,14 @@ spec:
     spec:
       hostNetwork: true
       hostPID: true
-      serviceAccountName: pon0-plugin
-      containers:
-        # Create a container with place_conf.sh that
-        # Installs required 20-pon0.conf on slave node.
+      serviceAccountName: ponnet-plugin
+      initContainers:
+        # Installs CNI config files on each node
         - name: install-cni
-          image: {{ .Values.pull_docker_registry }}{{ .Values.images.pon0.repository }}:{{ .Values.images.pon0.tag }} 
-          imagePullPolicy: {{ .Values.images.pon0.pullPolicy }} 
-          command: ["/place_conf.sh"]
+          image: {{ .Values.pull_docker_registry }}{{ .Values.images.ponnet.repository }}:{{ .Values.images.ponnet.tag }} 
+          imagePullPolicy: {{ .Values.images.ponnet.pullPolicy }}
+          command: ["/bin/sh", "-c", "cp /tmp/cni/* /host/etc/cni/net.d"]
           env:
-            - name: CNI_NETWORK_CONFIG
-              valueFrom:
-                configMapKeyRef:
-                  name: pon0-config
-                  key: cni_pon0_network_config
-            - name: CNI_PON1_NETWORK_CONFIG
-              valueFrom:
-                configMapKeyRef:
-                  name: pon1-config
-                  key: cni_pon1_network_config
             - name: KUBERNETES_NODE_NAME
               valueFrom:
                 fieldRef:
@@ -191,6 +166,8 @@ spec:
               name: cni-bin-dir
             - mountPath: /host/etc/cni/net.d
               name: cni-net-dir
+            - mountPath: /tmp/cni
+              name: ponnet-config
       volumes:
         - name: cni-bin-dir
           hostPath:
@@ -198,3 +175,10 @@ spec:
         - name: cni-net-dir
           hostPath:
             path: /etc/cni/net.d
+        - name: ponnet-config
+          configMap:
+            name: ponnet-config
+      containers:
+        - name: pause
+          image: gcr.io/google_containers/pause
+
