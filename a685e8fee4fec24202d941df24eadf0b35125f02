@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8706314e_6139902f",
+        "filename": "nem-monitoring/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-05-24T18:44:40Z",
+      "side": 1,
+      "message": "This should be Always to have a consistent behavior with all the other charts. During development it can be overridden with --set device_management.pullPolicy\u003dIfNotPresent (or via a value file)",
+      "range": {
+        "startLine": 28,
+        "startChar": 17,
+        "endLine": 28,
+        "endChar": 29
+      },
+      "revId": "a685e8fee4fec24202d941df24eadf0b35125f02",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
