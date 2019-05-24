@@ -40,17 +40,17 @@ xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
 # ONOS applications
-sadisAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/sadis-app/2.2.0/sadis-app-2.2.0.oar"
-sadisAppVersion: "2.2.0"
+sadisAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=sadis-app&v=3.1.0-SNAPSHOT&e=oar"
+sadisAppVersion: "3.1.0.SNAPSHOT"
 
-dhcpl2relayAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/dhcpl2relay/1.5.0/dhcpl2relay-1.5.0.oar"
-dhcpl2relayAppVersion: "1.5.0"
+dhcpl2relayAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=dhcpl2relay-app&v=1.6.0-SNAPSHOT&e=oar"
+dhcpl2relayAppVersion: "1.6.0.SNAPSHOT"
 
-oltAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/olt-app/2.1.0/olt-app-2.1.0.oar"
-oltAppVersion: "2.1.0"
+oltAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=olt-app&v=3.0.1-SNAPSHOT&e=oar"
+oltAppVersion: "3.0.1.SNAPSHOT"
 
-kafkaAppUrl: "https://oss.sonatype.org/service/local/repositories/releases/content/org/opencord/kafka/1.0.0/kafka-1.0.0.oar"
-kafkaAppVersion: "1.0.0"
+kafkaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=kafka&v=1.1.0-SNAPSHOT&e=oar"
+kafkaAppVersion: "1.1.0.SNAPSHOT"
 
 onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka.default.svc.cluster.local:9092"
