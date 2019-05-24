@@ -16,10 +16,10 @@
 pull_docker_registry:
 
 images:
-  pon0:
-    repository: gopinatht/pon0-network
+  ponnet:
+    repository: 'alpine'
     tag: 'latest'
-    pullPolicy: 'Always'
-  
+    pullPolicy: 'IfNotPresent'
+
 global:
   namespace: voltha
