@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7d4260f5_83a9fddf",
+        "filename": "ponnet/values.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-05-24T23:30:33Z",
+      "side": 1,
+      "message": "Not sure it\u0027s important in this case, but all the other helm-charts set the pullPolicy to Always",
+      "range": {
+        "startLine": 22,
+        "startChar": 17,
+        "endLine": 22,
+        "endChar": 29
+      },
+      "revId": "cb9b478e7464c133d141b08e952f4669c568c790",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
