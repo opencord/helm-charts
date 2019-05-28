@@ -13,34 +13,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- range $i, $junk := until (.Values.numOlts|int) }}
+---
 apiVersion: v1
 kind: Service
 metadata:
-   name: onu
-   namespace: {{ .Values.global.namespace }}
+   name: onu{{ $i }}
+   namespace: {{ $.Values.global.namespace }}
    labels:
-     name: onu
+     name: onu{{ $i }}
 spec:
   ports:
     - name: grpc
       port: 50061
       targetPort: 50061
   selector:
-    app: onu
+    app: onu{{ $i }}
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: onu
-  namespace: {{ .Values.global.namespace }}
+  name: onu{{ $i }}
+  namespace: {{ $.Values.global.namespace }}
 spec:
    replicas: 1
    template:
      metadata:
        labels:
-         app: onu
+         app: onu{{ $i }}
        annotations:
-         cni: "calico,pon0"
+         cni: "calico,pon{{ $i }}"
      spec:
        affinity:
         podAffinity:
@@ -52,12 +54,12 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - rg
+                  - rg{{ $i }}
               topologyKey: kubernetes.io/hostname
        containers:
-         - name: onu
-           image: "{{ .Values.global.registry }}{{ .Values.images.onu.repository }}:{{ tpl .Values.images.onu.tag . }}"
-           imagePullPolicy: {{ .Values.images.onu.pullPolicy }}
+         - name: onu{{ $i }}
+           image: "{{ $.Values.global.registry }}{{ $.Values.images.onu.repository }}:{{ tpl $.Values.images.onu.tag $ }}"
+           imagePullPolicy: {{ $.Values.images.onu.pullPolicy }}
            env:
              - name: POD_IP
                valueFrom:
@@ -72,7 +74,7 @@ spec:
              - "-device_type"
              - "ONU"
              - "-parent_addr"
-             - "olt"
+             - "olt{{ $i }}"
              - "-grpc_port"
              - "50061"
              - "-internal_if"
@@ -80,7 +82,12 @@ spec:
              - "-external_if"
              - "eth1"
              - "-promiscuous"
+{{- if not $.Values.legacyPonsim }}
+             - "-serial_number"
+             - "PSMO{{ printf "%04d" $i }}0000"
+{{- end }}
 
            ports:
             - containerPort: 50061
               name: grpc-port
+{{- end }}
