@@ -31,13 +31,21 @@ topology_template:
         name: att-workflow-driver
         must-exist: true
 
-    whitelist:
+{{- range $i, $junk := until (.Values.numOlts|int) }}
+
+    whitelist{{ $i }}:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
+{{- if $.Values.legacyPonsim }}
         serial_number: PSMO12345678
         device_id: of:0000aabbccddeeff
+{{- else }}
+        serial_number: PSMO{{ printf "%04d" $i }}0000
+        device_id: {{ index $.Values.oltDpids $i }}
+{{- end }}
         pon_port_id: 1
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
+{{- end }}
