@@ -59,24 +59,34 @@ if __name__ == '__main__':
     net.addLink( h1, s2 )
     net.addLink( h2, s2 )
 
-    info( '*** Adding hardware interface eth1 to switch %s\n' % s1.name)
-    _intf = Intf( 'eth1', node=s1 )
+{{- range $i, $junk := until (.Values.numOlts|int) -}}
+{{- $intf := printf "eth%d" (add $i 1) }}
 
-    info( '*** Turning off checksum offloading for eth1\n' )
-    print quietRun( 'ethtool -K eth1 tx off rx off' )
+    info( '*** Adding hardware interface {{ $intf }} to switch s1\n')
+    _intf = Intf( '{{ $intf }}', node=s1 )
 
-    info( '*** Adding VLAN interface to host %s\n' % h1.name)
-    base = "%s-eth0" % h1.name
-    h1.cmd( 'ifconfig %s-eth1 10.1.0.1/24 up' % h1.name)
-    h1.cmd( 'ip link add link %s name %s.222 type vlan proto 802.1Q id 222' % (base, base))
-    h1.cmd( 'ip link add link %s.222 name %s.222.111 type vlan proto 802.1Q id 111' % (base, base))
-    h1.cmd( 'ifconfig %s.222 up' % base)
-    h1.cmd( 'ifconfig %s.222.111 up' % base)
-    h1.cmd( 'ifconfig %s.222.111 172.18.0.10/24' % base)
-    h1.cmd( 'dnsmasq --dhcp-range=172.18.0.50,172.18.0.150,12h' )
+    info( '*** Turning off checksum offloading for {{ $intf }}\n' )
+    print quietRun( 'ethtool -K {{ $intf }} tx off rx off' )
+{{- end }}
+
+    info( '*** Adding VLAN interface to host h1\n')
+    h1.cmd( 'ifconfig h1-eth1 10.1.0.1/24 up')
+
+{{- range $i, $junk := until (.Values.numOlts|int) -}}
+{{- $stag := add 222 $i }}
+{{- $ctag := 111 }}
+
+    h1.cmd( 'ip link add link h1-eth0 name h1-eth0.{{ $stag }} type vlan proto 802.1Q id {{ $stag }}' )
+    h1.cmd( 'ip link add link h1-eth0.{{ $stag }} name h1-eth0.{{ $stag }}.{{ $ctag }} type vlan proto 802.1Q id {{ $ctag }}' )
+    h1.cmd( 'ifconfig h1-eth0.{{ $stag }} up' )
+    h1.cmd( 'ifconfig h1-eth0.{{ $stag }}.{{ $ctag }} up' )
+    h1.cmd( 'ifconfig h1-eth0.{{ $stag }}.{{ $ctag }} 172.18.{{ $i }}.10/24' )
+{{- end }}
+
+    h1.cmd( 'dnsmasq {{ template "mininet.dhcp_range" . }}' )
 
 {{- if .Values.enableMulticast }}
-    info( '*** Start multicast routing on %s and source on %s\n' % (h1.name, h2.name))
+    info( '*** Start multicast routing on h1 and source on h2\n')
     h1.cmd( 'service pimd start' )
     h2.cmd( 'mcjoin -s -i h2-eth0 -t 2 >& /tmp/mcjoin.log &')
 {{- end }}

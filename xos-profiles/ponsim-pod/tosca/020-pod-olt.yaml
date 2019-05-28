@@ -29,29 +29,36 @@ topology_template:
         name: volt
         must-exist: true
 
-    olt_device:
+{{- range $i, $junk := until (.Values.numOlts|int) }}
+
+    olt{{ $i }}_device:
       type: tosca.nodes.OLTDevice
       properties:
-        name: PONSIM OLT
+        name: PONSIM OLT {{ $i }}
         device_type: ponsim_olt
-        host: olt.voltha.svc
+        host: olt{{ $i }}.voltha.svc
         port: 50060
         switch_datapath_id: of:0000000000000001
-        switch_port: "2"
+        switch_port: "{{ add 2 $i }}"
         outer_tpid: "0x8100"
+{{- if $.Values.legacyPonsim }}
         dp_id: of:0000aabbccddeeff
+{{- else }}
+        dp_id: {{ index $.Values.oltDpids $i }}
+{{- end }}
         uplink: "2"
       requirements:
         - volt_service:
             node: service#volt
             relationship: tosca.relationships.BelongsToOne
 
-    pon_port:
+    olt{{ $i }}_pon_port:
       type: tosca.nodes.PONPort
       properties:
-        name: pon0
+        name: olt{{ $i }}pon0
         port_no: 1
       requirements:
         - olt_device:
-            node: olt_device
+            node: olt{{ $i }}_device
             relationship: tosca.relationships.BelongsToOne
+{{- end }}
