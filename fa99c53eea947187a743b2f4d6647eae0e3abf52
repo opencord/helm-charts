@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "90674bd8_9a0c9f28",
+        "filename": "nem-monitoring/templates/importer-deployment.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-05-28T22:30:44Z",
+      "side": 1,
+      "message": "Remove whitespace after  this and on lines 27, 31",
+      "range": {
+        "startLine": 19,
+        "startChar": 25,
+        "endLine": 19,
+        "endChar": 26
+      },
+      "revId": "fa99c53eea947187a743b2f4d6647eae0e3abf52",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "750d409f_efa74bba",
+        "filename": "nem-monitoring/values.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-05-28T22:30:44Z",
+      "side": 1,
+      "message": "This image isn\u0027t published yet, and it would need to have a tag of `master` or some set version to work correctly.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 27,
+        "endChar": 17
+      },
+      "revId": "fa99c53eea947187a743b2f4d6647eae0e3abf52",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
