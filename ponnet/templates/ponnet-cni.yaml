@@ -90,11 +90,12 @@ metadata:
   name: ponnet-config
   namespace: kube-system
 data:
-  pon0.conf: |
+{{- range $i, $junk := until (.Values.numOlts|int) }}
+  pon{{ $i }}.conf: |
     {
-      "name": "pon0",
+      "name": "pon{{ $i }}",
       "type": "bridge",
-      "bridge": "pon0",
+      "bridge": "pon{{ $i }}",
       "isGateway": false,
       "ipMask": false,
       "ipam": {
@@ -102,11 +103,11 @@ data:
         "subnet": "10.22.0.0/16"
       }
     }
-  pon1.conf: |
+  nni{{ $i }}.conf: |
     {
-      "name": "pon1",
+      "name": "nni{{ $i }}",
       "type": "bridge",
-      "bridge": "pon1",
+      "bridge": "nni{{ $i }}",
       "isGateway": false,
       "ipMask": false,
       "ipam": {
@@ -114,6 +115,7 @@ data:
         "subnet": "10.23.0.0/16"
       }
     }
+{{- end }}
 
 ---
 # Install Ponnnet CNI conf on each slave node.

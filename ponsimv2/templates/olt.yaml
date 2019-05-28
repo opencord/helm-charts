@@ -13,39 +13,41 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- range $i, $junk := until (.Values.numOlts|int) }}
+---
 apiVersion: v1
 kind: Service
 metadata:
-   name: olt
-   namespace: {{ .Values.global.namespace }}
+   name: olt{{ $i }}
+   namespace: {{ $.Values.global.namespace }}
    labels:
-     name: olt
+     name: olt{{ $i }}
 spec:
   ports:
     - name: grpc
       port: 50060
       targetPort: 50060
   selector:
-    app: olt
+    app: olt{{ $i }}
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: olt
-  namespace: {{ .Values.global.namespace }}
+  name: olt{{ $i }}
+  namespace: {{ $.Values.global.namespace }}
 spec:
    replicas: 1
    template:
      metadata:
        labels:
-         app: olt
+         app: olt{{ $i }}
        annotations:
-         cni: "calico,pon1"
+         cni: "calico,nni{{ $i }}"
      spec:
        containers:
-         - name: olt
-           image: "{{ .Values.global.registry }}{{ .Values.images.olt.repository }}:{{ tpl .Values.images.olt.tag . }}"
-           imagePullPolicy: {{ .Values.images.olt.pullPolicy }}
+         - name: olt{{ $i }}
+           image: "{{ $.Values.global.registry }}{{ $.Values.images.olt.repository }}:{{ tpl $.Values.images.olt.tag $ }}"
+           imagePullPolicy: {{ $.Values.images.olt.pullPolicy }}
            env:
              - name: POD_IP
                valueFrom:
@@ -71,3 +73,4 @@ spec:
            ports:
             - containerPort: 50060
               name: grpc-port
+{{- end }}

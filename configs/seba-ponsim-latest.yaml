@@ -35,7 +35,6 @@ images:
     tag: 'master'
 # ONOS
   onos:
-    repository: 'matteoscandolo/onos'
     tag: '1.13.9-rc4'
 # VOLTHA
   vcore:
@@ -82,7 +81,7 @@ onos-service:
 sadis-server:
   image:
     tag: 'latest'
-olt-service:
+volt:
   image:
     tag: 'master'
 rcord:
@@ -116,6 +115,7 @@ enableMulticast: True
 
 # in ponsim-pod chart
 bandwidthProfiles: True
+legacyPonsim: False
 
 # ONOS applications
 aaaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=aaa-app&v=1.9.0-SNAPSHOT&e=oar"

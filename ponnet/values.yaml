@@ -23,3 +23,5 @@ images:
 
 global:
   namespace: voltha
+
+numOlts: 1
