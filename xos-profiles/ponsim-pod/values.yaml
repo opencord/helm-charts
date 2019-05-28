@@ -37,3 +37,5 @@ xosAdminPassword: "letmein"
 workflow: att-workflow
 
 bandwidthProfiles: False
+
+numOlts: 1

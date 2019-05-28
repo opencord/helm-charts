@@ -38,16 +38,19 @@ topology_template:
         ofId: of:0000000000000001
         routerMac: 00:00:02:01:06:01
 
-    # Setup the OLT switch port
-    port#olt_port:
+    # Setup the OLT switch ports
+{{- range $i, $junk := until (.Values.numOlts|int) }}
+
+    port#olt{{ $i }}_port:
       type: tosca.nodes.SwitchPort
       properties:
-        portId: 2
+        portId: {{ add 2 $i }}
         host_learning: false
       requirements:
         - switch:
             node: switch#leaf_1
             relationship: tosca.relationships.BelongsToOne
+{{- end }}
 
     # Port connected to the BNG
     port#bng_port:
