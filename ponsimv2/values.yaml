@@ -34,3 +34,6 @@ images:
 global:
   namespace: voltha
   registry: ''
+
+ponsimIndex: 0
+numOlts: 1

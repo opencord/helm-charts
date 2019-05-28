@@ -39,6 +39,7 @@ images:
     tag: '1.13.9-rc4'
 # VOLTHA
   vcore:
+    repository: 'andybavier/voltha-voltha'
     tag: 'latest'
   vcli:
     tag: 'latest'
@@ -82,7 +83,7 @@ onos-service:
 sadis-server:
   image:
     tag: 'latest'
-olt-service:
+volt:
   image:
     tag: 'master'
 rcord:

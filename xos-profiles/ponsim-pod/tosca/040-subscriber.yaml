@@ -38,16 +38,18 @@ topology_template:
          name: Bronze
 {{- end }}
 
-    # Pre-provision the subscriber the subscriber
-    my_house:
+    # Pre-provision the subscribers
+{{- range $i, $junk := until (.Values.numOlts|int) }}
+
+    house_{{ $i }}:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: QQClient
+        name: QQClient{{ $i }}
         status: pre-provisioned
-        c_tag: 111
-        s_tag: 222
-        onu_device: PSMO12345678
-{{- if .Values.bandwidthProfiles }}
+        c_tag: {{ add 111 $i }}
+        s_tag: {{ add 222 $i }}
+        onu_device: PSMO{{ add 12345678 $i }}
+  {{- if $.Values.bandwidthProfiles }}
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -55,4 +57,5 @@ topology_template:
         - downstream_bps:
             node: bronze_bp
             relationship: tosca.relationships.BelongsToOne
+  {{- end }}
 {{- end }}

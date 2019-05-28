@@ -59,11 +59,15 @@ if __name__ == '__main__':
     net.addLink( h1, s2 )
     net.addLink( h2, s2 )
 
-    info( '*** Adding hardware interface eth1 to switch %s\n' % s1.name)
-    _intf = Intf( 'eth1', node=s1 )
+{{- range $i, $junk := until (.Values.numOlts|int) -}}
+{{- $intf := printf "eth%d" (add $i 1) }}\
 
-    info( '*** Turning off checksum offloading for eth1\n' )
-    print quietRun( 'ethtool -K eth1 tx off rx off' )
+    info( '*** Adding hardware interface {{ $intf }} to switch %s\n' % s1.name)
+    _intf = Intf( '{{ $intf }}', node=s1 )
+
+    info( '*** Turning off checksum offloading for {{ $intf }}\n' )
+    print quietRun( 'ethtool -K {{ $intf }} tx off rx off' )
+{{- end }}
 
     info( '*** Adding VLAN interface to host %s\n' % h1.name)
     base = "%s-eth0" % h1.name
