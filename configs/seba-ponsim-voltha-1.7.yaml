@@ -23,15 +23,7 @@ etcd-cluster:
 
 # in xos-core chart and other charts with multiple images
 images:
-  xos_core:
-    tag: '3.2.5'
-  xos_chameleon:
-    tag: '3.2.2'
   xos_tosca:
-    tag: '1.3.1'
-  xos_api_tester:
-    tag: 'master'
-  tosca_loader:
     tag: '1.3.1'
 
 # ONOS
@@ -62,38 +54,14 @@ images:
   rg:
     tag: "voltha-1.7"
 
-# in xos-gui sub-chart required by xos-core chart
-xos-gui:
-  images:
-    xos_gui:
-      tag: '1.0.5'
-    xos_ws:
-      tag: '2.0.2'
-
 # in seba service chart
-fabric:
-  image:
-    tag: '2.2.1'
-fabric-crossconnect:
-  image:
-    tag: '1.2.1'
-onos-service:
-  image:
-    tag: '2.1.1'
 sadis-server:
   image:
     tag: 'latest'
-volt:
-  image:
-    tag: '2.2.1'
 rcord:
   image:
     tag: 'master'
 
-# in base-kubernetes chart
-kubernetes:
-  image:
-    tag: '1.2.1'
 
 # in workflow/att-workflow service chart
 att-workflow-driver:
