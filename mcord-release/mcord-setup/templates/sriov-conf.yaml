@@ -28,7 +28,7 @@ data:
           "resourceName": {{ .Values.sriov.name | quote }},
           "rootDevices": [{{ .Values.sriov.devicepci | quote }}],
           "sriovMode": true,
-          "deviceType": "vfio"
+          "deviceType": {{ .Values.sriov.devicetype | quote }}
         }
       ]
     }
