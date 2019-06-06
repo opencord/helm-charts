@@ -1,0 +1,73 @@
+---
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: antmedia
+spec:
+  selector:
+    app: antmedia
+  type: NodePort
+  ports:
+  - name: httpui
+    port: {{ .Values.antmedia.ports.httpui }}
+    nodePort: {{ .Values.antmedia.ports.httpui_np }}
+    protocol: TCP
+  - name: rtmp
+    port: {{ .Values.antmedia.ports.rtmp }}
+    nodePort: {{ .Values.antmedia.ports.rtmp_np }}
+    protocol: TCP
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: antmedia
+  labels:
+    name: antmedia
+    app: antmedia
+spec:
+  replicas: {{ .Values.antmedia.replicas }}
+  selector:
+    matchLabels:
+      app: antmedia
+  serviceName: "antmedia"
+  template:
+    metadata:
+      labels:
+        app: antmedia
+        name: antmedia
+    spec:
+      terminationGracePeriodSeconds: 1
+      nodeSelector:
+        kubernetes.io/hostname: {{ .Values.cdn_node_selector }}
+      containers:
+      - name: antmedia
+        image: {{ .Values.antmedia.images.antmedia_image }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: {{ .Values.antmedia.ports.httpui }}
+        - containerPort: {{ .Values.antmedia.ports.rtmp }}
+        stdin: true
+        tty: true
+        command: [ "bash",  "-xc"]
+        args:
+          - cd /usr/local/antmedia && ./start.sh | tee /opt/start.log
+        resources:
+          limits:
+            cpu: {{ .Values.antmedia.resources.cpu }}
+            memory: {{ .Values.antmedia.resources.mem }}

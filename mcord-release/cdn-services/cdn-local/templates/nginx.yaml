@@ -1,0 +1,107 @@
+---
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-rtmp
+spec:
+  selector:
+    app: nginx-rtmp
+  type: NodePort
+  ports:
+  - name: vlc
+    port: {{ .Values.nginx.ports.rtmp_orig }}
+    nodePort: {{ .Values.nginx.ports.rtmp_np }}
+    protocol: TCP
+
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: nginx-rtmp
+spec:
+  serviceName: nginx-rtmp
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: nginx-rtmp
+        app: nginx-rtmp
+      annotations:
+        k8s.v1.cni.cncf.io/networks: '[
+            { "name": "sgi-net", "interface": "sgi-net", "namespace": "default" }
+        ]'
+    spec:
+      #hostNetwork: true
+      nodeSelector:
+        kubernetes.io/hostname: {{ .Values.cdn_node_selector }}
+      terminationGracePeriodSeconds: 0
+      imagePullSecrets:
+      - name: nexus-docker-secret
+      initContainers:
+      - name: "nginx-rtmp-init"
+        image: {{ .Values.nginx.images.nginx_image }}
+        imagePullPolicy: "IfNotPresent"
+        args:
+        - cp /config/*.sh /shared-vol;cp /conf/* /shared-vol
+        command:
+        - "/bin/bash"
+        - "-c"
+        volumeMounts:
+        - name: "shared-volume"
+          mountPath: "/shared-vol"
+        - name: "nginx-rtmp-config"
+          mountPath: "/config"
+        - name: "nginx-rtmp-conf"
+          mountPath: "/conf"
+      containers:
+      - name: nginx-rtmp
+        image: {{ .Values.nginx.images.nginx_image }}
+        imagePullPolicy: IfNotPresent
+        args:
+        - chmod a+x /config/*.sh;/config/nginx_rtmp_config.sh
+        command:
+        - "/bin/bash"
+        - "-c"
+        tty: true
+        securityContext:
+          privileged: true
+        ports:
+        - containerPort: {{ .Values.nginx.ports.rtmp_orig }}
+        volumeMounts:
+        - name: shared-volume
+          mountPath: /config
+        - name: shared-volume
+          mountPath: /conf
+        resources:
+          limits:
+            intel.com/sriov: '2'
+      volumes:
+      - name: nginx-rtmp-config
+        configMap:
+          name: nginx-rtmp-config
+          items:
+          - key: nginx_rtmp_config.sh
+            path: nginx_rtmp_config.sh
+      - name: nginx-rtmp-conf
+        configMap:
+          name: nginx-rtmp-conf
+          items:
+          - key: nginx.conf
+            path: nginx.conf
+      - name: shared-volume
+        emptyDir: {}

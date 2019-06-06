@@ -1,0 +1,77 @@
+---
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-rtmp-config
+data:
+  nginx_rtmp_config.sh: |+
+    #!/bin/bash
+    ip route add {{ .Values.ue_ip_subnet1 }} via {{ .Values.spgwu_sgiip }} dev sgi-net;
+    ip route add {{ .Values.ue_ip_subnet2 }} via {{ .Values.spgwu_sgiip }} dev sgi-net;
+    ip link set sgi-net mtu 1200;
+    cp /conf/nginx.conf  /etc/nginx/
+    nginx -g "daemon off;"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-rtmp-conf
+data:
+  nginx.conf: |+
+    worker_processes  1;
+
+    events {
+        worker_connections  1024;
+    }
+
+
+    http {
+        include       mime.types;
+        default_type  application/octet-stream;
+
+        sendfile        on;
+        keepalive_timeout  65;
+
+        server {
+            listen       8085;
+            server_name  localhost;
+
+            location / {
+                root   html;
+                index  index.html index.htm;
+            }
+
+            error_page   500 502 503 504  /50x.html;
+            location = /50x.html {
+                root   html;
+            }
+        }
+    }
+    rtmp {
+        server {
+            listen 1935;
+            chunk_size 4000;
+            application r {
+               live on;
+               pull rtmp://{{ .Values.remote_ip }}:30935/LiveApp/{{ .Values.stream_name }};
+            }
+            application l {
+               play /opt/cdn/movies;
+            }
+        }
+    }

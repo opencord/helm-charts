@@ -1,0 +1,80 @@
+---
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: remote-streaming
+spec:
+  selector:
+    app: remote-streaming
+  type: NodePort
+  ports:
+  - name: vlc
+    port: {{ .Values.remote_streaming.ports.vlc }}
+    nodePort: {{ .Values.remote_streaming.ports.vlc_np }}
+    protocol: TCP
+  - name: http
+    port: {{ .Values.remote_streaming.ports.http }}
+    nodePort: {{ .Values.remote_streaming.ports.http_np }}
+    protocol: TCP
+
+---
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: remote-streaming
+spec:
+  replicas: {{ .Values.remote_streaming.replicas }}
+  selector:
+    matchLabels:
+      app: remote-streaming
+  serviceName: "remote-streaming"
+  template:
+    metadata:
+      labels:
+        app: remote-streaming
+        name: remote-streaming
+    spec:
+      terminationGracePeriodSeconds: 1
+      nodeSelector:
+        kubernetes.io/hostname: {{ .Values.cdn_node_selector }}
+      containers:
+      - name: streaming
+        image: {{ .Values.remote_streaming.images.remote_streaming_image }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: {{ .Values.remote_streaming.ports.vlc }}
+        - containerPort: {{ .Values.remote_streaming.ports.http }}
+        stdin: true
+        tty: true
+        command: [ "bash",  "-xc"]
+        args:
+        - sed -i 's/geteuid/getppid/' /usr/bin/vlc;
+          /opt/start-remote-stream.sh
+        resources:
+          limits:
+            cpu: {{ .Values.remote_streaming.resources.cpu }}
+            memory: {{ .Values.remote_streaming.resources.mem }}
+        volumeMounts:
+        - name: start-script
+          mountPath: /opt/start-remote-stream.sh
+          subPath: start-remote-stream.sh
+      volumes:
+      - name: start-script
+        configMap:
+          name: start-remote-stream
+          defaultMode: 493
