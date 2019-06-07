@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9120f7b8_6b53c166",
+        "filename": "mcord-release/cdn-services/cdn-local/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000523
+      },
+      "writtenOn": "2019-06-07T17:52:33Z",
+      "side": 1,
+      "message": "M-CORD containers which are installed by mcord-services charts in mcord-services directory are not in \u0027epc\u0027 namespace. They are installed in \u0027default\u0027 namespace. How about installing this local cdn in \u0027default\u0027 namespace as well or \u0027localcdn\u0027? (It is just my opinion :D)",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 14
+      },
+      "revId": "02fb3987c57c5832c88d881f822034b61c7868ff",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
