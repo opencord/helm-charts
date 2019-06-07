@@ -52,6 +52,9 @@ images:
     tag: 'latest'
   freeradius:
     tag: 'latest'
+# BBSim
+  bbsim:
+    tag: 'latest'
 
 # Ponsimv2
   olt:
