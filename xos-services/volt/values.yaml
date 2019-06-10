@@ -35,7 +35,6 @@ xosAdminPassword: "letmein"
 xosCoreService: "xos-core:50051"
 
 volthaRestService: "voltha.voltha.svc.cluster.local"
-onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka"
 
 resources: {}

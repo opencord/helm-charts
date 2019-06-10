@@ -29,8 +29,4 @@ topology_template:
         kind: data
         voltha_url: {{ .volthaRestService | quote }}
         voltha_port: 8882
-        onos_voltha_url: {{ .onosRestService | quote }}
-        onos_voltha_port: 8181
-        onos_voltha_user: karaf
-        onos_voltha_pass: karaf
 {{- end -}}
