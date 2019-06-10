@@ -6,6 +6,7 @@ requirements.lock
 
 # child repos (defined in the repo manifest)
 macro/*
+helm-repo-tools/*
 
 # ignore dependent chart dirs
 xos-core/charts
