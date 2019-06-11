@@ -15,5 +15,5 @@
 
 dependencies:
 - name: kubernetes
-  version: 1.0.2
+  version: 1.0.3
   repository: file://../../xos-services/kubernetes
