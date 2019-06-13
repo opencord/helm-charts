@@ -37,6 +37,6 @@ global:
 
 # numOlts > 1 only works with voltha-1.7 or greater
 numOlts: 1
-
+numOnus: 1
 # legacyPonsim == true means that we are using voltha-1.6
 legacyPonsim: true

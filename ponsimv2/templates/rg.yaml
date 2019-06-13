@@ -13,21 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- $rgcount := (.Values.numOnus|int) }}
 {{- range $i, $junk := until (.Values.numOlts|int) }}
+{{- range $j, $junk1 := until ($rgcount) }}
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: rg{{ $i }}
+  name: rg{{ $i }}-{{ $j }}
   namespace: {{ $.Values.global.namespace }}
 spec:
    replicas: 1
    template:
      metadata:
        labels:
-         app: rg{{ $i }}
+         app: rg{{ $i }}-{{ $j }}
        annotations:
-         cni: "pon{{ $i }}"
+         cni: "pon{{ $i }}.{{ $j }}"
      spec:
        affinity:
         podAffinity:
@@ -39,10 +41,10 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - onu{{ $i }}
+                  - onu{{ $i }}-{{ $j }}
               topologyKey: kubernetes.io/hostname
        containers:
-         - name: rg{{ $i }}
+         - name: rg{{ $i }}-{{ $j }}
            image: "{{ $.Values.global.registry }}{{ $.Values.images.rg.repository }}:{{ tpl $.Values.images.rg.tag $ }}"
            imagePullPolicy: {{ $.Values.images.rg.pullPolicy }}
            env:
@@ -57,4 +59,5 @@ spec:
            command: [ "/bin/bash", "-c", "trap : TERM INT; sleep infinity & wait" ]
            securityContext:
              privileged: true
+{{- end }}
 {{- end }}
