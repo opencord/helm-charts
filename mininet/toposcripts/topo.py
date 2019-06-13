@@ -72,17 +72,18 @@ if __name__ == '__main__':
     info( '*** Adding VLAN interface to host h1\n')
     h1.cmd( 'ifconfig h1-eth1 10.1.0.1/24 up')
 
+    {{- $onucount := .Values.numOnus|int}}
 {{- range $i, $junk := until (.Values.numOlts|int) -}}
 {{- $stag := add 222 $i }}
-{{- $ctag := 111 }}
-
+{{- range $j, $junk1 := until ($onucount) -}}
+{{- $ctag := add 111 $j }}
     h1.cmd( 'ip link add link h1-eth0 name h1-eth0.{{ $stag }} type vlan proto 802.1Q id {{ $stag }}' )
     h1.cmd( 'ip link add link h1-eth0.{{ $stag }} name h1-eth0.{{ $stag }}.{{ $ctag }} type vlan proto 802.1Q id {{ $ctag }}' )
     h1.cmd( 'ifconfig h1-eth0.{{ $stag }} up' )
     h1.cmd( 'ifconfig h1-eth0.{{ $stag }}.{{ $ctag }} up' )
-    h1.cmd( 'ifconfig h1-eth0.{{ $stag }}.{{ $ctag }} 172.18.{{ $i }}.10/24' )
+    h1.cmd( 'ifconfig h1-eth0.{{ $stag }}.{{ $ctag }} 172.{{ add $i 18  }}.{{ $j }}.10/24' )
 {{- end }}
-
+{{- end }}
     h1.cmd( 'dnsmasq {{ template "mininet.dhcp_range" . }}' )
 
 {{- if .Values.enableMulticast }}

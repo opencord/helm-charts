@@ -24,4 +24,5 @@ images:
 global:
   namespace: voltha
 
-numOlts: 1
+numOlts: 1 
+numOnus: 1

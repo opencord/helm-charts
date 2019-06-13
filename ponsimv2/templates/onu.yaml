@@ -13,36 +13,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- $onucount := (.Values.numOnus|int)}}
 {{- range $i, $junk := until (.Values.numOlts|int) }}
+{{- range $j, $junk1 := until ($onucount) }}
 ---
 apiVersion: v1
 kind: Service
 metadata:
-   name: onu{{ $i }}
+   name: onu{{ $i }}-{{ $j }}
    namespace: {{ $.Values.global.namespace }}
    labels:
-     name: onu{{ $i }}
+     name: onu{{ $i }}-{{ $j }}
 spec:
   ports:
     - name: grpc
       port: 50061
       targetPort: 50061
   selector:
-    app: onu{{ $i }}
+    app: onu{{ $i }}-{{ $j }}
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: onu{{ $i }}
+  name: onu{{ $i }}-{{ $j }}
   namespace: {{ $.Values.global.namespace }}
 spec:
    replicas: 1
    template:
      metadata:
        labels:
-         app: onu{{ $i }}
+         app: onu{{ $i }}-{{ $j }}
        annotations:
-         cni: "calico,pon{{ $i }}"
+         cni: "calico,pon{{ $i }}.{{ $j }}"
      spec:
        affinity:
         podAffinity:
@@ -54,10 +56,10 @@ spec:
                 - key: app
                   operator: In
                   values:
-                  - rg{{ $i }}
+                  - rg{{ $i }}-{{ $j }}
               topologyKey: kubernetes.io/hostname
        containers:
-         - name: onu{{ $i }}
+         - name: onu{{ $i }}-{{ $j }}
            image: "{{ $.Values.global.registry }}{{ $.Values.images.onu.repository }}:{{ tpl $.Values.images.onu.tag $ }}"
            imagePullPolicy: {{ $.Values.images.onu.pullPolicy }}
            env:
@@ -84,7 +86,8 @@ spec:
              - "-promiscuous"
 {{- if not $.Values.legacyPonsim }}
              - "-serial_number"
-             - "PSMO{{ printf "%04d" $i }}0000"
+             - "PSMO{{ printf "%04d%04d" $i $j }}"
+{{- end }}
 {{- end }}
 
            ports:
