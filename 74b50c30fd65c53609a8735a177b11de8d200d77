@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b544fd79_bd9ab147",
+        "filename": "mininet/toposcripts/topo.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2019-06-13T23:14:22Z",
+      "side": 1,
+      "message": "Can we make this 172.$i+18.$j.10/24 in order to keep compatibility with our current numbering?",
+      "range": {
+        "startLine": 84,
+        "startChar": 54,
+        "endLine": 84,
+        "endChar": 82
+      },
+      "revId": "74b50c30fd65c53609a8735a177b11de8d200d77",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
