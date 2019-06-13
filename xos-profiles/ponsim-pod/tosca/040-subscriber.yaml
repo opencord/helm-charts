@@ -20,6 +20,7 @@ imports:
   - custom_types/bandwidthprofile.yaml
 {{- end }}
 
+{{- $onucount := (.Values.numOnus|int) }}
 description: Pre-provsion a subscriber
 
 topology_template:
@@ -40,18 +41,18 @@ topology_template:
 
     # Pre-provision the subscribers
 {{- range $i, $junk := until (.Values.numOlts|int) }}
-
-    house_{{ $i }}:
+{{- range $j, $junk1 := until ($onucount) }}
+    house_{{ $i }}-{{ $j }}:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: QQClient{{ $i }}
+        name: QQClient{{ $i }}-{{ $j }}
         status: pre-provisioned
-        c_tag: 111
+        c_tag: {{ add 111 $j }}
         s_tag: {{ add 222 $i }}
   {{- if $.Values.legacyPonsim }}
         onu_device: PSMO12345678
   {{- else }}
-        onu_device: PSMO{{ printf "%04d" $i }}0000
+        onu_device: PSMO{{ printf "%04d%04d" $i $j }}
   {{- end }}
   {{- if $.Values.bandwidthProfiles }}
       requirements:
@@ -62,4 +63,5 @@ topology_template:
             node: bronze_bp
             relationship: tosca.relationships.BelongsToOne
   {{- end }}
+{{- end }}
 {{- end }}

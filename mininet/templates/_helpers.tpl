@@ -61,7 +61,10 @@ Generate the CNI annotations depending on number of OLTs
 Generate the DHCP subnets depending on number of OLTs
 */}}
 {{- define "mininet.dhcp_range" -}}
+{{- $onucount := .Values.numOnus|int}}
 {{- range $i, $junk := until (.Values.numOlts|int) -}}
-{{- printf " --dhcp-range=172.18.%d.50,172.18.%d.150,12h" $i $i -}}
+{{- range $j, $junk1 := until ($onucount) -}}
+{{- printf " --dhcp-range=172.%d.%d.50,172.%d.%d.150,12h" (add $i 18) $j (add $i 18) $j -}}
+{{- end -}}
 {{- end -}}
 {{- end -}}

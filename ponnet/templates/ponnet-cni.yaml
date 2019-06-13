@@ -90,19 +90,8 @@ metadata:
   name: ponnet-config
   namespace: kube-system
 data:
+{{- $onucount := (.Values.numOnus|int) -}}
 {{- range $i, $junk := until (.Values.numOlts|int) }}
-  pon{{ $i }}.conf: |
-    {
-      "name": "pon{{ $i }}",
-      "type": "bridge",
-      "bridge": "pon{{ $i }}",
-      "isGateway": false,
-      "ipMask": false,
-      "ipam": {
-        "type": "host-local",
-        "subnet": "10.22.0.0/16"
-      }
-    }
   nni{{ $i }}.conf: |
     {
       "name": "nni{{ $i }}",
@@ -115,8 +104,21 @@ data:
         "subnet": "10.23.0.0/16"
       }
     }
+{{- range $j, $junk1 := until ($onucount) }}
+  pon{{ $i }}.{{ $j }}.conf: |
+    {
+      "name": "pon{{ $i }}.{{ $j }}",
+      "type": "bridge",
+      "bridge": "pon{{ $i }}.{{ $j }}",
+      "isGateway": false,
+      "ipMask": false,
+      "ipam": {
+        "type": "host-local",
+        "subnet": "10.22.0.0/16"
+      }
+    }
 {{- end }}
-
+{{- end }}
 ---
 # Install Ponnnet CNI conf on each slave node.
 kind: DaemonSet

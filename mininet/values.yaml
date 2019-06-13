@@ -49,3 +49,4 @@ onosOpenflowSvc: "onos-openflow.default.svc.cluster.local"
 vlanMatchDepth: 1
 enableMulticast: false
 numOlts: 1
+numOnus: 1
