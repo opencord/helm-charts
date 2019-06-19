@@ -14,62 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Values.spgwu.name }}
-data:
-  launch.sh: |
-    #!/bin/bash -xe
-
-    RUN_DIR=${RUN_DIR:-"/opt/dp"}
-    mkdir -p $RUN_DIR/config
-    cd $RUN_DIR/config
-    cp /etc/dp/config/{cdr.cfg,dp_config.cfg,interface.cfg} .
-    sed -i "s/CP_ADDR/$CP_ADDR/g" interface.cfg
-    sed -i "s/DP_ADDR/$DP_ADDR/g" interface.cfg
-    . dp_config.cfg
-    ngic_dataplane $EAL_ARGS -- $APP_ARGS
-  dp_config.cfg: |
-    if [ ! -d "/dev/hugepages" ]; then
-        MEMORY="--no-huge -m $((MEM_LIMIT-1024))"
-    fi
-
-    CORES="-c $(taskset -p $$ | awk '{print $NF}')"
-    EAL_ARGS="${CORES} ${MEMORY} ${DEVICES}"
-
-    SPGW_CFG="--spgw_cfg 03"
-    S1U_IP=$(ip -4 addr show dev ${S1U_DEVNAME} | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
-    SGI_IP=$(ip -4 addr show dev ${SGI_DEVNAME} | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
-    S1U_MAC=$(ip addr show dev ${S1U_DEVNAME} | awk '$1=="link/ether"{print $2}')
-    SGI_MAC=$(ip addr show dev ${SGI_DEVNAME} | awk '$1=="link/ether"{print $2}')
-    S1U="--s1u_ip ${S1U_IP} --s1u_mac ${S1U_MAC} --ul_iface ${S1U_DEVNAME}"
-    SGI="--sgi_ip ${SGI_IP} --sgi_mac ${SGI_MAC} --dl_iface ${SGI_DEVNAME} --sgi_gw_ip ${RTR_SGI_IP} --sgi_mask ${SGI_MASK}"
-    MISC="--log 1"
-    APP_ARGS="${S1U} ${SGI} ${MISC} ${SPGW_CFG}"
-  cdr.cfg: |
-    CDR_PATH=./cdr
-    MASTER_CDR=./cdr/master.csv
-  interface.cfg: |
-    [0]
-    dp_comm_ip = DP_ADDR
-    dp_comm_port = 20
-    cp_comm_ip = CP_ADDR
-    cp_comm_port = 21
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Values.spgwu.name }}
-spec:
-  selector:
-    app: {{ .Values.spgwu.name }}
-  clusterIP: None
-  ports:
-  - name: cpdp
-    port: 20
-    protocol: UDP
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -92,22 +36,36 @@ spec:
                 { "name": "sgi-net", "interface": "sgi-net" }
         ]'
     spec:
-      # Required if working with Linux bound devices so that kernel does not
-      # reply to GTP-U packets
-      #initContainers:
-      #- name: init
-      #  image: "ngick8stesting/c3po-init"
-      #  command: [ "sh", "-xec"]
-      #  securityContext:
-      #    capabilities:
-      #      add:
-      #        - NET_ADMIN
-      #  args:
-      #  - iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP;
+{{- if not .Values.network.sriov.enabled }}
+      initContainers:
+        - name: spgwu-iptables-init
+          image: {{ .Values.spgwu.images.tags.init | quote }}
+          imagePullPolicy: {{ .Values.spgwu.images.pullPolicy | quote }}
+          command: [ "sh", "-xec"]
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          args:
+            - iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP;
+        - name: spgwu-af-iface-init
+          image: {{ .Values.spgwu.images.tags.spgwu | quote }}
+          imagePullPolicy: {{ .Values.spgwu.images.pullPolicy | quote }}
+          securityContext:
+            capabilities:
+              add:
+                - NET_ADMIN
+          command:
+            - /opt/dp/scripts/setup-af-iface.sh
+          volumeMounts:
+            - name: dp-script
+              mountPath: /opt/dp/scripts/setup-af-iface.sh
+              subPath: setup-af-iface.sh
+{{- end }}
       containers:
       - name: {{ .Values.spgwu.name }}
-        image: {{ .Values.spgwu.image }}
-        imagePullPolicy: {{ .Values.global.imagepullpolicy }}
+        image: {{ .Values.spgwu.images.tags.spgwu | quote }}
+        imagePullPolicy: {{ .Values.spgwu.images.pullPolicy | quote }}
         stdin: true
         tty: true
         env:
@@ -118,21 +76,29 @@ spec:
               resource: limits.memory
               divisor: 1Mi
         - name: S1U_DEVNAME
+          {{- if .Values.network.sriov.enabled }}
           value: s1u-net
+          {{- else }}
+          value: {{ .Values.spgwu.conf.dp.s1u_af_dev | quote }}
+          {{- end }}
         - name: SGI_DEVNAME
+          {{- if .Values.network.sriov.enabled }}
           value: sgi-net
+          {{- else }}
+          value: {{ .Values.spgwu.conf.dp.sgi_af_dev | quote }}
+          {{- end }}
         - name: DEVICES
-          value: ""  # "--no-pci --vdev eth_af_packet0,iface=s1u-net --vdev eth_af_packet1,iface=sgi-net"
+          value: {{ .Values.spgwu.conf.dp.devices | quote }}
         - name: CP_ADDR
-          value: spgwc-0.{{ .Values.spgwc.name }}.{{ .Values.global.namespace }}.{{ .Values.global.fqdn }}
+          value: spgwc-0.{{ .Values.spgwc.name }}
         - name: DP_ADDR
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
         - name: RTR_SGI_IP
-          value: "13.1.1.254"
+          value: {{ .Values.spgwu.conf.dp.rtr_sgi_ip | quote }}
         - name: SGI_MASK
-          value: "255.255.255.0"
+          value: {{ .Values.spgwu.conf.dp.sgi_mask | quote }}
         command: ["bash", "-xc"]
         args:
         - ip a;
@@ -148,9 +114,11 @@ spec:
         resources:
           limits:
             #hugepages-1Gi: 8Gi
-            cpu: {{ .Values.spgwu.cpu | quote }}
-            memory: {{ .Values.spgwu.memory }}
+            cpu: {{ .Values.spgwu.resources.cpu | quote }}
+            memory: {{ .Values.spgwu.resources.memory }}
+            {{- if .Values.network.sriov.enabled }}
             intel.com/sriov: 2
+            {{- end }}
         securityContext:
           capabilities:
             add:

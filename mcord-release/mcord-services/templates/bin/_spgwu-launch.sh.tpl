@@ -1,6 +1,7 @@
----
-# Copyright 2018-present Open Networking Foundation
-# Copyright 2018 Intel Corporation
+#!/bin/bash
+#
+# Copyright 2019-present Open Networking Foundation
+# Copyright 2019 Intel Corporation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +15,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-appVersion: "1.0"
-description: M-CORD services with OMEC inside
-name: mcord-services
-version: 0.1.1
+set -ex
+
+RUN_DIR=${RUN_DIR:-"/opt/dp"}
+mkdir -p $RUN_DIR/config
+cd $RUN_DIR/config
+cp /etc/dp/config/{cdr.cfg,dp_config.cfg,interface.cfg} .
+
+sed -i "s/CP_ADDR/$CP_ADDR/g" interface.cfg
+sed -i "s/DP_ADDR/$DP_ADDR/g" interface.cfg
+
+source dp_config.cfg
+
+ngic_dataplane $EAL_ARGS -- $APP_ARGS
