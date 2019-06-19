@@ -14,28 +14,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-{{- range .Values.networks }}
+{{- range .Values.network.networks }}
 ---
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
   name: {{ .name }}
+{{- if $.Values.network.sriov.enabled }}
   annotations:
     k8s.v1.cni.cncf.io/resourceName: intel.com/sriov
+{{- end }}
 spec:
   config: '{
-    "type": {{ .sriovtype | quote }},
-    "name": {{ .name | quote }},
+    "type": {{ .type | quote }},
     "ipam": {
-        "type": {{ .ipamtype | quote }},
-    {{- if eq .ipamtype "host-local" }}
+        "type": {{ .ipam | quote }},
+    {{- if eq .ipam "host-local" }}
         "subnet": {{ .subnet | quote }},
         "gateway": {{ .gateway | quote }}
-    {{- else if eq .ipamtype "centralip" }}
+    {{- else if eq .ipam "centralip" }}
         "ipType": "cluster",
         "network": {{ .subnet | quote }},
         "etcdURL": {{ $.Values.global.etcdurl | quote }}
     {{- end }}
     }
-}'
+  }'
 {{- end }}

@@ -1,0 +1,53 @@
+---
+# Copyright 2019-present Open Networking Foundation
+# Copyright 2019 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.spgwu.name }}
+data:
+  dp_config.cfg: |
+    if [ ! -d "/dev/hugepages" ]; then
+        MEMORY="--no-huge -m $((MEM_LIMIT-1024))"
+    fi
+
+    CORES="-c $(taskset -p $$ | awk '{print $NF}')"
+    EAL_ARGS="${CORES} ${MEMORY} ${DEVICES}"
+
+    SPGW_CFG="--spgw_cfg 03"
+    S1U_IP=$(ip -4 addr show dev ${S1U_DEVNAME} | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+    SGI_IP=$(ip -4 addr show dev ${SGI_DEVNAME} | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+    S1U_MAC=$(ip addr show dev ${S1U_DEVNAME} | awk '$1=="link/ether"{print $2}')
+    SGI_MAC=$(ip addr show dev ${SGI_DEVNAME} | awk '$1=="link/ether"{print $2}')
+    S1U="--s1u_ip ${S1U_IP} --s1u_mac ${S1U_MAC} --ul_iface ${S1U_DEVNAME}"
+    SGI="--sgi_ip ${SGI_IP} --sgi_mac ${SGI_MAC} --dl_iface ${SGI_DEVNAME} --sgi_gw_ip ${RTR_SGI_IP} --sgi_mask ${SGI_MASK}"
+    MISC="--log 1"
+    APP_ARGS="${S1U} ${SGI} ${MISC} ${SPGW_CFG}"
+  cdr.cfg: |
+    CDR_PATH=./cdr
+    MASTER_CDR=./cdr/master.csv
+  interface.cfg: |
+    [0]
+    dp_comm_ip = DP_ADDR
+    dp_comm_port = 20
+    cp_comm_ip = CP_ADDR
+    cp_comm_port = 21
+{{- if not .Values.network.sriov.enabled }}
+  setup-af-iface.sh: |
+{{ tuple "bin/_spgwu-setup-af-iface.sh.tpl" . | include "mcord-services.template" | indent 4 }}
+{{- end }}
+  launch.sh: |
+{{ tuple "bin/_spgwu-launch.sh.tpl" . | include "mcord-services.template" | indent 4 }}
