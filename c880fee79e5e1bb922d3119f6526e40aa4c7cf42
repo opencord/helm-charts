@@ -46,6 +46,30 @@
       "revId": "c880fee79e5e1bb922d3119f6526e40aa4c7cf42",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cdad1426_60482255",
+        "filename": "mcord-release/mcord-services/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-06-20T02:43:49Z",
+      "side": 1,
+      "message": "Yeah, but what I mean this is the configuration scripts, the user doesn\u0027t need to modify it. Therefore, shouldn\u0027t we move it into configmap-spgwu.yaml?",
+      "parentUuid": "7e35238d_641f0bb9",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 25
+      },
+      "revId": "c880fee79e5e1bb922d3119f6526e40aa4c7cf42",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
