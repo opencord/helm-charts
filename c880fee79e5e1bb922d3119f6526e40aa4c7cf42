@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ded03178_30625b38",
+        "filename": "mcord-release/mcord-services/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000266
+      },
+      "writtenOn": "2019-06-20T01:31:58Z",
+      "side": 1,
+      "message": "If we are going to have an isolated ConfigMap (configmap-spgwu.yaml), then why we put these configurations at here? should we move it to configmap-spgwu.yaml?",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 25
+      },
+      "revId": "c880fee79e5e1bb922d3119f6526e40aa4c7cf42",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
