@@ -22,6 +22,30 @@
       "revId": "c880fee79e5e1bb922d3119f6526e40aa4c7cf42",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e35238d_641f0bb9",
+        "filename": "mcord-release/mcord-services/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-06-20T02:40:49Z",
+      "side": 1,
+      "message": "In this way, we can override the contents of the cfg files. If they never change, then it would be better to move them to configmap-spgwu.yaml.",
+      "parentUuid": "ded03178_30625b38",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 25
+      },
+      "revId": "c880fee79e5e1bb922d3119f6526e40aa4c7cf42",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
