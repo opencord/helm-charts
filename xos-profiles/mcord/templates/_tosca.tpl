@@ -18,7 +18,6 @@ limitations under the License.
 tosca_definitions_version: tosca_simple_yaml_1_0
 
 imports:
-  - custom_types/deployment.yaml
   - custom_types/site.yaml
 
 description: set up site and deployment and link them
@@ -135,15 +134,15 @@ topology_template:
         name: fabric
         must-exist: true
 
-    service#epc-local:
+    service#epc-cp:
       type: tosca.nodes.Service
       properties:
-        name: epc-local
+        name: epc-cp
 
-    service#epc-remote:
+    service#epc-up:
       type: tosca.nodes.Service
       properties:
-        name: epc-remote
+        name: epc-up
 
     service#cdn-local:
       type: tosca.nodes.Service
@@ -154,66 +153,6 @@ topology_template:
       type: tosca.nodes.Service
       properties:
         name: cdn-remote
-
-    service_dependency#epc_local_cdn_local:
-      type: tosca.nodes.ServiceDependency
-      properties:
-        connect_method: none
-      requirements:
-        - subscriber_service:
-            node: service#epc-local
-            relationship: tosca.relationships.BelongsToOne
-        - provider_service:
-            node: service#cdn-local
-            relationship: tosca.relationships.BelongsToOne
-
-    service_dependency#cdn_local_cdn_remote:
-      type: tosca.nodes.ServiceDependency
-      properties:
-        connect_method: none
-      requirements:
-        - subscriber_service:
-            node: service#cdn-local
-            relationship: tosca.relationships.BelongsToOne
-        - provider_service:
-            node: service#cdn-remote
-            relationship: tosca.relationships.BelongsToOne
-
-    service_dependency#mcord_progran:
-      type: tosca.nodes.ServiceDependency
-      properties:
-        connect_method: none
-      requirements:
-        - subscriber_service:
-            node: service#progran
-            relationship: tosca.relationships.BelongsToOne
-        - provider_service:
-            node: service#mcord
-            relationship: tosca.relationships.BelongsToOne
-
-    service_dependency#progran_epc_local:
-      type: tosca.nodes.ServiceDependency
-      properties:
-        connect_method: none
-      requirements:
-        - subscriber_service:
-            node: service#epc-local
-            relationship: tosca.relationships.BelongsToOne
-        - provider_service:
-            node: service#progran
-            relationship: tosca.relationships.BelongsToOne
-
-    service_dependency#epc_local_epc_remote:
-      type: tosca.nodes.ServiceDependency
-      properties:
-        connect_method: none
-      requirements:
-        - subscriber_service:
-            node: service#epc-remote
-            relationship: tosca.relationships.BelongsToOne
-        - provider_service:
-            node: service#epc-local
-            relationship: tosca.relationships.BelongsToOne
 
     service_dependency#onos-fabric_fabric:
       type: tosca.nodes.ServiceDependency
@@ -239,12 +178,84 @@ topology_template:
             node: service#fabric
             relationship: tosca.relationships.BelongsToOne
 
+    service_dependency#mcord_progran:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#progran
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#mcord
+            relationship: tosca.relationships.BelongsToOne
+
+    service_dependency#progran_epc_cp:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#epc-cp
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#progran
+            relationship: tosca.relationships.BelongsToOne
+
+    service_dependency#epc_cp_epc_up:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#epc-up
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#epc-cp
+            relationship: tosca.relationships.BelongsToOne
+
+    service_dependency#progran_epc_up:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#epc-up
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#progran
+            relationship: tosca.relationships.BelongsToOne
+
+    service_dependency#epc_up_cdn_local:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#cdn-local
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#epc-up
+            relationship: tosca.relationships.BelongsToOne
+
+    service_dependency#cdn_local_cdn_remote:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#cdn-remote
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#cdn-local
+            relationship: tosca.relationships.BelongsToOne
+
     constraints:
       type: tosca.nodes.ServiceGraphConstraint
       properties:
 {{- if .Values.seba.enabled }}
-        constraints: '[ ["mcord", null, "onos"], ["progran", null, "fabric"], ["epc-local", null, null] ["epc-remote", null, null] ]'
+        constraints: '[ ["mcord", null, "onos"], ["progran", null, "fabric"], ["epc-cp", null, null] ["epc-up", null, null] ]'
 {{ else }}
-        constraints: '[ ["mcord", null, "rcord", null], ["progran", null, "volt", "att-workflow-driver"], ["epc-local", "cdn-local", "fabric-crossconnect", "onos"], ["epc-remote", "cdn-remote", "vrouter", "fabric"] ]'
+        constraints: '[ ["mcord", "progran", null], ["epc-cp", "epc-up", "onos"], [null, "cdn-local", "fabric"], [null, "cdn-remote", "vrouter"] ]'
 {{- end -}}
 {{- end -}}
