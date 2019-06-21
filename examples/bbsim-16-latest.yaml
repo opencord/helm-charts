@@ -60,6 +60,7 @@ topology_template:
         uplink: "65536"
         nas_id: "NAS_ID"
         serial_number: "bbsim.voltha.svc:50060"
+        technology: xgspon
       requirements:
         - volt_service:
             node: service#volt
@@ -260,6 +261,7 @@ topology_template:
         circuit_id: circuit0
         remote_id: remote0
         nas_port_id: PON 2/1/01/1:1.1.0
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -279,6 +281,7 @@ topology_template:
         circuit_id: circuit1
         remote_id: remote1
         nas_port_id: PON 2/1/01/1:1.1.1
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -298,6 +301,7 @@ topology_template:
         circuit_id: circuit2
         remote_id: remote2
         nas_port_id: PON 2/1/01/1:1.1.2
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -317,6 +321,7 @@ topology_template:
         circuit_id: circuit3
         remote_id: remote3
         nas_port_id: PON 2/1/01/1:1.1.3
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -336,6 +341,7 @@ topology_template:
         circuit_id: circuit4
         remote_id: remote4
         nas_port_id: PON 2/1/01/1:1.1.4
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -355,6 +361,7 @@ topology_template:
         circuit_id: circuit5
         remote_id: remote5
         nas_port_id: PON 2/1/01/1:1.1.5
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -374,6 +381,7 @@ topology_template:
         circuit_id: circuit6
         remote_id: remote6
         nas_port_id: PON 2/1/01/1:1.1.6
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -393,6 +401,7 @@ topology_template:
         circuit_id: circuit7
         remote_id: remote7
         nas_port_id: PON 2/1/01/1:1.1.7
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -412,6 +421,7 @@ topology_template:
         circuit_id: circuit8
         remote_id: remote8
         nas_port_id: PON 2/1/01/1:1.1.8
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -431,6 +441,7 @@ topology_template:
         circuit_id: circuit9
         remote_id: remote9
         nas_port_id: PON 2/1/01/1:1.1.9
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -450,6 +461,7 @@ topology_template:
         circuit_id: circuit10a
         remote_id: remote10a
         nas_port_id: PON 2/1/01/1:1.1.10a
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -469,6 +481,7 @@ topology_template:
         circuit_id: circuit10b
         remote_id: remote10b
         nas_port_id: PON 2/1/01/1:1.1.10b
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -488,6 +501,7 @@ topology_template:
         circuit_id: circuit10c
         remote_id: remote10c
         nas_port_id: PON 2/1/01/1:1.1.10c
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -507,6 +521,7 @@ topology_template:
         circuit_id: circuit10d
         remote_id: remote10d
         nas_port_id: PON 2/1/01/1:1.1.10d
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -526,6 +541,7 @@ topology_template:
         circuit_id: circuit10e
         remote_id: remote10e
         nas_port_id: PON 2/1/01/1:1.1.10e
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
@@ -545,6 +561,7 @@ topology_template:
         circuit_id: circuit10f
         remote_id: remote10f
         nas_port_id: PON 2/1/01/1:1.1.10f
+        tech_profile_id: 64
       requirements:
         - upstream_bps:
             node: bronze_bp
