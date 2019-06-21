@@ -19,6 +19,9 @@ imports:
   - custom_types/onudevice.yaml
   - custom_types/ponport.yaml
   - custom_types/voltservice.yaml
+  {{- if $.Values.bandwidthProfiles }}
+  - custom_types/technologyprofile.yaml
+  {{- end }}
 description: Create a simulated OLT Device in VOLTHA
 topology_template:
   node_templates:
@@ -41,6 +44,9 @@ topology_template:
         switch_datapath_id: of:0000000000000001
         switch_port: "{{ add 2 $i }}"
         outer_tpid: "0x8100"
+{{- if $.Values.bandwidthProfiles }}
+        technology: xgspon
+{{- end }}
 {{- if $.Values.legacyPonsim }}
         dp_id: of:0000aabbccddeeff
 {{- else }}
@@ -61,4 +67,14 @@ topology_template:
         - olt_device:
             node: olt{{ $i }}_device
             relationship: tosca.relationships.BelongsToOne
+{{- end }}
+
+{{- if $.Values.bandwidthProfiles }}
+    technologyProfile:
+      type: tosca.nodes.TechnologyProfile
+      properties:
+        profile_id: 64
+        technology: xgspon
+        profile_value: >
+          {}
 {{- end }}

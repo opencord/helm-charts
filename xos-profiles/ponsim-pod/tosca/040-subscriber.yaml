@@ -49,6 +49,9 @@ topology_template:
         status: pre-provisioned
         c_tag: {{ add 111 $j }}
         s_tag: {{ add 222 $i }}
+  {{- if $.Values.bandwidthProfiles }}
+        tech_profile_id: 64
+  {{- end }}
   {{- if $.Values.legacyPonsim }}
         onu_device: PSMO12345678
   {{- else }}
