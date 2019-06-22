@@ -70,6 +70,30 @@
       "revId": "c880fee79e5e1bb922d3119f6526e40aa4c7cf42",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4ca0fd95_e84a78b7",
+        "filename": "mcord-release/mcord-services/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-06-22T02:48:52Z",
+      "side": 1,
+      "message": "Hmm...that is unusual for \"configuration\" file. I\u0027ll move them to configmap then.",
+      "parentUuid": "cdad1426_60482255",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 25
+      },
+      "revId": "c880fee79e5e1bb922d3119f6526e40aa4c7cf42",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
