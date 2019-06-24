@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b1398ffb_1daa6c88",
+        "filename": "scripts/check-versions.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-06-24T17:32:15Z",
+      "side": 1,
+      "message": "Is the indentation right on this one?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 13
+      },
+      "revId": "21d6516246b0f4abef46874eeec3c82da8dec5d6",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
