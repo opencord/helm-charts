@@ -61,6 +61,9 @@ sadis-server:
 rcord:
   image:
     tag: 'master'
+volt:
+  image:
+    tag: 'master'
 
 
 # in workflow/att-workflow service chart
