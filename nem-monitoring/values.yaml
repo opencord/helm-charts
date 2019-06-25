@@ -19,7 +19,7 @@ global:
 images:
   voltha_kpi_exporter:
     repository: 'opencord/kafka-topic-exporter'
-    tag: '1.1.2'
+    tag: '1.2.1'
     pullPolicy: 'Always'
 
 nem_voltha_kpi_exporter_nodePort: 31080

@@ -63,6 +63,10 @@ images:
   rg:
     tag: "latest"
 
+# NEM Monitoring
+  voltha_kpi_exporter:
+    tag: 'latest'
+
 # in xos-gui sub-chart required by xos-core chart
 xos-gui:
   images:
