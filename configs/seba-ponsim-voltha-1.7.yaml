@@ -28,7 +28,8 @@ images:
 
 # ONOS
   onos:
-    tag: '1.13.9-rc4'
+    repository: matteoscandolo/onos
+    tag: '1.13-branch'
 
 # VOLTHA
   vcore:
@@ -91,7 +92,7 @@ bandwidthProfiles: True
 legacyPonsim: False
 
 # ONOS applications
-aaaAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/aaa-app/1.9.0-SNAPSHOT/aaa-app-1.9.0-20190521.071409-20.oar"
+aaaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=aaa-app&v=1.9.0-SNAPSHOT&e=oar"
 aaaAppVersion: "1.9.0.SNAPSHOT"
 
 sadisAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=sadis-app&v=3.1.0-SNAPSHOT&e=oar"
