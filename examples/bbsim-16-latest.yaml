@@ -73,17 +73,6 @@ topology_template:
         name: att-workflow-driver
         must-exist: true
 
-    BBSM00000000:
-      type: tosca.nodes.AttWorkflowDriverWhiteListEntry
-      properties:
-        serial_number: BBSM00000000
-        pon_port_id: 536870912
-        device_id: of:0000626273696d76
-      requirements:
-        - owner:
-            node: service#att
-            relationship: tosca.relationships.BelongsToOne
-
     BBSM00000001:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
@@ -249,37 +238,28 @@ topology_template:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    # Pre-provision the subscriber
-    bbsim_subscriber_0:
-      type: tosca.nodes.RCORDSubscriber
+    BBSM00000010:
+      type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        name: Sub_BBSM00000000
-        status: pre-provisioned
-        c_tag: 900
-        s_tag: 999
-        onu_device: BBSM00000000
-        circuit_id: circuit0
-        remote_id: remote0
-        nas_port_id: PON 2/1/01/1:1.1.0
-        tech_profile_id: 64
+        serial_number: BBSM00000010
+        pon_port_id: 536870912
+        device_id: of:0000626273696d76
       requirements:
-        - upstream_bps:
-            node: bronze_bp
-            relationship: tosca.relationships.BelongsToOne
-        - downstream_bps:
-            node: bronze_bp
+        - owner:
+            node: service#att
             relationship: tosca.relationships.BelongsToOne
 
+    # Pre-provision the subscriber
     bbsim_subscriber_1:
       type: tosca.nodes.RCORDSubscriber
       properties:
         name: Sub_BBSM00000001
         status: pre-provisioned
-        c_tag: 901
+        c_tag: 900
         s_tag: 999
         onu_device: BBSM00000001
-        circuit_id: circuit1
-        remote_id: remote1
+        circuit_id: circuit01
+        remote_id: remote01
         nas_port_id: PON 2/1/01/1:1.1.1
         tech_profile_id: 64
       requirements:
@@ -295,11 +275,11 @@ topology_template:
       properties:
         name: Sub_BBSM00000002
         status: pre-provisioned
-        c_tag: 902
+        c_tag: 901
         s_tag: 999
         onu_device: BBSM00000002
-        circuit_id: circuit2
-        remote_id: remote2
+        circuit_id: circuit02
+        remote_id: remote02
         nas_port_id: PON 2/1/01/1:1.1.2
         tech_profile_id: 64
       requirements:
@@ -315,11 +295,11 @@ topology_template:
       properties:
         name: Sub_BBSM00000003
         status: pre-provisioned
-        c_tag: 903
+        c_tag: 902
         s_tag: 999
         onu_device: BBSM00000003
-        circuit_id: circuit3
-        remote_id: remote3
+        circuit_id: circuit03
+        remote_id: remote03
         nas_port_id: PON 2/1/01/1:1.1.3
         tech_profile_id: 64
       requirements:
@@ -335,11 +315,11 @@ topology_template:
       properties:
         name: Sub_BBSM00000004
         status: pre-provisioned
-        c_tag: 904
+        c_tag: 903
         s_tag: 999
         onu_device: BBSM00000004
-        circuit_id: circuit4
-        remote_id: remote4
+        circuit_id: circuit04
+        remote_id: remote04
         nas_port_id: PON 2/1/01/1:1.1.4
         tech_profile_id: 64
       requirements:
@@ -355,11 +335,11 @@ topology_template:
       properties:
         name: Sub_BBSM00000005
         status: pre-provisioned
-        c_tag: 905
+        c_tag: 904
         s_tag: 999
         onu_device: BBSM00000005
-        circuit_id: circuit5
-        remote_id: remote5
+        circuit_id: circuit05
+        remote_id: remote05
         nas_port_id: PON 2/1/01/1:1.1.5
         tech_profile_id: 64
       requirements:
@@ -375,11 +355,11 @@ topology_template:
       properties:
         name: Sub_BBSM00000006
         status: pre-provisioned
-        c_tag: 906
+        c_tag: 905
         s_tag: 999
         onu_device: BBSM00000006
-        circuit_id: circuit6
-        remote_id: remote6
+        circuit_id: circuit06
+        remote_id: remote06
         nas_port_id: PON 2/1/01/1:1.1.6
         tech_profile_id: 64
       requirements:
@@ -395,11 +375,11 @@ topology_template:
       properties:
         name: Sub_BBSM00000007
         status: pre-provisioned
-        c_tag: 907
+        c_tag: 906
         s_tag: 999
         onu_device: BBSM00000007
-        circuit_id: circuit7
-        remote_id: remote7
+        circuit_id: circuit07
+        remote_id: remote07
         nas_port_id: PON 2/1/01/1:1.1.7
         tech_profile_id: 64
       requirements:
@@ -415,11 +395,11 @@ topology_template:
       properties:
         name: Sub_BBSM00000008
         status: pre-provisioned
-        c_tag: 908
+        c_tag: 907
         s_tag: 999
         onu_device: BBSM00000008
-        circuit_id: circuit8
-        remote_id: remote8
+        circuit_id: circuit08
+        remote_id: remote08
         nas_port_id: PON 2/1/01/1:1.1.8
         tech_profile_id: 64
       requirements:
@@ -435,11 +415,11 @@ topology_template:
       properties:
         name: Sub_BBSM00000009
         status: pre-provisioned
-        c_tag: 909
+        c_tag: 908
         s_tag: 999
         onu_device: BBSM00000009
-        circuit_id: circuit9
-        remote_id: remote9
+        circuit_id: circuit09
+        remote_id: remote09
         nas_port_id: PON 2/1/01/1:1.1.9
         tech_profile_id: 64
       requirements:
@@ -455,12 +435,12 @@ topology_template:
       properties:
         name: Sub_BBSM0000000a
         status: pre-provisioned
-        c_tag: 910
+        c_tag: 909
         s_tag: 999
         onu_device: BBSM0000000a
-        circuit_id: circuit10a
-        remote_id: remote10a
-        nas_port_id: PON 2/1/01/1:1.1.10a
+        circuit_id: circuit90a
+        remote_id: remote0a
+        nas_port_id: PON 2/1/01/1:1.1.a
         tech_profile_id: 64
       requirements:
         - upstream_bps:
@@ -475,12 +455,12 @@ topology_template:
       properties:
         name: Sub_BBSM0000000b
         status: pre-provisioned
-        c_tag: 911
+        c_tag: 910
         s_tag: 999
         onu_device: BBSM0000000b
-        circuit_id: circuit10b
-        remote_id: remote10b
-        nas_port_id: PON 2/1/01/1:1.1.10b
+        circuit_id: circuit0b
+        remote_id: remote0b
+        nas_port_id: PON 2/1/01/1:1.1.00b
         tech_profile_id: 64
       requirements:
         - upstream_bps:
@@ -495,12 +475,12 @@ topology_template:
       properties:
         name: Sub_BBSM0000000c
         status: pre-provisioned
-        c_tag: 912
+        c_tag: 911
         s_tag: 999
         onu_device: BBSM0000000c
-        circuit_id: circuit10c
-        remote_id: remote10c
-        nas_port_id: PON 2/1/01/1:1.1.10c
+        circuit_id: circuit0c
+        remote_id: remote0c
+        nas_port_id: PON 2/1/01/1:1.1.00c
         tech_profile_id: 64
       requirements:
         - upstream_bps:
@@ -515,12 +495,12 @@ topology_template:
       properties:
         name: Sub_BBSM0000000d
         status: pre-provisioned
-        c_tag: 913
+        c_tag: 912
         s_tag: 999
         onu_device: BBSM0000000d
-        circuit_id: circuit10d
-        remote_id: remote10d
-        nas_port_id: PON 2/1/01/1:1.1.10d
+        circuit_id: circuit0d
+        remote_id: remote0d
+        nas_port_id: PON 2/1/01/1:1.1.00d
         tech_profile_id: 64
       requirements:
         - upstream_bps:
@@ -535,12 +515,12 @@ topology_template:
       properties:
         name: Sub_BBSM0000000e
         status: pre-provisioned
-        c_tag: 914
+        c_tag: 913
         s_tag: 999
         onu_device: BBSM0000000e
-        circuit_id: circuit10e
-        remote_id: remote10e
-        nas_port_id: PON 2/1/01/1:1.1.10e
+        circuit_id: circuit0e
+        remote_id: remote0e
+        nas_port_id: PON 2/1/01/1:1.1.00e
         tech_profile_id: 64
       requirements:
         - upstream_bps:
@@ -555,12 +535,32 @@ topology_template:
       properties:
         name: Sub_BBSM0000000f
         status: pre-provisioned
-        c_tag: 915
+        c_tag: 914
         s_tag: 999
         onu_device: BBSM0000000f
-        circuit_id: circuit10f
-        remote_id: remote10f
-        nas_port_id: PON 2/1/01/1:1.1.10f
+        circuit_id: circuit0f
+        remote_id: remote0f
+        nas_port_id: PON 2/1/01/1:1.1.00f
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+
+    bbsim_subscriber_10:
+      type: tosca.nodes.RCORDSubscriber
+      properties:
+        name: Sub_BBSM00000010
+        status: pre-provisioned
+        c_tag: 915
+        s_tag: 999
+        onu_device: BBSM00000010
+        circuit_id: circuit10
+        remote_id: remote10
+        nas_port_id: PON 2/1/01/1:1.1.010
         tech_profile_id: 64
       requirements:
         - upstream_bps:
