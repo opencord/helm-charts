@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9d16a94d_530671c6",
+        "filename": "examples/technology-profile.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-06-26T20:19:43Z",
+      "side": 1,
+      "message": "The volt service is not needed here",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "bd6c5e84bb7d9c59befe4dc7cfe7d00af97aacf0",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
