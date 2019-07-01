@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "c4669d1c_4ae33685",
+        "filename": "workflows/att-workflow/values.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000162
+      },
+      "writtenOn": "2019-07-01T20:32:34Z",
+      "side": 1,
+      "message": "Why is aaaApp defined here ? It may be left over from the previous chart, but if we have it in `seba-service` values file, we can remove it from here",
+      "revId": "57983b65767be7cfd252fba1ef75b91a93370452",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
