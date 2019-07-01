@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: exporter-configmap
+data:
+  conf.yaml: |
+{{ .Files.Get "exporter-config/conf.yaml" | indent 4 }}
