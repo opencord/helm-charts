@@ -36,3 +36,11 @@ spec:
             - containerPort: 8080
               port: 8080
               protocol: TCP
+          volumeMounts:
+            - name: exporter-config
+              mountPath: /etc/config/conf.yaml
+              subPath: conf.yaml
+      volumes:
+        - name: exporter-config
+          configMap:
+            name: exporter-configmap

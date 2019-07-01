@@ -1,0 +1,17 @@
+---
+broker:
+  name: broker-name
+  host: cord-kafka.default.svc.cluster.local:9092
+  description: The kafka broker
+  topics:
+    - voltha.kpis
+    - onos.kpis
+    - onos.aaa.stats.kpis
+logger:
+  loglevel: debug
+  host: cord-kafka.default.svc.cluster.local:9092
+target:
+  type: prometheus-target
+  name: http-server
+  port: 8080
+  description: http target for prometheus
