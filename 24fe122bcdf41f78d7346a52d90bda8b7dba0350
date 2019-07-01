@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "238294ff_9e96c302",
+        "filename": "mcord-release/mcord-services/templates/hss.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-07-01T18:15:49Z",
+      "side": 1,
+      "message": "I recommend to use the different MSISDN number. I know that it will be fine for our demo but MSISDN -- a phone number -- is normally unique in a same operator. How about to change 1122334457?",
+      "range": {
+        "startLine": 245,
+        "startChar": 59,
+        "endLine": 245,
+        "endChar": 69
+      },
+      "revId": "24fe122bcdf41f78d7346a52d90bda8b7dba0350",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
