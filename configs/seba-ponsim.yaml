@@ -35,7 +35,10 @@ tt-workflow-driver:
   kafkaService: cord-kafka
 
 # in mininet chart
-vlanMatchDepth: 1
+vlanMatchDepth: 2
+enableMulticast: True
 
 # in ponsim-pod chart
-bandwidthProfiles: False
+bandwidthProfiles: True
+legacyPonsim: False
+
