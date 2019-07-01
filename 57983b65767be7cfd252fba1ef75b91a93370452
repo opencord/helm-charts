@@ -16,6 +16,24 @@
       "revId": "57983b65767be7cfd252fba1ef75b91a93370452",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f8126296_801294e4",
+        "filename": "workflows/att-workflow/values.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000162
+      },
+      "writtenOn": "2019-07-01T20:35:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4669d1c_4ae33685",
+      "revId": "57983b65767be7cfd252fba1ef75b91a93370452",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
