@@ -17,21 +17,6 @@
 {{- range $i, $junk := until (.Values.numOlts|int) }}
 {{- range $j, $junk1 := until ($onucount) }}
 ---
-apiVersion: v1
-kind: Service
-metadata:
-   name: onu{{ $i }}-{{ $j }}
-   namespace: {{ $.Values.global.namespace }}
-   labels:
-     name: onu{{ $i }}-{{ $j }}
-spec:
-  ports:
-    - name: grpc
-      port: 50061
-      targetPort: 50061
-  selector:
-    app: onu{{ $i }}-{{ $j }}
----
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -42,7 +27,8 @@ spec:
    template:
      metadata:
        labels:
-         app: onu{{ $i }}-{{ $j }}
+         app: ponsim
+         onu: onu{{ $i }}-{{ $j }}
        annotations:
          cni: "calico,pon{{ $i }}.{{ $j }}"
      spec:
@@ -53,7 +39,7 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
-                - key: app
+                - key: rg
                   operator: In
                   values:
                   - rg{{ $i }}-{{ $j }}

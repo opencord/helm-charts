@@ -27,7 +27,8 @@ spec:
    template:
      metadata:
        labels:
-         app: rg{{ $i }}-{{ $j }}
+         app: ponsim
+         rg: rg{{ $i }}-{{ $j }}
        annotations:
          cni: "pon{{ $i }}.{{ $j }}"
      spec:
@@ -38,7 +39,7 @@ spec:
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
-                - key: app
+                - key: onu
                   operator: In
                   values:
                   - onu{{ $i }}-{{ $j }}

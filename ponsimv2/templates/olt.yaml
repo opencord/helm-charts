@@ -28,7 +28,7 @@ spec:
       port: 50060
       targetPort: 50060
   selector:
-    app: olt{{ $i }}
+    olt: olt{{ $i }}
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
@@ -40,10 +40,23 @@ spec:
    template:
      metadata:
        labels:
-         app: olt{{ $i }}
+         app: ponsim
+         olt: olt{{ $i }}
        annotations:
          cni: "calico,nni{{ $i }}"
      spec:
+       affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - mininet
+              topologyKey: kubernetes.io/hostname
        containers:
          - name: olt{{ $i }}
            image: "{{ $.Values.global.registry }}{{ $.Values.images.olt.repository }}:{{ tpl $.Values.images.olt.tag $ }}"
