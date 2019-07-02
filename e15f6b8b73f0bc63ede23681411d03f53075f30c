@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "68524eb5_7f1c9746",
+        "filename": "nem-monitoring/exporter-config/conf.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-07-02T21:42:21Z",
+      "side": 1,
+      "message": "We should consider defaulting the loglevel to info, otherwise we get a log message for every kpi that is processed.",
+      "range": {
+        "startLine": 11,
+        "startChar": 2,
+        "endLine": 11,
+        "endChar": 17
+      },
+      "revId": "e15f6b8b73f0bc63ede23681411d03f53075f30c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
