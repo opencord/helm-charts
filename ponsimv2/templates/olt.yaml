@@ -40,10 +40,22 @@ spec:
    template:
      metadata:
        labels:
-         app: olt{{ $i }}
+         app: ponsim
        annotations:
          cni: "calico,nni{{ $i }}"
      spec:
+       affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - mininet
+              topologyKey: kubernetes.io/hostname
        containers:
          - name: olt{{ $i }}
            image: "{{ $.Values.global.registry }}{{ $.Values.images.olt.repository }}:{{ tpl $.Values.images.olt.tag $ }}"
