@@ -15,5 +15,5 @@
 
 dependencies:
 - name: simpleexampleservice
-  version: 1.2.1
+  version: 1.2.2
   repository: file://../../xos-services/simpleexampleservice

@@ -15,11 +15,11 @@
 
 dependencies:
 - name: onos-service
-  version: 2.1.1
+  version: 2.1.2
   repository: file://../../xos-services/onos-service
   condition: onos-service.enabled
 - name: fabric
-  version: 2.2.1
+  version: 2.2.2
   repository: file://../../xos-services/fabric
   condition: fabric.enabled
 - name: mcord-subscriber

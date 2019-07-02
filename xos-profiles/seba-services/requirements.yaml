@@ -15,22 +15,22 @@
 
 dependencies:
 - name: rcord
-  version: 1.0.15
+  version: 1.0.16
   repository: file://../../xos-services/rcord
 - name: onos-service
-  version: 2.1.1
+  version: 2.1.2
   repository: file://../../xos-services/onos-service
   condition: onos-service.enabled
 - name: fabric
-  version: 2.2.1
+  version: 2.2.2
   repository: file://../../xos-services/fabric
   condition: fabric.enabled
 - name: volt
-  version: 2.2.4
+  version: 2.2.5
   repository: file://../../xos-services/volt
 - name: fabric-crossconnect
-  version: 1.2.1
+  version: 1.2.2
   repository: file://../../xos-services/fabric-crossconnect
 - name: sadis-server
-  version: 1.0.3
+  version: 1.0.4
   repository: file://../../sadis-server
