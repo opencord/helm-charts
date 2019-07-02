@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4add4448_81c920b3",
+        "filename": "nem-monitoring/Chart.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-07-02T18:43:57Z",
+      "side": 1,
+      "message": "Version should go up on development version - order is 1.0.0 -\u003e 1.0.1-dev -\u003e 1.0.1",
+      "range": {
+        "startLine": 18,
+        "startChar": 1,
+        "endLine": 18,
+        "endChar": 18
+      },
+      "revId": "ac547dfb6d9af9980159b8449dbd5ca57cdf202f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4bc9d571_0f06069b",
+        "filename": "nem-monitoring/templates/importer-deployment.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-07-02T18:43:57Z",
+      "side": 1,
+      "message": "Unneeded whitespace",
+      "range": {
+        "startLine": 19,
+        "startChar": 25,
+        "endLine": 19,
+        "endChar": 1
+      },
+      "revId": "ac547dfb6d9af9980159b8449dbd5ca57cdf202f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ed8539c3_cf5954fe",
+        "filename": "nem-monitoring/values.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-07-02T18:43:57Z",
+      "side": 1,
+      "message": "This tag doesn\u0027t exist in the repo: https://cloud.docker.com/u/opencord/repository/docker/opencord/device-management/tags",
+      "range": {
+        "startLine": 27,
+        "startChar": 10,
+        "endLine": 27,
+        "endChar": 16
+      },
+      "revId": "ac547dfb6d9af9980159b8449dbd5ca57cdf202f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
