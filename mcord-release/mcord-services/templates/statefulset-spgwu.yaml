@@ -32,8 +32,8 @@ spec:
         app: {{ .Values.spgwu.name }}
       annotations:
         k8s.v1.cni.cncf.io/networks: '[
-                { "name": "s1u-net", "interface": "s1u-net" },
-                { "name": "sgi-net", "interface": "sgi-net" }
+                { "name": "s1u-net", "interface": "s1u-net", "interfaceRequest": "s1u-net" },
+                { "name": "sgi-net", "interface": "sgi-net", "interfaceRequest": "sgi-net" }
         ]'
     spec:
 {{- if .Values.network.sriov.enabled }}
