@@ -4,4 +4,4 @@ metadata:
   name: exporter-configmap
 data:
   conf.yaml: |
-{{ .Files.Get "exporter-config/conf.yaml" | indent 4 }}
+{{ include "exporter.config" . | indent 4 }}
