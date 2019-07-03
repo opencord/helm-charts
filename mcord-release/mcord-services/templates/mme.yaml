@@ -13,6 +13,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+{{- if eq .Values.mme.type "c3po" }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -291,3 +293,4 @@ spec:
         configMap:
           name: {{ .Values.mme.name }}
           defaultMode: 420
+{{- end }}

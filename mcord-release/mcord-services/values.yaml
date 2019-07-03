@@ -46,6 +46,47 @@ mme:
   image: ngick8stesting/c3po-mme:5e2eaf6
   cpu: 3
   memory: 1Gi
+  # provide which mme will be used
+  # possible options are c3po and openmme
+  type: c3po
+  # configs below are valid only for openmme
+  images:
+    tags:
+      dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+      mme_init: openmme:v0.1
+      mme: openmme:v0.1
+    pullPolicy: IfNotPresent
+  resources:
+    cpu: 3
+    memory: 1Gi
+    # leave the hostnames and addressses in the following sections unset
+    # unless you're using external enb, spgw and hss
+  conf:
+    mme:
+      name: vmmestandalone
+      group_id: 1
+      code: 1
+      mcc:
+        dig1: 2
+        dig2: 0
+        dig3: 8
+      mnc:
+        dig1: 0
+        dig2: 1
+        dig3: -1
+    s1ap:
+      sctp_port: 36412
+      sctp_port_external: 36412
+      enb_addr: 10.1.11.3
+      enb_port: 36412
+    s11:
+      egtp_default_port: 2123
+      sgw_addr: null
+      pgw_addr: null
+    s6a:
+      host_type: freediameter
+      host: null
+      realm: null
 
 spgwc:
   name: spgwc
