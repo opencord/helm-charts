@@ -46,7 +46,7 @@ affinity:
         topologyKey: kubernetes.io/hostname
 
 onosOpenflowSvc: "onos-openflow.default.svc.cluster.local"
-vlanMatchDepth: 1
-enableMulticast: false
+vlanMatchDepth: 2
+enableMulticast: true
 numOlts: 1
 numOnus: 1

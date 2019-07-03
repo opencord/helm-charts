@@ -39,4 +39,5 @@ global:
 numOlts: 1
 numOnus: 1
 # legacyPonsim == true means that we are using voltha-1.6
-legacyPonsim: true
+bandwidthProfile: true
+legacyPonsim: false

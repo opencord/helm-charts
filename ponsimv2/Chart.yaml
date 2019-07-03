@@ -17,7 +17,7 @@ name: ponsimv2
 description: PON Simulator
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 1.2.0
+version: 1.2.1
 
 # VOLTHA version
 appVersion: 1.7.0
