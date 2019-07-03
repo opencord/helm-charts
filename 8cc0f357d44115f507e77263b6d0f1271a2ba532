@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4d1ef7c2_c2eb0ad2",
+        "filename": "nem-monitoring/exporter-config/conf.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-07-03T16:46:38Z",
+      "side": 1,
+      "message": "Should this be `cord-kafka:9092` to be consistent with other charts?",
+      "range": {
+        "startLine": 12,
+        "startChar": 2,
+        "endLine": 12,
+        "endChar": 49
+      },
+      "revId": "8cc0f357d44115f507e77263b6d0f1271a2ba532",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
