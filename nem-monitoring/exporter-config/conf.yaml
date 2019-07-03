@@ -9,7 +9,7 @@ broker:
     - voltha.kpis
 logger:
   loglevel: info
-  host: cord-kafka.default.svc.cluster.local:9092
+  host: {{ .Values.args.voltha_kpi_broker }}
 target:
   type: prometheus-target
   name: http-server
