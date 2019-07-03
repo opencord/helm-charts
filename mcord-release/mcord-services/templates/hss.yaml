@@ -248,9 +248,9 @@ spec:
         - name: HSSDB_ADDR
           value: {{ .Values.hssdb.name }}
         - name: MME_HOST
-          value: mme-0
+          value: {{ tuple "mme" "host" . | include "mcord-services.endpoint_lookup" | quote }}
         - name: MME_REALM
-          value: {{ .Values.mme.name }}.{{ .Values.global.namespace }}.{{ .Values.global.fqdn }}
+          value: {{ tuple "mme" "realm" . | include "mcord-services.endpoint_lookup" | quote }}
       containers:
       - name: hss
         image: {{ .Values.hss.image }}
@@ -261,7 +261,7 @@ spec:
         - name: HSSDB_ADDR
           value: {{ .Values.hssdb.name | quote }}
         - name: MME_IDENTITY
-          value: {{ .Values.mme.name }}.{{ .Values.global.namespace }}.{{ .Values.global.fqdn }}
+          value: {{ tuple "mme" "identity" . | include "mcord-services.endpoint_lookup" | quote }}
         command: ["bash", "-c", "/opt/c3po/hss/launch.sh; sleep 3600"]
         resources:
           limits:

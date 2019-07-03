@@ -58,3 +58,21 @@ Render the given template.
 {{- $wtf := $context.Template.Name | replace $last $name -}}
 {{ include $wtf $context }}
 {{- end -}}
+
+{{/*
+Return identity, realm, and hostname of the first pod of the given statefulset.
+*/}}
+{{- define "mcord-services.endpoint_lookup" -}}
+{{- $service := index . 0 -}}
+{{- $type := index . 1 -}}
+{{- $context := index . 2 -}}
+{{- $serviceContext := index $context.Values $service -}}
+{{- $serviceName := $serviceContext.name -}}
+{{- if eq $type "identity" -}}
+{{- printf "%s-0.%s.%s.svc.%s" $serviceName $serviceName $context.Release.Namespace "cluster.local" -}}
+{{- else if eq $type "realm" -}}
+{{- printf "%s.%s.svc.%s" $serviceName $context.Release.Namespace "cluster.local" -}}
+{{- else if eq $type "host" -}}
+{{- printf "%s-0" $serviceName -}}
+{{- end -}}
+{{- end -}}
