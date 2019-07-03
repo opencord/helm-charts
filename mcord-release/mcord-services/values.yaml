@@ -41,11 +41,47 @@ hss:
   memory: 1Gi
 
 mme:
-  name: mme
   initimage: ngick8stesting/c3po-mmeinit
   image: ngick8stesting/c3po-mme:5e2eaf6
   cpu: 3
   memory: 1Gi
+  # Provide which mme will be used.
+  # Possible options are c3po and openmme but note that c3po mme will be deprecated soon.
+  type: c3po
+  name: mme
+  images:
+    tags:
+      dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+      mme: omecproject/openmme:0.1.0-dev
+    pullPolicy: IfNotPresent
+  resources:
+    cpu: 3
+    memory: 1Gi
+  conf:
+    # Leave hostnames and addressses null unless using external spgw and hss.
+    mme:
+      name: vmmestandalone
+      group_id: 1
+      code: 1
+      mcc:
+        dig1: 2
+        dig2: 0
+        dig3: 8
+      mnc:
+        dig1: 0
+        dig2: 1
+        dig3: -1
+    s1ap:
+      sctp_port: 36412
+      sctp_port_external: 36412
+    s11:
+      egtp_default_port: 2123
+      sgw_addr: null
+      pgw_addr: null
+    s6a:
+      host_type: freediameter
+      host: null
+      realm: null
 
 spgwc:
   name: spgwc

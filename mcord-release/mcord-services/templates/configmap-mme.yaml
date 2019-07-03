@@ -1,0 +1,115 @@
+---
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+{{- if eq .Values.mme.type "openmme" }}
+
+{{- if empty .Values.mme.conf.s6a.host -}}
+{{- $_ := tuple "hss" "identity" . | include "mcord-services.endpoint_lookup" | set .Values.mme.conf.s6a "host" -}}
+{{- end }}
+{{- if empty .Values.mme.conf.s6a.realm -}}
+{{- $_ := tuple "hss" "realm" . | include "mcord-services.endpoint_lookup" | set .Values.mme.conf.s6a "realm" -}}
+{{- end }}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.mme.name }}
+data:
+  config.json: {{ toJson .Values.mme.conf | quote }}
+  s6a_fd.conf: |
+    # -------- Test configuration ---------
+    AppServThreads = 40;
+    SCTP_streams = 3;
+    NoRelay;
+    No_IPv6;
+
+    # Identity = "<diameter_host>.<diameter_realm>";
+    Identity = {{ tuple "mme" "identity" . | include "mcord-services.endpoint_lookup" | quote }};
+    Realm = {{ tuple "mme" "realm" . | include "mcord-services.endpoint_lookup" | quote }};
+    # Port = 3868;
+    # SecPort = 3869;
+
+    ConnectPeer = {{ tuple "hss" "identity" . | include "mcord-services.endpoint_lookup" | quote }} { No_TLS; port = 3868; };
+
+    # TLS_Cred = "<diameter_host>.cert.pem", "<diameter_host>.key.pem";
+    TLS_Cred = "conf/{{ tuple "mme" "host" . | include "mcord-services.endpoint_lookup" }}.cert.pem",
+               "conf/{{ tuple "mme" "host" . | include "mcord-services.endpoint_lookup" }}.key.pem";
+    TLS_CA = "conf/cacert.pem";
+
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_3gpp2_avps.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_CreditControl.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_base_rfc6733.fdx";
+    ###
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_draftload_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_etsi283034_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4004_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4006bis_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4072_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4590_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5447_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5580_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5777_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5778_avps.fdx";
+    ###
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc6734_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc6942_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7155_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7683_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7944_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29061_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29128_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29154_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29173_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29212_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29214_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29215_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29217_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29229_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29272_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29273_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29329_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29336_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29337_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29338_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29343_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29344_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29345_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29368_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29468_avps.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_ts32299_avps.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_CxDx.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Gx.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_NAS.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Rf.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Ro.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Rx.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6as6d.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6c.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_S6mS6n.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6t.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_S9.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_SGd.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_SLh.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Sd.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Sh.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_T4.fdx";
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_T6aT6bT7.fdx";
+    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Tsp.fdx";
+  mme-init.sh: |
+{{ tuple "bin/_mme-init.sh.tpl" . | include "mcord-services.template" | indent 4 }}
+  mme-run.sh : |
+{{ tuple "bin/_mme-run.sh.tpl" . | include "mcord-services.template" | indent 4 }}
+{{- end }}

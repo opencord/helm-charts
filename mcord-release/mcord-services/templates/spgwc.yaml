@@ -492,7 +492,7 @@ spec:
         - name: DP_ADDR
           value: spgwu-0.{{ .Values.spgwu.name }}.{{ .Values.global.namespace }}.{{ .Values.global.fqdn }}
         - name: MME_S11_IP
-          value: mme-0.{{ .Values.mme.name }}.{{ .Values.global.namespace }}.{{ .Values.global.fqdn }}
+          value: {{ tuple "mme" "identity" . | include "mcord-services.endpoint_lookup" | quote }}
         - name: APN
           value: apn1
         - name: IP_POOL_IP

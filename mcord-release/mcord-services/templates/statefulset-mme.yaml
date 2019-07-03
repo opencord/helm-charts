@@ -1,0 +1,198 @@
+---
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+{{- if eq .Values.mme.type "openmme" }}
+
+{{- $releaseName := .Release.Name }}
+{{- $namespace := .Values.global.namespace }}
+{{- $name := .Values.mme.name }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ $releaseName }}-{{ $name }}
+  namespace: {{ $namespace }}
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ $releaseName }}-{{ $name }}
+  namespace: {{ $namespace }}
+rules:
+  - apiGroups:
+      - ""
+      - extensions
+      - batch
+      - apps
+    verbs:
+      - get
+      - list
+    resources:
+      - daemonsets
+      - jobs
+      - pods
+      - services
+      - endpoints
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ $releaseName }}-{{ $name }}
+  namespace: {{ $namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ $releaseName }}-{{ $name }}
+subjects:
+- kind: ServiceAccount
+  name: {{ $releaseName }}-{{ $name }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ $name }}
+  namespace: {{ $namespace }}
+  labels:
+    app: {{ $name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ $name }}
+  serviceName: {{ $name | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ $name }}
+    spec:
+      serviceAccountName: {{ $releaseName }}-{{ $name }}
+      initContainers:
+      - name: mme-dep-check
+        image: {{ .Values.mme.images.tags.dep_check | quote }}
+        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: PATH
+            value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
+          - name: COMMAND
+            value: "echo done"
+          - name: DEPENDENCY_POD_JSON
+            value: '[{"labels": {"app": {{ .Values.spgwc.name | quote }}}, "requireSameNode": false}, {"labels": {"app": {{ .Values.hss.name | quote }}}, "requireSameNode": false}]'
+          # add dependency job for make_certs.sh
+        command:
+          - kubernetes-entrypoint
+        volumeMounts:
+          []
+      - name: mme-init
+        image: {{ .Values.mme.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        command: ["/opt/mme/scripts/mme-init.sh"]
+        env:
+        - name: MME_LOCAL_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-init.sh
+          subPath: mme-init.sh
+        - name: configs
+          mountPath: /opt/mme/config
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
+      containers:
+      - name: mme-app
+        image: {{ .Values.mme.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/mme/scripts/mme-run.sh mme-app
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-run.sh
+          subPath: mme-run.sh
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
+        - name: shared-app
+          mountPath: /tmp
+      - name: s1ap-app
+        image: {{ .Values.mme.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/mme/scripts/mme-run.sh s1ap-app
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-run.sh
+          subPath: mme-run.sh
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
+        - name: shared-app
+          mountPath: /tmp
+      - name: s6a-app
+        image: {{ .Values.mme.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/mme/scripts/mme-run.sh s6a-app
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-run.sh
+          subPath: mme-run.sh
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
+        - name: shared-app
+          mountPath: /tmp
+      - name: s11-app
+        image: {{ .Values.mme.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/mme/scripts/mme-run.sh s11-app
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-run.sh
+          subPath: mme-run.sh
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
+        - name: shared-app
+          mountPath: /tmp
+      volumes:
+      - name: scripts
+        configMap:
+          name: {{ $name }}
+          defaultMode: 493
+      - name: configs
+        configMap:
+          name: {{ $name }}
+          defaultMode: 420
+      - name: shared-data
+        emptyDir: {}
+      - name: shared-app
+        emptyDir: {}
+{{- end }}
