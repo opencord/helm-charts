@@ -59,7 +59,7 @@ topology_template:
         outer_tpid: "0x8100"
         uplink: "65536"
         nas_id: "NAS_ID"
-        serial_number: "bbsim.voltha.svc:50060"
+        serial_number: "BBSIMOLT000"
         technology: xgspon
       requirements:
         - volt_service:
