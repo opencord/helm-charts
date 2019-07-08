@@ -24,7 +24,6 @@ imports:
 description: Create a simulated OLT Device in VOLTHA
 topology_template:
   node_templates:
-
     technologyProfile:
       type: tosca.nodes.TechnologyProfile
       properties:
@@ -56,12 +55,12 @@ topology_template:
               "q_sched_policy": "hybrid"
             },
             "upstream_gem_port_attribute_list": [{
-                "pbit_map": "0b11000000",
-                "aes_encryption": "TRUE",
-                "scheduling_policy": "Strict-Priority",
+                "pbit_map": "0b11111111",
+                "aes_encryption": "True",
+                "scheduling_policy": "StrictPriority",
                 "priority_q": 1,
                 "weight": 0,
-                "discard_policy": "Tail-Drop",
+                "discard_policy": "TailDrop",
                 "max_q_size": "auto",
                 "discard_config": {
                   "min_threshold": 0,
@@ -71,12 +70,12 @@ topology_template:
               }
             ],
             "downstream_gem_port_attribute_list": [{
-                "pbit_map": "0b11000000",
-                "aes_encryption": "TRUE",
-                "scheduling_policy": "Strict-Priority",
+                "pbit_map": "0b11111111",
+                "aes_encryption": "True",
+                "scheduling_policy": "StrictPriority",
                 "priority_q": 1,
                 "weight": 0,
-                "discard_policy": "Tail-Drop",
+                "discard_policy": "TailDrop",
                 "max_q_size": "auto",
                 "discard_config": {
                   "min_threshold": 0,
