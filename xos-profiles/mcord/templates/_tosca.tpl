@@ -134,15 +134,15 @@ topology_template:
         name: fabric
         must-exist: true
 
-    service#epc-cp:
+    service#omec-cp:
       type: tosca.nodes.Service
       properties:
-        name: epc-cp
+        name: omec-cp
 
-    service#epc-up:
+    service#omec-up:
       type: tosca.nodes.Service
       properties:
-        name: epc-up
+        name: omec-up
 
     service#cdn-local:
       type: tosca.nodes.Service
@@ -196,7 +196,7 @@ topology_template:
         connect_method: none
       requirements:
         - subscriber_service:
-            node: service#epc-cp
+            node: service#omec-cp
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
             node: service#progran
@@ -208,10 +208,10 @@ topology_template:
         connect_method: none
       requirements:
         - subscriber_service:
-            node: service#epc-up
+            node: service#omec-up
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
-            node: service#epc-cp
+            node: service#omec-cp
             relationship: tosca.relationships.BelongsToOne
 
     service_dependency#progran_epc_up:
@@ -220,7 +220,7 @@ topology_template:
         connect_method: none
       requirements:
         - subscriber_service:
-            node: service#epc-up
+            node: service#omec-up
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
             node: service#progran
@@ -235,7 +235,7 @@ topology_template:
             node: service#cdn-local
             relationship: tosca.relationships.BelongsToOne
         - provider_service:
-            node: service#epc-up
+            node: service#omec-up
             relationship: tosca.relationships.BelongsToOne
 
     service_dependency#cdn_local_cdn_remote:
@@ -254,8 +254,8 @@ topology_template:
       type: tosca.nodes.ServiceGraphConstraint
       properties:
 {{- if .Values.seba.enabled }}
-        constraints: '[ ["mcord", null, "onos"], ["progran", null, "fabric"], ["epc-cp", null, null] ["epc-up", null, null] ]'
+        constraints: '[ ["mcord", null, "onos"], ["progran", null, "fabric"], ["omec-cp", null, null] ["omec-up", null, null] ]'
 {{ else }}
-        constraints: '[ ["mcord", "progran", null], ["epc-cp", "epc-up", "onos"], [null, "cdn-local", "fabric"], [null, "cdn-remote", "vrouter"] ]'
+        constraints: '[ ["mcord", "progran", null], ["omec-cp", "omec-up", "onos"], [null, "cdn-local", "fabric"], [null, "cdn-remote", "vrouter"] ]'
 {{- end -}}
 {{- end -}}
