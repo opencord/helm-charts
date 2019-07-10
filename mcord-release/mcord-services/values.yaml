@@ -56,6 +56,7 @@ spgwc:
 
 spgwu:
   name: spgwu
+  node_selector: node2
   images:
     tags:
       init: ngick8stesting/c3po-init:latest
