@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cdn_node_selector: node3
+cdn_node_selector: node1
 nginx_hostname: "nginx"
 local_vlc_hostname: "local_vlc"
 
