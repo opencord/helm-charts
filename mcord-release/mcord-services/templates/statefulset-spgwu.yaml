@@ -36,6 +36,8 @@ spec:
                 { "name": "sgi-net", "interface": "sgi-net" }
         ]'
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: {{ .Values.spgwu.node_selector }}
 {{- if not .Values.network.sriov.enabled }}
       initContainers:
         - name: spgwu-iptables-init
