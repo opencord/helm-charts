@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6b6c84cc_8150ba8c",
+        "filename": "mcord-release/cdn-services/cdn-local/templates/nginx.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-07-10T18:02:15Z",
+      "side": 1,
+      "message": "You may want to make the value or the whole nodeSelector key-value as a variable which can be overridable for the future need.",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 24
+      },
+      "revId": "c072c6ad6e3600829b4d2849a1d050063f543fcd",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7e79c9c9_ccb1359b",
+        "filename": "mcord-release/mcord-services/templates/statefulset-spgwu.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-07-10T18:02:15Z",
+      "side": 1,
+      "message": "here, too.",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "c072c6ad6e3600829b4d2849a1d050063f543fcd",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
