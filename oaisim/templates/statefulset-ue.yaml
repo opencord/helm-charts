@@ -1,0 +1,172 @@
+{{/*
+Copyright 2019-present Open Networking Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+{{- $releaseName := .Release.Name }}
+{{- $namespace := .Release.Namespace }}
+{{- $name := .Values.conf.ue.name }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ $releaseName }}-{{ $name }}
+  namespace: {{ $namespace }}
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ $releaseName }}-{{ $name }}
+  namespace: {{ $namespace }}
+rules:
+  - apiGroups:
+      - ""
+      - extensions
+      - batch
+      - apps
+    verbs:
+      - get
+      - list
+    resources:
+      - daemonsets
+      - jobs
+      - pods
+      - services
+      - endpoints
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ $releaseName }}-{{ $name }}
+  namespace: {{ $namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ $releaseName }}-{{ $name }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ $releaseName }}-{{ $name }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ $name }}
+  namespace: {{ $namespace }}
+  labels:
+    app: oai-ue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oai-ue
+  serviceName: {{ $name | quote }}
+  template:
+    metadata:
+      labels:
+        app: oai-ue
+    spec:
+      serviceAccountName: {{ $releaseName }}-{{ $name }}
+      hostNetwork: true
+      initContainers:
+        - name: ue-dep-check
+          image: {{ .Values.images.tags.dep_check | quote }}
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            runAsUser: 0
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: PATH
+              value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
+            - name: COMMAND
+              value: "echo done"
+            - name: DEPENDENCY_POD_JSON
+              value: '[{"labels": {"app": "oai-enb"}, "requireSameNode": true}]'
+          command:
+            - kubernetes-entrypoint
+          volumeMounts:
+            []
+        - name: ue-gen-usim
+          image: {{ .Values.images.tags.ue | quote }}
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          command:
+            - /opt/oaisim/ue/scripts/ue-gen-usim.sh
+          volumeMounts:
+            - name: script
+              mountPath: /opt/oaisim/ue/scripts/ue-gen-usim.sh
+              subPath: ue-gen-usim.sh
+            - name: config
+              mountPath: /opt/oaisim/ue/config
+            - name: pod-share
+              mountPath: /etc/oaisim/ue
+        - name: ue-init
+          image: {{ .Values.images.tags.ue | quote }}
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          securityContext:
+            privileged: true
+          command:
+            - /opt/oaisim/ue/scripts/ue-init.sh
+          volumeMounts:
+            - name: script
+              mountPath: /opt/oaisim/ue/scripts/ue-init.sh
+              subPath: ue-init.sh
+      containers:
+        - name: {{ $name }}
+          image: {{ .Values.images.tags.ue | quote }}
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          securityContext:
+            privileged: true
+          command:
+            - /opt/oaisim/ue/scripts/ue-run.sh
+            - start
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                  - /opt/oaisim/enb/scripts/ue-run.sh
+                  - stop
+          env:
+            - name: UE_LOCAL_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          volumeMounts:
+            - name: script
+              mountPath: /opt/oaisim/ue/scripts/ue-run.sh
+              subPath: ue-run.sh
+            - name: config
+              mountPath: /opt/oaisim/ue/config
+            - name: pod-share
+              mountPath: /etc/oaisim/ue
+      volumes:
+        - name: config
+          configMap:
+            name: {{ $name }}
+            defaultMode: 420
+        - name: script
+          configMap:
+            name: {{ $name }}
+            defaultMode: 493
+        - name: pod-share
+          emptyDir: {}
