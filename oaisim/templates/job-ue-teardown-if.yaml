@@ -1,0 +1,50 @@
+{{/*
+Copyright 2019-present Open Networking Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+{{- $name := .Values.conf.ue.name }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ $name }}-teardown-if
+  labels:
+    app: {{ $name }}
+  annotations:
+    "helm.sh/hook": post-delete
+    "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ $name }}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: ue-teardown-if-job
+          image: {{ .Values.images.tags.ue | quote }}
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          command: ["bash", "-xc"]
+          args:
+            - if chroot /mnt/host-rootfs lsmod | grep -q ue_ip;then chroot /mnt/host-rootfs rmmod ue_ip;fi
+          volumeMounts:
+            - name: host-rootfs
+              mountPath: /mnt/host-rootfs
+      volumes:
+        - name: host-rootfs
+          hostPath:
+            path: /
