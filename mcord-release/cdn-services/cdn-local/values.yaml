@@ -13,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cdn_node_selector: node3
 nginx_hostname: "nginx"
 local_vlc_hostname: "local_vlc"
 
@@ -30,3 +29,5 @@ nginx:
     rtmp_orig: 1935
     rtmp_np: 31935
   replicas: 1
+  nodeselector:
+    sriov: netdevice

@@ -48,7 +48,7 @@ spec:
     spec:
       #hostNetwork: true
       nodeSelector:
-        kubernetes.io/hostname: {{ .Values.cdn_node_selector }}
+{{ toYaml .Values.nginx.nodeselector | indent 8 }}
       terminationGracePeriodSeconds: 0
       imagePullSecrets:
       - name: nexus-docker-secret

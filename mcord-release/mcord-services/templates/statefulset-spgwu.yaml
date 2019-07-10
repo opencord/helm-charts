@@ -36,6 +36,10 @@ spec:
                 { "name": "sgi-net", "interface": "sgi-net" }
         ]'
     spec:
+{{- if .Values.network.sriov.enabled }}
+      nodeSelector:
+{{ toYaml .Values.spgwu.nodeselector | indent 8 }}
+{{- end }}
 {{- if not .Values.network.sriov.enabled }}
       initContainers:
         - name: spgwu-iptables-init
