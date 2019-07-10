@@ -1,0 +1,51 @@
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+images:
+  tags:
+    dep_check: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+    enb: omecproject/lte-softmodem:v1.0.0
+    ue: omecproject/lte-uesoftmodem:v1.0.0
+  pullPolicy: IfNotPresent
+conf:
+  # 1 PLMN is supported for now
+  plmn:
+    name: "COMAC Test Network"
+    short_name: "COMAC"
+    mcc: "208"
+    mnc: "01"
+    mnc_length: 2
+  enb:
+    name: enb
+    mme:
+      # Provide the IP address of MME.
+      # MME provies nodePort for eNB access, so 127.0.0.1 should work
+      # in most cases unless using external MME.
+      address: 127.0.0.1
+    networks:
+      s1_mme:
+        # Provide the interface used for S1_MME network.
+        interface: eno1
+      s1u:
+        # Provide the interface used for S1U network.
+        interface: s1u-enb
+        port: 2152
+  ue:
+    # 1 UE is supported for now
+    name: ue
+    sim:
+      msin: "4567891201"
+      api_key: "465b5ce8b199b49faa5f0a2ee238a6bc"
+      opc: "d4416644f6154936193433dd20a0ace0"
+      msisdn: "1122334456"
