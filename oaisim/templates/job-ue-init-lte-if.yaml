@@ -1,0 +1,57 @@
+{{/*
+Copyright 2019-present Open Networking Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+{{- $releaseName := .Release.Name }}
+{{- $namespace := .Release.Namespace }}
+{{- $name := .Values.conf.ue.name }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ $name }}-init-lte-if
+  labels:
+    app: {{ $name }}
+spec:
+  template:
+    metadata:
+      labels:
+        app: {{ $name }}
+    spec:
+      serviceAccountName: {{ $releaseName }}-{{ $name }}
+      restartPolicy: OnFailure
+      containers:
+        - name: ue-init-lte-if
+          image: {{ .Values.images.tags.ue | quote }}
+          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          securityContext:
+            privileged: true
+            runAsUser: 0
+          command:
+            - /opt/oaisim/ue/scripts/ue-init-lte-if.sh
+          volumeMounts:
+            - name: script
+              mountPath: /opt/oaisim/ue/scripts/ue-init-lte-if.sh
+              subPath: ue-init-lte-if.sh
+            - name: host-rootfs
+              mountPath: /mnt/host-rootfs
+      volumes:
+        - name: script
+          configMap:
+            name: {{ $name }}
+            defaultMode: 493
+        - name: host-rootfs
+          hostPath:
+            path: /
