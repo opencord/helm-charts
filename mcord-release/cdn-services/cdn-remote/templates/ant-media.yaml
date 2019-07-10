@@ -53,8 +53,6 @@ spec:
         name: antmedia
     spec:
       terminationGracePeriodSeconds: 1
-      nodeSelector:
-        kubernetes.io/hostname: {{ .Values.cdn_node_selector }}
       containers:
       - name: antmedia
         image: {{ .Values.antmedia.images.antmedia_image }}
