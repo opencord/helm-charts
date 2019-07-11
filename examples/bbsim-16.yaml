@@ -24,10 +24,22 @@ imports:
   - custom_types/attworkflowdriverservice.yaml
   - custom_types/attworkflowdriverwhitelistentry.yaml
   - custom_types/rcordsubscriber.yaml
+  - custom_types/bandwidthprofile.yaml
 
 description: Create a simulated OLT Device in VOLTHA
 topology_template:
   node_templates:
+
+    # Bronze bandwidthprofile for subscriber
+    bronze_bp:
+      type: tosca.nodes.BandwidthProfile
+      properties:
+         air: 99999
+         cbs: 99999
+         cir: 99999
+         ebs: 99999
+         eir: 99999
+         name: Bronze
 
     service#volt:
       type: tosca.nodes.VOLTService
@@ -47,7 +59,8 @@ topology_template:
         outer_tpid: "0x8100"
         uplink: "65536"
         nas_id: "NAS_ID"
-        serial_number: "bbsim.voltha.svc:50060"
+        serial_number: "BBSIMOLT000"
+        technology: xgspon
       requirements:
         - volt_service:
             node: service#volt
@@ -60,176 +73,176 @@ topology_template:
         name: att-workflow-driver
         must-exist: true
 
-    BBSM00000100:
+    BBSM00000001:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM00000100
-        pon_port_id: 536870913
+        serial_number: BBSM00000001
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM00000101:
+    BBSM00000002:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM00000101
-        pon_port_id: 536870913
+        serial_number: BBSM00000002
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM00000102:
+    BBSM00000003:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM00000102
-        pon_port_id: 536870913
+        serial_number: BBSM00000003
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM00000103:
+    BBSM00000004:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM00000103
-        pon_port_id: 536870913
+        serial_number: BBSM00000004
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM00000104:
+    BBSM00000005:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM00000104
-        pon_port_id: 536870913
+        serial_number: BBSM00000005
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM00000105:
+    BBSM00000006:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM00000105
-        pon_port_id: 536870913
+        serial_number: BBSM00000006
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM00000106:
+    BBSM00000007:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM00000106
-        pon_port_id: 536870913
+        serial_number: BBSM00000007
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM00000107:
+    BBSM00000008:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM00000107
-        pon_port_id: 536870913
+        serial_number: BBSM00000008
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM00000108:
+    BBSM00000009:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM00000108
-        pon_port_id: 536870913
+        serial_number: BBSM00000009
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM00000109:
+    BBSM0000000a:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM00000109
-        pon_port_id: 536870913
+        serial_number: BBSM0000000a
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM0000010a:
+    BBSM0000000b:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM0000010a
-        pon_port_id: 536870913
+        serial_number: BBSM0000000b
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM0000010b:
+    BBSM0000000c:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM0000010b
-        pon_port_id: 536870913
+        serial_number: BBSM0000000c
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM0000010c:
+    BBSM0000000d:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM0000010c
-        pon_port_id: 536870913
+        serial_number: BBSM0000000d
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM0000010d:
+    BBSM0000000e:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM0000010d
-        pon_port_id: 536870913
+        serial_number: BBSM0000000e
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM0000010e:
+    BBSM0000000f:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM0000010e
-        pon_port_id: 536870913
+        serial_number: BBSM0000000f
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
             node: service#att
             relationship: tosca.relationships.BelongsToOne
 
-    BBSM0000010f:
+    BBSM00000010:
       type: tosca.nodes.AttWorkflowDriverWhiteListEntry
       properties:
-        serial_number: BBSM0000010f
-        pon_port_id: 536870913
+        serial_number: BBSM00000010
+        pon_port_id: 536870912
         device_id: of:0000626273696d76
       requirements:
         - owner:
@@ -237,194 +250,322 @@ topology_template:
             relationship: tosca.relationships.BelongsToOne
 
     # Pre-provision the subscriber
-    bbsim_subscriber_0:
-      type: tosca.nodes.RCORDSubscriber
-      properties:
-        name: Sub_BBSM00000100
-        status: pre-provisioned
-        c_tag: 900
-        s_tag: 999
-        onu_device: BBSM00000100
-        circuit_id: circuit0
-        remote_id: remote0
-        nas_port_id: PON 2/1/01/1:1.1.0
-
     bbsim_subscriber_1:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM00000101
+        name: Sub_BBSM00000001
         status: pre-provisioned
-        c_tag: 901
+        c_tag: 900
         s_tag: 999
-        onu_device: BBSM00000101
-        circuit_id: circuit1
-        remote_id: remote1
+        onu_device: BBSM00000001
+        circuit_id: circuit01
+        remote_id: remote01
         nas_port_id: PON 2/1/01/1:1.1.1
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_2:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM00000102
+        name: Sub_BBSM00000002
         status: pre-provisioned
-        c_tag: 902
+        c_tag: 901
         s_tag: 999
-        onu_device: BBSM00000102
-        circuit_id: circuit2
-        remote_id: remote2
+        onu_device: BBSM00000002
+        circuit_id: circuit02
+        remote_id: remote02
         nas_port_id: PON 2/1/01/1:1.1.2
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_3:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM00000103
+        name: Sub_BBSM00000003
         status: pre-provisioned
-        c_tag: 903
+        c_tag: 902
         s_tag: 999
-        onu_device: BBSM00000103
-        circuit_id: circuit3
-        remote_id: remote3
+        onu_device: BBSM00000003
+        circuit_id: circuit03
+        remote_id: remote03
         nas_port_id: PON 2/1/01/1:1.1.3
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_4:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM00000104
+        name: Sub_BBSM00000004
         status: pre-provisioned
-        c_tag: 904
+        c_tag: 903
         s_tag: 999
-        onu_device: BBSM00000104
-        circuit_id: circuit4
-        remote_id: remote4
+        onu_device: BBSM00000004
+        circuit_id: circuit04
+        remote_id: remote04
         nas_port_id: PON 2/1/01/1:1.1.4
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_5:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM00000105
+        name: Sub_BBSM00000005
         status: pre-provisioned
-        c_tag: 905
+        c_tag: 904
         s_tag: 999
-        onu_device: BBSM00000105
-        circuit_id: circuit5
-        remote_id: remote5
+        onu_device: BBSM00000005
+        circuit_id: circuit05
+        remote_id: remote05
         nas_port_id: PON 2/1/01/1:1.1.5
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_6:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM00000106
+        name: Sub_BBSM00000006
         status: pre-provisioned
-        c_tag: 906
+        c_tag: 905
         s_tag: 999
-        onu_device: BBSM00000106
-        circuit_id: circuit6
-        remote_id: remote6
+        onu_device: BBSM00000006
+        circuit_id: circuit06
+        remote_id: remote06
         nas_port_id: PON 2/1/01/1:1.1.6
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_7:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM00000107
+        name: Sub_BBSM00000007
         status: pre-provisioned
-        c_tag: 907
+        c_tag: 906
         s_tag: 999
-        onu_device: BBSM00000107
-        circuit_id: circuit7
-        remote_id: remote7
+        onu_device: BBSM00000007
+        circuit_id: circuit07
+        remote_id: remote07
         nas_port_id: PON 2/1/01/1:1.1.7
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_8:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM00000108
+        name: Sub_BBSM00000008
         status: pre-provisioned
-        c_tag: 908
+        c_tag: 907
         s_tag: 999
-        onu_device: BBSM00000108
-        circuit_id: circuit8
-        remote_id: remote8
+        onu_device: BBSM00000008
+        circuit_id: circuit08
+        remote_id: remote08
         nas_port_id: PON 2/1/01/1:1.1.8
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_9:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM00000109
+        name: Sub_BBSM00000009
         status: pre-provisioned
-        c_tag: 909
+        c_tag: 908
         s_tag: 999
-        onu_device: BBSM00000109
-        circuit_id: circuit9
-        remote_id: remote9
+        onu_device: BBSM00000009
+        circuit_id: circuit09
+        remote_id: remote09
         nas_port_id: PON 2/1/01/1:1.1.9
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_a:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM0000010a
+        name: Sub_BBSM0000000a
         status: pre-provisioned
-        c_tag: 910
+        c_tag: 909
         s_tag: 999
-        onu_device: BBSM0000010a
-        circuit_id: circuit10a
-        remote_id: remote10a
-        nas_port_id: PON 2/1/01/1:1.1.10a
+        onu_device: BBSM0000000a
+        circuit_id: circuit90a
+        remote_id: remote0a
+        nas_port_id: PON 2/1/01/1:1.1.a
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_b:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM0000010b
+        name: Sub_BBSM0000000b
         status: pre-provisioned
-        c_tag: 911
+        c_tag: 910
         s_tag: 999
-        onu_device: BBSM0000010b
-        circuit_id: circuit10b
-        remote_id: remote10b
-        nas_port_id: PON 2/1/01/1:1.1.10b
+        onu_device: BBSM0000000b
+        circuit_id: circuit0b
+        remote_id: remote0b
+        nas_port_id: PON 2/1/01/1:1.1.00b
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_c:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM0000010c
+        name: Sub_BBSM0000000c
         status: pre-provisioned
-        c_tag: 912
+        c_tag: 911
         s_tag: 999
-        onu_device: BBSM0000010c
-        circuit_id: circuit10c
-        remote_id: remote10c
-        nas_port_id: PON 2/1/01/1:1.1.10c
+        onu_device: BBSM0000000c
+        circuit_id: circuit0c
+        remote_id: remote0c
+        nas_port_id: PON 2/1/01/1:1.1.00c
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_d:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM0000010d
+        name: Sub_BBSM0000000d
         status: pre-provisioned
-        c_tag: 913
+        c_tag: 912
         s_tag: 999
-        onu_device: BBSM0000010d
-        circuit_id: circuit10d
-        remote_id: remote10d
-        nas_port_id: PON 2/1/01/1:1.1.10d
+        onu_device: BBSM0000000d
+        circuit_id: circuit0d
+        remote_id: remote0d
+        nas_port_id: PON 2/1/01/1:1.1.00d
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_e:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM0000010e
+        name: Sub_BBSM0000000e
         status: pre-provisioned
-        c_tag: 914
+        c_tag: 913
         s_tag: 999
-        onu_device: BBSM0000010e
-        circuit_id: circuit10e
-        remote_id: remote10e
-        nas_port_id: PON 2/1/01/1:1.1.10e
+        onu_device: BBSM0000000e
+        circuit_id: circuit0e
+        remote_id: remote0e
+        nas_port_id: PON 2/1/01/1:1.1.00e
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
 
     bbsim_subscriber_f:
       type: tosca.nodes.RCORDSubscriber
       properties:
-        name: Sub_BBSM0000010f
+        name: Sub_BBSM0000000f
+        status: pre-provisioned
+        c_tag: 914
+        s_tag: 999
+        onu_device: BBSM0000000f
+        circuit_id: circuit0f
+        remote_id: remote0f
+        nas_port_id: PON 2/1/01/1:1.1.00f
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+
+    bbsim_subscriber_10:
+      type: tosca.nodes.RCORDSubscriber
+      properties:
+        name: Sub_BBSM00000010
         status: pre-provisioned
         c_tag: 915
         s_tag: 999
-        onu_device: BBSM0000010f
-        circuit_id: circuit10f
-        remote_id: remote10f
-        nas_port_id: PON 2/1/01/1:1.1.10f
+        onu_device: BBSM00000010
+        circuit_id: circuit10
+        remote_id: remote10
+        nas_port_id: PON 2/1/01/1:1.1.010
+        tech_profile_id: 64
+      requirements:
+        - upstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
+        - downstream_bps:
+            node: bronze_bp
+            relationship: tosca.relationships.BelongsToOne
