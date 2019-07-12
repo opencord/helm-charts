@@ -22,7 +22,7 @@ metadata:
   name: {{ .name }}
 {{- if $.Values.network.sriov.enabled }}
   annotations:
-    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov
+    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_vfio
 {{- end }}
 spec:
   config: '{
