@@ -25,10 +25,16 @@ data:
       "resourceList":
       [
         {
-          "resourceName": {{ .Values.sriov.name | quote }},
-          "rootDevices": [{{ .Values.sriov.devicepci | quote }}],
+          "resourceName": {{ .Values.sriov_vfio.name | quote }},
+          "rootDevices": [{{ .Values.sriov_vfio.devicepci | quote }}],
           "sriovMode": true,
-          "deviceType": {{ .Values.sriov.devicetype | quote }}
+          "deviceType": {{ .Values.sriov_vfio.devicetype | quote }}
+        },
+        {
+          "resourceName": {{ .Values.sriov_netdevice.name | quote }},
+          "rootDevices": [{{ .Values.sriov_netdevice.devicepci | quote }}],
+          "sriovMode": true,
+          "deviceType": {{ .Values.sriov_netdevice.devicetype | quote }}
         }
       ]
     }
