@@ -121,7 +121,7 @@ spec:
             cpu: {{ .Values.spgwu.resources.cpu | quote }}
             memory: {{ .Values.spgwu.resources.memory }}
             {{- if .Values.network.sriov.enabled }}
-            intel.com/sriov: 2
+            intel.com/sriov_vfio: 2
             {{- end }}
         securityContext:
           capabilities:

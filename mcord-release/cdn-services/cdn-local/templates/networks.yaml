@@ -22,7 +22,7 @@ metadata:
   name: {{ .name }}
 {{- if $.Values.network.sriov.enabled }}
   annotations:
-    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_vfio
+    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_netdevice
 {{- end }}
 spec:
   config: '{
@@ -35,7 +35,7 @@ spec:
     {{- else if eq .ipam "centralip" }}
         "ipType": "cluster",
         "network": {{ .subnet | quote }},
-        "etcdURL": {{ $.Values.global.etcdurl | quote }}
+        "etcdURL": {{ $.Values.etcdurl | quote }}
     {{- end }}
     }
   }'

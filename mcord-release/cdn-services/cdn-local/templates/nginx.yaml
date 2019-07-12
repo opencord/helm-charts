@@ -43,7 +43,7 @@ spec:
         app: nginx-rtmp
       annotations:
         k8s.v1.cni.cncf.io/networks: '[
-            { "name": "sgi-net", "interface": "sgi-net", "namespace": "default" }
+            { "name": "sgi-net-nd", "interface": "sgi-net-nd" }
         ]'
     spec:
       #hostNetwork: true
@@ -89,7 +89,7 @@ spec:
           mountPath: /conf
         resources:
           limits:
-            intel.com/sriov: '2'
+            intel.com/sriov_netdevice: '2'
       volumes:
       - name: nginx-rtmp-config
         configMap:
