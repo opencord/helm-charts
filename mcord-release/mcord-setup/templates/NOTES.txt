@@ -19,8 +19,8 @@ Congratulations! You have installed SR-IOV network device plugin into your Kuber
 
 Your configurations for SR-IOV network device plugin as following:
 
-    10-Gigabit NIC PCI address: {{ .Values.sriov.devicepci }}
-    SR-IOV device type: {{ .Values.sriov.devicetype }}
+    10-Gigabit NIC PCI address: {{ .Values.sriov_vfio.devicepci }}
+    SR-IOV device type: {{ .Values.sriov_vfio.devicetype }} and {{ .Values.sriov_netdevice.devicetype }}
 
 You can run following command to check SR-IOV is working in Kubernetes cluster:
 
@@ -30,4 +30,4 @@ You can run following command to check SR-IOV is working in Kubernetes cluster:
     node1: {"cpu":"39800m","ephemeral-storage":"452697199891","hugepages-1Gi":"32Gi","intel.com/sriov":"63","memory":"31776336Ki","pods":"110"}
     node2: {"cpu":"39800m","ephemeral-storage":"452697199891","hugepages-1Gi":"32Gi","intel.com/sriov":"63","memory":"31776336Ki","pods":"110"}
 
-The result should show "intel.com/sriov" resource is registered to cluster, and have some virtual function available here.
+The result should show "intel.com/sriov_*" resource is registered to cluster, and have some virtual function available here.
