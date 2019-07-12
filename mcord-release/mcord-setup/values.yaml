@@ -18,7 +18,12 @@ sriovds:
   initimage: aweimeow/multus-sriov
   image: aweimeow/multus-sriov
 
-sriov:
-  name: sriov
+sriov_vfio:
+  name: sriov_vfio
   devicepci: 04:00.0
   devicetype: vfio
+
+sriov_netdevice:
+  name: sriov_netdevice
+  devicepci: 04:00.0
+  devicetype: netdevice
