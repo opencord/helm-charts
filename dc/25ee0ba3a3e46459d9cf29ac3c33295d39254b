@@ -1,0 +1,7 @@
+Code-Review+2: Kailash Khalasi <kailash@opennetworking.org>
+Verified+1: Kailash Khalasi <kailash@opennetworking.org>
+Submitted-by: Kailash Khalasi <kailash@opennetworking.org>
+Submitted-at: Fri, 12 Jul 2019 21:56:35 +0000
+Reviewed-on: https://gerrit.opencord.org/14670
+Project: helm-charts
+Branch: refs/heads/cord-7.0
