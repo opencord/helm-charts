@@ -31,3 +31,13 @@ nginx:
   replicas: 1
   nodeselector:
     sriov: netdevice
+
+network:
+  sriov:
+    enabled: true
+  networks:
+    - name: sgi-net
+      type: sriov
+      ipam: centralip
+      subnet: 13.1.1.0/24
+      gateway: 13.1.1.254
