@@ -55,12 +55,12 @@ topology_template:
               "q_sched_policy": "hybrid"
             },
             "upstream_gem_port_attribute_list": [{
-                "pbit_map": "0b11111111",
-                "aes_encryption": "True",
-                "scheduling_policy": "StrictPriority",
+                "pbit_map": "0b11000000",
+                "aes_encryption": "TRUE",
+                "scheduling_policy": "Strict-Priority",
                 "priority_q": 1,
                 "weight": 0,
-                "discard_policy": "TailDrop",
+                "discard_policy": "Tail-Drop",
                 "max_q_size": "auto",
                 "discard_config": {
                   "min_threshold": 0,
@@ -70,12 +70,12 @@ topology_template:
               }
             ],
             "downstream_gem_port_attribute_list": [{
-                "pbit_map": "0b11111111",
-                "aes_encryption": "True",
-                "scheduling_policy": "StrictPriority",
+                "pbit_map": "0b11000000",
+                "aes_encryption": "TRUE",
+                "scheduling_policy": "Strict-Priority",
                 "priority_q": 1,
                 "weight": 0,
-                "discard_policy": "TailDrop",
+                "discard_policy": "Tail-Drop",
                 "max_q_size": "auto",
                 "discard_config": {
                   "min_threshold": 0,
