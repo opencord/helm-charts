@@ -13,6 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: nem-monitoring
-description: Time Series Storage and Dashboard for SEBA
-version: 1.0.7-dev
+apiVersion: v1
+kind: Service
+metadata:
+  name: device-management
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      nodePort: {{ .Values.nem_device_management_httpPort }}
+      protocol: TCP
+    - port: 50051
+      targetPort: 50051
+      nodePort: {{ .Values.nem_device_management_grpcPort }}
+      protocol: TCP
+  selector:
+    app: "device-management"

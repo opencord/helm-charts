@@ -20,7 +20,7 @@ metadata:
   labels:
     release: {{ .Release.Name }}
 spec:
-  replicas: {{ .Values.device_management_replicas }}
+  replicas: {{ .Values.nem_device_management_replicas }}
   template:
     metadata:
       labels:
@@ -35,3 +35,13 @@ spec:
             - containerPort: 8080
               port: 8080
               protocol: TCP
+            - containerPort: 50051
+              port: 50051
+              protocol: TCP
+          env:
+          - name: DEVICE_MANAGEMENT_DESTIP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+          - name: DEVICE_MANAGEMENT_DESTPORT
+            value: "{{ .Values.nem_device_management_httpPort }}"
