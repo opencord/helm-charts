@@ -49,7 +49,8 @@ topology_template:
         value: >
           {
             "dhcpl2relay" : {
-              "useOltUplinkForServerPktInOut" : true
+              "useOltUplinkForServerPktInOut" : true,
+              "dhcpServerConnectPoints" : [ "of:0000626273696d76/65536" ]
             }
           }
       requirements:
