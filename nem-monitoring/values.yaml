@@ -29,8 +29,8 @@ images:
 
 nem_voltha_kpi_exporter_nodePort: 31080
 nem_voltha_kpi_exporter_replicas: 2
-device_management_replicas: 1
-
+nem_device_management_tcpPort: 30180
+nem_device_management_replicas: 1
 args:
   voltha_kpi_broker: cord-kafka:9092
 
