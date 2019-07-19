@@ -464,7 +464,7 @@ spec:
         image: {{ .Values.spgwc.initimage }}
         command: ["/bin/sh", "-co", "pipefail"]
         args:
-        - until $(kubectl get pod -ojson spgwu-0 2>/dev/null | jq -r '.metadata.annotations["k8s.v1.cni.cncf.io/networks-status"]' | jq -r '.[] | select(.name=="s1u-net") | .ips[0]' > /opt/cp/config/shared/SGW_S1U_IP);
+        - until $(kubectl get pod -ojson spgwu-0 2>/dev/null | jq -r '.metadata.annotations["k8s.v1.cni.cncf.io/networks-status"]' | jq -r '.[] | select(.name=="s1u-net") | .ips[0]' > /opt/cp/config/shared/SGW_S1U_IP | [ -s /opt/cp/config/shared/SGW_S1U_IP ]);
           do echo "waiting for SPGWU"; sleep 2; done
         volumeMounts:
         - name: shared-data
