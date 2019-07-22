@@ -44,7 +44,9 @@ spec:
           securityContext:
             privileged: true
           command: [
+            "/dlv", "--listen=:40000", "--headless=true", "--api-version=2", "exec",
             "/app/bbsim",
+            "--",
             "-n", "{{ .Values.onus_per_pon_port }}",
             "-m", "{{ .Values.emulation_mode }}",
             "-H", ":{{ .Values.olt_tcp_port }}",
