@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e2f40fdb_24240748",
+        "filename": "freeradius/values.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-07-23T15:10:22Z",
+      "side": 1,
+      "message": "Could link this to the `appVersion` in the Chart.yaml, but it looks like this image changes infrequently.",
+      "range": {
+        "startLine": 25,
+        "startChar": 9,
+        "endLine": 25,
+        "endChar": 16
+      },
+      "revId": "aa90f7b37c5df2aab98db99bcf11ce6164d0aa0e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
