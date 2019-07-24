@@ -121,26 +121,36 @@ enb:
 
 # Network block defines the networks
 # Note that currently we use fixed list of networks, s1u-net and sgi-net
-# type: provide what type of cni will be used
-#       possible options are vfioveth and ptp
-#       use vfioveth when sriov enabled, and ptp otherwise
+#
+# cni_plugin: provide what type of cni will be used
 # ipam: provide what type of ipam will be used
 #       possible options are centralip and host-local
 #       note that centralip requires etcd cluster
 # subnet: provide subnet range to be assigned to the pod
 # gateway: provide default gateway of the network
-#          valid only when centralip is used
+#       valid only when centralip is used
+# static_arp: provide static arp entries for each network port
+#       valid only when sriov is disabled
+# example usage)
+# - ip: <ip_addr_start> <ip_addr_end>
+#   mac: <ethernet_mac_addr>
+# - ip: <ip_addr>
+#   mac: <ethernet_mac_addr>
+
 network:
   sriov:
     enabled: true
-  networks:
-    - name: s1u-net
-      type: vfioveth
-      ipam: centralip
-      subnet: 119.0.0.0/24
-      gateway: 119.0.0.254
-    - name: sgi-net
-      type: vfioveth
-      ipam: centralip
-      subnet: 13.1.1.0/24
-      gateway: 13.1.1.254
+  s1u:
+    cni_plugin: vfioveth
+    ipam: centralip
+    subnet: 119.0.0.0/24
+    gateway: 119.0.0.254
+    static_arp: null
+  sgi:
+    cni_plugin: vfioveth
+    ipam: centralip
+    subnet: 13.1.1.0/24
+    gateway: 13.1.1.254
+    static_arp:
+    - ip: 13.1.1.254
+      mac: 0e:00:00:00:00:01

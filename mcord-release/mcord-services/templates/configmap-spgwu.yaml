@@ -46,6 +46,15 @@ data:
     cp_comm_ip = CP_ADDR
     cp_comm_port = 21
 {{- if not .Values.network.sriov.enabled }}
+  static_arp.cfg: |
+    [sgi]
+{{- range .Values.network.sgi.static_arp }}
+    {{ .ip }}   = {{ .mac }}
+{{- end }}
+    [s1u]
+{{- range .Values.network.s1u.static_arp }}
+    {{ .ip }}   = {{ .mac }}
+{{- end }}
   setup-af-iface.sh: |
 {{ tuple "bin/_spgwu-setup-af-iface.sh.tpl" . | include "mcord-services.template" | indent 4 }}
 {{- end }}
