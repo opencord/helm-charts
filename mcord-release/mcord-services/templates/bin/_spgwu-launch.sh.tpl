@@ -21,10 +21,12 @@ RUN_DIR=${RUN_DIR:-"/opt/dp"}
 mkdir -p $RUN_DIR/config
 cd $RUN_DIR/config
 cp /etc/dp/config/{cdr.cfg,dp_config.cfg,interface.cfg} .
+{{- if not .Values.network.sriov.enabled }}
+cp /etc/dp/config/static_arp.cfg .
+{{- end }}
 
 sed -i "s/CP_ADDR/$CP_ADDR/g" interface.cfg
 sed -i "s/DP_ADDR/$DP_ADDR/g" interface.cfg
 
 source dp_config.cfg
-
 ngic_dataplane $EAL_ARGS -- $APP_ARGS
