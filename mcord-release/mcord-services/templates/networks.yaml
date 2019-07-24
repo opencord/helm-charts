@@ -14,29 +14,51 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-{{- range .Values.network.networks }}
 ---
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
-  name: {{ .name }}
+  name: s1u-net
 {{- if $.Values.network.sriov.enabled }}
   annotations:
     k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_vfio
 {{- end }}
 spec:
   config: '{
-    "type": {{ .type | quote }},
+    "type": {{ .Values.network.s1u.cni_plugin | quote }},
     "ipam": {
-        "type": {{ .ipam | quote }},
-    {{- if eq .ipam "host-local" }}
-        "subnet": {{ .subnet | quote }},
-        "gateway": {{ .gateway | quote }}
-    {{- else if eq .ipam "centralip" }}
+        "type": {{ .Values.network.s1u.ipam | quote }},
+    {{- if eq .Values.network.s1u.ipam "host-local" }}
+        "subnet": {{ .Values.network.s1u.subnet | quote }},
+        "gateway": {{ .Values.network.s1u.gateway | quote }}
+    {{- else if eq .Values.network.s1u.ipam "centralip" }}
         "ipType": "cluster",
-        "network": {{ .subnet | quote }},
-        "etcdURL": {{ $.Values.global.etcdurl | quote }}
+        "network": {{ .Values.network.s1u.subnet | quote }},
+        "etcdURL": {{ .Values.global.etcdurl | quote }}
     {{- end }}
     }
   }'
+---
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: sgi-net
+{{- if $.Values.network.sriov.enabled }}
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_vfio
 {{- end }}
+spec:
+  config: '{
+    "type": {{ .Values.network.sgi.cni_plugin | quote }},
+    "ipam": {
+        "type": {{ .Values.network.sgi.ipam | quote }},
+    {{- if eq .Values.network.sgi.ipam "host-local" }}
+        "subnet": {{ .Values.network.sgi.subnet | quote }},
+        "gateway": {{ .Values.network.sgi.gateway | quote }}
+    {{- else if eq .Values.network.sgi.ipam "centralip" }}
+        "ipType": "cluster",
+        "network": {{ .Values.network.sgi.subnet | quote }},
+        "etcdURL": {{ .Values.global.etcdurl | quote }}
+    {{- end }}
+    }
+  }'
