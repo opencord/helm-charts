@@ -16,4 +16,4 @@ apiVersion: v1
 appVersion: "1.0"
 description: openairinterface5g eNB and UE
 name: oaisim
-version: 0.1.0
+version: 0.1.1
