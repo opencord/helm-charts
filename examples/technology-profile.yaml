@@ -14,13 +14,12 @@
 
 # Example TOSCA to create technology profile
 # Load into xos-tosca with:
-#  curl -H "xos-username: admin@opencord.org" -H "xos-password: letmein" -X POST --data-binary @bbsim-16.yaml http://127.0.0.1:30007/run
+#  curl -H "xos-username: admin@opencord.org" -H "xos-password: letmein" -X POST --data-binary @technology-profile.yaml http://127.0.0.1:30007/run
 
 tosca_definitions_version: tosca_simple_yaml_1_0
 imports:
   - custom_types/voltservice.yaml
   - custom_types/technologyprofile.yaml
-
 description: Create a simulated OLT Device in VOLTHA
 topology_template:
   node_templates:
@@ -55,12 +54,12 @@ topology_template:
               "q_sched_policy": "hybrid"
             },
             "upstream_gem_port_attribute_list": [{
-                "pbit_map": "0b11000000",
-                "aes_encryption": "TRUE",
-                "scheduling_policy": "Strict-Priority",
+                "pbit_map": "0b11111111",
+                "aes_encryption": "True",
+                "scheduling_policy": "StrictPriority",
                 "priority_q": 1,
                 "weight": 0,
-                "discard_policy": "Tail-Drop",
+                "discard_policy": "TailDrop",
                 "max_q_size": "auto",
                 "discard_config": {
                   "min_threshold": 0,
@@ -70,12 +69,12 @@ topology_template:
               }
             ],
             "downstream_gem_port_attribute_list": [{
-                "pbit_map": "0b11000000",
-                "aes_encryption": "TRUE",
-                "scheduling_policy": "Strict-Priority",
+                "pbit_map": "0b11111111",
+                "aes_encryption": "True",
+                "scheduling_policy": "StrictPriority",
                 "priority_q": 1,
                 "weight": 0,
-                "discard_policy": "Tail-Drop",
+                "discard_policy": "TailDrop",
                 "max_q_size": "auto",
                 "discard_config": {
                   "min_threshold": 0,
