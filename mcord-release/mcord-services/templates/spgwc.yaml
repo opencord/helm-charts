@@ -65,6 +65,10 @@ data:
         while [ ! -f ${SHARED_DIR}/SGW_S1U_IP ]; do echo "Waiting for SGW_S1U_IP"; sleep 2; done
         SGW_S1U_IP=$(cat ${SHARED_DIR}/SGW_S1U_IP)
     fi
+    until dig +short ${MME_S11_IP} | grep -v -e '^$' > /dev/null; do
+        echo "Waiting for MME";
+        sleep 5;
+    done
 
     MGMT_INFO="-s ${CP_ADDR} -m ${MME_S11_IP} -w ${SGW_S1U_IP}"
     APN_INFO="-i ${IP_POOL_IP} -p ${IP_POOL_MASK} -a ${APN}"
