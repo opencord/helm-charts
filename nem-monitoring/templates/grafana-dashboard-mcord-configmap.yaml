@@ -1,5 +1,5 @@
 ---
-# Copyright 2017-present Open Networking Foundation
+# Copyright 2018-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,6 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: nem-monitoring
-description: Time Series Storage and Dashboard for SEBA
-version: 1.0.11-dev
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboard-mcord
+  labels:
+     grafana_dashboard: "1"
+data:
+  mcord.json: |
+{{ .Files.Get "grafana-dashboards/mcord.json" | indent 4 }}
