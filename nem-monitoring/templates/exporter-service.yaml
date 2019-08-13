@@ -24,7 +24,7 @@ spec:
   ports:
     - port: 8080
       targetPort: 8080
-      nodePort: {{ .Values.nem_voltha_kpi_exporter_nodePort }}
+      nodePort: {{ .Values.kpi_exporter.nem_kpi_exporter_nodePort }}
       protocol: TCP
   selector:
     app: "kpi-exporter"

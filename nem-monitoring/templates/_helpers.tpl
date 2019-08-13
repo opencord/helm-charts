@@ -19,15 +19,13 @@ limitations under the License.
 ---
 broker:
   name: broker-name
-  host: {{ .Values.args.voltha_kpi_broker }}
+  host: {{ .Values.kpi_exporter.kpi_broker }}
   description: The kafka broker
-  topics:
-    - onos.aaa.stats.kpis
-    - onos.kpis
-    - voltha.kpis
+  topics: {{ range .Values.kpi_exporter.topics }}
+    - {{ . }} {{ end }}
 logger:
   loglevel: info
-  host: {{ .Values.args.voltha_kpi_broker }}
+  host: {{ .Values.kpi_exporter.kpi_broker }}
 target:
   type: prometheus-target
   name: http-server
