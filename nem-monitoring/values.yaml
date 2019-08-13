@@ -17,7 +17,7 @@ global:
   registry: ''
 
 images:
-  voltha_kpi_exporter:
+  kpi_exporter:
     repository: 'opencord/kafka-topic-exporter'
     tag: '1.2.3'
     pullPolicy: 'Always'
@@ -27,13 +27,18 @@ images:
     tag: 'master'
     pullPolicy: 'Always'
 
-nem_voltha_kpi_exporter_nodePort: 31080
-nem_voltha_kpi_exporter_replicas: 2
 nem_device_management_grpcPort: 31085
 nem_device_management_httpPort: 30180
 nem_device_management_replicas: 1
-args:
-  voltha_kpi_broker: cord-kafka:9092
+
+kpi_exporter:
+  nem_kpi_exporter_nodePort: 31080
+  nem_kpi_exporter_replicas: 2
+  kpi_broker: cord-kafka:9092
+  topics: 
+    - voltha.kpis
+    - onos.aaa.stats.kpis
+    - onos.kpis
 
 prometheus:
   alertmanager:
