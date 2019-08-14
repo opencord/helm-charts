@@ -15,4 +15,4 @@
 
 description: Sets up Rook for Ceph storage in testing environments
 name: rook-cluster
-version: 0.1.0-dev0
+version: 0.1.1-dev0

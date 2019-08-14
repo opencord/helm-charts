@@ -45,3 +45,33 @@ spec:
                 fieldPath: status.hostIP
           - name: DEVICE_MANAGEMENT_DESTPORT
             value: "{{ .Values.nem_device_management_httpPort }}"
+{{- if .Values.needDBPersistence }}
+          - name: DEVICE_MANAGEMENT_PVMOUNT
+            value: {{ .Values.nem_device_management_pv_mount | quote }}
+          volumeMounts:
+          - name: device-management-persistent-storage
+            mountPath: {{ .Values.nem_device_management_pv_mount | quote }}
+      volumes:
+        - name: device-management-persistent-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.pvClaimName }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.pvClaimName }}
+spec:
+{{- if .Values.useLocalDirectory }}
+  selector:
+     matchLabels:
+       for-app: device-management
+  storageClassName: {{ .Values.storageLDClassName }}
+{{- else if .Values.useCeph }}
+  storageClassName: {{ .Values.storageCephClassName }}
+{{- end }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+{{- end }}
