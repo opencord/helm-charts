@@ -30,6 +30,7 @@ images:
 nem_device_management_grpcPort: 31085
 nem_device_management_httpPort: 30180
 nem_device_management_replicas: 1
+nem_device_management_pv_mount: '/tmp'
 
 kpi_exporter:
   nem_kpi_exporter_nodePort: 31080
@@ -242,3 +243,10 @@ grafana:
           url: http://nem-monitoring-prometheus-server.default.svc.cluster.local
           access: proxy
           isDefault: true
+
+# persistence related vars
+needDBPersistence: true
+useCeph: true
+pvClaimName: device-management-pv-claim
+storageLDClassName: local-directory
+storageCephClassName: cord-ceph-rbd
