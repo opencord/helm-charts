@@ -32,6 +32,7 @@ nem_voltha_kpi_exporter_replicas: 2
 nem_device_management_grpcPort: 31085
 nem_device_management_httpPort: 30180
 nem_device_management_replicas: 1
+nem_device_management_pv_mount: '/tmp'
 args:
   voltha_kpi_broker: cord-kafka:9092
 
@@ -237,3 +238,8 @@ grafana:
           url: http://nem-monitoring-prometheus-server.default.svc.cluster.local
           access: proxy
           isDefault: true
+
+# persistence related vars
+needDBPersistence: true
+pvClaimName: device-management-pv-claim
+storageClassName: cord-ceph-rbd

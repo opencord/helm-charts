@@ -17,7 +17,6 @@
 
 rookSystemNamespace: "rook-ceph-system"
 
-rook-ceph:
-  agent:
-    flexVolumeDirPath: "/var/lib/kubelet/volume-plugins"
+agent:
+  flexVolumeDirPath: "/var/lib/kubelet/volume-plugins"
 
