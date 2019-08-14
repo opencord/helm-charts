@@ -24,4 +24,9 @@ volumes:
     size: "10Gi"
     host: "node1"
     directory: "/var/kubernetes_local_directories/large-pv"
+  - name: "dm-pv"
+    size: "1Gi"
+    host: "node1"
+    app: "device-management"
+    directory: "/var/kubernetes_local_directories/dm-pv"
 

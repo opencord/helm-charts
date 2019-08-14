@@ -25,7 +25,7 @@ rookPoolName: "cord-ceph-pool"
 rookCephfsName: "cord-ceph-filesystem"
 
 rookCephfsPersistentVolumeName: "cord-cephfs-pv"
-rookCephfsPersistentVolumeSize: 20Gi
+rookCephfsPersistentVolumeSize: 5Gi
 
 # StorageClass used by other charts to create PersistentVolumeClaims
 rbdStorageClassName: "cord-ceph-rbd"
