@@ -1,4 +1,3 @@
----
 # Copyright 2018-present Open Networking Foundation
 # Copyright 2018 Intel Corporation
 #
@@ -15,15 +14,24 @@
 # limitations under the License.
 
 sriovds:
-  initimage: aweimeow/multus-sriov
-  image: aweimeow/multus-sriov
+  initimage: docker.io/omecproject/omec-cni:0.0.1
+  image: docker.io/omecproject/omec-cni:0.0.1
 
-sriov_vfio:
-  name: sriov_vfio
-  devicepci: 04:00.0
-  devicetype: vfio
-
-sriov_netdevice:
-  name: sriov_netdevice
-  devicepci: 04:00.0
-  devicetype: netdevice
+# We need to speficy both pfName and driver name to prevent one interface to be
+# allocated to multiple resource pools
+resourceList:
+  - resourceName: sriov_vfio
+    # Provide vfio-pci bounded physical function names in your cluster under "pfNames"
+    # Do not change "drivers" unless you know what you're doing
+    selectors:
+      pfNames:
+        - eno1
+      drivers:
+        - vfio-pci
+  - resourceName: sriov_netdevice
+     # Provide pfNames and their drivers that serve virtual functions in your cluster
+    selectors:
+      pfNames:
+        - eno1
+      drivers:
+        - ixgbevf
