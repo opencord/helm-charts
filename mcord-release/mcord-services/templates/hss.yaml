@@ -1,27 +1,30 @@
----
-# Copyright 2018-present Open Networking Foundation
-# Copyright 2018 Intel Corporation
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+{{/*
+Copyright 2018-present Open Networking Foundation
+Copyright 2018 Intel Corporation
 
-# Default values for mcord-vepc-helm.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Default values for mcord-vepc-helm.
+This is a YAML-formatted file.
+Declare variables to be passed into your templates.
+*/}}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.hss.name }}
+  name: hss
+  labels:
+{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 4 }}
 data:
   acl.conf: |
     ALLOW_OLD_TLS   *.cluster.local
@@ -204,10 +207,12 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.hss.name }}
+  name: hss
+  labels:
+{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 4 }}
 spec:
   selector:
-    app: {{ .Values.hss.name }}
+{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 4 }}
   clusterIP: None
   ports:
   - name: s6a
@@ -217,24 +222,28 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Values.hss.name }}
+  name: hss
   labels:
-    app: {{ .Values.hss.name }}
+{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.hss.name }}
-  serviceName: {{ .Values.hss.name }}
+{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 6 }}
+  serviceName: hss
   template:
     metadata:
       labels:
-        app: {{ .Values.hss.name }}
+{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 8 }}
     spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.hss.label }}: {{ .Values.nodeSelectors.hss.value }}
+    {{- end }}
       initContainers:
       - name: init-hss
-        image: {{ .Values.hss.initimage }}
-        imagePullPolicy: Always
+        image: {{ .Values.images.tags.hssdb }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
         command: [ "bash", "-xc"]
         # TODO: Move the SIM card configuration into values.yaml
         args:
@@ -246,27 +255,27 @@ spec:
           until data_provisioning_mme.sh 1 19136246000 smsrouter.test3gpp.net test3gpp.net 0 $HSSDB_ADDR; do echo "setting up smsrouter"; sleep 2; done;
         env:
         - name: HSSDB_ADDR
-          value: {{ .Values.hssdb.name }}
+          value: hssdb
         - name: MME_HOST
           value: {{ tuple "mme" "host" . | include "mcord-services.endpoint_lookup" | quote }}
         - name: MME_REALM
           value: {{ tuple "mme" "realm" . | include "mcord-services.endpoint_lookup" | quote }}
       containers:
       - name: hss
-        image: {{ .Values.hss.image }}
-        imagePullPolicy: {{ .Values.global.imagepullpolicy }}
+        image: {{ .Values.images.tags.hss }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
         stdin: true
         tty: true
         env:
         - name: HSSDB_ADDR
-          value: {{ .Values.hssdb.name | quote }}
+          value: hssdb
         - name: MME_IDENTITY
           value: {{ tuple "mme" "identity" . | include "mcord-services.endpoint_lookup" | quote }}
         command: ["bash", "-c", "/opt/c3po/hss/launch.sh; sleep 3600"]
+      {{- if .Values.resources.enabled }}
         resources:
-          limits:
-            cpu: {{ .Values.hss.cpu | quote }}
-            memory: {{ .Values.hss.memory }}
+{{ toYaml .Values.resources.hss | indent 10 }}
+      {{- end }}
         volumeMounts:
         - name: hss-script
           mountPath: /opt/c3po/hss/launch.sh
@@ -276,9 +285,9 @@ spec:
       volumes:
       - name: hss-script
         configMap:
-          name: {{ .Values.hss.name }}
+          name: hss
           defaultMode: 493
       - name: hss-config
         configMap:
-          name: {{ .Values.hss.name }}
+          name: hss
           defaultMode: 420
