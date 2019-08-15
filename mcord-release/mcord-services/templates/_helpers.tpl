@@ -15,37 +15,20 @@
 # limitations under the License.
 */ -}}
 
-{{/* vim: set filetype=mustache: */}}
 {{/*
-Expand the name of the chart.
+abstract: |
+  Renders a set of standardised labels
+usage: |
+  {{ tuple "mme" . | include "mcord-services.metadata_labels" }}
+return: |
+  release: mcord-services
+  app: mme
 */}}
-{{- define "mcord-services.name" -}}
-{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{/*
-Create a default fully qualified app name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-If release name contains chart name it will be used as a full name.
-*/}}
-{{- define "mcord-services.fullname" -}}
-{{- if .Values.fullnameOverride -}}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- $name := default .Chart.Name .Values.nameOverride -}}
-{{- if contains $name .Release.Name -}}
-{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
-{{- else -}}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Create chart name and version as used by the chart label.
-*/}}
-{{- define "mcord-services.chart" -}}
-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
+{{- define "mcord-services.metadata_labels" -}}
+{{- $application := index . 0 -}}
+{{- $context := index . 1 -}}
+release: {{ $context.Release.Name }}
+app: {{ $application }}
 {{- end -}}
 
 {{/*
@@ -66,13 +49,11 @@ Return identity, realm, and hostname of the first pod of the given statefulset.
 {{- $service := index . 0 -}}
 {{- $type := index . 1 -}}
 {{- $context := index . 2 -}}
-{{- $serviceContext := index $context.Values $service -}}
-{{- $serviceName := $serviceContext.name -}}
 {{- if eq $type "identity" -}}
-{{- printf "%s-0.%s.%s.svc.%s" $serviceName $serviceName $context.Release.Namespace "cluster.local" -}}
+{{- printf "%s-0.%s.%s.svc.%s" $service $service $context.Release.Namespace "cluster.local" -}}
 {{- else if eq $type "realm" -}}
-{{- printf "%s.%s.svc.%s" $serviceName $context.Release.Namespace "cluster.local" -}}
+{{- printf "%s.%s.svc.%s" $service $context.Release.Namespace "cluster.local" -}}
 {{- else if eq $type "host" -}}
-{{- printf "%s-0" $serviceName -}}
+{{- printf "%s-0" $service -}}
 {{- end -}}
 {{- end -}}

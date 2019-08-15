@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 #
 # Copyright 2019-present Open Networking Foundation
 # Copyright 2019 Intel Corporation
@@ -17,8 +17,8 @@
 
 set -ex
 
-UL_IFACE="{{- .Values.spgwu.conf.dp.s1u_af_dev -}}"
-DL_IFACE="{{- .Values.spgwu.conf.dp.sgi_af_dev -}}"
+UL_IFACE="{{- .Values.confs.spgwu.dp.s1uAfDev -}}"
+DL_IFACE="{{- .Values.confs.spgwu.dp.sgiAfDev -}}"
 
 if ! ip link show $UL_IFACE; then
     s1u_mac=$(ip addr show dev s1u-net | awk '$1=="link/ether"{print $2}')
