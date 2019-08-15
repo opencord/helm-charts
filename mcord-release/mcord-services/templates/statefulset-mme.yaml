@@ -1,35 +1,33 @@
----
-# Copyright 2019-present Open Networking Foundation
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+{{/*
+Copyright 2019-present Open Networking Foundation
 
-{{- if eq .Values.mme.type "openmme" }}
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-{{- $releaseName := .Release.Name }}
-{{- $namespace := .Values.global.namespace }}
-{{- $name := .Values.mme.name }}
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: {{ $releaseName }}-{{ $name }}
-  namespace: {{ $namespace }}
+  name: mme
+  labels:
+{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ $releaseName }}-{{ $name }}
-  namespace: {{ $namespace }}
+  name: mme
+  labels:
+{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
 rules:
   - apiGroups:
       - ""
@@ -49,39 +47,43 @@ rules:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ $releaseName }}-{{ $name }}
-  namespace: {{ $namespace }}
+  name: mme
+  labels:
+{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ $releaseName }}-{{ $name }}
+  name: mme
 subjects:
 - kind: ServiceAccount
-  name: {{ $releaseName }}-{{ $name }}
+  name: mme
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ $name }}
-  namespace: {{ $namespace }}
+  name: mme
   labels:
-    app: {{ $name }}
+{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ $name }}
-  serviceName: {{ $name | quote }}
+{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 6 }}
+  serviceName: mme
   template:
     metadata:
       labels:
-        app: {{ $name }}
+{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 8 }}
     spec:
-      serviceAccountName: {{ $releaseName }}-{{ $name }}
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.mme.label }}: {{ .Values.nodeSelectors.mme.value }}
+    {{- end }}
+      serviceAccountName: mme
       initContainers:
       - name: mme-dep-check
-        image: {{ .Values.mme.images.tags.dep_check | quote }}
-        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        image: {{ .Values.images.tags.depCheck | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: false
@@ -102,15 +104,15 @@ spec:
           - name: COMMAND
             value: "echo done"
           - name: DEPENDENCY_POD_JSON
-            value: '[{"labels": {"app": {{ .Values.spgwc.name | quote }}}, "requireSameNode": false}, {"labels": {"app": {{ .Values.hss.name | quote }}}, "requireSameNode": false}]'
+            value: '[{"labels": {"app": "spgwc"}, "requireSameNode": false}, {"labels": {"app": "hss"}, "requireSameNode": false}]'
           # add dependency job for make_certs.sh
         command:
           - kubernetes-entrypoint
         volumeMounts:
           []
       - name: mme-init
-        image: {{ .Values.mme.images.tags.mme | quote }}
-        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        image: {{ .Values.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
         command: ["/opt/mme/scripts/mme-init.sh"]
         env:
         - name: MME_LOCAL_IP
@@ -127,11 +129,15 @@ spec:
           mountPath: /opt/mme/config/shared
       containers:
       - name: mme-app
-        image: {{ .Values.mme.images.tags.mme | quote }}
-        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        image: {{ .Values.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
         command: ["bash", "-xc"]
         args:
         - /opt/mme/scripts/mme-run.sh mme-app
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.mme | indent 10 }}
+      {{- end }}
         volumeMounts:
         - name: scripts
           mountPath: /opt/mme/scripts/mme-run.sh
@@ -141,11 +147,15 @@ spec:
         - name: shared-app
           mountPath: /tmp
       - name: s1ap-app
-        image: {{ .Values.mme.images.tags.mme | quote }}
-        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        image: {{ .Values.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
         command: ["bash", "-xc"]
         args:
         - /opt/mme/scripts/mme-run.sh s1ap-app
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.mme | indent 10 }}
+      {{- end }}
         volumeMounts:
         - name: scripts
           mountPath: /opt/mme/scripts/mme-run.sh
@@ -155,11 +165,15 @@ spec:
         - name: shared-app
           mountPath: /tmp
       - name: s6a-app
-        image: {{ .Values.mme.images.tags.mme | quote }}
-        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        image: {{ .Values.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
         command: ["bash", "-xc"]
         args:
         - /opt/mme/scripts/mme-run.sh s6a-app
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.mme | indent 10 }}
+      {{- end }}
         volumeMounts:
         - name: scripts
           mountPath: /opt/mme/scripts/mme-run.sh
@@ -169,11 +183,15 @@ spec:
         - name: shared-app
           mountPath: /tmp
       - name: s11-app
-        image: {{ .Values.mme.images.tags.mme | quote }}
-        imagePullPolicy: {{ .Values.mme.images.pullPolicy }}
+        image: {{ .Values.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
         command: ["bash", "-xc"]
         args:
         - /opt/mme/scripts/mme-run.sh s11-app
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.mme | indent 10 }}
+      {{- end }}
         volumeMounts:
         - name: scripts
           mountPath: /opt/mme/scripts/mme-run.sh
@@ -185,14 +203,13 @@ spec:
       volumes:
       - name: scripts
         configMap:
-          name: {{ $name }}
+          name: mme
           defaultMode: 493
       - name: configs
         configMap:
-          name: {{ $name }}
+          name: mme
           defaultMode: 420
       - name: shared-data
         emptyDir: {}
       - name: shared-app
         emptyDir: {}
-{{- end }}

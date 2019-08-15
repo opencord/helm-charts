@@ -1,28 +1,33 @@
----
-# Copyright 2018-present Open Networking Foundation
-# Copyright 2018 Intel Corporation
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+{{/*
+Copyright 2018-present Open Networking Foundation
+Copyright 2018 Intel Corporation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: spgwc-pod-reader
+  name: spgwc
+  labels:
+{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: pod-reader
+  name: spgwc
+  labels:
+{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
 rules:
 - apiGroups: [""]
   resources: ["pods"]
@@ -31,19 +36,23 @@ rules:
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: spgwc-pod-reader-rb
+  name: spgwc
+  labels:
+{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: pod-reader
+  name: spgwc
 subjects:
 - kind: ServiceAccount
-  name: spgwc-pod-reader
+  name: spgwc
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.spgwc.name }}
+  name: spgwc
+  labels:
+{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
 data:
   launch.sh: |
     #!/bin/bash -xe
@@ -432,10 +441,12 @@ data:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.spgwc.name }}
+  name: spgwc
+  labels:
+{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
 spec:
   selector:
-    app: {{ .Values.spgwc.name }}
+{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
   clusterIP: None
   ports:
   - name: s11
@@ -448,24 +459,28 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ .Values.spgwc.name }}
+  name: spgwc
   labels:
-    app: {{ .Values.spgwc.name }}
+{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{ .Values.spgwc.name }}
-  serviceName: {{ .Values.spgwc.name | quote }}
+{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 6 }}
+  serviceName: spgwc
   template:
     metadata:
       labels:
-        app: {{ .Values.spgwc.name }}
+{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 8 }}
     spec:
-      serviceAccount: spgwc-pod-reader
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.spgwc.label }}: {{ .Values.nodeSelectors.spgwc.value }}
+    {{- end }}
+      serviceAccountName: spgwc
       initContainers:
       - name: init-spgwc
-        image: {{ .Values.spgwc.initimage }}
+        image: {{ .Values.images.tags.init }}
         command: ["/bin/sh", "-co", "pipefail"]
         args:
         - until $(kubectl get pod -ojson spgwu-0 2>/dev/null | jq -r '.metadata.annotations["k8s.v1.cni.cncf.io/networks-status"]' | jq -r '.[] | select(.name=="s1u-net") | .ips[0]' > /opt/cp/config/shared/SGW_S1U_IP | [ -s /opt/cp/config/shared/SGW_S1U_IP ]);
@@ -475,8 +490,8 @@ spec:
           mountPath: /opt/cp/config/shared
       containers:
       - name: spgwc
-        image: {{ .Values.spgwc.image }}
-        imagePullPolicy: {{ .Values.global.imagepullpolicy }}
+        image: {{ .Values.images.tags.spgwc }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
         stdin: true
         tty: true
         command: ["/opt/cp/scripts/launch.sh"]
@@ -487,14 +502,12 @@ spec:
               containerName: spgwc
               resource: limits.memory
               divisor: 1Mi
-        #- name: SGW_S1U_IP
-        #  value: "11.1.1.1"
         - name: CP_ADDR
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
         - name: DP_ADDR
-          value: spgwu-0.{{ .Values.spgwu.name }}.{{ .Values.global.namespace }}.{{ .Values.global.fqdn }}
+          value: spgwu-0.spgwu
         - name: MME_S11_IP
           value: {{ tuple "mme" "identity" . | include "mcord-services.endpoint_lookup" | quote }}
         - name: APN
@@ -503,6 +516,10 @@ spec:
           value: "16.0.0.0"
         - name: IP_POOL_MASK
           value: "255.0.0.0"
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.spgwc | indent 10 }}
+      {{- end }}
         volumeMounts:
         - name: cp-script
           mountPath: /opt/cp/scripts/launch.sh
@@ -511,24 +528,14 @@ spec:
           mountPath: /etc/cp/config
         - name: shared-data
           mountPath: /opt/cp/config/shared
-        #- name: hugepage
-        #  mountPath: /dev/hugepages
-        resources:
-          limits:
-            #hugepages-2Mi: 4Gi
-            cpu: {{ .Values.spgwc.cpu | quote }}
-            memory: {{ .Values.spgwc.memory }}
       volumes:
       - name: cp-script
         configMap:
-          name: {{ .Values.spgwc.name }}
+          name: spgwc
           defaultMode: 493
       - name: cp-config
         configMap:
-          name: {{ .Values.spgwc.name }}
+          name: spgwc
           defaultMode: 420
       - name: shared-data
         emptyDir: {}
-        #- name: hugepage
-        #  emptyDir:
-        #    medium: HugePages
