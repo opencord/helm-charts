@@ -18,6 +18,10 @@ Default values for mcord-vepc-helm.
 This is a YAML-formatted file.
 Declare variables to be passed into your templates.
 */}}
+
+{{- if not (hasKey .Values.config.hss "hssdb") -}}
+{{- $_ := .Values.cassandra.fullnameOverride | set .Values.config.hss "hssdb" -}}
+{{- end }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -255,7 +259,7 @@ spec:
           until data_provisioning_mme.sh 1 19136246000 smsrouter.test3gpp.net test3gpp.net 0 $HSSDB_ADDR; do echo "setting up smsrouter"; sleep 2; done;
         env:
         - name: HSSDB_ADDR
-          value: hssdb
+          value: {{ .Values.config.hss.hssdb }}
         - name: MME_HOST
           value: {{ tuple "mme" "host" . | include "mcord-services.endpoint_lookup" | quote }}
         - name: MME_REALM
@@ -268,7 +272,7 @@ spec:
         tty: true
         env:
         - name: HSSDB_ADDR
-          value: hssdb
+          value: {{ .Values.config.hss.hssdb }}
         - name: MME_IDENTITY
           value: {{ tuple "mme" "identity" . | include "mcord-services.endpoint_lookup" | quote }}
         command: ["bash", "-c", "/opt/c3po/hss/launch.sh; sleep 3600"]
