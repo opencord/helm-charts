@@ -26,9 +26,6 @@ images:
 
 nodeSelectors:
   enabled: false
-  hssdb:
-    label: omec-cp
-    value: enabled
   hss:
     label: omec-cp
     value: enabled
@@ -44,13 +41,6 @@ nodeSelectors:
 
 resources:
   enabled: true
-  hssdb:
-    requests:
-      cpu: 2
-      memory: 4Gi
-    limits:
-      cpu: 2
-      memory: 4Gi
   hss:
     requests:
       cpu: 2
@@ -82,9 +72,31 @@ resources:
       cpu: 4
       memory: 8Gi
 
+cassandra:
+  deploy: true
+  fullnameOverride: cassandra
+  image:
+    tag: 2.1.20
+  #selector:
+  #  nodeSelector:
+  #    cassandra: enabled
+  persistence:
+    enabled: false
+  config:
+    #cluster_size: 1
+    endpoint_snitch: GossipingPropertyFileSnitch
+  resources: {}
+    #requests:
+    #  memory: 4Gi
+    #  cpu: 2
+    #limits:
+    #  memory: 4Gi
+    #  cpu: 2
+
 config:
-  hssdb: {}
   hss: {}
+    # hssdb will be set to cassandra if unset
+    #hssdb:
   mme:
     mme:
       name: vmmestandalone
