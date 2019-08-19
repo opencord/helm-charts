@@ -13,9 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-sriovds:
-  initimage: docker.io/omecproject/omec-cni:0.0.1
-  image: docker.io/omecproject/omec-cni:0.0.1
+images:
+  tags:
+    omecCni: docker.io/omecproject/omec-cni:0.0.1
+    sriovDp: docker.io/nfvpe/sriov-device-plugin:v3.0.0
+  pullPolicy: IfNotPresent
 
 # We need to speficy both pfName and driver name to prevent one interface to be
 # allocated to multiple resource pools
