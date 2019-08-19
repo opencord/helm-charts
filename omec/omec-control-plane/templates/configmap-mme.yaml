@@ -15,10 +15,10 @@ limitations under the License.
 */}}
 
 {{- if not (hasKey .Values.config.mme.s6a "host") -}}
-{{- $_ := tuple "hss" "identity" . | include "mcord-services.endpoint_lookup" | set .Values.config.mme.s6a "host" -}}
+{{- $_ := tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | set .Values.config.mme.s6a "host" -}}
 {{- end }}
 {{- if not (hasKey .Values.config.mme.s6a "realm") -}}
-{{- $_ := tuple "hss" "realm" . | include "mcord-services.endpoint_lookup" | set .Values.config.mme.s6a "realm" -}}
+{{- $_ := tuple "hss" "realm" . | include "omec-control-plane.endpoint_lookup" | set .Values.config.mme.s6a "realm" -}}
 {{- end }}
 ---
 apiVersion: v1
@@ -26,7 +26,7 @@ kind: ConfigMap
 metadata:
   name: mme
   labels:
-{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 data:
   config.json: {{ toJson .Values.config.mme | quote }}
   s6a_fd.conf: |
@@ -37,16 +37,16 @@ data:
     No_IPv6;
 
     # Identity = "<diameter_host>.<diameter_realm>";
-    Identity = {{ tuple "mme" "identity" . | include "mcord-services.endpoint_lookup" | quote }};
-    Realm = {{ tuple "mme" "realm" . | include "mcord-services.endpoint_lookup" | quote }};
+    Identity = {{ tuple "mme" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }};
+    Realm = {{ tuple "mme" "realm" . | include "omec-control-plane.endpoint_lookup" | quote }};
     # Port = 3868;
     # SecPort = 3869;
 
-    ConnectPeer = {{ tuple "hss" "identity" . | include "mcord-services.endpoint_lookup" | quote }} { No_TLS; port = 3868; };
+    ConnectPeer = {{ tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }} { No_TLS; port = 3868; };
 
     # TLS_Cred = "<diameter_host>.cert.pem", "<diameter_host>.key.pem";
-    TLS_Cred = "conf/{{ tuple "mme" "host" . | include "mcord-services.endpoint_lookup" }}.cert.pem",
-               "conf/{{ tuple "mme" "host" . | include "mcord-services.endpoint_lookup" }}.key.pem";
+    TLS_Cred = "conf/{{ tuple "mme" "host" . | include "omec-control-plane.endpoint_lookup" }}.cert.pem",
+               "conf/{{ tuple "mme" "host" . | include "omec-control-plane.endpoint_lookup" }}.key.pem";
     TLS_CA = "conf/cacert.pem";
 
     LoadExtension = "/usr/local/lib/freeDiameter/dict_3gpp2_avps.fdx";
@@ -109,6 +109,6 @@ data:
     LoadExtension = "/usr/local/lib/freeDiameter/dict_T6aT6bT7.fdx";
     #LoadExtension = "/usr/local/lib/freeDiameter/dict_Tsp.fdx";
   mme-init.sh: |
-{{ tuple "bin/_mme-init.sh.tpl" . | include "mcord-services.template" | indent 4 }}
+{{ tuple "bin/_mme-init.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
   mme-run.sh : |
-{{ tuple "bin/_mme-run.sh.tpl" . | include "mcord-services.template" | indent 4 }}
+{{ tuple "bin/_mme-run.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}

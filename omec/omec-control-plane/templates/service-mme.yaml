@@ -20,10 +20,10 @@ kind: Service
 metadata:
   name: mme
   labels:
-{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   selector:
-{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
   clusterIP: None
   ports:
   - name: s11
@@ -38,10 +38,10 @@ kind: Service
 metadata:
   name: mme-sctp
   labels:
-{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   selector:
-{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
   type: NodePort
   ports:
     - name: s1ap

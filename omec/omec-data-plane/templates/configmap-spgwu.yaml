@@ -20,7 +20,7 @@ kind: ConfigMap
 metadata:
   name: spgwu
   labels:
-{{ tuple "spgwu" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
 data:
   dp_config.cfg: |
     if [ ! -d "/dev/hugepages" ]; then
@@ -47,10 +47,10 @@ data:
     dp_comm_ip = DP_ADDR
     dp_comm_port = 20
     cp_comm_ip = CP_ADDR
-    cp_comm_port = 21
-{{- if not .Values.networks.sriov.enabled }}
+    cp_comm_port = CP_PORT
+{{- if not .Values.config.sriov.enabled }}
   setup-af-iface.sh: |
-{{ tuple "bin/_spgwu-setup-af-iface.sh.tpl" . | include "mcord-services.template" | indent 4 }}
+{{ tuple "bin/_spgwu-setup-af-iface.sh.tpl" . | include "omec-data-plane.template" | indent 4 }}
 {{- end }}
   run.sh: |
-{{ tuple "bin/_spgwu-run.sh.tpl" . | include "mcord-services.template" | indent 4 }}
+{{ tuple "bin/_spgwu-run.sh.tpl" . | include "omec-data-plane.template" | indent 4 }}

@@ -1,0 +1,82 @@
+# Copyright 2018-present Open Networking Foundation
+# Copyright 2018 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+images:
+  tags:
+    init: docker.io/omecproject/pod-init:0.1.0-dev
+    omecCni: docker.io/omecproject/omec-cni:0.0.1
+    sriovDp: docker.io/nfvpe/sriov-device-plugin:v3.0.0
+    spgwu: docker.io/omecproject/ngic-dp:0.1.0-dev
+    depCheck: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+  pullPolicy: IfNotPresent
+
+nodeSelectors:
+  enabled: false
+  spgwu:
+    label: omec-dp
+    value: enabled
+
+resources:
+  enabled: true
+  spgwu:
+    requests:
+      cpu: 4
+      memory: 8Gi
+    limits:
+      cpu: 4
+      memory: 8Gi
+
+config:
+  sriov:
+    enabled: true
+    resourceList:
+      - resourceName: sriov_vfio
+        selectors:
+          pfNames:
+            - eno1
+          drivers:
+            - vfio-pci
+      - resourceName: sriov_netdevice
+        selectors:
+          pfNames:
+            - eno1
+          drivers:
+            - ixgbevf
+  spgwu:
+    spgwc:
+      addr: spgwc
+      port: 21
+    # s1u and sgi interfaces are fixed to "s1u-net" and "sgi-net"
+    # Note that s1uAfDev and sgiAfDev are valid only when sriov is disabled
+    # setup-af-iface.sh script creates additional veth pair with the names here
+    s1uAfDev: s1u-veth
+    sgiAfDev: sgi-veth
+    # set "--no-pci --vdev eth_af_packet0,iface=s1u-net --vdev eth_af_packet1,iface=sgi-net"
+    # when sriov is disabled
+    devices: ""
+    rtrSgiIp: 13.1.1.254
+    sgiMask: 255.255.255.0
+
+networks:
+  cniPlugin: vfioveth
+  ipam: centralip
+  # etcdurl is required only when centralip IPAM is used
+  etcdurl: http://localhost:32379
+  s1u:
+    subnet: 119.0.0.0/24
+    gateway: 119.0.0.254
+  sgi:
+    subnet: 13.1.1.0/24
+    gateway: 13.1.1.254

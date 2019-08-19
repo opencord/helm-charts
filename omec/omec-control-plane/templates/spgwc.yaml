@@ -20,14 +20,14 @@ kind: ServiceAccount
 metadata:
   name: spgwc
   labels:
-{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: spgwc
   labels:
-{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 rules:
 - apiGroups: [""]
   resources: ["pods"]
@@ -38,7 +38,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: spgwc
   labels:
-{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -52,7 +52,7 @@ kind: ConfigMap
 metadata:
   name: spgwc
   labels:
-{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 data:
   launch.sh: |
     #!/bin/bash -xe
@@ -63,6 +63,7 @@ data:
     cp /etc/cp/config/{adc_rules.cfg,cp_config.cfg,interface.cfg,meter_profile.cfg,pcc_rules.cfg,sdf_rules.cfg} .
     sed -i "s/CP_ADDR/$CP_ADDR/g" interface.cfg
     sed -i "s/DP_ADDR/$DP_ADDR/g" interface.cfg
+    sed -i "s/DP_PORT/$DP_PORT/g" interface.cfg
     . cp_config.cfg
     ngic_controlplane $EAL_ARGS -- $APP_ARGS
   cp_config.cfg: |
@@ -90,7 +91,7 @@ data:
   interface.cfg: |
     [0]
     dp_comm_ip = DP_ADDR
-    dp_comm_port = 20
+    dp_comm_port = DP_PORT
     cp_comm_ip = CP_ADDR
     cp_comm_port = 21
   adc_rules.cfg: |
@@ -443,10 +444,10 @@ kind: Service
 metadata:
   name: spgwc
   labels:
-{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   selector:
-{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
   clusterIP: None
   ports:
   - name: s11
@@ -461,17 +462,17 @@ kind: StatefulSet
 metadata:
   name: spgwc
   labels:
-{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 6 }}
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 6 }}
   serviceName: spgwc
   template:
     metadata:
       labels:
-{{ tuple "spgwc" . | include "mcord-services.metadata_labels" | indent 8 }}
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 8 }}
     spec:
     {{- if .Values.nodeSelectors.enabled }}
       nodeSelector:
@@ -507,9 +508,11 @@ spec:
             fieldRef:
               fieldPath: status.podIP
         - name: DP_ADDR
-          value: spgwu-0.spgwu
+          value: {{ .Values.config.spgwc.spgwu.addr | quote }}
+        - name: DP_PORT
+          value: {{ .Values.config.spgwc.spgwu.port | quote }}
         - name: MME_S11_IP
-          value: {{ tuple "mme" "identity" . | include "mcord-services.endpoint_lookup" | quote }}
+          value: {{ tuple "mme" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }}
         - name: APN
           value: apn1
         - name: IP_POOL_IP

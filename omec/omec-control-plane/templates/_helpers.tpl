@@ -16,15 +16,9 @@
 */ -}}
 
 {{/*
-abstract: |
-  Renders a set of standardised labels
-usage: |
-  {{ tuple "mme" . | include "mcord-services.metadata_labels" }}
-return: |
-  release: mcord-services
-  app: mme
+Renders a set of standardised labels
 */}}
-{{- define "mcord-services.metadata_labels" -}}
+{{- define "omec-control-plane.metadata_labels" -}}
 {{- $application := index . 0 -}}
 {{- $context := index . 1 -}}
 release: {{ $context.Release.Name }}
@@ -34,7 +28,7 @@ app: {{ $application }}
 {{/*
 Render the given template.
 */}}
-{{- define "mcord-services.template" -}}
+{{- define "omec-control-plane.template" -}}
 {{- $name := index . 0 -}}
 {{- $context := index . 1 -}}
 {{- $last := base $context.Template.Name }}
@@ -45,7 +39,7 @@ Render the given template.
 {{/*
 Return identity, realm, and hostname of the first pod of the given statefulset.
 */}}
-{{- define "mcord-services.endpoint_lookup" -}}
+{{- define "omec-control-plane.endpoint_lookup" -}}
 {{- $service := index . 0 -}}
 {{- $type := index . 1 -}}
 {{- $context := index . 2 -}}

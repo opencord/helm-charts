@@ -25,7 +25,7 @@ jq --arg MME_LOCAL_IP "$MME_LOCAL_IP" '.s1ap.s1ap_local_addr=$MME_LOCAL_IP' conf
 jq --arg MME_LOCAL_IP "$MME_LOCAL_IP" '.s11.egtp_local_addr=$MME_LOCAL_IP' config.json > config.tmp && mv config.tmp config.json
 
 # Set SPGW-C address to the config
-SPGWC_POD={{ tuple "spgwc" "identity" . | include "mcord-services.endpoint_lookup" | quote }}
+SPGWC_POD={{ tuple "spgwc" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }}
 SPGWC_ADDR=$(dig +short $SPGWC_POD)
 jq --arg SPGWC_ADDR "$SPGWC_ADDR" '.s11.sgw_addr //= $SPGWC_ADDR' config.json > config.tmp && mv config.tmp config.json
 jq --arg SPGWC_ADDR "$SPGWC_ADDR" '.s11.pgw_addr //= $SPGWC_ADDR' config.json > config.tmp && mv config.tmp config.json
@@ -44,9 +44,9 @@ cp /opt/mme/config/shared/config.json /opt/mme/config/shared/s6a.json
 cp /opt/mme/config/s6a_fd.conf /opt/mme/config/shared/s6a_fd.conf
 
 # Generate certs
-MME_IDENTITY={{ tuple "mme" "identity" . | include "mcord-services.endpoint_lookup" | quote }};
+MME_IDENTITY={{ tuple "mme" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }};
 DIAMETER_HOST=$(echo $MME_IDENTITY | cut -d'.' -f1)
-DIAMETER_REALM={{ tuple "mme" "realm" . | include "mcord-services.endpoint_lookup" | quote }};
+DIAMETER_REALM={{ tuple "mme" "realm" . | include "omec-control-plane.endpoint_lookup" | quote }};
 
 cp /openmme/target/conf/make_certs.sh /opt/mme/config/shared/make_certs.sh
 cd /opt/mme/config/shared

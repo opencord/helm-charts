@@ -28,7 +28,7 @@ kind: ConfigMap
 metadata:
   name: hss
   labels:
-{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 data:
   acl.conf: |
     ALLOW_OLD_TLS   *.cluster.local
@@ -213,10 +213,10 @@ kind: Service
 metadata:
   name: hss
   labels:
-{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   selector:
-{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
   clusterIP: None
   ports:
   - name: s6a
@@ -228,17 +228,17 @@ kind: StatefulSet
 metadata:
   name: hss
   labels:
-{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 6 }}
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 6 }}
   serviceName: hss
   template:
     metadata:
       labels:
-{{ tuple "hss" . | include "mcord-services.metadata_labels" | indent 8 }}
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 8 }}
     spec:
     {{- if .Values.nodeSelectors.enabled }}
       nodeSelector:
@@ -261,9 +261,9 @@ spec:
         - name: HSSDB_ADDR
           value: {{ .Values.config.hss.hssdb }}
         - name: MME_HOST
-          value: {{ tuple "mme" "host" . | include "mcord-services.endpoint_lookup" | quote }}
+          value: {{ tuple "mme" "host" . | include "omec-control-plane.endpoint_lookup" | quote }}
         - name: MME_REALM
-          value: {{ tuple "mme" "realm" . | include "mcord-services.endpoint_lookup" | quote }}
+          value: {{ tuple "mme" "realm" . | include "omec-control-plane.endpoint_lookup" | quote }}
       containers:
       - name: hss
         image: {{ .Values.images.tags.hss }}
@@ -274,7 +274,7 @@ spec:
         - name: HSSDB_ADDR
           value: {{ .Values.config.hss.hssdb }}
         - name: MME_IDENTITY
-          value: {{ tuple "mme" "identity" . | include "mcord-services.endpoint_lookup" | quote }}
+          value: {{ tuple "mme" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }}
         command: ["bash", "-c", "/opt/c3po/hss/launch.sh; sleep 3600"]
       {{- if .Values.resources.enabled }}
         resources:

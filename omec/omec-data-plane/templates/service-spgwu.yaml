@@ -22,7 +22,7 @@ metadata:
   name: spgwu
 spec:
   selector:
-{{ tuple "spgwu" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
   clusterIP: None
   ports:
   - name: cpdp

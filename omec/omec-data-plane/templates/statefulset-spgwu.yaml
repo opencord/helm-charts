@@ -20,17 +20,17 @@ kind: StatefulSet
 metadata:
   name: spgwu
   labels:
-{{ tuple "spgwu" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-{{ tuple "spgwu" . | include "mcord-services.metadata_labels" | indent 6 }}
+{{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 6 }}
   serviceName: spgwu
   template:
     metadata:
       labels:
-{{ tuple "spgwu" . | include "mcord-services.metadata_labels" | indent 8 }}
+{{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 8 }}
       annotations:
         k8s.v1.cni.cncf.io/networks: '[
                 { "name": "s1u-net", "interface": "s1u-net" },
@@ -41,7 +41,7 @@ spec:
       nodeSelector:
         {{ .Values.nodeSelectors.spgwu.label }}: {{ .Values.nodeSelectors.spgwu.value }}
     {{- end }}
-    {{- if not .Values.networks.sriov.enabled }}
+    {{- if not .Values.config.sriov.enabled }}
       initContainers:
         - name: spgwu-iptables-init
           image: {{ .Values.images.tags.init | quote }}
@@ -81,29 +81,31 @@ spec:
               resource: limits.memory
               divisor: 1Mi
         - name: S1U_DEVNAME
-        {{- if .Values.networks.sriov.enabled }}
+        {{- if .Values.config.sriov.enabled }}
           value: s1u-net
         {{- else }}
-          value: {{ .Values.config.spgwu.dp.s1uAfDev | quote }}
+          value: {{ .Values.config.spgwu.s1uAfDev | quote }}
         {{- end }}
         - name: SGI_DEVNAME
-        {{- if .Values.networks.sriov.enabled }}
+        {{- if .Values.config.sriov.enabled }}
           value: sgi-net
         {{- else }}
-          value: {{ .Values.config.spgwu.dp.sgiAfDev | quote }}
+          value: {{ .Values.config.spgwu.sgiAfDev | quote }}
         {{- end }}
         - name: DEVICES
-          value: {{ .Values.config.spgwu.dp.devices | quote }}
+          value: {{ .Values.config.spgwu.devices | quote }}
         - name: CP_ADDR
-          value: spgwc-0.spgwc
+          value: {{ .Values.config.spgwu.spgwc.addr | quote }}
+        - name: CP_PORT
+          value: {{ .Values.config.spgwu.spgwc.port | quote }}
         - name: DP_ADDR
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
         - name: RTR_SGI_IP
-          value: {{ .Values.config.spgwu.dp.rtrSgiIp | quote }}
+          value: {{ .Values.config.spgwu.rtrSgiIp | quote }}
         - name: SGI_MASK
-          value: {{ .Values.config.spgwu.dp.sgiMask | quote }}
+          value: {{ .Values.config.spgwu.sgiMask | quote }}
         command: ["bash", "-xc"]
         args:
         - ip a;
@@ -119,14 +121,14 @@ spec:
           {{- if .Values.resources.enabled }}
 {{ toYaml .Values.resources.spgwu.requests | indent 12 }}
           {{- end }}
-          {{- if .Values.networks.sriov.enabled }}
+          {{- if .Values.config.sriov.enabled }}
             intel.com/sriov_vfio: 2
           {{- end }}
           limits:
           {{- if .Values.resources.enabled }}
 {{ toYaml .Values.resources.spgwu.limits | indent 12 }}
           {{- end }}
-          {{- if .Values.networks.sriov.enabled }}
+          {{- if .Values.config.sriov.enabled }}
             intel.com/sriov_vfio: 2
           {{- end }}
         securityContext:

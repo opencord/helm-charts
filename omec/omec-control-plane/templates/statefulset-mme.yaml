@@ -20,14 +20,14 @@ kind: ServiceAccount
 metadata:
   name: mme
   labels:
-{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: mme
   labels:
-{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 rules:
   - apiGroups:
       - ""
@@ -49,7 +49,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: mme
   labels:
-{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
@@ -63,17 +63,17 @@ kind: StatefulSet
 metadata:
   name: mme
   labels:
-{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 4 }}
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 6 }}
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 6 }}
   serviceName: mme
   template:
     metadata:
       labels:
-{{ tuple "mme" . | include "mcord-services.metadata_labels" | indent 8 }}
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 8 }}
     spec:
     {{- if .Values.nodeSelectors.enabled }}
       nodeSelector:

@@ -20,7 +20,7 @@ apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
   name: s1u-net
-{{- if $.Values.networks.sriov.enabled }}
+{{- if $.Values.config.sriov.enabled }}
   annotations:
     k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_vfio
 {{- end }}
@@ -44,7 +44,7 @@ apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
   name: sgi-net
-{{- if $.Values.networks.sriov.enabled }}
+{{- if $.Values.config.sriov.enabled }}
   annotations:
     k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_vfio
 {{- end }}

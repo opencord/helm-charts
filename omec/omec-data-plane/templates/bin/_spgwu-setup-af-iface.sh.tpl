@@ -17,8 +17,8 @@
 
 set -ex
 
-UL_IFACE="{{- .Values.config.spgwu.dp.s1uAfDev -}}"
-DL_IFACE="{{- .Values.config.spgwu.dp.sgiAfDev -}}"
+UL_IFACE="{{- .Values.config.spgwu.s1uAfDev -}}"
+DL_IFACE="{{- .Values.config.spgwu.sgiAfDev -}}"
 
 if ! ip link show $UL_IFACE; then
     s1u_mac=$(ip addr show dev s1u-net | awk '$1=="link/ether"{print $2}')
