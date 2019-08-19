@@ -1,0 +1,215 @@
+{{/*
+Copyright 2019-present Open Networking Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mme
+  labels:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: mme
+  labels:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+rules:
+  - apiGroups:
+      - ""
+      - extensions
+      - batch
+      - apps
+    verbs:
+      - get
+      - list
+    resources:
+      - daemonsets
+      - jobs
+      - pods
+      - services
+      - endpoints
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: mme
+  labels:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: mme
+subjects:
+- kind: ServiceAccount
+  name: mme
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mme
+  labels:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 6 }}
+  serviceName: mme
+  template:
+    metadata:
+      labels:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 8 }}
+    spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.mme.label }}: {{ .Values.nodeSelectors.mme.value }}
+    {{- end }}
+      serviceAccountName: mme
+      initContainers:
+      - name: mme-dep-check
+        image: {{ .Values.images.tags.depCheck | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: PATH
+            value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
+          - name: COMMAND
+            value: "echo done"
+          - name: DEPENDENCY_POD_JSON
+            value: '[{"labels": {"app": "spgwc"}, "requireSameNode": false}, {"labels": {"app": "hss"}, "requireSameNode": false}]'
+          # add dependency job for make_certs.sh
+        command:
+          - kubernetes-entrypoint
+        volumeMounts:
+          []
+      - name: mme-init
+        image: {{ .Values.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        command: ["/opt/mme/scripts/mme-init.sh"]
+        env:
+        - name: MME_LOCAL_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-init.sh
+          subPath: mme-init.sh
+        - name: configs
+          mountPath: /opt/mme/config
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
+      containers:
+      - name: mme-app
+        image: {{ .Values.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/mme/scripts/mme-run.sh mme-app
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.mme | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-run.sh
+          subPath: mme-run.sh
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
+        - name: shared-app
+          mountPath: /tmp
+      - name: s1ap-app
+        image: {{ .Values.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/mme/scripts/mme-run.sh s1ap-app
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.mme | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-run.sh
+          subPath: mme-run.sh
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
+        - name: shared-app
+          mountPath: /tmp
+      - name: s6a-app
+        image: {{ .Values.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/mme/scripts/mme-run.sh s6a-app
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.mme | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-run.sh
+          subPath: mme-run.sh
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
+        - name: shared-app
+          mountPath: /tmp
+      - name: s11-app
+        image: {{ .Values.images.tags.mme | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        command: ["bash", "-xc"]
+        args:
+        - /opt/mme/scripts/mme-run.sh s11-app
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.mme | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-run.sh
+          subPath: mme-run.sh
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
+        - name: shared-app
+          mountPath: /tmp
+      volumes:
+      - name: scripts
+        configMap:
+          name: mme
+          defaultMode: 493
+      - name: configs
+        configMap:
+          name: mme
+          defaultMode: 420
+      - name: shared-data
+        emptyDir: {}
+      - name: shared-app
+        emptyDir: {}
