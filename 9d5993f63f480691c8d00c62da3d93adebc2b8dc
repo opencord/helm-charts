@@ -22,6 +22,30 @@
       "revId": "9d5993f63f480691c8d00c62da3d93adebc2b8dc",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "688ca656_3649f896",
+        "filename": "mcord-release/mcord-setup/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-08-19T18:08:24Z",
+      "side": 1,
+      "message": "User is supposed to provide the drivers in their environment. Providing PCI address seems older version. https://github.com/intel/sriov-network-device-plugin",
+      "parentUuid": "eb9ddf13_ee518e14",
+      "range": {
+        "startLine": 34,
+        "startChar": 10,
+        "endLine": 34,
+        "endChar": 17
+      },
+      "revId": "9d5993f63f480691c8d00c62da3d93adebc2b8dc",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
