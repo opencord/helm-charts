@@ -16,7 +16,7 @@ limitations under the License.
 
 {{- $releaseName := .Release.Name }}
 {{- $namespace := .Release.Namespace }}
-{{- $name := .Values.conf.enb.name }}
+{{- $name := .Values.config.enb.name }}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -76,6 +76,10 @@ spec:
       labels:
         app: oai-enb
     spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.enb.label }}: {{ .Values.nodeSelectors.enb.value }}
+    {{- end }}
       serviceAccountName: {{ $releaseName }}-{{ $name }}
       hostNetwork: true
       initContainers:

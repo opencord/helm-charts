@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-{{- $name := .Values.conf.ue.name }}
+{{- $name := .Values.config.ue.name }}
 ---
 apiVersion: batch/v1
 kind: Job
@@ -31,6 +31,10 @@ spec:
       labels:
         app: {{ $name }}
     spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.ue.label }}: {{ .Values.nodeSelectors.ue.value }}
+    {{- end }}
       restartPolicy: Never
       containers:
         - name: ue-teardown-if-job

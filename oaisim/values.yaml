@@ -18,7 +18,17 @@ images:
     enb: omecproject/lte-softmodem:1.0.0
     ue: omecproject/lte-uesoftmodem:1.0.0
   pullPolicy: IfNotPresent
-conf:
+
+nodeSelectors:
+  enabled: false
+  enb:
+    label: oaisim
+    value: enabled
+  ue:
+    label: oaisim
+    value: enabled
+
+config:
   # 1 PLMN is supported for now
   plmn:
     name: "COMAC Test Network"

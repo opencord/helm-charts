@@ -18,7 +18,7 @@ limitations under the License.
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.conf.enb.name }}
+  name: {{ .Values.config.enb.name }}
 data:
   nfapi.conf: |
     Active_eNBs = ("eNB-OAISIM-LTEBox");
@@ -35,9 +35,9 @@ data:
         tracking_area_code = 1;
         plmn_list = (
           {
-            mcc = {{ .Values.conf.plmn.mcc }};
-            mnc = {{ .Values.conf.plmn.mnc }};
-            mnc_length = {{ .Values.conf.plmn.mnc_length }};
+            mcc = {{ .Values.config.plmn.mcc }};
+            mnc = {{ .Values.config.plmn.mnc }};
+            mnc_length = {{ .Values.config.plmn.mnc_length }};
           }
         );
         tr_s_preference     = "local_mac"
@@ -180,7 +180,7 @@ data:
         ////////// MME parameters:
         mme_ip_address = (
           {
-            ipv4       = {{ .Values.conf.enb.mme.address | quote }};
+            ipv4       = {{ .Values.config.enb.mme.address | quote }};
             ipv6       = "192:168:30::17";
             active     = "yes";
             preference = "ipv4";
@@ -189,11 +189,11 @@ data:
 
         NETWORK_INTERFACES :
         {
-          ENB_INTERFACE_NAME_FOR_S1_MME            = {{ .Values.conf.enb.networks.s1_mme.interface | quote }};
+          ENB_INTERFACE_NAME_FOR_S1_MME            = {{ .Values.config.enb.networks.s1_mme.interface | quote }};
           ENB_IPV4_ADDRESS_FOR_S1_MME              = S1_MME_IP_ADDRESS;
-          ENB_INTERFACE_NAME_FOR_S1U               = {{ .Values.conf.enb.networks.s1u.interface | quote }};
+          ENB_INTERFACE_NAME_FOR_S1U               = {{ .Values.config.enb.networks.s1u.interface | quote }};
           ENB_IPV4_ADDRESS_FOR_S1U                 = S1U_IP_ADDRESS;
-          ENB_PORT_FOR_S1U                         = {{ .Values.conf.enb.networks.s1u.port }}; # Spec 2152
+          ENB_PORT_FOR_S1U                         = {{ .Values.config.enb.networks.s1u.port }}; # Spec 2152
           ENB_IPV4_ADDRESS_FOR_X2C                 = X2C_IP_ADDRESS;
           ENB_PORT_FOR_X2C                         = 36422; # Spec 36422
         };
