@@ -21,7 +21,7 @@ Return endpoint of the given application.
 {{- $app := index . 0 -}}
 {{- $type := index . 1 -}}
 {{- $context := index . 2 -}}
-{{- $appContext := index $context.Values.conf $app -}}
+{{- $appContext := index $context.Values.config $app -}}
 {{- $appName := $appContext.name -}}
 {{- if eq $type "fqdn" -}}
 {{- printf "%s-0.%s.%s.svc.%s" $appName $appName $context.Release.Namespace "cluster.local" -}}
