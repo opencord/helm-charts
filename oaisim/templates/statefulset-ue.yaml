@@ -16,7 +16,7 @@ limitations under the License.
 
 {{- $releaseName := .Release.Name }}
 {{- $namespace := .Release.Namespace }}
-{{- $name := .Values.conf.ue.name }}
+{{- $name := .Values.config.ue.name }}
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -76,6 +76,10 @@ spec:
       labels:
         app: oai-ue
     spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.ue.label }}: {{ .Values.nodeSelectors.ue.value }}
+    {{- end }}
       serviceAccountName: {{ $releaseName }}-{{ $name }}
       hostNetwork: true
       initContainers:

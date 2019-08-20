@@ -14,20 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-{{- $plmn := tuple .Values.conf.plmn.mcc .Values.conf.plmn.mnc | include "oaisim.plmn" | quote -}}
+{{- $plmn := tuple .Values.config.plmn.mcc .Values.config.plmn.mnc | include "oaisim.plmn" | quote -}}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.conf.ue.name }}
+  name: {{ .Values.config.ue.name }}
 data:
   ue_comac_test.conf: |
     PLMN: {
       PLMN0: {
-             FULLNAME={{ .Values.conf.plmn.name | quote }};
-             SHORTNAME={{ .Values.conf.plmn.short_name | quote }};
-             MCC={{ .Values.conf.plmn.mcc | quote }};
-             MNC={{ .Values.conf.plmn.mnc | quote }};
+             FULLNAME={{ .Values.config.plmn.name | quote }};
+             SHORTNAME={{ .Values.config.plmn.short_name | quote }};
+             MCC={{ .Values.config.plmn.mcc | quote }};
+             MNC={{ .Values.config.plmn.mnc | quote }};
       };
     };
     UE0: {
@@ -38,10 +38,10 @@ data:
             PIN="0000";
       };
       SIM: {
-           MSIN={{ .Values.conf.ue.sim.msin | quote }};
-           USIM_API_K={{ .Values.conf.ue.sim.api_key | quote }};
-           OPC={{ .Values.conf.ue.sim.opc | quote }};
-           MSISDN={{ .Values.conf.ue.sim.msisdn | quote }};
+           MSIN={{ .Values.config.ue.sim.msin | quote }};
+           USIM_API_K={{ .Values.config.ue.sim.api_key | quote }};
+           OPC={{ .Values.config.ue.sim.opc | quote }};
+           MSISDN={{ .Values.config.ue.sim.msisdn | quote }};
       };
       HPLMN= {{ $plmn }};
       UCPLMN_LIST = ();
