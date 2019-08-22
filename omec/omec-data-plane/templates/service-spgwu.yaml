@@ -19,12 +19,19 @@ limitations under the License.
 apiVersion: v1
 kind: Service
 metadata:
-  name: spgwu
+  name: spgwu-dp-comm
+  labels:
+{{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
 spec:
   selector:
 {{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
-  clusterIP: None
+{{- if .Values.config.spgwu.dpComm.nodePort.enabled }}
+  type: NodePort
+{{- end }}
   ports:
-  - name: cpdp
+  - name: dp-comm
     port: 20
     protocol: UDP
+  {{- if .Values.config.spgwu.dpComm.nodePort.enabled }}
+    nodePort: {{ .Values.config.spgwu.dpComm.nodePort.port }}
+  {{- end }}

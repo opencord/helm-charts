@@ -26,7 +26,6 @@ spec:
   selector:
     matchLabels:
 {{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 6 }}
-  serviceName: spgwu
   template:
     metadata:
       labels:
@@ -88,7 +87,7 @@ spec:
               containerName: spgwu
               resource: limits.memory
               divisor: 1Mi
-        - name: DP_ADDR
+        - name: POD_IP
           valueFrom:
             fieldRef:
               fieldPath: status.podIP

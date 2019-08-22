@@ -115,5 +115,5 @@ config:
   spgwc:
     # make it global
     spgwu:
-      addr: spgwu
+      addr: spgwu-dp-comm
       port: 20
