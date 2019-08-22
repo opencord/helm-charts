@@ -88,7 +88,7 @@ spec:
               containerName: spgwu
               resource: limits.memory
               divisor: 1Mi
-        - name: DP_ADDR
+        - name: POD_IP
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
