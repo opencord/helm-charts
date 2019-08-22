@@ -14,6 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */}}
+
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -58,8 +59,8 @@ data:
     [0]
     dp_comm_ip = DP_ADDR
     dp_comm_port = 20
-    cp_comm_ip = {{ .Values.config.spgwu.spgwc.addr }}
-    cp_comm_port = {{ .Values.config.spgwu.spgwc.port }}
+    cp_comm_ip = {{ .Values.config.spgwu.cpComm.addr }}
+    cp_comm_port = {{ .Values.config.spgwu.cpComm.port }}
 {{- if not .Values.config.sriov.enabled }}
   setup-af-iface.sh: |
 {{ tuple "bin/_spgwu-setup-af-iface.sh.tpl" . | include "omec-data-plane.template" | indent 4 }}

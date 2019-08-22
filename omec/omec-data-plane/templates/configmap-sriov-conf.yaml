@@ -24,6 +24,24 @@ metadata:
 data:
   config.json: |
     {
-      "resourceList": {{ toJson .Values.config.sriov.resourceList }}
+      "resourceList": [
+        {
+          "resourceName": "sriov_vfio",
+          "selectors": {
+              "pfNames": {{ toJson .Values.config.sriov.resourceList.vfio.pfNames }},
+              "drivers": ["vfio-pci"]
+          }
+        }
+{{- if hasKey .Values.config.sriov.resourceList "netDevice" }}
+        ,
+        {
+          "resourceName": "sriov_netdevice",
+          "selectors": {
+              "pfNames": {{ toJson .Values.config.sriov.resourceList.netDevice.pfNames }},
+              "drivers": {{ toJson .Values.config.sriov.resourceList.netDevice.drivers }}
+          }
+        }
+{{- end }}
+      ]
     }
 {{- end }}
