@@ -33,8 +33,8 @@ spec:
 {{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 8 }}
       annotations:
         k8s.v1.cni.cncf.io/networks: '[
-                { "name": "s1u-net", "interface": "s1u-net" },
-                { "name": "sgi-net", "interface": "sgi-net" }
+                { "name": "s1u-net", "interface": "s1u-net", "ips": {{ .Values.networks.s1uIp | quote }} },
+                { "name": "sgi-net", "interface": "sgi-net", "ips": {{ .Values.networks.sgiIp | quote }} }
         ]'
     spec:
     {{- if .Values.nodeSelectors.enabled }}
