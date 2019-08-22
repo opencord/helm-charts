@@ -26,18 +26,30 @@ data:
     if [ ! -d "/dev/hugepages" ]; then
         MEMORY="--no-huge -m $((MEM_LIMIT-1024))"
     fi
-
     CORES="-c $(taskset -p $$ | awk '{print $NF}')"
-    EAL_ARGS="${CORES} ${MEMORY} ${DEVICES}"
+    EAL_ARGS="${CORES} ${MEMORY} {{ .Values.config.spgwu.devices }}"
 
-    SPGW_CFG="--spgw_cfg 03"
+    {{- if .Values.config.sriov.enabled }}
+    S1U_DEVNAME={{ .Values.config.spgwu.s1u.device }}
+    {{- else }}
+    S1U_DEVNAME={{ .Values.config.spgwu.s1u.device }}-veth
+    {{- end }}
+    {{- if .Values.config.sriov.enabled }}
+    SGI_DEVNAME={{ .Values.config.spgwu.sgi.device }}
+    {{- else }}
+    SGI_DEVNAME={{ .Values.config.spgwu.sgi.device }}-veth
+    {{- end }}
+
     S1U_IP=$(ip -4 addr show dev ${S1U_DEVNAME} | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
     SGI_IP=$(ip -4 addr show dev ${SGI_DEVNAME} | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
     S1U_MAC=$(ip addr show dev ${S1U_DEVNAME} | awk '$1=="link/ether"{print $2}')
     SGI_MAC=$(ip addr show dev ${SGI_DEVNAME} | awk '$1=="link/ether"{print $2}')
+
     S1U="--s1u_ip ${S1U_IP} --s1u_mac ${S1U_MAC} --ul_iface ${S1U_DEVNAME}"
-    SGI="--sgi_ip ${SGI_IP} --sgi_mac ${SGI_MAC} --dl_iface ${SGI_DEVNAME} --sgi_gw_ip ${RTR_SGI_IP} --sgi_mask ${SGI_MASK}"
+    SGI="--sgi_ip ${SGI_IP} --sgi_mac ${SGI_MAC} --dl_iface ${SGI_DEVNAME} --sgi_gw_ip {{ .Values.networks.sgi.gateway }} --sgi_mask {{ .Values.networks.sgi.mask }}"
     MISC="--log 1"
+    SPGW_CFG="--spgw_cfg 03"
+
     APP_ARGS="${S1U} ${SGI} ${MISC} ${SPGW_CFG}"
   cdr.cfg: |
     CDR_PATH=./cdr
@@ -46,8 +58,8 @@ data:
     [0]
     dp_comm_ip = DP_ADDR
     dp_comm_port = 20
-    cp_comm_ip = CP_ADDR
-    cp_comm_port = CP_PORT
+    cp_comm_ip = {{ .Values.config.spgwu.spgwc.addr }}
+    cp_comm_port = {{ .Values.config.spgwu.spgwc.port }}
 {{- if not .Values.config.sriov.enabled }}
   setup-af-iface.sh: |
 {{ tuple "bin/_spgwu-setup-af-iface.sh.tpl" . | include "omec-data-plane.template" | indent 4 }}

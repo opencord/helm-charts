@@ -38,7 +38,7 @@ spec:
         imagePullPolicy: {{ .Values.images.pullPolicy }}
         command: [ "bash", "-c" ]
         args:
-        - cp /tmp/cni/bin/{sriov,vfioveth,centralip,jq} /host/opt/cni/bin/
+        - cp /tmp/cni/bin/{sriov,vfioveth,static} /host/opt/cni/bin/
         volumeMounts:
         - name: cni-bin
           mountPath: /host/opt/cni/bin

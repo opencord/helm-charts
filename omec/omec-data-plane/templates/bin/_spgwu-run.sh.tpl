@@ -22,8 +22,6 @@ mkdir -p $RUN_DIR/config
 cd $RUN_DIR/config
 cp /etc/dp/config/{cdr.cfg,dp_config.cfg,interface.cfg} .
 
-sed -i "s/CP_ADDR/$CP_ADDR/g" interface.cfg
-sed -i "s/CP_PORT/$CP_PORT/g" interface.cfg
 sed -i "s/DP_ADDR/$DP_ADDR/g" interface.cfg
 
 source dp_config.cfg

@@ -33,8 +33,16 @@ spec:
 {{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 8 }}
       annotations:
         k8s.v1.cni.cncf.io/networks: '[
-                { "name": "s1u-net", "interface": "s1u-net" },
-                { "name": "sgi-net", "interface": "sgi-net" }
+          {
+            "name": "s1u-net",
+            "interface": {{ .Values.config.spgwu.s1u.device | quote }},
+            "ips": {{ .Values.config.spgwu.s1u.ip | quote }}
+          },
+          {
+            "name": "sgi-net",
+            "interface": {{ .Values.config.spgwu.sgi.device | quote }},
+            "ips": {{ .Values.config.spgwu.sgi.ip | quote }}
+          }
         ]'
     spec:
     {{- if .Values.nodeSelectors.enabled }}
@@ -80,32 +88,10 @@ spec:
               containerName: spgwu
               resource: limits.memory
               divisor: 1Mi
-        - name: S1U_DEVNAME
-        {{- if .Values.config.sriov.enabled }}
-          value: s1u-net
-        {{- else }}
-          value: {{ .Values.config.spgwu.s1uAfDev | quote }}
-        {{- end }}
-        - name: SGI_DEVNAME
-        {{- if .Values.config.sriov.enabled }}
-          value: sgi-net
-        {{- else }}
-          value: {{ .Values.config.spgwu.sgiAfDev | quote }}
-        {{- end }}
-        - name: DEVICES
-          value: {{ .Values.config.spgwu.devices | quote }}
-        - name: CP_ADDR
-          value: {{ .Values.config.spgwu.spgwc.addr | quote }}
-        - name: CP_PORT
-          value: {{ .Values.config.spgwu.spgwc.port | quote }}
         - name: DP_ADDR
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
-        - name: RTR_SGI_IP
-          value: {{ .Values.config.spgwu.rtrSgiIp | quote }}
-        - name: SGI_MASK
-          value: {{ .Values.config.spgwu.sgiMask | quote }}
         command: ["bash", "-xc"]
         args:
         - ip a;
