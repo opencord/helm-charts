@@ -71,12 +71,8 @@ config:
 
 networks:
   cniPlugin: vfioveth
-  ipam: centralip
-  # etcdurl is required only when centralip IPAM is used
-  etcdurl: http://localhost:32379
-  s1u:
-    subnet: 119.0.0.0/24
-    gateway: 119.0.0.254
-  sgi:
-    subnet: 13.1.1.0/24
-    gateway: 13.1.1.254
+  # Currently, we do not support dynamic IP allocation
+  # It will be fixed soon with an ability of multiple instances and load balancing
+  ipam: static
+  s1uIp: 119.0.0.3/24
+  sgiIp: 13.1.1.3/24
