@@ -36,7 +36,7 @@ data:
     S1U_MAC=$(ip addr show dev ${S1U_DEVNAME} | awk '$1=="link/ether"{print $2}')
     SGI_MAC=$(ip addr show dev ${SGI_DEVNAME} | awk '$1=="link/ether"{print $2}')
     S1U="--s1u_ip ${S1U_IP} --s1u_mac ${S1U_MAC} --ul_iface ${S1U_DEVNAME}"
-    SGI="--sgi_ip ${SGI_IP} --sgi_mac ${SGI_MAC} --dl_iface ${SGI_DEVNAME} --sgi_gw_ip ${RTR_SGI_IP} --sgi_mask ${SGI_MASK}"
+    SGI="--sgi_ip ${SGI_IP} --sgi_mac ${SGI_MAC} --dl_iface ${SGI_DEVNAME} --sgi_gw_ip {{ .Values.networks.sgi.gateway | quote }} --sgi_mask {{ .Values.networks.sgi.mask | quote }}"
     MISC="--log 1"
     APP_ARGS="${S1U} ${SGI} ${MISC} ${SPGW_CFG}"
   cdr.cfg: |

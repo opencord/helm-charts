@@ -28,15 +28,7 @@ spec:
   config: '{
     "type": {{ .Values.networks.cniPlugin | quote }},
     "ipam": {
-        "type": {{ .Values.networks.ipam | quote }},
-    {{- if eq .Values.networks.ipam "host-local" }}
-        "subnet": {{ .Values.networks.s1u.subnet | quote }},
-        "gateway": {{ .Values.networks.s1u.gateway | quote }}
-    {{- else if eq .Values.networks.ipam "centralip" }}
-        "ipType": "cluster",
-        "network": {{ .Values.networks.s1u.subnet | quote }},
-        "etcdURL": {{ .Values.networks.etcdurl | quote }}
-    {{- end }}
+        "type": {{ .Values.networks.ipam | quote }}
     }
   }'
 ---
@@ -52,14 +44,6 @@ spec:
   config: '{
     "type": {{ .Values.networks.cniPlugin | quote }},
     "ipam": {
-        "type": {{ .Values.networks.ipam | quote }},
-    {{- if eq .Values.networks.ipam "host-local" }}
-        "subnet": {{ .Values.networks.sgi.subnet | quote }},
-        "gateway": {{ .Values.networks.sgi.gateway | quote }}
-    {{- else if eq .Values.networks.ipam "centralip" }}
-        "ipType": "cluster",
-        "network": {{ .Values.networks.sgi.subnet | quote }},
-        "etcdURL": {{ .Values.networks.etcdurl | quote }}
-    {{- end }}
+        "type": {{ .Values.networks.ipam | quote }}
     }
   }'
