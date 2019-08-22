@@ -58,25 +58,26 @@ config:
     spgwc:
       addr: spgwc
       port: 21
-    # s1u and sgi interfaces are fixed to "s1u-net" and "sgi-net"
-    # Note that s1uAfDev and sgiAfDev are valid only when sriov is disabled
-    # setup-af-iface.sh script creates additional veth pair with the names here
-    s1uAfDev: s1u-veth
-    sgiAfDev: sgi-veth
-    # set "--no-pci --vdev eth_af_packet0,iface=s1u-net --vdev eth_af_packet1,iface=sgi-net"
+    # Provide the S1U and SGI networks facing device name and IP address
+    s1u:
+      device: s1u-net
+      ip: 119.0.0.3/24
+    sgi:
+      device: sgi-net
+      ip: 13.1.1.3/24
+    # Set "--no-pci --vdev eth_af_packet0,iface=s1u-net --vdev eth_af_packet1,iface=sgi-net"
     # when sriov is disabled
     devices: ""
-    rtrSgiIp: 13.1.1.254
-    sgiMask: 255.255.255.0
 
 networks:
   cniPlugin: vfioveth
-  ipam: centralip
-  # etcdurl is required only when centralip IPAM is used
-  etcdurl: http://localhost:32379
+  # Currently, we do not support dynamic IP allocation
+  ipam: static
   s1u:
     subnet: 119.0.0.0/24
+    mask: 255.255.255.0
     gateway: 119.0.0.254
   sgi:
     subnet: 13.1.1.0/24
+    mask: 255.255.255.0
     gateway: 13.1.1.254
