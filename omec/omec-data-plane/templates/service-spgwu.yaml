@@ -23,8 +23,13 @@ metadata:
 spec:
   selector:
 {{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
-  clusterIP: None
+{{- if .Values.config.dpComm.nodePort.enabled }}
+  type: NodePort
+{{- end }}
   ports:
-  - name: cpdp
+  - name: dp-comm
     port: 20
     protocol: UDP
+  {{- if .Values.config.dpComm.nodePort.enabled }}
+    nodePort: {{ .Values.config.dpComm.nodePort.port }}
+  {{- end }}
