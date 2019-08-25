@@ -14,11 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-{{- if not (hasKey .Values.config.mme.s6a "host") -}}
-{{- $_ := tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | set .Values.config.mme.s6a "host" -}}
+{{- if not (hasKey .Values.config.mme.appConfig.s6a "host") -}}
+{{- $_ := tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | set .Values.config.mme.appConfig.s6a "host" -}}
 {{- end }}
-{{- if not (hasKey .Values.config.mme.s6a "realm") -}}
-{{- $_ := tuple "hss" "realm" . | include "omec-control-plane.endpoint_lookup" | set .Values.config.mme.s6a "realm" -}}
+{{- if not (hasKey .Values.config.mme.appConfig.s6a "realm") -}}
+{{- $_ := tuple "hss" "realm" . | include "omec-control-plane.endpoint_lookup" | set .Values.config.mme.appConfig.s6a "realm" -}}
 {{- end }}
 ---
 apiVersion: v1
@@ -28,9 +28,8 @@ metadata:
   labels:
 {{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 data:
-  config.json: {{ toJson .Values.config.mme | quote }}
+  config.json: {{ toJson .Values.config.mme.appConfig | quote }}
   s6a_fd.conf: |
-    # -------- Test configuration ---------
     AppServThreads = 40;
     SCTP_streams = 3;
     NoRelay;
@@ -50,9 +49,6 @@ data:
     TLS_CA = "conf/cacert.pem";
 
     LoadExtension = "/usr/local/lib/freeDiameter/dict_3gpp2_avps.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_CreditControl.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_base_rfc6733.fdx";
-    ###
     LoadExtension = "/usr/local/lib/freeDiameter/dict_draftload_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_etsi283034_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc4004_avps.fdx";
@@ -63,7 +59,6 @@ data:
     LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5580_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5777_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc5778_avps.fdx";
-    ###
     LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc6734_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc6942_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_rfc7155_avps.fdx";
@@ -90,25 +85,16 @@ data:
     LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29368_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29468_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_ts32299_avps.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_CxDx.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Gx.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_NAS.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Rf.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Ro.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Rx.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_S6as6d.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_S6c.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_S6mS6n.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_S6t.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_S9.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_SGd.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_SLh.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Sd.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Sh.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_T4.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_T6aT6bT7.fdx";
-    #LoadExtension = "/usr/local/lib/freeDiameter/dict_Tsp.fdx";
   mme-init.sh: |
 {{ tuple "bin/_mme-init.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
-  mme-run.sh : |
+  mme-run.sh: |
 {{ tuple "bin/_mme-run.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
+{{- if not (hasKey .Values.config.spgwc "mmeAddr") }}
+  mme-ip.sh: |
+{{ tuple "bin/_mme-ip.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
+{{- end }}

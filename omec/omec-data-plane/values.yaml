@@ -71,7 +71,7 @@ config:
       # from both cpComm(omec-control-plane) and dpComm(omec-data-plane) and
       # set "addr" to remote cluster's entry node IP and
       # "port" to cpComm.nodePort.port value configured in omec-control-plane.
-      addr: spgwc
+      addr: spgwc-cp-comm
       port: 21
     dpComm:
       nodePort:

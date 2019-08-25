@@ -15,7 +15,7 @@
 
 images:
   tags:
-    init: docker.io/omecproject/pod-init:0.1.0-dev
+    init: docker.io/omecproject/pod-init:0.1.0
     hssdb: docker.io/omecproject/c3po-hssdb:0.1.0-dev
     hss: docker.io/omecproject/c3po-hss:0.1.0-dev
     mme: docker.io/omecproject/openmme:0.1.0-dev
@@ -46,7 +46,7 @@ resources:
       memory: 1Gi
   mme:
     # Note that MME pod is composed of 4 containers
-    # Provide resources for a container, not a pod
+    # Provide resources for a container, not a pod total
     requests:
       cpu: 0.5
       memory: 1Gi
@@ -73,7 +73,10 @@ cassandra:
     enabled: false
   config:
     #cluster_size: 1
+    #seed_size: 1
     endpoint_snitch: GossipingPropertyFileSnitch
+  readinessProbe:
+    initialDelaySeconds: 10
   resources: {}
     #requests:
     #  memory: 4Gi
@@ -87,33 +90,117 @@ config:
     # hssdb will be set to cassandra if unset
     #hssdb:
   mme:
-    mme:
-      name: vmmestandalone
-      group_id: 1
-      code: 1
-      mcc:
-        dig1: 2
-        dig2: 0
-        dig3: 8
-      mnc:
-        dig1: 0
-        dig2: 1
-        dig3: -1
-    s1ap:
-      sctp_port: 36412
-      sctp_port_external: 36412
+    spgwAddr: spgwc-s11
     s11:
-      egtp_default_port: 2123
-      # sgw_addr and pgw_addr will be set dynamically if unset
-      #sgw_addr:
-      #pgw_addr:
-    s6a:
-      host_type: freediameter
-      # host and realm will be set dynamically if unset
-      #host:
-      #realm:
+      nodePort:
+        enabled: false
+        port: 32124
+    # appConfig is directly converted to config.json
+    # See https://github.com/omec-project/openmme/blob/master/README.txt for more config options
+    appConfig:
+      mme:
+        name: vmmestandalone
+        group_id: 1
+        code: 1
+        mcc:
+          dig1: 2
+          dig2: 0
+          dig3: 8
+        mnc:
+          dig1: 0
+          dig2: 1
+          dig3: -1
+      s1ap:
+        sctp_port: 36412
+        sctp_port_external: 36412
+      s11:
+        egtp_default_port: 2123
+        # sgw_addr and pgw_addr will be set dynamically if unset
+        #sgw_addr:
+        #pgw_addr:
+      s6a:
+        host_type: freediameter
+        # host and realm will be set dynamically if unset
+        #host:
+        #realm:
   spgwc:
-    # make it global
-    spgwu:
+    apn: apn1
+    ueIpPool:
+      ip: 16.0.0.0
+      mask: 255.0.0.0
+    # This address must match to S1U IP address configured in omec-data-plane
+    s1uAddr: 119.0.0.3
+    # mmeAddr will be set automatically to mme pod IP if it's unset
+    #mmeAddr:
+    s11:
+      nodePort:
+        enabled: false
+        port: 32123
+    cpComm:
+      nodePort:
+        enabled: false
+        port: 30021
+    dpComm:
+      # IMPORTANT: when you deploy CP and DP to separate clusters, enable nodePort
+      # from both cpComm(omec-control-plane) and dpComm(omec-data-plane) and
+      # set "addr" to remote cluster's entry node IP and
+      # "port" to dpComm.nodePort.port value configured in omec-data-plane.
       addr: spgwu-dp-comm
       port: 20
+    cfgFiles:
+      # See https://github.com/omec-project/ngic-rtc/tree/master/config for details
+      adc_rules.cfg: |
+        [GLOBAL]
+        NUM_ADC_RULES = 0
+      meter_profile.cfg: |
+        [GLOBAL]
+        NUM_OF_IDX = 3
+
+        [ENTRY_1]
+        ; QCI5,QCI7 15.571kbps = 1947 B
+        CIR = 2342400
+        CBS = 5856
+        EBS = 11712
+        MTR_PROFILE_IDX = 5
+
+        [ENTRY_2]
+        ; QCI1, 44kbps = 5500 B
+        CIR = 2342400
+        CBS = 5856
+        EBS = 11712
+        MTR_PROFILE_IDX = 6
+
+        [ENTRY_3]
+        ; 128B, 2pps
+        CIR = 2342400
+        CBS = 512
+        EBS = 1024
+        MTR_PROFILE_IDX = 9
+      pcc_rules.cfg: |
+        [GLOBAL]
+        NUM_PCC_FILTERS = 1
+        UL_AMBR_MTR_PROFILE_IDX = 1
+        DL_AMBR_MTR_PROFILE_IDX = 2
+
+        [PCC_FILTER_1]
+        RULE_NAME = DefaultRule
+        RATING_GROUP = 9
+        SERVICE_ID = 0
+        RULE_STATUS = 0
+        GATE_STATUS = 1
+        SESSION_CONT = 0
+        REPORT_LEVEL = 1
+        CHARGING_MODE = 0
+        METERING_METHOD = 0
+        MUTE_NOTIFY = 0
+        MONITORING_KEY = 0
+        SPONSOR_ID = 0
+        REDIRECT_INFO = 0
+        PRECEDENCE = 254
+        DROP_PKT_COUNT = 0
+        UL_MBR_MTR_PROFILE_IDX = 3
+        DL_MBR_MTR_PROFILE_IDX = 3
+        SDF_FILTER_IDX = 99998
+      sdf_rules.cfg: |
+        [GLOBAL]
+        NUM_SDF_FILTERS = 0

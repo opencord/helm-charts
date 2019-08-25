@@ -1,0 +1,49 @@
+{{/*
+Copyright 2019-present Open Networking Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spgwc
+  labels:
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+data:
+  cp_config.cfg: |
+    if [ ! -d "/dev/hugepages" ]; then
+        MEMORY="--no-huge -m $((MEM_LIMIT-1024))"
+    fi
+    CORES="-c $(taskset -p $$ | awk '{print $NF}')"
+    EAL_ARGS="${CORES} ${MEMORY} --no-pci"
+
+    MGMT_INFO="-s ${POD_IP} -m ${MME_ADDR} -w {{ .Values.config.spgwc.s1uAddr }}"
+    APN_INFO="-i {{ .Values.config.spgwc.ueIpPool.ip }} -p {{ .Values.config.spgwc.ueIpPool.mask }} -a {{ .Values.config.spgwc.apn }}"
+    MISC="-l 2"
+    SPGW_CFG="-d 03"
+
+    APP_ARGS="${MGMT_INFO} ${APN_INFO} ${MISC} ${SPGW_CFG}"
+  interface.cfg: |
+    [0]
+    dp_comm_ip = {{ .Values.config.spgwc.dpComm.addr }}
+    dp_comm_port = {{ .Values.config.spgwc.dpComm.port }}
+    cp_comm_ip = CP_ADDR
+    cp_comm_port = 21
+  spgwc-run.sh: |
+{{ tuple "bin/_spgwc-run.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
+{{- range $key, $value := .Values.config.spgwc.cfgFiles }}
+  {{ $key }}: |-
+{{ $value | indent 4 }}
+{{- end }}

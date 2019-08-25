@@ -20,13 +20,14 @@ cp /opt/mme/config/config.json /opt/mme/config/shared/config.json
 cd /opt/mme/config/shared
 
 # Set local IP address for s1ap and s11 networks to the config
-jq --arg MME_LOCAL_IP "$MME_LOCAL_IP" '.mme.ip_addr=$MME_LOCAL_IP' config.json > config.tmp && mv config.tmp config.json
-jq --arg MME_LOCAL_IP "$MME_LOCAL_IP" '.s1ap.s1ap_local_addr=$MME_LOCAL_IP' config.json > config.tmp && mv config.tmp config.json
-jq --arg MME_LOCAL_IP "$MME_LOCAL_IP" '.s11.egtp_local_addr=$MME_LOCAL_IP' config.json > config.tmp && mv config.tmp config.json
+jq --arg MME_LOCAL_IP "$POD_IP" '.mme.ip_addr=$MME_LOCAL_IP' config.json > config.tmp && mv config.tmp config.json
+jq --arg MME_LOCAL_IP "$POD_IP" '.s1ap.s1ap_local_addr=$MME_LOCAL_IP' config.json > config.tmp && mv config.tmp config.json
+jq --arg MME_LOCAL_IP "$POD_IP" '.s11.egtp_local_addr=$MME_LOCAL_IP' config.json > config.tmp && mv config.tmp config.json
 
-# Set SPGW-C address to the config
-SPGWC_POD={{ tuple "spgwc" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }}
-SPGWC_ADDR=$(dig +short $SPGWC_POD)
+# Set SPGWC address to the config
+# We need to convert service domain name to actual IP address
+# because mme apps does not take domain address - should be fixed in openmme
+SPGWC_ADDR=$(dig +short +search {{ .Values.config.mme.spgwAddr }})
 jq --arg SPGWC_ADDR "$SPGWC_ADDR" '.s11.sgw_addr //= $SPGWC_ADDR' config.json > config.tmp && mv config.tmp config.json
 jq --arg SPGWC_ADDR "$SPGWC_ADDR" '.s11.pgw_addr //= $SPGWC_ADDR' config.json > config.tmp && mv config.tmp config.json
 
