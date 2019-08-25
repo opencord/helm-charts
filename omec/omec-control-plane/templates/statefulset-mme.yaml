@@ -14,49 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: mme
-  labels:
-{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: mme
-  labels:
-{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-rules:
-  - apiGroups:
-      - ""
-      - extensions
-      - batch
-      - apps
-    verbs:
-      - get
-      - list
-    resources:
-      - daemonsets
-      - jobs
-      - pods
-      - services
-      - endpoints
----
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: mme
-  labels:
-{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: mme
-subjects:
-- kind: ServiceAccount
-  name: mme
+{{ tuple "mme" . | include "omec-control-plane.service_account" }}
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -69,7 +27,6 @@ spec:
   selector:
     matchLabels:
 {{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 6 }}
-  serviceName: mme
   template:
     metadata:
       labels:
@@ -81,6 +38,26 @@ spec:
     {{- end }}
       serviceAccountName: mme
       initContainers:
+    {{- if not (hasKey .Values.config.spgwc "mmeAddr") }}
+      - name: mme-configmap-mme-ip
+        image: {{ .Values.images.tags.init | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        command: ["/opt/mme/scripts/mme-ip.sh"]
+        volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-ip.sh
+          subPath: mme-ip.sh
+    {{- end }}
       - name: mme-dep-check
         image: {{ .Values.images.tags.depCheck | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
@@ -104,7 +81,7 @@ spec:
           - name: COMMAND
             value: "echo done"
           - name: DEPENDENCY_POD_JSON
-            value: '[{"labels": {"app": "spgwc"}, "requireSameNode": false}, {"labels": {"app": "hss"}, "requireSameNode": false}]'
+            value: '[{"labels": {"app": "hss"}, "requireSameNode": false}]'
           # add dependency job for make_certs.sh
         command:
           - kubernetes-entrypoint
@@ -115,7 +92,7 @@ spec:
         imagePullPolicy: {{ .Values.images.pullPolicy }}
         command: ["/opt/mme/scripts/mme-init.sh"]
         env:
-        - name: MME_LOCAL_IP
+        - name: POD_IP
           valueFrom:
             fieldRef:
               fieldPath: status.podIP

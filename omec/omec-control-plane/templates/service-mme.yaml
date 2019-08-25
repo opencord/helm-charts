@@ -18,17 +18,33 @@ limitations under the License.
 apiVersion: v1
 kind: Service
 metadata:
-  name: mme
+  name: mme-s11
   labels:
 {{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   selector:
 {{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-  clusterIP: None
+{{- if .Values.config.mme.s11.nodePort.enabled }}
+  type: NodePort
+{{- end }}
   ports:
   - name: s11
-    port: {{ .Values.config.mme.s11.egtp_default_port }}
+    port: {{ .Values.config.mme.appConfig.s11.egtp_default_port }}
     protocol: UDP
+  {{- if .Values.config.mme.s11.nodePort.enabled }}
+    nodePort: {{ .Values.config.mme.s11.nodePort.port }}
+  {{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mme-s6a
+  labels:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+  ports:
   - name: s6a
     port: 3868
     protocol: TCP
@@ -36,7 +52,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mme-sctp
+  name: mme-s1ap
   labels:
 {{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
@@ -45,6 +61,6 @@ spec:
   type: NodePort
   ports:
     - name: s1ap
-      port: {{ .Values.config.mme.s1ap.sctp_port }}
-      nodePort: {{ .Values.config.mme.s1ap.sctp_port_external }}
+      port: {{ .Values.config.mme.appConfig.s1ap.sctp_port }}
+      nodePort: {{ .Values.config.mme.appConfig.s1ap.sctp_port_external }}
       protocol: SCTP
