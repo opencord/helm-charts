@@ -51,3 +51,62 @@ Return identity, realm, and hostname of the first pod of the given statefulset.
 {{- printf "%s-0" $service -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Render ServiceAccount, Role, and RoleBinding required for kubernetes-entrypoint.
+*/}}
+{{- define "omec-control-plane.service_account" -}}
+{{- $context := index . 1 -}}
+{{- $saName := index . 0 -}}
+{{- $saNamespace := $context.Release.Namespace }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ $saName }}
+  namespace: {{ $saNamespace }}
+  labels:
+{{ tuple $saName $context | include "omec-control-plane.metadata_labels" | indent 4 }}
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: {{ $saName }}
+  namespace: {{ $saNamespace }}
+  labels:
+{{ tuple $saName $context | include "omec-control-plane.metadata_labels" | indent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ $saName }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ $saName }}
+    namespace: {{ $saNamespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: {{ $saName }}
+  namespace: {{ $saNamespace }}
+  labels:
+{{ tuple $saName $context | include "omec-control-plane.metadata_labels" | indent 4 }}
+rules:
+  - apiGroups:
+      - ""
+      - extensions
+      - batch
+      - apps
+    verbs:
+      - get
+      - list
+      - patch
+    resources:
+      - statefulsets
+      - daemonsets
+      - jobs
+      - pods
+      - services
+      - endpoints
+      - configmaps
+{{- end -}}
