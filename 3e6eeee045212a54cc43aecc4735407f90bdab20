@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3bc5bd7b_5f4a86c9",
+        "filename": "nem-monitoring/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000016
+      },
+      "writtenOn": "2019-08-27T19:56:17Z",
+      "side": 1,
+      "message": "I think it would be best if this defaulted to `needPersistence: false`, and users overrode it to `needPersistence: true` if they wanted to opt-in to persistence. This would be consistent with how other components (for example on the NEM) are implemented.",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 21
+      },
+      "revId": "3e6eeee045212a54cc43aecc4735407f90bdab20",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
