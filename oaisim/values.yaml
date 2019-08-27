@@ -33,8 +33,8 @@ config:
   plmn:
     name: "COMAC Test Network"
     short_name: "COMAC"
-    mcc: "208"
-    mnc: "01"
+    mcc: "001"
+    mnc: "001"
     mnc_length: 2
   enb:
     name: enb
