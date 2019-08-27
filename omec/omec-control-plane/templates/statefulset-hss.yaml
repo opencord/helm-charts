@@ -1,0 +1,98 @@
+{{/*
+Copyright 2019-present Open Networking Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Default values for mcord-vepc-helm.
+This is a YAML-formatted file.
+Declare variables to be passed into your templates.
+*/}}
+
+{{ tuple "hss" . | include "omec-control-plane.service_account" }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: hss
+  labels:
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 6 }}
+  serviceName: hss
+  template:
+    metadata:
+      labels:
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 8 }}
+    spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.hss.label }}: {{ .Values.nodeSelectors.hss.value }}
+    {{- end }}
+      serviceAccountName: hss
+      initContainers:
+      - name: hss-dep-check
+        image: {{ .Values.images.tags.depCheck | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+        env:
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: PATH
+            value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
+          - name: COMMAND
+            value: "echo done"
+          - name: DEPENDENCY_JOBS
+          {{- if .Values.config.hss.bootstrap }}
+            value: job-hss-db-sync,job-hss-bootstrap
+          {{- else }}
+            value: job-hss-db-sync
+          {{- end }}
+        command:
+          - kubernetes-entrypoint
+        volumeMounts:
+          []
+      containers:
+      - name: hss
+        image: {{ .Values.images.tags.hss }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        stdin: true
+        tty: true
+        command: ["bash", "-c", "/opt/c3po/hss/hss-run.sh; sleep 3600"]
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.hss | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: hss-script
+          mountPath: /opt/c3po/hss/hss-run.sh
+          subPath: hss-run.sh
+        - name: hss-config
+          mountPath: /etc/hss/conf
+      volumes:
+      - name: hss-script
+        configMap:
+          name: hss
+          defaultMode: 493
+      - name: hss-config
+        configMap:
+          name: hss
+          defaultMode: 420
