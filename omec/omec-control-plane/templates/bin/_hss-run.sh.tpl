@@ -1,6 +1,6 @@
----
-# Copyright 2018-present Open Networking Foundation
-# Copyright 2018 Intel Corporation
+#!/bin/bash
+#
+# Copyright 2019-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,8 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-appVersion: "1.0"
-description: OMEC control plane services
-name: omec-control-plane
-version: 0.1.2
+set -ex
+
+CONF_DIR="/opt/c3po/hss/conf"
+LOGS_DIR="/opt/c3po/hss/logs"
+mkdir -p $CONF_DIR $LOGS_DIR
+
+cp /etc/hss/conf/{acl.conf,hss.json,hss.conf,oss.json} $CONF_DIR
+cat $CONF_DIR/{hss.json,hss.conf}
+
+cd $CONF_DIR
+make_certs.sh {{ tuple "hss" "host" . | include "omec-control-plane.endpoint_lookup" }} {{ tuple "hss" "realm" . | include "omec-control-plane.endpoint_lookup" }}
+
+cd ..
+hss -j $CONF_DIR/hss.json

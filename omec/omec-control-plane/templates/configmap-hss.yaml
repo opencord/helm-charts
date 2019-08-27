@@ -12,40 +12,55 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+Default values for mcord-vepc-helm.
+This is a YAML-formatted file.
+Declare variables to be passed into your templates.
 */}}
 
-{{- $configJson := index .Values.config.mme.cfgFiles "config.json" }}
-{{- $configJsonS6a := index $configJson "s6a" }}
+{{- $hssJson := index .Values.config.hss.cfgFiles "hss.json" }}
+{{- $hssJsonCommon := index $hssJson "common" }}
+{{- $hssJsonHss := index $hssJson "hss" }}
 
-{{- if not (hasKey $configJsonS6a "host") -}}
-{{- $_ := tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | set $configJsonS6a "host" -}}
+{{- if not (hasKey $hssJsonCommon "originhost") -}}
+{{- $_ := tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | set $hssJsonCommon "originhost" -}}
 {{- end }}
-{{- if not (hasKey $configJsonS6a "realm") -}}
-{{- $_ := tuple "hss" "realm" . | include "omec-control-plane.endpoint_lookup" | set $configJsonS6a "realm" -}}
+{{- if not (hasKey $hssJsonCommon "originrealm") -}}
+{{- $_ := tuple "hss" "realm" . | include "omec-control-plane.endpoint_lookup" | set $hssJsonCommon "originrealm" -}}
+{{- end }}
+{{- if not (hasKey $hssJsonHss "casssrv") -}}
+{{- $_ := .Values.cassandra.fullnameOverride | set $hssJsonHss "casssrv" -}}
 {{- end }}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mme
+  name: hss
   labels:
-{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 data:
-  s6a_fd.conf: |
-    Identity = {{ tuple "mme" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }};
-    Realm = {{ tuple "mme" "realm" . | include "omec-control-plane.endpoint_lookup" | quote }};
-    TLS_Cred = "conf/{{ tuple "mme" "host" . | include "omec-control-plane.endpoint_lookup" }}.cert.pem",
-               "conf/{{ tuple "mme" "host" . | include "omec-control-plane.endpoint_lookup" }}.key.pem";
-    TLS_CA = "conf/cacert.pem";
-    AppServThreads = 40;
+  acl.conf: |
+  {{- if hasKey .Values.config.hss.acl "oldTls" }}
+    ALLOW_OLD_TLS {{ .Values.config.hss.acl.oldTls }}
+  {{- end }}
+  {{- if hasKey .Values.config.hss.acl "ipSec" }}
+    ALLOW_IPSEC {{ .Values.config.hss.acl.ipSec }}
+  {{- end }}
+  hss.conf: |
+    Identity = {{ tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }};
+    Realm = {{ tuple "hss" "realm" . | include "omec-control-plane.endpoint_lookup" | quote }};
+    TLS_Cred = "/opt/c3po/hss/conf/{{ tuple "hss" "host" . | include "omec-control-plane.endpoint_lookup" }}.cert.pem",
+               "/opt/c3po/hss/conf/{{ tuple "hss" "host" . | include "omec-control-plane.endpoint_lookup" }}.key.pem";
+    TLS_CA = "/opt/c3po/hss/conf/cacert.pem";
+    No_SCTP;
+    Prefer_TCP;
+    No_IPv6;
     SCTP_streams = 3;
     NoRelay;
-    No_IPv6;
-    #Port = 3868;
-    #SecPort = 3869;
-
-    ConnectPeer = {{ tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }} { No_TLS; port = 3868; };
-
+    AppServThreads = 4;
+    Port = 3868;
+    SecPort = 5868;
+    LoadExtension = "/usr/local/lib/freeDiameter/acl_wl.fdx" : "/opt/c3po/hss/conf/acl.conf";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_3gpp2_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_draftload_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_etsi283034_avps.fdx";
@@ -84,18 +99,12 @@ data:
     LoadExtension = "/usr/local/lib/freeDiameter/dict_ts29468_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_ts32299_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_S6as6d.fdx";
-    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6c.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_S6t.fdx";
-    LoadExtension = "/usr/local/lib/freeDiameter/dict_SGd.fdx";
-    LoadExtension = "/usr/local/lib/freeDiameter/dict_T6aT6bT7.fdx";
-  mme-init.sh: |
-{{ tuple "bin/_mme-init.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
-  mme-run.sh: |
-{{ tuple "bin/_mme-run.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
-{{- if not (hasKey .Values.config.spgwc "mmeAddr") }}
-  mme-ip.sh: |
-{{ tuple "bin/_mme-ip.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
-{{- end }}
-{{- range $key, $value := .Values.config.mme.cfgFiles }}
+    LoadExtension = "/usr/local/lib/freeDiameter/dict_S6c.fdx";
+  hss-run.sh: |
+{{ tuple "bin/_hss-run.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
+  hss-bootstrap.sh: |
+{{ tuple "bin/_hss-bootstrap.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
+{{- range $key, $value := .Values.config.hss.cfgFiles }}
   {{ $key }}: {{ toJson $value | quote }}
 {{- end }}

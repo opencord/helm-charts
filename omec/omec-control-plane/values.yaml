@@ -86,43 +86,131 @@ cassandra:
     #  cpu: 2
 
 config:
-  hss: {}
-    # hssdb will be set to cassandra if unset
-    #hssdb:
+  hss:
+    hssdb: cassandra
+    s6a:
+      nodePort:
+        enabled: false
+        port: 33868
+    # Provide the peer whitelist extension
+    # The peer name must be a fqdn. We allow also a special "*" character as the
+    # first label of the fqdn, to allow all fqdn with the same domain name.
+    # Example: *.example.net will allow host1.example.net and host2.example.net
+    acl:
+      oldTls: "*.cluster.local"
+      #ipSec:
+    bootstrap:
+      enabled: true
+      users:
+        imsi: "208014567891200"
+        msisdn: "1122334455"
+        apn: apn1
+        key: "465b5ce8b199b49faa5f0a2ee238a6bc"
+        opc: "d4416644f6154936193433dd20a0ace0"
+        numbers: 2
+      mme:
+        id: 1
+        isdn: "19136246000"
+        unreachability: 1
+    # See https://github.com/omec-project/c3po for details of config options
+    cfgFiles:
+      hss.json:
+        common:
+          fdcfg: conf/hss.conf
+          # Origin host and realm will be set automatically if unset
+          #originhost: ""
+          #originrealm: ""
+        hss:
+          gtwhost: "*"
+          gtwport: 9080
+          restport: 9081
+          ossport: 9082
+          # casssrv will be set to cassandra in the same cluster if unset
+          #casssrv: ""
+          cassusr: root
+          casspwd: root
+          cassdb: vhss
+          casscoreconnections: 2
+          cassmaxconnections: 8
+          cassioqueuesize: 32768
+          cassiothreads: 2
+          randv: true
+          optkey: "63bfa50ee6523365ff14c1f45f88737d"
+          reloadkey: false
+          logsize: 20
+          lognumber: 5
+          logname: logs/hss.log
+          logqsize: 8192
+          statlogsize: 20
+          statlognumber: 5
+          statlogname: logs/hss_stat.log
+          auditlogsize: 20
+          auditlognumber: 5
+          auditlogname: logs/hss_audit.log
+          statfreq: 2000
+          numworkers: 4
+          concurrent: 10
+          ossfile: conf/oss.json
+      oss.json:
+        option:
+          id: url
+          type: string
+        services:
+          - id: logger
+            commands:
+              - id: describe_loggers
+              - id: set_logger_level
+                options:
+                  - id: name
+                    type: string
+                  - id: level
+                    type: integer
+          - id: stats
+            commands:
+              - id: describe_stats_frequency
+              - id: describe_stats_live
+              - id: set_stats_frequency
+                options:
+                  - id: frequency
+                    type: integer
   mme:
     spgwAddr: spgwc-s11
     s11:
       nodePort:
         enabled: false
         port: 32124
-    # appConfig is directly converted to config.json
+    s6a:
+      nodePort:
+        enabled: false
+        port: 33869
     # See https://github.com/omec-project/openmme/blob/master/README.txt for more config options
-    appConfig:
-      mme:
-        name: vmmestandalone
-        group_id: 1
-        code: 1
-        mcc:
-          dig1: 2
-          dig2: 0
-          dig3: 8
-        mnc:
-          dig1: 0
-          dig2: 1
-          dig3: -1
-      s1ap:
-        sctp_port: 36412
-        sctp_port_external: 36412
-      s11:
-        egtp_default_port: 2123
-        # sgw_addr and pgw_addr will be set dynamically if unset
-        #sgw_addr:
-        #pgw_addr:
-      s6a:
-        host_type: freediameter
-        # host and realm will be set dynamically if unset
-        #host:
-        #realm:
+    cfgFiles:
+      config.json:
+        mme:
+          name: vmmestandalone
+          group_id: 1
+          code: 1
+          mcc:
+            dig1: 2
+            dig2: 0
+            dig3: 8
+          mnc:
+            dig1: 0
+            dig2: 1
+            dig3: -1
+        s1ap:
+          sctp_port: 36412
+          sctp_port_external: 36412
+        s11:
+          egtp_default_port: 2123
+          # sgw_addr and pgw_addr will be set dynamically if unset
+          #sgw_addr:
+          #pgw_addr:
+        s6a:
+          host_type: freediameter
+          # host and realm will be set dynamically if unset
+          #host:
+          #realm:
   spgwc:
     apn: apn1
     ueIpPool:
