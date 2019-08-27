@@ -189,14 +189,15 @@ config:
           name: vmmestandalone
           group_id: 1
           code: 1
+          # Provide MCC and MNC and configured the same value in eNB
           mcc:
-            dig1: 2
+            dig1: 0
             dig2: 0
-            dig3: 8
+            dig3: 1
           mnc:
             dig1: 0
-            dig2: 1
-            dig3: -1
+            dig2: 0
+            dig3: 1
         s1ap:
           sctp_port: 36412
           sctp_port_external: 36412
