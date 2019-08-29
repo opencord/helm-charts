@@ -18,7 +18,7 @@ local_vlc_hostname: "local_vlc"
 
 remote_ip: 10.90.0.132
 stream_name: 1.stream
-spgwu_sgiip: 13.0.0.83
+spgwu_sgiip: 13.1.1.3
 ue_ip_subnet1: 16.0.0.0/8
 ue_ip_subnet2: 17.0.0.0/8
 etcdurl: http://node1:32379
@@ -30,15 +30,13 @@ nginx:
     rtmp_orig: 1935
     rtmp_np: 31935
   replicas: 1
-  nodeselector:
-    sriov: netdevice
 
-network:
+networks:
   sriov:
     enabled: true
-  networks:
-    - name: sgi-net-nd
-      type: sriov
-      ipam: centralip
-      subnet: 13.1.1.0/24
-      gateway: 13.1.1.254
+  sgi_net_nd:
+    type: sriov
+    ipam: static
+    ip: 13.1.1.253/24
+    subnet: 13.1.1.0/24
+    gateway: 13.1.1.254

@@ -43,12 +43,10 @@ spec:
         app: nginx-rtmp
       annotations:
         k8s.v1.cni.cncf.io/networks: '[
-            { "name": "sgi-net-nd", "interface": "sgi-net-nd" }
+            { "name": "sgi-net-nd", "interface": "sgi-net-nd", "ips": {{ .Values.networks.sgi_net_nd.ip | quote }} }
         ]'
     spec:
       #hostNetwork: true
-      nodeSelector:
-{{ toYaml .Values.nginx.nodeselector | indent 8 }}
       terminationGracePeriodSeconds: 0
       imagePullSecrets:
       - name: nexus-docker-secret
