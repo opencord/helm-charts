@@ -242,28 +242,7 @@ config:
         NUM_ADC_RULES = 0
       meter_profile.cfg: |
         [GLOBAL]
-        NUM_OF_IDX = 3
-
-        [ENTRY_1]
-        ; QCI5,QCI7 15.571kbps = 1947 B
-        CIR = 2342400
-        CBS = 5856
-        EBS = 11712
-        MTR_PROFILE_IDX = 5
-
-        [ENTRY_2]
-        ; QCI1, 44kbps = 5500 B
-        CIR = 2342400
-        CBS = 5856
-        EBS = 11712
-        MTR_PROFILE_IDX = 6
-
-        [ENTRY_3]
-        ; 128B, 2pps
-        CIR = 2342400
-        CBS = 512
-        EBS = 1024
-        MTR_PROFILE_IDX = 9
+        NUM_OF_IDX = 0
       pcc_rules.cfg: |
         [GLOBAL]
         NUM_PCC_FILTERS = 1
