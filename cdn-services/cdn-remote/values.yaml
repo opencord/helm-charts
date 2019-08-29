@@ -21,7 +21,7 @@ remote_streaming:
   video_quality: 360
   antmedia_ip: 10.90.0.132
   images:
-    remote_streaming_image: "woojoong/mwc-cdn:remote-v3"
+    remote_streaming_image: "docker.io/omecproject/cdn-video-repo:1.0.0"
   ports:
     vlc: 8089
     vlc_np: 31889
@@ -34,7 +34,7 @@ remote_streaming:
 
 antmedia:
   images:
-    antmedia_image: "woojoong/antmedia:1.7.0"
+    antmedia_image: "docker.io/omecproject/cdn-antmedia:1.0.0"
   ports:
     httpui: 5080
     httpui_np: 32080

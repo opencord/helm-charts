@@ -25,7 +25,7 @@ etcdurl: http://node1:32379
 
 nginx:
   images:
-    nginx_image: "woojoong/nginx:onf-video-v3"
+    nginx_image: "docker.io/omecproject/cdn-nginx:1.0.0"
   ports:
     rtmp_orig: 1935
     rtmp_np: 31935
