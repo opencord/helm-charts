@@ -15,11 +15,11 @@
 
 images:
   tags:
-    init: docker.io/omecproject/pod-init:0.1.0
-    hssdb: docker.io/omecproject/c3po-hssdb:0.1.0-dev
-    hss: docker.io/omecproject/c3po-hss:0.1.0-dev
-    mme: docker.io/omecproject/openmme:0.1.0-dev
-    spgwc: docker.io/omecproject/ngic-cp:0.1.0-dev
+    init: docker.io/omecproject/pod-init:1.0.0
+    hssdb: docker.io/omecproject/c3po-hssdb:1.0.0
+    hss: docker.io/omecproject/c3po-hss:1.0.0
+    mme: docker.io/omecproject/openmme:1.0.0
+    spgwc: docker.io/omecproject/ngic-cp:1.0.0
     depCheck: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
   pullPolicy: IfNotPresent
 

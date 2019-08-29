@@ -15,10 +15,10 @@
 
 images:
   tags:
-    init: docker.io/omecproject/pod-init:0.1.0-dev
-    omecCni: docker.io/omecproject/omec-cni:0.0.1
+    init: docker.io/omecproject/pod-init:1.0.0
+    omecCni: docker.io/omecproject/omec-cni:1.0.0
     sriovDp: docker.io/nfvpe/sriov-device-plugin:v3.0.0
-    spgwu: docker.io/omecproject/ngic-dp:0.1.0-dev
+    spgwu: docker.io/omecproject/ngic-dp:1.0.0
     depCheck: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
   pullPolicy: IfNotPresent
 
