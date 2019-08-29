@@ -21,9 +21,9 @@ metadata:
 data:
   nginx_rtmp_config.sh: |+
     #!/bin/bash
-    ip route add {{ .Values.ue_ip_subnet1 }} via {{ .Values.spgwu_sgiip }} dev sgi-net;
-    ip route add {{ .Values.ue_ip_subnet2 }} via {{ .Values.spgwu_sgiip }} dev sgi-net;
-    ip link set sgi-net mtu 1200;
+    ip route add {{ .Values.ue_ip_subnet1 }} via {{ .Values.spgwu_sgiip }} dev sgi-net-nd;
+    ip route add {{ .Values.ue_ip_subnet2 }} via {{ .Values.spgwu_sgiip }} dev sgi-net-nd;
+    ip link set sgi-net-nd mtu 1200;
     cp /conf/nginx.conf  /etc/nginx/
     nginx -g "daemon off;"
 ---
