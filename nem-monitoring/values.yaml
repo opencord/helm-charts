@@ -22,15 +22,6 @@ images:
     tag: '1.2.3'
     pullPolicy: 'Always'
 
-  device_management:
-    repository: 'opencord/device-management'
-    tag: 'master'
-    pullPolicy: 'Always'
-
-nem_device_management_grpcPort: 31085
-nem_device_management_httpPort: 30180
-nem_device_management_replicas: 1
-
 kpi_exporter:
   nem_kpi_exporter_nodePort: 31080
   nem_kpi_exporter_replicas: 2
