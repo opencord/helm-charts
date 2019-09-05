@@ -82,6 +82,8 @@ onos_env:
     fieldPath: metadata.namespace
 - name: ONOS_APPS
   value: "drivers,openflow-base"
+- name: JAVA_DEBUG_PORT
+  value: "0.0.0.0:5005"
 
 resources: {}
 
