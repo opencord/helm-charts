@@ -22,8 +22,8 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
-  repository: ciena/mininet
-  tag: ubuntu-bionic
+  repository: 'andybavier/mininet'
+  tag: '{{ .Chart.AppVersion }}'
   pullPolicy: IfNotPresent
 
 resources: {}
