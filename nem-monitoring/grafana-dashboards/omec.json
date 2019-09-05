@@ -2,7 +2,7 @@
   "annotations": {
     "list": [
       {
-        "$$hashKey": "object:6611",
+        "$$hashKey": "object:175",
         "builtIn": 1,
         "datasource": "-- Grafana --",
         "enable": true,
@@ -16,8 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 6,
-  "iteration": 1565383179131,
+  "id": 9,
+  "iteration": 1567571557083,
   "links": [],
   "panels": [
     {
@@ -95,7 +95,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "kube_pod_container_resource_requests_cpu_cores{pod=\"$Pod-0\"}",
+          "expr": "sum(kube_pod_container_resource_requests_cpu_cores{pod=\"$Pod-0\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -356,7 +356,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "kube_pod_container_resource_requests_memory_bytes{pod=\"$Pod-0\"}",
+          "expr": "sum(kube_pod_container_resource_requests_memory_bytes{pod=\"$Pod-0\"})",
           "format": "time_series",
           "intervalFactor": 1,
           "refId": "A"
@@ -471,8 +471,8 @@
         "allValue": null,
         "current": {
           "tags": [],
-          "text": "HSS",
-          "value": "hss"
+          "text": "SPGW-U",
+          "value": "spgwu"
         },
         "hide": 0,
         "includeAll": false,
@@ -481,47 +481,49 @@
         "name": "Pod",
         "options": [
           {
+            "$$hashKey": "object:205",
             "selected": false,
             "text": "MME",
             "value": "mme"
           },
           {
+            "$$hashKey": "object:206",
             "selected": false,
             "text": "SPGW-C",
             "value": "spgwc"
           },
           {
-            "selected": false,
+            "$$hashKey": "object:207",
+            "selected": true,
             "text": "SPGW-U",
             "value": "spgwu"
           },
           {
-            "selected": true,
+            "$$hashKey": "object:208",
+            "selected": false,
             "text": "HSS",
             "value": "hss"
           },
           {
-            "selected": false,
-            "text": "HSS-DB",
-            "value": "hssdb"
-          },
-          {
+            "$$hashKey": "object:209",
             "selected": false,
             "text": "Remote CDN",
             "value": "antmedia"
           },
           {
+            "$$hashKey": "object:210",
             "selected": false,
             "text": "Remote Streaming",
             "value": "remote-streaming"
           },
           {
+            "$$hashKey": "object:211",
             "selected": false,
             "text": "Local CDN",
             "value": "nginx-rtmp"
           }
         ],
-        "query": "MME, SPGW-C, SPGW-U, HSS, HSS-DB, Remote CDN, Remote Streaming, Local CDN",
+        "query": "MME, SPGW-C, SPGW-U, HSS, Remote CDN, Remote Streaming, Local CDN",
         "type": "custom"
       }
     ]
@@ -557,7 +559,7 @@
     ]
   },
   "timezone": "",
-  "title": "M-CORD",
-  "uid": "gKU3e27Zz",
+  "title": "OMEC",
+  "uid": "gKU2e27Zz",
   "version": 1
 }
