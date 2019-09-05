@@ -87,6 +87,8 @@ spec:
           mountPath: /conf
         resources:
           limits:
+            cpu: {{ .Values.nginx.resources.cpu }}
+            memory: {{ .Values.nginx.resources.mem }}
             intel.com/sriov_netdevice: '2'
       volumes:
       - name: nginx-rtmp-config

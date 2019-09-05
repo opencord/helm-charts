@@ -30,6 +30,9 @@ nginx:
     rtmp_orig: 1935
     rtmp_np: 31935
   replicas: 1
+  resources:
+    cpu: 3
+    mem: "1Gi"
 
 networks:
   sriov:
