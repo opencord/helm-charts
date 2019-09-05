@@ -20,5 +20,5 @@ metadata:
   labels:
      grafana_dashboard: "1"
 data:
-  kb8s.json: |
+  aaa.json: |
 {{ .Files.Get "grafana-dashboards/aaa-stats.json" | indent 4 }}
