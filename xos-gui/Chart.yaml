@@ -16,7 +16,7 @@
 name: xos-gui
 description: Web GUI for XOS
 icon: https://guide.opencord.org/logos/xos.svg
-version: 1.2.6
+version: 1.2.7
 
 # appVersion is of the xos-gui container, xos-ws tag is specified in values.yaml
 appVersion: 1.0.6
