@@ -38,8 +38,8 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.global.registry }}{{ .Values.images.mininet.repository }}:{{ tpl .Values.images.mininet.tag . }}"
+          imagePullPolicy: {{ .Values.images.mininet.pullPolicy }}
           args: ["/toposcripts/topo.py"]
           stdin: true
           tty: true
