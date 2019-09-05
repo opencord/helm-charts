@@ -35,5 +35,6 @@ xos_wsNodePort: 30008
 platformKafka: cord-kafka:9092
 
 xos_projectName: "CORD"
+xos_payoff: "Your VNF orchestrator"
 
-cord_version: 6.1.0
+cord_version: 7.0.0
