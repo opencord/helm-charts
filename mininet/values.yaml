@@ -21,10 +21,14 @@ replicaCount: 1
 nameOverride: ""
 fullnameOverride: ""
 
-image:
-  repository: ciena/mininet
-  tag: ubuntu-bionic
-  pullPolicy: IfNotPresent
+images:
+  mininet:
+    repository: 'andybavier/mininet'
+    tag: '{{ .Chart.AppVersion }}'
+    pullPolicy: IfNotPresent
+
+global:
+  registry: ''
 
 resources: {}
 

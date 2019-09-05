@@ -31,12 +31,6 @@ from mininet.util import quietRun
 if __name__ == '__main__':
     setLogLevel( 'info' )
 
-    info( '*** Installing required software\n' )
-    print quietRun( 'apt-get update' )
-    print quietRun( 'apt-get -y install dnsmasq ethtool wget pimd bridge-utils' )
-    print quietRun( 'wget https://github.com/troglobit/mcjoin/releases/download/v2.4/mcjoin_2.4_amd64.deb' )
-    print quietRun( 'dpkg -i mcjoin_2.4_amd64.deb' )
-
     print quietRun( 'ovs-vsctl set Open_vSwitch . other_config:vlan-limit={{ .Values.vlanMatchDepth }}' )
     OVSSwitch13 = partial( OVSSwitch, protocols='OpenFlow13' )
     controllerIp = socket.gethostbyname( '{{ .Values.onosOpenflowSvc }}' )
