@@ -22,9 +22,9 @@ nameOverride: ""
 fullnameOverride: ""
 
 image:
-  repository: ciena/mininet
-  tag: ubuntu-bionic
-  pullPolicy: IfNotPresent
+  repository: andybavier/mininet
+  tag: latest
+  pullPolicy: Always
 
 resources: {}
 
