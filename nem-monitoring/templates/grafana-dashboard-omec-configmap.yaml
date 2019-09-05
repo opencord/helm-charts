@@ -16,9 +16,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: grafana-dashboard-mcord
+  name: grafana-dashboard-omec
   labels:
      grafana_dashboard: "1"
 data:
   mcord.json: |
-{{ .Files.Get "grafana-dashboards/mcord.json" | indent 4 }}
+{{ .Files.Get "grafana-dashboards/omec.json" | indent 4 }}
