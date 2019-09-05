@@ -36,7 +36,7 @@ angular.module('app')
   projectName: {{ .Values.xos_projectName | quote }},
   favicon: 'cord-favicon.png',
   background: 'cord-bg.jpg',
-  payoff: 'Your VNF orchestrator',
+  payoff: {{ .Values.xos_payoff | quote }},
   logo: 'cord-logo.png',
   routes: [
       {
