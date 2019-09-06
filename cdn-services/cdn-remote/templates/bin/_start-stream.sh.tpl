@@ -1,4 +1,5 @@
----
+#!/bin/bash
+#
 # Copyright 2019-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: start-remote-stream
-data:
-  start-remote-stream.sh: |+
-    #!/bin/bash
-    while true; do ffmpeg -re -i /opt/cdn/movies/{{ .Values.remote_streaming.video_quality }}.mp4 -c copy -f flv rtmp://{{ .Values.remote_streaming.antmedia_ip }}:30935/LiveApp/{{ .Values.stream_name }}; done
+QUALITY=$1
+
+while true; do
+    ffmpeg -re -i /opt/cdn/movies/$QUALITY.mp4 -c copy -f flv rtmp://{{ tuple "ant-media" . | include "cdn-remote.get_domain" }}:1935/LiveApp/$QUALITY;
+done
