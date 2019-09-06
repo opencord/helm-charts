@@ -1,0 +1,7 @@
+Code-Review+2: Kailash Khalasi <kailash@opennetworking.org>
+Verified+1: Jenkins Jenkins <do-not-reply@opencord.org>
+Submitted-by: Matteo Scandolo <teo@opennetworking.org>
+Submitted-at: Fri, 06 Sep 2019 18:29:11 +0000
+Reviewed-on: https://gerrit.opencord.org/15185
+Project: helm-charts
+Branch: refs/heads/master
