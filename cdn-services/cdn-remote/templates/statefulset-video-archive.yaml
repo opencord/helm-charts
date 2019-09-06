@@ -1,0 +1,99 @@
+{{/*
+Copyright 2019-present Open Networking Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+{{ tuple "video-archive" . | include "cdn-remote.service_account" }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: video-archive
+  labels:
+{{ tuple "video-archive" . | include "cdn-remote.metadata_labels" | indent 4 }}
+spec:
+  replicas: {{ .Values.video_archive.replicas }}
+  selector:
+    matchLabels:
+{{ tuple "video-archive" . | include "cdn-remote.metadata_labels" | indent 6 }}
+  serviceName: "video-archive"
+  template:
+    metadata:
+      labels:
+{{ tuple "video-archive" . | include "cdn-remote.metadata_labels" | indent 8 }}
+    spec:
+    {{- if .Values.node_selectors.enabled }}
+      nodeSelector:
+        {{ .Values.node_selectors.video_archive.label }}: {{ .Values.node_selectors.video_archive.value }}
+    {{- end }}
+      serviceAccountName: video-archive
+      initContainers:
+      - name: video-archive-dep-check
+        image: {{ .Values.images.tags.dep_check | quote }}
+        imagePullPolicy: {{ .Values.images.pull_policy }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.namespace
+            - name: PATH
+              value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
+            - name: COMMAND
+              value: "echo done"
+            - name: DEPENDENCY_POD_JSON
+              value: '[{"labels": {"app": "antmedia"}, "requireSameNode": false}]'
+          command:
+            - kubernetes-entrypoint
+          volumeMounts:
+            []
+      containers:
+      - name: streaming
+        image: {{ .Values.images.tags.video_archive | quote }}
+        imagePullPolicy: {{ .Values.images.pull_policy }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+        ports:
+        - containerPort: {{ .Values.video_archive.ports.vlc }}
+        - containerPort: {{ .Values.video_archive.ports.http }}
+        stdin: true
+        tty: true
+        command: [ "bash",  "-xc"]
+        args:
+        - sed -i 's/geteuid/getppid/' /usr/bin/vlc;
+          /opt/start-stream.sh
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.video_archive | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: start-script
+          mountPath: /opt/start-stream.sh
+          subPath: start-stream.sh
+      volumes:
+      - name: start-script
+        configMap:
+          name: start-stream
+          defaultMode: 493

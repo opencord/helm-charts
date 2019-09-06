@@ -1,0 +1,60 @@
+{{/*
+Copyright 2019-present Open Networking Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+{{ tuple "antmedia" . | include "cdn-remote.service_account" }}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: antmedia
+  labels:
+{{ tuple "antmedia" . | include "cdn-remote.metadata_labels" | indent 4 }}
+spec:
+  replicas: {{ .Values.antmedia.replicas }}
+  selector:
+    matchLabels:
+{{ tuple "antmedia" . | include "cdn-remote.metadata_labels" | indent 6 }}
+  serviceName: "antmedia"
+  template:
+    metadata:
+      labels:
+{{ tuple "antmedia" . | include "cdn-remote.metadata_labels" | indent 8 }}
+    spec:
+    {{- if .Values.node_selectors.enabled }}
+      nodeSelector:
+        {{ .Values.node_selectors.antmedia.label }}: {{ .Values.node_selectors.antmedia.value }}
+    {{- end }}
+      serviceAccountName: antmedia
+      containers:
+      - name: antmedia
+        image: {{ .Values.images.tags.antmedia | quote }}
+        imagePullPolicy: {{ .Values.images.pull_policy }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+        ports:
+        - containerPort: {{ .Values.antmedia.ports.httpui }}
+        - containerPort: {{ .Values.antmedia.ports.rtmp }}
+        stdin: true
+        tty: true
+        command: [ "bash",  "-xc"]
+        args:
+          - cd /usr/local/antmedia && ./start.sh | tee /opt/start.log
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.antmedia | indent 10 }}
+      {{- end }}
