@@ -13,32 +13,47 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-stream_name: 1.stream
+images:
+  tags:
+    videoArchive: docker.io/omecproject/cdn-video-repo:1.0.0
+    antMedia: docker.io/omecproject/cdn-antmedia:1.0.0
+    depCheck: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
+  pullPolicy: IfNotPresent
 
-remote_streaming:
-  video_quality: 360
-  antmedia_ip: 10.90.0.132
-  images:
-    remote_streaming_image: "docker.io/omecproject/cdn-video-repo:1.0.0"
-  ports:
-    vlc: 8089
-    vlc_np: 31889
-    http: 50001
-    http_np: 31501
-  replicas: 1
-  resources:
-    cpu: 3
-    mem: "1Gi"
+nodeSelectors:
+  enabled: false
+  videoArchive:
+    label: videoArchive
+    value: enabled
+  antMedia:
+    label: antMedia
+    value: enabled
 
-antmedia:
-  images:
-    antmedia_image: "docker.io/omecproject/cdn-antmedia:1.0.0"
-  ports:
-    httpui: 5080
-    httpui_np: 32080
-    rtmp: 1935
-    rtmp_np: 30935
-  replicas: 1
-  resources:
-    cpu: 3
-    mem: "1Gi"
+resources:
+  enabled: true
+  videoArchive:
+    requests:
+      cpu: 3
+      memory: 1Gi
+    limits:
+      cpu: 3
+      memory: 1Gi
+  antMedia:
+    requests:
+      cpu: 3
+      memory: 1Gi
+    limits:
+      cpu: 3
+      memory: 1Gi
+
+config:
+  videoArchive:
+    replicas: 1
+  antMedia:
+    ports:
+      httpui: 5080
+      rtmp: 1935
+      nodePorts:
+        httpui: 32080
+        rtmp: 30935
+    replicas: 1
