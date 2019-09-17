@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ce8aa166_105b2fa7",
+        "filename": "cdn-services/cdn-remote/templates/_helpers.tpl",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-09-17T23:35:32Z",
+      "side": 1,
+      "message": "Forget to remove #?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 1
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d9943336_221801c9",
+        "filename": "cdn-services/cdn-remote/templates/service-ant-media.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-09-17T23:35:32Z",
+      "side": 1,
+      "message": "Based on the service name, antmedia-external, looks like NodePort always have to be set here.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 10
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2f686957_01da7851",
+        "filename": "cdn-services/cdn-remote/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-09-17T23:35:32Z",
+      "side": 1,
+      "message": "We haven\u0027t fixed the value ordering but I guess it is better to align with omec charts.\nimages -\u003e nodeSelectors -\u003e resources -\u003e configs.",
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fb35bc9b_8e1a4499",
+        "filename": "cdn-services/cdn-remote/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-09-17T23:35:32Z",
+      "side": 1,
+      "message": "Carmel case is the recommended naming convention in official helm dev guide. Let\u0027s follow the convention if you don\u0027t mind.",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 15
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c068afaa_ffe704c1",
+        "filename": "cdn-services/cdn-remote/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-09-17T23:35:32Z",
+      "side": 1,
+      "message": "How about add a parent level \"conf\" to align with omec charts?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 13
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1c8d39e2_fdfd7894",
+        "filename": "cdn-services/cdn-remote/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-09-17T23:35:32Z",
+      "side": 1,
+      "message": "duplicate of images.tags.video_archive?",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 69
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c0eacf80_f82e29f0",
+        "filename": "cdn-services/cdn-remote/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-09-17T23:35:32Z",
+      "side": 1,
+      "message": "here, too?",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 62
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
