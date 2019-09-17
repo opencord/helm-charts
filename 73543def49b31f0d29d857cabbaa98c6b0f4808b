@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "18b786ab_c63b3a7c",
+        "filename": "cdn-services/cdn-remote/templates/_helpers.tpl",
+        "patchSetId": 7
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-09-17T23:41:19Z",
+      "side": 1,
+      "message": "yes, I forgot :(",
+      "parentUuid": "ce8aa166_105b2fa7",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 2,
+        "endChar": 1
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "d9943336_221801c9",
         "filename": "cdn-services/cdn-remote/templates/service-ant-media.yaml",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2019-09-17T23:35:32Z",
       "side": 1,
       "message": "Based on the service name, antmedia-external, looks like NodePort always have to be set here.",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 10
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bd3c7bcc_aab01ee0",
+        "filename": "cdn-services/cdn-remote/templates/service-ant-media.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-09-17T23:41:19Z",
+      "side": 1,
+      "message": "Yes, AntMedia always requires NodePort since CDN-Local should be able to access here. I guess, there is no need to use \".Values.antmedia.ports.node_ports.enabled\". Let me remove the value.",
+      "parentUuid": "d9943336_221801c9",
       "range": {
         "startLine": 45,
         "startChar": 0,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "986be461_c8552aba",
+        "filename": "cdn-services/cdn-remote/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-09-17T23:41:19Z",
+      "side": 1,
+      "message": "Ok, will move it.",
+      "parentUuid": "2f686957_01da7851",
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fb35bc9b_8e1a4499",
         "filename": "cdn-services/cdn-remote/values.yaml",
         "patchSetId": 7
@@ -76,6 +142,30 @@
       "writtenOn": "2019-09-17T23:35:32Z",
       "side": 1,
       "message": "Carmel case is the recommended naming convention in official helm dev guide. Let\u0027s follow the convention if you don\u0027t mind.",
+      "range": {
+        "startLine": 18,
+        "startChar": 2,
+        "endLine": 18,
+        "endChar": 15
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3044e9f7_d413105f",
+        "filename": "cdn-services/cdn-remote/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-09-17T23:41:19Z",
+      "side": 1,
+      "message": "Ok. I will change names with conventional way.",
+      "parentUuid": "fb35bc9b_8e1a4499",
       "range": {
         "startLine": 18,
         "startChar": 2,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "58c69d83_8ee060d2",
+        "filename": "cdn-services/cdn-remote/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-09-17T23:41:19Z",
+      "side": 1,
+      "message": "Ok let me add here.",
+      "parentUuid": "c068afaa_ffe704c1",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 13
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1c8d39e2_fdfd7894",
         "filename": "cdn-services/cdn-remote/values.yaml",
         "patchSetId": 7
@@ -134,6 +248,30 @@
     },
     {
       "key": {
+        "uuid": "91396219_de8c2ba9",
+        "filename": "cdn-services/cdn-remote/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-09-17T23:41:19Z",
+      "side": 1,
+      "message": "I forgot to remove here :(",
+      "parentUuid": "1c8d39e2_fdfd7894",
+      "range": {
+        "startLine": 52,
+        "startChar": 4,
+        "endLine": 52,
+        "endChar": 69
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c0eacf80_f82e29f0",
         "filename": "cdn-services/cdn-remote/values.yaml",
         "patchSetId": 7
@@ -145,6 +283,30 @@
       "writtenOn": "2019-09-17T23:35:32Z",
       "side": 1,
       "message": "here, too?",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 62
+      },
+      "revId": "73543def49b31f0d29d857cabbaa98c6b0f4808b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "f574ffef_708d4e5a",
+        "filename": "cdn-services/cdn-remote/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-09-17T23:41:19Z",
+      "side": 1,
+      "message": "I forgot to remove here :(",
+      "parentUuid": "c0eacf80_f82e29f0",
       "range": {
         "startLine": 66,
         "startChar": 4,
