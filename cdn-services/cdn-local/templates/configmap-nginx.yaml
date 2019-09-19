@@ -1,0 +1,98 @@
+{{/*
+Copyright 2019-present Open Networking Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-net-config
+  labels:
+{{ tuple "nginx" . | include "cdn-local.metadata_labels" | indent 4 }}
+data:
+  route-gen.sh: |
+{{ tuple "bin/_route-gen.sh.tpl" . | include "cdn-local.template" | indent 4 }}
+  network-config.sh: |
+{{ tuple "bin/_network-config.sh.tpl" . | include "cdn-local.template" | indent 4 }}
+  run-nginx.sh: |
+{{ tuple "bin/_run-nginx.sh.tpl" . | include "cdn-local.template" | indent 4 }}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-rtmp-config
+  labels:
+{{ tuple "nginx" . | include "cdn-local.metadata_labels" | indent 4 }}
+data:
+  nginx.conf: |+
+    worker_processes {{ .Values.config.nginx.events.workerProcesses }};
+
+    events {
+      worker_connections {{ .Values.config.nginx.events.workerConnections }};
+    }
+
+    http {
+      include mime.types;
+
+      default_type {{ .Values.config.nginx.http.defaultType }};
+
+      sendfile {{ .Values.config.nginx.http.sendfile }};
+
+      keepalive_timeout {{ .Values.config.nginx.http.keepaliveTimeout }};
+
+      server {
+        listen {{ .Values.config.nginx.ports.http }};
+
+        server_name {{ .Values.config.nginx.http.server.serverName }};
+
+        location / {
+          root {{ .Values.config.nginx.http.server.location.root }};
+
+          index {{ .Values.config.nginx.http.server.location.index }};
+        }
+
+        error_page {{ .Values.config.nginx.http.server.error.code }} {{ .Values.config.nginx.http.server.error.page }};
+
+        location = {{ .Values.config.nginx.http.server.error.page }} {
+          root {{ .Values.config.nginx.http.server.error.root }};
+        }
+      }
+    }
+
+    rtmp {
+      server{
+        listen {{ .Values.config.nginx.ports.rtmp }};
+
+        chunk_size {{ .Values.config.nginx.rtmp.chunkSize }};
+
+        {{ range .Values.config.cdnRemotes }}
+        {{- $cdnRemote := . -}}
+        # name: {{ .name }}
+        application {{ $.Values.config.nginx.rtmp.appRemote.name }}/{{ $cdnRemote.name }} {
+          live {{ $.Values.config.nginx.rtmp.appRemote.live }};
+
+          {{- range .streams }}
+          pull rtmp://{{ $cdnRemote.ip }}:{{ $cdnRemote.port }}/LiveApp/{{ .value }} name={{ .value }};
+          {{- end }}
+
+        }
+        {{ end }}
+
+        application {{ .Values.config.nginx.rtmp.appLocal.name }} {
+          play {{ .Values.config.nginx.rtmp.appLocal.movieLocation }};
+        }
+      }
+    }

@@ -13,29 +13,106 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-remote_ip: 10.90.0.132
-stream_name: 1.stream
-spgwu_sgiip: 13.1.1.3
-ue_ip_subnet1: 16.0.0.0/8
-ue_ip_subnet2: 17.0.0.0/8
+images:
+  tags:
+    nginx: docker.io/omecproject/cdn-nginx:1.0.0
+  pullPolicy: IfNotPresent
 
-nginx:
-  images:
-    nginx_image: "docker.io/omecproject/cdn-nginx:1.0.0"
-  ports:
-    rtmp_orig: 1935
-    rtmp_np: 31935
-  replicas: 1
-  resources:
-    cpu: 3
-    mem: "1Gi"
+nodeSelectors:
+  enabled: false
+  nginx:
+    label: nginx
+    value: enabled
+
+resources:
+  enabled: true
+  nginx:
+    requests:
+      cpu: 3
+      memory: 1Gi
+    limits:
+      cpu: 3
+      memory: 1Gi
+
+config:
+  sriov:
+    enabled: true # default value. Do not use here as false now.
+    netDevice:
+      pfNames:
+        - eno2
+      drivers:
+        - ixgbevf
+        - i40evf
+  nginx:
+    ports:
+      rtmp: 1935
+      http: 8085
+      nodePorts:
+        enabled: true
+        rtmp: 31935
+        http: 31885
+    sgi:
+      device: sgi-net-cdn
+      ip: 13.1.1.253/24
+    mtu: 1200
+    events:
+      workerProcesses: 1
+      workerConnections: 1024
+    http:
+      defaultType: application/octet-stream
+      sendfile: "on"
+      keepaliveTimeout: 65
+      server:
+        serverName: localhost
+        location:
+          root: html
+          index: index.html index.htm
+        error:
+          code: 500 502 503 504
+          page: /50x.html
+          root: html
+    rtmp:
+      chunkSize: 4000
+      appRemote:
+        name: r
+        live: "on"
+      appLocal:
+        name: l
+        movieLocation: /opt/cdn/movies
+    replicas: 1
+  cdnRemotes:
+  - name: remote-1
+    ip: 10.90.0.131
+    port: 30935
+    streams:
+    - name: 360p
+      value: 360
+    - name: 480p
+      value: 480
+    - name: 720p
+      value: 720
+#  - name: CDN-Remote-2
+#    ip: 10.90.0.151
+#    port: 30935
+#    streams:
+#    - name: 360p
+#      value: 360
+#    - name: 480p
+#      value: 480
+#    - name: 720p
+#      value: 720
+  spgwu:
+    sgi:
+      ip: 13.1.1.3/24
+  spgwc:
+    ueIpPool:
+      ip: 16.0.0.0
+      mask: 255.0.0.0
 
 networks:
-  sriov:
-    enabled: true
-  sgi_net_nd:
-    type: sriov
-    ipam: static
-    ip: 13.1.1.253/24
+  cniPlugin: sriov # which means netdevice
+  ipam: static
+  sgi:
     subnet: 13.1.1.0/24
+    mask: 255.255.255.0
     gateway: 13.1.1.254

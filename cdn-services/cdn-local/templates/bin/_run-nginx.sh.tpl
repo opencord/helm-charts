@@ -1,4 +1,5 @@
----
+#!/bin/bash
+#
 # Copyright 2019-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +14,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-appVersion: "1.0"
-description: A Helm chart for M-CORD CDN Services in Local Edge
-name: cdn-local
-version: 0.1.3-dev
+cp /conf/nginx.conf  /etc/nginx/
+nginx -g "daemon off;"

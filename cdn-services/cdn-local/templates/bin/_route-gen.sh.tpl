@@ -1,4 +1,5 @@
----
+#!/bin/bash
+#
 # Copyright 2019-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,8 +14,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-appVersion: "1.0"
-description: A Helm chart for M-CORD CDN Services in Local Edge
-name: cdn-local
-version: 0.1.3-dev
+SPGWU_IP=$(echo {{ .Values.config.spgwu.sgi.ip }} | awk -F '/' '{print $1}')
+
+netmask_to_prefix() {
+    prefix=0
+    octat=0$( printf '%o' ${1//./ } )
+    while [ $octat -gt 0 ];
+    do
+        prefix=$(( $prefix + $(( $octat % 2))))
+        octat=$(( $octat >> 1))
+    done
+    echo $prefix
+}
+
+ip route add {{ .Values.config.spgwc.ueIpPool.ip }}/$(netmask_to_prefix {{ .Values.config.spgwc.ueIpPool.mask }} ) via $SPGWU_IP dev {{ .Values.config.nginx.sgi.device }}
+
+
