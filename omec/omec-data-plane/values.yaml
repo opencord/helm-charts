@@ -53,11 +53,12 @@ config:
       # The driver name must be specified to prevent one interface is
       # registered to both vfio and netdevice resource pools
       # NOTE: netDevice is required to use CDN service
-      #netDevice:
-      #  pfNames:
-      #    - eno2
-      #  drivers:
-      #    - ixgbevf
+      netDevice:
+        pfNames:
+          - eno1
+        drivers:
+          - i40evf
+          - ixgbevf
   spgwu:
     # Provide the S1U and SGI networks facing device name and IP address
     s1u:
