@@ -14,7 +14,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */}}
-{{- define "seba-services.onosTosca" -}}
+{{- define "seba-services.onosTosca" }}
 tosca_definitions_version: tosca_simple_yaml_1_0
 
 imports:
@@ -75,19 +75,6 @@ topology_template:
         app_id: org.opencord.sadis
         url: {{ .sadisAppUrl }}
         version: {{ .sadisAppVersion }}
-      requirements:
-        - owner:
-            node: service#onos
-            relationship: tosca.relationships.BelongsToOne
-
-    onos_app#dhcpl2relay:
-      type: tosca.nodes.ONOSApp
-      properties:
-        name: dhcpl2relay
-        app_id: org.opencord.dhcpl2relay
-        url: {{ .dhcpl2relayAppUrl }}
-        version: {{ .dhcpl2relayAppVersion }}
-        dependencies: org.opencord.sadis
       requirements:
         - owner:
             node: service#onos
@@ -162,6 +149,45 @@ topology_template:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
+{{- if and .fabric.stratum.enabled .fabric.stratum.pipeconfAppExternal }}
+    onos_app#fabric-pipeconf:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: {{ .fabric.stratum.pipeconfAppId }}
+        app_id: {{ .fabric.stratum.pipeconfAppId }}
+        url: {{ .fabric.stratum.pipeconfAppUrl }}
+        version: {{ .fabric.stratum.pipeconfAppVersion }}
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+{{- else if and .fabric.stratum.enabled (not .fabric.stratum.pipeconfAppExternal) }}
+    onos_app#fabric-pipeconf:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: {{ .fabric.stratum.pipeconfAppId }}
+        app_id: {{ .fabric.stratum.pipeconfAppId }}
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+{{- end }}
+
+{{- if .bng.embedded.enabled }}
+    onos_app#bngc:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: {{ .bng.embedded.bngcAppId }}
+        app_id: {{ .bng.embedded.bngcAppId }}
+        url: {{ .bng.embedded.bngcAppUrl }}
+        version: {{ .bng.embedded.bngcAppVersion }}
+        dependencies: {{ .fabric.stratum.pipeconfAppId }}, org.opencord.kafka, org.opencord.sadis
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+{{- end }}
+
     onos_app#netcfghostprovider:
       type: tosca.nodes.ONOSApp
       properties:
@@ -181,9 +207,9 @@ topology_template:
         - owner:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
-{{- end -}}
+{{- end }}
 
-{{- define "seba-services.basicFixturesTosca" -}}
+{{- define "seba-services.basicFixturesTosca" }}
 tosca_definitions_version: tosca_simple_yaml_1_0
 description: Some basic fixtures
 imports:
@@ -246,17 +272,22 @@ topology_template:
         translation: none
         shared_network_name: ext-net
 
-{{- end -}}
+{{- end }}
 
 
-{{- define "seba-services.serviceGraphTosca" -}}
+{{- define "seba-services.serviceGraphTosca" }}
 tosca_definitions_version: tosca_simple_yaml_1_0
 imports:
   - custom_types/fabricservice.yaml
   - custom_types/onosservice.yaml
   - custom_types/rcordservice.yaml
   - custom_types/voltservice.yaml
+{{- if .bng.external.enabled }}
   - custom_types/fabriccrossconnectservice.yaml
+{{- end }}
+{{- if .bng.embedded.enabled }}
+  - custom_types/vrouterservice.yaml
+{{- end }}
   - custom_types/servicedependency.yaml
   - custom_types/servicegraphconstraint.yaml
 description: seba service graph
@@ -289,11 +320,21 @@ topology_template:
         name: volt
         must-exist: true
 
+{{- if .bng.external.enabled }}
     service#fabric-crossconnect:
       type: tosca.nodes.FabricCrossconnectService
       properties:
         name: fabric-crossconnect
         must-exist: true
+{{- end }}
+
+{{- if .bng.embedded.enabled }}
+    service#vrouter:
+      type: tosca.nodes.VRouterService
+      properties:
+        name: vrouter
+        must-exist: true
+{{- end }}
 
     service_dependency#onos-fabric_fabric:
       type: tosca.nodes.ServiceDependency
@@ -331,6 +372,7 @@ topology_template:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
+{{- if .bng.external.enabled }}
     service_dependency#volt_fabric-crossconnect:
       type: tosca.nodes.ServiceDependency
       properties:
@@ -354,4 +396,20 @@ topology_template:
         - provider_service:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
-{{- end -}}
+{{- end }}
+
+{{- if .bng.embedded.enabled }}
+    service_dependency#fabric_vrouter:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#vrouter
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#fabric
+            relationship: tosca.relationships.BelongsToOne
+{{- end }}
+
+{{- end }}
