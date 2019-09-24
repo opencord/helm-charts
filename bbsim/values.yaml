@@ -32,10 +32,10 @@ onus_per_pon_port: 16
 emulation_mode: 'both'
 
 # -a option
-wpa_wait: 60
+wpa_wait: 10
 
 # -d option
-dhcp_wait: 120
+dhcp_wait: 10
 
 # -k option
 kafka_broker: 'cord-kafka.default.svc.cluster.local:9092'
