@@ -59,6 +59,21 @@ spec:
           mountPath: /opt/mme/scripts/mme-ip.sh
           subPath: mme-ip.sh
     {{- end }}
+      - name: mme-load-sctp-module
+        image: {{ .Values.images.tags.init | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        command: ["bash", "-xc"]
+        args:
+        - >
+          if chroot /mnt/host-rootfs modinfo nf_conntrack_proto_sctp > /dev/null 2>&1; then \
+              chroot /mnt/host-rootfs modprobe nf_conntrack_proto_sctp; \
+          fi
+        volumeMounts:
+        - name: host-rootfs
+          mountPath: /mnt/host-rootfs
       - name: mme-dep-check
         image: {{ .Values.images.tags.depCheck | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
@@ -191,3 +206,6 @@ spec:
         emptyDir: {}
       - name: shared-app
         emptyDir: {}
+      - name: host-rootfs
+        hostPath:
+          path: /
