@@ -90,7 +90,9 @@ topology_template:
 tosca_definitions_version: tosca_simple_yaml_1_0
 
 imports:
+{{- if .Values.fabric.enabled }}
    - custom_types/fabricservice.yaml
+{{- end }}
    - custom_types/mcordsubscriberservice.yaml
    - custom_types/onosservice.yaml
 {{- if .Values.progran.enabled }}
@@ -130,11 +132,13 @@ topology_template:
         name: onos
         must-exist: true
 
+{{- if .Values.fabric.enabled }}
     service#fabric:
       type: tosca.nodes.FabricService
       properties:
         name: fabric
         must-exist: true
+{{- end }}
 
     service#omec-cp:
       type: tosca.nodes.Service
@@ -156,6 +160,7 @@ topology_template:
       properties:
         name: cdn-remote
 
+{{- if .Values.fabric.enabled }}
     service_dependency#onos-fabric_fabric:
       type: tosca.nodes.ServiceDependency
       properties:
@@ -179,6 +184,7 @@ topology_template:
         - provider_service:
             node: service#fabric
             relationship: tosca.relationships.BelongsToOne
+{{- end }}
 
 {{ if .Values.progran.enabled }}
     service_dependency#mcord_progran:
@@ -282,7 +288,9 @@ topology_template:
     constraints:
       type: tosca.nodes.ServiceGraphConstraint
       properties:
-{{ if (.Values.seba.enabled) and (.Values.progran.enabled) }}
+{{ if .Values.fabric.enabled }}
+        constraints: '[ ["mcord", null, "onos"], ["progran", null, null], ["omec-cp", null, null] ["omec-up", null, null] ]'
+{{ else if (.Values.seba.enabled) and (.Values.progran.enabled) }}
         constraints: '[ ["mcord", null, "onos"], ["progran", null, "fabric"], ["omec-cp", null, null] ["omec-up", null, null] ]'
 {{ else if (not .Values.seba.enabled) and (.Values.progran.enabled) }}
         constraints: '[ ["mcord", "progran", null], ["omec-cp", "omec-up", "onos"], [null, "cdn-local", "fabric"], [null, "cdn-remote", "vrouter"] ]'
