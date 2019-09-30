@@ -18,7 +18,7 @@ kind: ConfigMap
 metadata:
   name: comac-tosca
 data:
-{{- if .Values.wired_service.enabled }}
+{{- if .Values.resdentialService.enabled }}
   010-rcord-subscriber-service.yaml: |
 {{ include "rcord.serviceTosca" .Values.rcord | indent 4 }}
   020-volt-service.yaml: |
@@ -32,7 +32,7 @@ data:
   050-fabric-service.yaml: |
 {{ include "fabric.serviceTosca" .Values.fabric | indent 4 }}
 {{- end }}
-{{- if .Values.wired_service.enabled }}
+{{- if .Values.resdentialService.enabled }}
   060-fixtures.yaml: |
 {{ include "comac.basicFixturesTosca" . | indent 4 }}
 {{- end }}
