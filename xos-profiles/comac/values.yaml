@@ -23,7 +23,7 @@ nameOverride: ""
 fullnameOverride: ""
 
 images:
-  tosca_loader:
+  toscaLoader:
     repository: 'xosproject/tosca-loader'
     tag: '{{ .Chart.AppVersion }}'
     pullPolicy: 'Always'
@@ -54,7 +54,7 @@ kafkaAppVersion: "1.1.0"
 onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka.default.svc.cluster.local:9092"
 
-wired_service:
+resdentialService:
   enabled: false
 
 # whether to install or not this shared services
