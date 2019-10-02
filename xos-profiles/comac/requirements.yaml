@@ -41,6 +41,10 @@ dependencies:
   version: 1.0.4
   repository: file://../../sadis-server
   condition: resdentialService.enabled
+- name: att-workflow-driver
+  version: 1.1.2
+  repository: file://../../xos-services/att-workflow-driver
+  condition: resdentialService.enabled
 - name: vrouter
   version: 2.1.0
   repository: file://../../xos-services/vrouter
