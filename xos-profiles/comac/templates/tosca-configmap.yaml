@@ -25,6 +25,8 @@ data:
 {{ include "volt.serviceTosca" .Values.volt | indent 4 }}
   030-fabric-crossconnect-service.yaml: |
 {{ include "fabric-crossconnect.serviceTosca" (index .Values "fabric-crossconnect") | indent 4 }}
+  031-fixtures.yaml: |
+{{ include "att-workflow-driver.serviceTosca"  (index .Values "att-workflow-driver") | indent 4 }}
 {{- end }}
   040-onos-service.yaml: |
 {{ include "comac.onosTosca" .Values | indent 4 }}
