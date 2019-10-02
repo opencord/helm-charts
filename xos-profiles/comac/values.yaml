@@ -54,6 +54,12 @@ kafkaAppVersion: "1.1.0"
 onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka.default.svc.cluster.local:9092"
 
+aaaAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/aaa-app/1.9.0/aaa-app-1.9.0.oar"
+aaaAppVersion: "1.9.0"
+
+att-workflow-driver:
+  kafkaService: "cord-platform-kafka"
+
 resdentialService:
   enabled: false
 
