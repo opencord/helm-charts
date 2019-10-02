@@ -57,6 +57,21 @@ topology_template:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
+    # FOR ATT-Workflow --
+    onos_app#aaa:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: aaa
+        app_id: org.opencord.aaa
+        url: {{ .aaaAppUrl }}
+        version: {{ .aaaAppVersion }}
+        dependencies: org.opencord.sadis
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+    # --
+
     onos_app#olt:
       type: tosca.nodes.ONOSApp
       properties:
@@ -153,6 +168,39 @@ topology_template:
         - service_instance:
             node: onos_app#sadis
             relationship: tosca.relationships.BelongsToOne
+
+    # FOR ATT-Workflow --
+    aaa-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration/apps/org.opencord.aaa
+        value: >
+          {
+            "AAA" : {
+              "radiusConnectionType" : "socket",
+              "radiusHost" : "freeradius.voltha.svc.cluster.local",
+              "radiusServerPort" : "1812",
+              "radiusSecret" : "SECRET"
+            }
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#aaa
+            relationship: tosca.relationships.BelongsToOne
+
+    olt-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/configuration/org.opencord.olt.impl.Olt?preset=true
+        value: >
+          {
+            "enableDhcpOnProvisioning" : true
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#olt
+            relationship: tosca.relationships.BelongsToOne
+    # --
 {{- end }}
 
     onos_app#segmentrouting:
@@ -262,6 +310,7 @@ imports:
   - custom_types/rcordservice.yaml
   - custom_types/voltservice.yaml
   - custom_types/fabriccrossconnectservice.yaml
+  - custom_types/attworkflowdriverservice.yaml
 {{- end }}
   - custom_types/servicegraphconstraint.yaml
   - custom_types/servicedependency.yaml
@@ -312,6 +361,14 @@ topology_template:
       properties:
         name: fabric-crossconnect
         must-exist: true
+
+    # FOR ATT-Workflow --
+    service#att-workflow-driver:
+      type: tosca.nodes.AttWorkflowDriverService
+      properties:
+        name: att-workflow-driver
+        must-exist: true
+    # --
 {{- end }}
 
     service#omec-cp:
@@ -406,6 +463,20 @@ topology_template:
         - provider_service:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
+
+    # FOR ATT-Workflow --
+    service_dependency#workflow_volt:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#att-workflow-driver
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#volt
+            relationship: tosca.relationships.BelongsToOne
+    # --
 {{- end }}
 
     service_dependency#mcord_epc_cp:
@@ -467,4 +538,9 @@ topology_template:
         - provider_service:
             node: service#cdn-local
             relationship: tosca.relationships.BelongsToOne
+
+    constraints:
+      type: tosca.nodes.ServiceGraphConstraint
+      properties:
+        constraints: '[["mcord", null, null, "rcord"], [null, null, "att-workflow-driver", "volt"], ["omec-cp", "omec-up", "onos", "fabric-crossconnect"], [null, "cdn-local", "fabric", null], [null, "cdn-remote", "vrouter", null]]'
 {{- end -}}
