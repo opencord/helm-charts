@@ -49,3 +49,7 @@ dependencies:
   version: 2.1.0
   repository: file://../../xos-services/vrouter
   condition: vrouter.enabled
+- name: progran
+  version: 2.0.7
+  repository: file://../../xos-services/progran
+  condition: progran.enabled
