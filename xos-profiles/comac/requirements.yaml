@@ -17,7 +17,7 @@ dependencies:
 - name: rcord
   version: 1.0.16
   repository: file://../../xos-services/rcord
-  condition: resdentialService.enabled
+  condition: residentialService.enabled
 - name: onos-service
   version: 2.1.3
   repository: file://../../xos-services/onos-service
@@ -32,19 +32,19 @@ dependencies:
 - name: volt
   version: 2.2.5
   repository: file://../../xos-services/volt
-  condition: resdentialService.enabled
+  condition: residentialService.enabled
 - name: fabric-crossconnect
   version: 1.2.2
   repository: file://../../xos-services/fabric-crossconnect
-  condition: resdentialService.enabled
+  condition: residentialService.enabled
 - name: sadis-server
   version: 1.0.4
   repository: file://../../sadis-server
-  condition: resdentialService.enabled
+  condition: residentialService.enabled
 - name: att-workflow-driver
   version: 1.1.2
   repository: file://../../xos-services/att-workflow-driver
-  condition: resdentialService.enabled
+  condition: residentialService.enabled
 - name: vrouter
   version: 2.1.0
   repository: file://../../xos-services/vrouter

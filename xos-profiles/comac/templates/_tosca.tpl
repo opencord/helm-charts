@@ -36,7 +36,7 @@ topology_template:
           rest_hostname: {{ .onosRestService | quote }}
           rest_port: 8181
 
-{{- if $.resdentialService.enabled }}
+{{- if $.residentialService.enabled }}
     onos_app#openflow-base:
       type: tosca.nodes.ONOSApp
       properties:
@@ -306,7 +306,7 @@ imports:
   - custom_types/mcordsubscriberservice.yaml
   - custom_types/onosservice.yaml
   - custom_types/vrouterservice.yaml
-{{- if .Values.resdentialService.enabled }}
+{{- if .Values.residentialService.enabled }}
   - custom_types/rcordservice.yaml
   - custom_types/voltservice.yaml
   - custom_types/fabriccrossconnectservice.yaml
@@ -343,7 +343,7 @@ topology_template:
         name: mcord
         must-exist: true
 
-{{- if .Values.resdentialService.enabled }}
+{{- if .Values.residentialService.enabled }}
     service#rcord:
       type: tosca.nodes.RCORDService
       properties:
@@ -415,7 +415,7 @@ topology_template:
             node: service#fabric
             relationship: tosca.relationships.BelongsToOne
 
-{{- if .Values.resdentialService.enabled }}
+{{- if .Values.residentialService.enabled }}
     service_dependency#rcord_volt:
       type: tosca.nodes.ServiceDependency
       properties:
