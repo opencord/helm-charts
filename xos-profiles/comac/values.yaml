@@ -70,3 +70,5 @@ fabric:
   enabled: true
 onos-service:
   enabled: true
+progran:
+  enabled: true

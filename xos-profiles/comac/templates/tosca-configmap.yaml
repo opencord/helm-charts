@@ -25,22 +25,26 @@ data:
 {{ include "volt.serviceTosca" .Values.volt | indent 4 }}
   030-fabric-crossconnect-service.yaml: |
 {{ include "fabric-crossconnect.serviceTosca" (index .Values "fabric-crossconnect") | indent 4 }}
-  031-fixtures.yaml: |
+  040-fixtures.yaml: |
 {{ include "att-workflow-driver.serviceTosca"  (index .Values "att-workflow-driver") | indent 4 }}
 {{- end }}
-  040-onos-service.yaml: |
+  050-onos-service.yaml: |
 {{ include "comac.onosTosca" .Values | indent 4 }}
+{{- if .Values.progran.enabled }}
+  060-progran-service.yaml: |
+{{ include "progran.serviceTosca" .Values.progran | indent 4 }}
+{{- end }}
 {{- if .Values.fabric.enabled }}
-  050-fabric-service.yaml: |
+  070-fabric-service.yaml: |
 {{ include "fabric.serviceTosca" .Values.fabric | indent 4 }}
 {{- end }}
 {{- if .Values.residentialService.enabled }}
-  060-fixtures.yaml: |
+  080-fixtures.yaml: |
 {{ include "comac.basicFixturesTosca" . | indent 4 }}
 {{- end }}
-  070-vrouter-service.yaml: |
+  0900-vrouter-service.yaml: |
 {{ include "vrouter.serviceTosca" .Values.vrouter | indent 4 }}
-  080-mcord-subscriber-service.yaml: |
+  100-mcord-subscriber-service.yaml: |
 {{ include "mcord-subscriber.serviceTosca" (index .Values "mcord-subscriber") | indent 4 }}
   300-service-graph.yaml: |
 {{ include "comac.serviceGraphTosca" . | indent 4 }}

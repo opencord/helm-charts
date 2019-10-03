@@ -306,6 +306,9 @@ imports:
   - custom_types/mcordsubscriberservice.yaml
   - custom_types/onosservice.yaml
   - custom_types/vrouterservice.yaml
+{{- if .Values.progran.enabled }}
+   - custom_types/progranservice.yaml
+{{- end }}
 {{- if .Values.residentialService.enabled }}
   - custom_types/rcordservice.yaml
   - custom_types/voltservice.yaml
@@ -342,6 +345,14 @@ topology_template:
       properties:
         name: mcord
         must-exist: true
+
+{{ if .Values.progran.enabled }}
+    service#progran:
+      type: tosca.nodes.ProgranService
+      properties:
+        name: progran
+        must-exist: true
+{{ end }}
 
 {{- if .Values.residentialService.enabled }}
     service#rcord:
@@ -479,6 +490,44 @@ topology_template:
     # --
 {{- end }}
 
+{{ if .Values.progran.enabled }}
+    service_dependency#mcord_progran:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#progran
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#mcord
+            relationship: tosca.relationships.BelongsToOne
+
+    service_dependency#progran_epc_cp:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#omec-cp
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#progran
+            relationship: tosca.relationships.BelongsToOne
+
+    service_dependency#progran_epc_up:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#omec-up
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#progran
+            relationship: tosca.relationships.BelongsToOne
+
+{{ else }}
     service_dependency#mcord_epc_cp:
       type: tosca.nodes.ServiceDependency
       properties:
@@ -502,6 +551,7 @@ topology_template:
         - provider_service:
             node: service#mcord
             relationship: tosca.relationships.BelongsToOne
+{{ end }}
 
     service_dependency#epc_cp_epc_up:
       type: tosca.nodes.ServiceDependency
@@ -542,5 +592,5 @@ topology_template:
     constraints:
       type: tosca.nodes.ServiceGraphConstraint
       properties:
-        constraints: '[["mcord", null, null, "rcord"], [null, null, "att-workflow-driver", "volt"], ["omec-cp", "omec-up", "onos", "fabric-crossconnect"], [null, "cdn-local", "fabric", null], [null, "cdn-remote", "vrouter", null]]'
+        constraints: '[["mcord", null, null, "rcord"], ["progran", null, "att-workflow-driver", "volt"], ["omec-cp", "omec-up", "onos", "fabric-crossconnect"], [null, "cdn-local", "fabric", null], [null, "cdn-remote", "vrouter", null]]'
 {{- end -}}
