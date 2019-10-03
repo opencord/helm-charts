@@ -307,7 +307,7 @@ imports:
   - custom_types/onosservice.yaml
   - custom_types/vrouterservice.yaml
 {{- if .Values.progran.enabled }}
-   - custom_types/progranservice.yaml
+  - custom_types/progranservice.yaml
 {{- end }}
 {{- if .Values.residentialService.enabled }}
   - custom_types/rcordservice.yaml
