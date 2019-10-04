@@ -27,6 +27,17 @@ spec:
         app: kpi-exporter
         release: {{ .Release.Name }}
     spec:
+      initContainers:
+        - name: kpi-exporter-dep-check
+          image:  "{{ .Values.global.registry }}{{ .Values.images.kpi_exporter.repository }}:{{ tpl .Values.images.kpi_exporter.tag . }}"
+          imagePullPolicy: "{{ .Values.images.kpi_exporter.pullPolicy }}"
+          command: ["sh", "-xc"]
+          args:
+            - >
+              until nc -zvw1 {{ (split ":" .Values.kpi_exporter.kpi_broker)._0 }} {{ (split ":" .Values.kpi_exporter.kpi_broker)._1 }}; do
+                  echo "Waiting for kafka to be ready";
+                  sleep 5;
+              done;
       containers:
         - name: kpi-exporter
           image:  "{{ .Values.global.registry }}{{ .Values.images.kpi_exporter.repository }}:{{ tpl .Values.images.kpi_exporter.tag . }}"
