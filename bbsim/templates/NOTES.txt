@@ -1,5 +1,9 @@
 BBSim deployed with release name: {{ .Release.Name }}
 
-OLT ID: {{ .Values.olt_id }}, on TCP port: {{ .Values.olt_tcp_port }}
-# of PON Ports: {{ .Values.pon_ports }}
-ONUs per PON Port: {{ .Values.onus_per_pon_port }} (total: {{ mul .Values.pon_ports .Values.onus_per_pon_port}})
+OLT ID: {{ .Values.olt_id }}
+# of NNI Ports: {{ .Values.nni }}
+# of PON Ports: {{ .Values.pon }}
+# of ONU Ports: {{ .Values.onu }}
+Total ONUs: (total: {{ mul .Values.pon .Values.onu}})
+
+OLT is listening on: "bbsim:{{ .Values.olt_tcp_port }}"

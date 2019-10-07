@@ -45,14 +45,10 @@ spec:
             privileged: true
           command: [
             "/app/bbsim",
-            "-n", "{{ .Values.onus_per_pon_port }}",
-            "-m", "{{ .Values.emulation_mode }}",
-            "-H", ":{{ .Values.olt_tcp_port }}",
-            "-id", "{{ .Values.olt_id }}",
-            "-i", "{{ .Values.pon_ports }}",
-            "-aw", "{{ .Values.wpa_wait }}",
-            "-dw", "{{ .Values.dhcp_wait }}",
-            "-k", "{{ .Values.kafka_broker }}",
+            "-olt_id", "{{ .Values.olt_id }}",
+            "-nni", "{{ .Values.nni }}",
+            "-pon", "{{ .Values.pon }}",
+            "-onu", "{{ .Values.onu }}",
           ]
           ports:
             - name: "bbsim-olt-id-{{ .Values.olt_id }}"

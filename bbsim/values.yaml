@@ -16,38 +16,19 @@
 
 # CLI switches passed to bbsim
 
-# -id option
 olt_id: 0
+nni: 1
+pon: 1
+onu: 1
 
-# -H option, port number portion
+# TODO read this values in the config
 olt_tcp_port: 50060
-
-# -i option
-pon_ports: 1
-
-# -n option
-onus_per_pon_port: 16
-
-# -m option
-emulation_mode: 'both'
-
-# -a option
-wpa_wait: 10
-
-# -d option
-dhcp_wait: 10
-
-# -k option
-kafka_broker: 'cord-kafka.default.svc.cluster.local:9092'
+bbsim_api_port: 50070
 
 images:
   bbsim:
-    repository: 'voltha/voltha-bbsim'
+    repository: 'voltha/bbsim'
     tag: '{{ .Chart.AppVersion }}'
-    pullPolicy: 'Always'
-  xos_api_tester:
-    repository: 'xosproject/xos-api-tester'
-    tag: 'master'
     pullPolicy: 'Always'
 
 global:
