@@ -1,0 +1,61 @@
+{{/*
+Copyright 2019-present Open Networking Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: accelleran-cu
+  labels:
+{{ tuple "accelleran-cu" . | include "accelleran-cu.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "accelleran-cu" . | include "accelleran-cu.metadata_labels" | indent 4 }}
+  ports:
+  - name: s1ap
+    port: {{ .Values.config.accelleranCU.vranL3.ports.s1ap }}
+    protocol: SCTP
+  - name: nats
+    port: {{ .Values.config.accelleranCU.vranL3.ports.nats }}
+    protocol: TCP
+  - name: redis
+    port: {{ .Values.config.accelleranCU.vranL3.ports.redis }}
+    protocol: TCP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: acceleran-cu-external
+  labels:
+{{ tuple "accelleran-cu" . | include "accelleran-cu.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "accelleran-cu" . | include "accelleran-cu.metadata_labels" | indent 4 }}
+  type: NodePort
+  ports:
+  - name: s1ap
+    port: {{ .Values.config.accelleranCU.vranL3.ports.s1ap }}
+    protocol: SCTP
+    nodePort: {{ .Values.config.accelleranCU.vranL3.ports.nodePorts.s1ap }}
+  - name: nats
+    port: {{ .Values.config.accelleranCU.vranL3.ports.nats }}
+    protocol: TCP
+    nodePort: {{ .Values.config.accelleranCU.vranL3.ports.nodePorts.nats }}
+  - name: redis
+    port: {{ .Values.config.accelleranCU.vranL3.ports.redis }}
+    protocol: TCP
+    nodePort: {{ .Values.config.accelleranCU.vranL3.ports.nodePorts.redis }}
