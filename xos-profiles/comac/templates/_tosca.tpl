@@ -302,10 +302,14 @@ topology_template:
 {{- define "comac.serviceGraphTosca" -}}
 tosca_definitions_version: tosca_simple_yaml_1_0
 imports:
+{{- if .Values.fabric.enabled }}
   - custom_types/fabricservice.yaml
+{{- end }}
   - custom_types/mcordsubscriberservice.yaml
   - custom_types/onosservice.yaml
+{{- if .Values.vrouter.enabled }}
   - custom_types/vrouterservice.yaml
+{{- end }}
 {{- if .Values.progran.enabled }}
   - custom_types/progranservice.yaml
 {{- end }}
@@ -328,17 +332,20 @@ topology_template:
         name: onos
         must-exist: true
 
+{{ if .Values.fabric.enabled }}
     service#fabric:
       type: tosca.nodes.FabricService
       properties:
         name: fabric
         must-exist: true
-
+{{ end }}
+{{ if .Values.vrouter.enabled }}
     service#vrouter:
       type: tosca.nodes.VRouterService
       properties:
         name: vrouter
         must-exist: true
+{{ end }}
 
     service#mcord:
       type: tosca.nodes.MCordSubscriberService
@@ -402,6 +409,7 @@ topology_template:
       properties:
         name: cdn-remote
 
+{{ if .Values.fabric.enabled }}
     service_dependency#onos-fabric_fabric:
       type: tosca.nodes.ServiceDependency
       properties:
@@ -414,6 +422,7 @@ topology_template:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
+{{ if .Values.vrouter.enabled }}
     service_dependency#vrouter_fabric:
       type: tosca.nodes.ServiceDependency
       properties:
@@ -425,6 +434,8 @@ topology_template:
         - provider_service:
             node: service#fabric
             relationship: tosca.relationships.BelongsToOne
+{{ end }}
+{{ end }}
 
 {{- if .Values.residentialService.enabled }}
     service_dependency#rcord_volt:
