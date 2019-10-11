@@ -37,18 +37,18 @@ Render the given template.
 {{- end -}}
 
 {{/*
-Return identity, realm, and hostname of the first pod of the given statefulset.
+Return s6a service for Diameter identity, realm, and hostname for a given application.
 */}}
-{{- define "omec-control-plane.endpoint_lookup" -}}
+{{- define "omec-control-plane.diameter_endpoint" -}}
 {{- $service := index . 0 -}}
 {{- $type := index . 1 -}}
 {{- $context := index . 2 -}}
 {{- if eq $type "identity" -}}
-{{- printf "%s-0.%s.%s.svc.%s" $service $service $context.Release.Namespace "cluster.local" -}}
+{{- printf "%s-s6a.%s.svc.%s" $service $context.Release.Namespace "cluster.local" -}}
 {{- else if eq $type "realm" -}}
-{{- printf "%s.%s.svc.%s" $service $context.Release.Namespace "cluster.local" -}}
+{{- printf "%s.svc.%s" $context.Release.Namespace "cluster.local" -}}
 {{- else if eq $type "host" -}}
-{{- printf "%s-0" $service -}}
+{{- printf "%s-s6a" $service -}}
 {{- end -}}
 {{- end -}}
 
