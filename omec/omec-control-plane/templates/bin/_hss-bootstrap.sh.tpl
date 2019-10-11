@@ -67,8 +67,8 @@ function provision_mme() {
     echo -e "Added mme $id\n"
 }
 
-mme_identity={{ tuple "mme" "identity" . | include "omec-control-plane.endpoint_lookup" }}
-mme_realm={{ tuple "mme" "realm" . | include "omec-control-plane.endpoint_lookup" }}
+mme_identity={{ tuple "mme" "identity" . | include "omec-control-plane.diameter_endpoint" }}
+mme_realm={{ tuple "mme" "realm" . | include "omec-control-plane.diameter_endpoint" }}
 
 {{- range .Values.config.hss.bootstrap.users }}
 provision_users \

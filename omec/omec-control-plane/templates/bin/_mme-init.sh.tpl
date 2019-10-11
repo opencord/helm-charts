@@ -45,9 +45,9 @@ cp /opt/mme/config/shared/config.json /opt/mme/config/shared/s6a.json
 cp /opt/mme/config/s6a_fd.conf /opt/mme/config/shared/s6a_fd.conf
 
 # Generate certs
-MME_IDENTITY={{ tuple "mme" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }};
+MME_IDENTITY={{ tuple "mme" "identity" . | include "omec-control-plane.diameter_endpoint" | quote }};
 DIAMETER_HOST=$(echo $MME_IDENTITY | cut -d'.' -f1)
-DIAMETER_REALM={{ tuple "mme" "realm" . | include "omec-control-plane.endpoint_lookup" | quote }};
+DIAMETER_REALM={{ tuple "mme" "realm" . | include "omec-control-plane.diameter_endpoint" | quote }};
 
 cp /openmme/target/conf/make_certs.sh /opt/mme/config/shared/make_certs.sh
 cd /opt/mme/config/shared

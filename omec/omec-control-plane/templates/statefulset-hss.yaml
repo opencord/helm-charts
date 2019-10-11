@@ -31,7 +31,6 @@ spec:
   selector:
     matchLabels:
 {{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 6 }}
-  serviceName: hss
   template:
     metadata:
       labels:
