@@ -24,7 +24,7 @@ cp /etc/hss/conf/{acl.conf,hss.json,hss.conf,oss.json} $CONF_DIR
 cat $CONF_DIR/{hss.json,hss.conf}
 
 cd $CONF_DIR
-make_certs.sh {{ tuple "hss" "host" . | include "omec-control-plane.endpoint_lookup" }} {{ tuple "hss" "realm" . | include "omec-control-plane.endpoint_lookup" }}
+make_certs.sh {{ tuple "hss" "host" . | include "omec-control-plane.diameter_endpoint" }} {{ tuple "hss" "realm" . | include "omec-control-plane.diameter_endpoint" }}
 
 cd ..
 hss -j $CONF_DIR/hss.json

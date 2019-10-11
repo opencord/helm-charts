@@ -18,21 +18,6 @@ limitations under the License.
 {{- $configJsonS11 := index $configJson "s11" }}
 {{- $configJsonS1ap := index $configJson "s1ap" }}
 ---
-# Additional service for identity
-apiVersion: v1
-kind: Service
-metadata:
-  name: mme
-  labels:
-{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-spec:
-  selector:
-{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-  ports:
-  - name: s6a
-    port: 3868
-    protocol: TCP
----
 apiVersion: v1
 kind: Service
 metadata:

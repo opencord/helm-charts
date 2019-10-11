@@ -23,10 +23,10 @@ Declare variables to be passed into your templates.
 {{- $hssJsonHss := index $hssJson "hss" }}
 
 {{- if not (hasKey $hssJsonCommon "originhost") -}}
-{{- $_ := tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | set $hssJsonCommon "originhost" -}}
+{{- $_ := tuple "hss" "identity" . | include "omec-control-plane.diameter_endpoint" | set $hssJsonCommon "originhost" -}}
 {{- end }}
 {{- if not (hasKey $hssJsonCommon "originrealm") -}}
-{{- $_ := tuple "hss" "realm" . | include "omec-control-plane.endpoint_lookup" | set $hssJsonCommon "originrealm" -}}
+{{- $_ := tuple "hss" "realm" . | include "omec-control-plane.diameter_endpoint" | set $hssJsonCommon "originrealm" -}}
 {{- end }}
 {{- if not (hasKey $hssJsonHss "casssrv") -}}
 {{- $_ := .Values.cassandra.fullnameOverride | set $hssJsonHss "casssrv" -}}
@@ -47,10 +47,10 @@ data:
     ALLOW_IPSEC {{ .Values.config.hss.acl.ipSec }}
   {{- end }}
   hss.conf: |
-    Identity = {{ tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }};
-    Realm = {{ tuple "hss" "realm" . | include "omec-control-plane.endpoint_lookup" | quote }};
-    TLS_Cred = "/opt/c3po/hss/conf/{{ tuple "hss" "host" . | include "omec-control-plane.endpoint_lookup" }}.cert.pem",
-               "/opt/c3po/hss/conf/{{ tuple "hss" "host" . | include "omec-control-plane.endpoint_lookup" }}.key.pem";
+    Identity = {{ tuple "hss" "identity" . | include "omec-control-plane.diameter_endpoint" | quote }};
+    Realm = {{ tuple "hss" "realm" . | include "omec-control-plane.diameter_endpoint" | quote }};
+    TLS_Cred = "/opt/c3po/hss/conf/{{ tuple "hss" "host" . | include "omec-control-plane.diameter_endpoint" }}.cert.pem",
+               "/opt/c3po/hss/conf/{{ tuple "hss" "host" . | include "omec-control-plane.diameter_endpoint" }}.key.pem";
     TLS_CA = "/opt/c3po/hss/conf/cacert.pem";
     No_SCTP;
     Prefer_TCP;

@@ -18,10 +18,10 @@ limitations under the License.
 {{- $configJsonS6a := index $configJson "s6a" }}
 
 {{- if not (hasKey $configJsonS6a "host") -}}
-{{- $_ := tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | set $configJsonS6a "host" -}}
+{{- $_ := tuple "hss" "identity" . | include "omec-control-plane.diameter_endpoint" | set $configJsonS6a "host" -}}
 {{- end }}
 {{- if not (hasKey $configJsonS6a "realm") -}}
-{{- $_ := tuple "hss" "realm" . | include "omec-control-plane.endpoint_lookup" | set $configJsonS6a "realm" -}}
+{{- $_ := tuple "hss" "realm" . | include "omec-control-plane.diameter_endpoint" | set $configJsonS6a "realm" -}}
 {{- end }}
 ---
 apiVersion: v1
@@ -32,10 +32,10 @@ metadata:
 {{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 data:
   s6a_fd.conf: |
-    Identity = {{ tuple "mme" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }};
-    Realm = {{ tuple "mme" "realm" . | include "omec-control-plane.endpoint_lookup" | quote }};
-    TLS_Cred = "conf/{{ tuple "mme" "host" . | include "omec-control-plane.endpoint_lookup" }}.cert.pem",
-               "conf/{{ tuple "mme" "host" . | include "omec-control-plane.endpoint_lookup" }}.key.pem";
+    Identity = {{ tuple "mme" "identity" . | include "omec-control-plane.diameter_endpoint" | quote }};
+    Realm = {{ tuple "mme" "realm" . | include "omec-control-plane.diameter_endpoint" | quote }};
+    TLS_Cred = "conf/{{ tuple "mme" "host" . | include "omec-control-plane.diameter_endpoint" }}.cert.pem",
+               "conf/{{ tuple "mme" "host" . | include "omec-control-plane.diameter_endpoint" }}.key.pem";
     TLS_CA = "conf/cacert.pem";
     AppServThreads = 40;
     SCTP_streams = 3;
@@ -44,7 +44,7 @@ data:
     #Port = 3868;
     #SecPort = 3869;
 
-    ConnectPeer = {{ tuple "hss" "identity" . | include "omec-control-plane.endpoint_lookup" | quote }} { No_TLS; port = 3868; };
+    ConnectPeer = {{ tuple "hss" "identity" . | include "omec-control-plane.diameter_endpoint" | quote }} { No_TLS; port = 3868; };
 
     LoadExtension = "/usr/local/lib/freeDiameter/dict_3gpp2_avps.fdx";
     LoadExtension = "/usr/local/lib/freeDiameter/dict_draftload_avps.fdx";

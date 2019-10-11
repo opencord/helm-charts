@@ -27,7 +27,6 @@ spec:
   selector:
     matchLabels:
 {{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 6 }}
-  serviceName: mme
   template:
     metadata:
       labels:
