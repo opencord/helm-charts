@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "b83b14c9_4d039f8c",
+        "filename": "cdn-services/cdn-local/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-10-15T20:27:21Z",
+      "side": 1,
+      "message": "Here was my mistake :( forgot to remove..",
+      "parentUuid": "6a00bb68_45a7ce2e",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 20
+      },
+      "revId": "b7bf884085134fb4e7e52af86d7d6073ecec7165",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "8649b4fe_c6e0f929",
         "filename": "cdn-services/cdn-local/values.yaml",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2019-10-15T20:15:33Z",
       "side": 1,
       "message": "Can\u0027t we just use single value \"sriov.enabled\" instead of adding a new value \"hostNetwork.enabled\" which can conflict with each other? We can add a note that host network will be used when sriov is disabled.",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 18
+      },
+      "revId": "b7bf884085134fb4e7e52af86d7d6073ecec7165",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "049352a1_987c1f91",
+        "filename": "cdn-services/cdn-local/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-10-15T20:27:21Z",
+      "side": 1,
+      "message": "Yes absolutely right. I pursued that the sriov.enabled variable can be used to determine the network type for CDN-Local. However, I thought that users would be hard to notice that `sriov.enabled\u003dfalse` means \u0027hostNetwork.enabled\u0027. Like your comment, if we note it on this file and COMAC guide as well, it would be better. Let me change it :)",
+      "parentUuid": "8649b4fe_c6e0f929",
       "range": {
         "startLine": 121,
         "startChar": 0,
