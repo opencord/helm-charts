@@ -36,7 +36,7 @@ resources:
 
 config:
   sriov:
-    enabled: true # default value. Do not use here as false now.
+    enabled: true
     netDevice:
       pfNames:
         - eno2
