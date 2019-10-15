@@ -33,6 +33,7 @@ spec:
     metadata:
       labels:
 {{ tuple "nginx" . | include "cdn-local.metadata_labels" | indent 8 }}
+{{ if .Values.config.sriov.enabled }}
       annotations:
         k8s.v1.cni.cncf.io/networks: '[
           {
@@ -41,11 +42,13 @@ spec:
             "ips": {{ .Values.config.nginx.sgi.ip | quote }}
           }
         ]'
+{{ end }}
     spec:
     {{- if .Values.nodeSelectors.enabled }}
       nodeSelector:
         {{ .Values.nodeSelectors.antMedia.label }}: {{ .Values.nodeSelectors.antMedia.value }}
     {{- end }}
+      hostNetwork: {{ not .Values.config.sriov.enabled }}
       serviceAccountName: nginx
       initContainers:
       - name: nginx-init

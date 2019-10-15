@@ -36,7 +36,7 @@ resources:
 
 config:
   sriov:
-    enabled: true # default value. Do not use here as false now.
+    enabled: true # If you want to use Host Network, please unset this flag.
     netDevice:
       pfNames:
         - eno2
