@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9138ff8a_3d8f1488",
+        "filename": "ran/accelleran-cu/Chart.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-15T22:04:09Z",
+      "side": 1,
+      "message": "And this appVersion looks not used anywhere",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 17
+      },
+      "revId": "4605966244cc2668b7cb70fa2d54494806ba18cd",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
