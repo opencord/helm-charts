@@ -14,15 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
+{{ if .Values.config.sriov.enabled }}
 ---
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
   name: sgi-net-cdn
-{{- if .Values.config.sriov.enabled }}
   annotations:
     k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_netdevice
-{{- end }}
 spec:
   config: '{
     "type": {{ .Values.networks.cniPlugin | quote }},
@@ -30,3 +29,4 @@ spec:
         "type": {{ .Values.networks.ipam | quote }}
     }
   }'
+{{ end }}
