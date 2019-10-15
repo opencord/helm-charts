@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "c5be4a87_86deb745",
+        "filename": "ran/accelleran-cu/Chart.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-10-15T20:29:01Z",
+      "side": 1,
+      "message": "Sure.",
+      "parentUuid": "00120657_c912c533",
+      "range": {
+        "startLine": 21,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "c9aadbdb28dee9c00d82c80a6553d2dc7ee91770",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d6671cc_9dac4edd",
         "filename": "ran/accelleran-cu/templates/_helpers.tpl",
         "patchSetId": 2
@@ -48,6 +72,30 @@
     },
     {
       "key": {
+        "uuid": "6dd4d6c7_c18b42c3",
+        "filename": "ran/accelleran-cu/templates/_helpers.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-10-15T20:29:01Z",
+      "side": 1,
+      "message": "Ok. Let me check it.",
+      "parentUuid": "1d6671cc_9dac4edd",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 11
+      },
+      "revId": "c9aadbdb28dee9c00d82c80a6553d2dc7ee91770",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1d36e985_7559a42d",
         "filename": "ran/accelleran-cu/templates/configmap-accelleran.yaml",
         "patchSetId": 2
@@ -59,6 +107,30 @@
       "writtenOn": "2019-10-15T20:23:55Z",
       "side": 1,
       "message": "It would be better to include application name so that we can easily recognize what it is from `kubectl get cm` result.",
+      "range": {
+        "startLine": 21,
+        "startChar": 8,
+        "endLine": 21,
+        "endChar": 17
+      },
+      "revId": "c9aadbdb28dee9c00d82c80a6553d2dc7ee91770",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7025e594_9d2edc81",
+        "filename": "ran/accelleran-cu/templates/configmap-accelleran.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-10-15T20:29:01Z",
+      "side": 1,
+      "message": "Ok, let me change it to `accelleran-cu-config` or something like that.",
+      "parentUuid": "1d36e985_7559a42d",
       "range": {
         "startLine": 21,
         "startChar": 8,
