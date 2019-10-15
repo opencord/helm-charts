@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00120657_c912c533",
+        "filename": "ran/accelleran-cu/Chart.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-15T20:23:55Z",
+      "side": 1,
+      "message": "0.1.0 is recommended for the first version",
+      "range": {
+        "startLine": 21,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "c9aadbdb28dee9c00d82c80a6553d2dc7ee91770",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d6671cc_9dac4edd",
+        "filename": "ran/accelleran-cu/templates/_helpers.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-15T20:23:55Z",
+      "side": 1,
+      "message": "accelleran-cu pod seems not need a permission to access these resources at all",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 11
+      },
+      "revId": "c9aadbdb28dee9c00d82c80a6553d2dc7ee91770",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1d36e985_7559a42d",
+        "filename": "ran/accelleran-cu/templates/configmap-accelleran.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-15T20:23:55Z",
+      "side": 1,
+      "message": "It would be better to include application name so that we can easily recognize what it is from `kubectl get cm` result.",
+      "range": {
+        "startLine": 21,
+        "startChar": 8,
+        "endLine": 21,
+        "endChar": 17
+      },
+      "revId": "c9aadbdb28dee9c00d82c80a6553d2dc7ee91770",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
