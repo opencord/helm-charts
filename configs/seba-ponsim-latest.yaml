@@ -35,8 +35,8 @@ images:
     tag: 'master'
 # ONOS
   onos:
-    repository: matteoscandolo/onos
-    tag: '1.13-branch'
+    repository: onosproject/onos
+    tag: 'master'
 # VOLTHA
   vcore:
     tag: 'latest'
