@@ -20,6 +20,11 @@
 etcd-cluster:
   clusterSize: 1
 
+# in seba service chart
+fabric-crossconnect:
+  image:
+    tag: '1.2.2'
+
 # in workflow/att-workflow service chart
 att-workflow-driver:
   # this is mandatory, it's needed to correctly configure the kafka endpoint
@@ -41,4 +46,3 @@ enableMulticast: True
 # in ponsim-pod chart
 bandwidthProfiles: True
 legacyPonsim: False
-

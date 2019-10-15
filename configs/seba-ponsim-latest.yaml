@@ -35,8 +35,7 @@ images:
     tag: 'master'
 # ONOS
   onos:
-    repository: matteoscandolo/onos
-    tag: '1.13-branch'
+    tag: '1.13.9'
 # VOLTHA
   vcore:
     tag: 'latest'
@@ -82,7 +81,7 @@ fabric:
     tag: 'master'
 fabric-crossconnect:
   image:
-    tag: 'master'
+    tag: '1.2.2'
 onos-service:
   image:
     tag: 'master'
