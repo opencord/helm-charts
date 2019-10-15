@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a00bb68_45a7ce2e",
+        "filename": "cdn-services/cdn-local/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-15T20:15:33Z",
+      "side": 1,
+      "message": "Looks like this value is not used anywhere",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 20
+      },
+      "revId": "b7bf884085134fb4e7e52af86d7d6073ecec7165",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8649b4fe_c6e0f929",
+        "filename": "cdn-services/cdn-local/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-15T20:15:33Z",
+      "side": 1,
+      "message": "Can\u0027t we just use single value \"sriov.enabled\" instead of adding a new value \"hostNetwork.enabled\" which can conflict with each other? We can add a note that host network will be used when sriov is disabled.",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 18
+      },
+      "revId": "b7bf884085134fb4e7e52af86d7d6073ecec7165",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
