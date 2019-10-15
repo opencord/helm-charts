@@ -36,7 +36,7 @@ resources:
 
 config:
   sriov:
-    enabled: true # default value. Do not use here as false now.
+    enabled: true
     netDevice:
       pfNames:
         - eno2
@@ -44,6 +44,8 @@ config:
         - ixgbevf
         - i40evf
   nginx:
+    hostNetwork:
+      enabled: false
     ports:
       rtmp: 1935
       http: 8085
@@ -116,3 +118,5 @@ networks:
     subnet: 13.1.1.0/24
     mask: 255.255.255.0
     gateway: 13.1.1.254
+  hostNetwork:
+    enabled: false
