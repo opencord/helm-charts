@@ -107,11 +107,13 @@ config:
           apn: apn1
           key: "465b5ce8b199b49faa5f0a2ee238a6bc"
           opc: "d4416644f6154936193433dd20a0ace0"
+          sqn: 96
         - imsi: "208014567891201"
           msisdn: "1122334455"
           apn: apn1
           key: "465b5ce8b199b49faa5f0a2ee238a6bc"
           opc: "d4416644f6154936193433dd20a0ace0"
+          sqn: 96
       mmes:
         - id: 1
           isdn: "19136246000"
