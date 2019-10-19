@@ -106,5 +106,37 @@ log4j.appender.sift.appender.append=true
 
 # Application logs
 {{ .Values.application_logs }}
+{{- end -}}
 
+{{/*
+Render a Service.
+*/}}
+{{- define "onos.service" -}}
+{{- $name := index . 0 -}}
+{{- $spec := index . 1 -}}
+{{- $context := index . 2 -}}
+{{- $namespace := $context.Release.Namespace }}
+{{- $serviceName := printf "%s-%s" (include "onos.fullname" $context) $name }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $serviceName }}
+  namespace: {{ $namespace }}
+  labels:
+    app: {{ template "onos.name" $context }}
+    chart: {{ template "onos.chart" $context }}
+    release: {{ $context.Release.Name }}
+    heritage: {{ $context.Release.Service }}
+spec:
+  type: {{ $spec.type }}
+  ports:
+  - name: {{ $name }}
+    port: {{ $spec.port }}
+{{- if and $spec.type (eq (printf "%s" $spec.type) "NodePort") }}
+    nodePort: {{ $spec.nodePort }}
+{{- end }}
+  selector:
+    app: {{ template "onos.name" $context }}
+    release: {{ $context.Release.Name }}
 {{- end -}}
