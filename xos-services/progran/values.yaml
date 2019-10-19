@@ -33,6 +33,8 @@ global:
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
+onosProgranRestService: "onos-ui.default.svc.cluster.local"
+
 resources: {}
 
 nodeSelector: {}
