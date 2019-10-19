@@ -19,21 +19,21 @@ kind: ConfigMap
 metadata:
   name: mcord-tosca
 data:
-  010-onos-service.yaml: |
-{{ include "mcord.onosTosca" .Values | indent 4 }}
 {{- if .Values.fabric.enabled }}
+  010-onos-fabric-service.yaml: |
+{{ include "mcord-services.onosFabricTosca" .Values | indent 4 }}
   020-fabric-service.yaml: |
 {{ include "fabric.serviceTosca" .Values.fabric | indent 4 }}
+  030-vrouter-service.yaml: |
+{{ include "vrouter.serviceTosca" .Values.vrouter | indent 4 }}
 {{- end }}
-  030-fixtures.yaml: |
-{{ include "mcord.fixtureTosca" . | indent 4 }}
 {{- if .Values.progran.enabled }}
-  040-progran-service.yaml: |
+  040-onos-progran-service.yaml: |
+{{ include "mcord-services.onosProgranTosca" .Values | indent 4 }}
+  050-progran-service.yaml: |
 {{ include "progran.serviceTosca" .Values.progran | indent 4 }}
 {{- end }}
-  050-vrouter-service.yaml: |
-{{ include "vrouter.serviceTosca" .Values.vrouter | indent 4 }}
   100-mcord-subscriber-service.yaml: |
 {{ include "mcord-subscriber.serviceTosca" (index .Values "mcord-subscriber") | indent 4 }}
   300-service-graph.yaml: |
-{{ include "mcord.serviceGraphTosca" . | indent 4 }}
+{{ include "mcord-services.serviceGraphTosca" . | indent 4 }}

@@ -17,36 +17,27 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
-
 nameOverride: ""
 fullnameOverride: ""
 
+global:
+  registry: ""
 images:
   tosca_loader:
     repository: 'xosproject/tosca-loader'
     tag: '{{ .Chart.AppVersion }}'
     pullPolicy: 'Always'
 
-global:
-  registry: ""
-
+# XOS
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
-cordSiteName: "mysite"
+# ONOS
+onosFabricRestService: "onos-ui.default.svc.cluster.local"
+onosProgranRestService: "onos-progran-ui.default.svc.cluster.local"
 
-onosRestService: "onos-ui.default.svc.cluster.local"
-kafkaService: "cord-kafka.default.svc.cluster.local:9092"
-
-# whether to install or not this shared services
+# Services
 fabric:
-  enabled: true
-onos-service:
   enabled: true
 progran:
   enabled: true
-
-# whether SEBA will be installed on the side or not
-seba:
-  enabled: false
