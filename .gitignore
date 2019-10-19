@@ -9,11 +9,4 @@ macro/*
 helm-repo-tools/*
 
 # ignore dependent chart dirs
-xos-core/charts
-voltha/charts
-xos-core/charts
-nem-monitoring/charts/
-xos-profiles/*/charts
-workflows/*/charts
-storage/*/charts
-logging/charts
+charts
