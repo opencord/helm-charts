@@ -1,0 +1,80 @@
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+onos-progran:
+  nameOverride: "onos-progran"
+  images:
+    onos:
+      repository: 'omecproject/onos-progran'
+      tag: '1.0.0'
+  services:
+    openflow:
+      nodePort: 31654
+    ssh:
+      nodePort: 30116
+    ui:
+      nodePort: 30121
+    debugger:
+      nodePort: 30556
+    progran:
+      type: NodePort
+      port: 4010
+      nodePort: 30410
+
+mcord-services:
+  enabled: true
+  onosFabricRestService: "cord-platform-onos-ui.default.svc.cluster.local"
+  onosProgranRestService: "comac-onos-progran-ui.default.svc.cluster.local"
+  progran:
+    image:
+      repository: 'omecproject/progran-synchronizer'
+      tag: 'comac-1.0.0'
+      pullPolicy: 'IfNotPresent'
+    onosProgranRestService: "comac-onos-progran-ui.default.svc.cluster.local"
+  mcord-subscriber:
+    image:
+      repository: 'omecproject/mcord-synchronizer'
+      tag: 'comac-1.0.0'
+      pullPolicy: 'IfNotPresent'
+  onos-service:
+    kafkaService: "cord-platform-kafka"
+    onosRestService: "cord-platform-onos-cord-ui.default.svc.cluster.local"
+    enabled: true
+
+seba-services:
+  enabled: false
+  # Disable onos-service and fabric from SEBA to avoid conflict with MCORD services
+  # Note that Helm 2.15 or higher is required for nested dependency configs work properly
+  onos-service:
+    enabled: false
+  fabric:
+    enabled: false
+
+  onosRestService: "cord-platform-onos-ui.default.svc.cluster.local"
+  kafkaService: "cord-platform-kafka.default.svc.cluster.local:9092"
+  volt:
+    kafkaService: "cord-platform-kafka"
+    volthaRestService: "voltha.voltha.svc.cluster.local"
+    onosRestService: "cord-platform-onos-ui.default.svc.cluster.local"
+  fabric-crossconnect:
+    kafkaService: "cord-platform-kafka"
+  sadis-server:
+    kafkaBroker: "cord-platform-kafka:9092"
+
+base-kubernetes:
+  kubernetes:
+    image:
+      repository: 'omecproject/kubernetes-synchronizer'
+      tag: 'comac-1.0.0'
+      pullPolicy: 'IfNotPresent'
