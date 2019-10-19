@@ -50,19 +50,6 @@ spec:
           command: ["./bin/onos-service", "server", "debug"]
           env:
 {{ toYaml .Values.onos_env | indent 12 }}
-          ports:
-            - name: ovsdb
-              containerPort: {{ .Values.services.ovsdb.port }}
-            - name: openflow
-              containerPort: {{ .Values.services.openflow.port }}
-            - name: ssh
-              containerPort: {{ .Values.services.ssh.port }}
-            - name: ui
-              containerPort: {{ .Values.services.ui.port }}
-            - name: cluster
-              containerPort: {{ .Values.services.cluster.port }}
-            - name: debugger
-              containerPort: {{ .Values.services.debugger.port }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
@@ -102,7 +89,7 @@ spec:
             optional: true
         - name: onos-logs-cfg
           configMap:
-            name: onos
+            name: {{ template "onos.fullname" . }}-onos
             items:
               - key: logCfg
                 path: org.ops4j.pax.logging.cfg
@@ -111,7 +98,7 @@ spec:
 {{- if .Values.log_agent.enabled }}
         - name: log-agent-configmap-volume
           configMap:
-            name: log-agent-configmap
+            name: {{ template "onos.fullname" . }}-log-agent-configmap
             items:
               - key: config
                 path: filebeat.yml

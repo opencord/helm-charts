@@ -47,32 +47,30 @@ namespace: default
 serviceAccountName: default
 
 services:
-  openflowServiceType: NodePort
   openflow:
+    type: NodePort
     port: 6653
     nodePort: 31653
-
-  sshServiceType: NodePort
   ssh:
+    type: NodePort
     port: 8101
     nodePort: 30115
-
-  uiServiceType: NodePort
   ui:
+    type: NodePort
     port: 8181
     nodePort: 30120
-
-  debuggerServiceType: NodePort
   debugger:
+    type: NodePort
     port: 5005
     nodePort: 30555
-
-  ovsdbServiceType: ClusterIP
   ovsdb:
+    type: ClusterIP
     port: 6640
-
-  cluster:
-    port: 9876
+  # Add application specific ports
+  #progran:
+  #  type: NodePort
+  #  port: 4010
+  #  nodePort: 30410
 
 onos_env:
 - name: POD_IP

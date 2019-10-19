@@ -18,7 +18,7 @@ limitations under the License.
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: log-agent-configmap
+  name: {{ template "onos.fullname" . }}-log-agent-configmap
 data:
   config: |
     ---

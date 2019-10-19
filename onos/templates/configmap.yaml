@@ -16,7 +16,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: onos
+  name: {{ template "onos.fullname" . }}-onos
 data:
   logCfg: |
 {{ include "onos.logCfg" . | indent 4 }}
