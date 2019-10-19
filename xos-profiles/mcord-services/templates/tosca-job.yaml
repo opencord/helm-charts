@@ -17,7 +17,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ template "mcord.fullname" . }}-tosca-loader
+  name: {{ template "mcord.fullname" . }}-job-tosca-loader
   labels:
     app: {{ template "mcord.name" . }}
     chart: {{ template "mcord.chart" . }}
