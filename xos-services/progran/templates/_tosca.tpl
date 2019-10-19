@@ -29,6 +29,6 @@ topology_template:
       type: tosca.nodes.ProgranService
       properties:
         name: progran
-        onos_address: onos-progran-ui
+        onos_address: {{ .onosProgranRestService | quote }}
         onos_port: "8181"
 {{- end -}}
