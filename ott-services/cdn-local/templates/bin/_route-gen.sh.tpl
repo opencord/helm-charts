@@ -27,6 +27,6 @@ netmask_to_prefix() {
     echo $prefix
 }
 
-ip route add {{ .Values.config.spgwc.ueIpPool.ip }}/$(netmask_to_prefix {{ .Values.config.spgwc.ueIpPool.mask }} ) via $SPGWU_IP dev {{ .Values.config.nginx.sgi.device }}
+ip route add {{ .Values.config.spgwc.ueIpPool.ip }}/$(netmask_to_prefix {{ .Values.config.spgwc.ueIpPool.mask }} ) via $SPGWU_IP dev {{ .Values.config.tomcatFs.sgi.device }}
 
 
