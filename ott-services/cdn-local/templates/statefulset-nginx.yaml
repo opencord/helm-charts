@@ -46,7 +46,7 @@ spec:
     spec:
     {{- if .Values.nodeSelectors.enabled }}
       nodeSelector:
-        {{ .Values.nodeSelectors.antMedia.label }}: {{ .Values.nodeSelectors.antMedia.value }}
+        {{ .Values.nodeSelectors.nginx.label }}: {{ .Values.nodeSelectors.nginx.value }}
     {{- end }}
       hostNetwork: {{ not .Values.config.sriov.enabled }}
       serviceAccountName: nginx
