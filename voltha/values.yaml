@@ -36,6 +36,7 @@ services:
         - name: mystery
           port: 8001
           targetPort: 8001
+          nodePort: 30126
         - name: mystery2
           port: 8443
           targetPort: 8443
@@ -43,6 +44,7 @@ services:
         - name: grpc
           port: 50555
           targetPort: 50555
+          nodePort: 30127
 
 etcd:
   cluster:
