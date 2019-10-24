@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "de796201_9eb07d33",
+        "filename": "ott-services/file-server/templates/statefulset-tomcat-fs.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-24T18:39:59Z",
+      "side": 1,
+      "message": "Can it be a deployment?",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 21,
+        "endChar": 17
+      },
+      "revId": "a174bbad175bb4b495ccd68bc76889d6670b8262",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
