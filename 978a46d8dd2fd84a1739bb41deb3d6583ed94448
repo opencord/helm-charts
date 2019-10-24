@@ -22,6 +22,98 @@
       "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00ebb3d6_116b3e64",
+        "filename": "ran/accelleran-cu/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-24T18:53:29Z",
+      "side": 1,
+      "message": "You can use this image docker.io/omecproject/pod-init:1.0.0 as a init image.",
+      "range": {
+        "startLine": 18,
+        "startChar": 12,
+        "endLine": 18,
+        "endChar": 39
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a05afad_3d1200da",
+        "filename": "ran/accelleran-cu/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-24T18:53:29Z",
+      "side": 1,
+      "message": "Maybe just \"ip\" sounds more clear. For me, I think twice what is \"nodeIpAddr\"..should I put some special address here?",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 14
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e797965f_1f6a336c",
+        "filename": "ran/accelleran-cu/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-24T18:53:29Z",
+      "side": 1,
+      "message": "Looks like this value is not used anywhere. If so, please remove.",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "41594fdc_cde682b1",
+        "filename": "ran/accelleran-cu/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-24T18:53:29Z",
+      "side": 1,
+      "message": "Here, too.",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 10
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
