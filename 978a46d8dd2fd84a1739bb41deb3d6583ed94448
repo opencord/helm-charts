@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "f73b4298_ec943f98",
+        "filename": "ran/accelleran-cu/templates/_helpers.tpl",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-24T18:34:31Z",
+      "side": 1,
+      "message": "These rules are required? They are for accessing or modifying k8s resources from a pod.",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 18
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
