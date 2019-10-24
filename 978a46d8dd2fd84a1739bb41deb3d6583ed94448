@@ -142,6 +142,30 @@
     },
     {
       "key": {
+        "uuid": "fa20440b_a232c19e",
+        "filename": "ran/accelleran-cu/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-10-24T22:12:40Z",
+      "side": 1,
+      "message": "I just thought that `replicas`, `socketInterface`, `instId`, and `ports` are only for Accelleran RAN. If we use a single values.yaml file (e.g., comac-onf-testbed-helm-charts.yaml) to deploy OMEC, RAN, OTT, etc, looks it may be confused.. I think we should indicate those are for Accelleran RAN. What do you think?",
+      "parentUuid": "fe228e41_401168ef",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 7
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a05afad_3d1200da",
         "filename": "ran/accelleran-cu/values.yaml",
         "patchSetId": 7
