@@ -22,6 +22,30 @@
       "revId": "79022a3d4fa7a822603889de1ad6b49fad0312d0",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4928eec9_606017cd",
+        "filename": "voltha/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-24T17:49:49Z",
+      "side": 1,
+      "message": "\"targetPort\" is set to the same value of \"port\" by default as far as I know. I think I can set service type to \"ClusterIP\" for the services without fixed node port to prevent assigning unused node port resource. But I\u0027m not sure if these are accessed from external or not. Can I assume that seba-in-a-box test confirm it?",
+      "parentUuid": "67a62368_94a78e7d",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "79022a3d4fa7a822603889de1ad6b49fad0312d0",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
