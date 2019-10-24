@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "67a62368_94a78e7d",
+        "filename": "voltha/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2019-10-24T14:44:11Z",
+      "side": 1,
+      "message": "Another option is maybe to remove the targetPort?  I assume that this would remove the random node port assignment.  If these services don\u0027t have a fixed node port already, I assume that means they\u0027re not being accessed by anything external to K8S.",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "79022a3d4fa7a822603889de1ad6b49fad0312d0",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
