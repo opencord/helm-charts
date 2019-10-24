@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "813d5a04_b66bcfe2",
+        "filename": "ran/accelleran-cu/templates/_helpers.tpl",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-10-24T19:14:33Z",
+      "side": 1,
+      "message": "Ok, let me remove it.",
+      "parentUuid": "f73b4298_ec943f98",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 18
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "00ebb3d6_116b3e64",
         "filename": "ran/accelleran-cu/values.yaml",
         "patchSetId": 7
@@ -36,6 +60,30 @@
       "writtenOn": "2019-10-24T18:53:29Z",
       "side": 1,
       "message": "You can use this image docker.io/omecproject/pod-init:1.0.0 as a init image.",
+      "range": {
+        "startLine": 18,
+        "startChar": 12,
+        "endLine": 18,
+        "endChar": 39
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b2d71b1f_6db31cd0",
+        "filename": "ran/accelleran-cu/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-10-24T19:14:33Z",
+      "side": 1,
+      "message": "Oh, ok.",
+      "parentUuid": "00ebb3d6_116b3e64",
       "range": {
         "startLine": 18,
         "startChar": 12,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "92a59e21_91cb23fa",
+        "filename": "ran/accelleran-cu/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-10-24T19:14:33Z",
+      "side": 1,
+      "message": "Ok make sense.",
+      "parentUuid": "9a05afad_3d1200da",
+      "range": {
+        "startLine": 44,
+        "startChar": 4,
+        "endLine": 44,
+        "endChar": 14
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "e797965f_1f6a336c",
         "filename": "ran/accelleran-cu/values.yaml",
         "patchSetId": 7
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "71d6c69f_200e88b3",
+        "filename": "ran/accelleran-cu/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-10-24T19:14:33Z",
+      "side": 1,
+      "message": "Ok let me remove it.",
+      "parentUuid": "e797965f_1f6a336c",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 21
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41594fdc_cde682b1",
         "filename": "ran/accelleran-cu/values.yaml",
         "patchSetId": 7
@@ -105,6 +201,30 @@
       "writtenOn": "2019-10-24T18:53:29Z",
       "side": 1,
       "message": "Here, too.",
+      "range": {
+        "startLine": 50,
+        "startChar": 4,
+        "endLine": 50,
+        "endChar": 10
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "91960f3b_15c73f05",
+        "filename": "ran/accelleran-cu/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-10-24T19:14:33Z",
+      "side": 1,
+      "message": "Will change it to ip",
+      "parentUuid": "41594fdc_cde682b1",
       "range": {
         "startLine": 50,
         "startChar": 4,
