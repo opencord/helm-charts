@@ -46,6 +46,30 @@
       "revId": "79022a3d4fa7a822603889de1ad6b49fad0312d0",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b0c010c2_e9addeb3",
+        "filename": "voltha/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2019-10-24T19:05:46Z",
+      "side": 1,
+      "message": "Yes I think that SiaB test confirms these are not used.\nHowever your approach to fix the node port is safe so I\u0027m fine going with this.",
+      "parentUuid": "4928eec9_606017cd",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 26
+      },
+      "revId": "79022a3d4fa7a822603889de1ad6b49fad0312d0",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
