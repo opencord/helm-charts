@@ -96,6 +96,52 @@
     },
     {
       "key": {
+        "uuid": "4745260d_4683d5ee",
+        "filename": "ran/accelleran-cu/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-24T19:53:37Z",
+      "side": 1,
+      "message": "This is for acceleran CU chart. So I think you can remove this line here.",
+      "range": {
+        "startLine": 32,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 15
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fe228e41_401168ef",
+        "filename": "ran/accelleran-cu/values.yaml",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-10-24T19:53:37Z",
+      "side": 1,
+      "message": "Sorry for multiple separate comments. Here\u0027s my suggestion of the config values structure as a user :)\n\nconfig:\n  replicas: 1\n  socketInterface: eth0\n  instId: \"enb_key\"\n  epc:\n    plmnId: 371211\n  mme:\n    ip: 10.90.0.151\n    s1apPort: 36412\n  progran:\n    enabled: false\n    # onos IP address\n    ip: 10.90.0.151\n    port: 30410\n  nats:\n    # This IP should be able to accessed from the Edge\n    ip: 10.90.0.151\n    serviceName: \"nats-cluster\"\n  ports:\n    s1ap:\n      port: 36412\n      nodePort: 31412\n    nats:\n      port: 4222\n      nodePort: 4222\n    redis:\n      port: 6379\n      nodePorts: 6379",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 7
+      },
+      "revId": "978a46d8dd2fd84a1739bb41deb3d6583ed94448",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a05afad_3d1200da",
         "filename": "ran/accelleran-cu/values.yaml",
         "patchSetId": 7
