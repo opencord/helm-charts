@@ -14,73 +14,29 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-{{- $releaseName := .Release.Name }}
-{{- $namespace := .Release.Namespace }}
-{{- $name := .Values.config.enb.name }}
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: {{ $releaseName }}-{{ $name }}
-  namespace: {{ $namespace }}
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: {{ $releaseName }}-{{ $name }}
-  namespace: {{ $namespace }}
-rules:
-  - apiGroups:
-      - ""
-      - extensions
-      - batch
-      - apps
-    verbs:
-      - get
-      - list
-    resources:
-      - daemonsets
-      - jobs
-      - pods
-      - services
-      - endpoints
----
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: {{ $releaseName }}-{{ $name }}
-  namespace: {{ $namespace }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: {{ $releaseName }}-{{ $name }}
-subjects:
-  - kind: ServiceAccount
-    name: {{ $releaseName }}-{{ $name }}
+{{ tuple "enb" . | include "oaisim.service_account" }}
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ $name }}
-  namespace: {{ $namespace }}
+  name: enb
   labels:
-    app: oai-enb
+{{ tuple "enb" . | include "oaisim.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oai-enb
-  serviceName: {{ $name | quote }}
+{{ tuple "enb" . | include "oaisim.metadata_labels" | indent 6 }}
   template:
     metadata:
       labels:
-        app: oai-enb
+{{ tuple "enb" . | include "oaisim.metadata_labels" | indent 8 }}
     spec:
     {{- if .Values.nodeSelectors.enabled }}
       nodeSelector:
         {{ .Values.nodeSelectors.enb.label }}: {{ .Values.nodeSelectors.enb.value }}
     {{- end }}
-      serviceAccountName: {{ $releaseName }}-{{ $name }}
+      serviceAccountName: enb
       hostNetwork: true
       initContainers:
         - name: enb-dep-check
@@ -134,7 +90,7 @@ spec:
             - name: pod-share
               mountPath: /etc/oaisim/enb
       containers:
-        - name: {{ $name }}
+        - name: enb
           image: {{ .Values.images.tags.enb | quote }}
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           securityContext:
@@ -162,11 +118,11 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ $name }}
+            name: enb
             defaultMode: 420
         - name: script
           configMap:
-            name: {{ $name }}
+            name: enb
             defaultMode: 493
         - name: pod-share
           emptyDir: {}

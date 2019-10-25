@@ -18,7 +18,9 @@ limitations under the License.
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.config.enb.name }}
+  name: enb
+  labels:
+{{ tuple "enb" . | include "oaisim.metadata_labels" | indent 4 }}
 data:
   nfapi.conf: |
     Active_eNBs = ("eNB-OAISIM-LTEBox");

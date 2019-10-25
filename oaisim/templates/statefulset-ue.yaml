@@ -14,73 +14,29 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-{{- $releaseName := .Release.Name }}
-{{- $namespace := .Release.Namespace }}
-{{- $name := .Values.config.ue.name }}
----
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: {{ $releaseName }}-{{ $name }}
-  namespace: {{ $namespace }}
----
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: {{ $releaseName }}-{{ $name }}
-  namespace: {{ $namespace }}
-rules:
-  - apiGroups:
-      - ""
-      - extensions
-      - batch
-      - apps
-    verbs:
-      - get
-      - list
-    resources:
-      - daemonsets
-      - jobs
-      - pods
-      - services
-      - endpoints
----
-kind: RoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: {{ $releaseName }}-{{ $name }}
-  namespace: {{ $namespace }}
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: {{ $releaseName }}-{{ $name }}
-subjects:
-  - kind: ServiceAccount
-    name: {{ $releaseName }}-{{ $name }}
+{{ tuple "ue" . | include "oaisim.service_account" }}
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: {{ $name }}
-  namespace: {{ $namespace }}
+  name: ue
   labels:
-    app: oai-ue
+{{ tuple "ue" . | include "oaisim.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: oai-ue
-  serviceName: {{ $name | quote }}
+{{ tuple "ue" . | include "oaisim.metadata_labels" | indent 6 }}
   template:
     metadata:
       labels:
-        app: oai-ue
+{{ tuple "ue" . | include "oaisim.metadata_labels" | indent 8 }}
     spec:
     {{- if .Values.nodeSelectors.enabled }}
       nodeSelector:
         {{ .Values.nodeSelectors.ue.label }}: {{ .Values.nodeSelectors.ue.value }}
     {{- end }}
-      serviceAccountName: {{ $releaseName }}-{{ $name }}
+      serviceAccountName: ue
       hostNetwork: true
       initContainers:
         - name: ue-dep-check
@@ -106,7 +62,9 @@ spec:
             - name: COMMAND
               value: "echo done"
             - name: DEPENDENCY_POD_JSON
-              value: '[{"labels": {"app": "oai-enb"}, "requireSameNode": true}]'
+              value: '[{"labels": {"app": "enb"}, "requireSameNode": true}]'
+            - name: DEPENDENCY_JOBS
+              value: ue-setup-if
           command:
             - kubernetes-entrypoint
           volumeMounts:
@@ -136,7 +94,7 @@ spec:
               mountPath: /opt/oaisim/ue/scripts/ue-init.sh
               subPath: ue-init.sh
       containers:
-        - name: {{ $name }}
+        - name: ue
           image: {{ .Values.images.tags.ue | quote }}
           imagePullPolicy: {{ .Values.images.pullPolicy }}
           securityContext:
@@ -166,11 +124,11 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{ $name }}
+            name: ue
             defaultMode: 420
         - name: script
           configMap:
-            name: {{ $name }}
+            name: ue
             defaultMode: 493
         - name: pod-share
           emptyDir: {}
