@@ -49,3 +49,70 @@ Return PLMN from MCC and MNC.
 {{- $mnc := index . 1 -}}
 {{- printf "%s%s" $mcc $mnc -}}
 {{- end -}}
+
+{{/*
+Renders a set of standardised labels
+*/}}
+{{- define "oaisim.metadata_labels" -}}
+{{- $application := index . 0 -}}
+{{- $context := index . 1 -}}
+release: {{ $context.Release.Name }}
+app: {{ $application }}
+{{- end -}}
+
+{{/*
+Render ServiceAccount, Role, and RoleBinding required for kubernetes-entrypoint.
+*/}}
+{{- define "oaisim.service_account" -}}
+{{- $context := index . 1 -}}
+{{- $saName := index . 0 -}}
+{{- $saNamespace := $context.Release.Namespace }}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ $saName }}
+  namespace: {{ $saNamespace }}
+  labels:
+{{ tuple $saName $context | include "oaisim.metadata_labels" | indent 4 }}
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: RoleBinding
+metadata:
+  name: {{ $saName }}
+  namespace: {{ $saNamespace }}
+  labels:
+{{ tuple $saName $context | include "oaisim.metadata_labels" | indent 4 }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ $saName }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ $saName }}
+    namespace: {{ $saNamespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
+metadata:
+  name: {{ $saName }}
+  namespace: {{ $saNamespace }}
+  labels:
+{{ tuple $saName $context | include "oaisim.metadata_labels" | indent 4 }}
+rules:
+  - apiGroups:
+      - ""
+      - extensions
+      - batch
+      - apps
+    verbs:
+      - get
+      - list
+    resources:
+      - statefulsets
+      - jobs
+      - pods
+      - services
+      - endpoints
+      - configmaps
+{{- end -}}
