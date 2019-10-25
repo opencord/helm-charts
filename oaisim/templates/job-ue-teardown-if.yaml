@@ -14,22 +14,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-{{- $name := .Values.config.ue.name }}
 ---
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ $name }}-teardown-if
+  name: ue-teardown-if
   labels:
-    app: {{ $name }}
+{{ tuple "ue" . | include "oaisim.metadata_labels" | indent 4 }}
   annotations:
-    "helm.sh/hook": post-delete
-    "helm.sh/hook-delete-policy": hook-succeeded
+    "helm.sh/hook": "post-delete"
+    "helm.sh/hook-delete-policy": "before-hook-creation"
 spec:
   template:
     metadata:
       labels:
-        app: {{ $name }}
+{{ tuple "ue" . | include "oaisim.metadata_labels" | indent 8 }}
     spec:
     {{- if .Values.nodeSelectors.enabled }}
       nodeSelector:

@@ -19,7 +19,9 @@ limitations under the License.
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Values.config.ue.name }}
+  name: ue
+  labels:
+{{ tuple "ue" . | include "oaisim.metadata_labels" | indent 4 }}
 data:
   ue_comac_test.conf: |
     PLMN: {

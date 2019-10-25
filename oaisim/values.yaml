@@ -37,7 +37,6 @@ config:
     mnc: "01"
     mnc_length: 2
   enb:
-    name: enb
     mme:
       # Provide the IP address of MME.
       # MME provies nodePort for eNB access, so 127.0.0.1 should work
@@ -53,7 +52,6 @@ config:
         port: 2152
   ue:
     # 1 UE is supported for now
-    name: ue
     sim:
       msin: "4567891201"
       api_key: "465b5ce8b199b49faa5f0a2ee238a6bc"
