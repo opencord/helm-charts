@@ -15,7 +15,6 @@
 # limitations under the License.
 
 apiVersion: v1
-appVersion: "1.0"
 description: OMEC data plane services
 name: omec-data-plane
-version: 0.1.4
+version: 0.1.5
