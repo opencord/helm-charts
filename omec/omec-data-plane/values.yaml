@@ -17,7 +17,6 @@ images:
   tags:
     init: docker.io/omecproject/pod-init:1.0.0
     omecCni: docker.io/omecproject/omec-cni:1.0.0
-    sriovDp: docker.io/nfvpe/sriov-device-plugin:v3.0.0
     spgwu: docker.io/omecproject/ngic-dp:1.0.0
     depCheck: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
   pullPolicy: IfNotPresent
@@ -41,24 +40,6 @@ resources:
 config:
   sriov:
     enabled: true
-    # Provide interface used as a SR-IOV PF
-    # If your cluster has multiple nodes with different interface names,
-    # simply provide the whole list
-    resourceList:
-      # Provide PF name with its VFs are bounded to vfio-pci driver
-      vfio:
-        pfNames:
-          - eno1
-      # Provide PF name with its VFs bounded to PF's driver
-      # The driver name must be specified to prevent one interface is
-      # registered to both vfio and netdevice resource pools
-      # NOTE: netDevice is required to use CDN service
-      netDevice:
-        pfNames:
-          - eno1
-        drivers:
-          - i40evf
-          - ixgbevf
   spgwu:
     # Provide the S1U and SGI networks facing device name and IP address
     s1u:

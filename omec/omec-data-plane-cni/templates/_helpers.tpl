@@ -1,6 +1,5 @@
----
-# Copyright 2018-present Open Networking Foundation
-# Copyright 2018 Intel Corporation
+{{- /*
+# Copyright 2019-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,8 +12,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+*/ -}}
 
-apiVersion: v1
-description: OMEC data plane services
-name: omec-data-plane
-version: 0.1.5
+{{/*
+Renders a set of standardised labels.
+*/}}
+{{- define "omec-data-plane-cni.metadata_labels" -}}
+{{- $application := index . 0 -}}
+{{- $context := index . 1 -}}
+release: {{ $context.Release.Name }}
+app: {{ $application }}
+{{- end -}}
