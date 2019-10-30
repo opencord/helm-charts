@@ -49,6 +49,12 @@ spec:
             "-nni", "{{ .Values.nni }}",
             "-pon", "{{ .Values.pon }}",
             "-onu", "{{ .Values.onu }}",
+            {{ if .Values.auth -}}
+            "-auth",
+            {{ end -}}
+            {{ if .Values.dhcp -}}
+            "-dhcp",
+            {{ end -}}
           ]
           ports:
             - name: "bbsim-olt-id-{{ .Values.olt_id }}"
