@@ -30,12 +30,19 @@ topology_template:
     switch#leaf_1:
       type: tosca.nodes.Switch
       properties:
-        driver: ofdpa-ovs
+{{- if not $.Values.fabric.stratum.enabled }}
+        driver: "ofdpa-ovs"
+        ofId: of:0000000000000001
+{{- else }}
+        driver: "stratum-bmv2"
+        pipeconf: 'org.onosproject.pipelines.fabric'
+        managementAddress: "grpc://mininet-stratum:50001?device_id=1"
+        ofId: device:agg1
+{{- end }}
         ipv4Loopback: 192.168.0.201
         ipv4NodeSid: 17
         isEdgeRouter: True
         name: leaf_1
-        ofId: of:0000000000000001
         routerMac: 00:00:02:01:06:01
 
     # Setup the OLT switch ports
@@ -85,7 +92,11 @@ topology_template:
           {
             "dhcpl2relay" : {
               "useOltUplinkForServerPktInOut" : false,
+{{- if not $.Values.fabric.stratum.enabled }}
               "dhcpServerConnectPoints" : [ "of:0000000000000001/1" ]
+{{- else }}
+              "dhcpServerConnectPoints" : [ "device:agg1/1" ]
+{{- end }}
             }
           }
       requirements:
