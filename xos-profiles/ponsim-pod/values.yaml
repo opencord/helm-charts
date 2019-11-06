@@ -55,3 +55,7 @@ oltDpids:
   - of:00000da7f2c143c7
   - of:000032be2d4c2abc
   - of:0000ae9b8dcd58c7
+
+fabric:
+  stratum:
+    enabled: false

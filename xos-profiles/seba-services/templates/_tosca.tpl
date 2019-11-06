@@ -149,6 +149,18 @@ topology_template:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
 
+{{- if .fabric.stratum.enabled }}
+    onos_app#stratum-driver:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: {{ .fabric.stratum.driverAppId }}
+        app_id: {{ .fabric.stratum.driverAppId }}
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+{{- end }}
+
 {{- if and .fabric.stratum.enabled .fabric.stratum.pipeconfAppExternal }}
     onos_app#fabric-pipeconf:
       type: tosca.nodes.ONOSApp
