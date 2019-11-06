@@ -41,7 +41,11 @@ topology_template:
         device_type: ponsim_olt
         host: olt{{ $i }}.voltha.svc
         port: 50060
+{{- if not $.Values.fabric.stratum.enabled }}
         switch_datapath_id: of:0000000000000001
+{{- else }}
+        switch_datapath_id: device:agg1
+{{- end }}
         switch_port: "{{ add 2 $i }}"
         outer_tpid: "0x8100"
 {{- if $.Values.bandwidthProfiles }}
