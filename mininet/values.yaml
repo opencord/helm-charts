@@ -49,6 +49,8 @@ affinity:
             - olt
         topologyKey: kubernetes.io/hostname
 
+stratumEnabled: false
+topoScript: '/toposcripts/topo.py'
 onosOpenflowSvc: "onos-openflow.default.svc.cluster.local"
 vlanMatchDepth: 2
 enableMulticast: true

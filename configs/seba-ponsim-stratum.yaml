@@ -1,0 +1,63 @@
+---
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Values file for deploying SEBA with Ponsim and Stratum
+# Use this file to deploy the service versions specified in the Helm charts.
+
+images:
+  # Mininet image
+  mininet:
+    repository: 'opencord/mn-stratum-siab'
+    tag: 'master'
+    pullPolicy: Always
+
+# voltha
+etcd-cluster:
+  clusterSize: 1
+
+# in workflow/att-workflow service chart
+att-workflow-driver:
+  # this is mandatory, it's needed to correctly configure the kafka endpoint
+  kafkaService: cord-kafka
+
+# in workflow/tt-workflow service chart
+tt-workflow-driver:
+  image:
+    repository: andybavier/test-image-synchronizer
+    tag: tt-workflow-driver
+
+  # this is mandatory, it's needed to correctly configure the kafka endpoint
+  kafkaService: cord-kafka
+
+# in mininet chart
+# FIXME: check if multicast is working
+enableMulticast: false
+topoScript: '/toposcripts/topo_stratum.py'
+stratumEnabled: true
+
+# in ponsim-pod chart
+bandwidthProfiles: true
+legacyPonsim: false
+
+# fabric
+fabric:
+  enabled: true
+  stratum:
+    driverAppId: 'org.onosproject.drivers.bmv2'
+    # Enable stratum
+    enabled: true
+    # Use BMv2 pipeconf (already in ONOS)
+    pipeconfAppExternal: false
+    pipeconfAppId: 'org.onosproject.pipelines.fabric'
