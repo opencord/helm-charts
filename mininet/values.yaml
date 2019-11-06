@@ -27,6 +27,9 @@ images:
     tag: '{{ .Chart.AppVersion }}'
     pullPolicy: IfNotPresent
 
+services:
+  stratumPort: 50001
+
 global:
   registry: ''
 
@@ -49,6 +52,8 @@ affinity:
             - olt
         topologyKey: kubernetes.io/hostname
 
+stratumEnabled: false
+topoScript: '/toposcripts/topo.py'
 onosOpenflowSvc: "onos-openflow.default.svc.cluster.local"
 vlanMatchDepth: 2
 enableMulticast: true
