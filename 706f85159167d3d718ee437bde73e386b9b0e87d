@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2d09b14c_2e37e9b0",
+        "filename": "configs/seba-ponsim-stratum.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2019-11-06T01:35:31Z",
+      "side": 1,
+      "message": "My advice is not to depend on a custom image, but rather something the whole community can easily find and maintain. I.e., where is the Dockerfile of steven30801/mn-stratum? Adding brctl to mn-stratum seems a meaningful addition to a mininet image. I\u0027m not sure why dnsmasq is needed. If we decide not to modify the official mn-stratum Dockerfile, is there any other repo where we can commit this file (and perhaps have CI jobs to regularly update images on Docker Hub)",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 28
+      },
+      "revId": "706f85159167d3d718ee437bde73e386b9b0e87d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "52e8855d_47709bb9",
+        "filename": "configs/seba-ponsim-stratum.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2019-11-06T01:35:31Z",
+      "side": 1,
+      "message": "Multicast (as meant by the segmentrouting app in ONOS) was working until December of last year. I\u0027m not sure if there are new changes to multicast support in SR that break support for fabric.p4.",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 38
+      },
+      "revId": "706f85159167d3d718ee437bde73e386b9b0e87d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ea989e57_dec9a17b",
+        "filename": "mininet/toposcripts/topo_mn_stratum.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2019-11-06T01:35:31Z",
+      "side": 1,
+      "message": "I don\u0027t see any controller being added",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 38
+      },
+      "revId": "706f85159167d3d718ee437bde73e386b9b0e87d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3eab2a67_2b7e1fbe",
+        "filename": "xos-profiles/ponsim-pod/tosca/030-fabric.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2019-11-06T01:35:31Z",
+      "side": 1,
+      "message": "\"type: tosca.nodes.Switch \\n properties:\" is shared by both branches, so it can be moved out of the conditional block",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "706f85159167d3d718ee437bde73e386b9b0e87d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
