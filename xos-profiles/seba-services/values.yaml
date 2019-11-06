@@ -59,6 +59,7 @@ fabric:
   # required to control the switch.
   stratum:
     enabled: false
+    driverAppId: "org.onosproject.drivers.bmv2"
     # Pipeconfs might contain switch vendor-specific P4 configurations that
     # cannot be made public. For this reason, an URL to the corresponding .oar
     # file must be explicitly provided.
