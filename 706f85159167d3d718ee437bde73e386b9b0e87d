@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "03e2b257_7d223e3f",
+        "filename": "configs/seba-ponsim-stratum.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2019-11-07T01:24:41Z",
+      "side": 1,
+      "message": "I agree. I can send you the main missing dependencies for running SEBA.\ndnsmasq is needed to run the DHCP server.\nI would also add the PPPoE server package so we can use the same image for both embedded PPPoE and external BNG.",
+      "parentUuid": "2d09b14c_2e37e9b0",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 28
+      },
+      "revId": "706f85159167d3d718ee437bde73e386b9b0e87d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "52e8855d_47709bb9",
         "filename": "configs/seba-ponsim-stratum.yaml",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2019-11-06T01:35:31Z",
       "side": 1,
       "message": "Multicast (as meant by the segmentrouting app in ONOS) was working until December of last year. I\u0027m not sure if there are new changes to multicast support in SR that break support for fabric.p4.",
+      "range": {
+        "startLine": 48,
+        "startChar": 2,
+        "endLine": 48,
+        "endChar": 38
+      },
+      "revId": "706f85159167d3d718ee437bde73e386b9b0e87d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0f3ab55a_f18db960",
+        "filename": "configs/seba-ponsim-stratum.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2019-11-07T01:24:41Z",
+      "side": 1,
+      "message": "WIP: I need to check if it is working on mininet with stratum rather than on ONOS and fabric.p4",
+      "parentUuid": "52e8855d_47709bb9",
       "range": {
         "startLine": 48,
         "startChar": 2,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "e95caec0_5b117ef3",
+        "filename": "mininet/toposcripts/topo_mn_stratum.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2019-11-07T01:24:41Z",
+      "side": 1,
+      "message": "Garbage from old Mininet script, we should not need any controller definition in Mininet.\n\nDone",
+      "parentUuid": "ea989e57_dec9a17b",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 38
+      },
+      "revId": "706f85159167d3d718ee437bde73e386b9b0e87d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3eab2a67_2b7e1fbe",
         "filename": "xos-profiles/ponsim-pod/tosca/030-fabric.yaml",
         "patchSetId": 1
@@ -82,6 +154,30 @@
       "writtenOn": "2019-11-06T01:35:31Z",
       "side": 1,
       "message": "\"type: tosca.nodes.Switch \\n properties:\" is shared by both branches, so it can be moved out of the conditional block",
+      "range": {
+        "startLine": 32,
+        "startChar": 6,
+        "endLine": 33,
+        "endChar": 17
+      },
+      "revId": "706f85159167d3d718ee437bde73e386b9b0e87d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29380321_8e1599fa",
+        "filename": "xos-profiles/ponsim-pod/tosca/030-fabric.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2019-11-07T01:24:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3eab2a67_2b7e1fbe",
       "range": {
         "startLine": 32,
         "startChar": 6,
