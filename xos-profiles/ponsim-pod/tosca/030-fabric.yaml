@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+{{- if $.Values.bng.external.enabled }}
 tosca_definitions_version: tosca_simple_yaml_1_0
 imports:
   - custom_types/switch.yaml
@@ -103,3 +104,212 @@ topology_template:
         - service_instance:
             node: onos_app#dhcpl2relay
             relationship: tosca.relationships.BelongsToOne
+{{- end }}
+
+{{- if $.Values.bng.embedded.enabled }}
+tosca_definitions_version: tosca_simple_yaml_1_0
+imports:
+  - custom_types/switch.yaml
+  - custom_types/onosapp.yaml
+  - custom_types/switchport.yaml
+  - custom_types/portinterface.yaml
+  - custom_types/vrouterserviceinstance.yaml
+  - custom_types/vrouterstaticroute.yaml
+  - custom_types/fabricipaddress.yaml
+  - custom_types/serviceinstanceattribute.yaml
+
+description: Configures the Ponsim SEBA POD fabric
+
+topology_template:
+  node_templates:
+    # Fabric configuration
+    switch#agg_sw:
+      type: tosca.nodes.Switch
+      properties:
+        driver: "stratum-bmv2"
+        pipeconf: 'org.onosproject.pipelines.fabric-bng'
+        managementAddress: "grpc://mininet-stratum:50001?device_id=1"
+        ipv4Loopback: 192.168.0.201
+        ipv4NodeSid: 17
+        isEdgeRouter: True
+        ofId: device:agg1
+        name: AGG SWITCH
+        routerMac: 00:00:02:01:06:01
+
+# Setup the OLT switch ports
+{{- range $i, $junk := until (.Values.numOlts|int) }}
+
+    port#olt{{ $i }}_port:
+      type: tosca.nodes.SwitchPort
+      properties:
+        portId: {{ add 3 $i }}
+        host_learning: false
+      requirements:
+        - switch:
+            node: switch#agg_sw
+            relationship: tosca.relationships.BelongsToOne
+
+    interface#access_interface_{{ $i }}:
+      type: tosca.nodes.PortInterface
+      properties:
+        name: access
+      requirements:
+        - port:
+            node: port#olt{{ $i }}_port
+            relationship: tosca.relationships.BelongsToOne
+
+    ip#access_ip_{{ $i }}:
+      type: tosca.nodes.FabricIpAddress
+      properties:
+        ip: "10.255.255.{{ $i }}/24"
+        description: access_ip_{{ $i }}
+      requirements:
+        - interface:
+            node: interface#access_interface_{{ $i }}
+            relationship: tosca.relationships.BelongsToOne
+{{- end }}
+
+    # Port connected to the PPPoE Server
+    port#pppoe_server_port:
+      type: tosca.nodes.SwitchPort
+      properties:
+        portId: 1
+      requirements:
+        - switch:
+            node: switch#agg_sw
+            relationship: tosca.relationships.BelongsToOne
+
+    interface#ppoe_server_interface_1:
+      type: tosca.nodes.PortInterface
+      properties:
+        vlanUntagged: 100
+        name: pppoe_server
+      requirements:
+        - port:
+            node: port#pppoe_server_port
+            relationship: tosca.relationships.BelongsToOne
+
+    # Port connected to the Upstream router
+    port#upstream_port:
+      type: tosca.nodes.SwitchPort
+      properties:
+        portId: 2
+      requirements:
+        - switch:
+            node: switch#agg_sw
+            relationship: tosca.relationships.BelongsToOne
+
+    interface#upstream_interface_1:
+      type: tosca.nodes.PortInterface
+      properties:
+        vlanUntagged: 200
+        name: upstream
+      requirements:
+        - port:
+            node: port#upstream_port
+            relationship: tosca.relationships.BelongsToOne
+
+    ip#upstream_ip_1:
+      type: tosca.nodes.FabricIpAddress
+      properties:
+        ip: "10.10.10.254/24"
+        description: upstream_ip_1
+      requirements:
+        - interface:
+            node: interface#upstream_interface_1
+            relationship: tosca.relationships.BelongsToOne
+
+    # Upstream host configuration
+    upstream-host-config:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration
+        value: >
+          {
+            "hosts": {
+              "00:66:77:88:99:AA/None": {
+                "basic": {
+                  "name": "Upstream",
+                  "ips": [
+                    "10.10.10.1"
+                  ],
+                  "locations": [
+                    "device:agg1/2"
+                  ]
+                }
+              }
+            }
+          }
+      requirements:
+        - service_instance:
+            node: ip#upstream_ip_1
+            relationship: tosca.relationships.BelongsToOne
+
+    onos_app#segmentrouting:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.onosproject.segmentrouting
+        must-exist: true
+
+    segmentrouting-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/configuration/org.onosproject.segmentrouting.SegmentRoutingManager?preset=true
+        value: >
+          {
+              "routeSimplification": "false",
+              "routeDoubleTaggedHosts": "true",
+              "respondToUnknownHosts": "true",
+              "defaultInternalVlan": "4094",
+              "pwTransportVlan": "4090",
+              "activeProbing": "true",
+              "singleHomedDown": "false",
+              "symmetricProbing": "false"
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#segmentrouting
+            relationship: tosca.relationships.BelongsToOne
+
+    # VRouter and default route.
+    vrouter#my_vrouter:
+      type: tosca.nodes.VRouterServiceInstance
+      properties:
+        name: my_vrouter
+
+    route#default_route:
+      type: tosca.nodes.VRouterStaticRoute
+      properties:
+        prefix: "0.0.0.0/0"
+        next_hop: "10.10.10.1"
+      requirements:
+        - vrouter:
+            node: vrouter#my_vrouter
+            relationship: tosca.relationships.BelongsToOne
+
+    # BNG App and its configuration for the PPPoE server relay.
+    onos_app#bng:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: org.opencord.bng
+        must-exist: true
+
+    bng-config-attr:
+      type: tosca.nodes.ServiceInstanceAttribute
+      properties:
+        name: /onos/v1/network/configuration/apps/org.opencord.bng
+        value: >
+          {
+            "pppoerelay": {
+              "oltConnectPoint": "device:agg1/3",
+              "pppoeServerConnectPoint": "device:agg1/1"
+            },
+            "bng": {
+              "bnguDeviceId": "device:agg1"
+            }
+          }
+      requirements:
+        - service_instance:
+            node: onos_app#bng
+            relationship: tosca.relationships.BelongsToOne
+{{- end }}
