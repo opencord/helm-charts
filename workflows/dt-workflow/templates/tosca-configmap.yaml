@@ -1,5 +1,6 @@
 ---
-# Copyright 2018-present Open Networking Foundation
+
+# Copyright 2019-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,11 +15,13 @@
 # limitations under the License.
 
 apiVersion: v1
-name: ponsim-pod
-description: A Helm chart for loading the Ponsim pod's TOSCA files into XOS
-icon: https://guide.opencord.org/logos/xos.svg
-
-version: 1.4.1
-
-# xosproject/tosca-loader version
-appVersion: 1.3.1
+kind: ConfigMap
+metadata:
+  name: dt-workflow-tosca
+data:
+  010-fixtures.yaml: |
+{{ include "dt-workflow-driver.serviceTosca"  (index .Values "dt-workflow-driver") | indent 4 }}
+  100-onos-apps.yaml: |
+{{ include "dt-workflow.onosTosca" . | indent 4 }}
+  300-service-graph.yaml: |
+{{ include "dt-workflow.serviceGraphTosca" . | indent 4 }}

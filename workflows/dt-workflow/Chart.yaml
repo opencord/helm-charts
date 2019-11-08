@@ -1,5 +1,5 @@
 ---
-# Copyright 2018-present Open Networking Foundation
+# Copyright 2019-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,11 +14,10 @@
 # limitations under the License.
 
 apiVersion: v1
-name: ponsim-pod
-description: A Helm chart for loading the Ponsim pod's TOSCA files into XOS
-icon: https://guide.opencord.org/logos/xos.svg
-
-version: 1.4.1
+name: dt-workflow
+description: A Helm chart for XOS's "dt-workflow"
+icon: https://guide.opencord.org/logos/cord.svg
+version: 1.0.0
 
 # xosproject/tosca-loader version
 appVersion: 1.3.1
