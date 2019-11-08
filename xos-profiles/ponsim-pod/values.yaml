@@ -60,3 +60,7 @@ fabric:
   stratum:
     enabled: false
 bng:
+  external:
+    enabled: true
+  embedded:
+    enabled: false
