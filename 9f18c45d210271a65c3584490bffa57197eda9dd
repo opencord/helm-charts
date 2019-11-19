@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f4e55a9_907bac71",
+        "filename": "xos-profiles/ponsim-pod/values.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2019-11-19T19:50:28Z",
+      "side": 1,
+      "message": "What is this for?",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 3
+      },
+      "revId": "9f18c45d210271a65c3584490bffa57197eda9dd",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
