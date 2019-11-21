@@ -1,0 +1,101 @@
+{{- /*
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+*/ -}}
+
+{{ tuple "accelleran-cbrs-ric" . | include "accelleran-cbrs-common.service_account" }}
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: accelleran-cbrs-ric
+  labels:
+{{ tuple "accelleran-cbrs-ric" . | include "accelleran-cbrs-common.metadata_labels" | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+{{ tuple "accelleran-cbrs-ric" . | include "accelleran-cbrs-common.metadata_labels" | indent 6 }}
+  serviceName: accelleran-cbrs-ric
+  template:
+    metadata:
+      labels:
+{{ tuple "accelleran-cbrs-ric" . | include "accelleran-cbrs-common.metadata_labels" | indent 8 }}
+    spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.accelleranCBRSCommon.label }}: {{ .Values.nodeSelectors.accelleranCBRSCommon.value }}
+    {{- end }}
+      serviceAccountName: accelleran-cbrs-ric
+      initContainers:
+      - name: redis-init-dep-check
+        image: {{ .Values.images.tags.depCheck }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: PATH
+          value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
+        - name: COMMAND
+          value: "echo done"
+        - name: DEPENDENCY_JOBS
+          value: job-redis-init
+      containers:
+      - name: ric
+        image: {{ .Values.images.tags.ric }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - NET_ADMIN
+            - IPC_LOCK
+            - SYS_NICE
+        env:
+        - name: ZLOG_CONF_PATH
+          value: /zlog.conf
+        - name: BOOTSTRAP_FILENAME
+          value: /bootstrap
+        - name: LD_LIBRARY_PATH
+          value: /data/
+        - name: FAP_DB_PATH
+          value: /data/
+        command: ["/data/ric"]
+        {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.accelleranCBRSCommon | indent 10 }}
+        {{- end }}
+        volumeMounts:
+        - name: ric-config-volume
+          mountPath: /bootstrap
+          subPath: bootstrap
+        - name: ric-config-volume
+          mountPath: /zlog.conf
+          subPath: zlog.conf
+      volumes:
+      - name: ric-config-volume
+        configMap:
+          name: accelleran-cbrs-ric-cm
