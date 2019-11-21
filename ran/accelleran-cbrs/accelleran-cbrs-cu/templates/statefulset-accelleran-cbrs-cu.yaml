@@ -1,0 +1,116 @@
+{{- /*
+# Copyright 2019-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+*/ -}}
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: accelleran-cbrs-cu-{{ .Values.config.vranL3.instanceId }}
+  labels:
+    deployedCellId: {{ .Values.config.vranL3.instanceId }}
+{{ tuple "accelleran-cbrs-cu" . | include "accelleran-cbrs-cu.metadata_labels" | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+{{ tuple "accelleran-cbrs-cu" . | include "accelleran-cbrs-cu.metadata_labels" | indent 6 }}
+  serviceName: accelleran-cbrs-cu-{{ .Values.config.vranL3.instanceId }}
+  template:
+    metadata:
+      labels:
+        deployedCellId: {{ .Values.config.vranL3.instanceId }}
+{{ tuple "accelleran-cbrs-cu" . | include "accelleran-cbrs-cu.metadata_labels" | indent 8 }}
+    spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.accelleranCBRSCU.label }}: {{ .Values.nodeSelectors.accelleranCBRSCU.value }}
+    {{- end }}
+      initContainers:
+      - name: cu-init
+        image: {{ .Values.images.tags.initCU }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        command: [ "sh",  "-c"]
+        args:
+        - >
+          iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP;
+          if chroot /mnt/host-rootfs modinfo nf_conntrack_proto_sctp > /dev/null 2>&1; then \
+              chroot /mnt/host-rootfs modprobe nf_conntrack_proto_sctp; \
+          fi; \
+        volumeMounts:
+        - name: host-rootfs
+          mountPath: /mnt/host-rootfs
+      containers:
+      - name: vran-l3
+        image: {{ .Values.images.tags.vranL3 }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        env:
+        - name: ZLOG_CONF_PATH
+          value: /zlog.conf
+        - name: BOOTSTRAP_FILENAME
+          value: /bootstrap
+        - name: LD_LIBRARY_PATH
+          value: /data/
+        - name: FAP_DB_PATH
+          value: /data/
+        command: ["sh", "-c"]
+        args:
+        - sqlite3 /data/datastoreRemRw.db "update FapServiceCellConfigLteEpcPlmnList set PLMNID='{{ .Values.config.vranL3.plmnId }}';";
+          sqlite3 /data/datastoreRemRw.db "update FapServiceFapControlLteGateway set SecGWServer1='{{ .Values.config.mme.ip }}';";
+          sqlite3 /data/datastoreRemRw.db "update FapServiceFapControlLteGateway set SecGWServer2='{{ .Values.config.mme.ip }}';";
+          sqlite3 /data/datastoreRemRw.db "update FapServiceFapControlLteGateway set SecGWServer3='{{ .Values.config.mme.ip }}';";
+          sqlite3 /data/datastoreRemRw.db "update FapServiceFapControlLteGateway_S1SigLinkServerListList set S1SigLinkServerList='{{ .Values.config.mme.ip }}';";
+          sqlite3 /data/datastoreRemRw.db "update FapServiceCellConfigLteRanRf set FreqBandIndicator='{{ .Values.config.vranL3.freqBand }}';";
+          sqlite3 /data/datastore.db "update featureActivation set good1PPSRequired=0;";
+          sqlite3 /data/datastoreRemRw.db "update FapServiceCellConfigLteRanRf_EARFCNDLList set EARFCNDL='{{ .Values.config.vranL3.earfcnDl }}';";
+          sqlite3 /data/datastoreRemRw.db "update FapServiceCellConfigLteRanRf_EARFCNULList set EARFCNUL='{{ .Values.config.vranL3.earfcnUl }}';";
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICEFAPCONTROLLTEGATEWAYS1SIGLINKSERVERLIST[0] S1SIGLINKSERVERLIST {{ .Values.config.mme.ip }};
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICEFAPCONTROLLTEGATEWAY_S1SIGLINKSERVERLISTLIST[0] S1SIGLINKSERVERLIST {{ .Values.config.mme.ip }};
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF FREQBANDINDICATOR {{ .Values.config.vranL3.freqBand }};
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FEATUREACTIVATION GOOD1PPSREQUIRED False;
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTEEPCPLMNLIST[0] PLMNID {{ .Values.config.vranL3.plmnId }};
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_EARFCNDLLIST EARFCNDL {{ .Values.config.vranL3.earfcnDl }};
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_EARFCNULLIST EARFCNUL {{ .Values.config.vranL3.earfcnUl }};
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICEFAPCONTROLLTEGATEWAYS1SIGLINKSERVERLIST[0];
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICEFAPCONTROLLTEGATEWAY_S1SIGLINKSERVERLISTLIST[0];
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF;
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FEATUREACTIVATION;
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTEEPCPLMNLIST[0];
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_EARFCNDLLIST;
+          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_EARFCNULLIST;
+          sleep 30;
+          /data/l3service;
+        securityContext:
+          privileged: true
+        {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.accelleranCBRSCU | indent 10 }}
+        {{- end }}
+        volumeMounts:
+        - name: l3-config-volume
+          mountPath: /bootstrap
+          subPath: bootstrap
+        - name: l3-config-volume
+          mountPath: /zlog.conf
+          subPath: zlog.conf
+      volumes:
+      - name: l3-config-volume
+        configMap:
+          name: accelleran-cbrs-cu-{{ .Values.config.vranL3.instanceId }}-cm
+      - name: host-rootfs
+        hostPath:
+          path: /
