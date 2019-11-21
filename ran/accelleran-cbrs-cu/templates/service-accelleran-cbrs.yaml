@@ -1,0 +1,83 @@
+{{- /*
+# Copyright 2018-present Open Networking Foundation
+# Copyright 2018 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+*/ -}}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: accelleran-cbrs-cu
+  labels:
+{{ tuple "accelleran-cbrs-cu" . | include "accelleran-cbrs-cu.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "accelleran-cbrs-cu" . | include "accelleran-cbrs-cu.metadata_labels" | indent 4 }}
+  ports:
+  - name: nats-port
+    port: {{ .Values.config.nats.ports.natsPort.port }}
+    protocol: {{ .Values.config.nats.ports.natsPort.protocol }}
+  - name: cluster-port
+    port: {{ .Values.config.nats.ports.clusterPort.port }}
+    protocol: {{ .Values.config.nats.ports.clusterPort.protocol }}
+  - name: console-port
+    port: {{ .Values.config.nats.ports.consolePort.port }}
+    protocol: {{ .Values.config.nats.ports.consolePort.protocol }}
+  - name: redis-port
+    port: {{ .Values.config.redis.ports.redisPort.port }}
+    protocol: {{ .Values.config.redis.ports.redisPort.protocol }}
+  - name: ric-web-port
+    port: {{ .Values.config.ricWeb.ports.ricWebPort.port }}
+    protocol: {{ .Values.config.ricWeb.ports.ricWebPort.protocol }}
+  - name: s1ap-port
+    port: {{ .Values.config.vranL3.ports.s1ap.port }}
+    protocol: {{ .Values.config.vranL3.ports.s1ap.protocol }}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: accelleran-cbrs-cu-external
+  labels:
+{{ tuple "accelleran-cbrs-cu" . | include "accelleran-cbrs-cu.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "accelleran-cbrs-cu" . | include "accelleran-cbrs-cu.metadata_labels" | indent 4 }}
+  type: NodePort
+  ports:
+  - name: nats-port
+    port: {{ .Values.config.nats.ports.natsPort.port }}
+    nodePort: {{ .Values.config.nats.ports.natsPort.nodePort }}
+    protocol: {{ .Values.config.nats.ports.natsPort.protocol }}
+  - name: cluster-port
+    port: {{ .Values.config.nats.ports.clusterPort.port }}
+    nodePort: {{ .Values.config.nats.ports.clusterPort.nodePort }}
+    protocol: {{ .Values.config.nats.ports.clusterPort.protocol }}
+  - name: console-port
+    port: {{ .Values.config.nats.ports.consolePort.port }}
+    nodePort: {{ .Values.config.nats.ports.consolePort.nodePort }}
+    protocol: {{ .Values.config.nats.ports.consolePort.protocol }}
+  - name: redis-port
+    port: {{ .Values.config.redis.ports.redisPort.port }}
+    nodePort: {{ .Values.config.redis.ports.redisPort.nodePort }}
+    protocol: {{ .Values.config.redis.ports.redisPort.protocol }}
+  - name: ric-web-port
+    port: {{ .Values.config.ricWeb.ports.ricWebPort.port }}
+    nodePort: {{ .Values.config.ricWeb.ports.ricWebPort.nodePort }}
+    protocol: {{ .Values.config.ricWeb.ports.ricWebPort.protocol }}
+  - name: s1ap-port
+    port: {{ .Values.config.vranL3.ports.s1ap.port }}
+    nodePort: {{ .Values.config.vranL3.ports.s1ap.nodePort }}
+    protocol: {{ .Values.config.vranL3.ports.s1ap.protocol }}

@@ -1,0 +1,150 @@
+{{- /*
+# Copyright 2018-present Open Networking Foundation
+# Copyright 2018 Intel Corporation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+*/ -}}
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: accelleran-cbrs-cu
+  labels:
+{{ tuple "accelleran-cbrs-cu" . | include "accelleran-cbrs-cu.metadata_labels" | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+{{ tuple "accelleran-cbrs-cu" . | include "accelleran-cbrs-cu.metadata_labels" | indent 6 }}
+  serviceName: accelleran-cbrs-cu
+  template:
+    metadata:
+      labels:
+{{ tuple "accelleran-cbrs-cu" . | include "accelleran-cbrs-cu.metadata_labels" | indent 8 }}
+    spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.accelleranCBRSCU.label }}: {{ .Values.nodeSelectors.accelleranCBRSCU.value }}
+    {{- end }}
+      initContainers:
+      - name: cu-init
+        image: {{ .Values.images.tags.initCU }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+        command: [ "sh",  "-c"]
+        args:
+        - >
+          iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP;
+          if chroot /mnt/host-rootfs modinfo nf_conntrack_proto_sctp > /dev/null 2>&1; then \
+              chroot /mnt/host-rootfs modprobe nf_conntrack_proto_sctp; \
+          fi; \
+        volumeMounts:
+        - name: host-rootfs
+          mountPath: /mnt/host-rootfs
+      containers:
+      - name: nats
+        image: {{ .Values.images.tags.nats }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        command: ["/entrypoint.sh"]
+        args: ["/usr/bin/gnatsd",  "-c",  "/etc/gnatsd.conf" ]
+        {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.accelleranCBRSCU | indent 10 }}
+        {{- end }}
+      - name: redis
+        image: {{ .Values.images.tags.redis }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.accelleranCBRSCU | indent 10 }}
+        {{- end }}
+        volumeMounts:
+        - mountPath: /data
+          name: redis-data-volume
+      - name: vran-l3
+        image: {{ .Values.images.tags.vranL3 }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        env:
+        - name: ZLOG_CONF_PATH
+          value: /zlog.conf
+        - name: BOOTSTRAP_FILENAME
+          value: /bootstrap
+        - name: LD_LIBRARY_PATH
+          value: /data/
+        - name: FAP_DB_PATH
+          value: /data/
+        command: ["/data/l3service"]
+        {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.accelleranCBRSCU | indent 10 }}
+        {{- end }}
+        volumeMounts:
+        - name: l3-config-volume
+          mountPath: /bootstrap
+          subPath: bootstrap
+        - name: l3-config-volume
+          mountPath: /zlog.conf
+          subPath: zlog.conf
+      - name: ric
+        image: {{ .Values.images.tags.ric }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          privileged: true
+          capabilities:
+            add:
+            - NET_ADMIN
+            - IPC_LOCK
+            - SYS_NICE
+        env:
+        - name: ZLOG_CONF_PATH
+          value: /zlog.conf
+        - name: BOOTSTRAP_FILENAME
+          value: /bootstrap
+        - name: LD_LIBRARY_PATH
+          value: /data/
+        - name: FAP_DB_PATH
+          value: /data/
+        command: ["/data/ric"]
+        {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.accelleranCBRSCU | indent 10 }}
+        {{- end }}
+        volumeMounts:
+        - name: ric-config-volume
+          mountPath: /bootstrap
+          subPath: bootstrap
+        - name: ric-config-volume
+          mountPath: /zlog.conf
+          subPath: zlog.conf
+      - name: ric-web
+        image: {{ .Values.images.tags.ricWeb }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        env:
+        - name: NATS_URL
+          value: "accelleran-cbrs-cu:4222"
+      volumes:
+      - name: redis-data-volume 
+        hostPath:
+          path: /tmp/redis-storage
+          type: DirectoryOrCreate
+      - name: l3-config-volume
+        configMap:
+          name: accelleran-cbrs-cu-vranl3-config
+      - name: ric-config-volume
+        configMap:
+          name: accelleran-cbrs-cu-ric-config
+      - name: host-rootfs
+        hostPath:
+          path: /
