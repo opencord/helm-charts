@@ -283,7 +283,9 @@
   ],
   "schemaVersion": 16,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "seba"
+  ],
   "templating": {
     "list": []
   },

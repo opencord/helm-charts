@@ -13,6 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+apiVersion: v1
 name: nem-monitoring
-description: Time Series Storage and Dashboard for SEBA
-version: 1.0.14
+description: Time Series Storage and Dashboard for CORD
+icon: https://guide.opencord.org/logos/cord.svg
+
+version: 1.1.0
