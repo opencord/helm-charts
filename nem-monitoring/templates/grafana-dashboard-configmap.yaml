@@ -48,3 +48,9 @@ data:
   omec.json: |
 {{ .Files.Get "grafana-dashboards/omec.json" | indent 4 }}
 {{- end }}
+{{- if .Values.dashboards.aether }}
+  aether-clusters.json: |
+{{ .Files.Get "grafana-dashboards/aether-clusters.json" | indent 4 }}
+  aether-edge-pods.json: |
+{{ .Files.Get "grafana-dashboards/aether-edge-pods.json" | indent 4 }}
+{{- end }}
