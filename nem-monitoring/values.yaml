@@ -105,3 +105,4 @@ dashboards:
   aaa: true
   voltha: true
   omec: false
+  aether: false
