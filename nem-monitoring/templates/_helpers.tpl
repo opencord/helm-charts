@@ -32,3 +32,20 @@ target:
   port: 8080
   description: http target for prometheus
 {{- end -}}
+
+{{/*
+Create a default fully qualified kpi-exporter name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "kpi-exporter.fullname" -}}
+{{- if .Values.kpi_exporter.fullnameOverride -}}
+{{- .Values.kpi_exporter.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default "nem-kpi-exporter" .Values.kpi_exporter.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
