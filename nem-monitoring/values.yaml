@@ -23,6 +23,9 @@ images:
     pullPolicy: 'Always'
 
 kpi_exporter:
+  enabled: true
+  fullnameOverride: ''
+  nameOverride: ''
   nem_kpi_exporter_nodePort: 31080
   nem_kpi_exporter_replicas: 2
   kpi_broker: cord-kafka:9092
@@ -59,7 +62,7 @@ prometheus:
       scrape_interval: 15s
       static_configs:
         - targets:
-            - kpi-exporter:8080
+            - nem-monitoring-nem-kpi-exporter:8080
     - job_name: 'node-exporter'
       metrics_path: /metrics
       scrape_interval: 15s
