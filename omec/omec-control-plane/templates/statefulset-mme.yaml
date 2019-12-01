@@ -136,6 +136,8 @@ spec:
           subPath: mme-run.sh
         - name: shared-data
           mountPath: /opt/mme/config/shared
+        - name: configs
+          mountPath: /opt/mme/config
         - name: shared-app
           mountPath: /tmp
       - name: s1ap-app
