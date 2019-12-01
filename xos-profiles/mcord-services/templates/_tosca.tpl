@@ -31,8 +31,8 @@ topology_template:
       properties:
           name: onos
           kind: data
-          rest_hostname: {{ .onosFabricRestService | quote }}
-          rest_port: 8181
+          rest_hostname: {{ .onosFabricRestHost | quote }}
+          rest_port: {{ .onosFabricRestPort }}
 
     onos_app#segmentrouting:
       type: tosca.nodes.ONOSApp
@@ -82,8 +82,8 @@ topology_template:
       properties:
           name: onos-progran
           kind: data
-          rest_hostname: {{ .onosProgranRestService | quote }}
-          rest_port: 8181
+          rest_hostname: {{ .onosProgranRestHost | quote }}
+          rest_port: {{ .onosProgranRestPort }}
 
     onos_app#progran:
       type: tosca.nodes.ONOSApp
