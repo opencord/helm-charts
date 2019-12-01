@@ -44,6 +44,10 @@ cp /opt/mme/config/shared/config.json /opt/mme/config/shared/s1ap.json
 cp /opt/mme/config/shared/config.json /opt/mme/config/shared/s6a.json
 cp /opt/mme/config/s6a_fd.conf /opt/mme/config/shared/s6a_fd.conf
 
+#This multiple copies of config needs some cleanup. For now I want 
+#that after running mme_init config to be present in the target directory
+cp /opt/mme/config/shared/* /openmme/target/conf/
+
 # Generate certs
 MME_IDENTITY={{ tuple "mme" "identity" . | include "omec-control-plane.diameter_endpoint" | quote }};
 DIAMETER_HOST=$(echo $MME_IDENTITY | cut -d'.' -f1)
