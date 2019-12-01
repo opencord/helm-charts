@@ -33,8 +33,10 @@ xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
 # ONOS
-onosFabricRestService: "onos-ui.default.svc.cluster.local"
-onosProgranRestService: "onos-progran-ui.default.svc.cluster.local"
+onosFabricRestHost: "onos-ui.default.svc.cluster.local"
+onosFabricRestPort: 8181
+onosProgranRestHost: "onos-progran-ui.default.svc.cluster.local"
+onosProgranRestPort: 8181
 
 # Services
 fabric:
