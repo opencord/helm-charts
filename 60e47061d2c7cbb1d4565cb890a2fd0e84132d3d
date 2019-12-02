@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b9f71474_e74f9975",
+        "filename": "omec/omec-control-plane/templates/bin/_mme-init.sh.tpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2019-12-02T18:34:54Z",
+      "side": 1,
+      "message": "Please remove trailing white space. And I think it would be better to leave more clear comment like \"TODO: clean up multiple copies of config files\".",
+      "range": {
+        "startLine": 47,
+        "startChar": 66,
+        "endLine": 47,
+        "endChar": 67
+      },
+      "revId": "60e47061d2c7cbb1d4565cb890a2fd0e84132d3d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
