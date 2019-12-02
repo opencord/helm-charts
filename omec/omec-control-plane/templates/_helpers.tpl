@@ -44,9 +44,9 @@ Return s6a service for Diameter identity, realm, and hostname for a given applic
 {{- $type := index . 1 -}}
 {{- $context := index . 2 -}}
 {{- if eq $type "identity" -}}
-{{- printf "%s-s6a.%s.svc.%s" $service $context.Release.Namespace "cluster.local" -}}
+{{- printf "%s-s6a.%s.svc.%s" $service $context.Release.Namespace $context.Values.config.clusterDomain -}}
 {{- else if eq $type "realm" -}}
-{{- printf "%s.svc.%s" $context.Release.Namespace "cluster.local" -}}
+{{- printf "%s.svc.%s" $context.Release.Namespace $context.Values.config.clusterDomain -}}
 {{- else if eq $type "host" -}}
 {{- printf "%s-s6a" $service -}}
 {{- end -}}

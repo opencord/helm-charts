@@ -86,6 +86,7 @@ cassandra:
     #  cpu: 2
 
 config:
+  clusterDomain: cluster.local
   hss:
     hssdb: cassandra
     s6a:

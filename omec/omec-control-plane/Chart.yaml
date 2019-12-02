@@ -15,7 +15,8 @@
 # limitations under the License.
 
 apiVersion: v1
-appVersion: "1.0"
 description: OMEC control plane services
 name: omec-control-plane
-version: 0.1.9
+icon: https://guide.opencord.org/logos/cord.svg
+
+version: 0.1.11
