@@ -22,6 +22,7 @@ pon: 1
 onu: 1
 auth: false
 dhcp: false
+delay: 200
 
 # TODO read this values in the config
 olt_tcp_port: 50060
