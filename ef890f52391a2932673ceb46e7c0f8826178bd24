@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "316441a1_943d01bb",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/Chart.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Before release, I guess yes. However, once we start to operate, I will bump up to 1.0.0",
+      "parentUuid": "632e543f_7edd1116",
+      "range": {
+        "startLine": 21,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "216cbf88_7db40633",
         "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/templates/_helpers.tpl",
         "patchSetId": 10
@@ -36,6 +60,30 @@
       "writtenOn": "2019-12-02T18:50:25Z",
       "side": 1,
       "message": "2019, and Intel is a part of the contribution?",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 34
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "33dbfaa5_05604698",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/templates/_helpers.tpl",
+        "patchSetId": 10
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Oh.. this is my mistake :(",
+      "parentUuid": "216cbf88_7db40633",
       "range": {
         "startLine": 2,
         "startChar": 0,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "a274e180_8c767878",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/templates/configmap-accelleran-cbrs-ric.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Ok will do",
+      "parentUuid": "fe76ac8d_f6b2f80c",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 4
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6d159290_6b7b0659",
         "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/templates/configmap-accelleran-cbrs-ric.yaml",
         "patchSetId": 10
@@ -82,6 +154,30 @@
       "writtenOn": "2019-12-02T18:50:25Z",
       "side": 1,
       "message": "Here, too.",
+      "range": {
+        "startLine": 40,
+        "startChar": 33,
+        "endLine": 40,
+        "endChar": 34
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d883c913_5294f0b2",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/templates/configmap-accelleran-cbrs-ric.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Ok will do.",
+      "parentUuid": "6d159290_6b7b0659",
       "range": {
         "startLine": 40,
         "startChar": 33,
@@ -117,6 +213,30 @@
     },
     {
       "key": {
+        "uuid": "49cffd31_f6c6771b",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/templates/statefulset-accelleran-cbrs-redis.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Ok will do.",
+      "parentUuid": "92edcbd1_3d765668",
+      "range": {
+        "startLine": 53,
+        "startChar": 31,
+        "endLine": 53,
+        "endChar": 32
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "78236051_44d89343",
         "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/templates/statefulset-accelleran-cbrs-ric.yaml",
         "patchSetId": 10
@@ -128,6 +248,30 @@
       "writtenOn": "2019-12-02T18:50:25Z",
       "side": 1,
       "message": "I\u0027d prefer removing prefix \"job\" here.",
+      "range": {
+        "startLine": 39,
+        "startChar": 14,
+        "endLine": 39,
+        "endChar": 38
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "991c1de3_924bbe57",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/templates/statefulset-accelleran-cbrs-ric.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Oh, right.",
+      "parentUuid": "78236051_44d89343",
       "range": {
         "startLine": 39,
         "startChar": 14,
@@ -163,6 +307,30 @@
     },
     {
       "key": {
+        "uuid": "fcc4646e_9cb830f3",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/templates/statefulset-accelleran-cbrs-ricweb.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Since it isn\u0027t open-source software, I cannot check. I just followed Accelleran\u0027s K8s yaml files..",
+      "parentUuid": "20aed5e1_30187fb6",
+      "range": {
+        "startLine": 19,
+        "startChar": 6,
+        "endLine": 19,
+        "endChar": 17
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "09d2d2b5_f3b02a34",
         "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/values.yaml",
         "patchSetId": 10
@@ -174,6 +342,30 @@
       "writtenOn": "2019-12-02T18:50:25Z",
       "side": 1,
       "message": "Let\u0027s make the default to \"registry.aether.opennetworking.org\", which is the our new setup.",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 26
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ab89c74_76b829de",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/values.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Sure will change here to the domain name.",
+      "parentUuid": "09d2d2b5_f3b02a34",
       "range": {
         "startLine": 18,
         "startChar": 10,
@@ -209,6 +401,30 @@
     },
     {
       "key": {
+        "uuid": "6243ed85_d85cda1b",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/values.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Let me check the Redis DB container from Accelleran. I just followed Accelleran\u0027s yaml file. If there is a special things inside the container, then we need to use this chart...",
+      "parentUuid": "43e73531_97e75f69",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41a766ac_78226305",
         "filename": "ran/accelleran-cbrs/accelleran-cbrs-cu/Chart.yaml",
         "patchSetId": 10
@@ -220,6 +436,30 @@
       "writtenOn": "2019-12-02T18:50:25Z",
       "side": 1,
       "message": "Can we start from 0.1.0?",
+      "range": {
+        "startLine": 21,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 14
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ffa464d1_299b94d1",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-cu/Chart.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Sure. I will change here.",
+      "parentUuid": "41a766ac_78226305",
       "range": {
         "startLine": 21,
         "startChar": 9,
@@ -255,6 +495,30 @@
     },
     {
       "key": {
+        "uuid": "493f819e_8947721d",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-cu/templates/configmap-accelleran-cbrs-cu.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "OMG. here too.. Let me remove here..",
+      "parentUuid": "96a04221_e7fbd4bf",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 4
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c428e4a5_2b666ce3",
         "filename": "ran/accelleran-cbrs/accelleran-cbrs-cu/templates/configmap-accelleran-cbrs-cu.yaml",
         "patchSetId": 10
@@ -266,6 +530,30 @@
       "writtenOn": "2019-12-02T18:50:25Z",
       "side": 1,
       "message": "here, too",
+      "range": {
+        "startLine": 40,
+        "startChar": 33,
+        "endLine": 40,
+        "endChar": 34
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "269dbbae_9e7388cb",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-cu/templates/configmap-accelleran-cbrs-cu.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Let me do it",
+      "parentUuid": "c428e4a5_2b666ce3",
       "range": {
         "startLine": 40,
         "startChar": 33,
@@ -301,6 +589,30 @@
     },
     {
       "key": {
+        "uuid": "ff878261_1d0edcac",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-cu/values.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Sure",
+      "parentUuid": "600a4840_53aec81d",
+      "range": {
+        "startLine": 18,
+        "startChar": 12,
+        "endLine": 18,
+        "endChar": 28
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4dbb78be_1d2c19bd",
         "filename": "ran/accelleran-cbrs/accelleran-cbrs-cu/values.yaml",
         "patchSetId": 10
@@ -312,6 +624,30 @@
       "writtenOn": "2019-12-02T18:50:25Z",
       "side": 1,
       "message": "please remove trailing white spaces",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 4
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d99734df_d8ff9ca0",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-cu/values.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-03T20:18:14Z",
+      "side": 1,
+      "message": "Sure :D",
+      "parentUuid": "4dbb78be_1d2c19bd",
       "range": {
         "startLine": 58,
         "startChar": 0,
