@@ -55,7 +55,7 @@ spec:
             {{ if .Values.dhcp -}}
             "-dhcp",
             {{ end -}}
-            "-delay {{ .Values.delay }}"
+            "-delay", "{{ .Values.delay }}"
           ]
           ports:
             - name: "bbsim-olt-id-{{ .Values.olt_id }}"
