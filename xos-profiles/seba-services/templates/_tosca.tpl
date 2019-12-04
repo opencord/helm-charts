@@ -354,4 +354,16 @@ topology_template:
         - provider_service:
             node: service#onos
             relationship: tosca.relationships.BelongsToOne
+
+    service_dependency#onos_rcord:
+      type: tosca.nodes.ServiceDependency
+      properties:
+        connect_method: none
+      requirements:
+        - subscriber_service:
+            node: service#rcord
+            relationship: tosca.relationships.BelongsToOne
+        - provider_service:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
 {{- end -}}
