@@ -16,6 +16,24 @@
       "revId": "451e960af7abd401827211a06dda616bfa8e5a7c",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e1770097_8bcebd27",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-cu/templates/statefulset-accelleran-cbrs-cu.yaml",
+        "patchSetId": 14
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-05T21:35:33Z",
+      "side": 1,
+      "message": "Oh... right.\nSince I changed editor to VS Code, white spaces happens a lot...\nLet me fix here.",
+      "parentUuid": "3ccdcb37_c3830292",
+      "revId": "451e960af7abd401827211a06dda616bfa8e5a7c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
