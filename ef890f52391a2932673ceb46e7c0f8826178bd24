@@ -449,6 +449,30 @@
     },
     {
       "key": {
+        "uuid": "b4f8c51c_ccd522e7",
+        "filename": "ran/accelleran-cbrs/accelleran-cbrs-common/values.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2019-12-05T21:21:07Z",
+      "side": 1,
+      "message": "Ok, after deployment, I will get back here :D",
+      "parentUuid": "5079a1cc_462b052e",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "ef890f52391a2932673ceb46e7c0f8826178bd24",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "41a766ac_78226305",
         "filename": "ran/accelleran-cbrs/accelleran-cbrs-cu/Chart.yaml",
         "patchSetId": 10
