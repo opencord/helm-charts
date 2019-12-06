@@ -41,4 +41,3 @@ enableMulticast: True
 # in ponsim-pod chart
 bandwidthProfiles: True
 legacyPonsim: False
-
