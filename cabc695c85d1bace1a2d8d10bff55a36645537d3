@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d8ba334f_bddf0e7f",
+        "filename": "xos-profiles/seba-services/templates/_tosca.tpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-12-06T17:48:36Z",
+      "side": 1,
+      "message": "this is needed so that the R-CORD service can flush the sadis cache",
+      "range": {
+        "startLine": 358,
+        "startChar": 4,
+        "endLine": 368,
+        "endChar": 58
+      },
+      "revId": "cabc695c85d1bace1a2d8d10bff55a36645537d3",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
