@@ -77,6 +77,19 @@ topology_template:
           name: onos
           must-exist: true
 
+    onos_app#dhcpl2relay:
+      type: tosca.nodes.ONOSApp
+      properties:
+        name: dhcpl2relay
+        app_id: org.opencord.dhcpl2relay
+        url: {{ .Values.dhcpl2relayAppUrl }}
+        version: {{ .Values.dhcpl2relayAppVersion }}
+        dependencies: org.opencord.sadis
+      requirements:
+        - owner:
+            node: service#onos
+            relationship: tosca.relationships.BelongsToOne
+
     onos_app#olt:
       type: tosca.nodes.ONOSApp
       properties:

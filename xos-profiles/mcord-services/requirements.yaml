@@ -22,7 +22,7 @@ dependencies:
   repository: file://../../xos-services/onos-service
   condition: fabric.enabled, progran.enabled
 - name: fabric
-  version: 2.2.2
+  version: 2.3.0
   repository: file://../../xos-services/fabric
   condition: fabric.enabled
 - name: vrouter
