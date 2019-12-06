@@ -43,7 +43,6 @@ fullnameOverride: ''
 
 xos_service_label: ONOS
 
-namespace: default
 serviceAccountName: default
 
 services:
