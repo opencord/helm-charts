@@ -24,6 +24,7 @@ metadata:
 {{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
+  serviceName: mme-headless
   selector:
     matchLabels:
 {{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 6 }}

@@ -18,39 +18,69 @@ limitations under the License.
 apiVersion: v1
 kind: Service
 metadata:
-  name: spgwc-cp-comm
+  name: spgwc
   labels:
 {{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
+  type: ClusterIP
   selector:
 {{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-{{- if .Values.config.spgwc.cpComm.nodePort.enabled }}
-  type: NodePort
-{{- end }}
   ports:
   - name: cp-comm
-    port: 21
+    port: {{ .Values.config.spgwc.cpComm.port }}
+{{- if .Values.config.spgwc.multiUpfs }}
+    protocol: TCP
+{{- else }}
     protocol: UDP
-  {{- if .Values.config.spgwc.cpComm.nodePort.enabled }}
-    nodePort: {{ .Values.config.spgwc.cpComm.nodePort.port }}
-  {{- end }}
+{{- end }}
+  - name: s11
+    port: {{ .Values.config.spgwc.s11.port }}
+    protocol: UDP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: spgwc-s11
+  name: spgwc-headless
   labels:
 {{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
+  clusterIP: None
   selector:
 {{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-{{- if .Values.config.spgwc.s11.nodePort.enabled }}
-  type: NodePort
-{{- end }}
   ports:
-  - name: s11
-    port: 2123
+  - name: cp-comm
+    port: {{ .Values.config.spgwc.cpComm.port }}
+{{- if .Values.config.spgwc.multiUpfs }}
+    protocol: TCP
+{{- else }}
     protocol: UDP
-  {{- if .Values.config.spgwc.s11.nodePort.enabled }}
-    nodePort: {{ .Values.config.spgwc.s11.nodePort.port }}
-  {{- end }}
+{{- end }}
+  - name: s11
+    port: {{ .Values.config.spgwc.s11.port }}
+    protocol: UDP
+{{- if not .Values.config.spgwc.multiUpfs }}
+{{- if or .Values.config.spgwc.cpComm.nodePort.enabled .Values.config.spgwc.s11.nodePort.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spgwc-external
+  labels:
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+spec:
+  type: NodePort
+  selector:
+{{ tuple "spgwc" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+  ports:
+{{- if .Values.config.spgwc.cpComm.nodePort.enabled }}
+  - name: cp-comm
+    port: {{ .Values.config.spgwc.cpComm.port }}
+    protocol: TCP
+{{- end }}
+{{- if .Values.config.spgwc.s11.nodePort.enabled }}
+  - name: s11
+    port: {{ .Values.config.spgwc.s11.port }}
+    protocol: UDP
+{{- end }}
+{{- end }}
+{{- end }}

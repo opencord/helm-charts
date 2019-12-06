@@ -19,19 +19,54 @@ limitations under the License.
 apiVersion: v1
 kind: Service
 metadata:
-  name: spgwu-dp-comm
+  name: spgwu
   labels:
 {{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
 spec:
   selector:
 {{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
-{{- if .Values.config.spgwu.dpComm.nodePort.enabled }}
-  type: NodePort
-{{- end }}
   ports:
   - name: dp-comm
-    port: 20
+    port: {{ .Values.config.spgwu.dpComm.port }}
+{{- if .Values.config.spgwu.multiUpfs }}
+    protocol: TCP
+{{- else }}
     protocol: UDP
-  {{- if .Values.config.spgwu.dpComm.nodePort.enabled }}
+{{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spgwu-headless
+  labels:
+{{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
+spec:
+  clusterIP: None
+  selector:
+{{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
+  ports:
+  - name: dp-comm
+    port: {{ .Values.config.spgwu.dpComm.port }}
+{{- if .Values.config.spgwu.multiUpfs }}
+    protocol: TCP
+{{- else }}
+    protocol: UDP
+{{- end }}
+{{- if and (not .Values.config.spgwu.multiUpfs) .Values.config.spgwu.dpComm.nodePort.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spgwu-external
+  labels:
+{{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
+  type: NodePort
+  ports:
+  - name: dp-comm
+    port: {{ .Values.config.spgwu.dpComm.port }}
+    protocol: UDP
     nodePort: {{ .Values.config.spgwu.dpComm.nodePort.port }}
-  {{- end }}
+{{- end }}
