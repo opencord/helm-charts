@@ -35,3 +35,6 @@ tt-workflow-driver:
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
+
+dhcpl2relayAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/dhcpl2relay-app/2.0.0/dhcpl2relay-app-2.0.0.oar"
+dhcpl2relayAppVersion: "2.0.0"
