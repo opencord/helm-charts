@@ -28,6 +28,7 @@ metadata:
 {{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
+  serviceName: hss-headless
   selector:
     matchLabels:
 {{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 6 }}

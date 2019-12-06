@@ -21,54 +21,68 @@ limitations under the License.
 apiVersion: v1
 kind: Service
 metadata:
-  name: mme-s11
+  name: mme
   labels:
 {{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   selector:
 {{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-{{- if .Values.config.mme.s11.nodePort.enabled }}
-  type: NodePort
-{{- end }}
+  type: ClusterIP
   ports:
-  - name: s11
-    port: {{ index $configJsonS11 "egtp_default_port" }}
-    protocol: UDP
+    - name: s11
+      port: {{ index $configJsonS11 "egtp_default_port" }}
+      protocol: UDP
+    - name: s6a
+      port: 3868
+      protocol: TCP
+    - name: s1ap
+      port: {{ index $configJsonS1ap "sctp_port" }}
+      protocol: SCTP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mme-headless
+  labels:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+  clusterIP: None
+  ports:
+    - name: s11
+      port: {{ index $configJsonS11 "egtp_default_port" }}
+      protocol: UDP
+    - name: s6a
+      port: 3868
+      protocol: TCP
+    - name: s1ap
+      port: {{ index $configJsonS1ap "sctp_port" }}
+      protocol: SCTP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mme-external
+  labels:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+  type: NodePort
+  ports:
   {{- if .Values.config.mme.s11.nodePort.enabled }}
-    nodePort: {{ .Values.config.mme.s11.nodePort.port }}
+    - name: s11
+      port: {{ index $configJsonS11 "egtp_default_port" }}
+      protocol: UDP
+      nodePort: {{ .Values.config.mme.s11.nodePort.port }}
   {{- end }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mme-s6a
-  labels:
-{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-{{- if .Values.config.mme.s6a.nodePort.enabled }}
-  type: NodePort
-{{- end }}
-spec:
-  selector:
-{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-  ports:
-  - name: s6a
-    port: 3868
-    protocol: TCP
   {{- if .Values.config.mme.s6a.nodePort.enabled }}
-    nodePort: {{ .Values.config.mme.s6a.nodePort.port }}
+    - name: s6a
+      port: 3868
+      protocol: TCP
+      nodePort: {{ .Values.config.mme.s6a.nodePort.port }}
   {{- end }}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mme-s1ap
-  labels:
-{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-spec:
-  selector:
-{{ tuple "mme" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-  type: NodePort
-  ports:
     - name: s1ap
       port: {{ index $configJsonS1ap "sctp_port" }}
       nodePort: {{ index $configJsonS1ap "sctp_port_external" }}

@@ -19,6 +19,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: spgwu
+  serviceName: spgwu-headless
   labels:
 {{ tuple "spgwu" . | include "omec-data-plane.metadata_labels" | indent 4 }}
 spec:

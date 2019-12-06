@@ -37,18 +37,18 @@ Render the given template.
 {{- end -}}
 
 {{/*
-Return s6a service for Diameter identity, realm, and hostname for a given application.
+Return domain name for Diameter identity, realm, and hostname for a given application.
 */}}
 {{- define "omec-control-plane.diameter_endpoint" -}}
 {{- $service := index . 0 -}}
 {{- $type := index . 1 -}}
 {{- $context := index . 2 -}}
 {{- if eq $type "identity" -}}
-{{- printf "%s-s6a.%s.svc.%s" $service $context.Release.Namespace $context.Values.config.clusterDomain -}}
+{{- printf "%s.%s.svc.%s" $service $context.Release.Namespace $context.Values.config.clusterDomain -}}
 {{- else if eq $type "realm" -}}
 {{- printf "%s.svc.%s" $context.Release.Namespace $context.Values.config.clusterDomain -}}
 {{- else if eq $type "host" -}}
-{{- printf "%s-s6a" $service -}}
+{{- printf "%s" $service -}}
 {{- end -}}
 {{- end -}}
 

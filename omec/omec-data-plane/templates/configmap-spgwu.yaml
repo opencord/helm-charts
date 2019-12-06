@@ -57,10 +57,20 @@ data:
     MASTER_CDR=./cdr/master.csv
   interface.cfg: |
     [0]
+    zmq_protocol = tcp
     dp_comm_ip = DP_ADDR
     dp_comm_port = 20
+{{- if .Values.config.spgwu.multiUpfs }}
+    cp_nb_ip = {{ .Values.config.spgwu.cpComm.addr }}
+    cp_nb_port = {{ .Values.config.spgwu.cpComm.port }}
     cp_comm_ip = {{ .Values.config.spgwu.cpComm.addr }}
     cp_comm_port = {{ .Values.config.spgwu.cpComm.port }}
+    zmq_dp_ip=127.0.0.1
+    zmq_cp_ip=127.0.0.1
+{{- else }}
+    cp_comm_ip = {{ .Values.config.spgwu.cpComm.addr }}
+    cp_comm_port = {{ .Values.config.spgwu.cpComm.port }}
+{{- end }}
 {{- if not .Values.config.sriov.enabled }}
   setup-af-iface.sh: |
 {{ tuple "bin/_spgwu-setup-af-iface.sh.tpl" . | include "omec-data-plane.template" | indent 4 }}
