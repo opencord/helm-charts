@@ -181,7 +181,7 @@ config:
                   - id: frequency
                     type: integer
   mme:
-    spgwAddr: spgwc-s11
+    spgwAddr: spgwc
     s11:
       nodePort:
         enabled: false
@@ -232,16 +232,23 @@ config:
       nodePort:
         enabled: false
         port: 32123
+      port: 2123
+    # ZMQ mode is used for cp-dp communication when multiple UPFs is set
+    # Otherwise, direct UDP mode is used
+    # Note that enabling NodePort is valid only in direct UDP mode
+    multiUpfs: true
     cpComm:
       nodePort:
         enabled: false
         port: 30021
+      port: 21
+    # dpComm is required only when direct UDP mode is used
+    # When you deploy CP and DP to separate clusters in direct UDP mode, enable nodePort
+    # from both cpComm(omec-control-plane) and dpComm(omec-data-plane) and
+    # set "addr" to remote cluster's entry node IP and
+    # "port" to dpComm.nodePort.port value configured in omec-data-plane.
     dpComm:
-      # IMPORTANT: when you deploy CP and DP to separate clusters, enable nodePort
-      # from both cpComm(omec-control-plane) and dpComm(omec-data-plane) and
-      # set "addr" to remote cluster's entry node IP and
-      # "port" to dpComm.nodePort.port value configured in omec-data-plane.
-      addr: spgwu-dp-comm
+      addr: spgwu
       port: 20
     cfgFiles:
       # See https://github.com/omec-project/ngic-rtc/tree/master/config for details
@@ -278,4 +285,14 @@ config:
         SDF_FILTER_IDX = 99998
       sdf_rules.cfg: |
         [GLOBAL]
-        NUM_SDF_FILTERS = 0
+        NUM_SDF_FILTERS = 1
+
+        [SDF_FILTER_1]
+        DIRECTION = downlink_only
+        IPV4_REMOTE = 13.2.1.113
+        IPV4_REMOTE_MASK = 255.255.255.0
+        PROTOCOL = 17
+        LOCAL_LOW_LIMIT_PORT = 0
+        LOCAL_HIGH_LIMIT_PORT = 65535
+        REMOTE_LOW_LIMIT_PORT = 0
+        REMOTE_HIGH_LIMIT_PORT = 65535

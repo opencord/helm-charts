@@ -18,19 +18,46 @@ limitations under the License.
 apiVersion: v1
 kind: Service
 metadata:
-  name: hss-s6a
+  name: hss
   labels:
 {{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
 spec:
   selector:
 {{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
-{{- if .Values.config.hss.s6a.nodePort.enabled }}
-  type: NodePort
-{{- end }}
   ports:
   - name: s6a
     port: 3868
     protocol: TCP
-  {{- if .Values.config.hss.s6a.nodePort.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hss-headless
+  labels:
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+  clusterIP: None
+  ports:
+  - name: s6a
+    port: 3868
+    protocol: TCP
+{{- if .Values.config.hss.s6a.nodePort.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hss-external
+  labels:
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "hss" . | include "omec-control-plane.metadata_labels" | indent 4 }}
+  type: NodePort
+  ports:
+  - name: s6a
+    port: 3868
+    protocol: TCP
     nodePort: {{ .Values.config.hss.s6a.nodePort.port }}
-  {{- end }}
+{{- end }}
