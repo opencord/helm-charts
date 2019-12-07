@@ -17,7 +17,6 @@ apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
   name: {{ template "onos.fullname" . }}
-  namespace: {{ .Values.namespace }}
   labels:
     app: {{ template "onos.name" . }}
     chart: {{ template "onos.chart" . }}
