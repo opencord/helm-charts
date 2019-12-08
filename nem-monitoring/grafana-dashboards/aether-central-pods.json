@@ -15,8 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
-  "iteration": 1575804277781,
+  "id": 3,
   "links": [],
   "panels": [
     {
@@ -92,6 +91,13 @@
       ],
       "repeat": null,
       "repeatDirection": "v",
+      "scopedVars": {
+        "pod": {
+          "selected": false,
+          "text": "mme",
+          "value": "mme"
+        }
+      },
       "sparkline": {
         "fillColor": "rgba(31, 118, 189, 0.18)",
         "full": false,
@@ -682,37 +688,27 @@
         "name": "pod",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "All",
             "value": "$__all"
           },
           {
-            "selected": true,
-            "text": "spgwu",
-            "value": "spgwu"
+            "selected": false,
+            "text": "mme",
+            "value": "mme"
           },
           {
             "selected": false,
-            "text": "accelleran-cbrs-ric",
-            "value": "accelleran-cbrs-ric"
+            "text": "hss",
+            "value": "hss"
           },
           {
             "selected": false,
-            "text": "accelleran-cbrs-nats",
-            "value": "accelleran-cbrs-nats"
-          },
-          {
-            "selected": false,
-            "text": "accelleran-cbrs-redis",
-            "value": "accelleran-cbrs-redis"
-          },
-          {
-            "selected": false,
-            "text": "accelleran-cbrs-ricweb",
-            "value": "accelleran-cbrs-ricweb"
+            "text": "spgwc",
+            "value": "spgwc"
           }
         ],
-        "query": "spgwu,accelleran-cbrs-ric,accelleran-cbrs-nats,accelleran-cbrs-redis,accelleran-cbrs-ricweb",
+        "query": "mme,hss,spgwc",
         "skipUrlSync": false,
         "type": "custom"
       }
@@ -749,7 +745,7 @@
     ]
   },
   "timezone": "",
-  "title": "Aether Edge Pods",
-  "uid": "gKU2e27Zc",
+  "title": "Aether Central Pods",
+  "uid": "gKU2e27Zb",
   "version": 1
 }

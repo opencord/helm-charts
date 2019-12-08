@@ -99,4 +99,7 @@ dashboards:
   aaa: true
   voltha: true
   omec: false
-  aether: false
+  aetherClusters: false
+  aetherEdges: false
+  aetherCentralPods: false
+  aetherEdgePods: false
