@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "74ba522c_7357d742",
+        "filename": "xos-core/templates/50-rbac.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-12-09T17:35:55Z",
+      "side": 1,
+      "message": "What sets this?",
+      "range": {
+        "startLine": 32,
+        "startChar": 14,
+        "endLine": 32,
+        "endChar": 39
+      },
+      "revId": "7d20f3113d1a5d6d31690551c67016402c52e069",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
