@@ -46,6 +46,30 @@
       "revId": "7d20f3113d1a5d6d31690551c67016402c52e069",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8b6992ca_a2d2f880",
+        "filename": "xos-core/templates/50-rbac.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-12-09T21:05:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aad7e0d5_22939de6",
+      "range": {
+        "startLine": 32,
+        "startChar": 14,
+        "endLine": 32,
+        "endChar": 39
+      },
+      "revId": "7d20f3113d1a5d6d31690551c67016402c52e069",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
