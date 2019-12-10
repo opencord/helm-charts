@@ -13,10 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: xossh
-description: A Helm chart for xossh, the XOS command line shell
-icon: https://guide.opencord.org/logos/xos.svg
-version: 3.0.0
+name: voltha-kafka-dump
+description: A Helm chart for voltha-kafka-dump
+icon: https://kafka.apache.org/images/logo.png
 
-# Runs the xosproject/xos-client container
-appVersion: 3.2.3
+version: 1.0.0
+
+# version of voltha/voltha-kafka-dump container
+appVersion: 6.1.1

@@ -13,11 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: kafkacat
-description: A Helm chart for kafkacat
-icon: https://kafka.apache.org/images/logo.png
+name: xossh
+description: A Helm chart for xossh, the XOS command line shell
+icon: https://guide.opencord.org/logos/xos.svg
+version: 3.0.1
 
-version: 1.0.0
-
-# version of confluentinc/cp-kafkacat container
-appVersion: 4.1.2
+# Runs the xosproject/xos-client container
+appVersion: 3.2.3

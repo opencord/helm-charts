@@ -13,7 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Use locally created xos-client container with tools/xossh chart
+# Default values for xossh
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+imagePullPolicy: Always
+
 image:
-  tag: 'candidate'
-  pullPolicy: 'IfNotPresent'
+  repository: 'opencord/voltha-kafka-dump'
+  tag: '{{ .Chart.AppVersion }}'
+  pullPolicy: 'Always'
+
+global:
+  registry: ''
+
