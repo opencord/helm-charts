@@ -1,0 +1,9 @@
+Thank you for installing {{ .Chart.Name }}.
+
+To dump events in human-readable format:
+
+kubectl exec -it <pod-name> ./voltha-dump-events.sh
+
+To dump events in binary format:
+
+kubectl exec -it <pod-name> ./voltha-dump-events.sh -- --binary
