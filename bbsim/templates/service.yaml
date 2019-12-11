@@ -32,6 +32,9 @@ spec:
     - name: "bbsim-olt-id-{{ .Values.olt_id }}-api"
       port: {{ .Values.bbsim_api_port }}
       protocol: TCP
+    - name: "bbsim-olt-id-{{ .Values.olt_id }}-sadis"
+      port: {{ .Values.bbsim_sadis_port }}
+      protocol: TCP
   selector:
     app: {{ template "bbsim.name" . }}
     release: {{ .Release.Name }}
