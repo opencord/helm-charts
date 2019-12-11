@@ -296,3 +296,6 @@ config:
         LOCAL_HIGH_LIMIT_PORT = 65535
         REMOTE_LOW_LIMIT_PORT = 0
         REMOTE_HIGH_LIMIT_PORT = 65535
+      app_config.cfg: |
+        [GLOBAL]
+        NUM_DP_SELECTION_RULES = 0
