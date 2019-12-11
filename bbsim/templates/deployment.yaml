@@ -62,6 +62,14 @@ spec:
               containerPort: {{ .Values.olt_tcp_port }}
               port: {{ .Values.olt_tcp_port }}
               protocol: TCP
+            - name: "bbsim-olt-id-{{ .Values.olt_id }}-api"
+              containerPort: {{ .Values.bbsim_api_port }}
+              port: {{ .Values.bbsim_api_port }}
+              protocol: TCP
+            - name: "bbsim-olt-id-{{ .Values.olt_id }}-sadis"
+              containerPort: {{ .Values.bbsim_sadis_port }}
+              port: {{ .Values.bbsim_sadis_port }}
+              protocol: TCP
           env:
             - name: POD_IP
               valueFrom:
