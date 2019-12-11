@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0a2002b8_63dc7814",
+        "filename": "configs/seba-ponsim-stratum.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2019-12-11T18:15:09Z",
+      "side": 1,
+      "message": "use opencord/mn-stratum-siab",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 38
+      },
+      "revId": "0294758cd4b88076591daf13229c21b1c38071ad",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c15c9528_9043621c",
+        "filename": "mininet/templates/stratum-service.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2019-12-11T18:15:09Z",
+      "side": 1,
+      "message": "9",
+      "range": {
+        "startLine": 1,
+        "startChar": 15,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "0294758cd4b88076591daf13229c21b1c38071ad",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "eceeab78_86934485",
+        "filename": "mininet/templates/stratum-service.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2019-12-11T18:15:09Z",
+      "side": 1,
+      "message": "check if stratumEnabled",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 32
+      },
+      "revId": "0294758cd4b88076591daf13229c21b1c38071ad",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "755e7f69_bd2eb50b",
+        "filename": "xos-profiles/seba-services/templates/_tosca.tpl",
+        "patchSetId": 8
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2019-12-11T18:15:09Z",
+      "side": 1,
+      "message": "merge the 2 conditions",
+      "range": {
+        "startLine": 162,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 33
+      },
+      "revId": "0294758cd4b88076591daf13229c21b1c38071ad",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
