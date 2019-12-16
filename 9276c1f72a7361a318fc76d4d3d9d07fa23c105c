@@ -22,6 +22,30 @@
       "revId": "9276c1f72a7361a318fc76d4d3d9d07fa23c105c",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "cada5597_5a5501fe",
+        "filename": "xos-core/Chart.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2019-12-16T22:37:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "038dbf10_65ac9be5",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 14
+      },
+      "revId": "9276c1f72a7361a318fc76d4d3d9d07fa23c105c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
