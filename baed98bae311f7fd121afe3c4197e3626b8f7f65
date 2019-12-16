@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8a948e75_00a59b67",
+        "filename": "bbsim/templates/service.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000553
+      },
+      "writtenOn": "2019-12-16T10:43:26Z",
+      "side": 1,
+      "message": "should be bbsim_sadis_port",
+      "range": {
+        "startLine": 36,
+        "startChar": 23,
+        "endLine": 36,
+        "endChar": 37
+      },
+      "revId": "baed98bae311f7fd121afe3c4197e3626b8f7f65",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
