@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "038dbf10_65ac9be5",
+        "filename": "xos-core/Chart.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2019-12-16T22:34:32Z",
+      "side": 1,
+      "message": "I would only change patch version (last number) - it\u0027s a fairly minor change.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 14
+      },
+      "revId": "9276c1f72a7361a318fc76d4d3d9d07fa23c105c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
