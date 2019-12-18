@@ -252,6 +252,21 @@ config:
       port: 20
     cfgFiles:
       # See https://github.com/omec-project/ngic-rtc/tree/master/config for details
+      app_config.cfg: |
+        [GLOBAL]
+        NUM_DP_SELECTION_RULES = 2
+        [DP_SELECTION_RULE_1]
+        DPID = 1
+        DPNAME = dp1
+        MCC = 315
+        MNC = 010
+        TAC = 202
+        [DP_SELECTION_RULE_2]
+        DPID = 2
+        DPNAME = dp2
+        MCC = 315
+        MNC = 010
+        TAC = 203
       adc_rules.cfg: |
         [GLOBAL]
         NUM_ADC_RULES = 0

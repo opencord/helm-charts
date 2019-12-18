@@ -67,6 +67,7 @@ config:
     # Set "--no-pci --vdev eth_af_packet0,iface=s1u-net --vdev eth_af_packet1,iface=sgi-net"
     # when sriov is disabled
     devices: ""
+    dpName: "dp1"
 
 networks:
   cniPlugin: vfioveth
