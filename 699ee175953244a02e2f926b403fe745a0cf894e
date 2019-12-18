@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dfb4428a_db8c2410",
+        "filename": "configs/seba-ponsim-stratum.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2019-12-18T01:35:38Z",
+      "side": 1,
+      "message": "This comment can be removed, we don\u0027t need to explain why we use a dedicated image. That explanation should be part of mn-stratum-siab.",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 48
+      },
+      "revId": "699ee175953244a02e2f926b403fe745a0cf894e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "29129cef_7e5045f1",
+        "filename": "configs/seba-ponsim-stratum.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2019-12-18T01:35:38Z",
+      "side": 1,
+      "message": "use mn-stratum-siab",
+      "range": {
+        "startLine": 25,
+        "startChar": 17,
+        "endLine": 25,
+        "endChar": 39
+      },
+      "revId": "699ee175953244a02e2f926b403fe745a0cf894e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "00616fea_8bdf9658",
+        "filename": "mininet/templates/stratum-service.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2019-12-18T01:35:38Z",
+      "side": 1,
+      "message": "Dumping the whole yaml tree looks too complicated for the use you do in the values file, without any apparent benefit. Can you dump just the actual port number? i.e. {{ Values.services.stratumPort }}",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 48
+      },
+      "revId": "699ee175953244a02e2f926b403fe745a0cf894e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0707b26_4bf87510",
+        "filename": "mininet/templates/stratum-service.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2019-12-18T01:35:38Z",
+      "side": 1,
+      "message": "The service should be exposed only if stratum is enabled",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 32
+      },
+      "revId": "699ee175953244a02e2f926b403fe745a0cf894e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8e4ddf9f_0606aad0",
+        "filename": "mininet/values.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2019-12-18T01:35:38Z",
+      "side": 1,
+      "message": "Is there any benefit in having this defined as value instead of it being hardcoded in the service template? Do we expect anything else other than ClusterIP?",
+      "range": {
+        "startLine": 31,
+        "startChar": 2,
+        "endLine": 31,
+        "endChar": 31
+      },
+      "revId": "699ee175953244a02e2f926b403fe745a0cf894e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "04b57bac_9dfc7787",
+        "filename": "mininet/values.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2019-12-18T01:35:38Z",
+      "side": 1,
+      "message": "For consistency, this should be stratumPort",
+      "range": {
+        "startLine": 32,
+        "startChar": 2,
+        "endLine": 33,
+        "endChar": 9
+      },
+      "revId": "699ee175953244a02e2f926b403fe745a0cf894e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
