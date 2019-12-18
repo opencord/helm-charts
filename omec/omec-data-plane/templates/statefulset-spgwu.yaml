@@ -92,6 +92,8 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
+        - name: DP_NAME
+          value: "{{ .Values.config.spgwu.dpName }}"
         command: ["bash", "-xc"]
         args:
         - ip a;
