@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d647e12e_2e549fe4",
+        "filename": "xos-profiles/seba-services/values.yaml",
+        "patchSetId": 18
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2019-12-20T00:29:36Z",
+      "side": 1,
+      "message": "2.0.0",
+      "range": {
+        "startLine": 53,
+        "startChar": 18,
+        "endLine": 53,
+        "endChar": 23
+      },
+      "revId": "d0b786d6588a9e0670c8db548fb49bcfdffe55c9",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
