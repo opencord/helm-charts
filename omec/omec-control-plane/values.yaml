@@ -236,7 +236,7 @@ config:
     # ZMQ mode is used for cp-dp communication when multiple UPFs is set
     # Otherwise, direct UDP mode is used
     # Note that enabling NodePort is valid only in direct UDP mode
-    multiUpfs: true
+    multiUpfs: false
     cpComm:
       nodePort:
         enabled: false
