@@ -51,7 +51,7 @@ config:
     # Note that zmq is used for cp-dp commmunication when multiple UPFs is set
     # Otherwise, direct UDP communication is used
     # TODO: unify cp-dp comm to ZMQ for both multi and single UPF scenario
-    multiUpfs: true
+    multiUpfs: false
     cpComm:
       # IMPORTANT: when you deploy CP and DP to separate clusters, enable nodePort
       # from both cpComm(omec-control-plane) and dpComm(omec-data-plane) and
