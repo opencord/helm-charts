@@ -22,6 +22,30 @@
       "revId": "d0b786d6588a9e0670c8db548fb49bcfdffe55c9",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad56b8cf_05d3205b",
+        "filename": "xos-profiles/seba-services/values.yaml",
+        "patchSetId": 18
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-10T22:03:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d647e12e_2e549fe4",
+      "range": {
+        "startLine": 53,
+        "startChar": 18,
+        "endLine": 53,
+        "endChar": 23
+      },
+      "revId": "d0b786d6588a9e0670c8db548fb49bcfdffe55c9",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
