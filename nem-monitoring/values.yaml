@@ -98,6 +98,7 @@ dashboards:
   onos: true
   aaa: true
   voltha: true
+  voltha2: false
   omec: false
   aetherClusters: false
   aetherEdges: false

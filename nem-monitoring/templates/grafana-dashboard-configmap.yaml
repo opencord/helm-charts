@@ -44,6 +44,10 @@ data:
   voltha.json: |
 {{ .Files.Get "grafana-dashboards/voltha-kpi.json" | indent 4 }}
 {{- end }}
+{{- if .Values.dashboards.voltha2 }}
+  voltha2.json: |
+{{ .Files.Get "grafana-dashboards/voltha-2x.json" | indent 4 }}
+{{- end }}
 {{- if .Values.dashboards.omec }}
   omec.json: |
 {{ .Files.Get "grafana-dashboards/omec.json" | indent 4 }}
