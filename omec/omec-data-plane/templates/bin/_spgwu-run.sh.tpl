@@ -17,6 +17,10 @@
 
 set -ex
 
+{{- if .Values.config.coreDump.enabled }}
+cp /bin/ngic_dataplane /tmp/coredump/
+{{- end }}
+
 mkdir -p /opt/dp/config
 cd /opt/dp/config
 cp /etc/dp/config/{cdr.cfg,dp_config.cfg,interface.cfg} .

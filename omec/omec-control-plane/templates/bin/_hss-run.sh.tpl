@@ -16,6 +16,10 @@
 
 set -ex
 
+{{- if .Values.config.coreDump.enabled }}
+cp /bin/hss /tmp/coredump/
+{{- end }}
+
 CONF_DIR="/opt/c3po/hss/conf"
 LOGS_DIR="/opt/c3po/hss/logs"
 mkdir -p $CONF_DIR $LOGS_DIR
