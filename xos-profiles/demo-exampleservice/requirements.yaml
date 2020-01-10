@@ -16,7 +16,7 @@
 dependencies:
 - name: exampleservice
   version: 2.2.4
-  repository: file://../../xos-services/exampleservice
+  repository: https://charts.opencord.org
 - name: addressmanager
   version: 2.0.4
-  repository: file://../../xos-services/addressmanager
+  repository: https://charts.opencord.org
