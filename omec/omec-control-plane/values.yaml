@@ -87,6 +87,9 @@ cassandra:
 
 config:
   clusterDomain: cluster.local
+  coreDump:
+    enabled: false
+    path: /tmp/coredump
   hss:
     hssdb: cassandra
     s6a:

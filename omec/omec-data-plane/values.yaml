@@ -38,6 +38,9 @@ resources:
       memory: 8Gi
 
 config:
+  coreDump:
+    enabled: false
+    path: /tmp/coredump
   sriov:
     enabled: true
   spgwu:
