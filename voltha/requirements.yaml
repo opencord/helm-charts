@@ -16,5 +16,5 @@
 dependencies:
 - name: etcd-cluster
   version: 0.1.2
-  repository: file://../etcd-cluster
+  repository: https://charts.opencord.org
   condition: etcd.cluster.enabled

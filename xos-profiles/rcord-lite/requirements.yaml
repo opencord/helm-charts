@@ -16,22 +16,22 @@
 dependencies:
 - name: rcord
   version: 1.0.16
-  repository: file://../../xos-services/rcord
+  repository: https://charts.opencord.org
 - name: onos-service
   version: 2.1.3
-  repository: file://../../xos-services/onos-service
+  repository: https://charts.opencord.org
 - name: fabric
   version: 2.2.2
-  repository: file://../../xos-services/fabric
+  repository: https://charts.opencord.org
 - name: volt
   version: 2.2.5
-  repository: file://../../xos-services/volt
+  repository: https://charts.opencord.org
 - name: vsg-hw
   version: 1.1.0
-  repository: file://../../xos-services/vsg-hw
+  repository: https://charts.opencord.org
 - name: vrouter
   version: 2.1.0
-  repository: file://../../xos-services/vrouter
+  repository: https://charts.opencord.org
 - name: sadis-server
   version: 1.0.4
-  repository: file://../../sadis-server
+  repository: https://charts.opencord.org
