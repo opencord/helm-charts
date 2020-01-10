@@ -16,6 +16,10 @@
 
 APPLICATION=$1
 
+{{- if .Values.config.coreDump.enabled }}
+cp /openmme/target/bin/$APPLICATION /tmp/coredump/
+{{- end }}
+
 # copy config files to openmme target directly
 cp /opt/mme/config/shared/* /openmme/target/conf/
 

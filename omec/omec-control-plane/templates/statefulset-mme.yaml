@@ -70,7 +70,7 @@ spec:
         - >
           if chroot /mnt/host-rootfs modinfo nf_conntrack_proto_sctp > /dev/null 2>&1; then \
               chroot /mnt/host-rootfs modprobe nf_conntrack_proto_sctp; \
-          fi
+          fi;
         volumeMounts:
         - name: host-rootfs
           mountPath: /mnt/host-rootfs
@@ -120,10 +120,18 @@ spec:
           mountPath: /opt/mme/config
         - name: shared-data
           mountPath: /opt/mme/config/shared
+    {{- if .Values.config.coreDump.enabled }}
+{{ tuple "mme" . | include "omec-control-plane.coredump_init" | indent 6 }}
+    {{- end }}
       containers:
       - name: mme-app
         image: {{ .Values.images.tags.mme | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
+      {{- if .Values.config.coreDump.enabled }}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+      {{- end }}
         command: ["bash", "-xc"]
         args:
         - /opt/mme/scripts/mme-run.sh mme-app
@@ -137,13 +145,22 @@ spec:
           subPath: mme-run.sh
         - name: shared-data
           mountPath: /opt/mme/config/shared
-        - name: configs
-          mountPath: /opt/mme/config
         - name: shared-app
           mountPath: /tmp
+        - name: configs
+          mountPath: /opt/mme/config
+      {{- if .Values.config.coreDump.enabled }}
+        - name: coredump
+          mountPath: /tmp/coredump
+      {{- end }}
       - name: s1ap-app
         image: {{ .Values.images.tags.mme | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
+      {{- if .Values.config.coreDump.enabled }}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+      {{- end }}
         command: ["bash", "-xc"]
         args:
         - /opt/mme/scripts/mme-run.sh s1ap-app
@@ -159,9 +176,18 @@ spec:
           mountPath: /opt/mme/config/shared
         - name: shared-app
           mountPath: /tmp
+      {{- if .Values.config.coreDump.enabled }}
+        - name: coredump
+          mountPath: /tmp/coredump
+      {{- end }}
       - name: s6a-app
         image: {{ .Values.images.tags.mme | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
+      {{- if .Values.config.coreDump.enabled }}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+      {{- end }}
         command: ["bash", "-xc"]
         args:
         - /opt/mme/scripts/mme-run.sh s6a-app
@@ -177,9 +203,18 @@ spec:
           mountPath: /opt/mme/config/shared
         - name: shared-app
           mountPath: /tmp
+      {{- if .Values.config.coreDump.enabled }}
+        - name: coredump
+          mountPath: /tmp/coredump
+      {{- end }}
       - name: s11-app
         image: {{ .Values.images.tags.mme | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
+      {{- if .Values.config.coreDump.enabled }}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+      {{- end }}
         command: ["bash", "-xc"]
         args:
         - /opt/mme/scripts/mme-run.sh s11-app
@@ -195,6 +230,10 @@ spec:
           mountPath: /opt/mme/config/shared
         - name: shared-app
           mountPath: /tmp
+      {{- if .Values.config.coreDump.enabled }}
+        - name: coredump
+          mountPath: /tmp/coredump
+      {{- end }}
       volumes:
       - name: scripts
         configMap:
@@ -211,3 +250,8 @@ spec:
       - name: host-rootfs
         hostPath:
           path: /
+    {{- if .Values.config.coreDump.enabled }}
+      - name: coredump
+        hostPath:
+          path: {{ .Values.config.coreDump.path }}
+    {{- end }}

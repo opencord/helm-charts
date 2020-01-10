@@ -70,10 +70,18 @@ spec:
           - kubernetes-entrypoint
         volumeMounts:
           []
+    {{- if .Values.config.coreDump.enabled }}
+{{ tuple "hss" . | include "omec-control-plane.coredump_init" | indent 6 }}
+    {{- end }}
       containers:
       - name: hss
         image: {{ .Values.images.tags.hss }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
+      {{- if .Values.config.coreDump.enabled }}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+      {{- end }}
         stdin: true
         tty: true
         command: ["bash", "-c", "/opt/c3po/hss/hss-run.sh; sleep 3600"]
@@ -87,6 +95,10 @@ spec:
           subPath: hss-run.sh
         - name: hss-config
           mountPath: /etc/hss/conf
+      {{- if .Values.config.coreDump.enabled }}
+        - name: coredump
+          mountPath: /tmp/coredump
+      {{- end }}
       volumes:
       - name: hss-script
         configMap:
@@ -96,3 +108,11 @@ spec:
         configMap:
           name: hss
           defaultMode: 420
+    {{- if .Values.config.coreDump.enabled }}
+      - name: host-rootfs
+        hostPath:
+          path: /
+      - name: coredump
+        hostPath:
+          path: {{ .Values.config.coreDump.path }}
+    {{- end }}

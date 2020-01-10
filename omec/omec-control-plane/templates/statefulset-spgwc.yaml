@@ -63,10 +63,18 @@ spec:
             value: "echo done"
           - name: DEPENDENCY_POD_JSON
             value: '[{"labels": {"app": "mme"}, "requireSameNode": false}]'
+    {{- if .Values.config.coreDump.enabled }}
+{{ tuple "spgwc" . | include "omec-control-plane.coredump_init" | indent 6 }}
+    {{- end }}
       containers:
       - name: spgwc
         image: {{ .Values.images.tags.spgwc }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
+      {{- if .Values.config.coreDump.enabled }}
+        securityContext:
+          privileged: true
+          runAsUser: 0
+      {{- end }}
         stdin: true
         tty: true
         command: ["/opt/cp/scripts/spgwc-run.sh"]
@@ -96,6 +104,10 @@ spec:
           subPath: spgwc-run.sh
         - name: cp-config
           mountPath: /etc/cp/config
+      {{- if .Values.config.coreDump.enabled }}
+        - name: coredump
+          mountPath: /tmp/coredump
+      {{- end }}
       volumes:
       - name: cp-script
         configMap:
@@ -105,3 +117,11 @@ spec:
         configMap:
           name: spgwc
           defaultMode: 420
+    {{- if .Values.config.coreDump.enabled }}
+      - name: host-rootfs
+        hostPath:
+          path: /
+      - name: coredump
+        hostPath:
+          path: {{ .Values.config.coreDump.path }}
+    {{- end }}
