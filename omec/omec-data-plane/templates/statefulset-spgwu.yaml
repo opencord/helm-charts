@@ -75,10 +75,21 @@ spec:
               mountPath: /opt/dp/scripts/setup-af-iface.sh
               subPath: setup-af-iface.sh
     {{- end }}
+    {{- if .Values.config.coreDump.enabled }}
+{{ tuple "spgwc" . | include "omec-data-plane.coredump_init" | indent 8 }}
+    {{- end }}
       containers:
       - name: spgwu
         image: {{ .Values.images.tags.spgwu | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy | quote }}
+        securityContext:
+      {{- if .Values.config.coreDump.enabled }}
+          privileged: true
+          runAsUser: 0
+      {{- end }}
+          capabilities:
+            add:
+              - IPC_LOCK
         stdin: true
         tty: true
         env:
@@ -104,6 +115,10 @@ spec:
           subPath: run.sh
         - name: dp-config
           mountPath: /etc/dp/config
+      {{- if .Values.config.coreDump.enabled }}
+        - name: coredump
+          mountPath: /tmp/coredump
+      {{- end }}
         resources:
           requests:
           {{- if .Values.resources.enabled }}
@@ -119,10 +134,6 @@ spec:
           {{- if .Values.config.sriov.enabled }}
             intel.com/sriov_vfio: 2
           {{- end }}
-        securityContext:
-          capabilities:
-            add:
-              - IPC_LOCK
       volumes:
       - name: dp-script
         configMap:
@@ -132,3 +143,11 @@ spec:
         configMap:
           name: spgwu
           defaultMode: 420
+    {{- if .Values.config.coreDump.enabled }}
+      - name: host-rootfs
+        hostPath:
+          path: /
+      - name: coredump
+        hostPath:
+          path: {{ .Values.config.coreDump.path }}
+    {{- end }}
