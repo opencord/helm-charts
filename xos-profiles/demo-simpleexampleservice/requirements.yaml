@@ -16,4 +16,4 @@
 dependencies:
 - name: simpleexampleservice
   version: 1.2.2
-  repository: file://../../xos-services/simpleexampleservice
+  repository: https://charts.opencord.org
