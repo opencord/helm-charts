@@ -23,8 +23,14 @@ data:
 {{ include "rcord.serviceTosca" .Values.rcord | indent 4 }}
   030-volt-service.yaml: |
 {{ include "volt.serviceTosca" .Values.volt | indent 4 }}
+{{- if .Values.bng.external.enabled }}
   040-fabric-crossconnect-service.yaml: |
 {{ include "fabric-crossconnect.serviceTosca" (index .Values "fabric-crossconnect") | indent 4 }}
+{{- end }}
+{{- if .Values.bng.embedded.enabled }}
+  040-vrouter-service.yaml: |
+{{ include "vrouter.serviceTosca" (index .Values "vrouter") | indent 4 }}
+{{- end }}
   061-onos-service.yaml: |
 {{ include "seba-services.onosTosca" .Values | indent 4 }}
 {{- if .Values.fabric.enabled }}
@@ -32,4 +38,4 @@ data:
 {{ include "fabric.serviceTosca" .Values.fabric | indent 4 }}
 {{- end }}
   300-service-graph.yaml: |
-{{ include "seba-services.serviceGraphTosca" . | indent 4 }}
+{{ include "seba-services.serviceGraphTosca" .Values | indent 4 }}

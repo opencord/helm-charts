@@ -55,8 +55,32 @@ kafkaAppVersion: "2.0.0"
 onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka.default.svc.cluster.local:9092"
 
-# whether to install or not this shared services
+# Whether to install or not the fabric service.
 fabric:
   enabled: true
+  # Whether the fabric uses Stratum or not, and the corresponding ONOS apps
+  # required to control the switch.
+  stratum:
+    enabled: false
+    # The ONOS driver to control the fabric switch
+    driverAppId: "org.onosproject.drivers.barefoot"
+    # Whether the app providing the pipeconf must be installed to ONOS from an
+    # external URL (pipeconfAppUrl). If false, the pipeconf app is assumed to be
+    # pre-installed in ONOS.
+    pipeconfAppExternal: true
+    pipeconfAppId: "org.opencord.fabric-tofino"
+    pipeconfAppUrl: "https://repo1.maven.org/maven2/org/opencord/fabric-tofino/1.0.0/fabric-tofino-1.0.0.oar"
+    pipeconfAppVersion: "1.0.0"
+
 onos-service:
   enabled: true
+
+# Whether the BNG is external or embedded
+bng:
+  external:
+    enabled: true
+  embedded:
+    enabled: false
+    bngAppId: "org.opencord.bng"
+    bngAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/bng/1.0.0/bng-1.0.0.oar"
+    bngAppVersion: "1.0.0"
