@@ -13,8 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+apiVersion: v1
 name: onos
 description: Open Network Operating System
-version: 1.1.4
+version: 2.0.0-b1
 icon: https://guide.opencord.org/logos/onos.svg
-appVersion: 1.13.9
+# FIXME: replace with 2.2.1 when released
+appVersion: 2.2.1-b4

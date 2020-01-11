@@ -40,17 +40,17 @@ xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 
 # ONOS applications
-sadisAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/sadis-app/3.1.0/sadis-app-3.1.0.oar"
-sadisAppVersion: "3.1.0"
+sadisAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/sadis-app/4.0.1/sadis-app-4.0.1.oar"
+sadisAppVersion: "4.0.1"
 
-dhcpl2relayAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/dhcpl2relay-app/1.6.0/dhcpl2relay-app-1.6.0.oar"
-dhcpl2relayAppVersion: "1.6.0"
+dhcpl2relayAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/dhcpl2relay-app/2.0.0/dhcpl2relay-app-2.0.0.oar"
+dhcpl2relayAppVersion: "2.0.0"
 
-oltAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/olt-app/3.0.1/olt-app-3.0.1.oar"
-oltAppVersion: "3.0.1"
+oltAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/olt-app/4.0.0/olt-app-4.0.0.oar"
+oltAppVersion: "4.0.0"
 
-kafkaAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/kafka/1.1.0/kafka-1.1.0.oar"
-kafkaAppVersion: "1.1.0"
+kafkaAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/kafka/2.0.0/kafka-2.0.0.oar"
+kafkaAppVersion: "2.0.0"
 
 onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka.default.svc.cluster.local:9092"
