@@ -35,8 +35,7 @@ images:
     tag: 'master'
 # ONOS
   onos:
-    repository: matteoscandolo/onos
-    tag: '1.13-branch'
+    tag: '2.2-latest'
 # VOLTHA
   vcore:
     tag: 'latest'
@@ -126,17 +125,17 @@ bandwidthProfiles: True
 legacyPonsim: False
 
 # ONOS applications
-aaaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=aaa-app&v=1.9.0-SNAPSHOT&e=oar"
-aaaAppVersion: "1.9.0.SNAPSHOT"
+aaaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=aaa-app&v=2.0.1-SNAPSHOT&e=oar"
+aaaAppVersion: "2.0.1.SNAPSHOT"
 
-sadisAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=sadis-app&v=3.1.0-SNAPSHOT&e=oar"
-sadisAppVersion: "3.1.0.SNAPSHOT"
+sadisAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=sadis-app&v=4.0.2-SNAPSHOT&e=oar"
+sadisAppVersion: "4.0.2.SNAPSHOT"
 
-dhcpl2relayAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=dhcpl2relay-app&v=1.6.0-SNAPSHOT&e=oar"
-dhcpl2relayAppVersion: "1.6.0.SNAPSHOT"
+dhcpl2relayAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=dhcpl2relay-app&v=2.0.1-SNAPSHOT&e=oar"
+dhcpl2relayAppVersion: "2.0.1.SNAPSHOT"
 
-oltAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=olt-app&v=3.0.1-SNAPSHOT&e=oar"
-oltAppVersion: "3.0.1.SNAPSHOT"
+oltAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=olt-app&v=4.0.1-SNAPSHOT&e=oar"
+oltAppVersion: "4.0.1.SNAPSHOT"
 
-kafkaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=kafka&v=1.1.0-SNAPSHOT&e=oar"
-kafkaAppVersion: "1.1.0.SNAPSHOT"
+kafkaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=kafka&v=2.0.1-SNAPSHOT&e=oar"
+kafkaAppVersion: "2.0.1.SNAPSHOT"
