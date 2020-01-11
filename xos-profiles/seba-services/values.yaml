@@ -55,8 +55,32 @@ kafkaAppVersion: "2.0.0"
 onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka.default.svc.cluster.local:9092"
 
-# whether to install or not this shared services
+# Whether to install or not the fabric service.
 fabric:
   enabled: true
+  # Whether the fabric uses Stratum or not, and the corresponding ONOS apps
+  # required to control the switch.
+  stratum:
+    enabled: false
+    driverAppId: "org.onosproject.drivers.bmv2"
+    pipeconfAppExternal: false
+    # Pipeconfs might contain switch vendor-specific P4 configurations that
+    # cannot be made public. For this reason, an URL to the corresponding .oar
+    # file must be explicitly provided.
+    pipeconfAppId: "org.onosproject.pipelines.fabric"
+#    pipeconfAppUrl: "<URL-TO-EXTERNAL-PIPECONF-APP-OAR>"
+#    pipeconfAppVersion: "<EXTERNAL-PIPECONF-APP-VERSION>"
+
 onos-service:
   enabled: true
+
+# Whether the BNG is external or embedded
+bng:
+  external:
+    enabled: true
+  embedded:
+    enabled: false
+    # ONOS app to provide the BNG control plane
+    bngAppId: "org.opencord.bng"
+    bngAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/bng/1.0.0/bng-1.0.0.oar"
+    bngAppVersion: "1.0.0"
