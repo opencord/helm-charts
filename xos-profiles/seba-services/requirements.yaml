@@ -23,14 +23,19 @@ dependencies:
   condition: onos-service.enabled
 - name: fabric
   version: 2.3.0
-  repository: file://../../xos-services/fabric
+  repository: https://charts.opencord.org
   condition: fabric.enabled
 - name: volt
   version: 2.2.5
   repository: https://charts.opencord.org
 - name: fabric-crossconnect
   version: 1.3.0
-  repository: file://../../xos-services/fabric-crossconnect
+  repository: https://charts.opencord.org
+  condition: bng.external.enabled
+- name: vrouter
+  version: 2.1.0
+  repository: https://charts.opencord.org
+  condition: bng.embedded.enabled
 - name: sadis-server
   version: 1.0.4
   repository: https://charts.opencord.org
