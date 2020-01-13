@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
   "links": [],
   "panels": [
     {
@@ -310,6 +309,11 @@
           "expr": "kafka_server_brokertopicmetrics_messagesinpersec_count{}",
           "legendFormat": "{{topic}}",
           "refId": "A"
+        },
+        {
+          "expr": "sum(kafka_server_brokertopicmetrics_messagesinpersec_count{})",
+          "legendFormat": "Total",
+          "refId": "B"
         }
       ],
       "thresholds": [],
@@ -401,6 +405,11 @@
           "expr": "sum(grpc_server_msg_sent_total{instance=\"voltha-etcd-cluster.voltha.svc:2379\"})",
           "legendFormat": "Sent",
           "refId": "B"
+        },
+        {
+          "expr": "sum(grpc_server_msg_received_total{instance=\"voltha-etcd-cluster.voltha.svc:2379\"}) + sum(grpc_server_msg_sent_total{instance=\"voltha-etcd-cluster.voltha.svc:2379\"})",
+          "legendFormat": "Total",
+          "refId": "C"
         }
       ],
       "thresholds": [],
@@ -473,5 +482,5 @@
   "timezone": "",
   "title": "VOLTHA-2.X",
   "uid": "ZLpJDKPZk",
-  "version": 5
+  "version": 1
 }
