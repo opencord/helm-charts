@@ -25,9 +25,16 @@ data:
     {
       "resourceList": [
         {
-          "resourceName": "sriov_vfio",
+          "resourceName": "sriov_vfio_s1u_net",
           "selectors": {
-              "pfNames": {{ toJson .Values.config.sriov.resourceList.vfio.pfNames }},
+              "pfNames": {{ toJson .Values.config.sriov.resourceList.vfio.s1uPfNames }},
+              "drivers": ["vfio-pci"]
+          }
+        },
+        {
+          "resourceName": "sriov_vfio_sgi_net",
+          "selectors": {
+              "pfNames": {{ toJson .Values.config.sriov.resourceList.vfio.sgiPfNames }},
               "drivers": ["vfio-pci"]
           }
         }

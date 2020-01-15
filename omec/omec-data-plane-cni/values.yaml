@@ -15,7 +15,7 @@
 images:
   tags:
     omecCni: docker.io/omecproject/omec-cni:1.0.0
-    sriovPlugin: docker.io/nfvpe/sriov-device-plugin:v3.0.0
+    sriovPlugin: docker.io/nfvpe/sriov-device-plugin:v3.1
   pullPolicy: IfNotPresent
 
 config:
@@ -24,10 +24,13 @@ config:
     # If your cluster has multiple nodes with different interface names,
     # simply provide the whole list
     resourceList:
-      # Provide PF name with its VFs are bounded to vfio-pci driver
+      # Provide PF name with VF range for S1U and SGI interfaces.
+      # Note that VF range of S1U must be smaller than SGI's.
       vfio:
-        pfNames:
-          - eno1
+        s1uPfNames:
+          - eno1#0-3
+        sgiPfNames:
+          - eno1#4-7
       # Provide PF name with its VFs bounded to PF's driver
       # The driver name must be specified to prevent one interface is
       # registered to both vfio and netdevice resource pools

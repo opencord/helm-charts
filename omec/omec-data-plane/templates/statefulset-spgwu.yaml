@@ -125,14 +125,16 @@ spec:
 {{ toYaml .Values.resources.spgwu.requests | indent 12 }}
           {{- end }}
           {{- if .Values.config.sriov.enabled }}
-            intel.com/sriov_vfio: 2
+            intel.com/sriov_vfio_s1u_net: 1
+            intel.com/sriov_vfio_sgi_net: 1
           {{- end }}
           limits:
           {{- if .Values.resources.enabled }}
 {{ toYaml .Values.resources.spgwu.limits | indent 12 }}
           {{- end }}
           {{- if .Values.config.sriov.enabled }}
-            intel.com/sriov_vfio: 2
+            intel.com/sriov_vfio_s1u_net: 1
+            intel.com/sriov_vfio_sgi_net: 1
           {{- end }}
       volumes:
       - name: dp-script

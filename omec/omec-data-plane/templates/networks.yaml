@@ -22,7 +22,7 @@ metadata:
   name: s1u-net
 {{- if $.Values.config.sriov.enabled }}
   annotations:
-    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_vfio
+    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_vfio_s1u_net
 {{- end }}
 spec:
   config: '{
@@ -38,7 +38,7 @@ metadata:
   name: sgi-net
 {{- if $.Values.config.sriov.enabled }}
   annotations:
-    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_vfio
+    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov_vfio_sgi_net
 {{- end }}
 spec:
   config: '{
