@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Values file for deploying SEBA with Ponsim and Stratum
+# Values file for deploying SEBA with Ponsim, Stratum and SD-BNG
 # Use this file to deploy the service versions specified in the Helm charts.
 
 images:
@@ -31,6 +31,11 @@ images:
     repository: 'dmoro92/voltha-rg'
     tag: 'dev'
     pullPolicy: Always
+  kpi_exporter:
+    # TODO: Modify when this docker image is published
+    repository: 'opencord/kafka-topic-exporter'
+    tag: 'latest'
+    pullPolicy: Always
 
 # ONOS activate debug
 onos_env:
@@ -41,8 +46,16 @@ onos_env:
 etcd-cluster:
   clusterSize: 1
 
-# Set topics for KPI-exporter, adding the bng.stats
+# Set topics for KPI-exporter
 kpi_exporter:
+  topics:
+    - voltha.kpis
+    - onos.aaa.stats.kpis
+    - onos.kpis
+    - bng.stats
+dashboards:
+  bng: true
+
 # Select DT-Workflow
 workflow: dt-workflow
 
