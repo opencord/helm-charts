@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "0c1c1c21_78b5439e",
+        "filename": "configs/seba-ponsim-stratum-sdbng.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-15T23:03:27Z",
+      "side": 1,
+      "message": "since sdbng implies that we are using stratum, can we replace all occurrences of \"stratum-sdbng\" with simply \"sdbng\". This applies to file names as well like this one.",
+      "revId": "0b2e12bfea1a8d5151a61176148e35aef96a1ec6",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
