@@ -27,6 +27,16 @@ images:
 # Select DT-Workflow
 workflow: dt-workflow
 
+# Activate BNG dashboard
+kpi_exporter:
+  topics:
+    - voltha.kpis
+    - onos.aaa.stats.kpis
+    - onos.kpis
+    - bng.stats
+dashboards:
+  bng: true
+
 # In mininet chart
 # FIXME: check if multicast is working
 enableMulticast: false
