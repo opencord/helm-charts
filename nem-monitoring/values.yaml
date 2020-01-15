@@ -104,3 +104,4 @@ dashboards:
   aetherEdges: false
   aetherCentralPods: false
   aetherEdgePods: false
+  bng: false
