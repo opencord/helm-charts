@@ -16,9 +16,9 @@
 images:
   tags:
     initCU: docker.io/omecproject/pod-init:1.0.0
-    nats: node1:30500/accelleran/vran-nats:20190121
-    redis: node1:30500/accelleran/vran-redis:20190121
-    vranL3: node1:30500/accelleran/vran-l3-fdd:onf-dns
+    nats: registry.aether.opennetworking.org/aether/accelleran-cu-nats-b17:v1.0.0
+    redis: registry.aether.opennetworking.org/aether/accelleran-cu-redis-b17:v1.0.0
+    vranL3: registry.aether.opennetworking.org/aether/accelleran-cu-l3-fdd-b17:v1.0.0
   pullPolicy: IfNotPresent
 
 nodeSelectors:
