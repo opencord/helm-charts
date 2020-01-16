@@ -29,7 +29,7 @@ data:
     CORES="-c $(taskset -p $$ | awk '{print $NF}')"
     EAL_ARGS="${CORES} ${MEMORY} --no-pci"
 
-    MGMT_INFO="-s ${POD_IP} -m ${MME_ADDR} -w {{ .Values.config.spgwc.s1uAddr }}"
+    MGMT_INFO="-s ${POD_IP} -w {{ .Values.config.spgwc.s1uAddr }}"
     APN_INFO="-i {{ .Values.config.spgwc.ueIpPool.ip }} -p {{ .Values.config.spgwc.ueIpPool.mask }} -a {{ .Values.config.spgwc.apn }}"
     MISC="-l 2"
     SPGW_CFG="-d 03"

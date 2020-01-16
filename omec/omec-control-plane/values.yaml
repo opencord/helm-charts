@@ -19,7 +19,7 @@ images:
     hssdb: docker.io/omecproject/c3po-hssdb:1.0.0
     hss: docker.io/omecproject/c3po-hss:1.0.0
     mme: docker.io/omecproject/openmme:1.0.0
-    spgwc: docker.io/omecproject/ngic-cp:1.0.0
+    spgwc: docker.io/omecproject/ngic-cp:1.1.0
     depCheck: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
   pullPolicy: IfNotPresent
 
@@ -229,8 +229,6 @@ config:
       mask: 255.0.0.0
     # This address must match to S1U IP address configured in omec-data-plane
     s1uAddr: 119.0.0.3
-    # mmeAddr will be set automatically to mme pod IP if it's unset
-    #mmeAddr:
     s11:
       nodePort:
         enabled: false

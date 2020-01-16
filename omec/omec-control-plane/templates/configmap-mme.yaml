@@ -92,10 +92,6 @@ data:
 {{ tuple "bin/_mme-init.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
   mme-run.sh: |
 {{ tuple "bin/_mme-run.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
-{{- if not (hasKey .Values.config.spgwc "mmeAddr") }}
-  mme-ip.sh: |
-{{ tuple "bin/_mme-ip.sh.tpl" . | include "omec-control-plane.template" | indent 4 }}
-{{- end }}
 {{- range $key, $value := .Values.config.mme.cfgFiles }}
   {{ $key }}: {{ toJson $value | quote }}
 {{- end }}
