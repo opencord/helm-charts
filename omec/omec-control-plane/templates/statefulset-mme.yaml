@@ -39,26 +39,6 @@ spec:
     {{- end }}
       serviceAccountName: mme
       initContainers:
-    {{- if not (hasKey .Values.config.spgwc "mmeAddr") }}
-      - name: mme-configmap-mme-ip
-        image: {{ .Values.images.tags.init | quote }}
-        imagePullPolicy: {{ .Values.images.pullPolicy }}
-        env:
-        - name: NAMESPACE
-          valueFrom:
-            fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.namespace
-        - name: POD_IP
-          valueFrom:
-            fieldRef:
-              fieldPath: status.podIP
-        command: ["/opt/mme/scripts/mme-ip.sh"]
-        volumeMounts:
-        - name: scripts
-          mountPath: /opt/mme/scripts/mme-ip.sh
-          subPath: mme-ip.sh
-    {{- end }}
       - name: mme-load-sctp-module
         image: {{ .Values.images.tags.init | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}

@@ -89,11 +89,6 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
-        - name: MME_ADDR
-          valueFrom:
-            configMapKeyRef:
-              name: mme-ip
-              key: IP
       {{- if .Values.resources.enabled }}
         resources:
 {{ toYaml .Values.resources.spgwc | indent 10 }}
