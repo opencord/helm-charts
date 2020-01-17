@@ -22,6 +22,30 @@
       "revId": "ec8c675e97e9865ea3e0a3e153c87553c5e07413",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7279f8fb_a5aab6f4",
+        "filename": "onos/Chart.yaml",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T19:21:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97482350_2a5b8806",
+      "range": {
+        "startLine": 19,
+        "startChar": 9,
+        "endLine": 19,
+        "endChar": 14
+      },
+      "revId": "ec8c675e97e9865ea3e0a3e153c87553c5e07413",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
