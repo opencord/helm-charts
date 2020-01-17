@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ef0dbb5a_dad097c3",
+        "filename": "configs/seba-ponsim-stratum.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:14:48Z",
+      "side": 1,
+      "message": "Do you mean pipeconfAppExternal? That\u0027s the value name used in the default values for seba-services.",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 20
+      },
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ec6663c_dd6fd070",
+        "filename": "mininet/templates/deployment.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:14:48Z",
+      "side": 1,
+      "message": "I don\u0027t understand the purpose of this block. Is the if condition required? Perhaps the command should be \"python\"?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 10
+      },
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "656aca98_f264ef7f",
+        "filename": "mininet/templates/stratum-service.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:14:48Z",
+      "side": 1,
+      "message": "It would be good to have a short description of the service, i.e. exposes the gRPC port to control the stratum_bmv2 instance(s) running inside mininet. Perhaps we should call it \"mn-stratum-service\" given that it\u0027s meaningful only when running stratum inside mininet?",
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2e96c51b_dfc79cbf",
+        "filename": "mininet/templates/stratum-service.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:14:48Z",
+      "side": 1,
+      "message": "I think the name of the service should be \"stratum-\u003cdevice_id\u003e\" where device_id could be as simple as \"1\", \"agg1\", or anything that leaves open the possibility of having multiple ports to control topologies with more than one stratum device.",
+      "range": {
+        "startLine": 29,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 17
+      },
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "28fe65c0_a775ce01",
+        "filename": "mininet/templates/stratum-service.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:14:48Z",
+      "side": 1,
+      "message": "same as before, stratumPort1 or stratumPortAgg1",
+      "range": {
+        "startLine": 30,
+        "startChar": 37,
+        "endLine": 30,
+        "endChar": 48
+      },
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
