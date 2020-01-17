@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "92c3a833_726b7a29",
+        "filename": "configs/seba-ponsim-stratum.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:37:10Z",
+      "side": 1,
+      "message": "These shouldn\u0027t be needed since the default values already point to the updated apps",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 80,
+        "endChar": 31
+      },
+      "revId": "aa9e33d00c042e3dc4dd93e7c45b9763a5854062",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "94113bd3_aa3d70df",
+        "filename": "mininet/toposcripts/topo_mn_sdbng.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:37:10Z",
+      "side": 1,
+      "message": "\"mn\" in the name file is implicit and can be removed (all scripts are for mininet). applies also to topo_mn_stratum.py",
+      "revId": "aa9e33d00c042e3dc4dd93e7c45b9763a5854062",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ed4f1d7e_9f21e104",
+        "filename": "mininet/toposcripts/topo_mn_sdbng.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:37:10Z",
+      "side": 1,
+      "message": "Since we no longer need to hardcode the mac address in the netcfg, do we need to specify one or is it fine to let mininet pick a random one?",
+      "range": {
+        "startLine": 38,
+        "startChar": 28,
+        "endLine": 38,
+        "endChar": 51
+      },
+      "revId": "aa9e33d00c042e3dc4dd93e7c45b9763a5854062",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d22cd155_8e3a6ada",
+        "filename": "mininet/toposcripts/topo_mn_sdbng.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:37:10Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 39,
+        "startChar": 52,
+        "endLine": 39,
+        "endChar": 71
+      },
+      "revId": "aa9e33d00c042e3dc4dd93e7c45b9763a5854062",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "482b4aa8_3fd5295d",
+        "filename": "mininet/toposcripts/topo_mn_sdbng.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:37:10Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be h1, i.e. the pppoe server? At least according to the usual way we depict the system architecture..",
+      "range": {
+        "startLine": 45,
+        "startChar": 31,
+        "endLine": 45,
+        "endChar": 33
+      },
+      "revId": "aa9e33d00c042e3dc4dd93e7c45b9763a5854062",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "467b69b7_ab28d161",
+        "filename": "mininet/toposcripts/topo_mn_sdbng.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:37:10Z",
+      "side": 1,
+      "message": "nit: this file is already in the container, but you could write it as part of the script to control the IP addresses to assign. I see value in making that value explicit here, as part of the script defining the topology, e.g. to make sure to avoid conflicts with other ip address defined here",
+      "range": {
+        "startLine": 72,
+        "startChar": 56,
+        "endLine": 72,
+        "endChar": 67
+      },
+      "revId": "aa9e33d00c042e3dc4dd93e7c45b9763a5854062",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "79b64cdb_1ef01972",
+        "filename": "workflows/dt-workflow/requirements.yaml",
+        "patchSetId": 10
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T22:37:10Z",
+      "side": 1,
+      "message": "let\u0027s remember to update this to https://... after merge and once the dt-workflow-driver chart gets published",
+      "range": {
+        "startLine": 19,
+        "startChar": 14,
+        "endLine": 19,
+        "endChar": 58
+      },
+      "revId": "aa9e33d00c042e3dc4dd93e7c45b9763a5854062",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
