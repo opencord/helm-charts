@@ -108,6 +108,23 @@
       "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "56011e4e_0b0d3105",
+        "filename": "mininet/toposcripts/topo_mn_stratum.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-17T23:03:48Z",
+      "side": 1,
+      "message": "As commented in the other patch, \"mn\" can be removed form the file name.",
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
