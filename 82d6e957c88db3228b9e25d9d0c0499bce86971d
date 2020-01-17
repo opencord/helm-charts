@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "adbe27a4_ff375b81",
+        "filename": "configs/seba-ponsim-stratum.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2020-01-17T23:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef0dbb5a_dad097c3",
+      "range": {
+        "startLine": 62,
+        "startChar": 4,
+        "endLine": 62,
+        "endChar": 20
+      },
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ec6663c_dd6fd070",
         "filename": "mininet/templates/deployment.yaml",
         "patchSetId": 12
@@ -36,6 +60,30 @@
       "writtenOn": "2020-01-17T22:14:48Z",
       "side": 1,
       "message": "I don\u0027t understand the purpose of this block. Is the if condition required? Perhaps the command should be \"python\"?",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 10
+      },
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e9d95479_a43060ae",
+        "filename": "mininet/templates/deployment.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2020-01-17T23:53:02Z",
+      "side": 1,
+      "message": "The if condition is required since the mininet container used in standard SiaB has already an entrypoint that is not python.\nI added the command \"python\" as the one started when stratum is enabled.",
+      "parentUuid": "6ec6663c_dd6fd070",
       "range": {
         "startLine": 43,
         "startChar": 0,
@@ -65,6 +113,24 @@
     },
     {
       "key": {
+        "uuid": "00ec737a_30e08b6f",
+        "filename": "mininet/templates/stratum-service.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2020-01-17T23:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "656aca98_f264ef7f",
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "2e96c51b_dfc79cbf",
         "filename": "mininet/templates/stratum-service.yaml",
         "patchSetId": 12
@@ -76,6 +142,30 @@
       "writtenOn": "2020-01-17T22:14:48Z",
       "side": 1,
       "message": "I think the name of the service should be \"stratum-\u003cdevice_id\u003e\" where device_id could be as simple as \"1\", \"agg1\", or anything that leaves open the possibility of having multiple ports to control topologies with more than one stratum device.",
+      "range": {
+        "startLine": 29,
+        "startChar": 10,
+        "endLine": 29,
+        "endChar": 17
+      },
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b51795a6_89f5f312",
+        "filename": "mininet/templates/stratum-service.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2020-01-17T23:53:02Z",
+      "side": 1,
+      "message": "Done\nBut right now the current deployment does not support the possibility to expose more than 1 stratum gRPC port",
+      "parentUuid": "2e96c51b_dfc79cbf",
       "range": {
         "startLine": 29,
         "startChar": 10,
@@ -111,6 +201,30 @@
     },
     {
       "key": {
+        "uuid": "98cdebeb_150ef438",
+        "filename": "mininet/templates/stratum-service.yaml",
+        "patchSetId": 12
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2020-01-17T23:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28fe65c0_a775ce01",
+      "range": {
+        "startLine": 30,
+        "startChar": 37,
+        "endLine": 30,
+        "endChar": 48
+      },
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "56011e4e_0b0d3105",
         "filename": "mininet/toposcripts/topo_mn_stratum.py",
         "patchSetId": 12
@@ -122,6 +236,24 @@
       "writtenOn": "2020-01-17T23:03:48Z",
       "side": 1,
       "message": "As commented in the other patch, \"mn\" can be removed form the file name.",
+      "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "0fd0e1fb_a47730a9",
+        "filename": "mininet/toposcripts/topo_mn_stratum.py",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2020-01-17T23:53:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56011e4e_0b0d3105",
       "revId": "82d6e957c88db3228b9e25d9d0c0499bce86971d",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
