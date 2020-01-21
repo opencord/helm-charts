@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "4233084e_a14b799f",
+        "filename": "voltha/README.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2020-01-21T13:42:13Z",
+      "side": 1,
+      "message": "Remove EOL whitespace. \n\nTo see these more clearly in Gerrit, please enable the \"Show Whitespace Errors\" setting here: https://gerrit.opencord.org/#/settings/diff-preferences",
+      "range": {
+        "startLine": 2,
+        "startChar": 0,
+        "endLine": 5,
+        "endChar": 0
+      },
+      "revId": "0b8901daf1ad70b002d0587df4d5f74e4d4460a9",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
