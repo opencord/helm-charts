@@ -14,77 +14,32 @@
 # limitations under the License.
 
 # Values file for deploying SEBA with Ponsim and Stratum
-# Use this file to deploy the service versions specified in the Helm charts.
+# Use this file together with seba-ponsim.yaml to deploy the service versions
+# specified in the Helm charts.
+
+# --------------- Values modified or added wrt seba-ponsim.yaml ----------------
 
 images:
-  # Mininet image
   mininet:
     repository: 'opencord/mn-stratum-siab'
     tag: 'master'
-    pullPolicy: Always
-  onos:
-    repository: 'onosproject/onos'
-    tag: '2.2-latest'
-    pullPolicy: Always
-  rg:
-#    TODO: Modify when this docker image is published
-    repository: 'dmoro92/voltha-tester'
-    tag: 'latest'
-    pullPolicy: Always
 
-# ONOS activate debug
-onos_env:
-  - name: JAVA_DEBUG_PORT
-    value: "0.0.0.0:5005"
-
-# voltha
-etcd-cluster:
-  clusterSize: 1
-
-# Set topics for KPI-exporter, adding the bng.stats
-kpi_exporter:
 # Select DT-Workflow
 workflow: dt-workflow
 
-dt-workflow-driver:
-  image:
-#    TODO: modify when DT workflow synchronizer is published
-    repository: "dmoro92/dt-workflow-driver-synchronizer"
-    tag: "1.0.0-dev"
-  # this is mandatory, it's needed to correctly configure the kafka endpoint
-  kafkaService: cord-kafka
-
-# in mininet chart
-# FIXME: make multicast working
+# In mininet chart
+# FIXME: check if multicast is working
 enableMulticast: false
 topoScript: '/toposcripts/topo_sdbng.py'
-stratumEnabled: true
+mnStratumSwitchCount: 1
 
-# in ponsim-pod chart
-bandwidthProfiles: true
-legacyPonsim: false
-
-# fabric
 fabric:
-  enabled: true
   stratum:
-    # BMv2 drivers will activate also stratum drivers
-    driverAppId: 'org.onosproject.drivers.bmv2'
-    # Enable stratum
     enabled: true
-    # Use BMv2 pipeconf (already in ONOS)
-    pipeconfAppExternal: false
-    pipeconfAppId: 'org.onosproject.pipelines.fabric'
+
+# Activate SD-BNG
 bng:
   external:
     enabled: false
   embedded:
     enabled: true
-    # ONOS app to provide the BNG control plane
-    bngAppId: "org.opencord.bng"
-    bngAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=bng-app&v=1.0.0-SNAPSHOT&e=oar"
-    bngAppVersion: "1.0.0.SNAPSHOT"
-
-# ONOS applications
-kafkaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=kafka&v=2.0.1-SNAPSHOT&e=oar"
-kafkaAppVersion: "2.0.1.SNAPSHOT"
