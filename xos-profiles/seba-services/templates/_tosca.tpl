@@ -178,10 +178,10 @@ topology_template:
     onos_app#bng:
       type: tosca.nodes.ONOSApp
       properties:
-        name: {{ .bng.embedded.bngAppId }}
-        app_id: {{ .bng.embedded.bngAppId }}
-        url: {{ .bng.embedded.bngAppUrl }}
-        version: {{ .bng.embedded.bngAppVersion }}
+        name: org.opencord.bng
+        app_id: org.opencord.bng
+        url: {{ .bngAppUrl }}
+        version: {{ .bngAppVersion }}
         dependencies: {{ .fabric.stratum.pipeconfAppId }}, org.opencord.kafka, org.opencord.sadis
       requirements:
         - owner:

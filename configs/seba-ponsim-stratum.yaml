@@ -14,50 +14,22 @@
 # limitations under the License.
 
 # Values file for deploying SEBA with Ponsim and Stratum
-# Use this file to deploy the service versions specified in the Helm charts.
+# Use this file together with seba-ponsim.yaml to deploy the service versions
+# specified in the Helm charts.
+
+# ----------- Values modified or added wrt seba-ponsim.yaml --------------------
 
 images:
-  # Mininet image
   mininet:
     repository: 'opencord/mn-stratum-siab'
     tag: 'master'
-    pullPolicy: Always
 
-# voltha
-etcd-cluster:
-  clusterSize: 1
-
-# in workflow/att-workflow service chart
-att-workflow-driver:
-  # this is mandatory, it's needed to correctly configure the kafka endpoint
-  kafkaService: cord-kafka
-
-# in workflow/tt-workflow service chart
-tt-workflow-driver:
-  image:
-    repository: andybavier/test-image-synchronizer
-    tag: tt-workflow-driver
-
-  # this is mandatory, it's needed to correctly configure the kafka endpoint
-  kafkaService: cord-kafka
-
-# in mininet chart
+# In mininet chart
 # FIXME: check if multicast is working
 enableMulticast: false
 topoScript: '/toposcripts/topo_stratum.py'
-stratumEnabled: true
+mnStratumSwitchCount: 1
 
-# in ponsim-pod chart
-bandwidthProfiles: true
-legacyPonsim: false
-
-# fabric
 fabric:
-  enabled: true
   stratum:
-    driverAppId: 'org.onosproject.drivers.bmv2'
-    # Enable stratum
     enabled: true
-    # Use BMv2 pipeconf (already in ONOS)
-    pipeconfAppExternal: false
-    pipeconfAppId: 'org.onosproject.pipelines.fabric'

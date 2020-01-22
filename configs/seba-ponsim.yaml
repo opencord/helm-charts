@@ -14,7 +14,13 @@
 # limitations under the License.
 
 # Values file for deploying SEBA with Ponsim
-# Use this file to deploy the service versions speecified in the Helm charts.
+# Use this file to deploy the service versions specified in the Helm charts.
+
+images:
+  rg:
+    # TODO: Modify when this docker image is published with a release tag
+    repository: 'dmoro92/voltha-tester'
+    tag: 'latest'
 
 # voltha
 etcd-cluster:
@@ -30,7 +36,10 @@ tt-workflow-driver:
   image:
     repository: andybavier/test-image-synchronizer
     tag: tt-workflow-driver
+  # this is mandatory, it's needed to correctly configure the kafka endpoint
+  kafkaService: cord-kafka
 
+dt-workflow-driver:
   # this is mandatory, it's needed to correctly configure the kafka endpoint
   kafkaService: cord-kafka
 
@@ -42,3 +51,27 @@ enableMulticast: True
 bandwidthProfiles: True
 legacyPonsim: False
 
+# in seba-services profile
+fabric:
+  stratum:
+    enabled: false
+    # BMv2 drivers will activate also stratum drivers
+    driverAppId: 'org.onosproject.drivers.bmv2'
+    # Use BMv2 pipeconf (already in ONOS)
+    pipeconfAppExternal: false
+    pipeconfAppId: 'org.onosproject.pipelines.fabric'
+
+bng:
+  external:
+    enabled: true
+  embedded:
+    enabled: false
+
+# ONOS applications
+# TODO: remove when 2.0.1 is released (update the value definition in seba-services)
+kafkaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=kafka&v=2.0.1-SNAPSHOT&e=oar"
+kafkaAppVersion: "2.0.1.SNAPSHOT"
+
+# TODO: remove when app is released (rely on seba-services value definition)
+bngAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=bng-app&v=1.0.0-SNAPSHOT&e=oar"
+bngAppVersion: "1.0.0.SNAPSHOT"

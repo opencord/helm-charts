@@ -14,12 +14,10 @@
 # limitations under the License.
 
 # Values file for deploying SEBA with Ponsim
-# Use this file to deploy the 'master' (dev) versions of all services.
+# Use this file together to deploy the 'master' (dev) versions of all services.
+# This file can be used together with seba-ponsim.yaml, seba-ponsim-stratum.yaml
+# or seba-ponsim-sdbng.yaml
 # This is mainly useful for testing.
-
-# voltha
-etcd-cluster:
-  clusterSize: 1
 
 # in xos-core chart and other charts with multiple images
 images:
@@ -105,24 +103,14 @@ att-workflow-driver:
   image:
     tag: 'master'
 
-  # this is mandatory, it's needed to correctly configure the kafka endpoint
-  kafkaService: cord-kafka
-
 # in workflow/tt-workflow service chart
 tt-workflow-driver:
   image:
     tag: 'master'
 
-  # this is mandatory, it's needed to correctly configure the kafka endpoint
-  kafkaService: cord-kafka
-
-# in mininet chart
-vlanMatchDepth: 2
-enableMulticast: True
-
-# in ponsim-pod chart
-bandwidthProfiles: True
-legacyPonsim: False
+dt-workflow-driver:
+  image:
+    tag: "master"
 
 # ONOS applications
 aaaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=aaa-app&v=2.0.1-SNAPSHOT&e=oar"
@@ -139,3 +127,6 @@ oltAppVersion: "4.0.1.SNAPSHOT"
 
 kafkaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=kafka&v=2.0.1-SNAPSHOT&e=oar"
 kafkaAppVersion: "2.0.1.SNAPSHOT"
+
+bngAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=bng-app&v=1.0.0-SNAPSHOT&e=oar"
+bngAppVersion: "1.0.0.SNAPSHOT"

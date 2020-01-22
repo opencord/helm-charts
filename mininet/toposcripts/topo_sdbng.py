@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
     info( '*** Creating hosts\n' )
     h1 = net.addHost( 'h1' ) # PPPoE Server
-    h2 = net.addHost( 'h2', ip='10.10.10.1/24' ) # Upstream
+    h2 = net.addHost( 'h2', ip='10.10.10.1/24', mac="00:66:77:88:99:AA") # Upstream
     # FIXME: enable multicast
     # h3 = net.addHost( 'h3')
 
