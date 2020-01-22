@@ -1,0 +1,7 @@
+Code-Review+2: Carmelo Cascone <carmelo@opennetworking.org>
+Verified+1: Jenkins Jenkins <do-not-reply@opencord.org>
+Submitted-by: Carmelo Cascone <carmelo@opennetworking.org>
+Submitted-at: Wed, 22 Jan 2020 22:27:10 +0000
+Reviewed-on: https://gerrit.opencord.org/17131
+Project: helm-charts
+Branch: refs/heads/master
