@@ -52,6 +52,9 @@ oltAppVersion: "4.0.0"
 kafkaAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/kafka/2.0.0/kafka-2.0.0.oar"
 kafkaAppVersion: "2.0.0"
 
+bngAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/bng/1.0.0/bng-1.0.0.oar"
+bngAppVersion: "1.0.0"
+
 onosRestService: "onos-ui.default.svc.cluster.local"
 kafkaService: "cord-kafka.default.svc.cluster.local:9092"
 
@@ -81,6 +84,3 @@ bng:
     enabled: true
   embedded:
     enabled: false
-    bngAppId: "org.opencord.bng"
-    bngAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/bng/1.0.0/bng-1.0.0.oar"
-    bngAppVersion: "1.0.0"

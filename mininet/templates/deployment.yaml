@@ -40,7 +40,7 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.global.registry }}{{ .Values.images.mininet.repository }}:{{ tpl .Values.images.mininet.tag . }}"
           imagePullPolicy: {{ .Values.images.mininet.pullPolicy }}
-{{- if $.Values.stratumEnabled }}
+{{- if gt ($.Values.mnStratumSwitchCount|int) 0 }}
           command: ["python"]
 {{- end }}
           args: [{{ .Values.topoScript }}]
