@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e57e1bec_9344147a",
+        "filename": "configs/seba-ponsim-sdbng-latest.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-22T18:24:30Z",
+      "side": 1,
+      "message": "I think we can merge these values with seba-ponsim-latest.yml, so all latest values will live in the same place. When deploying without sdbng support, values concerning dt-workflow-driver, etc will bee ignored.",
+      "revId": "55c54de4747d9730b1521224834fb47b807b017c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7db7eb97_392b9f4d",
+        "filename": "configs/seba-ponsim-sdbng.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-22T18:24:30Z",
+      "side": 1,
+      "message": "This can go in seba-ponsim.yaml",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 26
+      },
+      "revId": "55c54de4747d9730b1521224834fb47b807b017c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "72263d25_49b9271b",
+        "filename": "configs/seba-ponsim-sdbng.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-22T18:24:30Z",
+      "side": 1,
+      "message": "For consistency with other apps, I\u0027m thinking that perhaps we should make these values top-level, instead of being nested under bng.embedded. What do you think?",
+      "range": {
+        "startLine": 45,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 35
+      },
+      "revId": "55c54de4747d9730b1521224834fb47b807b017c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
