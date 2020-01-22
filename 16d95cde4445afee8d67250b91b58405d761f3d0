@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "850aa7ed_24d03735",
+        "filename": "configs/seba-ponsim-sdbng.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-01-22T00:22:58Z",
+      "side": 1,
+      "message": "Change to kpi exporter was merged. Is this snippet still required?",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 22
+      },
+      "revId": "16d95cde4445afee8d67250b91b58405d761f3d0",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
