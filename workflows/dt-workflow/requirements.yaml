@@ -16,4 +16,4 @@
 dependencies:
 - name: dt-workflow-driver
   version: 1.0.1
-  repository: file://../../xos-services/dt-workflow-driver
+  repository: https://charts.opencord.org
