@@ -38,6 +38,11 @@ spec:
     - name: s1ap
       port: {{ index $configJsonS1ap "sctp_port" }}
       protocol: SCTP
+{{- if .Values.prometheusExporter.mme.enabled }}
+    - name: exporter
+      port: 3081
+      protocol: TCP
+{{- end }}
 ---
 apiVersion: v1
 kind: Service
@@ -87,3 +92,9 @@ spec:
       port: {{ index $configJsonS1ap "sctp_port" }}
       nodePort: {{ index $configJsonS1ap "sctp_port_external" }}
       protocol: SCTP
+  {{- if .Values.prometheusExporter.mme.enabled }}
+    - name: exporter
+      port: 3081
+      nodePort: {{ .Values.prometheusExporter.mme.port }}
+      protocol: TCP
+  {{- end }}
