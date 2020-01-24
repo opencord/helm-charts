@@ -68,3 +68,7 @@ data:
   aether-edge-pods.json: |
 {{ .Files.Get "grafana-dashboards/aether-edge-pods.json" | indent 4 }}
 {{- end }}
+{{- if .Values.dashboards.aetherSubmon }}
+  aether-submon.json
+{{ .Files.Get "grafana-dashboards/aether-submon.json" | indent 4 }}
+{{- end }}
