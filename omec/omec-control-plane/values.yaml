@@ -19,6 +19,7 @@ images:
     hssdb: docker.io/omecproject/c3po-hssdb:1.0.0
     hss: docker.io/omecproject/c3po-hss:1.0.0
     mme: docker.io/omecproject/openmme:1.0.0
+    mmeExporter: docker.io/omecproject/mme-exporter:0.1.0
     spgwc: docker.io/omecproject/ngic-cp:1.1.0
     depCheck: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
   pullPolicy: IfNotPresent
@@ -312,3 +313,8 @@ config:
         LOCAL_HIGH_LIMIT_PORT = 65535
         REMOTE_LOW_LIMIT_PORT = 0
         REMOTE_HIGH_LIMIT_PORT = 65535
+
+prometheusExporter:
+  mme:
+    enabled: true # if it is set to false, subscriber-monitoring will not be operational
+    port: 33081 # for NodePort

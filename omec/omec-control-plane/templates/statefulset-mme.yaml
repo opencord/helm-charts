@@ -214,6 +214,23 @@ spec:
         - name: coredump
           mountPath: /tmp/coredump
       {{- end }}
+    {{- if .Values.prometheusExporter.mme.enabled }}
+      - name: subscriber-exporter
+        image: {{ .Values.images.tags.mmeExporter }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          privileged: true
+        command: ["bash", "-xc"]
+        args:
+        - until [ -e /tmp/unix_socket ]; do sleep 1; done; chmod 777 /tmp/unix_socket; while true; do python3 monitor_client.py; sleep 1; done
+        {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.mme | indent 10 }}
+        {{- end }}
+        volumeMounts:
+        - name: shared-app
+          mountPath: /tmp
+    {{- end }}
       volumes:
       - name: scripts
         configMap:
