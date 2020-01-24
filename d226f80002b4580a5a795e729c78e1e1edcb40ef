@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "f54be65f_93c8acb0",
+        "filename": "omec/omec-control-plane/templates/statefulset-mme.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-01-24T21:19:00Z",
+      "side": 1,
+      "message": "Why this separate path ? Cant we use existing path for UDS ? @badari",
+      "revId": "d226f80002b4580a5a795e729c78e1e1edcb40ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70f8d8e5_63c7a4da",
         "filename": "omec/omec-control-plane/templates/statefulset-mme.yaml",
         "patchSetId": 6
@@ -19,6 +36,23 @@
         "endLine": 165,
         "endChar": 37
       },
+      "revId": "d226f80002b4580a5a795e729c78e1e1edcb40ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "82db6721_2731a856",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-01-24T21:19:00Z",
+      "side": 1,
+      "message": "Where is the code to specify target ? like /metric API ?",
       "revId": "d226f80002b4580a5a795e729c78e1e1edcb40ef",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
