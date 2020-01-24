@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "2402a7a4_4e1fc07b",
+        "filename": "omec/omec-control-plane/templates/statefulset-mme.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2020-01-24T21:31:45Z",
+      "side": 1,
+      "message": "Then, MME source code should be changed. mme-app may have a IPC path information. @Bad, could you take a look?",
+      "parentUuid": "f54be65f_93c8acb0",
+      "revId": "d226f80002b4580a5a795e729c78e1e1edcb40ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "70f8d8e5_63c7a4da",
         "filename": "omec/omec-control-plane/templates/statefulset-mme.yaml",
         "patchSetId": 6
@@ -42,6 +60,30 @@
     },
     {
       "key": {
+        "uuid": "b597a09e_a805f1fc",
+        "filename": "omec/omec-control-plane/templates/statefulset-mme.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2020-01-24T21:31:45Z",
+      "side": 1,
+      "message": "I double checked about this and will remove here :D",
+      "parentUuid": "70f8d8e5_63c7a4da",
+      "range": {
+        "startLine": 165,
+        "startChar": 10,
+        "endLine": 165,
+        "endChar": 37
+      },
+      "revId": "d226f80002b4580a5a795e729c78e1e1edcb40ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "82db6721_2731a856",
         "filename": "omec/omec-control-plane/values.yaml",
         "patchSetId": 6
@@ -53,6 +95,24 @@
       "writtenOn": "2020-01-24T21:19:00Z",
       "side": 1,
       "message": "Where is the code to specify target ? like /metric API ?",
+      "revId": "d226f80002b4580a5a795e729c78e1e1edcb40ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2faeb31f_63a3307f",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2020-01-24T21:31:45Z",
+      "side": 1,
+      "message": "The python code is in the container. We cannot upload this python file on Helm chart. If necessary, I will make PR to upload the python file on OpenMME repo.",
+      "parentUuid": "82db6721_2731a856",
       "revId": "d226f80002b4580a5a795e729c78e1e1edcb40ef",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
