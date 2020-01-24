@@ -129,6 +129,10 @@ spec:
           mountPath: /tmp
         - name: configs
           mountPath: /opt/mme/config
+      {{- if .Values.config.subMon.enabled }}
+        - name: submon-ipc-socket
+          mountPath: /mnt/host-rootfs
+      {{- end }}
       {{- if .Values.config.coreDump.enabled }}
         - name: coredump
           mountPath: /tmp/coredump
@@ -156,6 +160,10 @@ spec:
           mountPath: /opt/mme/config/shared
         - name: shared-app
           mountPath: /tmp
+      {{- if .Values.config.subMon.enabled }}
+        - name: submon-ipc-socket
+          mountPath: /mnt/host-rootfs
+      {{- end }}
       {{- if .Values.config.coreDump.enabled }}
         - name: coredump
           mountPath: /tmp/coredump
@@ -214,6 +222,23 @@ spec:
         - name: coredump
           mountPath: /tmp/coredump
       {{- end }}
+    {{- if .Values.config.subMon.enabled }}
+      - name: subscriber-exporter
+        image: {{ .Values.images.tags.subMon }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          privileged: true
+        command: ["bash", "-xc"]
+        args:
+        - until [ -e /tmp/unix_socket ]; do sleep 1; done; chmod 777 /mnt/unix_socket; while true; do python3 monitor_client.py; sleep 1; done
+        {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.mme | indent 10 }}
+        {{- end }}
+        volumeMounts:
+        - name: submon-ipc-socket
+          mountPath: /tmp
+    {{- end }}
       volumes:
       - name: scripts
         configMap:
@@ -230,6 +255,11 @@ spec:
       - name: host-rootfs
         hostPath:
           path: /
+    {{- if .Values.config.subMon.enabled }}
+      - name: submon-ipc-socket
+        hostPath:
+          path: /tmp/submon
+    {{- end }}
     {{- if .Values.config.coreDump.enabled }}
       - name: coredump
         hostPath:
