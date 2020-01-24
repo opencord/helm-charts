@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "70f8d8e5_63c7a4da",
+        "filename": "omec/omec-control-plane/templates/statefulset-mme.yaml",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-01-24T21:18:54Z",
+      "side": 1,
+      "message": "Isn\u0027t the socket has to be shared only between mme-app and sub mon container? It doesn\u0027t have to mount hostPath to me.",
+      "range": {
+        "startLine": 165,
+        "startChar": 10,
+        "endLine": 165,
+        "endChar": 37
+      },
+      "revId": "d226f80002b4580a5a795e729c78e1e1edcb40ef",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
