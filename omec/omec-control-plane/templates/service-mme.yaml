@@ -38,6 +38,11 @@ spec:
     - name: s1ap
       port: {{ index $configJsonS1ap "sctp_port" }}
       protocol: SCTP
+{{- if .Values.config.subMon.enabled }}
+    - name: submon
+      port: 3081
+      protocol: TCP
+{{- end }}
 ---
 apiVersion: v1
 kind: Service
