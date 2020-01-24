@@ -70,6 +70,30 @@
       "revId": "3184c101838be3f95e06906e11e85465dee1b0db",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e0957550_f66ec901",
+        "filename": "configs/seba-ponsim-sdbng.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2020-01-24T19:19:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3af60003_023b83ca",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 25
+      },
+      "revId": "3184c101838be3f95e06906e11e85465dee1b0db",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
