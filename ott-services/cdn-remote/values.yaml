@@ -49,6 +49,12 @@ resources:
 config:
   videoArchive:
     replicas: 1
+    q360p:
+      enabled: true
+    q480p:
+      enabled: true
+    q720p:
+      enabled: true
   antMedia:
     ports:
       httpui: 5080

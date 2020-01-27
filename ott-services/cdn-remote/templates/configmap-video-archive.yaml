@@ -20,7 +20,7 @@ kind: ConfigMap
 metadata:
   name: start-stream
   labels:
-{{ tuple "ant-media" . | include "cdn-remote.metadata_labels" | indent 4 }}
+{{ tuple "video-archive" . | include "cdn-remote.metadata_labels" | indent 4 }}
 data:
   start-stream.sh: |
 {{ tuple "bin/_start-stream.sh.tpl" . | include "cdn-remote.template" | indent 4 }}
