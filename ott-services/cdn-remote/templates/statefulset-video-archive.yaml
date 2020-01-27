@@ -68,6 +68,7 @@ spec:
         volumeMounts:
           []
       containers:
+{{- if .Values.config.videoArchive.q720p.enabled }}
       - name: streaming-720
         image: {{ .Values.images.tags.videoArchive | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
@@ -88,6 +89,8 @@ spec:
         - name: start-script
           mountPath: /opt/start-stream.sh
           subPath: start-stream.sh
+{{- end }}
+{{- if .Values.config.videoArchive.q480p.enabled }}
       - name: streaming-480
         image: {{ .Values.images.tags.videoArchive | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
@@ -108,6 +111,8 @@ spec:
         - name: start-script
           mountPath: /opt/start-stream.sh
           subPath: start-stream.sh
+{{- end }}
+{{- if .Values.config.videoArchive.q360p.enabled }}
       - name: streaming-360
         image: {{ .Values.images.tags.videoArchive | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
@@ -128,6 +133,7 @@ spec:
         - name: start-script
           mountPath: /opt/start-stream.sh
           subPath: start-stream.sh
+{{- end }}
       volumes:
       - name: start-script
         configMap:
