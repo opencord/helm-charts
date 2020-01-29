@@ -23,10 +23,6 @@ images:
   mininet:
     repository: 'opencord/mn-stratum-siab'
     tag: 'master'
-  kpi_exporter:
-    # TODO: remove then this docker container is released ((update the value definition in nem-monitoring)
-    repository: 'opencord/kafka-topic-exporter'
-    tag: 'latest'
 
 # Select DT-Workflow
 workflow: dt-workflow
