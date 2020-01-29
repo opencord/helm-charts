@@ -19,7 +19,7 @@ global:
 images:
   kpi_exporter:
     repository: 'opencord/kafka-topic-exporter'
-    tag: '1.2.3'
+    tag: '1.2.6'
     pullPolicy: 'Always'
 
 kpi_exporter:

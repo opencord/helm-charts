@@ -16,7 +16,7 @@
 apiVersion: v1
 name: onos
 description: Open Network Operating System
-version: 2.0.1-b1
+version: 2.0.1-b2
 icon: https://guide.opencord.org/logos/onos.svg
 # FIXME: replace with 2.2.1 when released
-appVersion: 2.2.1-b4
+appVersion: 2.2.1-b5
