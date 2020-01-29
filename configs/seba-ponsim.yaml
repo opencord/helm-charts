@@ -66,12 +66,3 @@ bng:
     enabled: true
   embedded:
     enabled: false
-
-# ONOS applications
-# TODO: remove when 2.0.1 is released (update the value definition in seba-services)
-kafkaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=kafka&v=2.0.1-SNAPSHOT&e=oar"
-kafkaAppVersion: "2.0.1.SNAPSHOT"
-
-# TODO: remove when app is released (rely on seba-services value definition)
-bngAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=bng-app&v=1.0.0-SNAPSHOT&e=oar"
-bngAppVersion: "1.0.0.SNAPSHOT"

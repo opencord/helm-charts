@@ -43,16 +43,13 @@ xosAdminPassword: "letmein"
 sadisAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/sadis-app/4.0.1/sadis-app-4.0.1.oar"
 sadisAppVersion: "4.0.1"
 
-dhcpl2relayAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/dhcpl2relay-app/2.0.0/dhcpl2relay-app-2.0.0.oar"
-dhcpl2relayAppVersion: "2.0.0"
-
 oltAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/olt-app/4.0.0/olt-app-4.0.0.oar"
 oltAppVersion: "4.0.0"
 
-kafkaAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/kafka/2.0.0/kafka-2.0.0.oar"
-kafkaAppVersion: "2.0.0"
+kafkaAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/kafka/2.1.0/kafka-2.1.0.oar"
+kafkaAppVersion: "2.1.0"
 
-bngAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/bng/1.0.0/bng-1.0.0.oar"
+bngAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/bng-app/1.0.0/bng-app-1.0.0.oar"
 bngAppVersion: "1.0.0"
 
 onosRestService: "onos-ui.default.svc.cluster.local"
@@ -72,8 +69,8 @@ fabric:
     # pre-installed in ONOS.
     pipeconfAppExternal: true
     pipeconfAppId: "org.opencord.fabric-tofino"
-    pipeconfAppUrl: "https://repo1.maven.org/maven2/org/opencord/fabric-tofino/1.0.0/fabric-tofino-1.0.0.oar"
-    pipeconfAppVersion: "1.0.0"
+    pipeconfAppUrl: "https://oss.sonatype.org/content/groups/public/org/opencord/fabric-tofino/1.1.0/fabric-tofino-1.1.0.oar"
+    pipeconfAppVersion: "1.1.0"
 
 onos-service:
   enabled: true

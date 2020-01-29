@@ -15,10 +15,10 @@
 
 dependencies:
 - name: rcord
-  version: 1.0.16
+  version: 1.0.17
   repository: https://charts.opencord.org
 - name: onos-service
-  version: 2.1.3
+  version: 2.1.4
   repository: https://charts.opencord.org
   condition: onos-service.enabled
 - name: fabric
