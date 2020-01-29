@@ -62,7 +62,7 @@ images:
     tag: "latest"
 
 # NEM Monitoring
-  voltha_kpi_exporter:
+  kpi_exporter:
     tag: 'latest'
 
 # in xos-gui sub-chart required by xos-core chart
@@ -125,8 +125,8 @@ dhcpl2relayAppVersion: "2.0.1.SNAPSHOT"
 oltAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=olt-app&v=4.0.1-SNAPSHOT&e=oar"
 oltAppVersion: "4.0.1.SNAPSHOT"
 
-kafkaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=kafka&v=2.0.1-SNAPSHOT&e=oar"
-kafkaAppVersion: "2.0.1.SNAPSHOT"
+kafkaAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=kafka&v=2.1.1-SNAPSHOT&e=oar"
+kafkaAppVersion: "2.1.1.SNAPSHOT"
 
-bngAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=bng-app&v=1.0.0-SNAPSHOT&e=oar"
-bngAppVersion: "1.0.0.SNAPSHOT"
+bngAppUrl: "https://oss.sonatype.org/service/local/artifact/maven/redirect?r=snapshots&g=org.opencord&a=bng-app&v=1.0.1-SNAPSHOT&e=oar"
+bngAppVersion: "1.0.1.SNAPSHOT"
