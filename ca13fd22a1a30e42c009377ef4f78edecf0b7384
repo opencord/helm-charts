@@ -22,6 +22,30 @@
       "revId": "ca13fd22a1a30e42c009377ef4f78edecf0b7384",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf9289fc_d63b66de",
+        "filename": "nem-monitoring/Chart.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2020-01-30T19:59:01Z",
+      "side": 1,
+      "message": "At the first patch, I did not change version number since I saw the surfix -dev. However, Jenkins fails, so I bumped up. Please correct me if I am wrong.",
+      "parentUuid": "eb9ac12c_b025ad17",
+      "range": {
+        "startLine": 21,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 18
+      },
+      "revId": "ca13fd22a1a30e42c009377ef4f78edecf0b7384",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
