@@ -47,10 +47,6 @@ spec:
 {{ tuple "accelleran-cu" . | include "accelleran-cu.metadata_labels" | indent 4 }}
   type: NodePort
   ports:
-  - name: s1ap
-    port: {{ .Values.config.vran.ports.s1ap.port }}
-    protocol: SCTP
-    nodePort: {{ .Values.config.vran.ports.s1ap.nodePort }}
   - name: nats
     port: {{ .Values.config.vran.ports.nats.port }}
     protocol: TCP
