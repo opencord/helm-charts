@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "eb9ac12c_b025ad17",
+        "filename": "nem-monitoring/Chart.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-01-30T19:41:55Z",
+      "side": 1,
+      "message": "do we need to bump the version if it\u0027s -dev?",
+      "range": {
+        "startLine": 21,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 18
+      },
+      "revId": "ca13fd22a1a30e42c009377ef4f78edecf0b7384",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
