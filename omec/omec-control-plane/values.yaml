@@ -226,10 +226,10 @@ config:
   spgwc:
     apn: apn1
     ueIpPool:
-      ip: 16.0.0.0
-      mask: 255.0.0.0
+      ip: 10.250.0.0
+      mask: 255.255.0.0
     # This address must match to S1U IP address configured in omec-data-plane
-    s1uAddr: 119.0.0.3
+    s1uAddr: 192.168.251.3
     s11:
       nodePort:
         enabled: false
