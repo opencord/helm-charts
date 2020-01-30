@@ -45,7 +45,6 @@ config:
     ports:
       s1ap:
         port: 36412
-        nodePort: 31412
       nats:
         port: 4222
         nodePort: 4222
