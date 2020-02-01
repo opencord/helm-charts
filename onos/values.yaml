@@ -21,21 +21,15 @@ replicaCount: 1
 
 images:
   onos:
-    repository: 'onosproject/onos'
-    tag: '{{ .Chart.AppVersion }}'
+    repository: 'dmoro92/onos'
+    tag: '2.2-dev'
     pullPolicy: 'Always'
-
-  # keep in sync with: https://github.com/helm/charts/blob/master/stable/filebeat/values.yaml
-  log_agent:
-    repository: docker.elastic.co/beats/filebeat-oss
-    tag: 6.4.2
-    pullPolicy: IfNotPresent
 
 global:
   registry: ''
 
 log_agent:
-  enabled: True
+  enabled: False
   kafka_brokers: ['cord-kafka:9092']
 
 nameOverride: ''
