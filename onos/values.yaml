@@ -25,12 +25,6 @@ images:
     tag: '{{ .Chart.AppVersion }}'
     pullPolicy: 'Always'
 
-  # keep in sync with: https://github.com/helm/charts/blob/master/stable/filebeat/values.yaml
-  log_agent:
-    repository: docker.elastic.co/beats/filebeat-oss
-    tag: 6.4.2
-    pullPolicy: IfNotPresent
-
 global:
   registry: ''
 
