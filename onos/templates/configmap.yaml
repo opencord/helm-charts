@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+{{- if .Values.log_agent.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -20,3 +20,6 @@ metadata:
 data:
   logCfg: |
 {{ include "onos.logCfg" . | indent 4 }}
+  blabla: |
+{{ include "onos.startupKaraf" . | indent 4 }}
+{{- end }}
