@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 1,
+  "iteration": 1580635125090,
   "links": [],
   "panels": [
     {
@@ -27,321 +28,10 @@
         "x": 0,
         "y": 0
       },
-      "id": 4,
-      "panels": [],
-      "repeat": "pod",
-      "scopedVars": {
-        "pod": {
-          "selected": true,
-          "text": "spgwu",
-          "value": "spgwu"
-        }
-      },
-      "title": "$pod",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 0,
-        "y": 1
-      },
-      "id": 16,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "scopedVars": {
-        "pod": {
-          "selected": true,
-          "text": "spgwu",
-          "value": "spgwu"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": true,
-      "targets": [
-        {
-          "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\", container_name!=\"POD\", pod_name=\"$pod-0\"}[5m])) by (datacenter)",
-          "interval": "10s",
-          "legendFormat": "{{ datacenter }}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$pod CPU usage in all Edges",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 2,
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 8,
-        "y": 1
-      },
-      "id": 17,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "scopedVars": {
-        "pod": {
-          "selected": true,
-          "text": "spgwu",
-          "value": "spgwu"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(container_memory_working_set_bytes{container_name!=\"POD\", container_name!=\"\", pod_name=\"$pod-0\"}) by (datacenter)",
-          "interval": "10s",
-          "legendFormat": "{{ datacenter }}",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$pod memory usage in all Edges",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 2,
-          "format": "bytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 8,
-        "x": 16,
-        "y": 1
-      },
-      "id": 18,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "nullPointMode": "null",
-      "options": {
-        "dataLinks": []
-      },
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "scopedVars": {
-        "pod": {
-          "selected": true,
-          "text": "spgwu",
-          "value": "spgwu"
-        }
-      },
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(rate(container_network_receive_bytes_total{pod_name=\"$pod-0\",container_name!=\"\"}[5m]))by (datacenter)",
-          "interval": "10s",
-          "legendFormat": "{{ datacenter }} rx",
-          "refId": "A"
-        },
-        {
-          "expr": "- sum(rate(container_network_transmit_bytes_total{pod_name=\"$pod-0\",container_name!=\"\"}[5m]))by (datacenter)",
-          "legendFormat": "{{ datacenter }} tx",
-          "refId": "B"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "$pod network I/O in all Edges",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "Bps",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": false
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "datasource": null,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 27
-      },
       "id": 25,
       "panels": [],
-      "repeat": "datacenter",
-      "title": "$pod usage in $datacenter",
+      "repeat": "pod",
+      "title": "$pod Resource Usage",
       "type": "row"
     },
     {
@@ -368,7 +58,7 @@
         "h": 5,
         "w": 6,
         "x": 0,
-        "y": 28
+        "y": 1
       },
       "id": 10,
       "interval": null,
@@ -411,7 +101,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "100 * sum(irate(container_cpu_usage_seconds_total{pod_name=\"$pod-0\", image!=\"\", container_name!=\"POD\", datacenter=\"$datacenter\"}[3m])) by (pod_name) / sum(container_spec_cpu_quota{image!=\"\", container_name!=\"POD\", datacenter=\"$datacenter\"} / container_spec_cpu_period{image!=\"\", container_name!=\"POD\", datacenter=\"$datacenter\"}) by (pod_name)",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{datacenter=\"$site\", image!=\"\", container_name!=\"POD\", pod_name=~\"$pod.*\"}[5m])) / sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", pod=~\"$pod.*\"}) * 100",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -420,7 +110,7 @@
         }
       ],
       "thresholds": "85,95",
-      "title": "$pod CPU usage in $datacenter",
+      "title": "CPU usage",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -456,7 +146,7 @@
         "h": 5,
         "w": 6,
         "x": 6,
-        "y": 28
+        "y": 1
       },
       "id": 12,
       "interval": null,
@@ -499,7 +189,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "100 * (sum(container_memory_usage_bytes{pod_name=\"$pod-0\", container_name!=\"POD\", datacenter=\"$datacenter\"}) / sum(container_spec_memory_limit_bytes{pod_name=\"$pod-0\", container_name!=\"POD\", datacenter=\"$datacenter\"}))",
+          "expr": "100 * (sum(container_memory_usage_bytes{datacenter=\"$site\", pod_name=~\"$pod.*\", container_name!=\"POD\"}) / sum(container_spec_memory_limit_bytes{datacenter=\"$site\", pod_name=~\"$pod.*\", container_name!=\"POD\"}))",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -509,7 +199,7 @@
         }
       ],
       "thresholds": "85,95",
-      "title": "$pod memory usage in $datacenter",
+      "title": "Memory usage",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -530,10 +220,10 @@
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
         "x": 12,
-        "y": 28
+        "y": 1
       },
       "id": 2,
       "legend": {
@@ -548,14 +238,14 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
       "options": {
         "dataLinks": []
       },
       "percentage": false,
-      "pointradius": 5,
+      "pointradius": 1,
       "points": false,
       "renderer": "flot",
       "repeat": null,
@@ -566,19 +256,19 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_network_receive_bytes_total{pod_name=\"$pod-0\", datacenter=\"$datacenter\"}[3m]))by (interface)",
+          "expr": "sum(rate(container_network_receive_bytes_total{pod_name=~\"$pod.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "rx: {{ interface }}",
+          "legendFormat": "rx: {{pod_name}}| {{ interface }}",
           "refId": "B"
         },
         {
-          "expr": "-sum(rate(container_network_transmit_bytes_total{pod_name=\"$pod-0\", datacenter=\"$datacenter\"}[3m]))by (interface)",
+          "expr": "-sum(rate(container_network_transmit_bytes_total{pod_name=~\"$pod.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
-          "legendFormat": "tx: {{ interface }}",
+          "legendFormat": "tx: {{pod_name}}| {{ interface }}",
           "refId": "A"
         }
       ],
@@ -586,7 +276,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "$pod network I/O in $datacenter",
+      "title": "Network I/O",
       "tooltip": {
         "shared": true,
         "sort": 1,
@@ -642,10 +332,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 3,
         "x": 0,
-        "y": 33
+        "y": 6
       },
       "id": 20,
       "interval": null,
@@ -689,7 +379,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$datacenter\", pod=\"$pod-0\"})",
+          "expr": "sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", pod=~\"$pod.*\"})",
           "interval": "10s",
           "refId": "A"
         }
@@ -728,10 +418,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 3,
         "x": 3,
-        "y": 33
+        "y": 6
       },
       "id": 21,
       "interval": null,
@@ -775,7 +465,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum (irate (container_cpu_usage_seconds_total{image!=\"\", container_name!=\"POD\", datacenter=\"$datacenter\", pod_name=\"$pod-0\"}[5m]))",
+          "expr": "sum (rate(container_cpu_usage_seconds_total{datacenter=\"$site\", image!=\"\", container_name!=\"POD\", pod_name=~\"$pod.*\"}[5m]))",
           "interval": "10s",
           "refId": "A"
         }
@@ -815,10 +505,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 3,
         "x": 6,
-        "y": 33
+        "y": 6
       },
       "id": 22,
       "interval": null,
@@ -862,7 +552,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_resource_limits_memory_bytes{datacenter=\"$datacenter\", pod=\"$pod-0\"})",
+          "expr": "sum(kube_pod_container_resource_limits_memory_bytes{datacenter=\"$site\", pod=~\"$pod.*\"})",
           "refId": "A"
         }
       ],
@@ -891,6 +581,7 @@
         "#d44a3a"
       ],
       "datasource": null,
+      "decimals": null,
       "format": "decbytes",
       "gauge": {
         "maxValue": 100,
@@ -900,10 +591,10 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 4,
+        "h": 3,
         "w": 3,
         "x": 9,
-        "y": 33
+        "y": 6
       },
       "id": 23,
       "interval": null,
@@ -947,7 +638,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(container_memory_working_set_bytes{container_name!=\"POD\", container_name!=\"\", datacenter=\"$datacenter\", pod_name=\"$pod-0\"})",
+          "expr": "sum(container_memory_working_set_bytes{datacenter=\"$site\", container_name!=\"POD\", container_name!=\"\", pod_name=~\"$pod.*\"})",
           "interval": "10s",
           "refId": "A"
         }
@@ -966,91 +657,340 @@
         }
       ],
       "valueName": "avg"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 3,
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 9
+      },
+      "height": "",
+      "id": 27,
+      "isNew": true,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": null,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 0,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 0.5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",pod_name=~\"^$pod-.*\",name=~\"^k8s_.*\",container_name!=\"POD\",datacenter=\"$site\"}[5m])) by (container_name, pod_name)",
+          "format": "time_series",
+          "hide": false,
+          "interval": "10s",
+          "intervalFactor": 5,
+          "legendFormat": "pod: {{ pod_name }} | {{ container_name }}",
+          "metric": "container_cpu",
+          "refId": "A",
+          "step": 10
+        },
+        {
+          "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",pod_name=\"$pod-0\",name!~\"^k8s_.*\",datacenter=\"$site\"}[5m])) by (kubernetes_io_hostname, name, image)",
+          "format": "time_series",
+          "hide": true,
+          "interval": "10s",
+          "intervalFactor": 5,
+          "legendFormat": "docker: {{ kubernetes_io_hostname }} | {{ image }} ({{ name }})",
+          "metric": "container_cpu",
+          "refId": "B",
+          "step": 10
+        },
+        {
+          "expr": "sum (rate (container_cpu_usage_seconds_total{rkt_container_name!=\"\",datacenter=\"$site\"}[5m])) by (kubernetes_io_hostname, rkt_container_name)",
+          "format": "time_series",
+          "hide": true,
+          "interval": "10s",
+          "intervalFactor": 5,
+          "legendFormat": "rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
+          "metric": "container_cpu",
+          "refId": "C",
+          "step": 10
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Containers CPU usage (5m avg)",
+      "tooltip": {
+        "msResolution": true,
+        "shared": false,
+        "sort": 2,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": "cores",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 2,
+      "editable": true,
+      "error": false,
+      "fill": 1,
+      "fillGradient": 0,
+      "grid": {},
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 29,
+      "isNew": true,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": null,
+        "sort": "current",
+        "sortDesc": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 0,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 0.5,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
+      "targets": [
+        {
+          "expr": "sum (container_memory_working_set_bytes{image!=\"\",datacenter=\"$site\",pod_name=~\"^$pod.*\",name=~\"^k8s_.*\",container_name!=\"POD\"}) by (container_name, pod_name)",
+          "format": "time_series",
+          "interval": "10s",
+          "intervalFactor": 5,
+          "legendFormat": "pod: {{ pod_name }} | {{ container_name }}",
+          "metric": "container_memory_usage:sort_desc",
+          "refId": "A",
+          "step": 10
+        },
+        {
+          "expr": "sum (container_memory_working_set_bytes{image!=\"\",name!~\"^k8s_.*\",datacenter=\"$Site\",kubernetes_io_hostname=~\"^$Node$\",namespace=~\"$Namespace\"}) by (kubernetes_io_hostname, name, image)",
+          "format": "time_series",
+          "hide": true,
+          "interval": "10s",
+          "intervalFactor": 5,
+          "legendFormat": "docker: {{ kubernetes_io_hostname }} | {{ image }} ({{ name }})",
+          "metric": "container_memory_usage:sort_desc",
+          "refId": "B",
+          "step": 10
+        },
+        {
+          "expr": "sum (container_memory_working_set_bytes{rkt_container_name!=\"\",datacenter=\"$Site\",kubernetes_io_hostname=~\"^$Node$\",namespace=~\"$Namespace\"}) by (kubernetes_io_hostname, rkt_container_name)",
+          "format": "time_series",
+          "hide": true,
+          "interval": "10s",
+          "intervalFactor": 5,
+          "legendFormat": "rkt: {{ kubernetes_io_hostname }} | {{ rkt_container_name }}",
+          "metric": "container_memory_usage:sort_desc",
+          "refId": "C",
+          "step": 10
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Containers memory usage",
+      "tooltip": {
+        "msResolution": false,
+        "shared": false,
+        "sort": 2,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "bytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
-  "refresh": "5s",
+  "refresh": "1m",
   "schemaVersion": 20,
   "style": "dark",
   "tags": [
-    "aether"
+    "aether",
+    "omec"
   ],
   "templating": {
     "list": [
       {
-        "allValue": ".*",
-        "current": {
-          "text": "spgwu",
-          "value": [
-            "spgwu"
-          ]
-        },
-        "hide": 0,
-        "includeAll": false,
-        "label": "Pod",
-        "multi": false,
-        "name": "pod",
-        "options": [
-          {
-            "selected": true,
-            "text": "spgwu",
-            "value": "spgwu"
-          },
-          {
-            "selected": false,
-            "text": "accelleran-cbrs-ric",
-            "value": "accelleran-cbrs-ric"
-          },
-          {
-            "selected": false,
-            "text": "accelleran-cbrs-nats",
-            "value": "accelleran-cbrs-nats"
-          },
-          {
-            "selected": false,
-            "text": "accelleran-cbrs-redis",
-            "value": "accelleran-cbrs-redis"
-          },
-          {
-            "selected": false,
-            "text": "accelleran-cbrs-ricweb",
-            "value": "accelleran-cbrs-ricweb"
-          }
-        ],
-        "query": "spgwu,accelleran-cbrs-ric,accelleran-cbrs-nats,accelleran-cbrs-redis,accelleran-cbrs-ricweb",
-        "skipUrlSync": false,
-        "type": "custom"
-      },
-      {
-        "allValue": ".*",
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
+        "allValue": null,
         "datasource": "Prometheus",
         "definition": "label_values(kube_pod_info, datacenter)",
         "hide": 0,
-        "includeAll": true,
-        "label": "Datacenter",
-        "multi": true,
-        "name": "datacenter",
-        "options": [],
+        "includeAll": false,
+        "label": "Site",
+        "multi": false,
+        "name": "site",
         "query": "label_values(kube_pod_info, datacenter)",
         "refresh": 2,
-        "regex": "/.*edge/",
+        "regex": "/.*central.*/",
         "skipUrlSync": false,
-        "sort": 1,
+        "sort": 0,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
+      },
+      {
+        "allValue": ".*",
+        "current": {
+          "tags": [],
+          "text": "All",
+          "value": [
+            "$__all"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Pod",
+        "multi": true,
+        "name": "pod",
+        "options": [
+          {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": true,
+            "text": "mme",
+            "value": "mme"
+          },
+          {
+            "selected": false,
+            "text": "spgwc",
+            "value": "spgwc"
+          },
+          {
+            "selected": false,
+            "text": "hss",
+            "value": "hss"
+          },
+          {
+            "selected": false,
+            "text": "cassandra",
+            "value": "cassandra"
+          }
+        ],
+        "query": "mme,spgwc,hss,cassandra",
+        "skipUrlSync": false,
+        "type": "custom"
       }
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -1080,7 +1020,7 @@
     ]
   },
   "timezone": "",
-  "title": "Aether Edges",
-  "uid": "gKU2e27Za",
-  "version": 3
+  "title": "OMEC Control Plane",
+  "uid": "gKU2e27Zb",
+  "version": 1
 }
