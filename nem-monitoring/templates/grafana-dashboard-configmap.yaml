@@ -52,27 +52,23 @@ data:
   omec.json: |
 {{ .Files.Get "grafana-dashboards/omec.json" | indent 4 }}
 {{- end }}
-{{- if .Values.dashboards.aetherClusters }}
-  aether-clusters.json: |
-{{ .Files.Get "grafana-dashboards/aether-clusters.json" | indent 4 }}
-{{- end }}
-{{- if .Values.dashboards.aetherEdges }}
-  aether-edges.json: |
-{{ .Files.Get "grafana-dashboards/aether-edges.json" | indent 4 }}
-{{- end }}
-{{- if .Values.dashboards.aetherCentralPods }}
-  aether-central-pods.json: |
-{{ .Files.Get "grafana-dashboards/aether-central-pods.json" | indent 4 }}
-{{- end }}
-{{- if .Values.dashboards.aetherEdgePods }}
-  aether-edge-pods.json: |
-{{ .Files.Get "grafana-dashboards/aether-edge-pods.json" | indent 4 }}
+{{- if .Values.dashboards.aether }}
+  multi-site-system.json: |
+{{ .Files.Get "grafana-dashboards/multi-site-system.json" | indent 4 }}
+  multi-site-system-summary.json: |
+{{ .Files.Get "grafana-dashboards/multi-site-system-summary.json" | indent 4 }}
+  multi-site-k8s.json: |
+{{ .Files.Get "grafana-dashboards/multi-site-k8s.json" | indent 4 }}
+  omec-user-plane.json: |
+{{ .Files.Get "grafana-dashboards/omec-user-plane.json" | indent 4 }}
+  omec-user-plane-summary.json: |
+{{ .Files.Get "grafana-dashboards/omec-user-plane-summary.json" | indent 4 }}
+  omec-control-plane.json: |
+{{ .Files.Get "grafana-dashboards/omec-control-plane.json" | indent 4 }}
+  omec-imsi-list.json: |
+{{ .Files.Get "grafana-dashboards/omec-imsi-list.json" | indent 4 }}
 {{- end }}
 {{- if .Values.dashboards.bng }}
   bng-dashboard.json: |
 {{ .Files.Get "grafana-dashboards/bng-dashboard.json" | indent 4 }}
-{{- end }}
-{{- if .Values.dashboards.aetherMMEExporter }}
-  aether-mme-exporter.json: |
-{{ .Files.Get "grafana-dashboards/aether-mme-exporter.json" | indent 4 }}
 {{- end }}

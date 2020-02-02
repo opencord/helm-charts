@@ -100,9 +100,5 @@ dashboards:
   voltha: true
   voltha2: false
   omec: false
-  aetherClusters: false
-  aetherEdges: false
-  aetherCentralPods: false
-  aetherEdgePods: false
-  aetherMMEExporter: false
+  aether: false
   bng: false

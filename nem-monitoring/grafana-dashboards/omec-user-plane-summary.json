@@ -15,7 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 3,
+  "id": 5,
+  "iteration": 1580754449762,
   "links": [],
   "panels": [
     {
@@ -27,39 +28,37 @@
         "x": 0,
         "y": 0
       },
-      "id": 25,
+      "id": 31,
       "panels": [],
-      "repeat": "pod",
-      "title": "$pod usage",
+      "repeat": "site",
+      "title": "$site",
       "type": "row"
     },
     {
       "cacheTimeout": null,
       "colorBackground": false,
-      "colorValue": true,
+      "colorValue": false,
       "colors": [
-        "rgba(50, 172, 45, 0.97)",
+        "#299c46",
         "rgba(237, 129, 40, 0.89)",
-        "rgba(245, 54, 54, 0.9)"
+        "#d44a3a"
       ],
-      "datasource": "Prometheus",
-      "decimals": null,
-      "description": "",
-      "format": "percent",
+      "datasource": null,
+      "format": "s",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
-        "show": true,
+        "show": false,
         "thresholdLabels": false,
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 5,
-        "w": 6,
+        "h": 4,
+        "w": 4,
         "x": 0,
         "y": 1
       },
-      "id": 10,
+      "id": 29,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -74,8 +73,7 @@
         }
       ],
       "maxDataPoints": 100,
-      "maxPerRow": 12,
-      "nullPointMode": "null",
+      "nullPointMode": "connected",
       "nullText": null,
       "options": {},
       "postfix": "",
@@ -91,34 +89,27 @@
       ],
       "repeat": null,
       "repeatDirection": "v",
-      "scopedVars": {
-        "pod": {
-          "selected": false,
-          "text": "mme",
-          "value": "mme"
-        }
-      },
       "sparkline": {
         "fillColor": "rgba(31, 118, 189, 0.18)",
         "full": false,
         "lineColor": "rgb(31, 120, 193)",
-        "show": true
+        "show": false,
+        "ymax": null,
+        "ymin": null
       },
       "tableColumn": "",
       "targets": [
         {
-          "expr": "100 * sum(irate(container_cpu_usage_seconds_total{pod_name=\"$pod-0\", image!=\"\", container_name!=\"POD\"}[3m])) by (pod_name) / sum(container_spec_cpu_quota{image!=\"\", container_name!=\"POD\"} / container_spec_cpu_period{image!=\"\", container_name!=\"POD\"}) by (pod_name)",
-          "format": "time_series",
-          "interval": "10s",
-          "intervalFactor": 1,
-          "legendFormat": "",
+          "expr": "sum(time() - kube_pod_created{datacenter=\"$site\",namespace=~\"omec|omec-cbrs\",pod=~\"spgwu.*\"})",
           "refId": "A"
         }
       ],
-      "thresholds": "85,95",
-      "title": "CPU usage",
+      "thresholds": "",
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Age",
       "type": "singlestat",
-      "valueFontSize": "80%",
+      "valueFontSize": "100%",
       "valueMaps": [
         {
           "op": "=",
@@ -126,7 +117,62 @@
           "value": "null"
         }
       ],
-      "valueName": "current"
+      "valueName": "avg"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "Prometheus",
+      "description": "",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 4,
+        "y": 1
+      },
+      "id": 10,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.4.2",
+      "repeat": null,
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "expr": "sum(rate(container_cpu_usage_seconds_total{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\", image!=\"\", container_name!=\"POD\", pod_name=~\"spgwu.*\"}[5m])) / sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\", pod=~\"spgwu.*\"}) * 100",
+          "format": "time_series",
+          "interval": "10s",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "title": "SPGWU CPU Utilization",
+      "type": "gauge"
     },
     {
       "cacheTimeout": null,
@@ -149,9 +195,9 @@
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 5,
-        "w": 6,
-        "x": 6,
+        "h": 8,
+        "w": 4,
+        "x": 8,
         "y": 1
       },
       "id": 12,
@@ -195,7 +241,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "100 * (sum(container_memory_usage_bytes{pod_name=\"$pod-0\", container_name!=\"POD\"}) / sum(container_spec_memory_limit_bytes{pod_name=\"$pod-0\", container_name!=\"POD\"}))",
+          "expr": "100 * (sum(container_memory_usage_bytes{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\", pod_name=~\"spgwu.*\", container_name!=\"POD\"}) / sum(container_spec_memory_limit_bytes{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\", pod_name=~\"spgwu.*\", container_name!=\"POD\"}))",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -205,7 +251,7 @@
         }
       ],
       "thresholds": "85,95",
-      "title": "Memory usage",
+      "title": "SPGWU Memory Utilization",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -226,7 +272,7 @@
       "fill": 2,
       "fillGradient": 0,
       "gridPos": {
-        "h": 9,
+        "h": 8,
         "w": 12,
         "x": 12,
         "y": 1
@@ -244,14 +290,14 @@
         "values": true
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
       "options": {
         "dataLinks": []
       },
       "percentage": false,
-      "pointradius": 5,
+      "pointradius": 1,
       "points": false,
       "renderer": "flot",
       "repeat": null,
@@ -262,7 +308,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_network_receive_bytes_total{pod_name=\"$pod-0\", interface!=\"tunl0\"}[3m]))by (interface)",
+          "expr": "sum(rate(container_network_receive_bytes_total{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\",  pod_name=~\"spgwu.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -270,7 +316,7 @@
           "refId": "B"
         },
         {
-          "expr": "-sum(rate(container_network_transmit_bytes_total{pod_name=\"$pod-0\", interface!=\"tunl0\"}[3m]))by (interface)",
+          "expr": "-sum(rate(container_network_transmit_bytes_total{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\",  pod_name=~\"spgwu.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -282,7 +328,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Network I/O",
+      "title": "SPGWU Network I/O",
       "tooltip": {
         "shared": true,
         "sort": 1,
@@ -329,7 +375,7 @@
         "#d44a3a"
       ],
       "datasource": null,
-      "format": "none",
+      "format": "s",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -339,11 +385,11 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
+        "w": 4,
         "x": 0,
-        "y": 6
+        "y": 5
       },
-      "id": 20,
+      "id": 32,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -372,7 +418,6 @@
           "to": "null"
         }
       ],
-      "repeat": null,
       "repeatDirection": "v",
       "sparkline": {
         "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -385,17 +430,16 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_resource_limits_cpu_cores{pod=\"$pod-0\"})",
-          "interval": "10s",
+          "expr": "count(ue_info{datacenter=\"$site\"})",
           "refId": "A"
         }
       ],
       "thresholds": "",
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPU limits",
+      "title": "Number of Subscribers",
       "type": "singlestat",
-      "valueFontSize": "80%",
+      "valueFontSize": "100%",
       "valueMaps": [
         {
           "op": "=",
@@ -407,7 +451,8 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
+      "colorBackground": true,
+      "colorPrefix": false,
       "colorValue": false,
       "colors": [
         "#299c46",
@@ -425,11 +470,11 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 3,
-        "y": 6
+        "w": 4,
+        "x": 0,
+        "y": 9
       },
-      "id": 21,
+      "id": 36,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -458,7 +503,6 @@
           "to": "null"
         }
       ],
-      "repeat": null,
       "repeatDirection": "v",
       "sparkline": {
         "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -471,17 +515,16 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\", container_name!=\"POD\", pod_name=\"$pod-0\"}[5m]))",
-          "interval": "10s",
+          "expr": "kube_pod_container_status_restarts_total{datacenter=\"$site\",namespace=~\"omec|omec-cbrs\",pod=~\"spgwu.*\"}",
           "refId": "A"
         }
       ],
-      "thresholds": "",
+      "thresholds": "3,10",
       "timeFrom": null,
       "timeShift": null,
-      "title": "CPU used (5m avg)",
+      "title": "SPGWU Restarts Total",
       "type": "singlestat",
-      "valueFontSize": "80%",
+      "valueFontSize": "110%",
       "valueMaps": [
         {
           "op": "=",
@@ -493,30 +536,85 @@
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
-      "colorValue": false,
-      "colors": [
-        "#299c46",
-        "rgba(237, 129, 40, 0.89)",
-        "#d44a3a"
+      "datasource": "Prometheus",
+      "description": "",
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 4,
+        "y": 9
+      },
+      "id": 33,
+      "links": [],
+      "options": {
+        "fieldOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "defaults": {
+            "mappings": [],
+            "max": 100,
+            "min": 0,
+            "thresholds": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "override": {},
+          "values": false
+        },
+        "orientation": "horizontal",
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "6.4.2",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "expr": "sum(rate(container_cpu_usage_seconds_total{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\", image!=\"\", container_name!=\"POD\", pod_name=~\"accelleran-cbrs-cu.*\"}[5m])) / sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\", pod=~\"accelleran-cbrs-cu.*\"}) * 100",
+          "format": "time_series",
+          "interval": "10s",
+          "intervalFactor": 1,
+          "legendFormat": "",
+          "refId": "A"
+        }
       ],
-      "datasource": null,
-      "decimals": 2,
-      "format": "decbytes",
+      "title": "Accelleran-CU CPU Utilization",
+      "type": "gauge"
+    },
+    {
+      "cacheTimeout": null,
+      "colorBackground": false,
+      "colorValue": true,
+      "colors": [
+        "rgba(50, 172, 45, 0.97)",
+        "rgba(237, 129, 40, 0.89)",
+        "rgba(245, 54, 54, 0.9)"
+      ],
+      "datasource": "Prometheus",
+      "decimals": null,
+      "description": "",
+      "format": "percent",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
-        "show": false,
+        "show": true,
         "thresholdLabels": false,
         "thresholdMarkers": true
       },
       "gridPos": {
-        "h": 4,
-        "w": 3,
-        "x": 6,
-        "y": 6
+        "h": 8,
+        "w": 4,
+        "x": 8,
+        "y": 9
       },
-      "id": 22,
+      "id": 34,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -531,7 +629,8 @@
         }
       ],
       "maxDataPoints": 100,
-      "nullPointMode": "connected",
+      "maxPerRow": 12,
+      "nullPointMode": "null",
       "nullText": null,
       "options": {},
       "postfix": "",
@@ -545,27 +644,27 @@
           "to": "null"
         }
       ],
-      "repeat": null,
       "repeatDirection": "v",
       "sparkline": {
         "fillColor": "rgba(31, 118, 189, 0.18)",
         "full": false,
         "lineColor": "rgb(31, 120, 193)",
-        "show": false,
-        "ymax": null,
-        "ymin": null
+        "show": true
       },
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_resource_limits_memory_bytes{pod=\"$pod-0\"})",
+          "expr": "100 * (sum(container_memory_usage_bytes{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\", pod_name=~\"accelleran-cbrs-cu.*\", container_name!=\"POD\"}) / sum(container_spec_memory_limit_bytes{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\", pod_name=~\"accelleran-cbrs-cu.*\", container_name!=\"POD\"}))",
+          "format": "time_series",
+          "hide": false,
+          "instant": false,
+          "interval": "10s",
+          "intervalFactor": 1,
           "refId": "A"
         }
       ],
-      "thresholds": "",
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "Memory limits",
+      "thresholds": "85,95",
+      "title": "Accelleran-CU Memory Utilization",
       "type": "singlestat",
       "valueFontSize": "80%",
       "valueMaps": [
@@ -575,11 +674,113 @@
           "value": "null"
         }
       ],
-      "valueName": "avg"
+      "valueName": "current"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 2,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 9
+      },
+      "id": 35,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": true,
+        "max": false,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 1,
+      "points": false,
+      "renderer": "flot",
+      "repeatDirection": "v",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "sum(rate(container_network_receive_bytes_total{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\",  pod_name=~\"accelleran-cbrs-cu.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
+          "format": "time_series",
+          "interval": "10s",
+          "intervalFactor": 1,
+          "legendFormat": "rx: {{ interface }}",
+          "refId": "B"
+        },
+        {
+          "expr": "-sum(rate(container_network_transmit_bytes_total{datacenter=\"$site\", namespace=~\"omec|omec-cbrs\",  pod_name=~\"accelleran-cbrs-cu.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
+          "format": "time_series",
+          "interval": "10s",
+          "intervalFactor": 1,
+          "legendFormat": "tx: {{ interface }}",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Accelleran-CU Network I/O",
+      "tooltip": {
+        "shared": true,
+        "sort": 1,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "Bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "Bps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     },
     {
       "cacheTimeout": null,
-      "colorBackground": false,
+      "colorBackground": true,
+      "colorPrefix": false,
       "colorValue": false,
       "colors": [
         "#299c46",
@@ -587,7 +788,7 @@
         "#d44a3a"
       ],
       "datasource": null,
-      "format": "decbytes",
+      "format": "none",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -597,11 +798,11 @@
       },
       "gridPos": {
         "h": 4,
-        "w": 3,
-        "x": 9,
-        "y": 6
+        "w": 4,
+        "x": 0,
+        "y": 13
       },
-      "id": 23,
+      "id": 37,
       "interval": null,
       "links": [],
       "mappingType": 1,
@@ -630,7 +831,6 @@
           "to": "null"
         }
       ],
-      "repeat": null,
       "repeatDirection": "v",
       "sparkline": {
         "fillColor": "rgba(31, 118, 189, 0.18)",
@@ -643,17 +843,16 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(container_memory_working_set_bytes{container_name!=\"POD\", container_name!=\"\", pod_name=\"$pod-0\"})",
-          "interval": "10s",
+          "expr": "kube_pod_container_status_restarts_total{datacenter=\"$site\",namespace=~\"omec|omec-cbrs\",pod=~\"accelleran-cbrs-cu.*\"}",
           "refId": "A"
         }
       ],
-      "thresholds": "",
+      "thresholds": "3,10",
       "timeFrom": null,
       "timeShift": null,
-      "title": "Memory used",
+      "title": "Accelleran-CU Restarts Total",
       "type": "singlestat",
-      "valueFontSize": "80%",
+      "valueFontSize": "110%",
       "valueMaps": [
         {
           "op": "=",
@@ -664,16 +863,17 @@
       "valueName": "avg"
     }
   ],
-  "refresh": "5s",
+  "refresh": "1m",
   "schemaVersion": 20,
   "style": "dark",
   "tags": [
-    "aether"
+    "aether",
+    "omec"
   ],
   "templating": {
     "list": [
       {
-        "allValue": ".*",
+        "allValue": null,
         "current": {
           "tags": [],
           "text": "All",
@@ -681,41 +881,29 @@
             "$__all"
           ]
         },
+        "datasource": "Prometheus",
+        "definition": "label_values(kube_pod_info, datacenter)",
         "hide": 0,
         "includeAll": true,
-        "label": "Pod",
+        "label": "Site",
         "multi": true,
-        "name": "pod",
-        "options": [
-          {
-            "selected": true,
-            "text": "All",
-            "value": "$__all"
-          },
-          {
-            "selected": false,
-            "text": "mme",
-            "value": "mme"
-          },
-          {
-            "selected": false,
-            "text": "hss",
-            "value": "hss"
-          },
-          {
-            "selected": false,
-            "text": "spgwc",
-            "value": "spgwc"
-          }
-        ],
-        "query": "mme,hss,spgwc",
+        "name": "site",
+        "options": [],
+        "query": "label_values(kube_pod_info, datacenter)",
+        "refresh": 2,
+        "regex": "/.*edge.*/",
         "skipUrlSync": false,
-        "type": "custom"
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
       }
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -745,7 +933,7 @@
     ]
   },
   "timezone": "",
-  "title": "Aether Central Pods",
-  "uid": "gKU2e27Zb",
+  "title": "OMEC User Plane Summary",
+  "uid": "jccoF4UWz",
   "version": 1
 }
