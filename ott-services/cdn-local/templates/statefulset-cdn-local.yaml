@@ -14,32 +14,32 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */}}
 
-{{ tuple "nginx" . | include "cdn-local.service_account" }}
+{{ tuple "cdn-local" . | include "cdn-local.service_account" }}
 
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: nginx
+  name: cdn-local
   labels:
-{{ tuple "nginx" . | include "cdn-local.metadata_labels" | indent 4 }}
+{{ tuple "cdn-local" . | include "cdn-local.metadata_labels" | indent 4 }}
 spec:
   replicas: {{ .Values.config.nginx.replicas }}
   selector:
     matchLabels:
-{{ tuple "nginx" . | include "cdn-local.metadata_labels" | indent 6 }}
-  serviceName: "nginx"
+{{ tuple "cdn-local" . | include "cdn-local.metadata_labels" | indent 6 }}
+  serviceName: "cdn-local"
   template:
     metadata:
       labels:
-{{ tuple "nginx" . | include "cdn-local.metadata_labels" | indent 8 }}
+{{ tuple "cdn-local" . | include "cdn-local.metadata_labels" | indent 8 }}
 {{ if .Values.config.sriov.enabled }}
       annotations:
         k8s.v1.cni.cncf.io/networks: '[
           {
             "name": "sgi-net-cdn",
-            "interface": {{ .Values.config.nginx.sgi.device | quote }},
-            "ips": {{ .Values.config.nginx.sgi.ip | quote }}
+            "interface": {{ .Values.config.nginx.sgiInterface.name | quote }},
+            "ips": {{ .Values.config.nginx.sgiInterface.ip | quote }}
           }
         ]'
 {{ end }}
@@ -49,9 +49,9 @@ spec:
         {{ .Values.nodeSelectors.nginx.label }}: {{ .Values.nodeSelectors.nginx.value }}
     {{- end }}
       hostNetwork: {{ not .Values.config.sriov.enabled }}
-      serviceAccountName: nginx
+      serviceAccountName: cdn-local
       initContainers:
-      - name: nginx-init
+      - name: cdn-local-init
         image: {{ .Values.images.tags.nginx }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
         securityContext:
@@ -74,7 +74,7 @@ spec:
         imagePullPolicy: {{ .Values.images.pullPolicy }}
         command: [ "bash",  "-xc"]
         args:
-        - chmod a+x /config/*.sh; /config/route-gen.sh; /config/network-config.sh; /config/run-nginx.sh
+        - chmod a+x /config/*.sh; /config/run-nginx.sh
         securityContext:
           privileged: true
         volumeMounts:

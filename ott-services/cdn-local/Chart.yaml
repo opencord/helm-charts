@@ -14,7 +14,7 @@
 # limitations under the License.
 
 apiVersion: v1
-appVersion: "1.0"
 description: A Helm chart for M-CORD CDN Services in Local Edge
+icon: https://guide.opencord.org/logos/cord.svg
 name: cdn-local
-version: 0.2.3
+version: 0.2.4

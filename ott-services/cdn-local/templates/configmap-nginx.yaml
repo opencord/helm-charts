@@ -22,10 +22,6 @@ metadata:
   labels:
 {{ tuple "nginx" . | include "cdn-local.metadata_labels" | indent 4 }}
 data:
-  route-gen.sh: |
-{{ tuple "bin/_route-gen.sh.tpl" . | include "cdn-local.template" | indent 4 }}
-  network-config.sh: |
-{{ tuple "bin/_network-config.sh.tpl" . | include "cdn-local.template" | indent 4 }}
   run-nginx.sh: |
 {{ tuple "bin/_run-nginx.sh.tpl" . | include "cdn-local.template" | indent 4 }}
 

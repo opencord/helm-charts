@@ -51,10 +51,14 @@ config:
         enabled: true
         rtmp: 31935
         http: 31885
-    sgi:
-      device: sgi-net-cdn
-      ip: 13.1.1.253/24
-    mtu: 1200
+    # In case sriov is enabled, additional interface connected to sgi-network directly will be added
+    # with the name and address specified below.
+    # Otherwise, specify the interface name connected to SGI network in the host machine.
+    # IP address will be ignored in that case.
+    sgiInterface:
+      name: sgi-net-cdn
+      mtu: 1200
+      ip: 192.168.250.249/24
     events:
       workerProcesses: 1
       workerConnections: 1024
@@ -101,18 +105,13 @@ config:
 #      value: 480
 #    - name: 720p
 #      value: 720
-  spgwu:
-    sgi:
-      ip: 13.1.1.3/24
-  spgwc:
-    ueIpPool:
-      ip: 16.0.0.0
-      mask: 255.0.0.0
 
 networks:
   cniPlugin: sriov # which means netdevice
   ipam: static
   sgi:
-    subnet: 13.1.1.0/24
+    subnet: 192.168.250.0/24
     mask: 255.255.255.0
-    gateway: 13.1.1.254
+    gateway: 192.168.250.250
+  ue:
+    subnet: 10.250.0.0/16

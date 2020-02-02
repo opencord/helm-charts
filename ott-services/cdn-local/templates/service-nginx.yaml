@@ -18,12 +18,12 @@ limitations under the License.
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: cdn-local
   labels:
-{{ tuple "nginx" . | include "cdn-local.metadata_labels" | indent 4 }}
+{{ tuple "cdn-local" . | include "cdn-local.metadata_labels" | indent 4 }}
 spec:
   selector:
-{{ tuple "nginx" . | include "cdn-local.metadata_labels" | indent 4 }}
+{{ tuple "cdn-local" . | include "cdn-local.metadata_labels" | indent 4 }}
   ports:
   - name: http
     port: {{ .Values.config.nginx.ports.http }}
@@ -36,12 +36,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-external
+  name: cdn-local-external
   labels:
-{{ tuple "nginx" . | include "cdn-local.metadata_labels" | indent 4 }}
+{{ tuple "cdn-local" . | include "cdn-local.metadata_labels" | indent 4 }}
 spec:
   selector:
-{{ tuple "nginx" . | include "cdn-local.metadata_labels" | indent 4 }}
+{{ tuple "cdn-local" . | include "cdn-local.metadata_labels" | indent 4 }}
   type: NodePort
   ports:
   - name: http
