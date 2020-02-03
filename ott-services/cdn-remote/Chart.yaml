@@ -17,4 +17,4 @@ apiVersion: v1
 appVersion: "1.0"
 description: A Helm chart for M-CORD CDN Services in Remote Edge
 name: cdn-remote
-version: 0.2.3
+version: 0.2.4

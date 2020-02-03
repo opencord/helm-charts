@@ -41,7 +41,7 @@ Get Domain name
 {{- define "cdn-remote.get_domain" -}}
 {{- $service := index . 0 -}}
 {{- $context := index . 1 -}}
-{{- printf "%s-0.%s.%s.%s" $service $service $context.Release.Namespace "svc.cluster.local" -}}
+{{- printf "%s.%s.svc.%s" $service $context.Release.Namespace $context.Values.config.clusterDomain -}}
 {{- end -}}
 
 {{/*

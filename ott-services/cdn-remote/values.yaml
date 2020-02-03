@@ -47,6 +47,7 @@ resources:
       memory: 1Gi
 
 config:
+  clusterDomain: cluster.local
   videoArchive:
     replicas: 1
     q360p:
