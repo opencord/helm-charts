@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 5,
-  "iteration": 1580754449762,
+  "id": 2,
+  "iteration": 1580781656482,
   "links": [],
   "panels": [
     {
@@ -149,7 +149,8 @@
                 "color": "red",
                 "value": 80
               }
-            ]
+            ],
+            "unit": "percent"
           },
           "override": {},
           "values": false
@@ -375,7 +376,7 @@
         "#d44a3a"
       ],
       "datasource": null,
-      "format": "s",
+      "format": "none",
       "gauge": {
         "maxValue": 100,
         "minValue": 0,
@@ -430,7 +431,8 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "count(ue_info{datacenter=\"$site\"})",
+          "expr": "count(ue_info{EDGE=\"$site\"})",
+          "instant": true,
           "refId": "A"
         }
       ],
@@ -564,7 +566,8 @@
                 "color": "red",
                 "value": 80
               }
-            ]
+            ],
+            "unit": "percent"
           },
           "override": {},
           "values": false
