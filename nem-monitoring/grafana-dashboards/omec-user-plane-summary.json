@@ -517,7 +517,8 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "kube_pod_container_status_restarts_total{datacenter=\"$site\",namespace=~\"omec-data-plane-cbrs.*\",pod=~\"spgwu.*\"}",
+          "expr": "sum(kube_pod_container_status_restarts_total{datacenter=\"$site\",namespace=~\"omec-data-plane-cbrs.*\",pod=~\"spgwu.*\"})",
+          "instant": true,
           "refId": "A"
         }
       ],
@@ -534,7 +535,7 @@
           "value": "null"
         }
       ],
-      "valueName": "avg"
+      "valueName": "min"
     },
     {
       "cacheTimeout": null,
@@ -846,7 +847,8 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "kube_pod_container_status_restarts_total{datacenter=\"$site\",pod=~\"accelleran-cbrs-cu.*\"}",
+          "expr": "sum(kube_pod_container_status_restarts_total{datacenter=\"edge-barcelona\",pod=~\"accelleran-cu.*\"})",
+          "instant": true,
           "refId": "A"
         }
       ],
@@ -863,7 +865,7 @@
           "value": "null"
         }
       ],
-      "valueName": "avg"
+      "valueName": "min"
     }
   ],
   "refresh": "1m",
