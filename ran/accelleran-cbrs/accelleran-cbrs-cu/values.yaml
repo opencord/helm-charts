@@ -52,6 +52,7 @@ config:
         nodePort: 31412
         protocol: SCTP
   redis:
+    hostName: accelleran-cbrs-redis
     ports:
       redisPort:
         port: 6379

@@ -23,7 +23,7 @@ metadata:
 {{ tuple "accelleran-cbrs-cu-cm" . | include "accelleran-cbrs-cu.metadata_labels" | indent 4 }}
 data:
   bootstrap: |
-    redis.hostname:accelleran-cbrs-redis
+    redis.hostname:{{ .Values.config.redis.hostName }}
     redis.port:{{ .Values.config.redis.ports.redisPort.port }}
     instance.filter:{{ .Values.config.vranL3.instanceId }}
 
