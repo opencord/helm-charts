@@ -66,6 +66,6 @@ spec:
         imagePullPolicy: {{ .Values.images.pullPolicy }}
         command: ["sh", "-c"]
         args:
-        - redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} flushall;
-          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} set NATS_SERVICE_URL "nat://{{ .Values.config.nats.ip }}:{{ .Values.config.nats.ports.natsPort.nodePort }}";
-          redis-cli -h accelleran-cbrs-redis -p {{ .Values.config.redis.ports.redisPort.port }} keys '*';
+        - redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} flushall;
+          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} set NATS_SERVICE_URL "nat://{{ .Values.config.nats.ip }}:{{ .Values.config.nats.ports.natsPort.nodePort }}";
+          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} keys '*';
