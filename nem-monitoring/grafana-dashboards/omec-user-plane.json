@@ -2015,7 +2015,7 @@
         "name": "namespace",
         "query": "label_values(kube_pod_info{datacenter=\"$site\"},namespace)",
         "refresh": 2,
-        "regex": "\\b(?:omec|omec-cbrs|omec-b7)\\b",
+        "regex": "\\b(?:omec-data-plane-cbrs.*|omec-data-plane-b7.*)\\b",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
