@@ -33,6 +33,7 @@ kpi_exporter:
     - voltha.kpis
     - onos.aaa.stats.kpis
     - onos.kpis
+    - bng.stats
 
 prometheus:
   alertmanager:
