@@ -480,7 +480,9 @@
   "refresh": "15s",
   "schemaVersion": 16,
   "style": "dark",
-  "tags": [],
+  "tags": [
+    "seba"
+  ],
   "templating": {
     "list": [
       {
