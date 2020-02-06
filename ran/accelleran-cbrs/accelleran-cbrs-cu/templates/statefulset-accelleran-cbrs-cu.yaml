@@ -100,12 +100,12 @@ spec:
           sqlite3 /data/datastoreRemRw.db "update FapServiceCellConfigLteRanRf_ULBandwidthList set ULBandwidth='2';";
           sqlite3 /data/datastoreRemRw.db "update FapServiceCellConfigLteRanRf_DLBandwidthList set DLBandwidth='2';";
           sqlite3 /data/datastore.db "update adiPhyConfig set registersInitFilePath='/usr/bin/ad9362_init_zen5Mhz.txt';";
-          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_DLBANDWIDTHLIST DLBANDWIDTH 2
-          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_ULBANDWIDTHLIST ULBANDWIDTH 2
-          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_ADIPHYCONFIG REGISTERSINITFILEPATH /usr/bin/ad9362_init_zen5Mhz.txt
-          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_DLBANDWIDTHLIST
-          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_ULBANDWIDTHLIST
-          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_ADIPHYCONFIG
+          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_DLBANDWIDTHLIST DLBANDWIDTH 2;
+          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_ULBANDWIDTHLIST ULBANDWIDTH 2;
+          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_ADIPHYCONFIG REGISTERSINITFILEPATH /usr/bin/ad9362_init_zen5Mhz.txt;
+          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_DLBANDWIDTHLIST;
+          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_ULBANDWIDTHLIST;
+          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_ADIPHYCONFIG;
         {{- end }}
           sleep 30;
           /data/l3service;
