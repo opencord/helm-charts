@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Default values for addressmanager.
+# Default values for vrouter.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -33,6 +33,9 @@ global:
 
 xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
+xosCoreService: "xos-core:50051"
+
+kafkaService: "cord-kafka"
 
 resources: {}
 
