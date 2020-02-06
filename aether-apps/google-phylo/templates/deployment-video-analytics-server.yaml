@@ -1,0 +1,87 @@
+{{- /*
+# Copyright 2020-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+*/ -}}
+
+{{ tuple "video-analytics-server" . | include "phylo.service_account" }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: video-analytics-server
+  labels:
+{{ tuple "video-analytics-server" . | include "phylo.metadata_labels" | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+{{ tuple "video-analytics-server" . | include "phylo.metadata_labels" | indent 6 }}
+  template:
+    metadata:
+      labels:
+{{ tuple "video-analytics-server" . | include "phylo.metadata_labels" | indent 8 }}
+    spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.videoAnalyticsServer.label }}: {{ .Values.nodeSelectors.videoAnalyticsServer.value }}
+    {{- end }}
+      serviceAccountName: video-analytics-server
+      initContainers:
+      - name: video-analytics-dep-check
+        image: {{ .Values.images.tags.depCheck | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+        env:
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+          - name: PATH
+            value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
+          - name: COMMAND
+            value: "echo done"
+          - name: DEPENDENCY_POD_JSON
+            value: '[{"labels": {"app": "phylo-rabbitmq"}, "requireSameNode": false}]'
+        command:
+          - kubernetes-entrypoint
+        volumeMounts:
+          []
+      containers:
+      - name: video-analytics-server
+        image: {{ .Values.images.tags.videoAnalyticsServer | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        command:
+        - /bin/run-video-analytics-server.sh
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.videoAnalyticsServer | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: script
+          mountPath: /bin/run-video-analytics-server.sh
+          readOnly: true
+          subPath: run-video-analytics-server.sh
+      volumes:
+      - name: script
+        configMap:
+          defaultMode: 0700
+          name: phylo
