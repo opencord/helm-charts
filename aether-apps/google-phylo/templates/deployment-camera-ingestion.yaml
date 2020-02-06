@@ -1,0 +1,90 @@
+{{- /*
+# Copyright 2020-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+*/ -}}
+
+{{ tuple "camera-ingestion" . | include "phylo.service_account" }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: camera-ingestion
+  labels:
+{{ tuple "camera-ingestion" . | include "phylo.metadata_labels" | indent 4 }}
+spec:
+  selector:
+    matchLabels:
+{{ tuple "camera-ingestion" . | include "phylo.metadata_labels" | indent 6 }}
+  template:
+    metadata:
+      labels:
+{{ tuple "camera-ingestion" . | include "phylo.metadata_labels" | indent 8 }}
+    spec:
+    {{- if .Values.nodeSelectors.enabled }}
+      nodeSelector:
+        {{ .Values.nodeSelectors.cameraIngestion.label }}: {{ .Values.nodeSelectors.cameraIngestion.value }}
+    {{- end }}
+      serviceAccountName: camera-ingestion
+      initContainers:
+      - name: camera-ingestion-dep-check
+        image: {{ .Values.images.tags.depCheck | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsUser: 0
+        env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: PATH
+          value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
+        - name: COMMAND
+          value: "echo done"
+        - name: DEPENDENCY_POD_JSON
+          value: '[{"labels": {"app": "video-analytics-server"}, "requireSameNode": false}]'
+        command:
+        - kubernetes-entrypoint
+        volumeMounts:
+          []
+      containers:
+      - name: camera-ingestion
+        image: {{ .Values.images.tags.cameraIngestion | quote }}
+        imagePullPolicy: {{ .Values.images.pullPolicy }}
+        env:
+        - name: GLOG_logtostderr
+          value: "1"
+        command:
+        - /bin/run-camera-ingestion.sh
+      {{- if .Values.resources.enabled }}
+        resources:
+{{ toYaml .Values.resources.cameraIngestion | indent 10 }}
+      {{- end }}
+        volumeMounts:
+        - name: script
+          mountPath: /bin/run-camera-ingestion.sh
+          readOnly: true
+          subPath: run-camera-ingestion.sh
+      volumes:
+      - name: script
+        configMap:
+          defaultMode: 0700
+          name: phylo
