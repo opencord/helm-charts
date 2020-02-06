@@ -33,7 +33,7 @@ dependencies:
   repository: https://charts.opencord.org
   condition: bng.external.enabled
 - name: vrouter
-  version: 2.1.0
+  version: 2.1.1
   repository: https://charts.opencord.org
   condition: bng.embedded.enabled
 - name: sadis-server
