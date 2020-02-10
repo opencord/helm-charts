@@ -38,7 +38,6 @@ images:
 global:
   registry: ''
 
-namespace: voltha
 serviceAccountName: default
 
 nameOverride: ""
