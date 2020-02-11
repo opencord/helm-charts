@@ -15,8 +15,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 10,
-  "iteration": 1580642657156,
+  "id": 2,
+  "iteration": 1581446899796,
   "links": [],
   "panels": [
     {
@@ -38,7 +38,7 @@
           "value": "spgwu"
         }
       },
-      "title": "$namespace:$pod Resource Usage",
+      "title": "$pod Resource Usage",
       "type": "row"
     },
     {
@@ -115,7 +115,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{datacenter=\"$site\", namespace=\"$namespace\", image!=\"\", container_name!=\"POD\", pod_name=~\"$pod.*\"}[5m])) / sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", namespace=\"$namespace\", pod=~\"$pod.*\"}) * 100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{datacenter=\"$site\", image!=\"\", container_name!=\"POD\", pod_name=~\"$pod.*\"}[5m])) / sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", pod=~\"$pod.*\"}) * 100",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -210,7 +210,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "100 * (sum(container_memory_usage_bytes{datacenter=\"$site\", namespace=\"$namespace\", pod_name=~\"$pod.*\", container_name!=\"POD\"}) / sum(container_spec_memory_limit_bytes{datacenter=\"$site\", namespace=\"$namespace\", pod_name=~\"$pod.*\", container_name!=\"POD\"}))",
+          "expr": "100 * (sum(container_memory_usage_bytes{datacenter=\"$site\", pod_name=~\"$pod.*\", container_name!=\"POD\"}) / sum(container_spec_memory_limit_bytes{datacenter=\"$site\", pod_name=~\"$pod.*\", container_name!=\"POD\"}))",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -284,7 +284,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_network_receive_bytes_total{datacenter=\"$site\", namespace=\"$namespace\", pod_name=~\"$pod.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
+          "expr": "sum(rate(container_network_receive_bytes_total{datacenter=\"$site\", pod_name=~\"$pod.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -292,7 +292,7 @@
           "refId": "B"
         },
         {
-          "expr": "-sum(rate(container_network_transmit_bytes_total{datacenter=\"$site\", namespace=\"$namespace\", pod_name=~\"$pod.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
+          "expr": "-sum(rate(container_network_transmit_bytes_total{datacenter=\"$site\", pod_name=~\"$pod.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -414,7 +414,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", namespace=\"$namespace\", pod=~\"$pod.*\"})",
+          "expr": "sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", pod=~\"$pod.*\"})",
           "interval": "10s",
           "refId": "A"
         }
@@ -507,7 +507,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum (rate(container_cpu_usage_seconds_total{datacenter=\"$site\", namespace=\"$namespace\", image!=\"\", container_name!=\"POD\", pod_name=~\"$pod.*\"}[5m]))",
+          "expr": "sum (rate(container_cpu_usage_seconds_total{datacenter=\"$site\", image!=\"\", container_name!=\"POD\", pod_name=~\"$pod.*\"}[5m]))",
           "interval": "10s",
           "refId": "A"
         }
@@ -601,7 +601,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_resource_limits_memory_bytes{datacenter=\"$site\", namespace=\"$namespace\", pod=~\"$pod.*\"})",
+          "expr": "sum(kube_pod_container_resource_limits_memory_bytes{datacenter=\"$site\", pod=~\"$pod.*\"})",
           "refId": "A"
         }
       ],
@@ -694,7 +694,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(container_memory_working_set_bytes{datacenter=\"$site\", namespace=\"$namespace\", container_name!=\"POD\", container_name!=\"\", pod_name=~\"$pod.*\"})",
+          "expr": "sum(container_memory_working_set_bytes{datacenter=\"$site\", container_name!=\"POD\", container_name!=\"\", pod_name=~\"$pod.*\"})",
           "interval": "10s",
           "refId": "A"
         }
@@ -775,7 +775,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",datacenter=\"$site\", namespace=\"$namespace\",pod_name=~\"^$pod-.*\",name=~\"^k8s_.*\",container_name!=\"POD\"}[5m])) by (container_name, pod_name)",
+          "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",datacenter=\"$site\", pod_name=~\"^$pod-.*\",name=~\"^k8s_.*\",container_name!=\"POD\"}[5m])) by (container_name, pod_name)",
           "format": "time_series",
           "hide": false,
           "interval": "10s",
@@ -908,7 +908,7 @@
       "steppedLine": true,
       "targets": [
         {
-          "expr": "sum (container_memory_working_set_bytes{image!=\"\",datacenter=\"$site\", namespace=\"$namespace\",pod_name=~\"^$pod.*\",name=~\"^k8s_.*\",container_name!=\"POD\"}) by (container_name, pod_name)",
+          "expr": "sum (container_memory_working_set_bytes{image!=\"\",datacenter=\"$site\", pod_name=~\"^$pod.*\",name=~\"^k8s_.*\",container_name!=\"POD\"}) by (container_name, pod_name)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 5,
@@ -994,7 +994,7 @@
       "id": 30,
       "panels": [],
       "repeat": null,
-      "repeatIteration": 1580642657156,
+      "repeatIteration": 1581446899796,
       "repeatPanelId": 25,
       "scopedVars": {
         "pod": {
@@ -1003,7 +1003,7 @@
           "value": "accelleran"
         }
       },
-      "title": "$namespace:$pod Resource Usage",
+      "title": "$pod Resource Usage",
       "type": "row"
     },
     {
@@ -1064,7 +1064,7 @@
       ],
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1580642657156,
+      "repeatIteration": 1581446899796,
       "repeatPanelId": 10,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1083,7 +1083,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{datacenter=\"$site\", namespace=\"$namespace\", image!=\"\", container_name!=\"POD\", pod_name=~\"$pod.*\"}[5m])) / sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", namespace=\"$namespace\", pod=~\"$pod.*\"}) * 100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{datacenter=\"$site\", image!=\"\", container_name!=\"POD\", pod_name=~\"$pod.*\"}[5m])) / sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", pod=~\"$pod.*\"}) * 100",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -1162,7 +1162,7 @@
       ],
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1580642657156,
+      "repeatIteration": 1581446899796,
       "repeatPanelId": 12,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1181,7 +1181,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "100 * (sum(container_memory_usage_bytes{datacenter=\"$site\", namespace=\"$namespace\", pod_name=~\"$pod.*\", container_name!=\"POD\"}) / sum(container_spec_memory_limit_bytes{datacenter=\"$site\", namespace=\"$namespace\", pod_name=~\"$pod.*\", container_name!=\"POD\"}))",
+          "expr": "100 * (sum(container_memory_usage_bytes{datacenter=\"$site\", pod_name=~\"$pod.*\", container_name!=\"POD\"}) / sum(container_spec_memory_limit_bytes{datacenter=\"$site\", pod_name=~\"$pod.*\", container_name!=\"POD\"}))",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -1242,7 +1242,7 @@
       "renderer": "flot",
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1580642657156,
+      "repeatIteration": 1581446899796,
       "repeatPanelId": 2,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1258,7 +1258,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_network_receive_bytes_total{datacenter=\"$site\", namespace=\"$namespace\", pod_name=~\"$pod.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
+          "expr": "sum(rate(container_network_receive_bytes_total{datacenter=\"$site\", pod_name=~\"$pod.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -1266,7 +1266,7 @@
           "refId": "B"
         },
         {
-          "expr": "-sum(rate(container_network_transmit_bytes_total{datacenter=\"$site\", namespace=\"$namespace\", pod_name=~\"$pod.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
+          "expr": "-sum(rate(container_network_transmit_bytes_total{datacenter=\"$site\", pod_name=~\"$pod.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -1370,7 +1370,7 @@
       ],
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1580642657156,
+      "repeatIteration": 1581446899796,
       "repeatPanelId": 20,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1391,7 +1391,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", namespace=\"$namespace\", pod=~\"$pod.*\"})",
+          "expr": "sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", pod=~\"$pod.*\"})",
           "interval": "10s",
           "refId": "A"
         }
@@ -1466,7 +1466,7 @@
       ],
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1580642657156,
+      "repeatIteration": 1581446899796,
       "repeatPanelId": 21,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1487,7 +1487,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum (rate(container_cpu_usage_seconds_total{datacenter=\"$site\", namespace=\"$namespace\", image!=\"\", container_name!=\"POD\", pod_name=~\"$pod.*\"}[5m]))",
+          "expr": "sum (rate(container_cpu_usage_seconds_total{datacenter=\"$site\", image!=\"\", container_name!=\"POD\", pod_name=~\"$pod.*\"}[5m]))",
           "interval": "10s",
           "refId": "A"
         }
@@ -1563,7 +1563,7 @@
       ],
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1580642657156,
+      "repeatIteration": 1581446899796,
       "repeatPanelId": 22,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1584,7 +1584,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_resource_limits_memory_bytes{datacenter=\"$site\", namespace=\"$namespace\", pod=~\"$pod.*\"})",
+          "expr": "sum(kube_pod_container_resource_limits_memory_bytes{datacenter=\"$site\", pod=~\"$pod.*\"})",
           "refId": "A"
         }
       ],
@@ -1659,7 +1659,7 @@
       ],
       "repeat": null,
       "repeatDirection": "v",
-      "repeatIteration": 1580642657156,
+      "repeatIteration": 1581446899796,
       "repeatPanelId": 23,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1680,7 +1680,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(container_memory_working_set_bytes{datacenter=\"$site\", namespace=\"$namespace\", container_name!=\"POD\", container_name!=\"\", pod_name=~\"$pod.*\"})",
+          "expr": "sum(container_memory_working_set_bytes{datacenter=\"$site\", container_name!=\"POD\", container_name!=\"\", pod_name=~\"$pod.*\"})",
           "interval": "10s",
           "refId": "A"
         }
@@ -1748,7 +1748,7 @@
       "pointradius": 0.5,
       "points": true,
       "renderer": "flot",
-      "repeatIteration": 1580642657156,
+      "repeatIteration": 1581446899796,
       "repeatPanelId": 27,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1764,7 +1764,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",datacenter=\"$site\", namespace=\"$namespace\",pod_name=~\"^$pod-.*\",name=~\"^k8s_.*\",container_name!=\"POD\"}[5m])) by (container_name, pod_name)",
+          "expr": "sum (rate (container_cpu_usage_seconds_total{image!=\"\",datacenter=\"$site\", pod_name=~\"^$pod-.*\",name=~\"^k8s_.*\",container_name!=\"POD\"}[5m])) by (container_name, pod_name)",
           "format": "time_series",
           "hide": false,
           "interval": "10s",
@@ -1884,7 +1884,7 @@
       "pointradius": 0.5,
       "points": true,
       "renderer": "flot",
-      "repeatIteration": 1580642657156,
+      "repeatIteration": 1581446899796,
       "repeatPanelId": 29,
       "repeatedByRow": true,
       "scopedVars": {
@@ -1900,7 +1900,7 @@
       "steppedLine": true,
       "targets": [
         {
-          "expr": "sum (container_memory_working_set_bytes{image!=\"\",datacenter=\"$site\", namespace=\"$namespace\",pod_name=~\"^$pod.*\",name=~\"^k8s_.*\",container_name!=\"POD\"}) by (container_name, pod_name)",
+          "expr": "sum (container_memory_working_set_bytes{image!=\"\",datacenter=\"$site\", pod_name=~\"^$pod.*\",name=~\"^k8s_.*\",container_name!=\"POD\"}) by (container_name, pod_name)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 5,
@@ -1993,29 +1993,10 @@
         "label": "Site",
         "multi": false,
         "name": "site",
+        "options": [],
         "query": "label_values(kube_pod_info, datacenter)",
         "refresh": 2,
         "regex": "/.*edge.*/",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "datasource": "Prometheus",
-        "definition": "label_values(kube_pod_info{datacenter=\"$site\"},namespace)",
-        "hide": 0,
-        "includeAll": false,
-        "label": "Namespace",
-        "multi": false,
-        "name": "namespace",
-        "query": "label_values(kube_pod_info{datacenter=\"$site\"},namespace)",
-        "refresh": 2,
-        "regex": "\\b(?:omec-data-plane-cbrs.*|omec-data-plane-b7.*)\\b",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -2094,5 +2075,5 @@
   "timezone": "",
   "title": "OMEC User Plane",
   "uid": "noPib7UZz",
-  "version": 9
+  "version": 1
 }

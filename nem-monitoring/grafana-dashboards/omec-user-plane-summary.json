@@ -100,7 +100,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(time() - kube_pod_created{datacenter=\"$site\",namespace=~\"omec-data-plane-cbrs.*\",pod=~\"spgwu.*\"})",
+          "expr": "sum(time() - kube_pod_created{datacenter=\"$site\",pod=~\"spgwu.*\"})",
           "refId": "A"
         }
       ],
@@ -164,7 +164,7 @@
       "repeatDirection": "v",
       "targets": [
         {
-          "expr": "sum(rate(container_cpu_usage_seconds_total{datacenter=\"$site\", namespace=~\"omec-data-plane-cbrs.*\", image!=\"\", container_name!=\"POD\", pod_name=~\"spgwu.*\"}[5m])) / sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", namespace=~\"omec-data-plane-cbrs.*\", pod=~\"spgwu.*\"}) * 100",
+          "expr": "sum(rate(container_cpu_usage_seconds_total{datacenter=\"$site\", image!=\"\", container_name!=\"POD\", pod_name=~\"spgwu.*\"}[5m])) / sum(kube_pod_container_resource_limits_cpu_cores{datacenter=\"$site\", pod=~\"spgwu.*\"}) * 100",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -242,7 +242,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "100 * (sum(container_memory_usage_bytes{datacenter=\"$site\", namespace=~\"omec-data-plane-cbrs.*\", pod_name=~\"spgwu.*\", container_name!=\"POD\"}) / sum(container_spec_memory_limit_bytes{datacenter=\"$site\", namespace=~\"omec-data-plane-cbrs.*\", pod_name=~\"spgwu.*\", container_name!=\"POD\"}))",
+          "expr": "100 * (sum(container_memory_usage_bytes{datacenter=\"$site\", pod_name=~\"spgwu.*\", container_name!=\"POD\"}) / sum(container_spec_memory_limit_bytes{datacenter=\"$site\", pod_name=~\"spgwu.*\", container_name!=\"POD\"}))",
           "format": "time_series",
           "hide": false,
           "instant": false,
@@ -309,7 +309,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(container_network_receive_bytes_total{datacenter=\"$site\", namespace=~\"omec-data-plane-cbrs.*\",  pod_name=~\"spgwu.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
+          "expr": "sum(rate(container_network_receive_bytes_total{datacenter=\"$site\", pod_name=~\"spgwu.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -317,7 +317,7 @@
           "refId": "B"
         },
         {
-          "expr": "-sum(rate(container_network_transmit_bytes_total{datacenter=\"$site\", namespace=~\"omec-data-plane-cbrs.*\",  pod_name=~\"spgwu.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
+          "expr": "-sum(rate(container_network_transmit_bytes_total{datacenter=\"$site\", pod_name=~\"spgwu.*\", interface!=\"tunl0\"}[3m]))by (pod_name, interface)",
           "format": "time_series",
           "interval": "10s",
           "intervalFactor": 1,
@@ -517,7 +517,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_status_restarts_total{datacenter=\"$site\",namespace=~\"omec-data-plane-cbrs.*\",pod=~\"spgwu.*\"})",
+          "expr": "sum(kube_pod_container_status_restarts_total{datacenter=\"$site\", pod=~\"spgwu.*\"})",
           "instant": true,
           "refId": "A"
         }
