@@ -847,7 +847,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(kube_pod_container_status_restarts_total{datacenter=\"edge-barcelona\",pod=~\"accelleran-cu.*\"})",
+          "expr": "sum(kube_pod_container_status_restarts_total{datacenter=\"$site\, pod=~\"accelleran-cbrs-cu.*\"})",
           "instant": true,
           "refId": "A"
         }
