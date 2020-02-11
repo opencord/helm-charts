@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "42de5007_7808a8c2",
+        "filename": "onos/templates/deployment.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000011
+      },
+      "writtenOn": "2020-02-11T19:39:12Z",
+      "side": 1,
+      "message": "As the filebeat container goes away with this patchset, you might change this option\u0027s name to be `kafka_logging` to better describe how it works",
+      "range": {
+        "startLine": 69,
+        "startChar": 7,
+        "endLine": 69,
+        "endChar": 32
+      },
+      "revId": "fe82163bb530bfdc1f5dce2b72898dba3c5b1f65",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
