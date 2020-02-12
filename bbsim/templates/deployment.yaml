@@ -55,6 +55,8 @@ spec:
             {{ if .Values.dhcp -}}
             "-dhcp",
             {{ end -}}
+            "-c_tag", "{{ .Values.c_tag }}",
+            "-s_tag", "{{ .Values.s_tag }}",
             "-delay", "{{ .Values.delay }}"
           ]
           ports:
