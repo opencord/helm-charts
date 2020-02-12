@@ -23,6 +23,8 @@ onu: 1
 auth: false
 dhcp: false
 delay: 200
+c_tag: 900
+s_tag: 900
 
 # TODO read this values in the config
 olt_tcp_port: 50060
