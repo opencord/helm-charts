@@ -32,6 +32,7 @@ spec:
     port: {{ .Values.config.nginx.ports.rtmp }}
     protocol: TCP
 
+{{- if .Values.config.nginx.ports.nodePorts.enabled }}
 ---
 apiVersion: v1
 kind: Service
@@ -52,3 +53,4 @@ spec:
     port: {{ .Values.config.nginx.ports.rtmp }}
     protocol: TCP
     nodePort: {{ .Values.config.nginx.ports.nodePorts.rtmp }}
+{{- end }}
