@@ -36,7 +36,6 @@ resources:
       memory: 1Gi
 
 config:
-  mwc: false
   vranL3:
     zlogConf:
       bufferMin: 64K
