@@ -19,7 +19,7 @@ images:
     hssdb: docker.io/omecproject/c3po-hssdb:1.0.0
     hss: docker.io/omecproject/c3po-hss:1.0.0
     mme: docker.io/omecproject/openmme:1.0.0
-    mmeExporter: docker.io/omecproject/mme-exporter:0.1.0
+    mmeExporter: docker.io/omecproject/mme-exporter:0.1.1
     spgwc: docker.io/omecproject/ngic-cp:1.1.0
     depCheck: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
   pullPolicy: IfNotPresent
@@ -223,6 +223,17 @@ config:
           # host and realm will be set dynamically if unset
           #host:
           #realm:
+      mme_exporter.json:
+        edges:
+        - id: onf-menlo-b48-1
+          tac: 202
+          edgeName: edge-onf-menlo
+        - id: intel-hillsboro-b48-1
+          tac: 101
+          edgeName: edge-intel-hillsboro
+        - id: onf-menlo-b7-1
+          tac: 17
+          edgeName: edge-onf-menlo
   spgwc:
     apn: apn1
     ueIpPool:

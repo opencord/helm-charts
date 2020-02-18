@@ -222,12 +222,17 @@ spec:
           privileged: true
         command: ["bash", "-xc"]
         args:
-        - until [ -e /tmp/unix_socket ]; do sleep 1; done; chmod 777 /tmp/unix_socket; while true; do python3 monitor_client.py; sleep 1; done
+        - cp /opt/mme/config/shared/mme_exporter.json /openmme/conf/mme_exporter.json;
+          until [ -e /tmp/unix_socket ]; do sleep 1; done;
+          chmod 777 /tmp/unix_socket;
+          while true; do python3 monitor_client.py; sleep 1; done;
         {{- if .Values.resources.enabled }}
         resources:
 {{ toYaml .Values.resources.mme | indent 10 }}
         {{- end }}
         volumeMounts:
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
         - name: shared-app
           mountPath: /tmp
     {{- end }}
