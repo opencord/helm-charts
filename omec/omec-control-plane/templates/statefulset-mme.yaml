@@ -216,18 +216,23 @@ spec:
       {{- end }}
     {{- if .Values.prometheusExporter.mme.enabled }}
       - name: subscriber-exporter
-        image: {{ .Values.images.tags.mmeExporter }}
+        image: {{ .Values.images.tags.mme | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy }}
         securityContext:
           privileged: true
         command: ["bash", "-xc"]
         args:
-        - until [ -e /tmp/unix_socket ]; do sleep 1; done; chmod 777 /tmp/unix_socket; while true; do python3 monitor_client.py; sleep 1; done
+        - /opt/mme/scripts/mme-run.sh exporter
         {{- if .Values.resources.enabled }}
         resources:
 {{ toYaml .Values.resources.mme | indent 10 }}
         {{- end }}
         volumeMounts:
+        - name: scripts
+          mountPath: /opt/mme/scripts/mme-run.sh
+          subPath: mme-run.sh
+        - name: shared-data
+          mountPath: /opt/mme/config/shared
         - name: shared-app
           mountPath: /tmp
     {{- end }}

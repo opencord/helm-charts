@@ -53,6 +53,14 @@ case $APPLICATION in
       cat conf/s11.json
       ./bin/s11-app
       ;;
+    "exporter")
+      echo "Starting mme-exporter"
+      echo "conf/mme_exporter.json"
+      cat conf/mme_exporter.json
+      until [ -e /tmp/unix_socket ]; do sleep 1; done
+      chmod 777 /tmp/unix_socket
+      while true; do python3 monitor_client.py; sleep 1; done
+      ;;
     *)
       echo "invalid app $APPLICATION"
       ;;
