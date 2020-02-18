@@ -18,4 +18,4 @@ name: accelleran-cbrs-cu
 description: A Helm chart to install Accelleran CU on CBRS band
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 0.1.5
+version: 0.1.6
