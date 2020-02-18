@@ -43,6 +43,7 @@ cp /opt/mme/config/shared/config.json /opt/mme/config/shared/s11.json
 cp /opt/mme/config/shared/config.json /opt/mme/config/shared/s1ap.json
 cp /opt/mme/config/shared/config.json /opt/mme/config/shared/s6a.json
 cp /opt/mme/config/s6a_fd.conf /opt/mme/config/shared/s6a_fd.conf
+cp /opt/mme/config/mme_exporter.json /opt/mme/config/shared/mme_exporter.json
 
 #This multiple copies of config needs some cleanup. For now I want 
 #that after running mme_init config to be present in the target directory
