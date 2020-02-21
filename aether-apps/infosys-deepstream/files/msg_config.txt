@@ -1,0 +1,63 @@
+## Group 0
+
+[sensor0]
+enable=1
+type=Camera
+id=CSI
+location=45.293701447;-75.8303914499;48.1557479338
+description=CSI Camera
+coordinate=5.2;10.1;11.2
+
+[place0]
+enable=1
+id=0
+type=intersection/road
+name=HWY_20_AND_LOCUST__EBA
+location=30.32;-40.55;100.0
+coordinate=1.0;2.0;3.0
+place-sub-field1=C_127_158
+place-sub-field2=Lane 1
+place-sub-field3=P1
+
+## Group 1
+
+[sensor1]
+enable=1
+type=Camera
+id=RTSP_1
+location=45.293701447;-75.8303914499;48.1557479338
+description=RTSP feed from Mobile Camera
+coordinate=5.2;10.1;11.2
+
+[place1]
+enable=1
+id=0
+type=intersection/road
+name=INT2_HWY_20_AND_LOCUST__EBA
+location=30.32;-40.55;100.0
+coordinate=1.0;2.0;3.0
+place-sub-field1=C_127_158
+place-sub-field2=Lane 1
+place-sub-field3=P1
+
+## Group 2
+
+[sensor2]
+enable=1
+type=Camera
+id=1
+location=45.293701447;-75.8303914499;48.1557479338
+description=Mobile Camera
+coordinate=5.2;10.1;11.2
+
+[place2]
+enable=1
+id=0
+type=intersection/road
+name=INT2_HWY_20_AND_LOCUST__EBA
+location=30.32;-40.55;100.0
+coordinate=1.0;2.0;3.0
+place-sub-field1=C_127_158
+place-sub-field2=Lane 1
+place-sub-field3=P1
+
