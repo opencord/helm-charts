@@ -1,0 +1,87 @@
+# Copyright 2020-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+images:
+  tags:
+    cameraIngestion: registry.central.aetherproject.net/google/phylo-camera-ingestion-client:latest
+    videoAnalyticsServer: registry.central.aetherproject.net/google/phylo-video-analytics-server:latest
+    phyloRabbitmq: registry.central.aetherproject.net/google/phylo-rabbitmq:latest
+    phyloRabbitmqPubsub: registry.central.aetherproject.net/google/phylo-rmq-pubsub:latest
+    rtspServer: registry.central.aetherproject.net/google/phylo_rmq-rtsp-server:0.2.0
+    rmqRestream: registry.central.aetherproject.net/google/phylo-rmq-restream:latest
+    wowza: registry.central.aetherproject.net/google/wowza:latest
+    depCheck: registry.central.aetherproject.net/kubernetes-entrypoint:v0.3.1
+  pullPolicy: "Always"
+
+nodeSelectors:
+  enabled: true
+  phylo:
+    label: google-phylo
+    value: enabled
+  wowza:
+    label: google-phylo
+    value: enabled
+
+resources:
+  enabled: false
+  rtspServer:
+    requests:
+      cpu: 2
+      memory: 2048Mi
+    limits:
+      cpu: 2
+      memory: 2048Mi
+  phyloRabbitmq:
+    requests:
+      cpu: 2
+      memory: 2048Mi
+    limits:
+      cpu: 2
+      memory: 2048Mi
+  phyloRabbitmqPubsub:
+    requests:
+      cpu: 2
+      memory: 2048Mi
+    limits:
+      cpu: 2
+      memory: 2048Mi
+  videoAnalyticsServer:
+    requests:
+      cpu: 5
+      memory: 2048Mi
+    limits:
+      cpu: 5
+      memory: 2048Mi
+  cameraIngestion:
+    requests:
+      cpu: 2
+      memory: 2048Mi
+    limits:
+      cpu: 2
+      memory: 2048Mi
+  wowza:
+    requests:
+      cpu: 2
+      memory: 2048Mi
+    limits:
+      cpu: 2
+      memory: 2048Mi
+
+config:
+  phylo:
+    sources:
+      - key: mystream
+        uri: rtmp://10.93.1.30:31935/live/myStream
+  wowza:
+    replica: 1

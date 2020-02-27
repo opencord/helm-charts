@@ -1,0 +1,76 @@
+{{- /*
+# Copyright 2020-present Open Networking Foundation
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+*/ -}}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wowza
+  labels:
+{{ tuple "wowza" . | include "phylo.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "wowza" . | include "phylo.metadata_labels" | indent 4 }}
+  ports:
+    - port: 554 #
+      targetPort: 554
+      protocol: TCP
+      name: tcp-554
+    - port: 1935 # RTMP/RTMPT/RTMPE/RTSP(interleaved)
+      targetPort: 1935
+      protocol: TCP
+      name: tcp-1935
+    - port: 8084 #
+      targetPort: 8084
+      protocol: TCP
+      name: tcp-8084
+    - port: 8085 #
+      targetPort: 8085
+      protocol: TCP
+      name: tcp-8085
+    - port: 8086 #
+      targetPort: 8086
+      protocol: TCP
+      name: tcp-8086
+    - port: 8087 #
+      targetPort: 8087
+      protocol: TCP
+      name: tcp-8087
+    - port: 8088 #
+      targetPort: 8088
+      protocol: TCP
+      name: tcp-8088
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wowza-external
+  labels:
+{{ tuple "wowza" . | include "phylo.metadata_labels" | indent 4 }}
+spec:
+  selector:
+{{ tuple "wowza" . | include "phylo.metadata_labels" | indent 4 }}
+  type: NodePort
+  ports:
+    - name: management
+      port: 8088
+      protocol: TCP
+      nodePort: 30088
+    - name: rtmp
+      port: 1935 # RTMP/RTMPT/RTMPE/RTSP(interleaved)
+      targetPort: 1935
+      protocol: TCP
+      nodePort: 31935
