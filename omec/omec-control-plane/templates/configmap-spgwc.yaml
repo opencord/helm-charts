@@ -30,7 +30,13 @@ data:
     EAL_ARGS="${CORES} ${MEMORY} --no-pci"
 
     MGMT_INFO="-s ${POD_IP} -w {{ .Values.config.spgwc.s1uAddr }}"
-    APN_INFO="-i {{ .Values.config.spgwc.ueIpPool.ip }} -p {{ .Values.config.spgwc.ueIpPool.mask }} -a {{ .Values.config.spgwc.apn }}"
+
+{{- if .Values.config.spgwc.multiUpfs }}
+    APN_INFO="-i {{ .Values.config.spgwc.ueIpPool.ip }} -p {{ .Values.config.spgwc.ueIpPool.mask }} -a {{ .Values.config.spgwc.apn }} "
+{{- else }}
+    APN_INFO="-i {{ .Values.config.spgwc.ueIpPool.ip }} -p {{ .Values.config.spgwc.ueIpPool.mask }} -a {{ .Values.config.spgwc.apn }} -h {{ .Values.config.spgwc.ueStaticPool}}"
+{{- end }}
+
     MISC="-l 2"
     SPGW_CFG="-d 03"
 

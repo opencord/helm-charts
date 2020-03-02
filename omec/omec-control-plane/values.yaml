@@ -113,12 +113,14 @@ config:
           key: "465b5ce8b199b49faa5f0a2ee238a6bc"
           opc: "d4416644f6154936193433dd20a0ace0"
           sqn: 96
+          staticAddr: 0.0.0.0
         - imsi: "208014567891201"
           msisdn: "1122334455"
           apn: apn1
           key: "465b5ce8b199b49faa5f0a2ee238a6bc"
           opc: "d4416644f6154936193433dd20a0ace0"
           sqn: 96
+          staticAddr: 0.0.0.0
       mmes:
         - id: 1
           isdn: "19136246000"
@@ -262,6 +264,8 @@ config:
 
   spgwc:
     apn: apn1
+    #This  ue Static pool is used only multi upf is not enabled. In case of multi-upf use app_config.cfg to provide static pool per DP
+    ueStaticPool: 10.250.1.0/24
     ueIpPool:
       ip: 10.250.0.0
       mask: 255.255.0.0
