@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6a8dc14a_b4480fc5",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000324
+      },
+      "writtenOn": "2020-03-02T21:10:28Z",
+      "side": 1,
+      "message": "Please remove this unnecessary space.",
+      "range": {
+        "startLine": 267,
+        "startChar": 134,
+        "endLine": 267,
+        "endChar": 135
+      },
+      "revId": "4bf6410df9f73d14c4801b4acd3f6f7610071de8",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
