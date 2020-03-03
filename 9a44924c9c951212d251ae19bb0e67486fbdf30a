@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "962f8c10_e382afdf",
+        "filename": "onos/templates/_helpers.tpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2020-03-03T23:44:18Z",
+      "side": 1,
+      "message": "I left the RollingFile appender that will provide a file based log on karaf.log file, as it was present in the previous configuration.\nI limited the amount of file to be kept at 10. Each file max size is 10MB, so maximum disk occupancy for logs will be 100MB",
+      "parentUuid": "b56b4f29_9b3f56f2",
+      "range": {
+        "startLine": 130,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 68
+      },
+      "revId": "9a44924c9c951212d251ae19bb0e67486fbdf30a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ca6d419c_8896dbb7",
         "filename": "onos/templates/_helpers.tpl",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2020-02-11T19:42:36Z",
       "side": 1,
       "message": "Can these lines be removed since they are commented out?",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 193,
+        "endChar": 34
+      },
+      "revId": "9a44924c9c951212d251ae19bb0e67486fbdf30a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6fa380df_4753a57a",
+        "filename": "onos/templates/_helpers.tpl",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2020-03-03T23:44:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca6d419c_8896dbb7",
       "range": {
         "startLine": 187,
         "startChar": 0,
