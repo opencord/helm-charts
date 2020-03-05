@@ -106,19 +106,14 @@ config:
       #ipSec:
     bootstrap:
       enabled: true
+      apn: internet
+      key: "465b5ce8b199b49faa5f0a2ee238a6bc"
+      opc: "d4416644f6154936193433dd20a0ace0"
+      sqn: 96
       users:
-        - imsi: "208014567891200"
-          msisdn: "1122334455"
-          apn: apn1
-          key: "465b5ce8b199b49faa5f0a2ee238a6bc"
-          opc: "d4416644f6154936193433dd20a0ace0"
-          sqn: 96
-        - imsi: "208014567891201"
-          msisdn: "1122334455"
-          apn: apn1
-          key: "465b5ce8b199b49faa5f0a2ee238a6bc"
-          opc: "d4416644f6154936193433dd20a0ace0"
-          sqn: 96
+        - imsiStart: "208014567891200"
+          msisdnStart: "1122334455"
+          count: 10
       mmes:
         - id: 1
           isdn: "19136246000"
@@ -235,33 +230,12 @@ config:
           tac: 17
           edgeName: edge-onf-menlo
         phoneTypes:
-        - imsi: 315010999912342
+        - imsi: 208014567891200
           phoneType: "Pixel-4"
-        - imsi: 315010999912343
-          phoneType: "iPhone11-Pro-Max"
-        - imsi: 315010999912345
-          phoneType: "iPhone11"
-        - imsi: 315010999912346
-          phoneType: "Sercomm-Dongle"
-        - imsi: 315010999912347
-          phoneType: "Sercomm-Camera"
-        - imsi: 315010999912348
-          phoneType: "Sercomm-Dongle"
-        - imsi: 315010999912349
+        - imsi: 208014567891201
           phoneType: "iPhone11-Pro"
-        - imsi: 315010999912350
-          phoneType: "iPhone11-Pro"
-        - imsi: 315010999912352
-          phoneType: "iPhone11"
-        - imsi: 315010999912353
-          phoneType: "iPhone11-Pro-Max"
-        - imsi: 315010999912354
-          phoneType: "iPhone11"
-        - imsi: 315010999912355
-          phoneType: "Pixel-4"
-
   spgwc:
-    apn: apn1
+    apn: internet
     ueIpPool:
       ip: 10.250.0.0
       mask: 255.255.0.0
