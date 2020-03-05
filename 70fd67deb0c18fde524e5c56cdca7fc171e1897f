@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a9bd7847_81242717",
+        "filename": "omec/omec-control-plane/templates/bin/_hss-bootstrap.sh.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-03-05T21:32:13Z",
+      "side": 1,
+      "message": "$10 does not work based on my experience. Bash makes it $1 and appends 0 to it. we need ${10}.",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "c7864832_1d73ec88",
+        "filename": "omec/omec-control-plane/templates/bin/_hss-bootstrap.sh.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-03-05T21:32:13Z",
+      "side": 1,
+      "message": "Can you change the Served-Party-IP-Address address 10.0.0.1 \u0026  10.0.0.2 to 0.0.0.0.\nThis field is used for static address assignment",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fcbcd897_25c2b61b",
+        "filename": "omec/omec-control-plane/templates/bin/_hss-bootstrap.sh.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-03-05T21:32:13Z",
+      "side": 1,
+      "message": "Do we need to have some default value for this in values.yaml ? I dont see this...in values.yaml file...So its kind of mandatory field.",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "24de5193_595c86a7",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-03-05T21:32:13Z",
+      "side": 1,
+      "message": "We have separate range for gslab, onf, intel, at\u0026t. So I assume we should need 1 entry per range in this place. Is that right ?",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6ac03026_6bb840af",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-03-05T21:32:13Z",
+      "side": 1,
+      "message": "I assume we will still be able to add single entried with count:1  but what if in the given range one of the device has fix address and we need to update in HSS...we will end up in writing separate script to update static address ? Nothing to worry now, but just wanted to know your thought",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bf61e48a_0746cfc5",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-03-05T21:32:13Z",
+      "side": 1,
+      "message": "Lets make this also internet",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "2d43919d_b98f0cbb",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-03-05T21:32:13Z",
+      "side": 1,
+      "message": "internet ? or we want to override this in the config ?",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
