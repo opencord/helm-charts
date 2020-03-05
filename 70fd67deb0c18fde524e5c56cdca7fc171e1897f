@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "aa3a8438_7331e404",
+        "filename": "omec/omec-control-plane/templates/bin/_hss-bootstrap.sh.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-03-05T21:44:35Z",
+      "side": 1,
+      "message": "Ah..right. Will fix it. It is strange that CiaB worked without error though.",
+      "parentUuid": "a9bd7847_81242717",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c7864832_1d73ec88",
         "filename": "omec/omec-control-plane/templates/bin/_hss-bootstrap.sh.tpl",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2020-03-05T21:32:13Z",
       "side": 1,
       "message": "Can you change the Served-Party-IP-Address address 10.0.0.1 \u0026  10.0.0.2 to 0.0.0.0.\nThis field is used for static address assignment",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bbe38bc3_a2414da7",
+        "filename": "omec/omec-control-plane/templates/bin/_hss-bootstrap.sh.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-03-05T21:44:35Z",
+      "side": 1,
+      "message": "Sure.",
+      "parentUuid": "c7864832_1d73ec88",
       "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "1c65df6e_4857f5d4",
+        "filename": "omec/omec-control-plane/templates/bin/_hss-bootstrap.sh.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-03-05T21:44:35Z",
+      "side": 1,
+      "message": "There is default value \"cassandra\" in values.yaml",
+      "parentUuid": "fcbcd897_25c2b61b",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "24de5193_595c86a7",
         "filename": "omec/omec-control-plane/values.yaml",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2020-03-05T21:32:13Z",
       "side": 1,
       "message": "We have separate range for gslab, onf, intel, at\u0026t. So I assume we should need 1 entry per range in this place. Is that right ?",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "563542bd_4600e062",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-03-05T21:44:35Z",
+      "side": 1,
+      "message": "We can add multiple ranges as a list like below.\n    users:\n        - imsiStart: \"315010888812340\"\n          msisdnStart: \"8888334455\"\n          count: 100\n          apn: \"internet\"\n          key: \"000102030405060708090a0b0c0d0e0f\"\n          opc: \"69d5c2eb2e2e624750541d3bbc692ba5\"\n          sqn: 135\n        - imsiStart: \"315010999912340\"\n          msisdnStart: \"9999334455\"\n          count: 100\n          apn: \"internet\"\n          key: \"000102030405060708090a0b0c0d0e0f\"\n          opc: \"69d5c2eb2e2e624750541d3bbc692ba5\"\n          sqn: 135",
+      "parentUuid": "24de5193_595c86a7",
       "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
@@ -87,6 +159,24 @@
     },
     {
       "key": {
+        "uuid": "987e3d3b_467f0d21",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-03-05T21:44:35Z",
+      "side": 1,
+      "message": "Not sure if we are going to support static address not just for demo. Anyway, this bootstrap job is just for helping us to create initial users in HSSDB. We\u0027ll add a better way to manage users.\n\nI asked Infosys team that has been helped developing the platform side of work to start to work on a XOS service that helps add/delete/update subscribers in HSSDB.",
+      "parentUuid": "6ac03026_6bb840af",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bf61e48a_0746cfc5",
         "filename": "omec/omec-control-plane/values.yaml",
         "patchSetId": 2
@@ -98,6 +188,24 @@
       "writtenOn": "2020-03-05T21:32:13Z",
       "side": 1,
       "message": "Lets make this also internet",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e7b5755_11bd3379",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000012
+      },
+      "writtenOn": "2020-03-05T21:44:35Z",
+      "side": 1,
+      "message": "Sure",
+      "parentUuid": "bf61e48a_0746cfc5",
       "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
