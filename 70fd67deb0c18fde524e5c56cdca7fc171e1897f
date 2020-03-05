@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "a4f83fed_143afa52",
+        "filename": "omec/omec-control-plane/templates/bin/_hss-bootstrap.sh.tpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-03-05T22:13:27Z",
+      "side": 1,
+      "message": "May be you can check db content.\nhttps://stackoverflow.com/questions/6146028/when-i-try-to-echo-10-it-becomes-echo-1-0",
+      "parentUuid": "aa3a8438_7331e404",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "c7864832_1d73ec88",
         "filename": "omec/omec-control-plane/templates/bin/_hss-bootstrap.sh.tpl",
         "patchSetId": 2
@@ -142,6 +160,24 @@
     },
     {
       "key": {
+        "uuid": "42888937_3b745802",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-03-05T22:13:27Z",
+      "side": 1,
+      "message": "Though range looks good in terms of clean code, we would have need in future to configure parameters specific to IMSI. May be that time we need to have better way of managing users.",
+      "parentUuid": "563542bd_4600e062",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "6ac03026_6bb840af",
         "filename": "omec/omec-control-plane/values.yaml",
         "patchSetId": 2
@@ -171,6 +207,24 @@
       "side": 1,
       "message": "Not sure if we are going to support static address not just for demo. Anyway, this bootstrap job is just for helping us to create initial users in HSSDB. We\u0027ll add a better way to manage users.\n\nI asked Infosys team that has been helped developing the platform side of work to start to work on a XOS service that helps add/delete/update subscribers in HSSDB.",
       "parentUuid": "6ac03026_6bb840af",
+      "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "e8a63d8f_a3cc3068",
+        "filename": "omec/omec-control-plane/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000640
+      },
+      "writtenOn": "2020-03-05T22:13:27Z",
+      "side": 1,
+      "message": "Hmmm...i added support for static in spgw, mme. Anyways, i would like to have code. I thought we would need that in OCP.",
+      "parentUuid": "987e3d3b_467f0d21",
       "revId": "70fd67deb0c18fde524e5c56cdca7fc171e1897f",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
