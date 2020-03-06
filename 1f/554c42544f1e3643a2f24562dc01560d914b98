@@ -1,0 +1,9 @@
+Code-Review+1: Woojoong Kim <woojoong@opennetworking.org>
+Code-Review+1: Ajay Thakur <thakur.ajay@gmail.com>
+Code-Review+2: Hyunsun Moon <hyunsun.moon@gmail.com>
+Verified+1: Jenkins Jenkins <do-not-reply@opencord.org>
+Submitted-by: Hyunsun Moon <hyunsun.moon@gmail.com>
+Submitted-at: Fri, 06 Mar 2020 20:42:25 +0000
+Reviewed-on: https://gerrit.opencord.org/17949
+Project: helm-charts
+Branch: refs/heads/master
