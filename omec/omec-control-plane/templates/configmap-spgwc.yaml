@@ -34,7 +34,8 @@ data:
     MISC="-l 2"
     SPGW_CFG="-d 03"
 
-    APP_ARGS="${MGMT_INFO} ${APN_INFO} ${MISC} ${SPGW_CFG}"
+    CONFIG_UPDATE_FOLDER="-f /etc/cp/config/"
+    APP_ARGS="${MGMT_INFO} ${APN_INFO} ${MISC} ${SPGW_CFG} ${CONFIG_UPDATE_FOLDER}"
   interface.cfg: |
     [0]
     zmq_protocol = tcp
