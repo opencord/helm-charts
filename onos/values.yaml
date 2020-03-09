@@ -29,7 +29,7 @@ global:
   registry: ''
 
 kafka_logging:
-  enabled: True
+  enabled: False
   brokers: ['cord-kafka:9092']
 
 nameOverride: ''
