@@ -30,6 +30,9 @@ s_tag: 900
 olt_tcp_port: 50060
 bbsim_api_port: 50070
 bbsim_sadis_port: 50074
+enablePerf: false
+enableEvents: false
+kafkaAddress: ":9092"
 
 images:
   bbsim:

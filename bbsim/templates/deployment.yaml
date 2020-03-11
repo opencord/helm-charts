@@ -57,7 +57,14 @@ spec:
             {{ end -}}
             "-c_tag", "{{ .Values.c_tag }}",
             "-s_tag", "{{ .Values.s_tag }}",
-            "-delay", "{{ .Values.delay }}"
+            "-delay", "{{ .Values.delay }}",
+            {{ if .Values.enableEvents -}}
+            "-enableEvents",
+            "-kafkaAddress", "{{ .Values.kafkaAddress }}",
+            {{ end -}}
+            {{ if .Values.enablePerf -}}
+            "-enableperf"
+            {{ end -}}
           ]
           ports:
             - name: "bbsim-{{ .Values.olt_id }}"
