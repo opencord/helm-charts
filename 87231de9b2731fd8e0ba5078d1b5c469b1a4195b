@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "961c2ebb_f4d9a7b0",
+        "filename": "bbsim/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-03-12T14:59:22Z",
+      "side": 1,
+      "message": "cord-kafka.default.svc:9092?\n\n:9092 will never work when deployed on K8s",
+      "range": {
+        "startLine": 35,
+        "startChar": 15,
+        "endLine": 35,
+        "endChar": 20
+      },
+      "revId": "87231de9b2731fd8e0ba5078d1b5c469b1a4195b",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
