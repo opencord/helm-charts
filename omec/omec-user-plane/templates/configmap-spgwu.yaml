@@ -1,0 +1,36 @@
+{{/*
+Copyright 2020-present Open Networking Foundation
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/}}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: spgwu
+  labels:
+{{ tuple "spgwu" . | include "omec-user-plane.metadata_labels" | indent 4 }}
+data:
+  spgwu.json: |
+{{ tuple "config/_spgwu.json.tpl" . | include "omec-user-plane.template" | indent 4 }}
+  spgwu.bess: |
+{{ .Files.Get "files/spgwu.bess" | indent 4 }}
+  __init__.py: |
+{{ .Files.Get "files/__init__.py" | indent 4 }}
+  route_control.py: |
+{{ .Files.Get "files/route_control.py" | indent 4 }}
+  utils.py: |
+{{ .Files.Get "files/utils.py" | indent 4 }}
+  bessd-poststart.sh: |
+{{ tuple "bin/_bessd-poststart.sh.tpl" . | include "omec-user-plane.template" | indent 4 }}
