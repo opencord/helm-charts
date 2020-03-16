@@ -34,7 +34,8 @@ xosAdminUser: "admin@opencord.org"
 xosAdminPassword: "letmein"
 xosCoreService: "xos-core:50051"
 
-volthaRestService: "voltha.voltha.svc.cluster.local"
+volthaGrpcUrl: "voltha-api.voltha.svc.cluster.local"
+volthaGrpcPort: 55555
 kafkaService: "cord-kafka"
 
 resources: {}
