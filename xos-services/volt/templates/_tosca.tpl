@@ -27,6 +27,6 @@ topology_template:
       properties:
         name: volt
         kind: data
-        voltha_url: {{ .volthaRestService | quote }}
-        voltha_port: 8882
+        voltha_url: {{ .volthaGrpcUrl | quote }}
+        voltha_port: {{ .volthaGrpcPort }}
 {{- end -}}
