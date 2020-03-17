@@ -159,6 +159,115 @@ log4j2.appender.kafka.layout.pattern = ${log4j2.kafka.pattern}
 
 {{- end -}}
 
+{{- define "onos.featuresCfg" -}}
+################################################################################
+#
+#    Licensed to the Apache Software Foundation (ASF) under one or more
+#    contributor license agreements.  See the NOTICE file distributed with
+#    this work for additional information regarding copyright ownership.
+#    The ASF licenses this file to You under the Apache License, Version 2.0
+#    (the "License"); you may not use this file except in compliance with
+#    the License.  You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS,
+#    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#    See the License for the specific language governing permissions and
+#    limitations under the License.
+#
+################################################################################
+
+#
+# Comma separated list of features repositories to register by default
+#
+featuresRepositories = \    mvn:org.apache.karaf.features/standard/4.2.8/xml/features, \
+    mvn:org.onosproject/onos-features/2.2.2-SNAPSHOT/xml/features, \
+    mvn:org.apache.karaf.features/enterprise/4.2.8/xml/features, \
+    mvn:org.apache.karaf.features/spring/4.2.8/xml/features, \
+    mvn:org.apache.karaf.features/standard/4.2.8/xml/features, \
+    mvn:org.apache.karaf.features/framework/4.2.8/xml/features
+
+#
+# Comma separated list of features to install at startup
+#
+featuresBoot = \
+    (instance/4.2.8, \
+    package/4.2.8, \
+    log/4.2.8, \
+    ssh/4.2.8, \
+    framework/4.2.8, \
+    system/4.2.8, \
+    eventadmin/4.2.8, \
+    feature/4.2.8, \
+    shell/4.2.8, \
+    management/4.2.8, \
+    service/4.2.8, \
+    jaas/4.2.8, \
+    deployer/4.2.8, \
+    diagnostic/4.2.8, \
+    wrap/2.6.2, \
+    bundle/4.2.8, \
+    config/4.2.8, \
+    kar/4.2.8, \
+    webconsole/4.2.8, \
+    scr/4.2.8, \
+    war/4.2.8), \
+    (onos-thirdparty-base/2.2.2-SNAPSHOT), \
+    (onos-log4j2-extra-feature/2.2.2-SNAPSHOT), \
+    (onos-api/2.2.2-SNAPSHOT, \
+    onos-core/2.2.2-SNAPSHOT, \
+    onos-cli/2.2.2-SNAPSHOT, \
+    onos-rest/2.2.2-SNAPSHOT)
+
+
+#
+# Resource repositories (OBR) that the features resolver can use
+# to resolve requirements/capabilities
+#
+# The format of the resourceRepositories is
+# resourceRepositories=[xml:url|json:url],...
+# for Instance:
+#
+#resourceRepositories=xml:http://host/path/to/index.xml
+# or
+#resourceRepositories=json:http://host/path/to/index.json
+#
+
+#
+# Defines if the boot features are started in asynchronous mode (in a dedicated thread)
+#
+featuresBootAsynchronous=false
+
+#
+# Service requirements enforcement
+#
+# By default, the feature resolver checks the service requirements/capabilities of
+# bundles for new features (xml schema >= 1.3.0) in order to automatically installs
+# the required bundles.
+# The following flag can have those values:
+#   - disable: service requirements are completely ignored
+#   - default: service requirements are ignored for old features
+#   - enforce: service requirements are always verified
+#
+#serviceRequirements=default
+
+#
+# Store cfg file for config element in feature
+#
+#configCfgStore=true
+
+#
+# Configuration of features processing mechanism (overrides, blacklisting, modification of features)
+# XML file defines instructions related to features processing
+# versions.properties may declare properties to resolve placeholders in XML file
+# both files are relative to ${karaf.etc}
+#
+#featureProcessing=org.apache.karaf.features.xml
+#featureProcessingVersions=versions.properties
+{{- end -}}
+
 {{/*
 Render a Service.
 */}}

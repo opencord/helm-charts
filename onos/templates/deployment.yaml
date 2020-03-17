@@ -56,9 +56,12 @@ spec:
               mountPath: /root/vtn
               readOnly: true
 {{- if .Values.kafka_logging.enabled }}
-            - name: onos-logs-cfg
+            - name: onos-cfg
               mountPath: /root/onos/apache-karaf-4.2.8/etc/org.ops4j.pax.logging.cfg
               subPath: org.ops4j.pax.logging.cfg
+            - name: onos-cfg
+              mountPath: /root/onos/apache-karaf-4.2.8/etc/org.apache.karaf.features.cfg
+              subPath: org.apache.karaf.features.cfg
 {{- end }}
       volumes:
         - name: node-key
@@ -67,12 +70,14 @@ spec:
             defaultMode: 256
             optional: true
 {{- if .Values.kafka_logging.enabled }}
-        - name: onos-logs-cfg
+        - name: onos-cfg
           configMap:
             name: {{ template "onos.fullname" . }}-onos
             items:
               - key: logCfg
                 path: org.ops4j.pax.logging.cfg
+              - key: featCfg
+                path: org.apache.karaf.features.cfg
 {{- end}}
         - name: onos-logs
           emptyDir: {}

@@ -20,3 +20,5 @@ metadata:
 data:
   logCfg: |
 {{ include "onos.logCfg" . | indent 4 }}
+  featCfg: |
+{{ include "onos.featuresCfg" . | indent 4 }}
