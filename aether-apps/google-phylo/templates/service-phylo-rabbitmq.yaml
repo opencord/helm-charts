@@ -31,7 +31,6 @@ spec:
     - port: 15672
       targetPort: 15672
       protocol: TCP
-      nodePort: 25672
       name: tcp-15672
     - port: 5672
       targetPort: 5672

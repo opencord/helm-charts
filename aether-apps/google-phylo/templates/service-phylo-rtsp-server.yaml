@@ -31,7 +31,6 @@ spec:
     - port: 8554
       targetPort: 8554
       protocol: TCP
-      nodePort: 28554
       name: tcp-8554
   type: NodePort
 {{ end }}
