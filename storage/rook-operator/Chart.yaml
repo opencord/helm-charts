@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-description: Sets up the Rook operator to provide storage
+description: Sets up the Rook operator to provide storage - UNMAINTAINED, LIKELY BROKEN
 name: rook-operator
-version: 0.1.0-dev0
+version: 0.1.0-dev1
 

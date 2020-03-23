@@ -15,5 +15,5 @@
 
 dependencies:
 - name: rook-ceph
-  version: 0.8.1
-  repository: https://charts.rook.io/beta
+  version: 1.2.6
+  repository: https://charts.rook.io/release
