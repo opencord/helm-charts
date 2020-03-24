@@ -23,6 +23,8 @@ data:
 {{- if .Values.dashboards.k8s }}
   k8s.json: |
 {{ .Files.Get "grafana-dashboards/k8s-app-metrics.json" | indent 4 }}
+  docker.json: |
+{{ .Files.Get "grafana-dashboards/docker-monitoring.json" | indent 4 }}
 {{- end }}
 {{- if .Values.dashboards.nodeExporter }}
   node-exporter.json: |
