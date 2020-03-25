@@ -114,6 +114,10 @@ config:
         - imsiStart: "208014567891200"
           msisdnStart: "1122334455"
           count: 10
+      staticusers:
+        - imsi: "208014567891201"
+          msisdn: "1122334455"
+          staticAddr: 0.0.0.0
       mmes:
         - id: 1
           isdn: "19136246000"
@@ -236,6 +240,9 @@ config:
           phoneType: "iPhone11-Pro"
   spgwc:
     apn: internet
+    #This  ue Static pool is used only multi upf is not enabled. In case of multi-upf use app_config.cfg to provide static pool per DP
+    #ueStaticPool: 10.250.255.0/24
+    ueStaticPool: None
     ueIpPool:
       ip: 10.250.0.0
       mask: 255.255.0.0
