@@ -38,7 +38,7 @@ data:
     CONFIG_UPDATE_FOLDER="-f /etc/cp/config/"
     APP_ARGS="${MGMT_INFO} ${APN_INFO} ${MISC} ${SPGW_CFG} ${CONFIG_UPDATE_FOLDER}"
 {{- else }}
-    APP_ARGS="${MGMT_INFO} ${APN_INFO} ${MISC} ${SPGW_CFG}"
+    APP_ARGS="${MGMT_INFO} ${APN_INFO} ${MISC} ${SPGW_CFG} "
 {{- end }}
   interface.cfg: |
     [0]
