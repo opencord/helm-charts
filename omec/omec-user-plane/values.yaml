@@ -69,6 +69,7 @@ config:
     name: "dp-staging"
     workers: 1
     maxSessions: 50000
+    maxIpDefragFlows: 1000
     # Provide the S1U and SGI networks facing device name and IP address
     s1u:
       device: s1u
