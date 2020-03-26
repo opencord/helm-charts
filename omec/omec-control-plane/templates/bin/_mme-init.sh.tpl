@@ -56,4 +56,5 @@ DIAMETER_REALM={{ tuple "mme" "realm" . | include "omec-control-plane.diameter_e
 
 cp /openmme/target/conf/make_certs.sh /opt/mme/config/shared/make_certs.sh
 cd /opt/mme/config/shared
+chmod +x make_certs.sh
 ./make_certs.sh $DIAMETER_HOST $DIAMETER_REALM
