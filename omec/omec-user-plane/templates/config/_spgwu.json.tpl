@@ -8,5 +8,6 @@
     "ifname": {{ .Values.config.spgwu.sgi.device | quote }}
   },
   "workers": {{ .Values.config.spgwu.workers }},
-  "max_sessions": {{ .Values.config.spgwu.maxSessions }}
+  "max_sessions": {{ .Values.config.spgwu.maxSessions }},
+  "max_ip_defrag_flows": {{ .Values.config.spgwu.maxIpDefragFlows }}
 }

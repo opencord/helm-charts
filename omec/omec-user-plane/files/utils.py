@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # SPDX-License-Identifier: Apache-2.0
-# Copyright 2020-present Open Networking Foundation
 # Copyright(c) 2019 Intel Corporation
 
 import os
@@ -32,7 +31,6 @@ def getpythonpid(process_name):
         if process_name in proc.info['cmdline'][1] and 'python' in proc.info['cmdline'][0]:
             return proc.info['pid']
     return
-
 
 def get_json_conf(path, dump):
     conf = json.loads(open(path).read())

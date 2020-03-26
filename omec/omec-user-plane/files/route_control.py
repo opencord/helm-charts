@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # SPDX-License-Identifier: Apache-2.0
-# Copyright 2020-present Open Networking Foundation
 # Copyright(c) 2019 Intel Corporation
 
 import argparse
@@ -104,7 +103,7 @@ def link_route_module(server, gateway_mac, item):
     iprange = item.iprange
     prefix_len = item.prefix_len
     route_module = item.iface + 'Routes'
-    last_module = item.iface + 'FastPO'
+    last_module = item.iface + 'Merge'
     gateway_mac_str = '{:X}'.format(gateway_mac)
     print('Adding route entry {}/{} for {}'.format(iprange, prefix_len,
                                                    route_module))
@@ -222,7 +221,7 @@ def del_route_entry(server, item):
     iprange = item.iprange
     prefix_len = item.prefix_len
     route_module = item.iface + 'Routes'
-    last_module = item.iface + 'FastPO'
+    last_module = item.iface + 'Merge'
 
     neighbor_exists = neighborcache.get(item.neighbor_ip)
     if neighbor_exists:
@@ -336,16 +335,13 @@ def parse_new_route(msg):
         del item
         return
 
-    # Fetch prefix_len
-    item.prefix_len = msg['dst_len']
-
     # if mac is 0, send ARP request
     if gateway_mac == 0:
         print('Adding entry {} in arp probe table'.format(item.iface))
         probe_addr(item, ipdb.interfaces[item.iface].address)
 
     else:  # if gateway_mac is set
-        print('Linking module {}Routes with {}FastPO (Dest MAC: {})'.format(
+        print('Linking module {}Routes with {}Merge (Dest MAC: {})'.format(
             item.iface, item.iface, _mac))
 
         link_route_module(bess, gateway_mac, item)
@@ -362,7 +358,7 @@ def parse_new_neighbor(msg):
 
     item = arpcache.get(neighbor_ip)
     if item:
-        print('Linking module {}Routes with {}FastPO (Dest MAC: {})'.format(
+        print('Linking module {}Routes with {}Merge (Dest MAC: {})'.format(
             item.iface, item.iface, gateway_mac))
 
         # Add route entry, and add item in the registered neighbor cache

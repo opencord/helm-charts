@@ -1,7 +1,6 @@
 # vim: syntax=py
 # -*- mode: python -*-
 # SPDX-License-Identifier: Apache-2.0
-# Copyright 2020-present Open Networking Foundation
 # Copyright(c) 2019 Intel Corporation
 
 # for errnos
@@ -51,6 +50,9 @@ def scan_dpdk_ports():
             else:
                 raise
         idx += 1
+        # RTE_MAX_ETHPORTS is 32 and we need 2 for vdevs
+        if idx == 30:
+          break
     return True if dpdk_ports else False
 
 
@@ -93,13 +95,11 @@ class Port:
         self.bpf = __bess_module__("{}FastBPF".format(name), 'BPF')
         self.bpf.clear()
 
+        # Reassemble IP4 fragments (if needed)
+        defrag = __bess_module__("{}IP4Defrag".format(name), 'IPDefrag', num_flows=max_ip_defrag_flows, numa=0)
         # Default drop when no matches
-        if max_ip_defrag_flows is not None:
-            ipdefrag = __bess_module__("{}Defrag".format(name), 'IPDefrag', num_flows=max_ip_defrag_flows, numa=0)
-            self.fpi -> ipdefrag:1 -> self.bpf:0 -> Sink()
-            ipdefrag:0 -> Sink()
-        else:
-            self.fpi -> self.bpf:0 -> Sink()
+        self.fpi -> defrag:1 -> self.bpf:0 -> Sink()
+        defrag:0 -> Sink()
 
         # Initialize route module
         self.rtr = __bess_module__("{}Routes".format(name), 'IPLookup')
@@ -169,6 +169,12 @@ class Port:
 
                 # Direct control traffic from kernel to DPDK
                 spi -> self.fpo
+
+                # Direct fast path traffic to Frag module
+                merge = __bess_module__("{}Merge".format(name), 'Merge')
+                frag = __bess_module__("{}IP4Frag".format(name), 'IPFrag')
+                merge -> frag:1 -> self.fpo
+                frag:0 -> Sink()
 
                 tc = 'slow{}'.format(wid)
                 try:
@@ -272,7 +278,6 @@ sgiFastBPF:UEGate \
 # Drop unknown packets
 GTPUEncap:0 -> Sink()
 
-
 # ====================================================
 #       Uplink Pipeline
 # ====================================================
@@ -305,7 +310,8 @@ s1uFastBPF.add(filters=[uplink_filter])
 
 sgiRoutes = ports[sgi_ifname].rtr
 
-s1uFastBPF:GTPUGate -> EtherDecapTrim::GenericDecap(bytes=14) -> GTPUDecap::GtpuDecap(ename="GTPUEncap"):1 \
+s1uFastBPF:GTPUGate \
+    -> EtherDecapTrim::GenericDecap(bytes=14) -> GTPUDecap::GtpuDecap(ename="GTPUEncap"):1 \
     -> SGIEtherAdd::GenericEncap(fields=[
         {'size': 6, 'value': {'value_int': 0x0}},
         {'size': 6, 'value': {'value_int': mac2hex(mac_by_interface(sgi_ifname))}},
@@ -320,7 +326,6 @@ s1uFastBPF:GTPUEchoGate \
 # Drop unknown packets
 GTPUEcho:0 -> Sink()
 GTPUDecap:0 -> Sink()
-
 
 # ====================================================
 #       SIM_TEST
