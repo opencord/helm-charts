@@ -47,10 +47,11 @@ spec:
           runAsUser: 0
         command: ["bash", "-xc"]
         args:
-        - >
-          if chroot /mnt/host-rootfs modinfo nf_conntrack_proto_sctp > /dev/null 2>&1; then \
-              chroot /mnt/host-rootfs modprobe nf_conntrack_proto_sctp; \
-          fi;
+        - |
+          if chroot /mnt/host-rootfs modinfo nf_conntrack_proto_sctp > /dev/null 2>&1; then
+              chroot /mnt/host-rootfs modprobe nf_conntrack_proto_sctp;
+          fi
+          chroot /mnt/host-rootfs modprobe tipc
         volumeMounts:
         - name: host-rootfs
           mountPath: /mnt/host-rootfs
