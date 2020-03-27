@@ -15,5 +15,5 @@
 
 dependencies:
 - name: tt-workflow-driver
-  version: 0.1.0
-  repository: https://charts.opencord.org
+  version: 1.0.0
+  repository: file://../../xos-services/tt-workflow-driver
