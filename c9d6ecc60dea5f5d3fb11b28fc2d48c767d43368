@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "10d48813_7db85784",
+        "filename": "workflows/att-workflow/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000381
+      },
+      "writtenOn": "2020-03-27T21:35:38Z",
+      "side": 1,
+      "message": "Minor: since this chart define requirements with file-based URLs, if we want to update them to http-based URLs later, then we could (1) use -dev here to avoid \"waste\" a version number, (2) wait for the dependency chart to be  published, (3) remove -dev with a new patch. However, I\u0027m not sure if this would cause problems with the siab-based test. Also, this is something we could automate with a Jenkins job.\n\nThe same comment applies to all other charts that define requirements with file-based URLs",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 14
+      },
+      "revId": "c9d6ecc60dea5f5d3fb11b28fc2d48c767d43368",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
