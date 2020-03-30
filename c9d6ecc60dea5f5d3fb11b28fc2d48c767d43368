@@ -22,6 +22,30 @@
       "revId": "c9d6ecc60dea5f5d3fb11b28fc2d48c767d43368",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "35517f43_6cb638de",
+        "filename": "workflows/att-workflow/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2020-03-30T14:38:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10d48813_7db85784",
+      "range": {
+        "startLine": 20,
+        "startChar": 9,
+        "endLine": 20,
+        "endChar": 14
+      },
+      "revId": "c9d6ecc60dea5f5d3fb11b28fc2d48c767d43368",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
