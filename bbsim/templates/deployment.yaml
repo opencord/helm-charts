@@ -12,6 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+{{- $log_level := tpl .Values.log_level . }}
 
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -39,8 +40,8 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
         - name: {{ .Chart.Name }}
-          image: {{ .Values.global.registry }}{{ .Values.images.bbsim.repository }}:{{ tpl .Values.images.bbsim.tag . }}
-          imagePullPolicy: {{ .Values.images.bbsim.pullPolicy }}
+          image: '{{ tpl .Values.images.bbsim.registry . }}{{ tpl .Values.images.bbsim.repository . }}:{{ tpl ( tpl .Values.images.bbsim.tag . ) . }}'
+          imagePullPolicy: {{ tpl .Values.images.bbsim.pullPolicy . }}
           securityContext:
             privileged: true
           command: [
@@ -49,6 +50,7 @@ spec:
             "-nni", "{{ .Values.nni }}",
             "-pon", "{{ .Values.pon }}",
             "-onu", "{{ .Values.onu }}",
+            "-logLevel", "{{ $log_level }}",
             {{ if .Values.auth -}}
             "-auth",
             {{ end -}}

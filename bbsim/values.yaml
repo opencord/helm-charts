@@ -14,8 +14,15 @@
 
 # bbsim values
 
-# CLI switches passed to bbsim
+# Default overrides
+defaults:
+  log_level: "DEBUG"
+  image_registry: ""
+  image_tag: ~
+  image_org: "voltha/"
+  image_pullPolicy: "Always"
 
+# CLI switches passed to bbsim
 olt_id: 0
 nni: 1
 pon: 1
@@ -25,6 +32,7 @@ dhcp: false
 delay: 200
 c_tag: 900
 s_tag: 900
+log_level: '{{ .Values.defaults.log_level }}'
 
 # TODO read this values in the config
 olt_tcp_port: 50060
@@ -36,9 +44,10 @@ kafkaAddress: ":9092"
 
 images:
   bbsim:
-    repository: 'voltha/bbsim'
-    tag: '{{ .Chart.AppVersion }}'
-    pullPolicy: 'Always'
+    registry: '{{ .Values.defaults.image_registry }}'
+    repository: '{{ .Values.defaults.image_org }}bbsim'
+    tag: '{{- if hasKey .Values.defaults "image_tag" }}{{- if .Values.defaults.image_tag }}{{ .Values.defaults.image_tag }}{{- else }}{{ .Chart.AppVersion }}{{- end }}{{- else }}{{ .Chart.AppVersion }}{{- end }}'
+    pullPolicy: '{{ .Values.defaults.image_pullPolicy | default "Always" }}'
 
 global:
   registry: ''
