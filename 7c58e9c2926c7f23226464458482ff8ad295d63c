@@ -16,6 +16,24 @@
       "revId": "7c58e9c2926c7f23226464458482ff8ad295d63c",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "353e8206_55dc224c",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-04-02T06:07:41Z",
+      "side": 1,
+      "message": "i would think the app should take it any case as a parameter",
+      "parentUuid": "44a28d6f_effd9889",
+      "revId": "7c58e9c2926c7f23226464458482ff8ad295d63c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
