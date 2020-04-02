@@ -119,6 +119,11 @@ spec:
         resources:
 {{ toYaml .Values.resources.mme | indent 10 }}
       {{- end }}
+        env:
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         volumeMounts:
         - name: scripts
           mountPath: /opt/mme/scripts/mme-run.sh
@@ -156,6 +161,8 @@ spec:
           mountPath: /opt/mme/config/shared
         - name: shared-app
           mountPath: /tmp
+        - name: configs
+          mountPath: /opt/mme/config
       {{- if .Values.config.coreDump.enabled }}
         - name: coredump
           mountPath: /tmp/coredump
