@@ -34,6 +34,24 @@
       "revId": "7c58e9c2926c7f23226464458482ff8ad295d63c",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "d6412005_f31097d9",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-04-02T15:46:23Z",
+      "side": 1,
+      "message": "The app doesn\u0027t really care so I removed \"upper\" and \"lower\".\nAs a note the first line was copied from here: https://github.com/opencord/voltha-helm-charts/blob/master/voltha-adapter-openolt/templates/adapters-openolt.yaml#L14\n\nShould that be addressed too?",
+      "parentUuid": "353e8206_55dc224c",
+      "revId": "7c58e9c2926c7f23226464458482ff8ad295d63c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
