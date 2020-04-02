@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "44a28d6f_effd9889",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000404
+      },
+      "writtenOn": "2020-04-02T02:40:28Z",
+      "side": 1,
+      "message": "I wonder why do we need to make the log_level upper and then lower?",
+      "revId": "7c58e9c2926c7f23226464458482ff8ad295d63c",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
