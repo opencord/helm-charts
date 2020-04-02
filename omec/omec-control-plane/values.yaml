@@ -209,6 +209,10 @@ config:
             dig1: 0
             dig2: 1
             dig3: -1
+          plmnlist:
+            #plmn1 - aether common plmn, plmn2 is for comac-in-box
+            plmn1: "mcc=315,mnc=010"
+            plmn2: "mcc=208,mnc=01"
         s1ap:
           sctp_port: 36412
           sctp_port_external: 36412
