@@ -33,8 +33,14 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ template "bbsim.name" . }}
+        app: "bbsim"
         release: {{ .Release.Name }}
+        app.kubernetes.io/name: "bbsim"
+        app.kubernetes.io/version: {{ quote .Chart.AppVersion }}
+        app.kubernetes.io/component: "device-emulator"
+        app.kubernetes.io/part-of: "voltha"
+        app.kubernetes.io/managed-by: {{ quote .Release.Service }}
+        helm.sh/chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     spec:
       serviceAccount: {{ .Values.serviceAccountName }}
       serviceAccountName: {{ .Values.serviceAccountName }}
