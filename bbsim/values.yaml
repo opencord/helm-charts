@@ -31,8 +31,12 @@ auth: false
 dhcp: false
 delay: 200
 c_tag: 900
+c_tag_allocation: unique
 s_tag: 900
+s_tag_allocation: shared
+sadisFormat: att
 log_level: '{{ .Values.defaults.log_level }}'
+
 
 # TODO read this values in the config
 olt_tcp_port: 50060
