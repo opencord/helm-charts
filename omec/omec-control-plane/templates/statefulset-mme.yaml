@@ -47,10 +47,11 @@ spec:
           runAsUser: 0
         command: ["bash", "-xc"]
         args:
-        - >
+        - |
           if chroot /mnt/host-rootfs modinfo nf_conntrack_proto_sctp > /dev/null 2>&1; then \
               chroot /mnt/host-rootfs modprobe nf_conntrack_proto_sctp; \
           fi;
+          chroot /mnt/host-rootfs modprobe tipc
         volumeMounts:
         - name: host-rootfs
           mountPath: /mnt/host-rootfs
@@ -124,6 +125,8 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: status.podIP
+        - name: MMERUNENV
+          value: "container"
         volumeMounts:
         - name: scripts
           mountPath: /opt/mme/scripts/mme-run.sh
@@ -153,6 +156,9 @@ spec:
         resources:
 {{ toYaml .Values.resources.mme | indent 10 }}
       {{- end }}
+        env:
+        - name: MMERUNENV
+          value: "container"
         volumeMounts:
         - name: scripts
           mountPath: /opt/mme/scripts/mme-run.sh
@@ -182,6 +188,9 @@ spec:
         resources:
 {{ toYaml .Values.resources.mme | indent 10 }}
       {{- end }}
+        env:
+        - name: MMERUNENV
+          value: "container"
         volumeMounts:
         - name: scripts
           mountPath: /opt/mme/scripts/mme-run.sh
@@ -209,6 +218,9 @@ spec:
         resources:
 {{ toYaml .Values.resources.mme | indent 10 }}
       {{- end }}
+        env:
+        - name: MMERUNENV
+          value: "container"
         volumeMounts:
         - name: scripts
           mountPath: /opt/mme/scripts/mme-run.sh
