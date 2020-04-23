@@ -64,15 +64,18 @@ spec:
             "-dhcp",
             {{ end -}}
             "-c_tag", "{{ .Values.c_tag }}",
+            "-c_tag_allocation", "{{ .Values.c_tag_allocation }}",
             "-s_tag", "{{ .Values.s_tag }}",
+            "-s_tag_allocation", "{{ .Values.s_tag_allocation }}",
             "-delay", "{{ .Values.delay }}",
             {{ if .Values.enableEvents -}}
             "-enableEvents",
             "-kafkaAddress", "{{ .Values.kafkaAddress }}",
             {{ end -}}
             {{ if .Values.enablePerf -}}
-            "-enableperf"
+            "-enableperf",
             {{ end -}}
+            "-sadisFormat", "{{ .Values.sadisFormat }}",
           ]
           ports:
             - name: "bbsim-{{ .Values.olt_id }}"
