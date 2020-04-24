@@ -79,6 +79,7 @@ spec:
             "-enableperf",
             {{ end -}}
             "-sadisFormat", "{{ .Values.sadisFormat }}",
+            "-kafkaEventTopic", "{{ .Values.kafkaEventTopic }}"
           ]
           ports:
             - name: "bbsim-{{ .Values.olt_id }}"
