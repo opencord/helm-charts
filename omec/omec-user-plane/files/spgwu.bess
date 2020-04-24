@@ -16,14 +16,24 @@ from conf.utils import *
 conf_file = get_env('CONF_FILE', 'conf/spgwu.json')
 conf = get_json_conf(conf_file, False)
 
-# Maximum number of flows to manage ip frags for re-assembly
+# Maximum number of flows to manage ip4 frags for re-assembly
 max_ip_defrag_flows = None
 try:
     max_ip_defrag_flows = int(conf["max_ip_defrag_flows"])
 except ValueError:
-    print('Invalid value for max_ip_defrag_flows. Not installing IPDefrag module.')
+    print('Invalid value for max_ip_defrag_flows. Not installing IP4Defrag module.')
 except KeyError:
-    print('max_ip_defrag_flows value not set. Not installing IPDefrag module.')
+    print('max_ip_defrag_flows value not set. Not installing IP4Defrag module.')
+
+# Enable ip4 fragmentation
+ip_frag_flows = None
+try:
+    ip_frag_flows = int(conf["ip_frag_flows"])
+except ValueError:
+    print('Invalid value for ip_frag_flows. Not installing IP4Frag module.')
+except KeyError:
+    print('ip_frag_flows value not set. Not installing IP4Frag module.')
+
 
 # ====================================================
 #       Port Helpers
@@ -32,6 +42,10 @@ except KeyError:
 
 MAX_GATES = 8192
 dpdk_ports = {}
+# Enable MEASURE = 1 to retreive telemetry data
+# See this link for details:
+## https://github.com/NetSys/bess/blob/master/bessctl/module_tests/timestamp.py
+MEASURE = bool(int($MEASURE!'0'))
 
 
 def scan_dpdk_ports():
@@ -57,7 +71,7 @@ def scan_dpdk_ports():
 
 
 class Port:
-    def __init__(self, name):
+    def __init__(self, name, nat, ext_addr):
         self.name = name
         self.wid = None
         self.fpi = None
@@ -65,6 +79,8 @@ class Port:
         self.bpf = None
         self.bpfgate = 0
         self.routes_table = None
+        self.nat = nat
+        self.ext_addr = ext_addr
 
     def bpf_gate(self):
         if self.bpfgate < MAX_GATES - 2:
@@ -95,11 +111,11 @@ class Port:
         self.bpf = __bess_module__("{}FastBPF".format(name), 'BPF')
         self.bpf.clear()
 
-        # Reassemble IP4 fragments (if needed)
-        defrag = __bess_module__("{}IP4Defrag".format(name), 'IPDefrag', num_flows=max_ip_defrag_flows, numa=0)
         # Default drop when no matches
-        self.fpi -> defrag:1 -> self.bpf:0 -> Sink()
-        defrag:0 -> Sink()
+        if MEASURE == 1:
+            self.fpi -> Timestamp() -> self.bpf:0 -> Sink()
+        else:
+            self.fpi -> self.bpf:0 -> Sink()
 
         # Initialize route module
         self.rtr = __bess_module__("{}Routes".format(name), 'IPLookup')
@@ -172,9 +188,30 @@ class Port:
 
                 # Direct fast path traffic to Frag module
                 merge = __bess_module__("{}Merge".format(name), 'Merge')
-                frag = __bess_module__("{}IP4Frag".format(name), 'IPFrag')
-                merge -> frag:1 -> self.fpo
-                frag:0 -> Sink()
+                if ip_frag_flows is not None:
+                    frag = __bess_module__("{}IP4Frag".format(name), 'IPFrag')
+                    if MEASURE == 1:
+                        if self.nat is not None:
+                            merge -> 0:self.nat:1 -> frag:1 -> Measure(latency_ns_resolution=1, latency_ns_max=100000) -> self.fpo
+                        else:
+                            merge -> frag:1 -> Measure(latency_ns_resolution=1, latency_ns_max=100000) -> self.fpo
+                    else:
+                        if self.nat is not None:
+                            merge -> 0:self.nat:1 -> frag:1 -> self.fpo
+                        else:
+                            merge -> frag:1 -> self.fpo
+                    frag:0 -> Sink()
+                else:
+                    if MEASURE == 1:
+                        if self.nat is not None:
+                            merge -> 0:self.nat:1 -> Measure(latency_ns_resolution=1, latency_ns_max=100000) -> self.fpo
+                        else:
+                            merge -> Measure(latency_ns_resolution=1, latency_ns_max=100000) -> self.fpo
+                    else:
+                        if self.nat is not None:
+                            merge -> 0:self.nat:1 -> self.fpo
+                        else:
+                            merge -> self.fpo
 
                 tc = 'slow{}'.format(wid)
                 try:
@@ -235,8 +272,18 @@ for wid in xrange(workers):
 
 interfaces = ["s1u", "sgi"]
 ports = {}
+
 for idx, interface in enumerate(interfaces):
-    port = Port(conf[interface]["ifname"])
+    try:
+        ext_addr = conf[interface]["ip_masquerade"]
+        if ext_addr is not None:
+#            nat::NAT(ext_addrs=[{'ext_addr': useNAT}])
+            nat = __bess_module__("{}NAT".format(conf[interface]["ifname"]), 'NAT', ext_addrs=[{'ext_addr': ext_addr}])
+    except KeyError:
+        nat = None
+        ext_addr = None
+
+    port = Port(conf[interface]["ifname"], nat, ext_addr)
     if port.name in ports:
         continue
     port.setup_port(idx, workers)
@@ -244,6 +291,7 @@ for idx, interface in enumerate(interfaces):
 
 s1u_ifname = conf["s1u"]["ifname"]
 sgi_ifname = conf["sgi"]["ifname"]
+
 
 # ====================================================
 #       Downlink Pipeline
@@ -260,13 +308,28 @@ except ValueError:
 # Setting filter to detect UE subnet
 sgiFastBPF = ports[sgi_ifname].bpf
 UEGate = ports[sgi_ifname].bpf_gate()
-ue_filter = {"priority": -UEGate,
-             "filter": "ip dst net {}".format(ue_cidr), "gate": UEGate}
+if ports[sgi_ifname].nat is not None:
+    ue_filter = {"priority": -UEGate,
+                 "filter": "ip dst {}".format(ports[sgi_ifname].ext_addr), "gate": UEGate}
+else:
+    ue_filter = {"priority": -UEGate,
+                 "filter": "ip dst net {}".format(ue_cidr), "gate": UEGate}
 sgiFastBPF.add(filters=[ue_filter])
 
-sgiFastBPF:UEGate \
-    -> EtherTrim::GenericDecap(bytes=14) \
-    -> GTPUEncap::GtpuEncap(s1u_sgw_ip=ip2long(ips_by_interface(s1u_ifname)[0]), num_subscribers=max_sessions):1 \
+if ports[sgi_ifname].nat is not None:
+    # Append sgiIP4Defrag module (if enabled)
+    if max_ip_defrag_flows is not None:
+        sgiFastBPF:UEGate -> 1:ports[sgi_ifname].nat:0 -> sgiIP4Defrag::IPDefrag(num_flows=max_ip_defrag_flows, numa=0):1 -> EtherTrim::GenericDecap(bytes=14)
+    else:
+        sgiFastBPF:UEGate -> 1:ports[sgi_ifname].nat:0 -> EtherTrim::GenericDecap(bytes=14)
+else:
+    # Append sgiIP4Defrag module (if enabled)
+    if max_ip_defrag_flows is not None:
+        sgiFastBPF:UEGate -> sgiIP4Defrag::IPDefrag(num_flows=max_ip_defrag_flows, numa=0):1 -> EtherTrim::GenericDecap(bytes=14)
+    else:
+        sgiFastBPF:UEGate -> EtherTrim::GenericDecap(bytes=14)
+
+EtherTrim -> GTPUEncap::GtpuEncap(s1u_sgw_ip=ip2long(ips_by_interface(s1u_ifname)[0]), num_subscribers=max_sessions):1 \
     -> S1UEtherAdd::GenericEncap(fields=[
         {'size': 6, 'value': {'value_int': 0x0}},
         {'size': 6, 'value': {'value_int': mac2hex(mac_by_interface(s1u_ifname))}},
@@ -277,6 +340,8 @@ sgiFastBPF:UEGate \
 
 # Drop unknown packets
 GTPUEncap:0 -> Sink()
+if max_ip_defrag_flows is not None:
+    sgiIP4Defrag:0 -> Sink()
 
 # ====================================================
 #       Uplink Pipeline
@@ -310,8 +375,13 @@ s1uFastBPF.add(filters=[uplink_filter])
 
 sgiRoutes = ports[sgi_ifname].rtr
 
-s1uFastBPF:GTPUGate \
-    -> EtherDecapTrim::GenericDecap(bytes=14) -> GTPUDecap::GtpuDecap(ename="GTPUEncap"):1 \
+# Append s1uIP4Defrag module (if enabled)
+if max_ip_defrag_flows is not None:
+    s1uFastBPF:GTPUGate -> s1uIP4Defrag::IPDefrag(num_flows=max_ip_defrag_flows, numa=0):1 -> EtherDecapTrim::GenericDecap(bytes=14)
+else:
+    s1uFastBPF:GTPUGate -> EtherDecapTrim::GenericDecap(bytes=14)
+
+EtherDecapTrim -> GTPUDecap::GtpuDecap(ename="GTPUEncap"):1 \
     -> SGIEtherAdd::GenericEncap(fields=[
         {'size': 6, 'value': {'value_int': 0x0}},
         {'size': 6, 'value': {'value_int': mac2hex(mac_by_interface(sgi_ifname))}},
@@ -326,6 +396,8 @@ s1uFastBPF:GTPUEchoGate \
 # Drop unknown packets
 GTPUEcho:0 -> Sink()
 GTPUDecap:0 -> Sink()
+if max_ip_defrag_flows is not None:
+    s1uIP4Defrag:0 -> Sink()
 
 # ====================================================
 #       SIM_TEST
