@@ -16,11 +16,11 @@
 images:
   tags:
     init: docker.io/omecproject/pod-init:1.0.0
-    hssdb: docker.io/omecproject/c3po-hssdb:1.0.0
-    hss: docker.io/omecproject/c3po-hss:1.0.0
-    mme: docker.io/omecproject/openmme:1.0.0
-    mmeExporter: docker.io/omecproject/mme-exporter:0.3.1
-    spgwc: docker.io/omecproject/ngic-cp:1.1.0
+    hssdb: docker.io/omecproject/c3po-hssdb:latest
+    hss: docker.io/omecproject/c3po-hss:latest
+    mme: docker.io/omecproject/openmme:paging-latest
+    mmeExporter: docker.io/omecproject/mme-exporter:paging-latest
+    spgwc: docker.io/omecproject/ngic-cp:central-cp-multi-upfs-latest
     depCheck: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
   pullPolicy: IfNotPresent
 
@@ -228,15 +228,12 @@ config:
           #realm:
       mme_exporter.json:
         edges:
-        - id: onf-menlo-b48-1
+        - id: onf-menlo
           tac: 202
           edgeName: edge-onf-menlo
-        - id: intel-hillsboro-b48-1
-          tac: 101
-          edgeName: edge-intel-hillsboro
-        - id: onf-menlo-b7-1
-          tac: 17
-          edgeName: edge-onf-menlo
+        - id: oaisim
+          tac: 1
+          edgeName: edge-oaisim
         phoneTypes:
         - imsi: 208014567891200
           phoneType: "Pixel-4"
@@ -244,7 +241,8 @@ config:
           phoneType: "iPhone11-Pro"
   spgwc:
     apn: internet
-    #This  ue Static pool is used only multi upf is not enabled. In case of multi-upf use app_config.cfg to provide static pool per DP
+    # ueStaticPool is used only when multiUpfs is not enabled.
+    # In case of multiUpfs, use app_config.cfg to provide static pool per DP.
     #ueStaticPool: 10.250.255.0/24
     ueStaticPool: None
     ueIpPool:
@@ -260,7 +258,7 @@ config:
     # ZMQ mode is used for cp-dp communication when multiple UPFs is set
     # Otherwise, direct UDP mode is used
     # Note that enabling NodePort is valid only in direct UDP mode
-    multiUpfs: false
+    multiUpfs: true
     cpComm:
       nodePort:
         enabled: false
@@ -281,16 +279,16 @@ config:
         NUM_DP_SELECTION_RULES = 2
         [DP_SELECTION_RULE_1]
         DPID = 1
-        DPNAME = dp1
+        DPNAME = onf-menlo
         MCC = 315
         MNC = 010
         TAC = 202
         [DP_SELECTION_RULE_2]
         DPID = 2
-        DPNAME = dp2
-        MCC = 315
-        MNC = 010
-        TAC = 203
+        DPNAME = oaisim
+        MCC = 208
+        MNC = 01
+        TAC = 1
       adc_rules.cfg: |
         [GLOBAL]
         NUM_ADC_RULES = 0

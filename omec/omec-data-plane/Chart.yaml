@@ -19,4 +19,4 @@ description: OMEC data plane services
 name: omec-data-plane
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 0.1.12
+version: 0.1.13

@@ -17,7 +17,7 @@ images:
   tags:
     init: docker.io/omecproject/pod-init:1.0.0
     omecCni: docker.io/omecproject/omec-cni:1.0.0
-    spgwu: docker.io/omecproject/ngic-dp:1.0.0
+    spgwu: docker.io/omecproject/ngic-dp:central-cp-multi-upfs-latest-debug
     depCheck: quay.io/stackanetes/kubernetes-entrypoint:v0.3.1
   pullPolicy: IfNotPresent
 
@@ -54,13 +54,13 @@ config:
     # Note that zmq is used for cp-dp commmunication when multiple UPFs is set
     # Otherwise, direct UDP communication is used
     # TODO: unify cp-dp comm to ZMQ for both multi and single UPF scenario
-    multiUpfs: false
+    multiUpfs: true
     cpComm:
       # IMPORTANT: when you deploy CP and DP to separate clusters, enable nodePort
       # from both cpComm(omec-control-plane) and dpComm(omec-data-plane) and
       # set "addr" to remote cluster's entry node IP and
       # "port" to cpComm.nodePort.port value configured in omec-control-plane.
-      addr: spgwc
+      addr: spgwc-headless
       port: 21
     dpComm:
       nodePort:
@@ -70,7 +70,7 @@ config:
     # Set "--no-pci --vdev eth_af_packet0,iface=s1u-net --vdev eth_af_packet1,iface=sgi-net"
     # when sriov is disabled
     devices: ""
-    dpName: "dp1"
+    dpName: "onf-menlo"
 
 networks:
   cniPlugin: vfioveth
