@@ -16,7 +16,7 @@
 
 set -ex
 
-until bessctl run spgwu; do
+until bessctl run /opt/bess/bessctl/conf/spgwu; do
     sleep 2;
 done;
 

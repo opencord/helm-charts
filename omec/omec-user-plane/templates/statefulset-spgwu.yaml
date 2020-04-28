@@ -60,7 +60,7 @@ spec:
         env:
           - name: PYTHONUNBUFFERED
             value: "1"
-        command: ["/bin/conf/route_control.py"]
+        command: ["/opt/bess/bessctl/conf/route_control.py"]
         args:
           - -i
           - {{ .Values.config.spgwu.s1u.device }}
@@ -69,9 +69,6 @@ spec:
         resources:
 {{ toYaml .Values.resources.routectl | indent 10 }}
       {{- end }}
-        volumeMounts:
-          - name: scripts
-            mountPath: /bin/conf
       - name: bessd
         image: {{ .Values.images.tags.bess | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy | quote }}
@@ -87,7 +84,7 @@ spec:
         lifecycle:
           postStart:
             exec:
-              command: ["/bin/conf/bessd-poststart.sh"]
+              command: ["/etc/bess/conf/bessd-poststart.sh"]
         livenessProbe:
           tcpSocket:
             port: 10514
@@ -110,13 +107,14 @@ spec:
             intel.com/sriov_vfio_s1u_net: 1
             intel.com/sriov_vfio_sgi_net: 1
           {{- end }}
+        env:
+          - name: CONF_FILE
+            value: /etc/bess/conf/spgwu.json
         volumeMounts:
           - name: hugepages
             mountPath: /dev/hugepages
           - name: configs
-            mountPath: /opt/bess/bessctl/conf
-          - name: scripts
-            mountPath: /bin/conf
+            mountPath: /etc/bess/conf
         {{- if .Values.config.coreDump.enabled }}
           - name: coredump
             mountPath: /tmp/coredump
@@ -129,11 +127,6 @@ spec:
         resources:
 {{ toYaml .Values.resources.web | indent 10 }}
       {{- end }}
-        volumeMounts:
-          - name: configs
-            mountPath: /opt/bess/bessctl/conf
-          - name: scripts
-            mountPath: /bin/conf
       - name: cpiface
         image: {{ .Values.images.tags.cpiface | quote }}
         imagePullPolicy: {{ .Values.images.pullPolicy | quote }}
@@ -164,10 +157,6 @@ spec:
       {{- end }}
       volumes:
       - name: configs
-        configMap:
-          name: spgwu
-          defaultMode: 420
-      - name: scripts
         configMap:
           name: spgwu
           defaultMode: 493
