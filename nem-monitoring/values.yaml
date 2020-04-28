@@ -103,3 +103,4 @@ dashboards:
   omec: false
   aether: false
   bng: false
+  sdran: false

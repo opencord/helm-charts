@@ -74,3 +74,7 @@ data:
   bng-dashboard.json: |
 {{ .Files.Get "grafana-dashboards/bng-dashboard.json" | indent 4 }}
 {{- end }}
+{{- if .Values.dashboards.sdran }}
+  sdran-overview.json: |
+{{ .Files.Get "grafana-dashboards/sdran-summary.json" | indent 4 }}
+{{- end }}
