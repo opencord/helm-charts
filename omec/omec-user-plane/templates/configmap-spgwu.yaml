@@ -24,13 +24,5 @@ metadata:
 data:
   spgwu.json: |
 {{ tuple "config/_spgwu.json.tpl" . | include "omec-user-plane.template" | indent 4 }}
-  spgwu.bess: |
-{{ .Files.Get "files/spgwu.bess" | indent 4 }}
-  __init__.py: |
-{{ .Files.Get "files/__init__.py" | indent 4 }}
-  route_control.py: |
-{{ .Files.Get "files/route_control.py" | indent 4 }}
-  utils.py: |
-{{ .Files.Get "files/utils.py" | indent 4 }}
   bessd-poststart.sh: |
 {{ tuple "bin/_bessd-poststart.sh.tpl" . | include "omec-user-plane.template" | indent 4 }}
