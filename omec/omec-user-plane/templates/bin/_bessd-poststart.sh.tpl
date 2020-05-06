@@ -21,6 +21,6 @@ until bessctl run /opt/bess/bessctl/conf/spgwu; do
 done;
 
 # Add route to eNB
-ip route add {{ .Values.networks.enb.subnet }} via {{ .Values.networks.s1u.gateway }}
+ip route replace {{ .Values.networks.enb.subnet }} via {{ .Values.networks.s1u.gateway }}
 # Add default gw to SGI gateway
-ip route add default via {{ .Values.networks.sgi.gateway }} metric 110
+ip route replace default via {{ .Values.networks.sgi.gateway }} metric 110
