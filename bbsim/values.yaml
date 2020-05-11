@@ -28,6 +28,7 @@ nni: 1
 pon: 1
 onu: 1
 auth: false
+igmp: false
 dhcp: false
 delay: 200
 c_tag: 900

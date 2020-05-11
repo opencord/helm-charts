@@ -63,6 +63,9 @@ spec:
             {{ if .Values.dhcp -}}
             "-dhcp",
             {{ end -}}
+            {{ if .Values.igmp -}}
+            "-igmp",
+            {{ end -}}
             "-c_tag", "{{ .Values.c_tag }}",
             "-c_tag_allocation", "{{ .Values.c_tag_allocation }}",
             "-s_tag", "{{ .Values.s_tag }}",
