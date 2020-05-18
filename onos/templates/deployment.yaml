@@ -51,6 +51,24 @@ spec:
 {{ toYaml .Values.onos_env | indent 12 }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - /root/onos/bin/check-onos-status
+            initialDelaySeconds: 30
+            periodSeconds: 15
+            failureThreshold: 10
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - /root/onos/bin/check-onos-app-status
+            initialDelaySeconds: 300
+            periodSeconds: 15
+            timeoutSeconds: 5
           volumeMounts:
             - name: node-key
               mountPath: /root/vtn
@@ -60,6 +78,12 @@ spec:
               mountPath: /root/onos/apache-karaf-4.2.8/etc/org.ops4j.pax.logging.cfg
               subPath: org.ops4j.pax.logging.cfg
 {{- end }}
+            - name: ready-probe-scripts
+              mountPath: /root/onos/bin/check-onos-status
+              subPath: check-onos-status
+            - name: live-probe-scripts
+              mountPath: /root/onos/bin/check-onos-app-status
+              subPath: check-onos-app-status
       volumes:
         - name: node-key
           secret:
@@ -74,6 +98,16 @@ spec:
               - key: logCfg
                 path: org.ops4j.pax.logging.cfg
 {{- end}}
+        - name: ready-probe-scripts
+          configMap:
+            name: ready-probe-scripts
+            defaultMode: 0744
+        - name: live-probe-scripts
+          configMap:
+            name: live-probe-scripts
+            defaultMode: 0744
+        - name: config
+          emptyDir: {}
         - name: onos-logs
           emptyDir: {}
 {{- with .Values.nodeSelector }}

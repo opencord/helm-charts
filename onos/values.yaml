@@ -76,6 +76,9 @@ onos_env:
     fieldPath: metadata.namespace
 - name: ONOS_APPS
   value: "drivers,openflow-base"
+- name: ONOS_CORD_APPS
+  value: "org.opencord.sadis,org.opencord.olt,org.opencord.mcast,org.opencord.kafka,org.opencord.igmpproxy,org.opencord.dhcpl2relay,org.opencord.aaa"
+
 - name: JAVA_DEBUG_PORT
   value: "0.0.0.0:5005"
 
