@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "16683a04_4f0d860f",
+        "filename": "nem-monitoring/values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-05-18T17:24:52Z",
+      "side": 1,
+      "message": "use \"etcd-cluster-client\"\n127.0.0.1 won\u0027t be resolved from inside the container and if you run that on the HOST you\u0027ll the cluster ETCD and not the VOLTHA ETCD",
+      "range": {
+        "startLine": 60,
+        "startChar": 22,
+        "endLine": 60,
+        "endChar": 31
+      },
+      "revId": "ac72ad1d8e982701a5e87fddb2348bd6ebc47a9e",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
+    }
+  ]
+}
