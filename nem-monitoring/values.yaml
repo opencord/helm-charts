@@ -52,6 +52,12 @@ prometheus:
     #    datacenter: onf-menlo
 
   extraScrapeConfigs: |
+    - job_name: 'etcd-metrics'
+      metrics_path: /metrics
+      scrape_interval: 15s
+      static_configs:
+        - targets:
+            - etcd-cluster-client:2379
     - job_name: 'xos-core'
       metrics_path: /metrics
       scrape_interval: 15s
