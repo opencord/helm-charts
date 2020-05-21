@@ -42,7 +42,7 @@ config:
       bufferMax: 64K
     instanceId: onfcell202 # Cell ID -- Unique value for each L2/DU-L3/CU pair, no capital and special character
     tac: 202
-    cellID: 1
+    enbId: 1
     freqBand: 48
     earfcnDl: 55990
     earfcnUl: 55990
