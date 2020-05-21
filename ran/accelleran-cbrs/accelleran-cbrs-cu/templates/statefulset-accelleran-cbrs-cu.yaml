@@ -79,7 +79,7 @@ spec:
           sqlite3 /data/datastoreRemRw.db "update FapServiceCellConfigLteRanRf_EARFCNDLList set EARFCNDL='{{ .Values.config.vranL3.earfcnDl }}';";
           sqlite3 /data/datastoreRemRw.db "update FapServiceCellConfigLteRanRf_EARFCNULList set EARFCNUL='{{ .Values.config.vranL3.earfcnUl }}';";
           sqlite3 /data/datastoreRemRw.db "update FapServiceCellConfigLteEpc set TAC='{{ .Values.config.vranL3.tac }}';";
-          sqlite3 /data/datastoreRemRw.db "update FapServiceCellConfigLteRanCommon set CellIdentity='{{ mul .Values.config.vranL3.cellID 256 }}';";
+          sqlite3 /data/datastoreRemRw.db "update FapServiceCellConfigLteRanCommon set CellIdentity='{{ mul .Values.config.vranL3.enbId 256 }}';";
           sqlite3 /data/datastoreRemRw.db "select * from FapServiceCellConfigLteEpc;";
           redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICEFAPCONTROLLTEGATEWAYS1SIGLINKSERVERLIST[0] S1SIGLINKSERVERLIST {{ .Values.config.mme.ip }};
           redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICEFAPCONTROLLTEGATEWAY_S1SIGLINKSERVERLISTLIST[0] S1SIGLINKSERVERLIST {{ .Values.config.mme.ip }};
@@ -89,7 +89,7 @@ spec:
           redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_EARFCNDLLIST EARFCNDL {{ .Values.config.vranL3.earfcnDl }};
           redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF_EARFCNULLIST EARFCNUL {{ .Values.config.vranL3.earfcnUl }};
           redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTEEPC TAC {{ .Values.config.vranL3.tac }};
-          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANCOMMON TAC {{ mul .Values.config.vranL3.cellID 256 }};
+          redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hset ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANCOMMON TAC {{ mul .Values.config.vranL3.enbId 256 }};
           redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICEFAPCONTROLLTEGATEWAYS1SIGLINKSERVERLIST[0];
           redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICEFAPCONTROLLTEGATEWAY_S1SIGLINKSERVERLISTLIST[0];
           redis-cli -h {{ .Values.config.redis.hostName }} -p {{ .Values.config.redis.ports.redisPort.port }} hgetall ENB_{{ .Values.config.vranL3.instanceId }}_FAPSERVICECELLCONFIGLTERANRF;
