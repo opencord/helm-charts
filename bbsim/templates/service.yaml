@@ -19,7 +19,8 @@ metadata:
   name: {{ template "bbsim.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ template "bbsim.name" . }}
+    app: "bbsim"
+    name: {{ template "bbsim.name" . }}
     chart: {{ template "bbsim.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -36,5 +37,6 @@ spec:
       port: {{ .Values.bbsim_sadis_port }}
       protocol: TCP
   selector:
-    app: {{ template "bbsim.name" . }}
+    app: "bbsim"
+    name: {{ template "bbsim.name" . }}
     release: {{ .Release.Name }}

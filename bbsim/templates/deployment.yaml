@@ -20,7 +20,8 @@ metadata:
   name: {{ template "bbsim.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ template "bbsim.name" . }}
+    app: "bbsim"
+    name: {{ template "bbsim.name" . }}
     chart: {{ template "bbsim.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
@@ -28,12 +29,14 @@ spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "bbsim.name" . }}
+      app: "bbsim"
+      name: {{ template "bbsim.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         app: "bbsim"
+        name: {{ template "bbsim.name" . }}
         release: {{ .Release.Name }}
         app.kubernetes.io/name: "bbsim"
         app.kubernetes.io/version: {{ quote .Chart.AppVersion }}
