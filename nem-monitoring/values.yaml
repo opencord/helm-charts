@@ -99,6 +99,7 @@ grafana:
 
 # Configure Grafana dashboard to import
 dashboards:
+  etcd: true
   k8s: true
   nodeExporter: true
   xos: true
