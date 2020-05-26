@@ -1,4 +1,3 @@
----
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,11 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: radius
+  name: {{ .Release.Name }}-radius
+  release: {{ .Release.Name }}
   serviceAccountName: {{ tpl .Values.serviceaccount . | quote }}
 spec:
   ports:
@@ -33,12 +33,13 @@ spec:
       targetPort: 18120
   selector:
     app: radius
+    release: {{ .Release.Name }}
 
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: radius
+  name: {{ .Release.Name }}-radius
   serviceAccountName: {{ tpl .Values.serviceaccount . }}
 spec:
   replicas: 1
@@ -46,8 +47,7 @@ spec:
     metadata:
       labels:
         app: radius
-      annotations:
-        cni: "calico"
+        release: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ tpl .Values.serviceaccount . }}
       containers:
@@ -86,4 +86,4 @@ spec:
       volumes:
         - name: freeradius-config
           configMap:
-            name: freeradius-config
+            name: {{ .Release.Name }}-freeradius-config

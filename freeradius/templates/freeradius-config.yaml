@@ -23,5 +23,5 @@ data:
 
 kind: ConfigMap
 metadata:
-  name: freeradius-config
+  name: {{ .Release.Name }}-freeradius-config
   serviceAccountName: {{ tpl .Values.serviceaccount . }}
