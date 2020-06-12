@@ -1,3 +1,4 @@
+---
 # Copyright 2017-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -11,16 +12,25 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+---
 apiVersion: v1
-data:
-  clients.conf: |
-    client 0.0.0.0/0 {
-      secret = SECRET
-    }
-  users: |
-    user Cleartext-Password := "password", MS-CHAP-Use-NTLM-Auth := 0
-
-kind: ConfigMap
+kind: Service
 metadata:
-  name: freeradius-config
+  name: "{{ template "fullname" . }}"
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  ports:
+    - name: radius-auth
+      protocol: UDP
+      port: 1812
+      targetPort: 1812
+    - name: radius-acc
+      protocol: UDP
+      port: 1813
+      targetPort: 1813
+    - name: radius
+      port: 18120
+      targetPort: 18120
+  selector:
+    app: radius
+    release: "{{ .Release.Name }}"

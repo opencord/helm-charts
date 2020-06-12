@@ -1,4 +1,4 @@
-# Copyright 2017-present Open Networking Foundation
+# Copyright 2020-present Open Networking Foundation
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -11,16 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-apiVersion: v1
-data:
-  clients.conf: |
-    client 0.0.0.0/0 {
-      secret = SECRET
-    }
-  users: |
-    user Cleartext-Password := "password", MS-CHAP-Use-NTLM-Auth := 0
-
-kind: ConfigMap
-metadata:
-  name: freeradius-config
+{{/* Expand the name of the chart. */}}
+{{- define "name" -}}
+{{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{/* Create a default fully qualified app name. We truncate at 63 chars because . . . */}}
+{{- define "fullname" -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- $fullname := default (printf "%s-%s" .Release.Name $name) .Values.fullNameOverride -}}
+{{- $fullname | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
