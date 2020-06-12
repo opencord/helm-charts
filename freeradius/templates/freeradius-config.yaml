@@ -24,4 +24,3 @@ data:
 kind: ConfigMap
 metadata:
   name: freeradius-config
-  serviceAccountName: {{ tpl .Values.serviceaccount . }}

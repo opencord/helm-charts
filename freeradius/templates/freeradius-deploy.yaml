@@ -12,42 +12,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: radius
-  serviceAccountName: {{ tpl .Values.serviceaccount . | quote }}
-spec:
-  ports:
-    - name: radius-auth
-      protocol: UDP
-      port: 1812
-      targetPort: 1812
-    - name: radius-acc
-      protocol: UDP
-      port: 1813
-      targetPort: 1813
-    - name: radius
-      port: 18120
-      targetPort: 18120
-  selector:
-    app: radius
-
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: radius
-  serviceAccountName: {{ tpl .Values.serviceaccount . }}
+  name: "{{ template "fullname" . }}"
+  namespace: "{{ .Release.Namespace }}"
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: radius
+      release: "{{ .Release.Name }}"
   template:
     metadata:
       labels:
         app: radius
-      annotations:
-        cni: "calico"
+        release: "{{ .Release.Name }}"
     spec:
       serviceAccountName: {{ tpl .Values.serviceaccount . }}
       containers:
