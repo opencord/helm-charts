@@ -11,10 +11,19 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-name: freeradius
-description: A Helm chart to deploy an example RADIUS server
-icon: https://guide.opencord.org/logos/cord.svg
-
-version: 1.0.0
-appVersion: 2.2.9
+---
+apiVersion: "v1"
+name: "freeradius"
+version: "1.0.1"
+description: "A Helm chart to deploy an example RADIUS server"
+keywords:
+  - "onf"
+  - "radius"
+  - "voltha"
+home: "https://www.opennetworking.org/voltha"
+icon: "https://guide.opencord.org/logos/voltha.svg"
+maintainers:
+  - name: "Open Networking Foundation"
+    email: "info@opennetworking.org"
+    url: "https://www.opennetworking.org"
+appVersion: "2.2.9"
