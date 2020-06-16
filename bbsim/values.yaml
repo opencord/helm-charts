@@ -38,6 +38,8 @@ s_tag_allocation: shared
 sadisFormat: att
 log_level: '{{ .Values.defaults.log_level }}'
 kafkaEventTopic: ""
+authRetry: false
+dhcpRetry: false
 
 # TODO read this values in the config
 olt_tcp_port: 50060
