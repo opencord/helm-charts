@@ -82,7 +82,13 @@ spec:
             "-enableperf",
             {{ end -}}
             "-sadisFormat", "{{ .Values.sadisFormat }}",
-            "-kafkaEventTopic", "{{ .Values.kafkaEventTopic }}"
+            "-kafkaEventTopic", "{{ .Values.kafkaEventTopic }}",
+            {{ if .Values.authRetry -}}
+            "-authRetry",
+            {{ end -}}
+            {{ if .Values.dhcpRetry -}}
+            "-dhcpRetry",
+            {{ end -}}
           ]
           ports:
             - name: "bbsim-{{ .Values.olt_id }}"
