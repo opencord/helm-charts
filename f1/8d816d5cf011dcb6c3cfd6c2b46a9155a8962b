@@ -1,0 +1,10 @@
+Verified+1: Jenkins Jenkins <do-not-reply@opencord.org>
+Verified+1: Jeremy Ronquillo <jeremyr@opennetworking.org>
+Code-Review+2: Jeremy Ronquillo <jeremyr@opennetworking.org>
+Code-Review+1: Woojoong Kim <woojoong@opennetworking.org>
+Code-Review+1: Hyunsun Moon <hyunsun.moon@gmail.com>
+Submitted-by: Jeremy Ronquillo <jeremyr@opennetworking.org>
+Submitted-at: Fri, 19 Jun 2020 22:05:46 +0000
+Reviewed-on: https://gerrit.opencord.org/c/helm-charts/+/19163
+Project: helm-charts
+Branch: refs/heads/master
