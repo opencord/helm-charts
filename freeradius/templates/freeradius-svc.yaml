@@ -18,7 +18,6 @@ kind: Service
 metadata:
   name: "{{ template "fullname" . }}"
   namespace: "{{ .Release.Namespace }}"
-  serviceAccountName: {{ tpl .Values.serviceaccount . | quote }}
 spec:
   ports:
     - name: radius-auth
