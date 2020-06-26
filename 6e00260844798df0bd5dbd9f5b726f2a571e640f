@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1c4bf5a7_90c35672",
+        "filename": "freeradius/values.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2020-06-26T08:10:28Z",
+      "side": 1,
+      "message": "why ~ here ? I was expecting either a name or \"\"",
+      "revId": "6e00260844798df0bd5dbd9f5b726f2a571e640f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
