@@ -14,7 +14,7 @@
 # limitations under the License.
 {{- $log_level := tpl .Values.log_level . }}
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "bbsim.fullname" . }}
@@ -93,15 +93,12 @@ spec:
           ports:
             - name: "bbsim-{{ .Values.olt_id }}"
               containerPort: {{ .Values.olt_tcp_port }}
-              port: {{ .Values.olt_tcp_port }}
               protocol: TCP
             - name: "bbsim-{{ .Values.olt_id }}-api"
               containerPort: {{ .Values.bbsim_api_port }}
-              port: {{ .Values.bbsim_api_port }}
               protocol: TCP
             - name: "bbsim-{{ .Values.olt_id }}-sadis"
               containerPort: {{ .Values.bbsim_sadis_port }}
-              port: {{ .Values.bbsim_sadis_port }}
               protocol: TCP
           env:
             - name: POD_IP
