@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ab662146_8899704c",
+        "filename": "bbsim/Chart.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2020-06-26T08:18:06Z",
+      "side": 1,
+      "message": "wondering if this should be a bump to 3.1",
+      "revId": "a987db6d709a5b9f08db18b893fd705590505c85",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}

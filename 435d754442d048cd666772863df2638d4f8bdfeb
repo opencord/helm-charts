@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f60d884_10cccac9",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2020-06-26T08:18:06Z",
+      "side": 0,
+      "message": "why was this removed ? also if it\u0027s removed here, shouldn\u0027t it be removed also from values.yaml ?",
+      "revId": "435d754442d048cd666772863df2638d4f8bdfeb",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
