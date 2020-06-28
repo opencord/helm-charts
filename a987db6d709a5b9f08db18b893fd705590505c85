@@ -16,6 +16,24 @@
       "revId": "a987db6d709a5b9f08db18b893fd705590505c85",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "e5042354_e3092201",
+        "filename": "bbsim/Chart.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-06-28T15:36:56Z",
+      "side": 1,
+      "message": "your call really. if you would like it bumped to 3.1.0 just let me know",
+      "parentUuid": "ab662146_8899704c",
+      "revId": "a987db6d709a5b9f08db18b893fd705590505c85",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
     }
   ]
 }

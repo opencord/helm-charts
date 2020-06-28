@@ -16,6 +16,24 @@
       "revId": "435d754442d048cd666772863df2638d4f8bdfeb",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "c992ddf1_271d288a",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-06-28T15:36:56Z",
+      "side": 0,
+      "message": "It was removed as this attribute was removed from the Deployment manifest in the apps/v1 version. it was failing verification. \n\nthe value is used for the `containerPort` attribute so I am not sure why you think it should be removed from the values.yaml?",
+      "parentUuid": "8f60d884_10cccac9",
+      "revId": "435d754442d048cd666772863df2638d4f8bdfeb",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
     }
   ]
 }
