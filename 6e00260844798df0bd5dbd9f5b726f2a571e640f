@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "ce5afa2f_046d8eb3",
+        "filename": "freeradius/Chart.yaml",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-06-29T19:40:56Z",
+      "side": 1,
+      "message": "yes, i saw your patchset and I think I gave it a +1, these two patchsets are somewhat orthogonal. i would like to get this one merged before the 2.4 release as it is mostly about naming, although I suspect it is non-critical,",
+      "parentUuid": "41d87721_63c550c3",
+      "range": {
+        "startLine": 29,
+        "startChar": 13,
+        "endLine": 29,
+        "endChar": 18
+      },
+      "revId": "6e00260844798df0bd5dbd9f5b726f2a571e640f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "1c4bf5a7_90c35672",
         "filename": "freeradius/values.yaml",
         "patchSetId": 5
