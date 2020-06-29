@@ -22,6 +22,30 @@
       "revId": "3d4d776f8a53719dc0c48578a78c0e9a772ace65",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a53adcf3_143ffef7",
+        "filename": "freeradius/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-06-29T15:42:08Z",
+      "side": 1,
+      "message": "i am ok leaving this as 1.0.1, but probably should run this through all the regression tests before merge.",
+      "parentUuid": "e644cc95_859273f0",
+      "range": {
+        "startLine": 19,
+        "startChar": 9,
+        "endLine": 19,
+        "endChar": 14
+      },
+      "revId": "3d4d776f8a53719dc0c48578a78c0e9a772ace65",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
     }
   ]
 }
