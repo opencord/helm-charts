@@ -23,6 +23,6 @@ defaults:
 images:
   radius:
     registry: ""
-    repository: "tpdock/freeradius"
+    repository: "freeradius/freeradius-server"
     tag: "{{ .Chart.AppVersion }}"
     pullPolicy: "{{ .Values.defaults.image_pullPolicy }}"
