@@ -81,4 +81,8 @@ data:
 {{- if .Values.dashboards.sdran }}
   sdran-overview.json: |
 {{ .Files.Get "grafana-dashboards/sdran-summary.json" | indent 4 }}
+  sdran-ho-detail.json: |
+{{ .Files.Get "grafana-dashboards/sdran-ho-detail.json" | indent 4 }}
+  sdran-mlb-detail.json: |
+{{ .Files.Get "grafana-dashboards/sdran-mlb-detail.json" | indent 4 }}
 {{- end }}
