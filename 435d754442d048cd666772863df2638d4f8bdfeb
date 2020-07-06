@@ -34,6 +34,24 @@
       "revId": "435d754442d048cd666772863df2638d4f8bdfeb",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d193dda4_1b497b48",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2020-07-06T15:10:25Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "c992ddf1_271d288a",
+      "revId": "435d754442d048cd666772863df2638d4f8bdfeb",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
