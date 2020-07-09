@@ -1,0 +1,9 @@
+{{- if .Values.kpi_exporter.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "kpi-exporter.fullname" . }}
+data:
+  conf.yaml: |
+{{ include "exporter.config" . | indent 4 }}
+{{- end }}
