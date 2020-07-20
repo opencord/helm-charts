@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "00de4757_35f259a0",
+        "filename": "freeradius/values.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-07-20T17:58:01Z",
+      "side": 1,
+      "message": "In the VOLTHA charts this is set to Always (https://github.com/opencord/voltha-helm-charts/blob/master/voltha/values.yaml#L26) why this change in the \"freeradius\" chart?\n\nI understand this image is less likely to change as we\u0027re not managing it, but we should be consistent and the docker cache will prevent a full download so the deploy time won\u0027t be much longer",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "d4dea70dd65a0c531b7a9638bdf4a0454936dc16",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
