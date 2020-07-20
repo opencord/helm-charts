@@ -70,6 +70,30 @@
       "revId": "d4dea70dd65a0c531b7a9638bdf4a0454936dc16",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "8c4cf3e0_a1ad7a5b",
+        "filename": "freeradius/values.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-07-20T21:35:02Z",
+      "side": 1,
+      "message": "Agreed and resolved",
+      "parentUuid": "828a7622_364ebe6c",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "d4dea70dd65a0c531b7a9638bdf4a0454936dc16",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
