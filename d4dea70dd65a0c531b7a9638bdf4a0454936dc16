@@ -46,6 +46,30 @@
       "revId": "d4dea70dd65a0c531b7a9638bdf4a0454936dc16",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "828a7622_364ebe6c",
+        "filename": "freeradius/values.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-07-20T21:04:32Z",
+      "side": 1,
+      "message": "changed back to `Always`. was not able to find documented best practice. as per `https://kubernetes.io/docs/concepts/configuration/overview/#container-images` Always should be fast if layers already exists.",
+      "parentUuid": "a2f90d4d_8b0d5402",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "d4dea70dd65a0c531b7a9638bdf4a0454936dc16",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": false
     }
   ]
 }
