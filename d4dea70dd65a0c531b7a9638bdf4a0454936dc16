@@ -22,6 +22,30 @@
       "revId": "d4dea70dd65a0c531b7a9638bdf4a0454936dc16",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "a2f90d4d_8b0d5402",
+        "filename": "freeradius/values.yaml",
+        "patchSetId": 9
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000003
+      },
+      "writtenOn": "2020-07-20T20:48:44Z",
+      "side": 1,
+      "message": "To be honest it should be \"IfNotPresent\" in all production charts as once tagged and released an image should not change so we shouldn\u0027t be downloading all the time. `Always` is really a development shortcut.",
+      "parentUuid": "00de4757_35f259a0",
+      "range": {
+        "startLine": 21,
+        "startChar": 21,
+        "endLine": 21,
+        "endChar": 33
+      },
+      "revId": "d4dea70dd65a0c531b7a9638bdf4a0454936dc16",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
     }
   ]
 }
