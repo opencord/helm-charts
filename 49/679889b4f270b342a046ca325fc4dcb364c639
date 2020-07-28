@@ -1,0 +1,7 @@
+Code-Review+2: Scott Baker <scottb@opennetworking.org>
+Verified+1: Jenkins Jenkins <do-not-reply@opencord.org>
+Submitted-by: Girish Gowdra <girish@opennetworking.org>
+Submitted-at: Tue, 28 Jul 2020 19:34:07 +0000
+Reviewed-on: https://gerrit.opencord.org/c/helm-charts/+/19912
+Project: helm-charts
+Branch: refs/heads/master
