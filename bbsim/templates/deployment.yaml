@@ -60,20 +60,8 @@ spec:
             "-pon", "{{ .Values.pon }}",
             "-onu", "{{ .Values.onu }}",
             "-logLevel", "{{ $log_level }}",
-            {{ if .Values.auth -}}
-            "-auth",
-            {{ end -}}
-            {{ if .Values.dhcp -}}
-            "-dhcp",
-            {{ end -}}
-            {{ if .Values.igmp -}}
-            "-igmp",
-            {{ end -}}
-            "-c_tag", "{{ .Values.c_tag }}",
-            "-c_tag_allocation", "{{ .Values.c_tag_allocation }}",
-            "-s_tag", "{{ .Values.s_tag }}",
-            "-s_tag_allocation", "{{ .Values.s_tag_allocation }}",
             "-delay", "{{ .Values.delay }}",
+            "-services", "configs/services.yaml",
             {{ if .Values.enableEvents -}}
             "-enableEvents",
             "-kafkaAddress", "{{ .Values.kafkaAddress }}",
@@ -81,7 +69,6 @@ spec:
             {{ if .Values.enablePerf -}}
             "-enableperf",
             {{ end -}}
-            "-sadisFormat", "{{ .Values.sadisFormat }}",
             "-kafkaEventTopic", "{{ .Values.kafkaEventTopic }}",
             {{ if .Values.authRetry -}}
             "-authRetry",
@@ -111,6 +98,17 @@ spec:
                   fieldPath: metadata.namespace
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+          volumeMounts:
+            - name: bbsim-services-config
+              mountPath: /app/configs/services.yaml
+              subPath: services.yaml
+      volumes:
+        - name: bbsim-services-config
+          configMap:
+            name: bbsim-services-{{ .Values.olt_id }}
+            items:
+              - key: bbsimServicesConfig
+                path: services.yaml
     {{- with .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml . | indent 8 }}

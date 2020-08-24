@@ -27,15 +27,7 @@ olt_id: 0
 nni: 1
 pon: 1
 onu: 1
-auth: false
-igmp: false
-dhcp: false
 delay: 200
-c_tag: 900
-c_tag_allocation: unique
-s_tag: 900
-s_tag_allocation: shared
-sadisFormat: att
 log_level: '{{ .Values.defaults.log_level }}'
 kafkaEventTopic: ""
 authRetry: false
@@ -48,6 +40,18 @@ bbsim_sadis_port: 50074
 enablePerf: false
 enableEvents: false
 kafkaAddress: ":9092"
+
+servicesConfig:
+  workflow: att
+  services:
+    - name: hsia
+      c_tag: 900
+      c_tag_allocation: unique
+      s_tag: 900
+      s_tag_allocation: shared
+      needs_eapol: true
+      needs_dhcp: true
+      tp_id: 64
 
 images:
   bbsim:
