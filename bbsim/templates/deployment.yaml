@@ -76,6 +76,9 @@ spec:
             {{ if .Values.dhcpRetry -}}
             "-dhcpRetry",
             {{ end -}}
+            {{ if .Values.bbsim_rest_port -}}
+            "-rest_api_address", ":{{ .Values.bbsim_rest_port }}"
+            {{ end -}}
           ]
           ports:
             - name: "bbsim-{{ .Values.olt_id }}"
@@ -86,6 +89,9 @@ spec:
               protocol: TCP
             - name: "bbsim-{{ .Values.olt_id }}-sadis"
               containerPort: {{ .Values.bbsim_sadis_port }}
+              protocol: TCP
+            - name: "bbsim-{{ .Values.olt_id }}-rest"
+              containerPort: {{ .Values.bbsim_rest_port }}
               protocol: TCP
           env:
             - name: POD_IP

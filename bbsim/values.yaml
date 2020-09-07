@@ -36,6 +36,7 @@ dhcpRetry: false
 # TODO read this values in the config
 olt_tcp_port: 50060
 bbsim_api_port: 50070
+bbsim_rest_port: 50071
 bbsim_sadis_port: 50074
 enablePerf: false
 enableEvents: false
