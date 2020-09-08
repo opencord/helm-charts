@@ -73,6 +73,24 @@
     },
     {
       "key": {
+        "uuid": "a1f9d7c1_815388d9",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2020-09-08T14:03:29Z",
+      "side": 1,
+      "message": "then a change in the helm chart to add that parameter is required. But again, my opinion, I\u0027ll let others comment.",
+      "parentUuid": "e692937b_dc293118",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6fb8f87c_deb369d9",
         "filename": "bbsim/values.yaml",
         "patchSetId": 1
@@ -138,6 +156,24 @@
       "side": 1,
       "message": "this won\u0027t work as you might have arguments without values right?",
       "parentUuid": "270dd8a1_4ac4e2fd",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "901cd6aa_536059f1",
+        "filename": "bbsim/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2020-09-08T14:03:29Z",
+      "side": 1,
+      "message": "a \"y\" or \"n\" value for those could work, I\u0027ll let other Helm experts comment.",
+      "parentUuid": "d218ab6a_b70d43e3",
       "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
