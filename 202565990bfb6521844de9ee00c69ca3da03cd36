@@ -91,6 +91,24 @@
     },
     {
       "key": {
+        "uuid": "cd151360_38c0c9bf",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-08T14:09:53Z",
+      "side": 1,
+      "message": "ok thanks",
+      "parentUuid": "a1f9d7c1_815388d9",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6fb8f87c_deb369d9",
         "filename": "bbsim/values.yaml",
         "patchSetId": 1
