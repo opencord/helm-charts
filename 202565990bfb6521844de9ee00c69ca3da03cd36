@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "df8b8f8a_c74bf203",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-08T08:53:57Z",
+      "side": 1,
+      "message": "this is essential since the community is constantly changing the arguments list so it would be very easy to adjust the changes if we get a new incompatible binary",
+      "parentUuid": "9b38c061_7ef3f2a8",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6fb8f87c_deb369d9",
         "filename": "bbsim/values.yaml",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2020-09-08T07:45:25Z",
       "side": 1,
       "message": "I\u0027d prefer this to be just rest_api_address: 50071, removing the args.",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "3ceda14e_96d86ae0",
+        "filename": "bbsim/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-08T08:53:57Z",
+      "side": 1,
+      "message": "no the parameter is address and not a port :50071 is a valid value where 50071 is not",
+      "parentUuid": "6fb8f87c_deb369d9",
       "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
