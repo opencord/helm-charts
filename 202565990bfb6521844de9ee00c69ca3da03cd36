@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "95c5796e_603ab76e",
+        "filename": "bbsim/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-09-08T21:59:32Z",
+      "side": 1,
+      "message": "you can leave it as it is, it\u0027s ok to have multiple \"-dev\" versions",
+      "parentUuid": "61e9f29c_ea1bdbf8",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b38c061_7ef3f2a8",
         "filename": "bbsim/templates/deployment.yaml",
         "patchSetId": 1
@@ -192,6 +216,24 @@
     },
     {
       "key": {
+        "uuid": "9a765439_1b0f050a",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-09-08T21:59:32Z",
+      "side": 1,
+      "message": "The reason to have the explicit parameters in the helm chart is to make it easier for the user to know which configurations are exposed and he can control. If we introduce that loop what will happen is that no-one will ever change the chart again to support new flags, thus whoever install it needs to go check in the binary which options are supported.\n\nThe most obvious downside is that if someone removes a parameter that you have defined in your installation script then the installation will fail with an error like: \"flag provided but not defined: -c_tag\"\n\nUltimately what I\u0027m suggesting is to just add this (instead of the loop):\n+            \"-rest_api_address\", \"{{ .Values.bbsim_rest_port }}\",",
+      "parentUuid": "7146f970_49c2324f",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6fb8f87c_deb369d9",
         "filename": "bbsim/values.yaml",
         "patchSetId": 1
@@ -311,6 +353,24 @@
       "side": 1,
       "message": "not really possible to add it here I guess when I add \":{{.Values.bbsim_rest_port}}\" here the parsed template contains \":{{.Values.bbsim_rest_port}}\" rather than \":50071\" ;-(",
       "parentUuid": "9d2b0d76_a6c49ce8",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d66b3e6f_102bb683",
+        "filename": "bbsim/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-09-08T21:59:32Z",
+      "side": 1,
+      "message": "Unluckily you can\u0027t do that, you can\u0027t use templates inside the values.yaml file.\n\nA way to do is what we do for images:\n- in values.yaml -\u003e repository: \u0027{{ .Values.defaults.image_org }}bbsim\u0027\n- in deployment.yaml -\u003e image: \u0027{{ tpl .Values.images.bbsim.registry . }}{{ tpl .Values.images.bbsim.repository . }}:{{ tpl ( tpl .Values.images.bbsim.tag . ) . }}\u0027",
+      "parentUuid": "dcff163e_569a03bf",
       "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
