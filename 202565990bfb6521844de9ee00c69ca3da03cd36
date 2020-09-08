@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "61e9f29c_ea1bdbf8",
+        "filename": "bbsim/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-08T17:17:49Z",
+      "side": 1,
+      "message": "so what should I do?",
+      "parentUuid": "88eec82c_722949bd",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b38c061_7ef3f2a8",
         "filename": "bbsim/templates/deployment.yaml",
         "patchSetId": 1
@@ -150,6 +174,24 @@
     },
     {
       "key": {
+        "uuid": "7146f970_49c2324f",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-08T17:17:49Z",
+      "side": 1,
+      "message": "are we talking about docker tags? the change is essential to add parameters which were added to the binary but not yet added in the helm chart (which is the case right now)\nI don\u0027t understand the cons of this change for me it\u0027s ideal. Let me give an example:\nthe binary supports right now rest_api_address parameter which is quite useful. But it\u0027s completely missing in helm. All I need to do is to call --set .args.rest_api_address\u003d:50442 (I am not sure about the syntax but you understand the idea) when installing the chart and the binary will expose the needed port, In another situation a programmer of bbsim will add parameter xyz but will forget to add it to the helm (which happened in the past). So to get it in the helm we have to wait couple of weeks till community reviews the changes and merges them to the helm repository. In our situation I\u0027ll just add --set args.xyz\u003d123 to our installation script and everything works instantly without any delays!",
+      "parentUuid": "f2be43e0_aa5f7bae",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6fb8f87c_deb369d9",
         "filename": "bbsim/values.yaml",
         "patchSetId": 1
@@ -251,6 +293,24 @@
       "side": 1,
       "message": "It seems to me that bbsim_rest_port is the parameter used to expose the port, there\u0027s no need to duplicate it",
       "parentUuid": "901cd6aa_536059f1",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "dcff163e_569a03bf",
+        "filename": "bbsim/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-08T17:17:49Z",
+      "side": 1,
+      "message": "not really possible to add it here I guess when I add \":{{.Values.bbsim_rest_port}}\" here the parsed template contains \":{{.Values.bbsim_rest_port}}\" rather than \":50071\" ;-(",
+      "parentUuid": "9d2b0d76_a6c49ce8",
       "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
