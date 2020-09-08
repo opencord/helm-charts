@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "e692937b_dc293118",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-08T12:07:36Z",
+      "side": 1,
+      "message": "this opportunity is left for the case if someone forgets to add some parameter to the helm chart which is supported by the binary\nas for key values - unfortunately we have some alone parameters (called flags) which we should also have support for",
+      "parentUuid": "246afba9_a327a74f",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6fb8f87c_deb369d9",
         "filename": "bbsim/values.yaml",
         "patchSetId": 1
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "then rest_api_address: \":50071\"",
       "parentUuid": "3ceda14e_96d86ae0",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "d218ab6a_b70d43e3",
+        "filename": "bbsim/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-08T12:07:36Z",
+      "side": 1,
+      "message": "this won\u0027t work as you might have arguments without values right?",
+      "parentUuid": "270dd8a1_4ac4e2fd",
       "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
