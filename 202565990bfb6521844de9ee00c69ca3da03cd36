@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "88eec82c_722949bd",
+        "filename": "bbsim/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-09-08T16:52:22Z",
+      "side": 1,
+      "message": "we\u0027re not ready to release a stable chart yet, we need to release BBSim 1.0.0 before pushing out the 4.0.0 chart",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b38c061_7ef3f2a8",
         "filename": "bbsim/templates/deployment.yaml",
         "patchSetId": 1
@@ -109,6 +132,24 @@
     },
     {
       "key": {
+        "uuid": "f2be43e0_aa5f7bae",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-09-08T16:52:22Z",
+      "side": 1,
+      "message": "In my opinion the helm-chart specifies the version of the container it works with there\u0027s no need to account for different combination of parameters. If you override the image tag with your custom image then you\u0027re in uncharted territory and it\u0027s ok if things are not supported.",
+      "parentUuid": "cd151360_38c0c9bf",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6fb8f87c_deb369d9",
         "filename": "bbsim/values.yaml",
         "patchSetId": 1
@@ -192,6 +233,24 @@
       "side": 1,
       "message": "a \"y\" or \"n\" value for those could work, I\u0027ll let other Helm experts comment.",
       "parentUuid": "d218ab6a_b70d43e3",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "9d2b0d76_a6c49ce8",
+        "filename": "bbsim/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-09-08T16:52:22Z",
+      "side": 1,
+      "message": "It seems to me that bbsim_rest_port is the parameter used to expose the port, there\u0027s no need to duplicate it",
+      "parentUuid": "901cd6aa_536059f1",
       "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
