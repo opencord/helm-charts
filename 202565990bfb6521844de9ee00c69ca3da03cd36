@@ -121,6 +121,30 @@
     },
     {
       "key": {
+        "uuid": "a62c7e01_8244378d",
+        "filename": "bbsim/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-09T08:03:57Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "4f57a1d0_eb617ffc",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b38c061_7ef3f2a8",
         "filename": "bbsim/templates/deployment.yaml",
         "patchSetId": 1
