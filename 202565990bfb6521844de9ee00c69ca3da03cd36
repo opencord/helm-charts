@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "c3cf019d_bd5cfe5c",
+        "filename": "bbsim/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-09T06:36:18Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "95c5796e_603ab76e",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b38c061_7ef3f2a8",
         "filename": "bbsim/templates/deployment.yaml",
         "patchSetId": 1
@@ -234,6 +258,24 @@
     },
     {
       "key": {
+        "uuid": "61908a1a_99967f72",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-09T06:36:18Z",
+      "side": 1,
+      "message": "ok done",
+      "parentUuid": "9a765439_1b0f050a",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "6fb8f87c_deb369d9",
         "filename": "bbsim/values.yaml",
         "patchSetId": 1
@@ -371,6 +413,24 @@
       "side": 1,
       "message": "Unluckily you can\u0027t do that, you can\u0027t use templates inside the values.yaml file.\n\nA way to do is what we do for images:\n- in values.yaml -\u003e repository: \u0027{{ .Values.defaults.image_org }}bbsim\u0027\n- in deployment.yaml -\u003e image: \u0027{{ tpl .Values.images.bbsim.registry . }}{{ tpl .Values.images.bbsim.repository . }}:{{ tpl ( tpl .Values.images.bbsim.tag . ) . }}\u0027",
       "parentUuid": "dcff163e_569a03bf",
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "595f09c5_a2ecc040",
+        "filename": "bbsim/values.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000569
+      },
+      "writtenOn": "2020-09-09T06:36:18Z",
+      "side": 1,
+      "message": "not actual anymore",
+      "parentUuid": "d66b3e6f_102bb683",
       "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
       "unresolved": true
