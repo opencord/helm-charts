@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "4f57a1d0_eb617ffc",
+        "filename": "bbsim/Chart.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2020-09-09T08:02:12Z",
+      "side": 1,
+      "message": "to fix https://jenkins.opencord.org/job/verify_helm-charts_helm-lint/2354/console I think you need to add a 1 to the version, 4.0.0-dev1 should be enough to pass validation, please try",
+      "parentUuid": "c3cf019d_bd5cfe5c",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 14
+      },
+      "revId": "202565990bfb6521844de9ee00c69ca3da03cd36",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "9b38c061_7ef3f2a8",
         "filename": "bbsim/templates/deployment.yaml",
         "patchSetId": 1
