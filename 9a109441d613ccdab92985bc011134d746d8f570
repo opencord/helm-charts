@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d08af0f8_2645dd1d",
+        "filename": "bbsim/templates/deployment.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2020-09-09T15:07:43Z",
+      "side": 1,
+      "message": "\"bbsim_rest_port\" is always set, so there\u0027s no need for the \"if\" check",
+      "range": {
+        "startLine": 79,
+        "startChar": 12,
+        "endLine": 79,
+        "endChar": 45
+      },
+      "revId": "9a109441d613ccdab92985bc011134d746d8f570",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
