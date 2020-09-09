@@ -32,6 +32,8 @@ log_level: '{{ .Values.defaults.log_level }}'
 kafkaEventTopic: ""
 authRetry: false
 dhcpRetry: false
+# default, only-onu, only-pon, both
+controlledActivation: default
 
 # TODO read this values in the config
 olt_tcp_port: 50060

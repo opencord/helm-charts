@@ -62,6 +62,8 @@ spec:
             "-logLevel", "{{ $log_level }}",
             "-delay", "{{ .Values.delay }}",
             "-services", "configs/services.yaml",
+            "-rest_api_address", ":{{ .Values.bbsim_rest_port }}",
+            "-ca", "{{ .Values.controlledActivation }}",
             {{ if .Values.enableEvents -}}
             "-enableEvents",
             "-kafkaAddress", "{{ .Values.kafkaAddress }}",
@@ -75,9 +77,6 @@ spec:
             {{ end -}}
             {{ if .Values.dhcpRetry -}}
             "-dhcpRetry",
-            {{ end -}}
-            {{ if .Values.bbsim_rest_port -}}
-            "-rest_api_address", ":{{ .Values.bbsim_rest_port }}"
             {{ end -}}
           ]
           ports:
