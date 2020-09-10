@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bc22e291_870fddf8",
+        "filename": "VERSION",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2020-09-10T13:24:22Z",
+      "side": 1,
+      "message": "dev 3 is not needed here but in https://github.com/opencord/helm-charts/blob/master/bbsim/Chart.yaml#L18",
+      "revId": "f5dc0b4193ab5d0335305f109a006a98f0bdb994",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
