@@ -55,6 +55,7 @@ spec:
             privileged: true
           command: [
             "/app/bbsim",
+            "-openolt_address", ":{{ .Values.olt_tcp_port }}",
             "-olt_id", "{{ .Values.olt_id }}",
             "-nni", "{{ .Values.nni }}",
             "-pon", "{{ .Values.pon }}",
