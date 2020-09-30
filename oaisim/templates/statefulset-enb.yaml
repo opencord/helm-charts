@@ -24,6 +24,7 @@ metadata:
 {{ tuple "enb" . | include "oaisim.metadata_labels" | indent 4 }}
 spec:
   replicas: 1
+  serviceName: oaisim-enb
   selector:
     matchLabels:
 {{ tuple "enb" . | include "oaisim.metadata_labels" | indent 6 }}
