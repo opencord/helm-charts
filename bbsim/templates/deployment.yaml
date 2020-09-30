@@ -60,6 +60,7 @@ spec:
             "-nni", "{{ .Values.nni }}",
             "-pon", "{{ .Values.pon }}",
             "-onu", "{{ .Values.onu }}",
+            "-oltRebootDelay", "{{ .Values.oltRebootDelay }}",
             "-logLevel", "{{ $log_level }}",
             "-delay", "{{ .Values.delay }}",
             "-services", "configs/services.yaml",

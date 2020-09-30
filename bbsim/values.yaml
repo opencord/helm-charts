@@ -27,6 +27,9 @@ olt_id: 0
 nni: 1
 pon: 1
 onu: 1
+# time that BBSim should wait to emulate an hardware reboot
+oltRebootDelay: 60
+# delay between ONU discovery indication
 delay: 200
 log_level: '{{ .Values.defaults.log_level }}'
 kafkaEventTopic: ""
