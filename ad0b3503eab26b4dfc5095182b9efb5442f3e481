@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "89d7fcc8_ccc0e661",
+        "filename": "bbsim/Chart.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000068
+      },
+      "writtenOn": "2020-09-30T22:46:44Z",
+      "side": 1,
+      "message": "Not 1.1.3?",
+      "revId": "ad0b3503eab26b4dfc5095182b9efb5442f3e481",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388",
+      "unresolved": true
+    }
+  ]
+}
