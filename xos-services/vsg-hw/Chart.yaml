@@ -16,6 +16,7 @@
 name: vsg-hw
 description: A Helm chart for XOS's "vsg-hw" service
 icon: https://guide.opencord.org/logos/cord.svg
+apiVersion: v1
 
-version: 1.1.0
+version: 1.1.1
 appVersion: 1.1.0

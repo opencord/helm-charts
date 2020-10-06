@@ -20,7 +20,7 @@
 # Minimal changes have been applied to align it with CORD/SEBA
 
 apiVersion: v1
-version: 2.0.0
+version: 2.0.1
 description: local provisioner chart
 name: local-provisioner
 keywords:
