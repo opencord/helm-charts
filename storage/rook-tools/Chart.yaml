@@ -15,6 +15,8 @@
 
 name: rook-tools
 description: Toolbox for debuging Rook's Ceph storage
-version: 0.1.0-dev0
+icon: https://guide.opencord.org/logos/cord.svg
+apiVersion: v1
+version: 0.1.0-dev1
 
 appVersion: 'v0.8.1'

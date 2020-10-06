@@ -16,6 +16,7 @@
 name: openstack
 description: A Helm chart for XOS's "openstack" service
 icon: https://guide.opencord.org/logos/cord.svg
+apiVersion: v1
 
-version: 1.1.6
+version: 1.1.7
 appVersion: 1.1.5

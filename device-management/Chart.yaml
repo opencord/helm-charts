@@ -15,4 +15,6 @@
 
 name: device-management
 description: Redfish device management for SEBA
-version: 1.0.0-dev
+icon: https://guide.opencord.org/logos/cord.svg
+apiVersion: v1
+version: 1.0.0-dev1

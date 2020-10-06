@@ -13,5 +13,7 @@
 # limitations under the License.
 
 name: sadis-server
-version: 1.0.4
+icon: https://guide.opencord.org/logos/cord.svg
+apiVersion: v1
+version: 1.0.5
 appVersion: 1.1.0

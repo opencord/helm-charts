@@ -15,7 +15,7 @@
 
 name: onos-progran
 description: ONOS with progran APP
-version: 1.2.5
+version: 1.2.6
 icon: https://guide.opencord.org/logos/onos.svg
+apiVersion: v1
 appVersion: 0.1.8
-
