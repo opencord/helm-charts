@@ -15,4 +15,6 @@
 
 description: Sets up Rook for Ceph storage in testing environments
 name: rook-cluster
+icon: https://guide.opencord.org/logos/cord.svg
+apiVersion: v1
 version: 0.1.0-dev0

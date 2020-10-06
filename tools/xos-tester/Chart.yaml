@@ -16,6 +16,7 @@
 name: xos-tester
 description: A Helm chart to run tests against an XOS deployment
 icon: https://guide.opencord.org/logos/xos.svg
+apiVersion: v1
 
 version: 1.0.1
 

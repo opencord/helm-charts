@@ -16,6 +16,7 @@
 name: base-openstack
 description: A Helm chart for the "base-openstack" profile
 icon: https://guide.opencord.org/logos/cord.svg
+apiVersion: v1
 version: 0.2.4
 
 # xosproject/tosca-loader version

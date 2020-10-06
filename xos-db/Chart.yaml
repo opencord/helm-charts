@@ -14,6 +14,7 @@
 # limitations under the License.
 
 name: xos-db
+apiVersion: v1
 version: 1.0.2
 
 icon: https://www.postgresql.org/media/img/about/press/elephant.png

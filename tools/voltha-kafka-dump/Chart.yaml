@@ -16,6 +16,7 @@
 name: voltha-kafka-dump
 description: A Helm chart for voltha-kafka-dump
 icon: https://kafka.apache.org/images/logo.png
+apiVersion: v1
 
 version: 1.0.3
 
