@@ -15,4 +15,6 @@
 
 description: Sets up log aggregation infrastructure in Kubernetes, with elasticstack and kibana
 name: logging
-version: 1.1.0
+icon: https://guide.opencord.org/logos/cord.svg
+apiVersion: v1
+version: 1.1.1

@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+icon: https://guide.opencord.org/logos/cord.svg
 apiVersion: v1
 appVersion: "0.9.2"
 description: Create an etcd-cluster using etcd-operator provided CRD
 name: etcd-cluster
-version: 0.1.2
+version: 0.1.3
