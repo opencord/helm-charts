@@ -26,3 +26,5 @@ images:
     repository: "freeradius/freeradius-server"
     tag: "{{ .Chart.AppVersion }}"
     pullPolicy: "{{ .Values.defaults.image_pullPolicy }}"
+
+debug: false

@@ -34,6 +34,12 @@ spec:
       containers:
         - name: radius
           image: {{ tpl .Values.images.radius.registry . }}{{ tpl .Values.images.radius.repository . }}:{{ tpl .Values.images.radius.tag . }}
+          {{ if .Values.debug -}}
+          command: [
+            "freeradius",
+            "-X",
+          ]
+          {{ end -}}
           imagePullPolicy: {{ tpl .Values.images.radius.pullPolicy . }}
           env:
             - name: POD_IP
@@ -64,6 +70,9 @@ spec:
             - name: freeradius-config
               mountPath: /etc/raddb/users
               subPath: users
+            - name: freeradius-config
+              mountPath: /etc/raddb/radiusd.conf
+              subPath: radiusd.conf
       volumes:
         - name: freeradius-config
           configMap:

@@ -20,6 +20,8 @@ data:
     }
   users: |
     user Cleartext-Password := "password", MS-CHAP-Use-NTLM-Auth := 0
+  radiusd.conf: |
+{{ include "radius.radiusdConf" . | indent 4 }}
 
 kind: ConfigMap
 metadata:
