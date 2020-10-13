@@ -39,6 +39,9 @@ spec:
     - name: "bbsim-{{ .Values.olt_id }}-rest"
       port: {{ .Values.bbsim_rest_port }}
       protocol: TCP
+    - name: "bbsim-{{ .Values.olt_id }}-dmi"
+      port: {{ .Values.bbsim_dmi_port }}
+      protocol: TCP
   selector:
     app: "bbsim"
     name: {{ template "bbsim.name" . }}

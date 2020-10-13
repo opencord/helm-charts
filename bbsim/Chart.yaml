@@ -16,5 +16,5 @@ name: bbsim
 description: Broadband Simulator
 icon: https://guide.opencord.org/logos/cord.svg
 apiVersion: v1
-version: 4.1.0
+version: 4.1.1
 appVersion: 1.2.0
