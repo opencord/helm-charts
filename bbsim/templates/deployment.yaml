@@ -94,6 +94,9 @@ spec:
             - name: "bbsim-{{ .Values.olt_id }}-rest"
               containerPort: {{ .Values.bbsim_rest_port }}
               protocol: TCP
+            - name: "bbsim-{{ .Values.olt_id }}-dmi"
+              containerPort: {{ .Values.bbsim_dmi_port }}
+              protocol: TCP
           env:
             - name: POD_IP
               valueFrom:
