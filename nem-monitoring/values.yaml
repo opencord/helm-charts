@@ -58,6 +58,12 @@ prometheus:
       static_configs:
         - targets:
             - etcd:2379
+    - job_name: 'kafka-metrics'
+      metrics_path: /metrics
+      scrape_interval: 15s
+      static_configs:
+        - targets:
+            - kafka-exporter:9308
     - job_name: 'xos-core'
       metrics_path: /metrics
       scrape_interval: 15s
