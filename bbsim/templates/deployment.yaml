@@ -52,7 +52,22 @@ spec:
           image: '{{ tpl .Values.images.bbsim.registry . }}{{ tpl .Values.images.bbsim.repository . }}:{{ tpl ( tpl .Values.images.bbsim.tag . ) . }}'
           imagePullPolicy: {{ tpl .Values.images.bbsim.pullPolicy . }}
           securityContext:
-            privileged: true
+            privileged: {{ .Values.privileged }}
+          livenessProbe:
+            exec:
+              command:
+              - bbsimctl
+              - olt
+              - get
+            initialDelaySeconds: 5
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /v2/cfg
+              port: {{ .Values.bbsim_sadis_port }}
+              httpHeaders:
+            initialDelaySeconds: 5
+            periodSeconds: 30
           command: [
             "/app/bbsim",
             "-openolt_address", ":{{ .Values.olt_tcp_port }}",
