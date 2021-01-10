@@ -17,19 +17,19 @@ dependencies:
 
 - name: elasticsearch
   version: 1.15.3
-  repository: https://kubernetes-charts.storage.googleapis.com/
+  repository: https://charts.helm.sh/stable
 
 - name: kibana
   condition: kibana.enabled
   version: 1.1.2
-  repository: https://kubernetes-charts.storage.googleapis.com/
+  repository: https://charts.helm.sh/stable
 
 - name: fluentd-elasticsearch
   condition: fluentd-elasticsearch.enabled
   version: 1.4.1
-  repository: https://kubernetes-charts.storage.googleapis.com/
+  repository: https://charts.helm.sh/stable
 
 - name: logstash
   condition: logstash.enabled
   version: 1.4.2
-  repository: https://kubernetes-charts.storage.googleapis.com/
+  repository: https://charts.helm.sh/stable
