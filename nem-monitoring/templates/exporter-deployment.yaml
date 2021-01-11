@@ -14,7 +14,7 @@
 # limitations under the License.
 
 {{- if .Values.kpi_exporter.enabled }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "kpi-exporter.fullname" . }}
@@ -22,6 +22,10 @@ metadata:
     release: {{ .Release.Name }}
 spec:
   replicas: {{ .Values.kpi_exporter.nem_kpi_exporter_replicas }}
+  selector:
+    matchLabels:
+      name: sadis-server
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
