@@ -17,4 +17,4 @@ description: Sets up log aggregation infrastructure in Kubernetes, with elastics
 name: logging
 icon: https://guide.opencord.org/logos/cord.svg
 apiVersion: v1
-version: 1.1.1
+version: 1.1.2

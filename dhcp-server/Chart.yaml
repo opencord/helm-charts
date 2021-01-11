@@ -14,5 +14,5 @@
 
 name: dhcp-server
 apiVersion: v1
-version: 1.0.1
+version: 1.0.2
 appVersion: 'latest'

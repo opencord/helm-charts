@@ -18,5 +18,5 @@ description: A Helm chart for XOS's "addressmanager" service
 icon: https://guide.opencord.org/logos/cord.svg
 apiVersion: v1
 
-version: 2.0.5
+version: 2.0.6
 appVersion: 2.0.4
