@@ -31,7 +31,7 @@ spec:
   selector:
     app: vcli
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: vcli
@@ -39,6 +39,10 @@ metadata:
   serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
 spec:
   replicas: {{ .Values.replicas.vcli }}
+  selector:
+    matchLabels:
+      name: device-management
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
@@ -65,5 +69,3 @@ spec:
           ports:
             - containerPort: 22
               name: ssh-port
-
-
