@@ -39,7 +39,7 @@ spec:
   selector:
     app: freeradius
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: freeradius
@@ -47,6 +47,10 @@ metadata:
   serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      name: freeradius
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
