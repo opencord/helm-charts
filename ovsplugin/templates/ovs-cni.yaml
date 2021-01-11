@@ -138,7 +138,7 @@ data:
 ---
 # Install OVS CNI plugin and conf on each slave node.
 kind: DaemonSet
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: ovs-plugin
   namespace: kube-system
