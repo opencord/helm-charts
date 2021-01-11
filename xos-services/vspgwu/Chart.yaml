@@ -18,5 +18,5 @@ description: A Helm chart for XOS's "vspgwu" service
 icon: https://guide.opencord.org/logos/cord.svg
 apiVersion: v1
 
-version: 1.0.3
+version: 1.0.4
 appVersion: 1.0.2

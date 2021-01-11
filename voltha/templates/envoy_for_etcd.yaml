@@ -27,13 +27,17 @@ spec:
   selector:
     app: voltha
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: voltha
   namespace: {{ .Values.global.namespace }}
 spec:
   replicas: {{ .Values.replicas.envoy_for_etcd }}
+  selector:
+    matchLabels:
+      name: voltha
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
@@ -69,5 +73,3 @@ spec:
               name: mystery2-port
             - containerPort: 50555
               name: grpc-port
-
-

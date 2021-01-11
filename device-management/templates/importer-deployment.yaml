@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: device-management
@@ -21,6 +21,10 @@ metadata:
     release: {{ .Release.Name }}
 spec:
   replicas: {{ .Values.device_management_replicas }}
+  selector:
+    matchLabels:
+      name: device-management
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:

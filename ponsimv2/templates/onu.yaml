@@ -17,7 +17,7 @@
 {{- range $i, $junk := until (.Values.numOlts|int) }}
 {{- range $j, $junk1 := until ($onucount) }}
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: onu{{ $i }}-{{ $j }}

@@ -18,5 +18,5 @@ name: vrouter
 description: A Helm chart for XOS's "vRouter" service
 icon: https://guide.opencord.org/logos/cord.svg
 
-version: 3.0.0
+version: 3.0.1
 appVersion: 3.0.0

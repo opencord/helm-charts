@@ -14,22 +14,18 @@
 # limitations under the License.
 
 dependencies:
-
-- name: elasticsearch
-  version: 1.15.3
-  repository: https://kubernetes-charts.storage.googleapis.com/
-
-- name: kibana
-  condition: kibana.enabled
-  version: 1.1.2
-  repository: https://kubernetes-charts.storage.googleapis.com/
-
-- name: fluentd-elasticsearch
-  condition: fluentd-elasticsearch.enabled
-  version: 1.4.1
-  repository: https://kubernetes-charts.storage.googleapis.com/
-
-- name: logstash
-  condition: logstash.enabled
-  version: 1.4.2
-  repository: https://kubernetes-charts.storage.googleapis.com/
+  - name: elasticsearch
+    repository: https://helm.elastic.co
+    version: 7.10.1
+  - name: kibana
+    repository: https://helm.elastic.co
+    version: 7.10.1
+    condition: kibana.enabled
+  - name: fluentd-elasticsearch
+    repository: https://kiwigrid.github.io
+    version: 9.6.2
+    condition: fluentd-elasticsearch.enabled
+  - name: logstash
+    condition: logstash.enabled
+    version: 1.4.2
+    repository: https://charts.helm.sh/stable

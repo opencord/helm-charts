@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: ofagent
@@ -21,6 +21,10 @@ metadata:
   serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
 spec:
   replicas: {{ .Values.replicas.ofagent }}
+  selector:
+    matchLabels:
+      name: ofagent
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:

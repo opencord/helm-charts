@@ -15,7 +15,7 @@
 
 name: xos-db
 apiVersion: v1
-version: 1.0.3
+version: 1.0.4
 
 icon: https://www.postgresql.org/media/img/about/press/elephant.png
 

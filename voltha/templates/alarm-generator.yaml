@@ -14,7 +14,7 @@
 # limitations under the License.
 
 {{- if .Values.alarm_generator_enable }}
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: alarm-generator

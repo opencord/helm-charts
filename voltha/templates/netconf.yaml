@@ -27,7 +27,7 @@ spec:
     - port: 830
       targetPort: 830
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: netconf
@@ -35,6 +35,10 @@ metadata:
   serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
 spec:
   replicas: {{ .Values.replicas.netconf }}
+  selector:
+    matchLabels:
+      name: netconf
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
