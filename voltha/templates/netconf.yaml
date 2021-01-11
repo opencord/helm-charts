@@ -27,7 +27,7 @@ spec:
     - port: 830
       targetPort: 830
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: netconf

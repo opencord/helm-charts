@@ -37,7 +37,7 @@ spec:
       port: {{ .Values.wowza.ports.webui }}
 
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: wowza
@@ -45,6 +45,10 @@ metadata:
 spec:
   serviceName: wowza
   replicas: 1
+  selector:
+    matchLabels:
+      name: wowza
+      release: {{ .Release.Name }}
   template:
     metadata:
       labels:
