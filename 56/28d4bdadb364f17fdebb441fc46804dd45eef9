@@ -1,0 +1,9 @@
+Verified+1: Jenkins Technical User <do-not-reply@opennetworking.org>
+Code-Review+1: Daniele Moro <daniele@opennetworking.org>
+Code-Review+1: Andrea Campanella <andrea@opennetworking.org>
+Code-Review+2: Matteo Scandolo <teo@opennetworking.org>
+Submitted-by: Matteo Scandolo <teo@opennetworking.org>
+Submitted-at: Fri, 15 Jan 2021 18:15:08 +0000
+Reviewed-on: https://gerrit.opencord.org/c/helm-charts/+/22357
+Project: helm-charts
+Branch: refs/heads/master
