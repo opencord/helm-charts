@@ -15,7 +15,7 @@
 # bbsim values
 
 # Default overrides
-defaults:
+global:
   log_level: "DEBUG"
   image_registry: ""
   image_tag: ~
@@ -31,7 +31,7 @@ onu: 1
 oltRebootDelay: 60
 # delay between ONU discovery indication
 delay: 200
-log_level: '{{ .Values.defaults.log_level }}'
+log_level: '{{ .Values.global.log_level }}'
 kafkaEventTopic: ""
 authRetry: false
 dhcpRetry: false
@@ -62,10 +62,10 @@ servicesConfig:
 
 images:
   bbsim:
-    registry: '{{ .Values.defaults.image_registry }}'
-    repository: '{{ .Values.defaults.image_org }}bbsim'
-    tag: '{{- if hasKey .Values.defaults "image_tag" }}{{- if .Values.defaults.image_tag }}{{ .Values.defaults.image_tag }}{{- else }}{{ .Chart.AppVersion }}{{- end }}{{- else }}{{ .Chart.AppVersion }}{{- end }}'
-    pullPolicy: '{{ .Values.defaults.image_pullPolicy | default "Always" }}'
+    registry: '{{ .Values.global.image_registry }}'
+    repository: '{{ .Values.global.image_org }}bbsim'
+    tag: '{{- if hasKey .Values.global "image_tag" }}{{- if .Values.global.image_tag }}{{ .Values.global.image_tag }}{{- else }}{{ .Chart.AppVersion }}{{- end }}{{- else }}{{ .Chart.AppVersion }}{{- end }}'
+    pullPolicy: '{{ .Values.global.image_pullPolicy | default "Always" }}'
 
 global:
   registry: ''
