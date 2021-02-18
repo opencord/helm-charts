@@ -23,7 +23,7 @@ spec:
   replicas: {{ .Values.device_management_replicas }}
   selector:
     matchLabels:
-      name: device-management
+      app: device-management
       release: {{ .Release.Name }}
   template:
     metadata:

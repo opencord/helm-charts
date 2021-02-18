@@ -23,12 +23,13 @@ spec:
   replicas: {{ .Values.replicas.ofagent }}
   selector:
     matchLabels:
-      name: ofagent
+      app: ofagent
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         app: ofagent
+        release: {{ .Release.Name }}
       annotations:
         cni: "calico"
     spec:

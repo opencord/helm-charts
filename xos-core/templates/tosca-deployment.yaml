@@ -23,12 +23,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: xos-tosca
+      app: xos-tosca
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         app: xos-tosca
+        release: {{ .Release.Name }}
     spec:
       containers:
         - name: xos-tosca

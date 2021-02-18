@@ -23,7 +23,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: sadis-server
+      app: sadis-server
       release: {{ .Release.Name }}
   template:
     metadata:

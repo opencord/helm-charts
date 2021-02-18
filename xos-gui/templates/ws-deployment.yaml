@@ -23,12 +23,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: xos-ws
+      app: xos-ws
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         app: xos-ws
+        release: {{ .Release.Name }}
     spec:
       containers:
         - name: xos-ws

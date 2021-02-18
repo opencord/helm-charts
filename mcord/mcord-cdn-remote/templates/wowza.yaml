@@ -54,6 +54,7 @@ spec:
       labels:
         name: wowza
         app: wowza
+        release: {{ .Release.Name }}
     spec:
       hostNetwork: true
       terminationGracePeriodSeconds: 0

@@ -23,12 +23,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: xos-chameleon
+      app: xos-chameleon
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         app: xos-chameleon
+        release: {{ .Release.Name }}
     spec:
       containers:
         - name: xos-chameleon
