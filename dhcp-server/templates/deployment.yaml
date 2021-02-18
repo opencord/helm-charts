@@ -23,12 +23,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: dhcp-server
+      app: dhcp-server
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         app: dhcp-server
+        release: {{ .Release.Name }}
     spec:
       containers:
         - name: dhcp-server

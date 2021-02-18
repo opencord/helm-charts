@@ -47,6 +47,8 @@ spec:
     metadata:
       labels:
         app: vcli
+        name: device-management
+        release: {{ .Release.Name }}
       annotations:
         cni: "calico"
     spec:

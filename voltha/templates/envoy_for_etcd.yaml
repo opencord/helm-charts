@@ -36,12 +36,13 @@ spec:
   replicas: {{ .Values.replicas.envoy_for_etcd }}
   selector:
     matchLabels:
-      name: voltha
+      app: voltha
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         app: voltha
+        release: {{ .Release.Name }}
     spec:
       serviceAccountName: {{ .Values.global.namespace }}-serviceaccount
       containers:

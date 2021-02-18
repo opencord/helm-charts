@@ -22,7 +22,7 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: mavenrepo
+      app: {{ template "mavenrepo.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:

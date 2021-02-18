@@ -37,12 +37,13 @@ spec:
   replicas: {{ .Values.replicas.netconf }}
   selector:
     matchLabels:
-      name: netconf
+      app: netconf
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         app: netconf
+        release: {{ .Release.Name }}
       annotations:
         cni: "calico"
     spec:

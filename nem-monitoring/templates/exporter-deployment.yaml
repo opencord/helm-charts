@@ -30,6 +30,7 @@ spec:
     metadata:
       labels:
         app: kpi-exporter
+        name: sadis-server
         release: {{ .Release.Name }}
     spec:
       containers:

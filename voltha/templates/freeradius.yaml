@@ -49,12 +49,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: freeradius
+      app: freeradius
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         app: freeradius
+        release: {{ .Release.Name }}
       annotations:
         cni: "calico"
     spec:

@@ -24,12 +24,13 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      name: default-http-backend
+      app: default-http-backend
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
         app: default-http-backend
+        release: {{ .Release.Name }}
     spec:
       terminationGracePeriodSeconds: 60
       containers:
