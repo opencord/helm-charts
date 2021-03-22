@@ -24,6 +24,10 @@ metadata:
   namespace: {{ $.Values.global.namespace }}
 spec:
    replicas: 1
+   selector:
+     matchLabels:
+       app: ponsim
+       onu: onu{{ $i }}-{{ $j }}
    template:
      metadata:
        labels:

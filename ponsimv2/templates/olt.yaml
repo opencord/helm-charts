@@ -37,6 +37,10 @@ metadata:
   namespace: {{ $.Values.global.namespace }}
 spec:
    replicas: 1
+   selector:
+     matchLabels:
+       app: ponsim
+       olt: olt{{ $i }}
    template:
      metadata:
        labels:
