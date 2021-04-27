@@ -37,6 +37,7 @@ authRetry: false
 dhcpRetry: false
 # default, only-onu, only-pon, both
 controlledActivation: default
+omci_response_rate: 10
 
 # TODO read this values in the config
 olt_tcp_port: 50060
