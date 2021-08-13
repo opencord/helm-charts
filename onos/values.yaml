@@ -82,7 +82,7 @@ onos_env:
 resources:
   requests:
     memory: "4Gi"
-    cpu: 1
+    cpu: 2
   limits:
     memory: ~
     cpu: ~
