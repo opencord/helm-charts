@@ -42,13 +42,15 @@ config:
       # MME provies nodePort for eNB access, so 127.0.0.1 should work
       # in most cases unless using external MME.
       address: 127.0.0.1
+      # Set false if MME is located in a different cluster
+      isLocal: true
     networks:
       s1_mme:
         # Provide the interface used for S1_MME network.
-        interface: eno1
+        interface: enb
       s1u:
         # Provide the interface used for S1U network.
-        interface: s1u-enb
+        interface: enb
         port: 2152
   ue:
     # 1 UE is supported for now

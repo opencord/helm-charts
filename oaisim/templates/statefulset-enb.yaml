@@ -40,6 +40,7 @@ spec:
       serviceAccountName: enb
       hostNetwork: true
       initContainers:
+      {{- if .Values.config.enb.mme.isLocal }}
         - name: enb-dep-check
           image: {{ .Values.images.tags.dep_check | quote }}
           imagePullPolicy: {{ .Values.images.pullPolicy }}
@@ -68,6 +69,7 @@ spec:
             - kubernetes-entrypoint
           volumeMounts:
             []
+      {{- end }}
         - name: enb-init
           image: {{ .Values.images.tags.enb | quote }}
           imagePullPolicy: {{ .Values.images.pullPolicy }}
