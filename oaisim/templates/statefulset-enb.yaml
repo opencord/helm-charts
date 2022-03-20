@@ -40,34 +40,6 @@ spec:
       serviceAccountName: enb
       hostNetwork: true
       initContainers:
-        - name: enb-dep-check
-          image: {{ .Values.images.tags.dep_check | quote }}
-          imagePullPolicy: {{ .Values.images.pullPolicy }}
-          securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: false
-            runAsUser: 0
-          env:
-            - name: POD_NAME
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: metadata.name
-            - name: NAMESPACE
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: metadata.namespace
-            - name: PATH
-              value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/
-            - name: COMMAND
-              value: "echo done"
-            - name: DEPENDENCY_POD_JSON
-              value: '[{"labels": {"app": "mme"}, "requireSameNode": false}]'
-          command:
-            - kubernetes-entrypoint
-          volumeMounts:
-            []
         - name: enb-init
           image: {{ .Values.images.tags.enb | quote }}
           imagePullPolicy: {{ .Values.images.pullPolicy }}
