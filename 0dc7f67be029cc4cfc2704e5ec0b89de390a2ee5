@@ -46,6 +46,30 @@
       },
       "revId": "0dc7f67be029cc4cfc2704e5ec0b89de390a2ee5",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7d2c082_270bfcd5",
+        "filename": "oaisim/templates/statefulset-enb.yaml",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000010
+      },
+      "writtenOn": "2022-03-21T19:47:15Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "ab4bba24_70fbe710",
+      "range": {
+        "startLine": 43,
+        "startChar": 16,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "0dc7f67be029cc4cfc2704e5ec0b89de390a2ee5",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
     }
   ]
 }
