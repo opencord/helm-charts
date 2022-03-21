@@ -1,0 +1,8 @@
+Code-Review+1: Andy Bavier <andy@opennetworking.org>
+Code-Review+2: Hyunsun Moon <hyunsun@opennetworking.org>
+Verified+1: Jenkins Technical User <do-not-reply@opennetworking.org>
+Submitted-by: Hyunsun Moon <hyunsun@opennetworking.org>
+Submitted-at: Mon, 21 Mar 2022 21:47:45 +0000
+Reviewed-on: https://gerrit.opencord.org/c/helm-charts/+/31858
+Project: helm-charts
+Branch: refs/heads/master
