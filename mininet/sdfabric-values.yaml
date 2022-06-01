@@ -13,9 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-icon: https://guide.opencord.org/logos/cord.svg
-apiVersion: v1
-appVersion: 1.1.0
-description: A Helm chart for Mininet
-name: mininet
-version: 1.2.0
+# Put Mininet topology scripts in the toposcripts directory.
+# They will be mounted inside the container in /toposcripts
+
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+images:
+  mininet:
+    repository: 'opennetworking/mn-stratum'
+    tag: 'latest'
+    pullPolicy: IfNotPresent
+
+global:
+  registry: ''
+
+resources: {}
+
+nodeSelector: {}
+
+tolerations: []
+
+mnStratumSwitchCount: 4
+topoScript: '/toposcripts/topo-leafspine.py'
