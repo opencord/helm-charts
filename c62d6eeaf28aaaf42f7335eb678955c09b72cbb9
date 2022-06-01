@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13bd15a0_f1083883",
+        "filename": "mininet/toposcripts/topo-leafspine.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2022-06-01T13:52:58Z",
+      "side": 1,
+      "message": "This file here is very UP4 specific, should we have more generic topo that can be built dynamically from the value file? For example, specifying the number of leaves and spines, hosts per leaf etc.\nSee how the sd-bng and stratum topo scripts are built.",
+      "revId": "c62d6eeaf28aaaf42f7335eb678955c09b72cbb9",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ec6d48_a8f7eee4",
+        "filename": "mininet/toposcripts/topo-leafspine.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000461
+      },
+      "writtenOn": "2022-06-01T13:52:58Z",
+      "side": 1,
+      "message": "This comment here is from STC in UP4, It may not make completely sense to keep it here.",
+      "revId": "c62d6eeaf28aaaf42f7335eb678955c09b72cbb9",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    }
+  ]
+}
