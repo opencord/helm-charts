@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c413b66c_41bd631a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-05T21:39:53Z",
+      "side": 1,
+      "message": "What\u0027s the difference between topo-leafspine and topo-leafspine-param? Looks like the latter one is just a generalized version of the former one.",
+      "revId": "1da92604edcbe0e65703e25c409d8cd537aa67b2",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a47fb6a_31e951f4",
+        "filename": "mininet/toposcripts/mn_lib.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2022-07-05T21:39:53Z",
+      "side": 1,
+      "message": "Just FYI - we have a few Trellis classes (such as DHCP client) defined here: https://github.com/opennetworkinglab/routing/blob/master/trellis/trellislib.py.\n\nIt\u0027s OK to start simple here, then move whatever we need from there later on.",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 6
+      },
+      "revId": "1da92604edcbe0e65703e25c409d8cd537aa67b2",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    }
+  ]
+}
