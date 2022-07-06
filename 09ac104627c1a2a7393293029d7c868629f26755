@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67db1f58_4c057903",
+        "filename": "mininet/sdfabric-values.yaml",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000007
+      },
+      "writtenOn": "2022-07-06T10:02:45Z",
+      "side": 1,
+      "message": "should this label be something more fabric specific?\nWe all agree it could be any random string but maybe \"stratum-device\" (or similar) would be a better fit",
+      "range": {
+        "startLine": 49,
+        "startChar": 20,
+        "endLine": 49,
+        "endChar": 23
+      },
+      "revId": "09ac104627c1a2a7393293029d7c868629f26755",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    }
+  ]
+}
