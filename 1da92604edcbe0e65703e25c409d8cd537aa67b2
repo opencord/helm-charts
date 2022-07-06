@@ -18,6 +18,24 @@
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a79076bf_922d8f1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2022-07-06T07:43:50Z",
+      "side": 1,
+      "message": "YEs, the -param was a first stab to make it parametrisable but I soon realised I did non have enough details/context to actually make the hosts multi tenant etc, so I left it there as a possibile starting point for when we have more details. I will switch to the topo-leafspine for the default env.",
+      "parentUuid": "c413b66c_41bd631a",
+      "revId": "1da92604edcbe0e65703e25c409d8cd537aa67b2",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a47fb6a_31e951f4",
@@ -31,6 +49,30 @@
       "writtenOn": "2022-07-05T21:39:53Z",
       "side": 1,
       "message": "Just FYI - we have a few Trellis classes (such as DHCP client) defined here: https://github.com/opennetworkinglab/routing/blob/master/trellis/trellislib.py.\n\nIt\u0027s OK to start simple here, then move whatever we need from there later on.",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 6
+      },
+      "revId": "1da92604edcbe0e65703e25c409d8cd537aa67b2",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3385f67_66ff382c",
+        "filename": "mininet/toposcripts/mn_lib.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2022-07-06T07:43:50Z",
+      "side": 1,
+      "message": "Thanks for the hint Charles",
+      "parentUuid": "4a47fb6a_31e951f4",
       "range": {
         "startLine": 1,
         "startChar": 2,

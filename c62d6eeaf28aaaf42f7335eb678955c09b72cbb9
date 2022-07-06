@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "681987dc_2b64b1d5",
+        "filename": "mininet/toposcripts/topo-leafspine.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2022-07-06T07:43:50Z",
+      "side": 1,
+      "message": "I think it has value of making them parametrised but I\u0027d say we stick with static for now until we have a better idea of topology/requirements",
+      "parentUuid": "13bd15a0_f1083883",
+      "revId": "c62d6eeaf28aaaf42f7335eb678955c09b72cbb9",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30ec6d48_a8f7eee4",
         "filename": "mininet/toposcripts/topo-leafspine.py",
         "patchSetId": 1
@@ -31,6 +49,24 @@
       "writtenOn": "2022-06-01T13:52:58Z",
       "side": 1,
       "message": "This comment here is from STC in UP4, It may not make completely sense to keep it here.",
+      "revId": "c62d6eeaf28aaaf42f7335eb678955c09b72cbb9",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f5cddd5_9cc441f3",
+        "filename": "mininet/toposcripts/topo-leafspine.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2022-07-06T07:43:50Z",
+      "side": 1,
+      "message": "removed",
+      "parentUuid": "30ec6d48_a8f7eee4",
       "revId": "c62d6eeaf28aaaf42f7335eb678955c09b72cbb9",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
     }
