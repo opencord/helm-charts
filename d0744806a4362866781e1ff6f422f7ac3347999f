@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2c288fd_38d9b738",
+        "filename": "mininet/toposcripts/topo-leafspine-2-by-3.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000042
+      },
+      "writtenOn": "2022-07-27T14:39:17Z",
+      "side": 1,
+      "message": "all the hosts here are static. See comment in the sdfabric-helm-charts",
+      "range": {
+        "startLine": 20,
+        "startChar": 6,
+        "endLine": 20,
+        "endChar": 18
+      },
+      "revId": "d0744806a4362866781e1ff6f422f7ac3347999f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ea38abd_604024b5",
+        "filename": "mininet/toposcripts/topo-leafspine-2-by-3.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000042
+      },
+      "writtenOn": "2022-07-27T14:39:17Z",
+      "side": 1,
+      "message": "2x3",
+      "range": {
+        "startLine": 21,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 10
+      },
+      "revId": "d0744806a4362866781e1ff6f422f7ac3347999f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3af1927_0ccd5550",
+        "filename": "mininet/toposcripts/topo-leafspine-2-by-3.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000042
+      },
+      "writtenOn": "2022-07-27T14:39:17Z",
+      "side": 1,
+      "message": "3",
+      "range": {
+        "startLine": 106,
+        "startChar": 38,
+        "endLine": 106,
+        "endChar": 39
+      },
+      "revId": "d0744806a4362866781e1ff6f422f7ac3347999f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ebc390_3eb4aacf",
+        "filename": "mininet/toposcripts/topo-leafspine-2-by-4.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000042
+      },
+      "writtenOn": "2022-07-27T14:39:17Z",
+      "side": 1,
+      "message": "I would suggest reorganising host names",
+      "revId": "d0744806a4362866781e1ff6f422f7ac3347999f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e65acace_09f7cea1",
+        "filename": "mininet/toposcripts/topo-leafspine-2-by-4.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000042
+      },
+      "writtenOn": "2022-07-27T14:39:17Z",
+      "side": 1,
+      "message": "is this a letfover ?",
+      "revId": "d0744806a4362866781e1ff6f422f7ac3347999f",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    }
+  ]
+}
