@@ -10,3 +10,6 @@ helm-repo-tools/
 
 # ignore dependent chart dirs
 charts
+
+# IntelliJ
+.idea
