@@ -30,7 +30,13 @@ images:
 global:
   registry: ''
 
-resources: {}
+resources:
+  requests:
+    cpu: 0.5
+    memory: 256Mi # In case of deploying topology with 27 hosts (e.g., 2 by 3 fabric), please consider allocating at least 800 Mb of RAM
+  limits:
+    cpu: ~
+    memory: ~
 
 nodeSelector: {}
 

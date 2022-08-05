@@ -52,7 +52,20 @@ spec:
           - name: "topo-config"
             mountPath: "/toposcripts"
           resources:
-{{ toYaml .Values.resources | indent 12 }}
+            requests:
+              {{- if .Values.resources.requests.memory }}
+              memory: {{ .Values.resources.requests.memory }}
+              {{- end }}
+              {{- if .Values.resources.requests.cpu }}
+              cpu: {{ .Values.resources.requests.cpu }}
+              {{- end }}
+            limits:
+              {{- if .Values.resources.limits.memory }}
+              memory: {{ .Values.resources.limits.memory }}
+              {{- end }}
+              {{- if .Values.resources.limits.cpu }}
+              cpu: {{ .Values.resources.limits.cpu }}
+              {{- end }}
       volumes:
         - name: "topo-config"
           configMap:
