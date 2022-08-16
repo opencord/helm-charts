@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "919d12e3_85081ebe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000042
+      },
+      "writtenOn": "2022-08-16T21:18:41Z",
+      "side": 1,
+      "message": "are these changes still relevant for this repo ?",
+      "revId": "79ac6e0a625e83b907a772fb3837afa52f5d5bb9",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    }
+  ]
+}
