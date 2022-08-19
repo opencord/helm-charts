@@ -14,7 +14,7 @@
 ---
 apiVersion: "v1"
 name: "freeradius"
-version: "1.0.2"
+version: "1.0.3"
 description: "A Helm chart to deploy an example RADIUS server"
 keywords:
   - "onf"
