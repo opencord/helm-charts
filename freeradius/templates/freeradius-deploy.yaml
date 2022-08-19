@@ -31,6 +31,10 @@ spec:
         release: "{{ .Release.Name }}"
     spec:
       serviceAccountName: {{ tpl .Values.serviceaccount . }}
+    {{- with .Values.images.radius.pullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
       containers:
         - name: radius
           image: {{ tpl .Values.images.radius.registry . }}{{ tpl .Values.images.radius.repository . }}:{{ tpl .Values.images.radius.tag . }}
