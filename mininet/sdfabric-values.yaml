@@ -36,5 +36,5 @@ nodeSelector: {}
 
 tolerations: []
 
-mnStratumSwitchCount: 4
+mnStratumSwitchCount: 1
 topoScript: '/toposcripts/topo-leafspine.py'
