@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "991e1d7d_452c65d6",
+        "filename": "mininet/toposcripts/topo-singleleaf.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000042
+      },
+      "writtenOn": "2022-08-22T07:05:18Z",
+      "side": 1,
+      "message": "I would like see a more complex scenario - something like this https://github.com/opencord/helm-charts/blob/15cc327c316dee35d9b9284a1ad76e0906ad09d2/mininet/toposcripts/topo-leafspine.py#L45\n\nMultiple hosts, different subnets/vlans and so on.",
+      "revId": "2ecb17204de4959a2ae81069e9937d4ac14409c0",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    }
+  ]
+}
