@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8636de87_2b1c0ca1",
+        "filename": "mininet/sdfabric-single-values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2022-08-26T13:04:23Z",
+      "side": 1,
+      "message": "swapped the files around, good catch.",
+      "parentUuid": "1de1fa89_7292df19",
+      "revId": "c9020af877ffc8dfbc4462657b859029deea797a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "234d79e5_aa64c4fc",
         "filename": "mininet/sdfabric-values.yaml",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2022-08-26T12:18:01Z",
       "side": 1,
       "message": "Should this be 4?",
+      "revId": "c9020af877ffc8dfbc4462657b859029deea797a",
+      "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b27ca02_c807d771",
+        "filename": "mininet/sdfabric-values.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2022-08-26T13:04:23Z",
+      "side": 1,
+      "message": "swapped the files around, good catch.",
+      "parentUuid": "234d79e5_aa64c4fc",
       "revId": "c9020af877ffc8dfbc4462657b859029deea797a",
       "serverId": "2a2bfe1b-c5c2-48ed-9ac8-16438ab24388"
     }
