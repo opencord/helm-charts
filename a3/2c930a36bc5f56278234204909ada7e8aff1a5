@@ -1,0 +1,9 @@
+Verified+1: Jenkins Technical User <do-not-reply@opennetworking.org>
+Code-Review+1: Daniele Moro <daniele.moro@intel.com>
+Code-Review+1: Pier Luigi Ventre <pier.ventre@intel.com>
+Code-Review+2: Andrea Campanella <andrea.campanella@intel.com>
+Submitted-by: Andrea Campanella <andrea.campanella@intel.com>
+Submitted-at: Fri, 02 Sep 2022 07:55:21 +0000
+Reviewed-on: https://gerrit.opencord.org/c/helm-charts/+/33182
+Project: helm-charts
+Branch: refs/heads/master
