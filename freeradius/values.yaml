@@ -28,4 +28,9 @@ images:
     pullPolicy: "{{ .Values.defaults.image_pullPolicy }}"
 #     pullSecrets:
 #     - name: regcred
-
+svc:
+  type: "ClusterIP"
+# Some load balancer services (i.e. MetalLB) do not support UDP/TCP
+#  in a the same service, setting twoScvs will create a secon service
+#  the TCP based inner-tunnel
+  twoSvcs: false

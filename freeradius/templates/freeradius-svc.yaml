@@ -28,9 +28,24 @@ spec:
       protocol: UDP
       port: 1813
       targetPort: 1813
+{{ if .Values.svc.twoSvcs }}
+  selector:
+    app: radius
+    release: "{{ .Release.Name }}"
+  type: {{ .Values.svc.type }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: "{{ template "fullname" . }}-inner-tunnel"
+  namespace: "{{ .Release.Namespace }}"
+spec:
+  ports:
+{{ end }}
     - name: radius
       port: 18120
       targetPort: 18120
   selector:
     app: radius
     release: "{{ .Release.Name }}"
+  type: {{ .Values.svc.type }}
